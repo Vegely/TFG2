@@ -1,0 +1,49 @@
+\chapter{Introducción}
+
+\section{Motivación del proyecto}
+Cuando en una instalación industrial se actúa o se mide un proceso, el autómata que envía las señales puede estar situado a gran distancia de dicho proceso. Por esta razón, las comunicaciones industriales precisan el uso de buses de longitudes considerables o realizar comunicaciones a distancia. 
+\newline
+
+Aunque las comunicaciones a distancia pudieran parecer una solución más económica de implementar, tienen el problema de ser vulnerables a ataques de intermediario (alguien ajeno al proceso intercepta los mensajes enviados), lo cual pone en peligro la confidencialidad de la información. Por esta misma razón, en este trabajo se estudiarán distintos algoritmos propuestos para la encriptación de los mensajes.
+\section{Objetivos}
+Para realizar el proyecto, se proponen los siguientes objetivos:
+\begin{itemize}
+\item Implementar los siguientes algoritmos en C/C++
+\begin{itemize}
+	\item RSA
+	\item Curvas elípticas
+	\item AES 256
+	\item Celosías
+	\item Algoritmo de Shore
+	\item Algoritmos post-cuánticos
+\end{itemize}
+\item Estudiar la eficacia de cifrado
+\begin{itemize}
+	\item Estudiar velocidad de ejecución del algoritmo
+	\item Estudiar recursos requeridos por el microprocesador
+	\item Estudiar la robustez del cifrado
+	\item Estudiar la posibilidad de ataques de canal lateral
+\end{itemize}
+\item Posibilidad de ejecución en sistemas basados en FPGAs
+
+\end{itemize}
+
+
+\section{Herramientas utilizadas}
+\subsection{LaTex \cite{latex}} 
+Se ha preferido el uso de \LaTeX\ debido a la facilidad que ofrece para el maquetado de textos, superando a otras herramientas de elaboración de documentos. Además, \LaTeX\ permite crear figuras vectorizadas, representar correctamente ecuaciones y ubicar adecuadamente figuras, tablas y bibliografía.
+\subsection{TikzMaker \cite{tikzmaker}} 
+Esta herramienta permite crear figuras vectorizadas de \LaTeX\ mediante el paquete de circuitikz. Su principal ventaja radica en la interfaz gráfica que proporciona y en la facilidad para elaborar figuras.
+
+
+\section{Estructura del documento}
+A continuación y para facilitar la lectura del documento, se detalla el contenido de cada capítulo:
+
+\begin{itemize}
+	\item En el capítulo 1 se realiza una introducción.
+	\item En el capítulo 2 se hace un repaso de desarrollos anteriores .
+	\item En el capítulo 3 se desarrollan los fundamentos matemáticos del proyecto.
+	\item En el capítulo 4 se describe la implementación de los algoritmos.
+	\item En el capítulo 5 se exponen los resultados obtenidos en el capítulo anterior. 
+	\item En el capítulo 6 se comparan los resultados de los distintos algoritmos.
+\end{itemize}

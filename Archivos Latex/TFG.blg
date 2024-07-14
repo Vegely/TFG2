@@ -1,0 +1,69 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: TFG.aux
+A level-1 auxiliary file: capitulos/portada.aux
+A level-1 auxiliary file: capitulos/firmas.aux
+A level-1 auxiliary file: capitulos/licencia.aux
+A level-1 auxiliary file: capitulos/evaluacion.aux
+A level-1 auxiliary file: capitulos/agradecimientos.aux
+A level-1 auxiliary file: capitulos/resumen.aux
+A level-1 auxiliary file: capitulos/introduccion.aux
+A level-1 auxiliary file: capitulos/estadoarte.aux
+A level-1 auxiliary file: capitulos/fundamentosgenerales.aux
+A level-1 auxiliary file: capitulos/desarrollo.aux
+A level-1 auxiliary file: capitulos/resultados.aux
+A level-1 auxiliary file: capitulos/conclusion.aux
+A level-1 auxiliary file: capitulos/apendice.aux
+The style file: unsrt.bst
+Database file #1: bibliografia/bibliografia.bib
+Warning--entry type for "latex" isn't style-file defined
+--line 3 of file bibliografia/bibliografia.bib
+Warning--I didn't find a database entry for "mat1"
+Warning--I didn't find a database entry for "mat2"
+Warning--I didn't find a database entry for "mat3"
+Warning--I didn't find a database entry for "mat4"
+Warning--I didn't find a database entry for "mat5"
+Warning--I didn't find a database entry for "mat6"
+Warning--I didn't find a database entry for "mat7"
+You've used 2 entries,
+            1791 wiz_defined-function locations,
+            473 strings with 3988 characters,
+and the built_in function-call counts, 259 in all, are:
+= -- 18
+> -- 9
+< -- 0
++ -- 4
+- -- 2
+* -- 5
+:= -- 39
+add.period$ -- 4
+call.type$ -- 2
+change.case$ -- 2
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 10
+empty$ -- 37
+format.name$ -- 2
+if$ -- 61
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 0
+newline$ -- 11
+num.names$ -- 1
+pop$ -- 14
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 9
+stack$ -- 0
+substring$ -- 0
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 1
+width$ -- 3
+write$ -- 18
+(There were 8 warnings)

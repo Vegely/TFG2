@@ -1,0 +1,121 @@
+% Plantilla realizada por Alberto Brunete (UPM).
+
+%parametros de tipo libro
+\documentclass[10pt,a4paper]{book}
+
+%idioma español y acentos
+\usepackage[spanish, es-tabla]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+
+%algunos sÌmbolos matem·ticos y paquete para usar subim·genes
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{appendix}
+%M·rgenes
+\usepackage[left=3cm,top=3cm,right=3cm,bottom=3cm]{geometry}
+
+%
+\usepackage{multicol}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{float} 
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%para generar índice con hipervínculos
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{esint}
+\usepackage{adjustbox}
+\usetikzlibrary{tikzmark,calc}
+
+%parametros del documento (sus propiedades)
+\hypersetup{
+    pdftitle={Bogurad Barañski Barañska - TFG - 2025},
+    pdfsubject={TFG - año},
+    pdfauthor={Bogurad Barañski Barañska},
+    pdfkeywords={encriptación} {comunicaciones} {lazo de control},
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+% profundidad de numeracion
+\setcounter{secnumdepth}{3}
+% profundidad de tabla de contenidos
+\setcounter{tocdepth}{4}
+
+%empieza el documento
+\begin{document}  
+	
+	%elementos antes del trabajo en sÌ se meten dentro de frontmatter
+	\frontmatter
+	
+	%cada incluye referencia a un archivo de tipo .tex
+	\include{capitulos/portada}
+	
+	\include{capitulos/firmas}
+	
+	%Licencia opcional
+	\include{capitulos/licencia}
+	
+	\include{capitulos/evaluacion}
+	\include{capitulos/agradecimientos}
+	\include{capitulos/resumen}
+	
+	%genera índice
+	\tableofcontents
+	\addcontentsline{toc}{chapter}{Índice}
+	
+	%Índice de figuras.
+	\listoffigures
+	
+	%Índice de tablas.
+	\listoftables
+	
+	%Empieza la parte descriptiva del trabajo
+	\mainmatter
+	
+	\include{capitulos/introduccion}
+	
+	%partes finales del trabajo: conclusiones, bibliografia y anexos
+	
+	\include{capitulos/estadoarte}
+	
+	\include{capitulos/fundamentosgenerales}
+	
+	\include{capitulos/desarrollo}
+	
+	\include{capitulos/resultados}
+	
+	\include{capitulos/conclusion}
+	
+	\appendix
+	
+	\include{capitulos/apendice}
+	
+	\backmatter
+	%Glosario, lista de símbolos, notas, etc.
+	
+	%estilo de bibliografía: plana, alfa...
+	\bibliographystyle{unsrt}
+	
+	%genera doble hoja en blanco
+	\cleardoublepage
+	
+	%apartado de bibliografía
+	\addcontentsline{toc}{chapter}{Bibliografia}
+	
+	%se incluye la bibliografía. Archivo de tipo .bib (bibtex)
+	\bibliography{bibliografia/bibliografia}
+	
+	%fin del documento
+\end{document}
