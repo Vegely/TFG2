@@ -1,0 +1,4 @@
+RSA: https://github.com/Biggy54321/crypto-rsa-C
+Curvas elípticas: https://github.com/kokke/tiny-ECDH-c  //  https://github.com/poojagarg/ECC
+AES 256: https://github.com/kokke/tiny-AES-c // https://github.com/ilvn/aes256
+
