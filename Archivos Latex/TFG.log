@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.1)  14 JUL 2024 22:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  22 JUL 2024 22:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1172,7 +1172,7 @@ or `spanish'. on input line 57.
 \openout2 = `capitulos/portada.aux'.
 
  (./capitulos/portada.tex
-<figuras/cabecera.png, id=102, 1130.2225pt x 357.335pt>
+<figuras/cabecera.png, id=110, 1130.2225pt x 357.335pt>
 File: figuras/cabecera.png Graphic file (type png)
 <use figuras/cabecera.png>
 Package pdftex.def Info: figuras/cabecera.png  used on input line 6.
@@ -1481,13 +1481,13 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: 231AA2B1E09FFD9548E6731DC3744284;2978.
+(rerunfilecheck)             Checksum: E50D7E660A73C9A772A9AB20D199F1F3;3258.
  ) 
 Here is how much of TeX's memory you used:
- 56571 strings out of 474222
- 1438736 string characters out of 5750210
+ 56575 strings out of 474222
+ 1438804 string characters out of 5750209
  2118584 words of memory out of 5000000
- 77999 multiletter control sequences out of 15000+600000
+ 78001 multiletter control sequences out of 15000+600000
  568706 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,6n,107p,726b,1045s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1503,10 +1503,10 @@ exlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/20
 23/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-
 dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts
 /type1/public/cm-super/sfrm1200.pfb>
-Output written on TFG.pdf (35 pages, 309194 bytes).
+Output written on TFG.pdf (35 pages, 309851 bytes).
 PDF statistics:
- 373 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 64 named destinations out of 1000 (max. 500000)
- 210 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 383 PDF objects out of 1000 (max. 8388607)
+ 314 compressed objects within 4 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 226 words of extra memory for PDF output out of 10000 (max. 10000000)
 

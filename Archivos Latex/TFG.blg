@@ -17,17 +17,10 @@ A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
 Warning--entry type for "latex" isn't style-file defined
---line 3 of file bibliografia/bibliografia.bib
-Warning--I didn't find a database entry for "mat1"
-Warning--I didn't find a database entry for "mat2"
-Warning--I didn't find a database entry for "mat3"
-Warning--I didn't find a database entry for "mat4"
-Warning--I didn't find a database entry for "mat5"
-Warning--I didn't find a database entry for "mat6"
-Warning--I didn't find a database entry for "mat7"
+--line 5 of file bibliografia/bibliografia.bib
 You've used 2 entries,
             1791 wiz_defined-function locations,
-            473 strings with 3988 characters,
+            466 strings with 3960 characters,
 and the built_in function-call counts, 259 in all, are:
 = -- 18
 > -- 9
@@ -66,4 +59,4 @@ warning$ -- 0
 while$ -- 1
 width$ -- 3
 write$ -- 18
-(There were 8 warnings)
+(There was 1 warning)
