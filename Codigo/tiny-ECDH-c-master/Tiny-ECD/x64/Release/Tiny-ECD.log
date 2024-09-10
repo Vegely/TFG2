@@ -1,0 +1,2 @@
+﻿ecdh.obj : error LNK2001: unresolved external symbol printf
+C:\Users\bogur\Desktop\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\x64\Release\Tiny-ECD.exe : fatal error LNK1120: 1 unresolved externals
