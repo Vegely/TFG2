@@ -84,10 +84,10 @@ extern "C" {
  #error Must define a curve to use
 #endif
 
-#define ECC_PUB_KEY_SIZE     (2 * ECC_PRV_KEY_SIZE)
+#define ECC_PUB_KEY_SIZE     (2 * )
 
 
-/******************************************************************************/
+/****************************************ECC_PRV_KEY_SIZE**************************************/
 
 
 /* NOTE: assumes private is filled with random data before calling */

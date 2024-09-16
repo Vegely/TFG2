@@ -42,11 +42,13 @@ typedef struct
 
 static prng_t prng_ctx;
 
+//Ror in C
 static uint32_t prng_rotate(uint32_t x, uint32_t k)
 {
   return (x << k) | (x >> (32 - k)); 
 }
 
+//Obtain a random uint32_t from the random number allocated in memory
 static uint32_t prng_next(void)
 {
   uint32_t e = prng_ctx.a - prng_rotate(prng_ctx.b, 27); 
@@ -57,6 +59,7 @@ static uint32_t prng_next(void)
   return prng_ctx.d;
 }
 
+//Initialize the random number and iterate 31 times to "randomize it"
 static void prng_init(uint32_t seed)
 {
   uint32_t i;
@@ -149,7 +152,7 @@ void ecdsa_broken()
 }
 
 
-
+//Accept as argument the number of times the demo will run
 int main(int argc, char* argv[])
 {
   int i;
