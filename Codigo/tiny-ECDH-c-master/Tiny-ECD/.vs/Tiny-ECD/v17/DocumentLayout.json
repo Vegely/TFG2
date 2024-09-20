@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh_example.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|solutionrelative:ecdh_example.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|solutionrelative:ecdh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{ABB51B4E-ABCB-4051-9806-98B60A89BC44}|Tiny-ECD.vcxproj|solutionrelative:ecdh.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ecdh.h",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.h",
+              "RelativeDocumentMoniker": "ecdh.h",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.h",
+              "RelativeToolTip": "ecdh.h",
+              "ViewState": "AQIAADwAAAAAAAAAAAASwFQAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-19T13:55:48.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ecdh.c",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.c",
+              "RelativeDocumentMoniker": "ecdh.c",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh.c",
+              "RelativeToolTip": "ecdh.c",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAwwFkAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-09-19T13:55:48.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ecdh_example.c",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh_example.c",
+              "RelativeDocumentMoniker": "ecdh_example.c",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\tiny-ECDH-c-master\\Tiny-ECD\\ecdh_example.c",
+              "RelativeToolTip": "ecdh_example.c",
+              "ViewState": "AQIAAHoAAAAAAAAAAAAqwJcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-09-19T13:55:48.687Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
