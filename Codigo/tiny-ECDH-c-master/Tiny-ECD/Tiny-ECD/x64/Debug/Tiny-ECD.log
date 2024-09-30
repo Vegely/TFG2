@@ -1,0 +1,29 @@
+﻿  ecdh.c
+  ecdh_example.c
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(81,23): error C2059: error de sintaxis: ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(83,23): error C2059: error de sintaxis: ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(84,23): error C2059: error de sintaxis: ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(86,23): error C2059: error de sintaxis: ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(102,3): error C2065: 'puba': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(102,3): warning C4047: 'función': 'uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(102,3): warning C4024: 'ecdh_generate_keys': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(109,3): error C2065: 'pubb': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(109,3): warning C4047: 'función': 'uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(109,3): warning C4024: 'ecdh_generate_keys': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): error C2065: 'pubb': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): warning C4047: 'función': 'const uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): warning C4024: 'ecdh_shared_secret': tipos distintos para el parámetro formal y el parámetro real 2
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): error C2065: 'seca': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): warning C4047: 'función': 'uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(112,3): warning C4024: 'ecdh_shared_secret': tipos distintos para el parámetro formal y el parámetro real 3
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): error C2065: 'puba': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): warning C4047: 'función': 'const uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): warning C4024: 'ecdh_shared_secret': tipos distintos para el parámetro formal y el parámetro real 2
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): error C2065: 'secb': identificador no declarado
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): warning C4047: 'función': 'uint8_t *' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(115,3): warning C4024: 'ecdh_shared_secret': tipos distintos para el parámetro formal y el parámetro real 3
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(118,19): error C2059: error de sintaxis: ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(118,40): error C2143: error de sintaxis: falta ';' delante de ')'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(122,1): error C2059: error de sintaxis: '}'
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(169,5): warning C4013: 'ecdsa_broken' sin definir; se supone que extern devuelve como resultado int
+  Generando código...
