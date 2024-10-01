@@ -1,0 +1,21 @@
+15:44:34 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:126:13: warning: statement with no effect [-Wunused-value]
+  126 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12500	    112	   2176	  14788	   39c4	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+
+15:44:36 Build Finished. 0 errors, 1 warnings. (took 1s.38ms)
+

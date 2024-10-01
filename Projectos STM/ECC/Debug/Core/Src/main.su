@@ -1,0 +1,7 @@
+../Core/Src/main.c:52:17:prng_rotate	16	static
+../Core/Src/main.c:58:17:prng_next	24	static
+../Core/Src/main.c:69:13:prng_init	24	static
+../Core/Src/main.c:85:13:ecdh_demo	16	static
+../Core/Src/main.c:160:5:main	24	static
+../Core/Src/main.c:213:6:SystemClock_Config	88	static
+../Core/Src/main.c:263:6:Error_Handler	4	static,ignoring_inline_asm

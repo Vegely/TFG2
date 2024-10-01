@@ -1,0 +1,339 @@
+14:49:51 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/ecdh.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ecdh.d" -MT"Core/Src/ecdh.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ecdh.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ecdh.c: In function 'ecdsa_verify':
+../Core/Src/ecdh.c:956:21: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  956 |         printf("%.08x", x1[i]);
+      |                 ~~~~^   ~~~~~
+      |                     |     |
+      |                     |     uint32_t {aka long unsigned int}
+      |                     unsigned int
+      |                 %.08lx
+../Core/Src/ecdh.c:958:19: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  958 |       printf("' [%u]\n", i);
+      |                  ~^      ~
+      |                   |      |
+      |                   |      uint32_t {aka long unsigned int}
+      |                   unsigned int
+      |                  %lu
+../Core/Src/ecdh.c:962:21: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  962 |         printf("%.08x", r[i]);
+      |                 ~~~~^   ~~~~
+      |                     |    |
+      |                     |    uint32_t {aka long unsigned int}
+      |                     unsigned int
+      |                 %.08lx
+../Core/Src/ecdh.c:964:19: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  964 |       printf("' [%u]\n", i);
+      |                  ~^      ~
+      |                   |      |
+      |                   |      uint32_t {aka long unsigned int}
+      |                   unsigned int
+      |                  %lu
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  15164	    112	   2336	  17612	   44cc	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:00:16 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-size  ECC.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15164	    112	   2336	  17612	   44cc	ECC.elf
+Finished building: default.size.stdout
+ 
+15:00:35 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-size  ECC.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15164	    112	   2336	  17612	   44cc	ECC.elf
+Finished building: default.size.stdout
+ 
+15:01:40 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:221:15: error: expected expression before '%' token
+  221 |               %ecdsa_broken();
+      |               ^
+make: *** [Core/Src/subdir.mk:37: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:02:06 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12960	    112	   2168	  15240	   3b88	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:03:24 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:90:18: warning: unused variable 'secb' [-Wunused-variable]
+   90 |   static uint8_t secb[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:89:18: warning: variable 'prvb' set but not used [-Wunused-but-set-variable]
+   89 |   static uint8_t prvb[ECC_PRV_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:88:18: warning: unused variable 'pubb' [-Wunused-variable]
+   88 |   static uint8_t pubb[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:87:18: warning: unused variable 'seca' [-Wunused-variable]
+   87 |   static uint8_t seca[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:86:18: warning: variable 'prva' set but not used [-Wunused-but-set-variable]
+   86 |   static uint8_t prva[ECC_PRV_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:85:18: warning: unused variable 'puba' [-Wunused-variable]
+   85 |   static uint8_t puba[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+At top level:
+../Core/Src/main.c:85:18: warning: 'puba' defined but not used [-Wunused-variable]
+../Core/Src/main.c:87:18: warning: 'seca' defined but not used [-Wunused-variable]
+   87 |   static uint8_t seca[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:88:18: warning: 'pubb' defined but not used [-Wunused-variable]
+   88 |   static uint8_t pubb[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+../Core/Src/main.c:90:18: warning: 'secb' defined but not used [-Wunused-variable]
+   90 |   static uint8_t secb[ECC_PUB_KEY_SIZE];
+      |                  ^~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+   5224	     20	   1636	   6880	   1ae0	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:05:51 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12624	    112	   2168	  14904	   3a38	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:14:41 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/ecdh.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ecdh.d" -MT"Core/Src/ecdh.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ecdh.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: In function 'ecdsa_broken':
+../Core/Src/main.c:154:3: warning: implicit declaration of function 'ecdsa_sign' [-Wimplicit-function-declaration]
+  154 |   ecdsa_sign((const uint8_t*)prv, msg, k, signature);
+      |   ^~~~~~~~~~
+../Core/Src/main.c:155:3: warning: implicit declaration of function 'ecdsa_verify' [-Wimplicit-function-declaration]
+  155 |   ecdsa_verify((const uint8_t*)pub, msg, (const uint8_t*)signature); /* fails... */
+      |   ^~~~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Drivers/stm/STM32CubeIDE_1.13.2/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-gettimeofdayr.o): in function `_gettimeofday_r':
+(.text._gettimeofday_r+0xe): warning: _gettimeofday is not implemented and will always fail
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12408	    112	   2168	  14688	   3960	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:18:02 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12456	    112	   2168	  14736	   3990	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:18:12 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12456	    112	   2168	  14736	   3990	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:18:25 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-size  ECC.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12456	    112	   2168	  14736	   3990	ECC.elf
+Finished building: default.size.stdout
+ 
+15:21:36 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12476	    112	   2168	  14756	   39a4	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:22:12 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:124:13: warning: statement with no effect [-Wunused-value]
+  124 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:198:19: warning: unused variable 'seconds' [-Wunused-variable]
+  198 |             float seconds=(float)avgtime/1000/ncycles;
+      |                   ^~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12488	    112	   2168	  14768	   39b0	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:24:31 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:125:13: warning: statement with no effect [-Wunused-value]
+  125 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:199:19: warning: unused variable 'seconds' [-Wunused-variable]
+  199 |             float seconds=(float)avgtime/1000/ncycles;
+      |                   ^~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12488	    112	   2168	  14768	   39b0	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:24:56 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:125:13: warning: statement with no effect [-Wunused-value]
+  125 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12500	    112	   2176	  14788	   39c4	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:42:25 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/ecdh.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ecdh.d" -MT"Core/Src/ecdh.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ecdh.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:125:13: warning: statement with no effect [-Wunused-value]
+  125 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12500	    112	   2176	  14788	   39c4	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
+15:44:34 **** Incremental Build of configuration Debug for project ECC ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'ecdh_demo':
+../Core/Src/main.c:126:13: warning: statement with no effect [-Wunused-value]
+  126 |     seca[i] == secb[i];
+      |     ~~~~~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "ECC.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ECC.elf
+ 
+arm-none-eabi-size  ECC.elf 
+arm-none-eabi-objdump -h -S ECC.elf  > "ECC.list"
+   text	   data	    bss	    dec	    hex	filename
+  12500	    112	   2176	  14788	   39c4	ECC.elf
+Finished building: default.size.stdout
+ 
+Finished building: ECC.list
+ 
