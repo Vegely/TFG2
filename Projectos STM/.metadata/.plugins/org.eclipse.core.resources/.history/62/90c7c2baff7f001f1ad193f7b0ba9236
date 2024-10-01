@@ -110,8 +110,7 @@ static void ecdh_demo(void)
 
   }
 
-  int start=HAL_GetTick();
-  ecdh_generate_keys(puba, prva);
+  //assert(ecdh_generate_keys(puba, prva));
 
   /* 2. Bob picks a (secret) random natural number 'b', calculates Q = b * g and sends Q to Alice. */
   for (i = 0; i < ECC_PRV_KEY_SIZE; ++i)
@@ -119,7 +118,7 @@ static void ecdh_demo(void)
     prvb[i] = prng_next();
   }
 
-
+  int start=HAL_GetTick();
   ecdh_generate_keys(pubb, prvb);
   time1+=HAL_GetTick()-start;
   /* 3. Alice calculates S = a * Q = a * (b * g). */
@@ -204,7 +203,7 @@ int main(void)
   while (1)
   {
 	  	int i;
-	    int ncycles = 5;
+	    int ncycles = 10;
 	    for (i = 0; i < ncycles; ++i)
 	    {
 	    	int start=HAL_GetTick();

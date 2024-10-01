@@ -36,9 +36,11 @@ float seconds0;
 float seconds1;
 float seconds2;
 float seconds3;
+float seconds4;
 int time1=0;
 int time2=0;
 int time3=0;
+int time4=0;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -96,6 +98,7 @@ static void ecdh_demo(void)
   static uint8_t prvb[ECC_PRV_KEY_SIZE];
   static uint8_t secb[ECC_PUB_KEY_SIZE];
   uint32_t i;
+  time1=time2=time3=time4=0;
   /* 0. Initialize and seed random number generator */
   static int initialized = 0;
   if (!initialized)
@@ -103,43 +106,39 @@ static void ecdh_demo(void)
     prng_init((0xbad ^ 0xc0ffee ^ 42) | 0xcafebabe | 666);
     initialized = 1;
   }
+  int start=HAL_GetTick();
   /* 1. Alice picks a (secret) random natural number 'a', calculates P = a * g and sends P to Bob. */
   for (i = 0; i < ECC_PRV_KEY_SIZE; ++i)
   {
     prva[i] = prng_next();
 
   }
-
-  int start=HAL_GetTick();
-  ecdh_generate_keys(puba, prva);
+  time1+=HAL_GetTick()-start;
+  //assert(ecdh_generate_keys(puba, prva));
 
   /* 2. Bob picks a (secret) random natural number 'b', calculates Q = b * g and sends Q to Alice. */
+  start=HAL_GetTick();
   for (i = 0; i < ECC_PRV_KEY_SIZE; ++i)
   {
     prvb[i] = prng_next();
   }
-
-
-  ecdh_generate_keys(pubb, prvb);
-  time1+=HAL_GetTick()-start;
-  /* 3. Alice calculates S = a * Q = a * (b * g). */
-  start=HAL_GetTick();
-  ecdh_shared_secret(prva, pubb, seca);
   time2+=HAL_GetTick()-start;
-  /* 4. Bob calculates T = b * P = b * (a * g). */
   start=HAL_GetTick();
+  ecdh_generate_keys(pubb, prvb);
+
+  /* 3. Alice calculates S = a * Q = a * (b * g). */
+  ecdh_shared_secret(prva, pubb, seca);
+
+  /* 4. Bob calculates T = b * P = b * (a * g). */
   ecdh_shared_secret(prvb, puba, secb);
   time3+=HAL_GetTick()-start;
-  /* 5. Assert equality, i.e. checkq that both parties calculated the same value. */
-  int equal=0;
+  /* 5. Assert equality, i.e. check that both parties calculated the same value. */
+  start=HAL_GetTick();
   for (i = 0; i < ECC_PUB_KEY_SIZE; ++i)
   {
-    if(seca[i] == secb[i])
-    {
-    	equal+=1;
-    }
+    seca[i] == secb[i];
   }
-  equal=equal;
+  time4+=HAL_GetTick()-start;
 }
 
 
@@ -204,7 +203,7 @@ int main(void)
   while (1)
   {
 	  	int i;
-	    int ncycles = 5;
+	    int ncycles = 10;
 	    for (i = 0; i < ncycles; ++i)
 	    {
 	    	int start=HAL_GetTick();
@@ -213,9 +212,6 @@ int main(void)
 	    	avgtime+=delta;
 	    }
 	    seconds0=(float)avgtime/1000/ncycles;
-	    seconds1=(float)time1/1000/ncycles;
-	    seconds2=(float)time2/1000/ncycles;
-	    seconds3=(float)time3/1000/ncycles;
 	    seconds0=0;
     /* USER CODE END WHILE */
 

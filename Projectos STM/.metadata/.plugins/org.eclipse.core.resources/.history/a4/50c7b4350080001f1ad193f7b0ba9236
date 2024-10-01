@@ -204,7 +204,7 @@ int main(void)
   while (1)
   {
 	  	int i;
-	    int ncycles = 5;
+	    int ncycles = 10;
 	    for (i = 0; i < ncycles; ++i)
 	    {
 	    	int start=HAL_GetTick();
