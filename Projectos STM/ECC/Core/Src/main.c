@@ -18,12 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "ecdh.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "ecdh.h"
+#include "cmox_crypto.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -31,11 +30,11 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-int avgtime=0;
 float seconds0;
 float seconds1;
 float seconds2;
 float seconds3;
+int time0=0;
 int time1=0;
 int time2=0;
 int time3=0;
@@ -43,105 +42,6 @@ int time3=0;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-typedef struct
-{
-  uint32_t a;
-  uint32_t b;
-  uint32_t c;
-  uint32_t d;
-} prng_t;
-
-static prng_t prng_ctx;
-
-//Ror in C
-static uint32_t prng_rotate(uint32_t x, uint32_t k)
-{
-  return (x << k) | (x >> (32 - k));
-}
-
-//Obtain a random uint32_t from the random number allocated in memory
-static uint32_t prng_next(void)
-{
-  uint32_t e = prng_ctx.a - prng_rotate(prng_ctx.b, 27);
-  prng_ctx.a = prng_ctx.b ^ prng_rotate(prng_ctx.c, 17);
-  prng_ctx.b = prng_ctx.c + prng_ctx.d;
-  prng_ctx.c = prng_ctx.d + e;
-  prng_ctx.d = e + prng_ctx.a;
-  return prng_ctx.d;
-}
-
-//Initialize the random number and iterate 31 times to "randomize it"
-static void prng_init(uint32_t seed)
-{
-  uint32_t i;
-  prng_ctx.a = 0xf1ea5eed;
-  prng_ctx.b = prng_ctx.c = prng_ctx.d = seed;
-
-  for (i = 0; i < 31; ++i)
-  {
-    (void) prng_next();
-  }
-}
-
-
-
-
-
-static void ecdh_demo(void)
-{
-  static uint8_t puba[ECC_PUB_KEY_SIZE];
-  static uint8_t prva[ECC_PRV_KEY_SIZE];
-  static uint8_t seca[ECC_PUB_KEY_SIZE];
-  static uint8_t pubb[ECC_PUB_KEY_SIZE];
-  static uint8_t prvb[ECC_PRV_KEY_SIZE];
-  static uint8_t secb[ECC_PUB_KEY_SIZE];
-  uint32_t i;
-  /* 0. Initialize and seed random number generator */
-  static int initialized = 0;
-  if (!initialized)
-  {
-    prng_init((0xbad ^ 0xc0ffee ^ 42) | 0xcafebabe | 666);
-    initialized = 1;
-  }
-  /* 1. Alice picks a (secret) random natural number 'a', calculates P = a * g and sends P to Bob. */
-  for (i = 0; i < ECC_PRV_KEY_SIZE; ++i)
-  {
-    prva[i] = prng_next();
-
-  }
-
-  int start=HAL_GetTick();
-  ecdh_generate_keys(puba, prva);
-
-  /* 2. Bob picks a (secret) random natural number 'b', calculates Q = b * g and sends Q to Alice. */
-  for (i = 0; i < ECC_PRV_KEY_SIZE; ++i)
-  {
-    prvb[i] = prng_next();
-  }
-
-
-  ecdh_generate_keys(pubb, prvb);
-  time1+=HAL_GetTick()-start;
-  /* 3. Alice calculates S = a * Q = a * (b * g). */
-  start=HAL_GetTick();
-  ecdh_shared_secret(prva, pubb, seca);
-  time2+=HAL_GetTick()-start;
-  /* 4. Bob calculates T = b * P = b * (a * g). */
-  start=HAL_GetTick();
-  ecdh_shared_secret(prvb, puba, secb);
-  time3+=HAL_GetTick()-start;
-  /* 5. Assert equality, i.e. checkq that both parties calculated the same value. */
-  int equal=0;
-  for (i = 0; i < ECC_PUB_KEY_SIZE; ++i)
-  {
-    if(seca[i] == secb[i])
-    {
-    	equal+=1;
-    }
-  }
-  equal=equal;
-}
-
 
 
 /* USER CODE END PD */
@@ -203,20 +103,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  	int i;
-	    int ncycles = 5;
-	    for (i = 0; i < ncycles; ++i)
-	    {
-	    	int start=HAL_GetTick();
-	    	ecdh_demo();
-	    	int delta=HAL_GetTick()-start;
-	    	avgtime+=delta;
-	    }
-	    seconds0=(float)avgtime/1000/ncycles;
-	    seconds1=(float)time1/1000/ncycles;
-	    seconds2=(float)time2/1000/ncycles;
-	    seconds3=(float)time3/1000/ncycles;
-	    seconds0=0;
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
