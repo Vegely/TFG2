@@ -60,8 +60,8 @@ all: main-build
 main-build: ECC.elf secondary-outputs
 
 # Tool invocations
-ECC.elf ECC.map: $(OBJS) $(USER_OBJS) C:\Users\bogur\Desktop\TFG2\Projectos\ STM\ECC\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ECC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\bogur\Desktop\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ECC.elf ECC.map: $(OBJS) $(USER_OBJS) C:\Users\bogurad\Desktop\Proyectos\ gitHub\TFG2\Projectos\ STM\ECC\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ECC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\ECC\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ECC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

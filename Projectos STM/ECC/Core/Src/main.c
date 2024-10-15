@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "cmox_crypto.h"
+#include "uECC.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -42,8 +42,16 @@ int time3=0;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+//uECC_set_rng(uECC_get_rng());
 
+uint8_t private1[21];
+uint8_t private2[21];
 
+uint8_t public1[40];
+uint8_t public2[40];
+
+uint8_t secret1[20];
+uint8_t secret2[20];
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -84,7 +92,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  const struct uECC_Curve_t * curve = uECC_secp160r1();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -104,6 +112,31 @@ int main(void)
   while (1)
   {
 
+	  	time0 = HAL_GetTick();
+	    uECC_make_key(public1, private1, curve);
+	    time0 = HAL_GetTick()-time0;
+
+	    time1 = HAL_GetTick();
+	    uECC_make_key(public2, private2, curve);
+	    time1 = HAL_GetTick()-time1;
+
+	    time2 = HAL_GetTick();
+	    int r = uECC_shared_secret(public2, private1, secret1, curve);
+	    time2 = HAL_GetTick()-time2;
+
+	    if (!r) {
+	    	break;
+	    }
+
+
+	    r = uECC_shared_secret(public1, private2, secret2, curve);
+	    if (!r) {
+	      break;
+	    }
+
+	    if (memcmp(secret1, secret2, 20) != 0) {
+	    	break;
+	    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
