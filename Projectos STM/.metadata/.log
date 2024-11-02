@@ -540,3 +540,22 @@ java.io.FileNotFoundException: C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Pr
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1038)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1241)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-11-02 14:08:59.525 -----------------------------------------------
+eclipse.buildId=Version 1.14.0
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\ECC\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\ECC\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-11-02 14:14:00.880
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-11-02 14:14:00.887
+!MESSAGE Log4j2 initialized with config file C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-11-02 14:14:11.519
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-11-02 14:14:14.961
+!MESSAGE Indexed 'ECC' (20 sources, 126 headers) in 3.13 sec: 10,957 declarations; 41,204 references; 1 unresolved inclusions; 95 syntax errors; 240 unresolved names (0.46%)
