@@ -559,3 +559,37 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\bogurad\Deskt
 
 !ENTRY org.eclipse.cdt.core 1 0 2024-11-02 14:14:14.961
 !MESSAGE Indexed 'ECC' (20 sources, 126 headers) in 3.13 sec: 10,957 declarations; 41,204 references; 1 unresolved inclusions; 95 syntax errors; 240 unresolved names (0.46%)
+!SESSION 2024-11-03 20:01:23.425 -----------------------------------------------
+eclipse.buildId=Version 1.14.0
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-11-03 20:01:38.457
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-11-03 20:01:38.463
+!MESSAGE Log4j2 initialized with config file C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-11-03 20:01:49.535
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2024-12-01 21:49:03.224 -----------------------------------------------
+eclipse.buildId=Version 1.14.0
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  C:\Users\bogurad\Desktop\Came\CAME\STM\ControlMotor\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\bogurad\Desktop\Came\CAME\STM\ControlMotor\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-12-01 21:49:19.106
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-12-01 21:49:19.115
+!MESSAGE Log4j2 initialized with config file C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Projectos STM\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-12-01 21:49:30.974
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-12-01 21:50:20.768
+!MESSAGE Indexed 'ControlMotor' (32 sources, 133 headers) in 4.37 sec: 13,908 declarations; 66,732 references; 1 unresolved inclusions; 92 syntax errors; 240 unresolved names (0.3%)
