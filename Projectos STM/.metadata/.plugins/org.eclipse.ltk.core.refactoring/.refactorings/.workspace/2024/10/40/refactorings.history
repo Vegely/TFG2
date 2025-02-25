@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;ECC/Core/Src/ecdh.c&apos;" deleteContents="false" description="Delete resource &apos;ECC/Core/Src/ecdh.c&apos;" element1="/ECC/Core/Src/ecdh.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1728126998977"/>&#x0A;<refactoring comment="Delete resource &apos;ECC/Core/Inc/ecdh.h&apos;" deleteContents="false" description="Delete resource &apos;ECC/Core/Inc/ecdh.h&apos;" element1="/ECC/Core/Inc/ecdh.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1728127004455"/>
-</session>
