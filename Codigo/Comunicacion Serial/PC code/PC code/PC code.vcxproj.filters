@@ -13,17 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de origen\UnitTest">
+      <UniqueIdentifier>{cb16c710-569c-4fe2-8191-41348e981b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Comunications">
+      <UniqueIdentifier>{7f016f9b-aca4-4e3d-b5cd-841827af815a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="serial_comunication.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="serial_comunication_unit_test.cpp">
+      <Filter>Archivos de origen\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="circular_buffer_unit_test.cpp">
+      <Filter>Archivos de origen\UnitTest</Filter>
+    </ClCompile>
+    <ClCompile Include="CircularBuffer.cpp">
+      <Filter>Archivos de origen\Comunications</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialComunication.cpp">
+      <Filter>Archivos de origen\Comunications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="serial_comunication.h">
+    <ClInclude Include="SerialComunication.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="CircularBuffer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

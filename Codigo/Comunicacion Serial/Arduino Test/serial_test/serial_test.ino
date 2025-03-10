@@ -1,6 +1,8 @@
 void setup() {
   Serial.begin(9600); // Start serial communication at 9600 baud
-  Serial.println("Arduino is ready to communicate.");
+  delay(1000); // Allow time for the serial port to initialize
+Serial.print("Hello, Serial!"); // No automatic newline
+
 }
 
 void loop() {
@@ -11,4 +13,3 @@ void loop() {
     Serial.println("Received: " + receivedData); // Echo back the received data
   }
 }
-

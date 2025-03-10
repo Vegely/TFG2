@@ -128,11 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="circular_buffer_unit_test.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="serial_comunication.cpp" />
+    <ClCompile Include="SerialComunication.cpp" />
+    <ClCompile Include="serial_comunication_unit_test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="serial_comunication.h" />
+    <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="SerialComunication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
