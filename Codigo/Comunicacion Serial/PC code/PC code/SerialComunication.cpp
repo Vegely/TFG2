@@ -22,7 +22,7 @@ bool SerialComunication::setAvailablePorts() {
 
     for (int i = 0; SetupDiEnumDeviceInfo(hDevInfo, i, &devInfoData); i++)
     {
-        // Get friendly name (e.g., "Arduino Mega 2560 (COM4)")
+        // Get friendly name 
         wchar_t friendlyName[256];
         if (SetupDiGetDeviceRegistryProperty(hDevInfo, &devInfoData, SPDRP_FRIENDLYNAME, nullptr,
             (PBYTE)friendlyName, sizeof(friendlyName), nullptr))

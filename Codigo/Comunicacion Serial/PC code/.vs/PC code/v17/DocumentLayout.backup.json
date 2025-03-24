@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\SerialComunication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\CircularBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\CircularBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\SerialComunication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\SerialComunication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\CircularBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\CircularBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\serial_comunication_unit_test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\serial_comunication_unit_test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\circular_buffer_unit_test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{810FF3A2-7F11-4769-8253-2A5AB7897A35}|PC code\\PC code.vcxproj|solutionrelative:PC code\\circular_buffer_unit_test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,17 +34,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\main.cpp",
               "RelativeDocumentMoniker": "PC code\\main.cpp",
               "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\main.cpp",
               "RelativeToolTip": "PC code\\main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-25T15:03:44.129Z",
               "IsPinned": true,
@@ -44,26 +52,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
+              "Title": "circular_buffer_unit_test.cpp",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\circular_buffer_unit_test.cpp",
+              "RelativeDocumentMoniker": "PC code\\circular_buffer_unit_test.cpp",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\circular_buffer_unit_test.cpp",
+              "RelativeToolTip": "PC code\\circular_buffer_unit_test.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-11T19:05:00.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "serial_comunication_unit_test.cpp",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\serial_comunication_unit_test.cpp",
+              "RelativeDocumentMoniker": "PC code\\serial_comunication_unit_test.cpp",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\serial_comunication_unit_test.cpp",
+              "RelativeToolTip": "PC code\\serial_comunication_unit_test.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-04T23:34:08.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CircularBuffer.h",
               "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\CircularBuffer.h",
               "RelativeDocumentMoniker": "PC code\\CircularBuffer.h",
               "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\CircularBuffer.h",
               "RelativeToolTip": "PC code\\CircularBuffer.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-04T17:48:16.934Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "SerialComunication.h",
               "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\SerialComunication.h",
               "RelativeDocumentMoniker": "PC code\\SerialComunication.h",
               "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\SerialComunication.h",
               "RelativeToolTip": "PC code\\SerialComunication.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-04T17:42:10.845Z",
               "EditorCaption": ""
@@ -76,7 +110,7 @@
               "RelativeDocumentMoniker": "PC code\\SerialComunication.cpp",
               "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Comunicacion Serial\\PC code\\PC code\\SerialComunication.cpp",
               "RelativeToolTip": "PC code\\SerialComunication.cpp",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAAAMwAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-04T17:38:45.569Z",
               "EditorCaption": ""
