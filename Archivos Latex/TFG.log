@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  26 FEB 2025 02:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  26 APR 2025 18:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1485,37 +1485,33 @@ Package rerunfilecheck Warning: File `TFG.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `TFG.out':
-(rerunfilecheck)             Before: 533F2AAF4AFF303B11198DA81A678A9A;4363
-(rerunfilecheck)             After:  322E98C186FCEE3162076EB644C64812;4358.
+(rerunfilecheck)             Before: 322E98C186FCEE3162076EB644C64812;4358
+(rerunfilecheck)             After:  1AAC45EB5AD85166002C6859DF2E191D;5449.
  ) 
 Here is how much of TeX's memory you used:
- 56586 strings out of 474222
- 1438980 string characters out of 5750209
- 2120592 words of memory out of 5000000
+ 56591 strings out of 474222
+ 1439040 string characters out of 5750209
+ 2120593 words of memory out of 5000000
  78006 multiletter control sequences out of 15000+600000
  568706 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,6n,107p,726b,1266s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsubsection.4.1.0.1} has been referenced but does
- not exist, replaced by a fixed one
-
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
-ve/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2023/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2023/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/tex
-live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-di
-st/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/t
-ype1/public/cm-super/sfrm1200.pfb>
-Output written on TFG.pdf (35 pages, 311808 bytes).
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
+live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2023/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2023/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/t
+exlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/20
+23/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-
+dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts
+/type1/public/cm-super/sfrm1200.pfb>
+Output written on TFG.pdf (35 pages, 312571 bytes).
 PDF statistics:
- 410 PDF objects out of 1000 (max. 8388607)
- 341 compressed objects within 4 object streams
- 72 named destinations out of 1000 (max. 500000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 77 named destinations out of 1000 (max. 500000)
  266 words of extra memory for PDF output out of 10000 (max. 10000000)
 
