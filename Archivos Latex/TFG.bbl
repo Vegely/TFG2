@@ -8,4 +8,61 @@ Leslie Lamport et~al.
 Tikzmaker.
 \newblock \url{https://tikzmaker.com/editor}, 2024.
 
+\bibitem{FIPS202}
+National~Institute of~Standards, Technology (NIST), and Morris~J. Dworkin.
+\newblock Sha-3 standard: Permutation-based hash and extendable-output
+  functions, 2015-08-04 00:08:00 2015.
+
+\bibitem{nistPQCround3}
+{National Institute of Standards and Technology}.
+\newblock Post-quantum cryptography - round 3 submissions.
+\newblock
+  \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions},
+  2020.
+\newblock Consultado: 2025-05-05.
+
+\bibitem{nistPQCround4}
+{National Institute of Standards and Technology}.
+\newblock Post-quantum cryptography - round 4 submissions.
+\newblock
+  \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/round-4-submissions},
+  2022.
+\newblock Consultado: 2025-05-05.
+
+\bibitem{kyber-spec-2021}
+Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint,
+  Vadim Lyubashevsky, John~M. Schanck, Peter Schwabe, Gregor Seiler, and Damien
+  Stehl{\'e}.
+\newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
+  Documentation (version 3.01)}.
+\newblock Technical report, CRYSTALS Project, January 2021.
+\newblock NIST PQC Round 3 submission.
+
+\bibitem{saber-spec-2020}
+Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
+  Karmakar, Sujoy~Sinha Roy, Michiel~Van Beirendonck, and Frederik Vercauteren.
+\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}.
+\newblock Technical report, Katholieke Universiteit Leuven and University of
+  Birmingham, 2020.
+\newblock NIST PQC Round 3 submission.
+
+\bibitem{hqc-spec-2022}
+Carlos~Aguilar Melchor, Nicolas Aragon, Slim Bettaieb, Lo{\"\i}c Bidoux,
+  Olivier Blazy, Jurjen Bos, Jean-Christophe Deneuville, Arnaud Dion, Philippe
+  Gaborit, J{\'e}r{\^o}me Lacan, Edoardo Persichetti, Jean-Marc Robert, Pascal
+  V{\'e}ron, and Gilles Z{\'e}mor.
+\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
+\newblock Technical report, HQC Team, October 2022.
+\newblock NIST PQC Round 4 submission.
+
+\bibitem{bike-spec-2022}
+Nicolas Aragon, Paulo S. L.~M. Barreto, Slim Bettaieb, Lo{\"\i}c Bidoux,
+  Olivier Blazy, Jean-Christophe Deneuville, Philippe Gaborit, Santosh Ghosh,
+  Shay Gueron, Tim G{\"u}neysu, Carlos~Aguilar Melchor, Rafael Misoczki,
+  Edoardo Persichetti, Jan Richter-Brockmann, Nicolas Sendrier, Jean-Pierre
+  Tillich, Valentin Vasseur, and Gilles Z{\'e}mor.
+\newblock {BIKE: Bit Flipping Key Encapsulation (Round 4 Submission)}.
+\newblock Technical report, BIKE Team, October 2022.
+\newblock NIST PQC Round 4 submission.
+
 \end{thebibliography}
