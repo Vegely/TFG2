@@ -18,45 +18,45 @@ The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
 Warning--entry type for "latex" isn't style-file defined
 --line 5 of file bibliografia/bibliografia.bib
-You've used 9 entries,
+You've used 16 entries,
             1791 wiz_defined-function locations,
-            508 strings with 6312 characters,
-and the built_in function-call counts, 1817 in all, are:
-= -- 113
-> -- 183
-< -- 0
-+ -- 65
-- -- 56
-* -- 123
-:= -- 349
-add.period$ -- 30
-call.type$ -- 9
-change.case$ -- 13
+            553 strings with 7610 characters,
+and the built_in function-call counts, 3065 in all, are:
+= -- 229
+> -- 227
+< -- 2
++ -- 83
+- -- 67
+* -- 176
+:= -- 531
+add.period$ -- 54
+call.type$ -- 16
+change.case$ -- 20
 chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 49
-empty$ -- 139
-format.name$ -- 56
-if$ -- 371
+cite$ -- 16
+duplicate$ -- 104
+empty$ -- 282
+format.name$ -- 67
+if$ -- 670
 int.to.chr$ -- 0
-int.to.str$ -- 9
-missing$ -- 0
-newline$ -- 51
-num.names$ -- 8
-pop$ -- 37
+int.to.str$ -- 16
+missing$ -- 2
+newline$ -- 88
+num.names$ -- 15
+pop$ -- 74
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 21
+skip$ -- 52
 stack$ -- 0
-substring$ -- 0
-swap$ -- 5
-text.length$ -- 0
+substring$ -- 32
+swap$ -- 23
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 8
-width$ -- 10
-write$ -- 102
+while$ -- 17
+width$ -- 18
+write$ -- 181
 (There was 1 warning)

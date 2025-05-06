@@ -10,7 +10,157 @@ En este capítulo se desarrollan las bases matemáticas de los distintos algorit
 \section{Funcionamiento básico de los algoritmos postcuánticos}
 En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el NIST en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
 \subsection{CRYSTALS-Kyber }
-Para \cite{kyber-spec-2021}
+Se utilizará la misma notación empleada en el artículo \cite{kyber-spec-2021}. El conjunto de los enteros sin signo de 8 bits se denota por \(\mathcal{B} = \{0, \dots, 255\}\). Para representar vectores de tamaño \(k\), se utiliza la notación \(\mathcal{B}^k\), mientras que para vectores de tamaño arbitrario se emplea \(\mathcal{B}^*\).
+\newline
+
+Para trabajar con estos vectores, se utiliza el símbolo \(||\) para denotar la concatenación de dos cadenas, y la notación \(+k\) para indicar el desplazamiento de \(k\) bytes desde el inicio de una cadena. Por ejemplo, si se tiene una cadena \(a\) de longitud \(l\) y se concatena con una cadena \(b\), se obtiene:
+\begin{equation}
+	c = a || b
+\end{equation}
+
+Entonces:
+\begin{equation}
+	b = c + l
+\end{equation}
+
+Para denotar vectores, se utiliza la notación \(v[i]\), donde \(v\) es un vector columna e \(i\) indica la posición del elemento (empezando desde 0, si no se indica lo contrario). Para las matrices, se emplea la notación \(A[i][j]\), donde \(i\) representa la fila y \(j\) la columna. La transpuesta de una matriz \(A\) se denota como \(A^T\).
+\newline
+
+Se denota mediante \(\lfloor x \rceil\) el redondeo de \(x\) al entero más cercano. Por ejemplo: \(\lfloor 2{,}3 \rceil = 2\), \(\lfloor 2{,}5 \rceil = 3\) y \(\lfloor 2{,}8 \rceil = 3\).
+\newline
+
+Para las reducciones modulares se emplean dos tipos: una centrada en cero y otra correspondiente a la reducción modular estándar. Para la reducción modular centrada en cero, sea \(\alpha\) un entero par. Esta operación se define como:
+\begin{equation}
+	r' = r \ \text{mod}^{\pm} \alpha \quad \Longrightarrow \quad -\dfrac{\alpha}{2} < r' \le \dfrac{\alpha}{2}
+\end{equation}
+
+Mientras que la reducción modular estándar se denota como:
+\begin{equation}
+	r' = r \ \text{mod}^{+} \alpha \quad \Longrightarrow \quad 0 \le r' < \alpha
+\end{equation}
+
+Finalmente, se denota mediante \(s \leftarrow S\) la selección de \(s\) de manera uniformemente aleatoria del conjunto \(S\). Si \(S\) representa una distribución de probabilidad, entonces \(s\) se selecciona de acuerdo con dicha distribución.
+\newpage
+
+\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (NTT)}
+Para acelerar las operaciones de multiplicación en el esquema basado en retículas, se utiliza la Transformada Teórica de Números (NTT, por sus siglas en inglés), la cual permite reducir la complejidad temporal de la multiplicación de polinomios desde \(\mathcal{O}(n^2)\), correspondiente al método tradicional, hasta \(\mathcal{O}(n \log(n))\). Para explicar en detalle el funcionamiento de esta transformada, se emplea como base el siguiente artículo \cite{cryptoeprint:2024/585}.
+\newline
+
+Antes de pasar a explicar el funcionamiento de este método es relevante aclarar que se trabaja sobre el siguiente anillo de polinomios para realizar las operaciones, denotado mediante \(R_q\):
+\begin{equation}
+	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}
+\end{equation}
+
+En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (NTT), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces n-enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la NTT. La validez de esta afirmación se fundamenta en el siguiente teorema \cite{moreno-roots}:
+\newline
+
+\begin{theorem}
+	Para \(n\), \(q>1\), el cuerpo  \(Z_q\) tiene una raíz enésima de la unidad si y solo sí \(n| (q-1)\)
+\end{theorem} 
+\begin{proof}
+	Si \(\omega\) es una raíz enésima de la unidad en el conjunto \( \mathbb{Z}_q \), entonces el conjunto:
+	\begin{equation}
+		\Omega = \left\{1, \omega, \omega^2, \dots, \omega^{n-1} \right\}
+	\end{equation}
+	forma un subgrupo cíclico \( H \) del grupo multiplicativo \( G_{q-1} \). Por el Teorema de Lagrange, se concluye que el orden de \( H \) divide al orden de \( G_{q-1} \), es decir, \( n \mid (q-1) \).
+	\newline
+	
+	Dado que \( G_{q-1} \) es también un grupo cíclico, existe un generador \(\alpha\) tal que, por el pequeño teorema de Fermat, se cumple:
+	\begin{equation}
+		\alpha^{q-1} = 1
+	\end{equation}
+	
+	Por lo tanto, el grupo \( G_{q-1} \) puede escribirse como:
+	\begin{equation}
+		G_{q-1} = \left\{1, \alpha, \alpha^2, \dots, \alpha^{q-2} \right\}
+	\end{equation}
+	
+	Si se define \(\omega\) como:
+	\begin{equation}
+		\omega = \alpha^{\frac{q-1}{n}},
+	\end{equation}
+	
+	entonces:
+	\begin{equation}
+		\omega^n = \alpha^{q-1} = 1,
+	\end{equation}
+	
+	y además, para todo \( 0 < k < n \), se cumple:
+	\begin{equation}
+		k \cdot \frac{q-1}{n} < q-1 \quad \Rightarrow \quad \omega^k \neq 1.
+	\end{equation}
+	
+	Por lo tanto, \(\omega\) es una raíz enésima de la unidad en \(\mathbb{Z}_q\).
+\end{proof}
+\newpage
+
+Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos. Como resultado, la Transformada (NTT) de un polinomio en el anillo \(R_q\) se representa como un vector de 128 polinomios de grado 1.
+\newline
+
+Sean las 256 raíces enésimas de la unidad \(\left\{\xi, \xi^3, \dots, \xi^{255}\right\}\), con \(\xi = 17\) como primera raíz primitiva. Entonces, se cumple que:
+\begin{equation}
+	X^{256}+1=\prod_{i=0}^{127}\left(X^2- \xi^{2i+1}\right)
+\end{equation}
+
+Aplicando la NTT a un polinomio \(f\in R_q\) se obtiene:
+\begin{equation}
+	NTT(f)=\hat{f}=\left(\hat{f}_0+\hat{f}_1X,\hat{f}_2+\hat{f}_3X,...,\hat{f}_{254}+\hat{f}_{255}X\right)
+\end{equation}
+
+Con
+\begin{equation}
+	\begin{array}{l}
+		\hat{f}_{2i}=\sum\limits_{j=0}^{127} f_{2j}\xi^{\left(2i+1\right)j}\\
+		\hat{f}_{2i+1}=\sum\limits_{j=0}^{127} f_{2j+1}\xi^{\left(2i+1\right)j}
+	\end{array}
+\end{equation}
+
+Donde mediante la transformada directa NTT e inversa NTT$^{-1}$ se puede realizar el producto de \(f\),\(g\in R_q\) de manera eficiente de la siguiente manera: 
+\begin{equation}
+	h=f\cdot g = \text{NTT}^{-1}\left[\text{NTT}(f) o \text{NTT}(g)\right]
+\end{equation}
+
+Siendo \(\hat{h}=\hat{f}o\hat{g}=\text{NTT}(f) o \text{NTT}(g)\) la multiplicación base definida como:
+\begin{equation}
+	\hat{h}_{2i}+\hat{h}_{2i+1}X=(\hat{f}_{2i}+\hat{f}_{2i+1})\left(\hat{g}_{2i}+\hat{g}_{2i+1}\right) \ \text{mod} \left(X^2-\xi^{2i+1}\right)
+\end{equation}
+
+En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de como funciona este proceso.
+\begin{figure}[H]
+	\centering
+		\begin{circuitikz}
+			\tikzstyle{every node}=[font=\LARGE]
+			\draw  (5.25,13.75) rectangle (7.75,12.25);
+			\draw  (13.5,13.75) rectangle (16,12.25);
+			\node [font=\LARGE] at (6.5,13) {f $\cdot$ g};
+			\node [font=\LARGE] at (14.75,13) {h};
+			\draw [ color={rgb,255:red,255; green,40; blue,40}, ->, >=Stealth] (7.75,13) -- (13.5,13);
+			\node [font=\LARGE, color={rgb,255:red,255; green,0; blue,0}] at (10.5,13.5) {$\mathcal{O}(n^2)$};
+			\node [font=\normalsize] at (10.5,12.5) {Multiplicación directa};
+			\draw  (5.25,9.5) rectangle (7.75,8);
+			\draw  (13.5,9.5) rectangle (16,8);
+			\draw [ color={rgb,255:red,0; green,64; blue,255}, ->, >=Stealth] (6.5,12.25) -- (6.5,9.5);
+			\draw [ color={rgb,255:red,0; green,64; blue,255}, ->, >=Stealth] (7.75,8.75) -- (13.5,8.75);
+			\draw [ color={rgb,255:red,0; green,64; blue,255}, ->, >=Stealth] (14.75,9.5) -- (14.75,12.25);
+			\node [font=\LARGE] at (5.75,10.75) {NTT};
+			\node [font=\LARGE] at (15.75,10.75) {NTT$^{-1}$};
+			\node [font=\LARGE, color={rgb,255:red,0; green,64; blue,255}] at (10.5,9.25) {$\mathcal{O}(n\log(n))$};
+			\node [font=\normalsize] at (10.75,8.25) {Multiplicación mediante NTT};
+			\node [font=\LARGE] at (6.5,8.75) {$\hat{f}$ $\cdot$ $\hat{g}$};
+			\node [font=\LARGE] at (14.75,8.75) {$\hat{h}$};
+		\end{circuitikz}
+	\label{fig:NTTFigure}
+	\caption{Representación del cálculo de un producto de polinomios mediante NTT en comparación con los algoritmos clásicos.}
+\end{figure}
+\newpage
+
+Tras este breve inciso sobre la aplicación concreta de la NTT en el algoritmo Kyber, utilizado en el presente trabajo, se procede a analizar los fundamentos teóricos de la Transformada Teórica Numérica según el artículo \cite{cryptoeprint:2024/585}.
+\subsubsection{LWE}
+\cite{LWElearning}
+\subsection{Transformadas Fujisaki-Okamoto}
+\cite{Fujisaki1999}
+\subsubsection{Algoritmos principales}
+\newpage
 \subsection{SABER}
 Para \cite{saber-spec-2020}
 \subsection{Hamming Quasi-Cyclic (HQC)}

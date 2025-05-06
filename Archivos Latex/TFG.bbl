@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{latex}
 Leslie Lamport et~al.
@@ -7,6 +7,24 @@ Leslie Lamport et~al.
 \bibitem{tikzmaker}
 Tikzmaker.
 \newblock \url{https://tikzmaker.com/editor}, 2024.
+
+\bibitem{ISO_C}
+{ISO/IEC 9899:2018 Information technology ? Programming languages ? C}.
+\newblock \url{https://www.iso.org/standard/82075.html}, 2024.
+\newblock International Organization for Standardization, Geneva, Switzerland.
+
+\bibitem{ISO_CPP}
+{ISO/IEC 14882:2025 Information technology ? Programming languages ? C++}.
+\newblock \url{https://www.iso.org/standard/83626.html}, 2024.
+\newblock International Organization for Standardization, Geneva, Switzerland.
+
+\bibitem{CY8CPROTO063BLE}
+{Infineon Technologies AG}.
+\newblock {CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.
+\newblock
+  \url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/},
+  2020.
+\newblock Consultado: 2025-05-05.
 
 \bibitem{FIPS202}
 National~Institute of~Standards, Technology (NIST), and Morris~J. Dworkin.
@@ -37,6 +55,31 @@ Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint,
   Documentation (version 3.01)}.
 \newblock Technical report, CRYSTALS Project, January 2021.
 \newblock NIST PQC Round 3 submission.
+
+\bibitem{cryptoeprint:2024/585}
+Ardianto Satriawan, Rella Mareta, and Hanho Lee.
+\newblock A complete beginner guide to the number theoretic transform ({NTT}).
+\newblock Cryptology {ePrint} Archive, Paper 2024/585, 2024.
+
+\bibitem{moreno-roots}
+Miguel~A. Moreno.
+\newblock Primitive $n$-th roots of unity of finite fields.
+\newblock
+  \url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html},
+  n.d.
+\newblock Consultado: 2025-05-05.
+
+\bibitem{LWElearning}
+Vadim Lyubashevsky, Chris Peikert, and Oded Regev.
+\newblock On ideal lattices and learning with errors over rings.
+\newblock {\em J. ACM}, 60(6), November 2013.
+
+\bibitem{Fujisaki1999}
+Eiichiro Fujisaki and Tatsuaki Okamoto.
+\newblock Secure integration of asymmetric and symmetric encryption schemes.
+\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
+  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
+  Berlin, Heidelberg, 1999. Springer.
 
 \bibitem{saber-spec-2020}
 Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
