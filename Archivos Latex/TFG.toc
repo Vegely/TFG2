@@ -25,7 +25,7 @@
 \contentsline {section}{\numberline {3.4}Funcionamiento básico de los algoritmos postcuánticos}{6}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}CRYSTALS-Kyber }{6}{subsection.3.4.1}%
 \contentsline {subsubsection}{\numberline {3.4.1.1}Transformada Teórica de Números o Number Theoretic Transform (\gls {ntt})}{7}{subsubsection.3.4.1.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.2}LWE}{10}{subsubsection.3.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}Aprendizaje Con Errores o Learning With Errors (\gls {lwe})}{10}{subsubsection.3.4.1.2}%
 \contentsline {subsection}{\numberline {3.4.2}Transformadas Fujisaki-Okamoto}{10}{subsection.3.4.2}%
 \contentsline {subsubsection}{\numberline {3.4.2.1}Algoritmos principales}{10}{subsubsection.3.4.2.1}%
 \contentsline {subsection}{\numberline {3.4.3}SABER}{11}{subsection.3.4.3}%

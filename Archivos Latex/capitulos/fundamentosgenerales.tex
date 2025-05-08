@@ -221,10 +221,10 @@ Con
 
 Donde mediante la transformada directa \gls{ntt} e inversa \gls{ntt}$^{-1}$ se puede realizar el producto de \(f\),\(g\in R_q\) de manera eficiente de la siguiente manera: 
 \begin{equation}
-	h=f\cdot g = \text{NTT}^{-1}\left[\text{NTT}(f) o \text{NTT}(g)\right]
+	h=f\cdot g = \text{NTT}^{-1}\left[\text{NTT}(f) \circ \text{NTT}(g)\right]
 \end{equation}
 
-Siendo \(\hat{h}=\hat{f}o\hat{g}=\text{NTT}(f) o \text{NTT}(g)\) la multiplicación base definida como:
+Siendo \(\hat{h}=\hat{f}\circ\hat{g}=\text{NTT}(f)\circ \text{NTT}(g)\) la multiplicación base definida como:
 \begin{equation}
 	\hat{h}_{2i}+\hat{h}_{2i+1}X=(\hat{f}_{2i}+\hat{f}_{2i+1})\left(\hat{g}_{2i}+\hat{g}_{2i+1}\right) \ \text{mod} \left(X^2-\xi^{2i+1}\right)
 \end{equation}
@@ -251,7 +251,7 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 			\node [font=\LARGE] at (15.75,10.75) {NTT$^{-1}$};
 			\node [font=\LARGE, color={rgb,255:red,0; green,64; blue,255}] at (10.5,9.25) {$\mathcal{O}(n\log(n))$};
 			\node [font=\normalsize] at (10.75,8.25) {Multiplicación mediante NTT};
-			\node [font=\LARGE] at (6.5,8.75) {$\hat{f}$ $\cdot$ $\hat{g}$};
+			\node [font=\LARGE] at (6.5,8.75) {$\hat{f}$ $\circ$ $\hat{g}$};
 			\node [font=\LARGE] at (14.75,8.75) {$\hat{h}$};
 		\end{circuitikz}
 	\label{fig:NTTFigure}
@@ -259,7 +259,7 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 \end{figure}
 
 
-\subsubsection{LWE}
+\subsubsection{Aprendizaje Con Errores o Learning With Errors (\gls{lwe})}
 \cite{LWElearning}
 \subsection{Transformadas Fujisaki-Okamoto}
 \cite{Fujisaki1999}
