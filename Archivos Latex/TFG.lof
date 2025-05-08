@@ -5,7 +5,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del cálculo de un producto de polinomios mediante NTT en comparación con los algoritmos clásicos.}}{8}{figure.3.1}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \gls {ntt} en comparación con los algoritmos clásicos.}}{10}{figure.3.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

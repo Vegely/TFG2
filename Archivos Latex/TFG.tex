@@ -34,6 +34,7 @@
 \usepackage{esint}
 \usepackage{adjustbox}
 \usetikzlibrary{tikzmark,calc}
+\usepackage[acronym]{glossaries}
 
 %parametros del documento (sus propiedades)
 \hypersetup{
@@ -48,7 +49,8 @@
     urlcolor=black,
 }
 
-
+%indice de gloarios 
+\makeglossaries
 \newtheorem{theorem}{Teorema}
 \newtheorem{proof}{Demostración}
 
@@ -56,6 +58,9 @@
 \setcounter{secnumdepth}{3}
 % profundidad de tabla de contenidos
 \setcounter{tocdepth}{4}
+
+\newacronym{ntt}{NTT}{Transformada Teórica de Números}
+\newacronym{dft}{DFT}{Transformada Discreta de Fourier}
 
 %empieza el documento
 \begin{document}  
@@ -84,6 +89,9 @@
 	
 	%Índice de tablas.
 	\listoftables
+	
+	%Glosario
+	\printglossaries
 	
 	%Empieza la parte descriptiva del trabajo
 	\mainmatter

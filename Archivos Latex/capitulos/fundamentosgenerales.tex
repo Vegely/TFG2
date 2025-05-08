@@ -42,8 +42,8 @@ Mientras que la reducción modular estándar se denota como:
 Finalmente, se denota mediante \(s \leftarrow S\) la selección de \(s\) de manera uniformemente aleatoria del conjunto \(S\). Si \(S\) representa una distribución de probabilidad, entonces \(s\) se selecciona de acuerdo con dicha distribución.
 \newpage
 
-\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (NTT)}
-Para acelerar las operaciones de multiplicación en el esquema basado en retículas, se utiliza la Transformada Teórica de Números (NTT, por sus siglas en inglés), la cual permite reducir la complejidad temporal de la multiplicación de polinomios desde \(\mathcal{O}(n^2)\), correspondiente al método tradicional, hasta \(\mathcal{O}(n \log(n))\). Para explicar en detalle el funcionamiento de esta transformada, se emplea como base el siguiente artículo \cite{cryptoeprint:2024/585}.
+\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (\gls{ntt})}
+Para acelerar las operaciones de multiplicación en el esquema basado en retículas, se utiliza la Transformada Teórica de Números (\gls{ntt}, por sus siglas en inglés), la cual permite reducir la complejidad temporal de la multiplicación de polinomios desde \(\mathcal{O}(n^2)\), correspondiente al método tradicional, hasta \(\mathcal{O}(n \log(n))\). Para más detalles, consúltese \cite{cryptoeprint:2024/585}.
 \newline
 
 Antes de pasar a explicar el funcionamiento de este método es relevante aclarar que se trabaja sobre el siguiente anillo de polinomios para realizar las operaciones, denotado mediante \(R_q\):
@@ -51,7 +51,7 @@ Antes de pasar a explicar el funcionamiento de este método es relevante aclarar
 	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}
 \end{equation}
 
-En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (NTT), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces n-enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la NTT. La validez de esta afirmación se fundamenta en el siguiente teorema \cite{moreno-roots}:
+En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (\gls{ntt}), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la \gls{ntt}. La validez de esta afirmación se fundamenta en el siguiente teorema \cite{moreno-roots}:
 \newline
 
 \begin{theorem}
@@ -94,7 +94,111 @@ En la implementación especificada de Kyber, según el artículo \cite{kyber-spe
 \end{proof}
 \newpage
 
-Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos. Como resultado, la Transformada (NTT) de un polinomio en el anillo \(R_q\) se representa como un vector de 128 polinomios de grado 1.
+Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos.
+\newline
+
+A este polinomio se le aplica la transformada \gls{ntt} a sus coeficientes, la cual no es más que una variación de la \gls{dft} aplicada a cuerpos finitos \(\mathbb{Z}_q\) y aplicada a polinomios de grado \(n\). Para ello, se definen dos operaciones fundamentales:
+\begin{enumerate}
+	\item La transformada directa:
+	\begin{equation}
+		\hat{a}_j=\sum_{i=0}^{n-1} \phi^{i\left(2j+1\right)} a_j \ \text{mod} \ q
+	\end{equation}
+	\item  La transformada inversa:
+	\begin{equation}
+		a_i=n^{-1} \sum_{j=0}^{n-1} \phi^{-i\left(2j+1\right)} \hat{a}_j \ \text{mod} \ q
+	\end{equation}
+\end{enumerate}
+
+Donde $\phi$ es un valor tal que $\phi^2=\omega$, con $\omega$ una raíz enésima de la unidad en \(\mathbb{Z}_q\) y \(n^{-1}\) es la inversa multiplicativa de \(n\) en \(\mathbb{Z}_q\).
+\newline
+
+A continuación, se presenta un ejemplo extraído de \cite{cryptoeprint:2024/585} para ilustrar su funcionamiento. Sea el polinomio \(G(x)=5+6x+7x^2+8x^3\), cuyo vector de coeficientes es \(g=[5,6,7,8]\). Trabajando en el anillo \(\mathbb{Z}_{7681}\), y tomando $\phi=1925$, se puede calcular la transformada \gls{ntt} \(\hat{g}\). Aplicando luego la transformada inversa, es posible recuperar el vector original \(g\).
+\begin{equation}
+	\hat{g}=\begin{bmatrix}
+		\phi^0 & \phi^1 & \phi^2 & \phi^3\\
+		\phi^0 & \phi^3 & \phi^6 & \phi^1\\
+		\phi^0 & \phi^5 & \phi^2 & \phi^7\\
+		\phi^0 & \phi^7 & \phi^6 & \phi^5\\
+	\end{bmatrix} \cdot \begin{bmatrix}
+	5\\
+	6\\
+	7\\
+	8
+	\end{bmatrix}=\begin{bmatrix}
+	1 & 1925 & 3383 & 6468\\
+	1 & 6468 & 4298 & 1925\\
+	1 & 5756 & 3383 & 1213\\
+	1 & 1213 & 4298 & 5756\\
+	\end{bmatrix} \cdot \begin{bmatrix}
+	5\\
+	6\\
+	7\\
+	8 \end{bmatrix}= \begin{bmatrix}
+	2489\\
+	7489\\
+	6478\\
+	6607 \end{bmatrix}
+\end{equation}
+
+Aplicando la transformada inversa, donde la inversa de $\phi=1925$ en \(\mathbb{Z}_{7681}\) es $\phi^{-1}=1213$ y el inverso del orden del polinomio \(n=4\) es \(n^{-1}=5761\):
+\begin{equation}
+	g=n^{-1}\begin{bmatrix}
+		\phi^0 & \phi^0 & \phi^0 & \phi^0\\
+		\phi^{-1} & \phi^{-3} & \phi^{-5} & \phi^{-7}\\
+		\phi^{-2} & \phi^{-6} & \phi^{-2} & \phi^{-6}\\
+		\phi^{-3} & \phi^{-1} & \phi^{-7} & \phi^{-5}\\
+	\end{bmatrix} \cdot \hat{g}=5761\begin{bmatrix}
+	1 & 1 & 1 & 1\\
+	1213& 5756& 6468& 1925\\
+	4298& 3383& 4298& 3383\\
+	5756& 1213& 1925& 6468\\
+	\end{bmatrix} \cdot \begin{bmatrix}
+	2489\\
+	7489\\
+	6478\\
+	6607 \end{bmatrix}
+\end{equation}
+
+Con estas transformadas definidas se define el producto o convolución negativa en el anillo \(	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}\) entre dos polinomios \(g\) y \(h\) como:
+\begin{equation}
+	g\cdot h= \text{NTT}^{-1}(\text{NTT}(g)\circ\text{NTT}(h))
+\end{equation}
+
+Donde la operación \(\circ\) denota la multiplicación elemento a elemento (o punto a punto) entre los vectores en ${Z}_q[X]$.
+\newpage
+
+Ahora, queda demostrar que el tiempo de ejecución de la \gls{ntt} es de \(\mathcal{O}(n \log(n))\). Para lograr este cometido, se aprovechan dos propiedades que cumplen estas raíces calculadas:
+\begin{enumerate}
+	\item Peridicidad: 
+	\begin{equation}
+		\phi^{k+2n}=\phi^k
+	\end{equation}
+	\item Simetría:
+	\begin{equation}
+		\phi^{k+n}=\phi^{-k}
+	\end{equation}
+\end{enumerate}
+
+Con estas propiedades, se puede implementar el algoritmo de Cooley-Tukey \cite{CooleyALG} que consiste en ir descomponiendo el problema en mitades de manera recursiva para reducir al máximo la cantidad de cálculos realizados. Partiendo de la transformada directa y desarrollando:
+\begin{equation}
+	\hat{a}_j=\sum_{i=0}^{n-1} \phi^{i\left(2j+1\right)} a_j \ \text{mod} \ q = \sum_{i=0}^{n/2-1} \phi^{4ij+2i} a_{2i} + \phi^{2j+1} \sum_{i=0}^{n/2-1} \phi^{4ij+2i} a_{2i+1} \ \text{mod} \ q
+\end{equation}
+
+Si se sustituye \(A_j=\sum_{i=0}^{n/2-1} \phi^{4ij+2i} a_{2i}\) y \(B_j=\sum_{i=0}^{n/2-1} \phi^{4ij+2i} a_{2i+1}\). Ahora aplicando simetría en \(\phi\):
+\begin{equation}
+	\hat{a}_j=A_j+\phi^{4ij+2i}B_j  \ \text{mod} \ q
+\end{equation}
+\begin{equation}
+	\hat{a}_{j+n/2}=A_j-\phi^{4ij+2i}B_j  \ \text{mod} \ q
+\end{equation}
+
+Donde las matrices \(A_j\) y \(B_j\)pueden obtenerse como el resultado de aplicar la \gls{ntt} sobre la mitad de los puntos, gracias a la estructura recursiva del algoritmo. Esto implica que, si \(n\) es una potencia de \(2\), el proceso puede repetirse recursivamente sobre subproblemas de tamaño cada vez menor, hasta alcanzar el caso base. 
+\newline
+
+De manera similar, se puede mostrar esta propiedad para la transformada inversa. Por tanto, se demuestra que este algoritmo tiene complejidad \(\mathcal{O}(n \log(n))\).
+\newline
+
+En el caso concreto de kyber \cite{kyber-spec-2021}, la Transformada (\gls{ntt}) de un polinomio en el anillo \(R_q\) se representa como un vector de 128 polinomios de grado 1.
 \newline
 
 Sean las 256 raíces enésimas de la unidad \(\left\{\xi, \xi^3, \dots, \xi^{255}\right\}\), con \(\xi = 17\) como primera raíz primitiva. Entonces, se cumple que:
@@ -102,7 +206,7 @@ Sean las 256 raíces enésimas de la unidad \(\left\{\xi, \xi^3, \dots, \xi^{255
 	X^{256}+1=\prod_{i=0}^{127}\left(X^2- \xi^{2i+1}\right)
 \end{equation}
 
-Aplicando la NTT a un polinomio \(f\in R_q\) se obtiene:
+Aplicando la \gls{ntt} propuesta en \cite{kyber-spec-2021} a un polinomio \(f\in R_q\) se obtiene:
 \begin{equation}
 	NTT(f)=\hat{f}=\left(\hat{f}_0+\hat{f}_1X,\hat{f}_2+\hat{f}_3X,...,\hat{f}_{254}+\hat{f}_{255}X\right)
 \end{equation}
@@ -115,7 +219,7 @@ Con
 	\end{array}
 \end{equation}
 
-Donde mediante la transformada directa NTT e inversa NTT$^{-1}$ se puede realizar el producto de \(f\),\(g\in R_q\) de manera eficiente de la siguiente manera: 
+Donde mediante la transformada directa \gls{ntt} e inversa \gls{ntt}$^{-1}$ se puede realizar el producto de \(f\),\(g\in R_q\) de manera eficiente de la siguiente manera: 
 \begin{equation}
 	h=f\cdot g = \text{NTT}^{-1}\left[\text{NTT}(f) o \text{NTT}(g)\right]
 \end{equation}
@@ -124,6 +228,7 @@ Siendo \(\hat{h}=\hat{f}o\hat{g}=\text{NTT}(f) o \text{NTT}(g)\) la multiplicaci
 \begin{equation}
 	\hat{h}_{2i}+\hat{h}_{2i+1}X=(\hat{f}_{2i}+\hat{f}_{2i+1})\left(\hat{g}_{2i}+\hat{g}_{2i+1}\right) \ \text{mod} \left(X^2-\xi^{2i+1}\right)
 \end{equation}
+
 
 En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de como funciona este proceso.
 \begin{figure}[H]
@@ -150,11 +255,10 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 			\node [font=\LARGE] at (14.75,8.75) {$\hat{h}$};
 		\end{circuitikz}
 	\label{fig:NTTFigure}
-	\caption{Representación del cálculo de un producto de polinomios mediante NTT en comparación con los algoritmos clásicos.}
+	\caption{Representación del cálculo de un producto de polinomios mediante \gls{ntt} en comparación con los algoritmos clásicos.}
 \end{figure}
-\newpage
 
-Tras este breve inciso sobre la aplicación concreta de la NTT en el algoritmo Kyber, utilizado en el presente trabajo, se procede a analizar los fundamentos teóricos de la Transformada Teórica Numérica según el artículo \cite{cryptoeprint:2024/585}.
+
 \subsubsection{LWE}
 \cite{LWElearning}
 \subsection{Transformadas Fujisaki-Okamoto}

@@ -24,18 +24,18 @@
 \contentsline {subsection}{\numberline {3.3.3}Algoritmo de Shore}{5}{subsection.3.3.3}%
 \contentsline {section}{\numberline {3.4}Funcionamiento básico de los algoritmos postcuánticos}{6}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}CRYSTALS-Kyber }{6}{subsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.1}Transformada Teórica de Números o Number Theoretic Transform (NTT)}{7}{subsubsection.3.4.1.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.2}LWE}{9}{subsubsection.3.4.1.2}%
-\contentsline {subsection}{\numberline {3.4.2}Transformadas Fujisaki-Okamoto}{9}{subsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.2.1}Algoritmos principales}{9}{subsubsection.3.4.2.1}%
-\contentsline {subsection}{\numberline {3.4.3}SABER}{10}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Hamming Quasi-Cyclic (HQC)}{10}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Bit Flipping Key Encapsulation (Bike)}{10}{subsection.3.4.5}%
-\contentsline {section}{\numberline {3.5}Fundamentos de seguridad de los algoritmos}{11}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}CRYSTALS-Kyber }{11}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}SABER}{11}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Hamming Quasi-Cyclic (HQC)}{11}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Bit Flipping Key Encapsulation (Bike)}{11}{subsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}Transformada Teórica de Números o Number Theoretic Transform (\gls {ntt})}{7}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}LWE}{10}{subsubsection.3.4.1.2}%
+\contentsline {subsection}{\numberline {3.4.2}Transformadas Fujisaki-Okamoto}{10}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}Algoritmos principales}{10}{subsubsection.3.4.2.1}%
+\contentsline {subsection}{\numberline {3.4.3}SABER}{11}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Hamming Quasi-Cyclic (HQC)}{11}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Bit Flipping Key Encapsulation (Bike)}{11}{subsection.3.4.5}%
+\contentsline {section}{\numberline {3.5}Fundamentos de seguridad de los algoritmos}{12}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}CRYSTALS-Kyber }{12}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}SABER}{12}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Hamming Quasi-Cyclic (HQC)}{12}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Bit Flipping Key Encapsulation (Bike)}{12}{subsection.3.5.4}%
 \contentsline {chapter}{\numberline {4}Desarrollo}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Implementación comunicación serie}{13}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{13}{subsection.4.1.1}%
