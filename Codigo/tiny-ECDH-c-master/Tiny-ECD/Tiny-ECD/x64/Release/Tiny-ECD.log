@@ -1,8 +1,0 @@
-﻿  ecdh.c
-  ecdh_example.c
-C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\ecdh_example.c(135,9): warning C4244: 'función': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Generando código
-  Previous IPDB not found, fall back to full compilation.
-  All 34 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Generación de código finalizada
-  Tiny-ECD.vcxproj -> C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\tiny-ECDH-c-master\Tiny-ECD\x64\Release\Tiny-ECD.exe
