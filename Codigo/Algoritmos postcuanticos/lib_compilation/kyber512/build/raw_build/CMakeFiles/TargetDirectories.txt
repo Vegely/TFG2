@@ -1,0 +1,5 @@
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/lib_compilation/kyber512/build/raw_build/CMakeFiles/kyber_shared.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/lib_compilation/kyber512/build/raw_build/CMakeFiles/kyber_static.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/lib_compilation/kyber512/build/raw_build/CMakeFiles/INSTALL.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/lib_compilation/kyber512/build/raw_build/CMakeFiles/ALL_BUILD.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/lib_compilation/kyber512/build/raw_build/CMakeFiles/ZERO_CHECK.dir
