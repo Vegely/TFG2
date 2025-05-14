@@ -295,7 +295,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\sha512.c" />
     <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\sha256.c" />
     <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\aes256ctr.c" />
-    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\rng.c" />
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\randombytes.c" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

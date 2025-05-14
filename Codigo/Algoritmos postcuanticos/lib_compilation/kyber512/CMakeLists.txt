@@ -39,7 +39,7 @@ set(KYBER_SOURCES
     aes256ctr.c
 
     # RNG
-    rng.c
+    randombytes.c
 )
 
 # Common compile definitions for both builds

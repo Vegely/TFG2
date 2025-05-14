@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "kem.h"
 #include "params.h"
-#include "rng.h"
+#include "randombytes.h"
 #include "symmetric.h"
 #include "verify.h"
 #include "indcpa.h"

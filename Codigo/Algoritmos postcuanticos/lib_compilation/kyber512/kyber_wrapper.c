@@ -2,7 +2,6 @@
 #include "params.h"
 #include "kem.h"
 #include "api.h"
-#include "rng.h"
 
 // Current security level
 static kyber_security_level_t current_security_level = KYBER_SECURITY_512;

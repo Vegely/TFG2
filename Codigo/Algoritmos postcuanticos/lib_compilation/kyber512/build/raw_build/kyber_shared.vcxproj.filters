@@ -46,7 +46,7 @@
     <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\aes256ctr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\rng.c">
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\lib_compilation\kyber512\randombytes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

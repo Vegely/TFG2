@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\KAT_tests\kyber512\kat_test\build_kat_512\CMakeFiles\a6ccac85e55b7d6346c49d8ab4e0f91b\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EB95E183-455C-3272-8A42-1AD37DFF6DF3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
