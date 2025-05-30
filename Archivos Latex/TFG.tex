@@ -33,9 +33,11 @@
 \usepackage{siunitx}
 \usepackage{esint}
 \usepackage{adjustbox}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usetikzlibrary{tikzmark,calc}
-\usepackage[acronym]{glossaries}
-
+\usepackage[acronym,nomain]{glossaries}
+\floatname{algorithm}{Algoritmo}
 %parametros del documento (sus propiedades)
 \hypersetup{
     pdftitle={Bogurad Barañski Barañska - TFG - 2025},
@@ -62,9 +64,13 @@
 \newacronym{ntt}{NTT}{Transformada Teórica de Números}
 \newacronym{dft}{DFT}{Transformada Discreta de Fourier}
 \newacronym{lwe}{LWE}{Aprendizaje Con Errores}
-
+\newacronym{rlwe}{R-LWE}{Aprendizaje Con Errores en Anillos}
+\newacronym{cca2}{IND-CCA2}{Indistinguibilidad bajo ataque de texto cifrado adaptable}
+\newacronym{ecc}{ECC}{Criptografía en Curvas Elípticas}
+\newacronym{rsa}{RSA}{Rivest-Shamir-Adleman}
 %empieza el documento
 \begin{document}  
+	\glsunsetall
 	
 	%elementos antes del trabajo en sÌ se meten dentro de frontmatter
 	\frontmatter
@@ -92,7 +98,11 @@
 	\listoftables
 	
 	%Glosario
-	\printglossaries
+	\setglossarystyle{super}
+	\printglossary[type=\acronymtype]
+
+
+	
 	
 	%Empieza la parte descriptiva del trabajo
 	\mainmatter
@@ -111,9 +121,6 @@
 	
 	\include{capitulos/conclusion}
 	
-	\appendix
-	
-	\include{capitulos/apendice}
 	
 	\backmatter
 	%Glosario, lista de símbolos, notas, etc.
@@ -123,6 +130,7 @@
 	
 	%genera doble hoja en blanco
 	\cleardoublepage
+	
 	
 	%apartado de bibliografía
 	\addcontentsline{toc}{chapter}{Bibliografia}

@@ -26,10 +26,122 @@ Tikzmaker.
   2020.
 \newblock Consultado: 2025-05-05.
 
+\bibitem{NIST_IR_8413_2022}
+Gorjan Alagic, Daniel Apon, David Cooper, Quynh Dang, Thinh Dang, John Kelsey,
+  Jacob Lichtinger, Carl Miller, Dustin Moody, Rene Peralta, Ray Perlner,
+  Angela Robinson, Daniel Smith-Tone, and Yi-Kai Liu.
+\newblock Status report on the third round of the nist post-quantum
+  cryptography standardization process.
+\newblock NIST Interagency Report NIST IR 8413 (Updated), National Institute of
+  Standards and Technology (NIST), July 2022.
+
+\bibitem{NIST_IR_8545_2025}
+Gorjan Alagic, Maxime Bros, Pierre Ciadoux, David Cooper, Quynh Dang, Thinh
+  Dang, John Kelsey, Jacob Lichtinger, Yi-Kai Liu, Carl Miller, Dustin Moody,
+  Rene Peralta, Ray Perlner, Angela Robinson, Hamilton Silberg, Daniel
+  Smith-Tone, and Noah Waller.
+\newblock Status report on the fourth round of the nist post-quantum
+  cryptography standardization process.
+\newblock NIST Internal Report NIST IR 8545, National Institute of Standards
+  and Technology (NIST), Gaithersburg, MD, March 2025.
+
+\bibitem{011318_1_5.0179566}
+Yichen Zhang, Yiming Bian, Zhengyu Li, Song Yu, and Hong Guo.
+\newblock Continuous-variable quantum key distribution system: Past, present,
+  and future.
+\newblock {\em Applied Physics Reviews}, 11(1):011318, 03 2024.
+
+\bibitem{s11042-024-20535-x}
+Mandeep Kumar and Bhaskar Mondal.
+\newblock A brief review on quantum key distribution protocols.
+\newblock {\em Multimedia Tools and Applications}, January 2025.
+
+\bibitem{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}
+Akoh Atadoga, Oluwatoyin~Ajoke Farayola, Benjamin~Samson Ayinla,
+  Olukunle~Oladipupo Amoo, Temitayo~Oluwaseun Abrahams, and Femi Osasona.
+\newblock A comparative review of data encryption methods in the usa and
+  europe.
+\newblock 5:447--460, Feb. 2024.
+
+\bibitem{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption}
+Qixin Zhang.
+\newblock An overview and analysis of hybrid encryption: The combination of
+  symmetric encryption and asymmetric encryption.
+\newblock In {\em 2021 2nd International Conference on Computing and Data
+  Science (CDS)}, pages 616--622, 2021.
+
+\bibitem{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}
+Basel Halak, Yildiran Yilmaz, and Daniel Shiu.
+\newblock Comparative analysis of energy costs of asymmetric vs symmetric
+  encryption-based security applications.
+\newblock {\em IEEE Access}, 10:76707--76719, 2022.
+
+\bibitem{2022-414}
+Mila Anastasova, Panos Kampanakis, and Jake Massimo.
+\newblock {PQ}-{HPKE}: Post-quantum hybrid public key encryption.
+\newblock Cryptology {ePrint} Archive, Paper 2022/414, 2022.
+
+\bibitem{An_overview_of_Quantum_Cryptography_and}
+C.~H. Ugwuishiwu, U.~E. Orji, C.~I. Ugwu, and C.~N. Asogwa.
+\newblock An overview of quantum cryptography and shor?s algorithm.
+\newblock {\em International Journal of Advanced Trends in Computer Science and
+  Engineering}, 9(5):7487--7495, September 2020.
+
+\bibitem{2502.12252v1}
+David Aasen, Morteza Aghaee, Zulfi Alam, and Mariusz~Andrzejczuk et~al.
+\newblock Roadmap to fault tolerant quantum computation using topological qubit
+  arrays, 2025.
+
+\bibitem{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT}
+Fouzia Samiullah, Ming-Lee Gan, Sedat Akleylek, and Y.~Aun.
+\newblock Quantum resistance saber-based group key exchange protocol for iot.
+\newblock {\em IEEE Open Journal of the Communications Society}, 6:378--398,
+  2025.
+
+\bibitem{NISTFIPS203}
+{National Institute of Standards and Technology}.
+\newblock {FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism
+  Standard}.
+\newblock Federal Information Processing Standards Publication FIPS 203,
+  National Institute of Standards and Technology, Gaithersburg, MD, USA, August
+  2024.
+
 \bibitem{FIPS202}
 National~Institute of~Standards, Technology (NIST), and Morris~J. Dworkin.
 \newblock Sha-3 standard: Permutation-based hash and extendable-output
   functions, 2015-08-04 00:08:00 2015.
+
+\bibitem{9508027v2}
+Peter~W. Shor.
+\newblock Polynomial-time algorithms for prime factorization and discrete
+  logarithms on a quantum computer.
+\newblock {\em SIAM Journal on Computing}, 26(5):1484--1509, 1997.
+
+\bibitem{0301141v2}
+John Proos and Christof Zalka.
+\newblock Shor's discrete logarithm quantum algorithm for elliptic curves,
+  2004.
+
+\bibitem{RESERCHFINAL}
+Siyon Singh and Eric Sakk.
+\newblock Implementation and analysis of shor?s algorithm to break rsa
+  cryptosystem security.
+\newblock January 2024.
+
+\bibitem{NIST_SP_800_227_ipd_2025}
+Gorjan Alagic, Elaine Barker, Lily Chen, Dustin Moody, Angela Robinson,
+  Hamilton Silberg, and Noah Waller.
+\newblock Recommendations for key-encapsulation mechanisms: Initial public
+  draft.
+\newblock NIST Special Publication NIST SP 800-227 ipd, National Institute of
+  Standards and Technology (NIST), January 2025.
+
+\bibitem{Fujisaki1999}
+Eiichiro Fujisaki and Tatsuaki Okamoto.
+\newblock Secure integration of asymmetric and symmetric encryption schemes.
+\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
+  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
+  Berlin, Heidelberg, 1999. Springer.
 
 \bibitem{nistPQCround3}
 {National Institute of Standards and Technology}.
@@ -79,12 +191,10 @@ Vadim Lyubashevsky, Chris Peikert, and Oded Regev.
 \newblock On ideal lattices and learning with errors over rings.
 \newblock {\em J. ACM}, 60(6), November 2013.
 
-\bibitem{Fujisaki1999}
-Eiichiro Fujisaki and Tatsuaki Okamoto.
-\newblock Secure integration of asymmetric and symmetric encryption schemes.
-\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
-  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
-  Berlin, Heidelberg, 1999. Springer.
+\bibitem{Micciancio2009}
+Daniele Micciancio and Oded Regev.
+\newblock {\em Lattice-based Cryptography}, pages 147--191.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
 
 \bibitem{saber-spec-2020}
 Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman

@@ -1,38 +1,29 @@
 \chapter{Introducción}
 
 \section{Motivación del proyecto}
-Cuando en una instalación industrial se actúa o se mide un proceso, el autómata que envía las señales puede estar situado a gran distancia de dicho proceso. Por esta razón, las comunicaciones industriales precisan el uso de buses de longitudes considerables o realizar comunicaciones a distancia. 
+En el ámbito de las comunicaciones industriales, la seguridad en el intercambio de información es un aspecto crítico, especialmente ante el avance de la computación cuántica y su impacto en los algoritmos criptográficos actuales. Este trabajo se enfoca en el análisis, implementación y evaluación de algoritmos de cifrado asimétrico post-cuántico en sistemas embebidos, con el objetivo de garantizar la seguridad de los protocolos de comunicación en un entorno industrial. Se realiza un estudio detallado de los fundamentos matemáticos de los algoritmos asimétricos clásicos y su vulnerabilidad frente al algoritmo de Shor, así como de los nuevos esquemas criptográficos diseñados para resistir ataques cuánticos.
 \newline
 
-Aunque las comunicaciones a distancia pudieran parecer una solución más económica de implementar, tienen el problema de ser vulnerables a ataques de intermediario (alguien ajeno al proceso intercepta los mensajes enviados), lo cual pone en peligro la confidencialidad de la información. Por esta misma razón, en este trabajo se estudiarán distintos algoritmos propuestos para la encriptación de los mensajes.
+El cifrado asimétrico es esencial para establecer claves seguras en protocolos de intercambio de claves, permitiendo así la utilización de cifrado simétrico en las comunicaciones industriales. Esto es particularmente relevante en sistemas de control en línea, donde el cifrado simétrico debe operar dentro del bucle de control en tiempo real, garantizando tanto seguridad como eficiencia.
+\newline
+
+Para ello, en este trabajo se comparan diferentes candidatos propuestos en el estándar NIST para evaluar su rendimiento en términos de velocidad, consumo de recursos y nivel de seguridad. 
 \section{Objetivos}
 Para realizar el proyecto, se proponen los siguientes objetivos:
 \begin{itemize}
-\item Implementar los siguientes algoritmos en C/C++
+\item Estudiar los fundamentos matemáticos de los métodos de cifrado asimétrico clásicos (no seguros cuánticamente) y modernos (seguros cuánticamente).
+\item Analizar el algoritmo de Shor y su impacto en la seguridad del cifrado asimétrico clásico.
+\item Implementar un sistema de comunicación entre un PC y un microcontrolador para el intercambio de claves seguras.
+\item  Desarrollar e integrar los siguientes algoritmos de cifrado asimétrico post-cuántico en un microcontrolador y PC:
 \begin{itemize}
-	\item RSA
-	\item Curvas elípticas
-	\item AES 256
-	\item Celosías
-	\item Algoritmo de Shore
-	\item Algoritmos post-cuánticos
+	\item Kyber
+	\item Saber
+	\item HQC
+	\item Bike
 \end{itemize}
-\item Estudiar la eficacia de cifrado
-\begin{itemize}
-	\item Estudiar velocidad de ejecución del algoritmo
-	\item Estudiar recursos requeridos por el microprocesador
-	\item Estudiar la robustez del cifrado
-	\item Estudiar la posibilidad de ataques de canal lateral
-\end{itemize}
-\item Posibilidad de ejecución en sistemas basados en FPGAs
-
-\item Qué y cómo medir en las ECC
-Intercambio de claves pública privado mediante RSA/ leif-haunman
-\begin{itemize}
-	\item Capacidad de memoria 
-	\item Tiempo de CPU  
-	\item Estudio de entropía 
-\end{itemize}
+\item Comparar el rendimiento de los algoritmos de cifrado post-cuántico evaluando velocidad, consumo de recursos y seguridad.
+\item Estudiar la necesidad de implementar estos algoritmos en FPGAs en caso de que en el microcontrolador el rendimiento no fuera aceptable.
+\item Implementar y diseñar un sistema de intercambio de claves que permita la escalabilidad de la solución.
 \end{itemize}
 
 
@@ -51,9 +42,9 @@ A continuación y para facilitar la lectura del documento, se detalla el conteni
 
 \begin{itemize}
 	\item En el capítulo 1 se realiza una introducción.
-	\item En el capítulo 2 se hace un repaso de desarrollos anteriores .
+	\item En el capítulo 2 se estudia trabajos realizados con relación al tema.
 	\item En el capítulo 3 se desarrollan los fundamentos matemáticos del proyecto.
 	\item En el capítulo 4 se describe la implementación de los algoritmos.
-	\item En el capítulo 5 se exponen los resultados obtenidos en el capítulo anterior. 
-	\item En el capítulo 6 se comparan los resultados de los distintos algoritmos.
+	\item En el capítulo 5 se presentan y analizan los resultados obtenidos en el capítulo anterior como consecuencia de ejecutar el software realizado. 
+	\item En el capítulo 6  se realiza una conclusión.
 \end{itemize}

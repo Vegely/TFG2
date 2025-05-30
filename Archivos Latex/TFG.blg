@@ -9,54 +9,64 @@ A level-1 auxiliary file: capitulos/agradecimientos.aux
 A level-1 auxiliary file: capitulos/resumen.aux
 A level-1 auxiliary file: capitulos/introduccion.aux
 A level-1 auxiliary file: capitulos/estadoarte.aux
+White space in argument---line 10 of file capitulos/estadoarte.aux
+ : \citation{First-Order-Masked-Kyber-on-ARM
+ :                                           Cortex-M4}
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: capitulos/fundamentosgenerales.aux
 A level-1 auxiliary file: capitulos/desarrollo.aux
 A level-1 auxiliary file: capitulos/resultados.aux
 A level-1 auxiliary file: capitulos/conclusion.aux
-A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 153 of file bibliografia/bibliografia.bib
+ : @misc{First-Order-Masked-Kyber-on-ARM 
+ :                                       Cortex-M4,
+I'm skipping whatever remains of this entry
 Warning--entry type for "latex" isn't style-file defined
---line 5 of file bibliografia/bibliografia.bib
-You've used 17 entries,
+--line 355 of file bibliografia/bibliografia.bib
+Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
+Warning--empty journal in RESERCHFINAL
+Warning--can't use both author and editor fields in Micciancio2009
+You've used 34 entries,
             1791 wiz_defined-function locations,
-            563 strings with 7798 characters,
-and the built_in function-call counts, 3305 in all, are:
-= -- 253
-> -- 235
-< -- 2
-+ -- 86
-- -- 69
-* -- 195
-:= -- 568
-add.period$ -- 57
-call.type$ -- 17
-change.case$ -- 21
+            665 strings with 12278 characters,
+and the built_in function-call counts, 7323 in all, are:
+= -- 562
+> -- 500
+< -- 8
++ -- 181
+- -- 147
+* -- 499
+:= -- 1239
+add.period$ -- 106
+call.type$ -- 34
+change.case$ -- 37
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 113
-empty$ -- 306
-format.name$ -- 69
-if$ -- 722
+cite$ -- 37
+duplicate$ -- 267
+empty$ -- 657
+format.name$ -- 147
+if$ -- 1592
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 3
-newline$ -- 93
-num.names$ -- 16
-pop$ -- 75
+int.to.str$ -- 34
+missing$ -- 14
+newline$ -- 176
+num.names$ -- 33
+pop$ -- 128
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 56
+skip$ -- 130
 stack$ -- 0
-substring$ -- 57
-swap$ -- 24
-text.length$ -- 2
+substring$ -- 268
+swap$ -- 59
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 20
-width$ -- 19
-write$ -- 192
-(There was 1 warning)
+warning$ -- 3
+while$ -- 49
+width$ -- 36
+write$ -- 371
+(There were 2 error messages)

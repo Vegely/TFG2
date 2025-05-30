@@ -1,6 +1,17 @@
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
-\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
-\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xix}}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{5}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{5}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{5}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{7}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{7}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{7}
@@ -16,3 +27,23 @@
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{10}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{10}
 \glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{10}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{10}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{10}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{10}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{11}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{12}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{12}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{12}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{12}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{12}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{15}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{15}

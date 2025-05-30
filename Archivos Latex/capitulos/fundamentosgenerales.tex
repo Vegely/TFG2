@@ -1,11 +1,19 @@
 \chapter{Fundamentos generales}
 En este capítulo se desarrollan las bases matemáticas de los distintos algoritmos a implementar.
 \section{Introducción}
-\section{Algoritmos de Hashing y Funciones de Salida Extendida\cite{FIPS202}}
+\section{Algoritmos de Hashing }
+Para elaborar esta seccion se sigue la seccion de recomendaciones del nist \cite{FIPS202}
 \section{Métodos clásicos de cifrado asimétrico}
-\subsection{RSA}
-\subsection{ECC}
+\subsection{Algoritmo Rivest-Shamir-Adleman (\gls{rsa})}
+\subsection{Criptografía en Curvas Elípticas (\gls{ecc})}
 \subsection{Algoritmo de Shore}
+Generico: \cite{9508027v2} ECC: \cite{0301141v2} RSA: \cite{RESERCHFINAL}
+\section{Fundamentos de seguridad de los algoritmos}
+Recomendaciones NIST para intercambio seguro de claves \cite{NIST_SP_800_227_ipd_2025}
+\subsection{Generación de números aleatorios criptográficamente seguros}
+\subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
+\subsection{Transformadas Fujisaki-Okamoto}
+\cite{Fujisaki1999}
 \newpage
 \section{Funcionamiento básico de los algoritmos postcuánticos}
 En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el NIST en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
@@ -198,7 +206,7 @@ Donde las matrices \(A_j\) y \(B_j\)pueden obtenerse como el resultado de aplica
 De manera similar, se puede mostrar esta propiedad para la transformada inversa. Por tanto, se demuestra que este algoritmo tiene complejidad \(\mathcal{O}(n \log(n))\).
 \newline
 
-En el caso concreto de kyber \cite{kyber-spec-2021}, la Transformada (\gls{ntt}) de un polinomio en el anillo \(R_q\) se representa como un vector de 128 polinomios de grado 1.
+En el caso concreto de Kyber \cite{kyber-spec-2021}, la Transformada (\gls{ntt}) de un polinomio en el anillo \(R_q\) se representa como un vector de 128 polinomios de grado 1.
 \newline
 
 Sean las 256 raíces enésimas de la unidad \(\left\{\xi, \xi^3, \dots, \xi^{255}\right\}\), con \(\xi = 17\) como primera raíz primitiva. Entonces, se cumple que:
@@ -260,24 +268,123 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 
 
 \subsubsection{Aprendizaje Con Errores o Learning With Errors (\gls{lwe})}
-\cite{LWElearning}
-\subsection{Transformadas Fujisaki-Okamoto}
-\cite{Fujisaki1999}
+Para la elaboración de esta sección, se ha utilizado la información contenida en el artículo \cite{LWElearning}, el cual expone los fundamentos matemáticos del problema de Aprendizaje con Errores (Learning With Errors, \gls{lwe}). Este problema constituye la base teórica sobre la que se sustenta el esquema criptográfico Kyber.
+\newline
+
+Para ello, los esquemas basados en \gls{lwe} trabajan con un objeto matemático conocido como retícula. Una retícula es un conjunto discreto de puntos en el espacio, generado por todas las combinaciones lineales con coeficientes enteros de un conjunto de \(n\) vectores linealmente independientes que conforman una base $\mathbb{B}=\left\{b_1,...,b_n\right\}$:
+\begin{equation}
+	\mathcal{A}=\mathcal{L}(\mathbb{B})= \left\{\sum_{i\in n} z_ib_i: z\in Z^n\right\}
+\end{equation}
+
+Esta definición será útil en la demostración de la seguridad de los esquemas basados en \gls{lwe}. Aun así, antes de pasar a la explicación del algoritmo de intercambio de claves públicas, es necesario definir el problema de Aprendizaje con Errores.
+\newline
+
+El Aprendizaje con Errores consiste en la tarea de distinguir entre parejas de la forma \((a_i, b_i) \in \mathbb{Z}_q^n \times \mathbb{Z}_q\), donde \(b_i \approx \langle a_i, s \rangle\), y parejas generados de manera completamente aleatoria. Donde, \(s \in \mathbb{Z}_q^n\) es el secreto  que se mantiene fijo para todas las muestras, \(a_i \in \mathbb{Z}_q^n\) es un vector elegido uniformemente al azar, y \(\langle ,  \rangle\) denota el producto escalar Euclídeo.
+\newline
+
+La principal utilidad criptográfica del problema \gls{lwe} radica en que, para quien no conoce el secreto, resulta computacionalmente difícil distinguir entre pares estructurados y pares aleatorios. En cambio, quien sí conoce el secreto puede identificar fácilmente qué parejas son consistentes con este, lo que permite construir esquemas seguros de cifrado e intercambio de claves.
+\paragraph{\gls{lwe} en anillos}
+\mbox{}\\
+
+En Kyber no se parte del problema LWE “puro”, ya que los esquemas basados directamente en \gls{lwe} suelen presentar claves de tamaño y tiempos de cálculo con un orden de magnitud \(\mathcal{O}(n^2)\) \cite{Micciancio2009}. Esto se debe a que, al trabajar con matrices genéricas, se carece de la estructura de anillo necesaria para aprovechar multiplicaciones mediante convolución rápida, es decir, la \gls{ntt}. En cambio, Kyber se fundamenta en una variante conocida como Ring-LWE, donde las operaciones de multiplicación matricial se pueden implementar como multiplicaciones de polinomios en $\dfrac{\mathbb{Z}_q[x]}{X^n + 1}$, lo cual permite usar la \gls{ntt}.
+\newline
+
+En cuanto a la eficiencia en la reducción del tamaño de las claves, esta puede observarse claramente a través del siguiente ejemplo ilustrativo:
+\begin{table}[h]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{lcc}
+		\hline
+		Esquema & \gls{lwe} “puro” & Kyber (\gls{rlwe}) \\
+		\hline
+		Tamaño clave pública & \(\mathcal{O}(n^2)\) bits & \(\mathcal{O}(n)\)  \\
+		\hline
+		Operación para generar la pareja & \(b_i=\langle a_i, s \rangle + e_i\) & \(b[x]=a[x]\cdot s[x]+e[x]\)\\
+		\hline
+		Matriz \(A\) &$\begin{pmatrix}
+							1  &2\\
+							3 &4
+						\end{pmatrix}$ &3+11X\\
+		\hline
+		Secreto \(s\) & $\begin{pmatrix}
+							5\\
+							6
+						\end{pmatrix}$&5+6X\\
+		\hline
+		Error \(e\)& $\begin{pmatrix}
+							1\\
+							1
+						\end{pmatrix}$&1+X\\
+		\hline
+		Resultado \(b\)&$\begin{pmatrix}
+							1\\
+							6
+						\end{pmatrix}$ & 1+6X\\
+		\hline
+	\end{tabular}
+	\caption{Tabla con un ejemplo numérico del calculo del valor \(b\) necesario para el problema \gls{lwe} tanto en el caso puro como en la estructura de anillo de Kyber para ver como efectivamente en la clave pública \((a,b)\) el tamaño es menor. En este ejemplo se trabaja en \(\mathbb{Z}_{17}\) y \(X^2 + 1\).}
+	\label{tab:LWE-RLWE}
+\end{table}
+
+Aunque la incorporación de estructura algebraica al problema criptográfico principal podría generar dudas sobre si se mantiene el mismo nivel de seguridad, esta cuestión se aborda en mayor detalle en la sección de seguridad, basándose en el artículo \cite{LWElearning}. Allí se explica cómo \gls{rlwe} ofrece garantías criptográficas equivalentes a las del \gls{lwe} original, por lo que este cambio no supone una debilidad, sino una optimización con respaldo teórico.
+\newpage
+
+\paragraph{Aplicación del \gls{rlwe} para el intercambio de claves públicas}
+\mbox{}\\
+
+A continuación, se presenta el algoritmo principal empleado para el intercambio de claves basado en el problema \gls{rlwe} que fundamenta matemáticamente el funcionamiento de Kyber.
+\begin{algorithm}[H]
+	\caption{Generación claves \gls{rlwe} en $\mathbb{Z}_q[x]/(X^n + 1)$}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(q\), \(n\)\\ 
+		\hline
+		\textbf{Salida: } \(sk\), \(pk\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State 1
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Cifrado \gls{rlwe}}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(pk\), \(z\)\\ 
+		\hline
+		\textbf{Salida: } \(u\), \(v\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State 1
+	\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[H]
+	\caption{Descifrado \gls{rlwe}}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(sk\), \(u\), \(v\)\\ 
+		\hline
+		\textbf{Salida: } \(z\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State 1
+	\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Fundamentos de seguridad de Kyber}
+\paragraph{Seguridad basada en retículas ideales}
+\mbox{}\\
+
+\paragraph{Seguridad esperada}
+\mbox{}\\
+\paragraph{Análisis respecto a ataques conocidos}
+\mbox{}\\
 \subsubsection{Algoritmos principales}
-\newpage
+\mbox{}\\
 \subsection{SABER}
 Para \cite{saber-spec-2020}
 \subsection{Hamming Quasi-Cyclic (HQC)}
 Para  \cite{hqc-spec-2022}
 \subsection{Bit Flipping Key Encapsulation (Bike)}
 Para \cite{bike-spec-2022}
-\newpage
-\section{Fundamentos de seguridad de los algoritmos}
-\subsection{CRYSTALS-Kyber }
-Para \cite{kyber-spec-2021}
-\subsection{SABER}
-Para \cite{saber-spec-2020}
-\subsection{Hamming Quasi-Cyclic (HQC)}
-Para  \cite{hqc-spec-2022}
-\subsection{Bit Flipping Key Encapsulation (Bike)}
-Para \cite{bike-spec-2022}
+

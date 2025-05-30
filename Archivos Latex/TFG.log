@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  8 MAY 2025 16:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  30 MAY 2025 03:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1039,7 +1039,36 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@loff=\dimen352
 \@vwid@roff=\dimen353
 ))
-(c:/texlive/2023/texmf-dist/tex/latex/tikzmark/tikzlibrarytikzmark.code.tex
+(c:/texlive/2023/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(c:/texlive/2023/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks53
+\c@algorithm=\count371
+)
+(c:/texlive/2023/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(c:/texlive/2023/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count372
+\c@ALG@rem=\count373
+\c@ALG@nested=\count374
+\ALG@tlm=\skip68
+\ALG@thistlm=\skip69
+\c@ALG@Lnr=\count375
+\c@ALG@blocknr=\count376
+\c@ALG@storecount=\count377
+\c@ALG@tmpcounter=\count378
+\ALG@tmplength=\skip70
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (c:/texlive/2023/texmf-dist/tex/latex/tikzmark/tikzlibrarytikzmark.code.tex
 File: tikzlibrarytikzmark.code.tex 2022/08/24 v1.15 TikZ library for marking po
 sitions in a document
 
@@ -1048,7 +1077,7 @@ Package: expl3 2024-01-22 L3 programming layer (loader)
 
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count371
+\l__color_backend_stack_int=\count379
 \l__pdf_internal_box=\box129
 ))
 (c:/texlive/2023/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
@@ -1065,13 +1094,10 @@ Package: xparse 2023-10-10 L3 Experimental document command parser
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/base/glossaries.sty
 Package: glossaries 2023/09/29 v4.53 (NLCT)
 
-(c:/texlive/2023/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
-)
 (c:/texlive/2023/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
 Package: mfirstuc 2022/10/14 v2.08 (NLCT)
-\@glsmfirst=\toks53
-\@glsmrest=\toks54
+\@glsmfirst=\toks54
+\@glsmrest=\toks55
 )
 (c:/texlive/2023/texmf-dist/tex/latex/xfor/xfor.sty
 Package: xfor 2009/02/05 v1.05 (NLCT)
@@ -1081,7 +1107,7 @@ Package: datatool-base 2019/09/27 v2.32 (NLCT)
 
 (c:/texlive/2023/texmf-dist/tex/latex/substr/substr.sty
 Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count372
+\c@su@anzahl=\count380
 )
 (c:/texlive/2023/texmf-dist/tex/latex/datatool/datatool-fp.sty
 Package: datatool-fp 2019/09/27 v2.32 (NLCT)
@@ -1092,19 +1118,19 @@ Package: fp 1995/04/02
 `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
 (c:/texlive/2023/texmf-dist/tex/latex/fp/defpattern.sty
 Package: defpattern 1994/10/12
-\actioncount=\count373
+\actioncount=\count381
 )
 (c:/texlive/2023/texmf-dist/tex/latex/fp/fp-basic.sty
 Package: fp-basic 1996/05/13
-\FP@xs=\count374
-\FP@xia=\count375
-\FP@xib=\count376
-\FP@xfa=\count377
-\FP@xfb=\count378
-\FP@rega=\count379
-\FP@regb=\count380
-\FP@regs=\count381
-\FP@times=\count382
+\FP@xs=\count382
+\FP@xia=\count383
+\FP@xib=\count384
+\FP@xfa=\count385
+\FP@xfb=\count386
+\FP@rega=\count387
+\FP@regb=\count388
+\FP@regs=\count389
+\FP@times=\count390
 )
 (c:/texlive/2023/texmf-dist/tex/latex/fp/fp-addons.sty
 Package: fp-addons 1995/03/15
@@ -1123,7 +1149,7 @@ Package: fp-pas 1994/08/29
 )
 (c:/texlive/2023/texmf-dist/tex/latex/fp/fp-random.sty
 Package: fp-random 1995/02/23
-\FPseed=\count383
+\FPseed=\count391
 )
 (c:/texlive/2023/texmf-dist/tex/latex/fp/fp-eqn.sty
 Package: fp-eqn 1995/04/03
@@ -1134,15 +1160,15 @@ Package: fp-upn 1996/10/21
 (c:/texlive/2023/texmf-dist/tex/latex/fp/fp-eval.sty
 Package: fp-eval 1995/04/03
 )))
-\@dtl@toks=\toks55
-\@dtl@tmpcount=\count384
-\dtl@tmplength=\skip68
-\dtl@sortresult=\count385
-\@dtl@numgrpsepcount=\count386
-\@dtl@datatype=\count387
-\dtl@codeA=\count388
-\dtl@codeB=\count389
-\@dtl@foreach@level=\count390
+\@dtl@toks=\toks56
+\@dtl@tmpcount=\count392
+\dtl@tmplength=\skip71
+\dtl@sortresult=\count393
+\@dtl@numgrpsepcount=\count394
+\@dtl@datatype=\count395
+\dtl@codeA=\count396
+\dtl@codeB=\count397
+\@dtl@foreach@level=\count398
 )
 (c:/texlive/2023/texmf-dist/tex/latex/tracklang/tracklang.sty
 Package: tracklang 2022/12/13 v1.6.1 (NLCT) Track Languages
@@ -1156,56 +1182,56 @@ File: glossaries-spanish.ldf 2014/11/23 v1.0
 
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries-spanish/glossaries-spanish-utf
 8.ldf))
-\gls@level=\count391
-\@gls@tmpb=\toks56
-\gls@tmplen=\skip69
-\glskeylisttok=\toks57
-\glslabeltok=\toks58
-\glsshorttok=\toks59
-\glslongtok=\toks60
+\gls@level=\count399
+\@gls@tmpb=\toks57
+\gls@tmplen=\skip72
+\glskeylisttok=\toks58
+\glslabeltok=\toks59
+\glsshorttok=\toks60
+\glslongtok=\toks61
 
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.sty
 Package: glossary-hypernav 2023/09/29 v4.53 (NLCT)
 )
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
 Package: glossary-list 2023/09/29 v4.53 (NLCT)
-\glslistdottedwidth=\skip70
+\glslistdottedwidth=\skip73
 )
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
 Package: glossary-long 2023/09/29 v4.53 (NLCT)
 
 (c:/texlive/2023/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
-\LTleft=\skip71
-\LTright=\skip72
-\LTpre=\skip73
-\LTpost=\skip74
-\LTchunksize=\count392
+\LTleft=\skip74
+\LTright=\skip75
+\LTpre=\skip76
+\LTpost=\skip77
+\LTchunksize=\count400
 \LTcapwidth=\dimen358
 \LT@head=\box130
 \LT@firsthead=\box131
 \LT@foot=\box132
 \LT@lastfoot=\box133
 \LT@gbox=\box134
-\LT@cols=\count393
-\LT@rows=\count394
-\c@LT@tables=\count395
-\c@LT@chunks=\count396
-\LT@p@ftn=\toks61
+\LT@cols=\count401
+\LT@rows=\count402
+\c@LT@tables=\count403
+\c@LT@chunks=\count404
+\LT@p@ftn=\toks62
 )
-\glsdescwidth=\skip75
-\glspagelistwidth=\skip76
+\glsdescwidth=\skip78
+\glspagelistwidth=\skip79
 )
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty
 Package: glossary-super 2023/09/29 v4.53 (NLCT)
 
 (c:/texlive/2023/texmf-dist/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2020/02/02 v4.1g the supertabular environment
-\c@tracingst=\count397
+\c@tracingst=\count405
 \ST@wd=\dimen359
-\ST@rightskip=\skip77
-\ST@leftskip=\skip78
-\ST@parfillskip=\skip79
+\ST@rightskip=\skip80
+\ST@leftskip=\skip81
+\ST@parfillskip=\skip82
 \ST@pageleft=\dimen360
 \ST@headht=\dimen361
 \ST@tailht=\dimen362
@@ -1219,67 +1245,62 @@ Package: supertabular 2020/02/02 v4.1g the supertabular environment
 ))
 (c:/texlive/2023/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2023/09/29 v4.53 (NLCT)
-\glstreeindent=\skip80
+\glstreeindent=\skip83
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 50.
+Package hyperref Info: Option `colorlinks' set `true' on input line 52.
 \glswrite=\write4
-\glo@main@file=\write5
-\openout5 = `TFG.glo'.
+\glo@acronym@file=\write5
+\openout5 = `TFG.acn'.
 
-Package glossaries Info: Writing glossary file TFG.glo on input line 53.
-\glo@acronym@file=\write6
-\openout6 = `TFG.acn'.
-
-Package glossaries Info: Writing glossary file TFG.acn on input line 53.
-\c@theorem=\count398
-\c@proof=\count399
+Package glossaries Info: Writing glossary file TFG.acn on input line 55.
+\c@theorem=\count406
+\c@proof=\count407
 
 (./TFG.aux (./capitulos/portada.aux)
-LaTeX Info: Redefining \. on input line 20.
-LaTeX Info: Redefining \% on input line 20.
+LaTeX Info: Redefining \. on input line 19.
+LaTeX Info: Redefining \% on input line 19.
  (./capitulos/firmas.aux)
 (./capitulos/licencia.aux) (./capitulos/evaluacion.aux)
 (./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
 (./capitulos/introduccion.aux) (./capitulos/estadoarte.aux)
 (./capitulos/fundamentosgenerales.aux) (./capitulos/desarrollo.aux)
-(./capitulos/resultados.aux) (./capitulos/conclusion.aux)
-(./capitulos/apendice.aux))
+(./capitulos/resultados.aux) (./capitulos/conclusion.aux))
 \openout1 = `TFG.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Info: Redefining \. on input line 67.
-LaTeX Info: Redefining \% on input line 67.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Info: Redefining \. on input line 72.
+LaTeX Info: Redefining \% on input line 72.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count400
+\scratchcounter=\count408
 \scratchdimen=\dimen369
 \scratchbox=\box136
-\nofMPsegments=\count401
-\nofMParguments=\count402
-\everyMPshowfont=\toks62
-\MPscratchCnt=\count403
+\nofMPsegments=\count409
+\nofMParguments=\count410
+\everyMPshowfont=\toks63
+\MPscratchCnt=\count411
 \MPscratchDim=\dimen370
-\MPnumerator=\count404
-\makeMPintoPDFobject=\count405
-\everyMPtoPDFconversion=\toks63
+\MPnumerator=\count412
+\makeMPintoPDFobject=\count413
+\everyMPtoPDFconversion=\toks64
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1289,7 +1310,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count406
+\c@lstlisting=\count414
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1328,10 +1349,10 @@ e
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-Package hyperref Info: Link coloring ON on input line 67.
+Package hyperref Info: Link coloring ON on input line 72.
 (./TFG.out) (./TFG.out)
-\@outlinefile=\write7
-\openout7 = `TFG.out'.
+\@outlinefile=\write6
+\openout6 = `TFG.out'.
 
 
 (c:/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionar
@@ -1340,11 +1361,11 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 67.
+or `spanish'. on input line 72.
 \openout2 = `capitulos/portada.aux'.
 
  (./capitulos/portada.tex
-<figuras/cabecera.png, id=231, 1130.2225pt x 357.335pt>
+<figuras/cabecera.png, id=347, 1130.2225pt x 357.335pt>
 File: figuras/cabecera.png Graphic file (type png)
 <use figuras/cabecera.png>
 Package pdftex.def Info: figuras/cabecera.png  used on input line 6.
@@ -1412,7 +1433,7 @@ LaTeX Font Info:    Trying to load font information for U+esint on input line 3
 (c:/texlive/2023/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 ))
-Overfull \hbox (17.61108pt too wide) in paragraph at lines 27--80
+Overfull \hbox (17.61108pt too wide) in paragraph at lines 27--86
 []$[]$ $[]$ 
  []
 
@@ -1451,8 +1472,8 @@ Package hyperref Warning: Difference (4) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 12.
 
 ) [13]
-LaTeX Info: Redefining \. on input line 85.
-LaTeX Info: Redefining \% on input line 85.
+LaTeX Info: Redefining \. on input line 91.
+LaTeX Info: Redefining \% on input line 91.
  [14
 
 
@@ -1486,40 +1507,57 @@ Overfull \hbox (0.5609pt too wide) detected at line 6
 Package spanish Warning: Replacing `OT1/cmr/bx/sc' by 
 (spanish)                faked small caps on input line 7.
 
-[15])
-\tf@toc=\write8
-\openout8 = `TFG.toc'.
 
-LaTeX Info: Redefining \. on input line 89.
-LaTeX Info: Redefining \% on input line 89.
- [16] (./TFG.lof
+Overfull \hbox (0.26952pt too wide) in paragraph at lines 27--27
+ [][] [][][]\OT1/cmr/m/n/12 Indistinguibilidad ba-jo ata-que de tex-to ci-fra-d
+o adap-ta-ble [][][]IND- 
+ []
+
+[15]
+LaTeX Info: Redefining \. on input line 75.
+LaTeX Info: Redefining \% on input line 75.
+ [16])
+\tf@toc=\write7
+\openout7 = `TFG.toc'.
+
+LaTeX Info: Redefining \. on input line 95.
+LaTeX Info: Redefining \% on input line 95.
+ [17]
+LaTeX Info: Redefining \. on input line 95.
+LaTeX Info: Redefining \% on input line 95.
+ [18
+
+] (./TFG.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lof=\write9
-\openout9 = `TFG.lof'.
+\tf@lof=\write8
+\openout8 = `TFG.lof'.
 
- [17
-
-]
-LaTeX Info: Redefining \. on input line 92.
-LaTeX Info: Redefining \% on input line 92.
- [18
+ [19]
+LaTeX Info: Redefining \. on input line 98.
+LaTeX Info: Redefining \% on input line 98.
+ [20
 
 ] (./TFG.lot
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lot=\write10
-\openout10 = `TFG.lot'.
+\tf@lot=\write9
+\openout9 = `TFG.lot'.
 
+ (./TFG.acr [21]
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [22
 
-No file TFG.gls.
-No file TFG.acr.
-[19]
-LaTeX Info: Redefining \. on input line 98.
-LaTeX Info: Redefining \% on input line 98.
- [20
+])
+[23
+
+]
+LaTeX Info: Redefining \. on input line 108.
+LaTeX Info: Redefining \% on input line 108.
+ [24
 
 ]
 \openout2 = `capitulos/introduccion.aux'.
@@ -1532,9 +1570,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--6
  []
 
 
-Overfull \hbox (6.63069pt too wide) in paragraph at lines 7--8
-[]\OT1/cmr/m/n/12 Aunque las co-mu-ni-ca-cio-nes a dis-tan-cia pu-die-ran pa-re
--cer una so-lu-ci^^Son m^^Sas econ^^Somi-
+Underfull \hbox (badness 10000) in paragraph at lines 7--9
+
+ []
+
+
+Overfull \hbox (0.93367pt too wide) in paragraph at lines 17--18
+[]\OT1/cmr/m/n/12 Desarrollar e in-te-grar los si-guien-tes al-go-rit-mos de ci
+-fra-do asim^^Setri-co post-cu^^Santi-
  []
 
 [1
@@ -1543,40 +1586,44 @@ Overfull \hbox (6.63069pt too wide) in paragraph at lines 7--8
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 40.
+(hyperref)                removing `\@ifnextchar' on input line 31.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 42.
+(hyperref)                removing `\@ifnextchar' on input line 33.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 45.
+(hyperref)                removing `\@ifnextchar' on input line 36.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 45.
+(hyperref)                removing `subscript' on input line 36.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 45.
+(hyperref)                removing `\@ifnextchar' on input line 36.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 45.
+(hyperref)                removing `subscript' on input line 36.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 47.
+(hyperref)                removing `\@ifnextchar' on input line 38.
 
 )
-LaTeX Info: Redefining \. on input line 100.
-LaTeX Info: Redefining \% on input line 100.
+LaTeX Info: Redefining \. on input line 110.
+LaTeX Info: Redefining \% on input line 110.
  [2]
 \openout2 = `capitulos/estadoarte.aux'.
 
  (./capitulos/estadoarte.tex
 Cap\'{\i }tulo 2.
+
+LaTeX Warning: Citation `First-Order-Masked-Kyber-on-ARM Cortex-M4' on page 3 u
+ndefined on input line 3.
+
 ) [3
 
 
@@ -1596,41 +1643,38 @@ LaTeX Info: Redefining \% on input line 1.
 ]
 Cap\'{\i }tulo 3.
 
-Overfull \hbox (18.52814pt too wide) in paragraph at lines 4--4
-[]\OT1/cmr/bx/n/14.4 Algoritmos de Hashing y Fun-cio-nes de Sa-li-da Extendida[
-[]] 
- []
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 7.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 4.
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 14.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 13--15
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--28
+Underfull \hbox (badness 10000) in paragraph at lines 34--36
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--31
+Underfull \hbox (badness 10000) in paragraph at lines 37--39
 
  []
 
-LaTeX Info: Redefining \. on input line 43.
-LaTeX Info: Redefining \% on input line 43.
+LaTeX Info: Redefining \. on input line 51.
+LaTeX Info: Redefining \% on input line 51.
 [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 45.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--48
-
- []
+(hyperref)                removing `\gls' on input line 53.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 54--56
@@ -1638,78 +1682,173 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--56
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--67
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
 
-LaTeX Info: Redefining \. on input line 95.
-LaTeX Info: Redefining \% on input line 95.
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--75
+
+ []
+
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
+Underfull \hbox (badness 10000) in paragraph at lines 105--107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--114
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
 
  []
 
-LaTeX Info: Redefining \. on input line 168.
-LaTeX Info: Redefining \% on input line 168.
+LaTeX Info: Redefining \. on input line 176.
+LaTeX Info: Redefining \% on input line 176.
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 195--197
+Underfull \hbox (badness 10000) in paragraph at lines 203--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
+Underfull \hbox (badness 10000) in paragraph at lines 206--208
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 209--211
 
  []
 
-LaTeX Info: Redefining \. on input line 225.
-LaTeX Info: Redefining \% on input line 225.
+LaTeX Info: Redefining \. on input line 233.
+LaTeX Info: Redefining \% on input line 233.
 [9]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 262.
+(hyperref)                removing `\gls' on input line 270.
 
-LaTeX Info: Redefining \. on input line 267.
-LaTeX Info: Redefining \% on input line 267.
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--281
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 282--284
+
+ []
+
+LaTeX Info: Redefining \. on input line 285.
+LaTeX Info: Redefining \% on input line 285.
 [10]
-LaTeX Info: Redefining \. on input line 274.
-LaTeX Info: Redefining \% on input line 274.
- [11])
-LaTeX Info: Redefining \. on input line 106.
-LaTeX Info: Redefining \% on input line 106.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 287.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--291
+
+ []
+
+LaTeX Info: Redefining \. on input line 330.
+LaTeX Info: Redefining \% on input line 330.
+[11]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 333.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 333--334
+
+ []
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 337.
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 338--344
+[]$[]$ 
+ []
+
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 351--357
+[]$[]$ 
+ []
+
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 363--369
+[]$[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 376--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 381--382
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 383--384
+
+ []
+
+)
+LaTeX Info: Redefining \. on input line 116.
+LaTeX Info: Redefining \% on input line 116.
  [12]
 \openout2 = `capitulos/desarrollo.aux'.
 
  (./capitulos/desarrollo.tex
 Cap\'{\i }tulo 4.
+
+Overfull \hbox (8.66649pt too wide) in paragraph at lines 6--6
+[]\OT1/cmr/bx/n/14.4 Estructura y API pa-ra los al-go-rit-mos de ci-fra-do asim
+^^Setri-
+ []
+
 ) [13
 
 
 
 
 ]
+LaTeX Info: Redefining \. on input line 118.
+LaTeX Info: Redefining \% on input line 118.
+ [14]
 \openout2 = `capitulos/resultados.aux'.
 
  (./capitulos/resultados.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [14
+Cap\'{\i }tulo 5.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 9.
+
+) [15
 
 
 
 
 ]
-Cap\'{\i }tulo 5.
-) [15]
 \openout2 = `capitulos/conclusion.aux'.
 
  (./capitulos/conclusion.tex
@@ -1723,22 +1862,9 @@ LaTeX Info: Redefining \% on input line 1.
 ]
 Cap\'{\i }tulo 6.
 ) [17]
-\openout2 = `capitulos/apendice.aux'.
-
- (./capitulos/apendice.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
+LaTeX Info: Redefining \. on input line 125.
+LaTeX Info: Redefining \% on input line 125.
  [18
-
-
-
-
-]
-Ap\'{e}ndice A.
-) [19]
-LaTeX Info: Redefining \. on input line 118.
-LaTeX Info: Redefining \% on input line 118.
- [20
 
 
 
@@ -1748,75 +1874,76 @@ Underfull \hbox (badness 3679) in paragraph at lines 22--28
 cms / en / product / evaluation-[]boards /
  []
 
+[19
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--41
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 147--153
 []\OT1/cmr/m/n/12 National Ins-ti-tu-te of Stan-dards and Tech-no-logy.  Post-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--41
+Underfull \hbox (badness 10000) in paragraph at lines 147--153
 \OT1/cmr/m/n/12 quantum cry-pto-graphy - round 3 sub-mis-sions.  [][]$\OT1/cmtt
 /m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--41
+Underfull \hbox (badness 10000) in paragraph at lines 147--153
 \OT1/cmtt/m/n/12 / / csrc . nist . gov / Projects / post-[]quantum-[]cryptograp
 hy /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--41
+Underfull \hbox (badness 10000) in paragraph at lines 147--153
 \OT1/cmtt/m/n/12 post-[]quantum-[]cryptography-[]standardization / round-[]3-[]
 submissions$[][]\OT1/cmr/m/n/12 ,
  []
 
-
-Underfull \hbox (badness 2932) in paragraph at lines 43--49
+LaTeX Info: Redefining \. on input line 153.
+LaTeX Info: Redefining \% on input line 153.
+[20]
+Underfull \hbox (badness 2932) in paragraph at lines 155--161
 []\OT1/cmr/m/n/12 National Ins-ti-tu-te of Stan-dards and Tech-no-logy.  Post-q
 uantum cry-
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 43--49
+Underfull \hbox (badness 1762) in paragraph at lines 155--161
 \OT1/cmr/m/n/12 pto-graphy - round 4 sub-mis-sions.  [][]$\OT1/cmtt/m/n/12 http
 s : / / csrc . nist . gov / Projects /
  []
 
 
-Underfull \hbox (badness 2582) in paragraph at lines 43--49
+Underfull \hbox (badness 2582) in paragraph at lines 155--161
 \OT1/cmtt/m/n/12 post-[]quantum-[]cryptography / round-[]4-[]submissions$[][]\O
 T1/cmr/m/n/12 , 2022.  Con-sul-ta-do:
  []
 
 
-Underfull \hbox (badness 3536) in paragraph at lines 65--71
+Underfull \hbox (badness 3536) in paragraph at lines 177--183
 []\OT1/cmr/m/n/12 Miguel A. Mo-reno.  Pri-mi-ti-ve $\OML/cmm/m/it/12 n$\OT1/cmr
 /m/n/12 -th roots of unity of fi-ni-te fields.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--71
+Underfull \hbox (badness 10000) in paragraph at lines 177--183
 [][]$\OT1/cmtt/m/n/12 https : / / www . csd . uwo . ca / []mmorenom / CS874 / L
 ectures / Newton2Hensel .
  []
 
-[21
-
-
-])
-LaTeX Info: Redefining \. on input line 134.
-LaTeX Info: Redefining \% on input line 134.
- [22] (./TFG.aux (./capitulos/portada.aux)
-LaTeX Info: Redefining \. on input line 20.
-LaTeX Info: Redefining \% on input line 20.
+)
+LaTeX Info: Redefining \. on input line 142.
+LaTeX Info: Redefining \% on input line 142.
+ [21] (./TFG.aux (./capitulos/portada.aux)
+LaTeX Info: Redefining \. on input line 19.
+LaTeX Info: Redefining \% on input line 19.
  (./capitulos/firmas.aux)
 (./capitulos/licencia.aux) (./capitulos/evaluacion.aux)
 (./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
 (./capitulos/introduccion.aux) (./capitulos/estadoarte.aux)
 (./capitulos/fundamentosgenerales.aux) (./capitulos/desarrollo.aux)
-(./capitulos/resultados.aux) (./capitulos/conclusion.aux)
-(./capitulos/apendice.aux))
+(./capitulos/resultados.aux) (./capitulos/conclusion.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1826,32 +1953,51 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
+LaTeX Warning: There were undefined references.
+
+
 Package rerunfilecheck Warning: File `TFG.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `TFG.out':
-(rerunfilecheck)             Before: CC21E94622E2D3405C8F9F97CDDABD47;9799
-(rerunfilecheck)             After:  B7A84CE733416865A1BC64BF5A3ABD0F;9815.
+(rerunfilecheck)             Before: B35A4482F70F7C3FE86E61E10448123F;16338
+(rerunfilecheck)             After:  A19500DE0D21668E9C739C280E813B25;16338.
  ) 
 Here is how much of TeX's memory you used:
- 62878 strings out of 474222
- 1562617 string characters out of 5750209
- 2281463 words of memory out of 5000000
- 84108 multiletter control sequences out of 15000+600000
- 570842 words of font info for 86 fonts, out of 8000000 for 9000
+ 63654 strings out of 474222
+ 1575195 string characters out of 5750209
+ 2294101 words of memory out of 5000000
+ 84812 multiletter control sequences out of 15000+600000
+ 572267 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,9n,107p,2322b,1253s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,16n,107p,2354b,1253s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{glo:dft} has been referenced but does not exist, re
+pdfTeX warning (dest): name{page.xvii} has been referenced but does not exist, 
+replaced by a fixed one
+
+
+pdfTeX warning (dest): name{page.xvi} has been referenced but does not exist, r
+eplaced by a fixed one
+
+
+pdfTeX warning (dest): name{page.xv} has been referenced but does not exist, re
 placed by a fixed one
 
 
-pdfTeX warning (dest): name{glo:lwe} has been referenced but does not exist, re
+pdfTeX warning (dest): name{page.xix} has been referenced but does not exist, r
+eplaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:rlwe} has been referenced but does not exist, r
+eplaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:ecc} has been referenced but does not exist, re
 placed by a fixed one
 
 
-pdfTeX warning (dest): name{glo:ntt} has been referenced but does not exist, re
+pdfTeX warning (dest): name{glo:rsa} has been referenced but does not exist, re
 placed by a fixed one
 
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
@@ -1859,25 +2005,28 @@ ve/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2023/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/t
-exlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/202
-3/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2023/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsl10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
-pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/te
-xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
-3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2023/texmf-dist/
-fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type
-1/public/cm-super/sfrm1200.pfb>
-Output written on TFG.pdf (42 pages, 445963 bytes).
+c/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/
+texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/20
+23/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/tex
+live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2023/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfont
+s/symbols/msbm10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sf
+rm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
+>
+Output written on TFG.pdf (45 pages, 506821 bytes).
 PDF statistics:
- 746 PDF objects out of 1000 (max. 8388607)
- 648 compressed objects within 7 object streams
- 154 named destinations out of 1000 (max. 500000)
- 466 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1035 PDF objects out of 1200 (max. 8388607)
+ 924 compressed objects within 10 object streams
+ 218 named destinations out of 1000 (max. 500000)
+ 698 words of extra memory for PDF output out of 10000 (max. 10000000)
 
