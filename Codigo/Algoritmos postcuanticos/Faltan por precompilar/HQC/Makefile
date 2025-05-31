@@ -40,16 +40,16 @@ fips202.o: | folders
 	@echo -e "\n### Compiling $@ (verbose mode)\n"
 	$(CPP) $(CPP_FLAGS) -c $< $(INCLUDE) $(LIB) -D VERBOSE -o $(BUILD)/$@
 
-hqc-128: $(HQC_OBJS) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-128\n"
+hqc-256: $(HQC_OBJS) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling hqc-256\n"
 	$(CPP) $(CPP_FLAGS) $(MAIN_HQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
 
-hqc-128-kat: $(HQC_OBJS) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-128 KAT\n"
+hqc-256-kat: $(HQC_OBJS) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling hqc-256 KAT\n"
 	$(CPP) $(CPP_FLAGS) $(MAIN_KAT) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
 
-hqc-128-verbose: $(HQC_OBJS_VERBOSE) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-128 (verbose mode)\n"
+hqc-256-verbose: $(HQC_OBJS_VERBOSE) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling hqc-256 (verbose mode)\n"
 	$(CPP) $(CPP_FLAGS) $(MAIN_HQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -D VERBOSE -o $(BIN)/$@
 
 

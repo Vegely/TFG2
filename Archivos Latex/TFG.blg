@@ -28,45 +28,45 @@ Warning--entry type for "latex" isn't style-file defined
 Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
 Warning--empty journal in RESERCHFINAL
 Warning--can't use both author and editor fields in Micciancio2009
-You've used 34 entries,
+You've used 35 entries,
             1791 wiz_defined-function locations,
-            665 strings with 12278 characters,
-and the built_in function-call counts, 7323 in all, are:
-= -- 562
-> -- 500
+            671 strings with 12458 characters,
+and the built_in function-call counts, 7479 in all, are:
+= -- 576
+> -- 508
 < -- 8
-+ -- 181
-- -- 147
-* -- 499
-:= -- 1239
-add.period$ -- 106
-call.type$ -- 34
-change.case$ -- 37
++ -- 184
+- -- 149
+* -- 502
+:= -- 1264
+add.period$ -- 110
+call.type$ -- 35
+change.case$ -- 38
 chr.to.int$ -- 0
-cite$ -- 37
-duplicate$ -- 267
-empty$ -- 657
-format.name$ -- 147
-if$ -- 1592
+cite$ -- 38
+duplicate$ -- 272
+empty$ -- 675
+format.name$ -- 149
+if$ -- 1629
 int.to.chr$ -- 0
-int.to.str$ -- 34
+int.to.str$ -- 35
 missing$ -- 14
-newline$ -- 176
-num.names$ -- 33
-pop$ -- 128
+newline$ -- 182
+num.names$ -- 34
+pop$ -- 134
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 130
+skip$ -- 133
 stack$ -- 0
 substring$ -- 268
-swap$ -- 59
+swap$ -- 60
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 49
-width$ -- 36
-write$ -- 371
+while$ -- 50
+width$ -- 37
+write$ -- 383
 (There were 2 error messages)

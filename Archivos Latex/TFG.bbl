@@ -196,6 +196,12 @@ Daniele Micciancio and Oded Regev.
 \newblock {\em Lattice-based Cryptography}, pages 147--191.
 \newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
 
+\bibitem{pqcrystalssecurity}
+L{\'e}o Ducas and John Schanck.
+\newblock Security estimation scripts for kyber and dilithium.
+\newblock \url{https://github.com/pq-crystals/security-estimates}, 2023.
+\newblock Consultado: 2025-05-31.
+
 \bibitem{saber-spec-2020}
 Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
   Karmakar, Sujoy~Sinha Roy, Michiel~Van Beirendonck, and Frederik Vercauteren.

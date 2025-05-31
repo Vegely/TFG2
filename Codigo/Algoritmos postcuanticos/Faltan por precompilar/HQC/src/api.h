@@ -6,12 +6,12 @@
 #ifndef API_H
 #define API_H
 
-#define CRYPTO_ALGNAME                      "HQC-128"
+#define CRYPTO_ALGNAME                      "HQC-256"
 
-#define CRYPTO_SECRETKEYBYTES               2289
-#define CRYPTO_PUBLICKEYBYTES               2249
+#define CRYPTO_SECRETKEYBYTES               7285
+#define CRYPTO_PUBLICKEYBYTES               7245
 #define CRYPTO_BYTES                        64
-#define CRYPTO_CIPHERTEXTBYTES              4497
+#define CRYPTO_CIPHERTEXTBYTES              14485
 
 // As a technicality, the public key is appended to the secret key in order to respect the NIST API.
 // Without this constraint, CRYPTO_SECRETKEYBYTES would be defined as 32

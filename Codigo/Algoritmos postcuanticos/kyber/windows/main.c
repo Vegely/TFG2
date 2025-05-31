@@ -78,21 +78,21 @@ int main(void) {
         memcpy(shared_secrets_receiver[i], ss2, ss_size);
 
         if (memcmp(ss1, ss2, ss_size) != 0) {
-            printf("❌ Mismatch at test %d\n", i);
+            printf("Mismatch at test %d\n", i);
             mismatch_found = 1;
         }
     }
 
     printf("\n=== Shared Secrets Comparison ===\n");
     if (!mismatch_found) {
-        printf("✅ All %d shared secrets matched correctly.\n", TEST_COUNT);
+        printf("All %d shared secrets matched correctly.\n", TEST_COUNT);
     }
 
     // Check if any shared secrets unexpectedly changed (should be unique)
     for (int i = 0; i < TEST_COUNT; ++i) {
         for (int j = i + 1; j < TEST_COUNT; ++j) {
             if (memcmp(shared_secrets_sender[i], shared_secrets_sender[j], ss_size) == 0) {
-                printf("⚠️  Warning: Duplicate shared secrets found at indices %d and %d\n", i, j);
+                printf("Warning: Duplicate shared secrets found at indices %d and %d\n", i, j);
             }
         }
     }

@@ -12,7 +12,7 @@ Generico: \cite{9508027v2} ECC: \cite{0301141v2} RSA: \cite{RESERCHFINAL}
 Recomendaciones NIST para intercambio seguro de claves \cite{NIST_SP_800_227_ipd_2025}
 \subsection{Generación de números aleatorios criptográficamente seguros}
 \subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
-\subsection{Transformadas Fujisaki-Okamoto}
+\subsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
 \cite{Fujisaki1999}
 \newpage
 \section{Funcionamiento básico de los algoritmos postcuánticos}
@@ -35,6 +35,9 @@ Para denotar vectores, se utiliza la notación \(v[i]\), donde \(v\) es un vecto
 \newline
 
 Se denota mediante \(\lfloor x \rceil\) el redondeo de \(x\) al entero más cercano. Por ejemplo: \(\lfloor 2{,}3 \rceil = 2\), \(\lfloor 2{,}5 \rceil = 3\) y \(\lfloor 2{,}8 \rceil = 3\).
+\newline
+
+Se denota mediante $\left\| x\right\|$ al valor absoluto de x.
 \newline
 
 Para las reducciones modulares se emplean dos tipos: una centrada en cero y otra correspondiente a la reducción modular estándar. Para la reducción modular centrada en cero, sea \(\alpha\) un entero par. Esta operación se define como:
@@ -290,7 +293,7 @@ En Kyber no se parte del problema LWE “puro”, ya que los esquemas basados di
 \newline
 
 En cuanto a la eficiencia en la reducción del tamaño de las claves, esta puede observarse claramente a través del siguiente ejemplo ilustrativo:
-\begin{table}[h]
+\begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{lcc}
@@ -333,6 +336,9 @@ Aunque la incorporación de estructura algebraica al problema criptográfico pri
 \mbox{}\\
 
 A continuación, se presenta el algoritmo principal empleado para el intercambio de claves basado en el problema \gls{rlwe} que fundamenta matemáticamente el funcionamiento de Kyber.
+\newline
+
+El algoritmo de generación de claves emplea los valores \(q\) y \(n\) , que definen la estructura algebraica, para calcular la llave privada \(sk\)  y la llave pública \(pk\).
 \begin{algorithm}[H]
 	\caption{Generación claves \gls{rlwe} en $\mathbb{Z}_q[x]/(X^n + 1)$}
 	$\begin{array}{p{\textwidth}}
@@ -342,35 +348,139 @@ A continuación, se presenta el algoritmo principal empleado para el intercambio
 		\hline
 	\end{array}$
 	\begin{algorithmic}[1]
-		\State 1
+		\State Generar \(a\in R_q\)  al azar según una distribución uniforme.
+		\State Generar \(sk, e \in R_q\) como elementos pequeños según la distribución del error. \Statex \Comment{Binomial en Kyber, discreta Gaussiana en otros esquemas}
+		\State Calcular 
+		\begin{equation}
+			b:=a\cdot sk + e
+		\end{equation}
+		\State \Return \(sk, pk:=a||b\)
 	\end{algorithmic}
 \end{algorithm}
 
+En el algoritmo de cifrado a partir de la llave pública, \(pk\) y un mensaje \(z\in \{0,1\}^n \) se obtienen los textos cifrados \(u\) y \(v\) que serán enviados al poseedor de la clave privada para descifrar el mensaje. 
 \begin{algorithm}[H]
 	\caption{Cifrado \gls{rlwe}}
 	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\), \(z\)\\ 
+		\textbf{Entrada: } \(pk\), \(z\), \(q\), \(n\)\\ 
 		\hline
 		\textbf{Salida: } \(u\), \(v\) \\ 
 		\hline
 	\end{array}$
 	\begin{algorithmic}[1]
-		\State 1
+		\State Generar \(r, e_1, e_2 \in R_q\) como elementos pequeños según la distribución del error.
+		\State Calcular el primer texto cifrado \(u\):
+		\begin{equation}
+			u:=a\cdot r + e_1 \ \text{mod}^{+}\text{q}
+		\end{equation}
+		\State Calcular el segundo texto cifrado \(v\):
+		\begin{equation}
+			v:=b\cdot r+e_2+\left\lfloor \dfrac{q}{2} \right\rceil \cdot z \ \text{mod}^{+}\text{q}
+		\end{equation}
+		\State \Return \(u,v\) 
+		 
 	\end{algorithmic}
 \end{algorithm}
+
+En el algoritmo de descifrado, a partir de los textos cifrados \(u\) y \(v\)se recupera el mensaje original \(z\). La seguridad del esquema radica en el término de ruido ($\varepsilon=r\cdot e- s\cdot e_1 +e_2$) que ofusca el mensaje, el cual solo puede recuperarse correctamente usando la clave secreta siempre que \(\left\|\varepsilon\right\|< q/4\).
+\newline
+
+Para mantener este error dentro de niveles aceptables, es fundamental ajustar adecuadamente los parámetros de las distribuciones de ruido en el algoritmo Kyber. En la versión empleada en este trabajo (Kyber1024), esto se traduce en una tasa de error de $2^{-174}$ \cite{pqcrystalssecurity}.
+\newpage
 \begin{algorithm}[H]
 	\caption{Descifrado \gls{rlwe}}
 	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(sk\), \(u\), \(v\)\\ 
+		\textbf{Entrada: } \(sk\), \(u\), \(v\), \(q\), \(n\)\\ 
 		\hline
 		\textbf{Salida: } \(z\)\\ 
 		\hline
 	\end{array}$
 	\begin{algorithmic}[1]
-		\State 1
+		\State Calcular el polinomio \(z'\) a partir del cual se calcula el mensaje.
+		\begin{equation}
+			\label{eq:ruidoLWE}
+			z':=v-u\cdot s = \left(r\cdot e- s\cdot e_1 +e_2\right)+\left\lfloor \dfrac{q}{2} \right\rceil \cdot z \ \text{mod}^{+}\text{q}
+		\end{equation}
+		\State Calcular la distancia de cada coeficiente \((z'_i)\) de \(z'\):
+		\Statex \hspace{1em} \textbf{1.1:} Distancia a \(0\):
+		\begin{equation}
+			\text{d}_i(0):=\left\| z'_i \ \text{mod}^{\pm} \left\lfloor \dfrac{q}{2} \right\rceil \right\| 
+		\end{equation} 
+		\Statex \hspace{1em} \textbf{1.2:} Distancia a $\left\lfloor \dfrac{q}{2} \right\rceil$:
+			\begin{equation}
+			\text{d}_i\left(\dfrac{q}{2}\right)=\left\| \left\lfloor \dfrac{q}{2} \right\rceil - \text{d}_i(0)\right\| 
+		\end{equation} 
+		\If{$\text{d}_i(0)<\text{d}_i\left(\dfrac{q}{2}\right)$}
+			\Statex
+			\State Descifrar el bit \(i\) del mensaje \(z\) como un \(0\).
+		\Else
+			\State Descifrar el bit \(i\) del mensaje \(z\) como un \(1\).
+		\EndIf
+		\State \Return \(z\)
 	\end{algorithmic}
 \end{algorithm}
 
+A continuación, se presenta un breve ejemplo de aplicación numérica de funcionamiento de los algoritmos anteriores. Para ello se trabaja en $R_{17}=\mathbb{Z}_{17}[X]/\left(X^2+1\right)$ con un mensaje $z\in \{0,1\}^2$ y la distribución del error $e\in \{-1,0,1\}$.
+\newline
+
+En el primer paso se generan $a, s$ y $e$:
+\begin{equation}
+	\begin{array}{l}
+		a[X]=3+4X\\
+		s[X]=1+0X\\
+		e[X]=-1+1X
+	\end{array}
+\end{equation}
+
+Una vez inicializados los parámetros, se procede al cálculo de \(b\). La reducción módulo $X^2+1$ equivale a sustituir $X^2$ por $-1$ cada vez que aparezca.
+\begin{equation}
+	b[X]=a[X]\cdot s[X]+e[X]=2+5X
+\end{equation}
+
+Con la clave pública calculada \(a||b\) se puede cifrar un mensaje \(z\), pero antes se generan los valores de \(z, r, e_1\) y \(e_2\):
+\begin{equation}
+	\begin{array}{l}
+		z[X]=1+0X\\
+		r[X]=1+1X\\
+		e_1[X]=0+1X\\
+		e_2[X]=-1+0X
+	\end{array}
+\end{equation}
+
+Con estos valores se calculan los textos cifrados:
+\begin{equation}
+	\begin{array}{l}
+		u[X]=a[X]\cdot r[X]+e_1[X]=16+8X\\
+		v[X]=b[X]\cdot r[X]+e_2[X]+\left\lfloor \dfrac{q}{2} \right\rceil \cdot z[X] =5+7X
+	\end{array}
+\end{equation}
+
+Por último, se comprueba que el mensaje se descifra correctamente. 
+\begin{equation}
+	z'[X]=v[X]-u[X]\cdot s[X]=6+16X \rightarrow \left\{ \begin{array}{l}
+		z'_0: \ \begin{array}{l}
+					\text{d}_0(0) = 6 \\
+					\text{d}_0(9) = 3
+				\end{array} \\
+		z'_1: \ \begin{array}{l}
+			\text{d}_1(0) = 1 \\
+			\text{d}_1(9) = 8
+		\end{array}
+	\end{array} \right.
+\end{equation}
+
+Con estas distancia se obtiene que \(z=(1,0)\). No obstante, aunque este descifrado se comprueba que se cumple que el error no supera la magnitud límite $q/4=4.25$.
+\begin{equation}
+	 \varepsilon [X]=r[X]\cdot e[X]- s[X]\cdot e_1[X] +e_2[X]=14+16X
+\end{equation}
+
+Para cumplirse la distancia a \(0\) debe ser menor a $q/4$ para cada coeficiente:
+\begin{equation}
+	\begin{array}{l}
+		\text{d}_0(0) = 3 \\
+		\text{d}_1(0) = 1
+	\end{array} 
+\end{equation}
 \subsubsection{Fundamentos de seguridad de Kyber}
 \paragraph{Seguridad basada en retículas ideales}
 \mbox{}\\
@@ -379,8 +489,142 @@ A continuación, se presenta el algoritmo principal empleado para el intercambio
 \mbox{}\\
 \paragraph{Análisis respecto a ataques conocidos}
 \mbox{}\\
+\subsubsection{Parámetros Kyber empleados}
+A continuación, se presenta una tabla con los parámetros del esquema Kyber1024 empleado en este trabajo fin de grado.
+\begin{table}[h]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{lcccccccc}
+		\hline
+		&\(n\)&\(k\)&\(q\)&\(\eta_1\)&\(\eta_2\)&\(d_u\)&\(d_v\)&\(\delta\)\\
+		\hline
+		Kyber1024&\(256\)&\(4\)&\(3329\)&\(2\)&\(2\)&\(11\)&\(5\)&\(2^{-174}\)\\
+		\hline
+	\end{tabular}
+	\caption{Tabla con los parámetros utilizados por Kyber1024.}
+	\label{tab:KyberParams}
+\end{table}
+\newpage
+
 \subsubsection{Algoritmos principales}
-\mbox{}\\
+En Kyber para garantizar la seguridad \gls{cca2} y aumentar la eficiencia de los algoritmos se emplea una variación de los algoritmos descritos anteriormente. Los algoritmos descritos son los de \cite{kyber-spec-2021}.
+
+\begin{algorithm}[H]
+	\caption{Generación llaves en Kyber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Salida: } \(pk\in \mathcal{B}^{12\cdot k\cdot n/8+32}\), \(sk\in \mathcal{B}^{24\cdot k\cdot n/8+96}\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Obtener \(d, z\in\mathcal{B}^{32}\) de manera aleatoria usando una distribución uniforme.
+		\State Obtener dos nuevos parámetros \(\rho, \sigma\) expandiendo el valor inicial \(d\):
+		\begin{equation}
+			(\rho, \sigma):=\text{SHA3-512}(d)
+		\end{equation}
+		\Statex Se crean las matrices para realizar las operaciones de los algoritmos de la  \gls{rlwe}.
+		\For{i=0:k-1}
+			\For{j=0:k-1}
+				\State $\hat{A}[i][j]:=\text{Parse}[\text{SHAKE-128}(\rho,j,i)]$ \Comment{Muestreo matriz en el dominio NTT.}
+			\EndFor
+		\EndFor
+		\State $N:=0$
+		\For{i=0:k-1}
+			\State $s[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\sigma,N)]$ \Comment{Muestreo secreto.}
+			\State $N:= N+1$
+		\EndFor
+		\For{i=0:k-1}
+			\State $e[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\sigma,N)]$ \Comment{Muestreo error.}
+			\State $N:= N+1$
+		\EndFor
+		\State Se convierten las magnitudes mediante la NTT para agilizar los cálculos:
+		\begin{equation}
+				\begin{array}{l}
+					\hat{s}:=\text{NTT}(s)\\
+					\hat{e}:=\text{NTT}(e)\\
+					\hat{t}:=\hat{A}\circ\hat{s}+\hat{e}\\
+				\end{array} 	
+		\end{equation}
+		\State Se calcula la llave pública:
+		\begin{equation}
+			pk:=\text{Encode}_{12}(\hat{t}\ \text{mod}^{+}\text{q} )||\rho 
+		\end{equation}
+		\Statex \Comment{Se envía $\hat{b}$ junto con la semilla $\rho$ para el calculo de $\hat{A}$.}
+		\Statex \Comment{Así se reduce el tamaño de la clave enviada.}
+		\State Se calcula la llave secreta:
+		\begin{equation}
+			sk:=\text{Encode}_{12}(\hat{s}\ \text{mod}^{+}\text{q} )||pk||\text{SHA3-256}(pk)||z
+		\end{equation}
+		\Statex \Comment{Se realiza esta concatenación para cumplir la seguridad \gls{cca2} mediante la \gls{tfo}.}
+		\State \Return pk,sk
+	\end{algorithmic}
+\end{algorithm}
+\newpage
+\begin{algorithm}[H]
+	\caption{Encapsulado Kyber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(pk\in \mathcal{B}^{12\cdot k\cdot n/8+32}\)\\ 
+		\hline
+		\textbf{Salida: } \(c\in \mathcal{B}^{d_u\cdot k\cdot n/8+d_v\cdot n/8}\), \(k\in \mathcal{B}^{*}\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Obtener los valores necesarios a partir de la llave pública:
+		\begin{equation}
+			\begin{array}{l}
+			\hat{t}:=\text{Decode}_{12}(pk)\\
+			p:=pk+12\cdot k\cdot n/8
+			\end{array} 
+		\end{equation}
+		\State Calcular la matriz \(\hat{A}^T\) a partir de \(\rho\) codificado en la llave pública.
+		\Statex Se crean las matrices para realizar las operaciones de los algoritmos de la  \gls{rlwe}.
+		\State Obtener \(m'\) de manera aleatoria usando una distribución uniforme.
+		\State Obtener los parámetros \(m, \kappa, \gamma\) a partir de \(m'\) y la llave pública:
+		\begin{equation}
+			\begin{array}{l}
+				m:=\text{SHA3-256}(m')\\
+				(\kappa,\gamma):=\text{SHA3-512}[m||\text{SHA3-256}(pk)]
+			\end{array} 
+		\end{equation}
+		\State \(N:=0\)
+		\For{i=0:k-1}
+			\State $r[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\gamma,N)]$ \Comment{Muestreo elemento \(r\).}
+			\State $N:= N+1$
+		\EndFor
+		\For{i=0:k-1}
+			\State $e_1[i]:= \text{CBD}_{\eta_2}[\text{SHAKE-256}(\gamma,N)]$ \Comment{Muestreo del primer error.}
+			\State $N:= N+1$
+		\EndFor
+		\State \(e_2[i]:= \text{CBD}_{\eta_2}[\text{SHAKE-256}(\gamma,N)]\) \Comment{Muestreo del segundo error.}
+		\State Calcular los valores de los textos cifrados mediante \gls{rlwe}:
+		\begin{equation}
+			\begin{array}{l}
+				\hat{r}:=\text{NTT}(r)\\
+				u:= \text{NTT}^{-1}(\hat{A}^T\circ \hat{r})+e_1\\
+				v:=\text{NTT}^{-1}(\hat{t}^T\circ \hat{r})+e_2+ \text{Decompress}_q[\text{Decode}_1(m),1]\\
+				c_1:=\text{Encode}_{d_u}[\text{Compress}_q(u,d_u)]\\
+				c_2:=\text{Encode}_{d_v}[\text{Compress}_q(v,d_v)]
+			\end{array}
+		\end{equation}
+		\State Calcular el secreto compartido:
+		\begin{equation}
+			k:= \text{SHAKE-256}[\kappa||\text{SHA3-256}(c)]
+		\end{equation}
+		\State \Return (\(c:=c1||c2,k\))
+	\end{algorithmic}
+\end{algorithm}
+\begin{algorithm}[H]
+	\caption{Decapsulado Kyber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(c\in \mathcal{B}^{d_u\cdot k\cdot n/8+d_v\cdot n/8}\), \(sk\in \mathcal{B}^{24\cdot k\cdot n/8+96}\)\\ 
+		\hline
+		\textbf{Salida: } \(k\in \mathcal{B}^{*}\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State 1
+	\end{algorithmic}
+\end{algorithm}
+
 \subsection{SABER}
 Para \cite{saber-spec-2020}
 \subsection{Hamming Quasi-Cyclic (HQC)}

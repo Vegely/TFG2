@@ -1,0 +1,10 @@
+^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\PRECOMPILATIONS\LIB_COMPILATION\KYBER1024\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/lib_compilation/kyber1024" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/lib_compilation/kyber1024/build/raw_build" --check-stamp-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/lib_compilation/kyber1024/build/raw_build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

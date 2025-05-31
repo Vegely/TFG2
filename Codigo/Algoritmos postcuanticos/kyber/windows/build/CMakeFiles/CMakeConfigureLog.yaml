@@ -24,7 +24,7 @@ events:
       The output was:
       0
       Versi├│n de MSBuild 17.13.19+0d9f5a35a para .NET Framework
-      Compilaci├│n iniciada a las 14/05/2025 20:13:20.
+      Compilaci├│n iniciada a las 31/05/2025 4:52:44.
       
       Proyecto "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\4.0.2\\CompilerIdC\\CompilerIdC.vcxproj" en nodo 1 (destinos predeterminados).
       PrepareForBuild:
@@ -62,7 +62,7 @@ events:
           0 Advertencia(s)
           0 Errores
       
-      Tiempo transcurrido 00:00:01.14
+      Tiempo transcurrido 00:00:01.77
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -81,8 +81,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-al43li"
-      binary: "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-al43li"
+      source: "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-a9zjre"
+      binary: "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-a9zjre"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -91,49 +91,49 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-al43li'
+        Change Dir: 'C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-a9zjre'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cd7ce.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b562c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         Versi├│n de MSBuild 17.13.19+0d9f5a35a para .NET Framework
-        Compilaci├│n iniciada a las 14/05/2025 20:13:22.
+        Compilaci├│n iniciada a las 31/05/2025 4:52:47.
         
-        Proyecto "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\cmTC_cd7ce.vcxproj" en nodo 1 (destinos predeterminados).
+        Proyecto "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\cmTC_b562c.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
-          Creando directorio "cmTC_cd7ce.dir\\Debug\\".
+          Creando directorio "cmTC_b562c.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creando directorio "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\".
-          Creando directorio "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\".
+          Creando directorio "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\".
+          Creando directorio "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\".
         InitializeBuildStatus:
-          Se crear├í "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
-          Aplicando tarea Touch a "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\unsuccessfulbuild".
+          Se crear├í "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\unsuccessfulbuild" porque se especific├│ "AlwaysCreate".
+          Aplicando tarea Touch a "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\unsuccessfulbuild".
         VcpkgTripletSelection:
           Using triplet "x64-windows" from "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\"
           Using normalized configuration "Debug"
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cd7ce.dir\\Debug\\\\" /Fd"cmTC_cd7ce.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b562c.dir\\Debug\\\\" /Fd"cmTC_b562c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34810 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /I"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cd7ce.dir\\Debug\\\\" /Fd"cmTC_cd7ce.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          cl /c /I"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b562c.dir\\Debug\\\\" /Fd"cmTC_b562c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\cmTC_cd7ce.exe" /INCREMENTAL /ILK:"cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.ilk" /NOLOGO /LIBPATH:"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-al43li/Debug/cmTC_cd7ce.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-al43li/Debug/cmTC_cd7ce.lib" /MACHINE:X64  /machine:x64 cmTC_cd7ce.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_cd7ce.vcxproj -> C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\cmTC_cd7ce.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\cmTC_b562c.exe" /INCREMENTAL /ILK:"cmTC_b562c.dir\\Debug\\cmTC_b562c.ilk" /NOLOGO /LIBPATH:"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-a9zjre/Debug/cmTC_b562c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/kyber/windows/build/CMakeFiles/CMakeScratch/TryCompile-a9zjre/Debug/cmTC_b562c.lib" /MACHINE:X64  /machine:x64 cmTC_b562c.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_b562c.vcxproj -> C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\cmTC_b562c.exe
         AppLocalFromInstalled:
-          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\cmTC_cd7ce.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\cmTC_cd7ce.write.1u.tlog" "cmTC_cd7ce.dir\\Debug\\vcpkg.applocal.log"
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\cmTC_b562c.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\cmTC_b562c.write.1u.tlog" "cmTC_b562c.dir\\Debug\\vcpkg.applocal.log"
           "pwsh.exe" no se reconoce como un comando interno o externo,
           programa o archivo por lotes ejecutable.
-          El comando "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\cmTC_cd7ce.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\cmTC_cd7ce.write.1u.tlog" "cmTC_cd7ce.dir\\Debug\\vcpkg.applocal.log"" sali├│ con el c├│digo 9009.
-          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\Debug\\cmTC_cd7ce.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\cmTC_cd7ce.write.1u.tlog" "cmTC_cd7ce.dir\\Debug\\vcpkg.applocal.log"
+          El comando "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\cmTC_b562c.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\cmTC_b562c.write.1u.tlog" "cmTC_b562c.dir\\Debug\\vcpkg.applocal.log"" sali├│ con el c├│digo 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\bogurad\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\Debug\\cmTC_b562c.exe" "C:\\Users\\bogurad\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\cmTC_b562c.write.1u.tlog" "cmTC_b562c.dir\\Debug\\vcpkg.applocal.log"
         FinalizeBuildStatus:
-          Se eliminar├í el archivo "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_cd7ce.dir\\Debug\\cmTC_cd7ce.tlog\\cmTC_cd7ce.lastbuildstate".
-        Compilaci├│n del proyecto terminada "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-al43li\\cmTC_cd7ce.vcxproj" (destinos predeterminados).
+          Se eliminar├í el archivo "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_b562c.dir\\Debug\\cmTC_b562c.tlog\\cmTC_b562c.lastbuildstate".
+        Compilaci├│n del proyecto terminada "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\kyber\\windows\\build\\CMakeFiles\\CMakeScratch\\TryCompile-a9zjre\\cmTC_b562c.vcxproj" (destinos predeterminados).
         
         Compilaci├│n correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:01.10
+        Tiempo transcurrido 00:00:01.09
         
       exitCode: 0
   -

@@ -15,6 +15,13 @@
 \contentsline {subsection}{\numberline {1.3.4}Microprocesador CY8CPROTO-063-BLE \cite {CY8CPROTO063BLE}}{2}{subsection.1.3.4}%
 \contentsline {section}{\numberline {1.4}Estructura del documento}{2}{section.1.4}%
 \contentsline {chapter}{\numberline {2}Estado del arte}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introducción}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Tipos de cifrado}{3}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Necesidad del cifrado asimétrico}{3}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Sistemas de intercambio de claves}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Cambio en el paradigma de cifrado asimétrico. Algoritmo de Shore}{3}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Evolución de los algoritmos postcuánticos}{3}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Cifrado asimétrico postcuántico en sistemas embebidos}{3}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Fundamentos generales}{5}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introducción}{5}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Algoritmos de Hashing }{5}{section.3.2}%
@@ -25,62 +32,63 @@
 \contentsline {section}{\numberline {3.4}Fundamentos de seguridad de los algoritmos}{5}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Generación de números aleatorios criptográficamente seguros}{5}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}Indistinguibilidad bajo ataque de texto cifrado adaptable \gls {cca2}}{5}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Transformadas Fujisaki-Okamoto}{5}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.3}Transformadas Fujisaki-Okamoto \gls {tfo}}{5}{subsection.3.4.3}%
 \contentsline {section}{\numberline {3.5}Funcionamiento básico de los algoritmos postcuánticos}{6}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}CRYSTALS-Kyber }{6}{subsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.1.1}Transformada Teórica de Números o Number Theoretic Transform (\gls {ntt})}{7}{subsubsection.3.5.1.1}%
 \contentsline {subsubsection}{\numberline {3.5.1.2}Aprendizaje Con Errores o Learning With Errors (\gls {lwe})}{10}{subsubsection.3.5.1.2}%
 \contentsline {paragraph}{\gls {lwe} en anillos}{11}{section*.11}%
 \contentsline {paragraph}{Aplicación del \gls {rlwe} para el intercambio de claves públicas}{12}{section*.12}%
-\contentsline {subsubsection}{\numberline {3.5.1.3}Fundamentos de seguridad de Kyber}{12}{subsubsection.3.5.1.3}%
-\contentsline {paragraph}{Seguridad basada en retículas ideales}{12}{section*.13}%
-\contentsline {paragraph}{Seguridad esperada}{12}{section*.14}%
-\contentsline {paragraph}{Análisis respecto a ataques conocidos}{12}{section*.15}%
-\contentsline {subsubsection}{\numberline {3.5.1.4}Algoritmos principales}{12}{subsubsection.3.5.1.4}%
-\contentsline {subsection}{\numberline {3.5.2}SABER}{12}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Hamming Quasi-Cyclic (HQC)}{12}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Bit Flipping Key Encapsulation (Bike)}{12}{subsection.3.5.4}%
-\contentsline {chapter}{\numberline {4}Desarrollo}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementación comunicación serie}{13}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{13}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementación en el ordenador}{13}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementación en el microprocesador}{13}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Estructura y API para los algoritmos de cifrado asimétrico}{13}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Kyber}{13}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Saber}{13}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Bike}{13}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}HQC}{13}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Implementación algoritmos en el PC}{13}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Compilación en librerías}{13}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Diagrama de uso}{13}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Diagrama funcional}{13}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Diagrama de clases}{13}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Implementación de algoritmos en el microcontrolador}{13}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Diagrama de uso}{13}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Diagrama funcional}{13}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}Implementación del intercambio de claves. Creación del secreto compartido}{13}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Modelo 1}{14}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Modelo 2}{14}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Modelo 3}{14}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Tests de rendimiento realizados}{14}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Resultados y discusión}{15}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Resultados}{15}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}(No sé si lo metere) Resultado de ejecución de los algoritmos clásicos}{15}{subsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.1.1}\gls {rsa}}{15}{subsubsection.5.1.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.1.2}\gls {ecc}}{15}{subsubsection.5.1.1.2}%
-\contentsline {subsection}{\numberline {5.1.2}Resultados de ejecución de los algoritmos post-cuánticos}{15}{subsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.1}Kyber}{15}{subsubsection.5.1.2.1}%
-\contentsline {subsubsection}{\numberline {5.1.2.2}Saber}{15}{subsubsection.5.1.2.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.3}HQC}{15}{subsubsection.5.1.2.3}%
-\contentsline {subsubsection}{\numberline {5.1.2.4}Bike}{15}{subsubsection.5.1.2.4}%
-\contentsline {subsection}{\numberline {5.1.3}Resultados de los distintos modelos de comunicación}{15}{subsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.3.1}Modelo 1}{15}{subsubsection.5.1.3.1}%
-\contentsline {subsubsection}{\numberline {5.1.3.2}Modelo 2}{15}{subsubsection.5.1.3.2}%
-\contentsline {subsubsection}{\numberline {5.1.3.3}Modelo 3}{15}{subsubsection.5.1.3.3}%
-\contentsline {section}{\numberline {5.2}Discusión}{15}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Comparativa entre los distintos algoritmos post-cuánticos analizados}{15}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Comparativa entre los distintos modelos de comunicación}{15}{subsection.5.2.2}%
-\contentsline {chapter}{\numberline {6}Conclusiones}{17}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusión}{17}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Desarrollos futuros}{17}{section.6.2}%
-\contentsline {chapter}{Bibliografia}{19}{section.6.2}%
+\contentsline {subsubsection}{\numberline {3.5.1.3}Fundamentos de seguridad de Kyber}{14}{subsubsection.3.5.1.3}%
+\contentsline {paragraph}{Seguridad basada en retículas ideales}{14}{section*.13}%
+\contentsline {paragraph}{Seguridad esperada}{14}{section*.14}%
+\contentsline {paragraph}{Análisis respecto a ataques conocidos}{14}{section*.15}%
+\contentsline {subsubsection}{\numberline {3.5.1.4}Parámetros Kyber empleados}{14}{subsubsection.3.5.1.4}%
+\contentsline {subsubsection}{\numberline {3.5.1.5}Algoritmos principales}{15}{subsubsection.3.5.1.5}%
+\contentsline {subsection}{\numberline {3.5.2}SABER}{16}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Hamming Quasi-Cyclic (HQC)}{16}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Bit Flipping Key Encapsulation (Bike)}{17}{subsection.3.5.4}%
+\contentsline {chapter}{\numberline {4}Desarrollo}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementación comunicación serie}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{19}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementación en el ordenador}{19}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementación en el microprocesador}{19}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Estructura y API para los algoritmos de cifrado asimétrico}{19}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Kyber}{19}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Saber}{19}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Bike}{19}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}HQC}{19}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Implementación algoritmos en el PC}{19}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Compilación en librerías}{19}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Diagrama de uso}{19}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Diagrama funcional}{19}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Diagrama de clases}{19}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Implementación de algoritmos en el microcontrolador}{19}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Diagrama de uso}{19}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Diagrama funcional}{19}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Implementación del intercambio de claves. Creación del secreto compartido}{19}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Modelo 1}{20}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Modelo 2}{20}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Modelo 3}{20}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Tests de rendimiento realizados}{20}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Resultados y discusión}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Resultados}{21}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}(No sé si lo metere) Resultado de ejecución de los algoritmos clásicos}{21}{subsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.1.1}\gls {rsa}}{21}{subsubsection.5.1.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.1.2}\gls {ecc}}{21}{subsubsection.5.1.1.2}%
+\contentsline {subsection}{\numberline {5.1.2}Resultados de ejecución de los algoritmos post-cuánticos}{21}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.1}Kyber}{21}{subsubsection.5.1.2.1}%
+\contentsline {subsubsection}{\numberline {5.1.2.2}Saber}{21}{subsubsection.5.1.2.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.3}HQC}{21}{subsubsection.5.1.2.3}%
+\contentsline {subsubsection}{\numberline {5.1.2.4}Bike}{21}{subsubsection.5.1.2.4}%
+\contentsline {subsection}{\numberline {5.1.3}Resultados de los distintos modelos de comunicación}{21}{subsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.1}Modelo 1}{21}{subsubsection.5.1.3.1}%
+\contentsline {subsubsection}{\numberline {5.1.3.2}Modelo 2}{21}{subsubsection.5.1.3.2}%
+\contentsline {subsubsection}{\numberline {5.1.3.3}Modelo 3}{21}{subsubsection.5.1.3.3}%
+\contentsline {section}{\numberline {5.2}Discusión}{21}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Comparativa entre los distintos algoritmos post-cuánticos analizados}{21}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Comparativa entre los distintos modelos de comunicación}{21}{subsection.5.2.2}%
+\contentsline {chapter}{\numberline {6}Conclusiones}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusión}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Desarrollos futuros}{23}{section.6.2}%
+\contentsline {chapter}{Bibliografia}{25}{section.6.2}%
