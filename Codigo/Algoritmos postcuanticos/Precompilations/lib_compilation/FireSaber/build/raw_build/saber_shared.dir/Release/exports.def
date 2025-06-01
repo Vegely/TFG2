@@ -1,0 +1,36 @@
+EXPORTS 
+	__isa_available_default 	 DATA
+	BS2POLT
+	BS2POLVECp
+	BS2POLVECq
+	BS2POLmsg
+	GenMatrix
+	GenSecret
+	InnerProd
+	MatrixVectorMul
+	POLT2BS
+	POLVECp2BS
+	POLVECq2BS
+	POLmsg2BS
+	cbd
+	cmov
+	crypto_kem_dec
+	crypto_kem_enc
+	crypto_kem_keypair
+	indcpa_kem_dec
+	indcpa_kem_enc
+	indcpa_kem_keypair
+	poly_mul_acc
+	randombytes
+	saber_decapsulate
+	saber_encapsulate
+	saber_get_ciphertext_size
+	saber_get_public_key_size
+	saber_get_secret_key_size
+	saber_get_shared_secret_size
+	saber_init
+	saber_keypair
+	sha3_256
+	sha3_512
+	shake128
+	verify

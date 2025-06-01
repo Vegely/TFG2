@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Faltan por precompilar\Test NTL\build\CMakeFiles\249fe5041f211f5ee3164c275ec4ca03\RUN_TESTS_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D6169481-EB07-3424-A107-572376A9ED68}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

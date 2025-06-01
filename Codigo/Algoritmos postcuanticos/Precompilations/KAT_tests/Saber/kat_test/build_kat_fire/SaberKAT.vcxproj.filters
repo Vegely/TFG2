@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\kat_test\kat_test_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\kat_test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{494F0DCC-9EF5-3918-B84A-B5AD62A752C9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\kem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\saber_wrapper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\SABER_indcpa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\poly.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\poly_mul.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\pack_unpack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\verify.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\cbd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\fips202.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\randombytes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D2D788C3-F8AC-3C87-94EB-5FB0D198E306}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

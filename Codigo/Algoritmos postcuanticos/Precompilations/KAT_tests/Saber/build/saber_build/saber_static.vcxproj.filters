@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\kem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\saber_wrapper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\SABER_indcpa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\poly.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\poly_mul.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\pack_unpack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\verify.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\cbd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\fips202.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\rng.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{334030F1-49D2-3B7C-9C37-53ED9864A7DF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

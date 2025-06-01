@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\lib_compilation\FireSaber\build\raw_build\CMakeFiles\36cd5e1a3540d16c17db697e8cb19053\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A2EE2AC5-6C5F-311F-8326-59B797C8EE83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

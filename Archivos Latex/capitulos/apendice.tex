@@ -1,3 +1,65 @@
 \chapter{Definiciones básicas}
 \label{chap:def}
+\chapter{Ejemplo \gls{rlwe}}
+\label{chap:ej:rlwe}
+Sea el espacio de trabajo en $R_{17}=\mathbb{Z}_{17}[X]/\left(X^2+1\right)$ con un mensaje $z\in \{0,1\}^2$ y la distribución del error $e\in \{-1,0,1\}$.
+\newline
 
+En el primer paso se generan $a, s$ y $e$:
+\begin{equation}
+	\begin{array}{l}
+		a[X]=3+4X\\
+		s[X]=1+0X\\
+		e[X]=-1+1X
+	\end{array}
+\end{equation}
+
+Una vez inicializados los parámetros, se procede al cálculo de \(b\). La reducción módulo $X^2+1$ equivale a sustituir $X^2$ por $-1$ cada vez que aparezca.
+\begin{equation}
+	b[X]=a[X]\cdot s[X]+e[X]=2+5X
+\end{equation}
+
+Con la clave pública calculada \(a||b\) se puede cifrar un mensaje \(z\), pero antes se generan los valores de \(z, r, e_1\) y \(e_2\):
+\begin{equation}
+	\begin{array}{l}
+		z[X]=1+0X\\
+		r[X]=1+1X\\
+		e_1[X]=0+1X\\
+		e_2[X]=-1+0X
+	\end{array}
+\end{equation}
+
+Con estos valores se calculan los textos cifrados:
+\begin{equation}
+	\begin{array}{l}
+		u[X]=a[X]\cdot r[X]+e_1[X]=16+8X\\
+		v[X]=b[X]\cdot r[X]+e_2[X]+\left\lfloor \dfrac{q}{2} \right\rceil \cdot z[X] =5+7X
+	\end{array}
+\end{equation}
+
+Por último, se comprueba que el mensaje se descifra correctamente. 
+\begin{equation}
+	z'[X]=v[X]-u[X]\cdot s[X]=6+16X \rightarrow \left\{ \begin{array}{l}
+		z'_0: \ \begin{array}{l}
+			\text{d}_0(0) = 6 \\
+			\text{d}_0(9) = 3
+		\end{array} \\
+		z'_1: \ \begin{array}{l}
+			\text{d}_1(0) = 1 \\
+			\text{d}_1(9) = 8
+		\end{array}
+	\end{array} \right.
+\end{equation}
+
+Con estas distancia se obtiene que \(z=(1,0)\). No obstante, aunque este descifrado se comprueba que se cumple que el error no supera la magnitud límite $q/4=4.25$.
+\begin{equation}
+	\varepsilon [X]=r[X]\cdot e[X]- s[X]\cdot e_1[X] +e_2[X]=14+16X
+\end{equation}
+
+Para cumplirse la distancia a \(0\) debe ser menor a $q/4$ para cada coeficiente:
+\begin{equation}
+	\begin{array}{l}
+		\text{d}_0(0) = 3 \\
+		\text{d}_1(0) = 1
+	\end{array} 
+\end{equation}

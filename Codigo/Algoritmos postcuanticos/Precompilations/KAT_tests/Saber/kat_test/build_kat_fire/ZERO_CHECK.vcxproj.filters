@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\Saber\kat_test\build_kat_fire\CMakeFiles\ca28388cee9840794ab2085fec160b1c\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B649767B-7988-383C-BBE6-04D366B623CA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

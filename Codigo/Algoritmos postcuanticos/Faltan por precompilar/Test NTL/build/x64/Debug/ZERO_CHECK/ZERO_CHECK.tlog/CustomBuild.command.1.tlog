@@ -1,0 +1,10 @@
+^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\FALTAN POR PRECOMPILAR\TEST NTL\BUILD\CMAKEFILES\249FE5041F211F5EE3164C275EC4CA03\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build/NTL_GF2_Operations.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

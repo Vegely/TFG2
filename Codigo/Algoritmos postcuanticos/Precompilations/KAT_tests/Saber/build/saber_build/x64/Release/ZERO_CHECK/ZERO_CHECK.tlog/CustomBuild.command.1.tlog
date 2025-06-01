@@ -1,0 +1,10 @@
+^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\PRECOMPILATIONS\KAT_TESTS\SABER\BUILD\SABER_BUILD\CMAKEFILES\5BB45301CFF13EB416DF0E1A2F2AB64F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/build/saber_build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/build/saber_build/saber_lib.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

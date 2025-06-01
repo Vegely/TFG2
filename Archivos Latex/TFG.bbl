@@ -196,6 +196,11 @@ Daniele Micciancio and Oded Regev.
 \newblock {\em Lattice-based Cryptography}, pages 147--191.
 \newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
 
+\bibitem{cryptoeprint:2019/930}
+Yang Wang and Mingqiang Wang.
+\newblock Module-{LWE} versus ring-{LWE}, revisited.
+\newblock Cryptology {ePrint} Archive, Paper 2019/930, 2019.
+
 \bibitem{pqcrystalssecurity}
 L{\'e}o Ducas and John Schanck.
 \newblock Security estimation scripts for kyber and dilithium.
