@@ -91,6 +91,6 @@
 \contentsline {chapter}{\numberline {6}Conclusiones}{23}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Conclusión}{23}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Desarrollos futuros}{23}{section.6.2}%
-\contentsline {chapter}{Definiciones básicas}{25}{appendix*.16}%
-\contentsline {chapter}{Ejemplo \gls {rlwe}}{27}{appendix*.17}%
-\contentsline {chapter}{Bibliografia}{29}{equation.Alph0.0.7}%
+\contentsline {chapter}{\numberline {A}Definiciones básicas}{25}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Ejemplo \gls {rlwe}}{27}{appendix.Alph2}%
+\contentsline {chapter}{Bibliografia}{29}{equation.Alph2.0.7}%
