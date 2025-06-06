@@ -1,6 +1,6 @@
-^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\KAT_TESTS\KYBER512\BUILD\KAT_BUILD\CMAKEFILES\7ED9020A22B8C75BD3170BFD59F2FE0D\GENERATE.STAMP.RULE
+^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\PRECOMPILATIONS\KAT_TESTS\KYBER512\BUILD\KAT_BUILD\CMAKEFILES\7E61224B96F8314C24DDA1D7B01285BB\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/KAT_tests/kyber512" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/KAT_tests/kyber512/build/kat_build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/KAT_tests/kyber512/build/kat_build/kyber_lib.sln"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber512" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber512/build/kat_build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber512/build/kat_build/kyber_lib.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

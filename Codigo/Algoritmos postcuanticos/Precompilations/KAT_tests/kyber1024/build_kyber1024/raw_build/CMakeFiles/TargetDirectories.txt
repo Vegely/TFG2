@@ -1,0 +1,5 @@
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/build_kyber1024/raw_build/CMakeFiles/kyber1024_shared.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/build_kyber1024/raw_build/CMakeFiles/kyber1024_static.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/build_kyber1024/raw_build/CMakeFiles/INSTALL.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/build_kyber1024/raw_build/CMakeFiles/ALL_BUILD.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/build_kyber1024/raw_build/CMakeFiles/ZERO_CHECK.dir

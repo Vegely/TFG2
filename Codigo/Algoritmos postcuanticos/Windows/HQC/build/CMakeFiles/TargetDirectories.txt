@@ -1,0 +1,3 @@
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Windows/HQC/build/CMakeFiles/hqc_test.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Windows/HQC/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Windows/HQC/build/CMakeFiles/ZERO_CHECK.dir

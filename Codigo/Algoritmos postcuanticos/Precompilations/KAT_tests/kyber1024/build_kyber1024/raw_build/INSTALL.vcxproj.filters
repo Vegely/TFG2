@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\Precompilations\KAT_tests\kyber1024\build_kyber1024\raw_build\CMakeFiles\bccc7b32de1167dcbb5e2cdc193ba4d1\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CF2F94C0-2547-3FD8-87EF-770CDDD86FCB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

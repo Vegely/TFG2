@@ -1,0 +1,3 @@
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/kat_test/build_kat_1024/CMakeFiles/KyberKAT.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/kat_test/build_kat_1024/CMakeFiles/ALL_BUILD.dir
+C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/kyber1024/kat_test/build_kat_1024/CMakeFiles/ZERO_CHECK.dir
