@@ -39,13 +39,14 @@
 #include <string.h>
 
 #include "hash_wrapper.h"
-#include "openssl_utils.h"
-#include "ntl.h"
 #include "decode.h"
 #include "sampling.h"
 #include "kem.h"
 #include "conversions.h"
 #include "shake_prng.h"
+
+#include "ntl.h"
+#include "openssl_utils.h"
 
 // Function H. It uses the extract-then-expand paradigm based on SHA384 and
 // AES256-CTR PRNG to produce e from m.

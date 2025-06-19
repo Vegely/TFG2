@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  3 JUN 2025 03:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  15 JUN 2025 16:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2064,13 +2064,19 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: D79641D2BCD913157BA002558AAF1877;18597.
+
+Package rerunfilecheck Warning: File `TFG.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `TFG.out':
+(rerunfilecheck)             Before: D79641D2BCD913157BA002558AAF1877;18597
+(rerunfilecheck)             After:  61DDE65612EFBF69418702367A6B7A74;18158.
  ) 
 Here is how much of TeX's memory you used:
  63851 strings out of 474222
  1578480 string characters out of 5750209
- 2297627 words of memory out of 5000000
+ 2297628 words of memory out of 5000000
  84941 multiletter control sequences out of 15000+600000
  574187 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2111,6 +2117,18 @@ placed by a fixed one
 pdfTeX warning (dest): name{glo:rsa} has been referenced but does not exist, re
 placed by a fixed one
 
+
+pdfTeX warning (dest): name{subsubsection.5.1.2.4} has been referenced but does
+ not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.4.2.4} has been referenced but does not 
+exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{subsection.3.5.4} has been referenced but does not 
+exist, replaced by a fixed one
+
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
 ve/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2023/texmf-dist/
@@ -2141,10 +2159,10 @@ lic/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/
 sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.p
 fb>
-Output written on TFG.pdf (56 pages, 641436 bytes).
+Output written on TFG.pdf (56 pages, 640880 bytes).
 PDF statistics:
- 1280 PDF objects out of 1440 (max. 8388607)
- 1136 compressed objects within 12 object streams
+ 1279 PDF objects out of 1440 (max. 8388607)
+ 1135 compressed objects within 12 object streams
  274 named destinations out of 1000 (max. 500000)
  778 words of extra memory for PDF output out of 10000 (max. 10000000)
 

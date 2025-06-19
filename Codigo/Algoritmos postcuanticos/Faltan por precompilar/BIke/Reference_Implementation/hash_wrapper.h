@@ -40,10 +40,11 @@
 
 #include "hash_wrapper.h"
 #include "utilities.h"
-#include "openssl/sha.h"
 #include "string.h"
 #include "stdio.h"
 #include "types.h"
+
+#include "openssl/sha.h"
 
 #define SHA384_HASH_SIZE   48ULL
 #define SHA384_HASH_QWORDS (SHA384_HASH_SIZE/8)

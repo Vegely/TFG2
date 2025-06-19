@@ -157,17 +157,5 @@ _INLINE_ status_t ossl_bin2bn(IN BIGNUM* out,
     return SUCCESS;
 }
 
-_INLINE_ status_t print_ossl_bn(IN const BIGNUM* bn, IN const uint64_t size)
-{
-    uint8_t tmp[size];
-    if(ossl_bn2bin(tmp, bn, size))
-    {
-        return E_OSSL_FAILURE;
-    }
-
-    print((uint64_t*)tmp, size*8);
-
-    return SUCCESS;
-}
 
 #endif //_OSSL_UTILITIES_H_
