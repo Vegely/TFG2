@@ -45,7 +45,14 @@
 \contentsline {paragraph}{Análisis respecto a ataques conocidos}{14}{section*.15}%
 \contentsline {subsubsection}{\numberline {3.5.1.4}Parámetros Kyber empleados}{14}{subsubsection.3.5.1.4}%
 \contentsline {subsubsection}{\numberline {3.5.1.5}Algoritmos principales \cite {kyber-spec-2021}}{15}{subsubsection.3.5.1.5}%
-\contentsline {subsection}{\numberline {3.5.2}SABER}{18}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.2}Saber}{18}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}Algoritmos de Toom-Cook y Karatsuba}{18}{subsubsection.3.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.5.2.2}Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{18}{subsubsection.3.5.2.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.3}Fundamentos de seguridad de Saber}{18}{subsubsection.3.5.2.3}%
+\contentsline {paragraph}{Seguridad esperada}{18}{section*.16}%
+\contentsline {paragraph}{Análisis respecto a ataques conocidos}{18}{section*.17}%
+\contentsline {subsubsection}{\numberline {3.5.2.4}Parámetros Saber empleados}{18}{subsubsection.3.5.2.4}%
+\contentsline {subsubsection}{\numberline {3.5.2.5}Algoritmos principales \cite {saber-spec-2020}}{18}{subsubsection.3.5.2.5}%
 \contentsline {subsection}{\numberline {3.5.3}Hamming Quasi-Cyclic (HQC)}{18}{subsection.3.5.3}%
 \contentsline {chapter}{\numberline {4}Desarrollo}{19}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Implementación comunicación serie}{19}{section.4.1}%

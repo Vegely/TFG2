@@ -682,8 +682,28 @@ En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llav
 \end{algorithm}
 \newpage
 
-\subsection{SABER}
-Para \cite{saber-spec-2020}
+\subsection{Saber}
+Para elaborar esta sección se parte del artículo de Saber adjuntado con la submission al NIST \cite{saber-spec-2020}. En saber al igual que en Kyber se trabaja en un anillo de la forma:
+\begin{equation}
+	R_q=\dfrac{\mathbb{Z}_q}{X^n+1}
+\end{equation}
+
+Con \(n=256\), pero con la diferencia de que \(q=2^{13}\) por lo cual no se puede utilizar la \gls{ntt}. No obstante, el uso de un número en base \(2\) permite otras ventajas \cite{modlwr} con respecto a la \gls{mlwe}:
+\begin{itemize}
+	\item \underline{Uso de la \gls{lwr}}:
+	\item  \underline{Uso del módulo \(2\)}:
+\end{itemize}
+\subsubsection{Algoritmos de Toom-Cook y Karatsuba}
+citar \cite{Karatsuba} y \cite{ToomCook}
+\subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
+uasd \cite{modlwr}
+\subsubsection{Fundamentos de seguridad de Saber}
+\paragraph{Seguridad esperada}
+\mbox{}\\
+\paragraph{Análisis respecto a ataques conocidos}
+\mbox{}\\
+\subsubsection{Parámetros Saber empleados}
+\subsubsection{Algoritmos principales \cite{saber-spec-2020}}
 \subsection{Hamming Quasi-Cyclic (HQC)}
 Para  \cite{hqc-spec-2022}
 

@@ -17,56 +17,57 @@ A level-1 auxiliary file: capitulos/fundamentosgenerales.aux
 A level-1 auxiliary file: capitulos/desarrollo.aux
 A level-1 auxiliary file: capitulos/resultados.aux
 A level-1 auxiliary file: capitulos/conclusion.aux
+A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 153 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 203 of file bibliografia/bibliografia.bib
  : @misc{First-Order-Masked-Kyber-on-ARM 
  :                                       Cortex-M4,
 I'm skipping whatever remains of this entry
 Warning--entry type for "latex" isn't style-file defined
---line 355 of file bibliografia/bibliografia.bib
+--line 405 of file bibliografia/bibliografia.bib
 Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
 Warning--empty journal in RESERCHFINAL
 Warning--can't use both author and editor fields in Micciancio2009
-You've used 36 entries,
+You've used 38 entries,
             1791 wiz_defined-function locations,
-            676 strings with 12595 characters,
-and the built_in function-call counts, 7626 in all, are:
-= -- 588
-> -- 516
+            693 strings with 12622 characters,
+and the built_in function-call counts, 7764 in all, are:
+= -- 613
+> -- 486
 < -- 8
-+ -- 187
-- -- 151
-* -- 505
-:= -- 1287
-add.period$ -- 113
-call.type$ -- 36
-change.case$ -- 39
++ -- 178
+- -- 140
+* -- 493
+:= -- 1295
+add.period$ -- 118
+call.type$ -- 38
+change.case$ -- 40
 chr.to.int$ -- 0
-cite$ -- 39
-duplicate$ -- 277
-empty$ -- 693
-format.name$ -- 151
-if$ -- 1664
+cite$ -- 41
+duplicate$ -- 293
+empty$ -- 732
+format.name$ -- 140
+if$ -- 1709
 int.to.chr$ -- 0
-int.to.str$ -- 36
-missing$ -- 14
-newline$ -- 187
-num.names$ -- 35
-pop$ -- 140
+int.to.str$ -- 38
+missing$ -- 16
+newline$ -- 196
+num.names$ -- 37
+pop$ -- 147
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 137
+skip$ -- 147
 stack$ -- 0
-substring$ -- 268
-swap$ -- 61
+substring$ -- 277
+swap$ -- 64
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 51
-width$ -- 38
-write$ -- 393
+while$ -- 54
+width$ -- 40
+write$ -- 412
 (There were 2 error messages)

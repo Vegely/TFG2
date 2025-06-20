@@ -1,6 +1,6 @@
-^C:\USERS\BOGURAD\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\PRECOMPILATIONS\KAT_TESTS\SABER\KAT_TEST\BUILD_KAT_FIRE\CMAKEFILES\CA28388CEE9840794AB2085FEC160B1C\GENERATE.STAMP.RULE
+^C:\USERS\BOGUR\DESKTOP\PROYECTOS GITHUB\TFG2\CODIGO\ALGORITMOS POSTCUANTICOS\PRECOMPILATIONS\KAT_TESTS\SABER\KAT_TEST\BUILD_KAT_FIRE\CMAKEFILES\EC662CC49026D8AC143FF713DA5165D3\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test" "-BC:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/saber_kat_tests.sln"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test" "-BC:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/saber_kat_tests.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

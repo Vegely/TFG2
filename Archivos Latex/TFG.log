@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.1.31)  15 JUN 2025 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.1)  20 JUN 2025 18:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1268,26 +1268,26 @@ LaTeX Info: Redefining \% on input line 19.
 (./capitulos/apendice.aux))
 \openout1 = `TFG.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Info: Redefining \. on input line 74.
-LaTeX Info: Redefining \% on input line 74.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Info: Redefining \. on input line 76.
+LaTeX Info: Redefining \% on input line 76.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1350,7 +1350,7 @@ e
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-Package hyperref Info: Link coloring ON on input line 74.
+Package hyperref Info: Link coloring ON on input line 76.
 (./TFG.out) (./TFG.out)
 \@outlinefile=\write6
 \openout6 = `TFG.out'.
@@ -1362,11 +1362,11 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 74.
+or `spanish'. on input line 76.
 \openout2 = `capitulos/portada.aux'.
 
  (./capitulos/portada.tex
-<figuras/cabecera.png, id=388, 1130.2225pt x 357.335pt>
+<figuras/cabecera.png, id=404, 1130.2225pt x 357.335pt>
 File: figuras/cabecera.png Graphic file (type png)
 <use figuras/cabecera.png>
 Package pdftex.def Info: figuras/cabecera.png  used on input line 6.
@@ -1434,7 +1434,7 @@ LaTeX Font Info:    Trying to load font information for U+esint on input line 3
 (c:/texlive/2023/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 ))
-Overfull \hbox (17.61108pt too wide) in paragraph at lines 27--88
+Overfull \hbox (17.61108pt too wide) in paragraph at lines 27--90
 []$[]$ $[]$ 
  []
 
@@ -1473,8 +1473,8 @@ Package hyperref Warning: Difference (4) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 12.
 
 ) [13]
-LaTeX Info: Redefining \. on input line 93.
-LaTeX Info: Redefining \% on input line 93.
+LaTeX Info: Redefining \. on input line 95.
+LaTeX Info: Redefining \% on input line 95.
  [14
 
 
@@ -1515,17 +1515,22 @@ o adap-ta-ble [][][]IND-
  []
 
 [15]
+Overfull \hbox (2.84596pt too wide) in paragraph at lines 50--50
+ [][] [][][]\OT1/cmr/m/n/12 Aprendizaje Con Re-don-deo Mo-du-lar o Mo-du-lar Le
+ar- 
+ []
+
 LaTeX Info: Redefining \. on input line 76.
 LaTeX Info: Redefining \% on input line 76.
- [16])
+[16])
 \tf@toc=\write7
 \openout7 = `TFG.toc'.
 
-LaTeX Info: Redefining \. on input line 97.
-LaTeX Info: Redefining \% on input line 97.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
  [17]
-LaTeX Info: Redefining \. on input line 97.
-LaTeX Info: Redefining \% on input line 97.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
  [18
 
 ] (./TFG.lof
@@ -1536,8 +1541,8 @@ LaTeX Info: Redefining \% on input line 1.
 \openout8 = `TFG.lof'.
 
  [19]
-LaTeX Info: Redefining \. on input line 100.
-LaTeX Info: Redefining \% on input line 100.
+LaTeX Info: Redefining \. on input line 102.
+LaTeX Info: Redefining \% on input line 102.
  [20
 
 ] (./TFG.lot
@@ -1556,8 +1561,8 @@ LaTeX Info: Redefining \% on input line 1.
 [23
 
 ]
-LaTeX Info: Redefining \. on input line 110.
-LaTeX Info: Redefining \% on input line 110.
+LaTeX Info: Redefining \. on input line 112.
+LaTeX Info: Redefining \% on input line 112.
  [24
 
 ]
@@ -1614,8 +1619,8 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\@ifnextchar' on input line 38.
 
 )
-LaTeX Info: Redefining \. on input line 112.
-LaTeX Info: Redefining \% on input line 112.
+LaTeX Info: Redefining \. on input line 114.
+LaTeX Info: Redefining \% on input line 114.
  [2]
 \openout2 = `capitulos/estadoarte.aux'.
 
@@ -1885,9 +1890,28 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 643--649
 
 LaTeX Info: Redefining \. on input line 683.
 LaTeX Info: Redefining \% on input line 683.
-[17])
-LaTeX Info: Redefining \. on input line 118.
-LaTeX Info: Redefining \% on input line 118.
+[17]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 698.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 702--703
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 704--705
+
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 706.
+
+)
+LaTeX Info: Redefining \. on input line 120.
+LaTeX Info: Redefining \% on input line 120.
  [18]
 \openout2 = `capitulos/desarrollo.aux'.
 
@@ -1905,8 +1929,8 @@ Overfull \hbox (8.66649pt too wide) in paragraph at lines 6--6
 
 
 ]
-LaTeX Info: Redefining \. on input line 120.
-LaTeX Info: Redefining \% on input line 120.
+LaTeX Info: Redefining \. on input line 122.
+LaTeX Info: Redefining \% on input line 122.
  [20]
 \openout2 = `capitulos/resultados.aux'.
 
@@ -1968,8 +1992,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--7
  []
 
 ) [27]
-LaTeX Info: Redefining \. on input line 133.
-LaTeX Info: Redefining \% on input line 133.
+LaTeX Info: Redefining \. on input line 135.
+LaTeX Info: Redefining \% on input line 135.
  [28
 
 
@@ -1984,65 +2008,66 @@ cms / en / product / evaluation-[]boards /
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 147--153
+LaTeX Info: Redefining \. on input line 155.
+LaTeX Info: Redefining \% on input line 155.
+ [30]
+Underfull \hbox (badness 10000) in paragraph at lines 164--170
 []\OT1/cmr/m/n/12 National Ins-ti-tu-te of Stan-dards and Tech-no-logy.  Post-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--153
+Underfull \hbox (badness 10000) in paragraph at lines 164--170
 \OT1/cmr/m/n/12 quantum cry-pto-graphy - round 3 sub-mis-sions.  [][]$\OT1/cmtt
 /m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--153
+Underfull \hbox (badness 10000) in paragraph at lines 164--170
 \OT1/cmtt/m/n/12 / / csrc . nist . gov / Projects / post-[]quantum-[]cryptograp
 hy /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--153
+Underfull \hbox (badness 10000) in paragraph at lines 164--170
 \OT1/cmtt/m/n/12 post-[]quantum-[]cryptography-[]standardization / round-[]3-[]
 submissions$[][]\OT1/cmr/m/n/12 ,
  []
 
-LaTeX Info: Redefining \. on input line 153.
-LaTeX Info: Redefining \% on input line 153.
-[30]
-Underfull \hbox (badness 2932) in paragraph at lines 155--161
+
+Underfull \hbox (badness 2932) in paragraph at lines 172--178
 []\OT1/cmr/m/n/12 National Ins-ti-tu-te of Stan-dards and Tech-no-logy.  Post-q
 uantum cry-
  []
 
 
-Underfull \hbox (badness 1762) in paragraph at lines 155--161
+Underfull \hbox (badness 1762) in paragraph at lines 172--178
 \OT1/cmr/m/n/12 pto-graphy - round 4 sub-mis-sions.  [][]$\OT1/cmtt/m/n/12 http
 s : / / csrc . nist . gov / Projects /
  []
 
 
-Underfull \hbox (badness 2582) in paragraph at lines 155--161
+Underfull \hbox (badness 2582) in paragraph at lines 172--178
 \OT1/cmtt/m/n/12 post-[]quantum-[]cryptography / round-[]4-[]submissions$[][]\O
 T1/cmr/m/n/12 , 2022.  Con-sul-ta-do:
  []
 
 
-Underfull \hbox (badness 3536) in paragraph at lines 177--183
+Underfull \hbox (badness 3536) in paragraph at lines 185--191
 []\OT1/cmr/m/n/12 Miguel A. Mo-reno.  Pri-mi-ti-ve $\OML/cmm/m/it/12 n$\OT1/cmr
 /m/n/12 -th roots of unity of fi-ni-te fields.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--183
+Underfull \hbox (badness 10000) in paragraph at lines 185--191
 [][]$\OT1/cmtt/m/n/12 https : / / www . csd . uwo . ca / []mmorenom / CS874 / L
 ectures / Newton2Hensel .
  []
 
-LaTeX Info: Redefining \. on input line 236.
-LaTeX Info: Redefining \% on input line 236.
+LaTeX Info: Redefining \. on input line 244.
+LaTeX Info: Redefining \% on input line 244.
 [31])
-LaTeX Info: Redefining \. on input line 148.
-LaTeX Info: Redefining \% on input line 148.
+LaTeX Info: Redefining \. on input line 150.
+LaTeX Info: Redefining \% on input line 150.
  [32] (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 19.
 LaTeX Info: Redefining \% on input line 19.
@@ -2064,23 +2089,21 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-
-Package rerunfilecheck Warning: File `TFG.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `TFG.out':
-(rerunfilecheck)             Before: D79641D2BCD913157BA002558AAF1877;18597
-(rerunfilecheck)             After:  61DDE65612EFBF69418702367A6B7A74;18158.
+Package rerunfilecheck Info: File `TFG.out' has not changed.
+(rerunfilecheck)             Checksum: 350BD6B635013B3063A07B742B8DF7A7;20037.
  ) 
 Here is how much of TeX's memory you used:
- 63851 strings out of 474222
- 1578480 string characters out of 5750209
- 2297628 words of memory out of 5000000
- 84941 multiletter control sequences out of 15000+600000
+ 63927 strings out of 474222
+ 1579599 string characters out of 5750210
+ 2298264 words of memory out of 5000000
+ 85008 multiletter control sequences out of 15000+600000
  574187 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,16n,107p,2354b,1253s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{glo:lwr} has been referenced but does not exist, re
+placed by a fixed one
+
 
 pdfTeX warning (dest): name{page.xvii} has been referenced but does not exist, 
 replaced by a fixed one
@@ -2095,6 +2118,10 @@ placed by a fixed one
 
 
 pdfTeX warning (dest): name{page.xix} has been referenced but does not exist, r
+eplaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:mlwr} has been referenced but does not exist, r
 eplaced by a fixed one
 
 
@@ -2116,18 +2143,6 @@ placed by a fixed one
 
 pdfTeX warning (dest): name{glo:rsa} has been referenced but does not exist, re
 placed by a fixed one
-
-
-pdfTeX warning (dest): name{subsubsection.5.1.2.4} has been referenced but does
- not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.4.2.4} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.5.4} has been referenced but does not 
-exist, replaced by a fixed one
 
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texli
 ve/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/t
@@ -2159,10 +2174,10 @@ lic/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/
 sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.p
 fb>
-Output written on TFG.pdf (56 pages, 640880 bytes).
+Output written on TFG.pdf (56 pages, 643453 bytes).
 PDF statistics:
- 1279 PDF objects out of 1440 (max. 8388607)
- 1135 compressed objects within 12 object streams
- 274 named destinations out of 1000 (max. 500000)
- 778 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1318 PDF objects out of 1440 (max. 8388607)
+ 1174 compressed objects within 12 object streams
+ 283 named destinations out of 1000 (max. 500000)
+ 810 words of extra memory for PDF output out of 10000 (max. 10000000)
 

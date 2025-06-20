@@ -26,6 +26,23 @@ Tikzmaker.
   2020.
 \newblock Consultado: 2025-05-05.
 
+\bibitem{kyber-spec-2021}
+Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint,
+  Vadim Lyubashevsky, John~M. Schanck, Peter Schwabe, Gregor Seiler, and Damien
+  Stehl{\'e}.
+\newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
+  Documentation (version 3.01)}.
+\newblock Technical report, CRYSTALS Project, January 2021.
+\newblock NIST PQC Round 3 submission.
+
+\bibitem{saber-spec-2020}
+Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
+  Karmakar, Sujoy~Sinha Roy, Michiel~Van Beirendonck, and Frederik Vercauteren.
+\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}.
+\newblock Technical report, Katholieke Universiteit Leuven and University of
+  Birmingham, 2020.
+\newblock NIST PQC Round 3 submission.
+
 \bibitem{NIST_IR_8413_2022}
 Gorjan Alagic, Daniel Apon, David Cooper, Quynh Dang, Thinh Dang, John Kelsey,
   Jacob Lichtinger, Carl Miller, Dustin Moody, Rene Peralta, Ray Perlner,
@@ -159,15 +176,6 @@ Eiichiro Fujisaki and Tatsuaki Okamoto.
   2022.
 \newblock Consultado: 2025-05-05.
 
-\bibitem{kyber-spec-2021}
-Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint,
-  Vadim Lyubashevsky, John~M. Schanck, Peter Schwabe, Gregor Seiler, and Damien
-  Stehl{\'e}.
-\newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
-  Documentation (version 3.01)}.
-\newblock Technical report, CRYSTALS Project, January 2021.
-\newblock NIST PQC Round 3 submission.
-
 \bibitem{cryptoeprint:2024/585}
 Ardianto Satriawan, Rella Mareta, and Hanho Lee.
 \newblock A complete beginner guide to the number theoretic transform ({NTT}).
@@ -207,13 +215,23 @@ L{\'e}o Ducas and John Schanck.
 \newblock \url{https://github.com/pq-crystals/security-estimates}, 2023.
 \newblock Consultado: 2025-05-31.
 
-\bibitem{saber-spec-2020}
-Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
-  Karmakar, Sujoy~Sinha Roy, Michiel~Van Beirendonck, and Frederik Vercauteren.
-\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}.
-\newblock Technical report, Katholieke Universiteit Leuven and University of
-  Birmingham, 2020.
-\newblock NIST PQC Round 3 submission.
+\bibitem{modlwr}
+Jan-Pieter D?Anvers, Angshuman Karmakar, Sujoy~Sinha Roy, and Frederik
+  Vercauteren.
+\newblock Saber: Module-{LWR} based key exchange, {CPA}-secure encryption and
+  {CCA}-secure {KEM}.
+\newblock Cryptology {ePrint} Archive, Paper 2018/230, 2018.
+
+\bibitem{Karatsuba}
+Anatolii Karatsuba and Yu~Ofman.
+\newblock Multiplication of multidigit numbers on automata.
+\newblock {\em Soviet Physics Doklady}, 7:595, 12 1962.
+
+\bibitem{ToomCook}
+A.~Toom.
+\newblock The complexity of a scheme of functional elements realizing the
+  multiplication of integers.
+\newblock {\em Doklady Akademii Nauk SSSR}, 3, 01 1963.
 
 \bibitem{hqc-spec-2022}
 Carlos~Aguilar Melchor, Nicolas Aragon, Slim Bettaieb, Lo{\"\i}c Bidoux,
@@ -222,16 +240,6 @@ Carlos~Aguilar Melchor, Nicolas Aragon, Slim Bettaieb, Lo{\"\i}c Bidoux,
   V{\'e}ron, and Gilles Z{\'e}mor.
 \newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
 \newblock Technical report, HQC Team, October 2022.
-\newblock NIST PQC Round 4 submission.
-
-\bibitem{bike-spec-2022}
-Nicolas Aragon, Paulo S. L.~M. Barreto, Slim Bettaieb, Lo{\"\i}c Bidoux,
-  Olivier Blazy, Jean-Christophe Deneuville, Philippe Gaborit, Santosh Ghosh,
-  Shay Gueron, Tim G{\"u}neysu, Carlos~Aguilar Melchor, Rafael Misoczki,
-  Edoardo Persichetti, Jan Richter-Brockmann, Nicolas Sendrier, Jean-Pierre
-  Tillich, Valentin Vasseur, and Gilles Z{\'e}mor.
-\newblock {BIKE: Bit Flipping Key Encapsulation (Round 4 Submission)}.
-\newblock Technical report, BIKE Team, October 2022.
 \newblock NIST PQC Round 4 submission.
 
 \end{thebibliography}

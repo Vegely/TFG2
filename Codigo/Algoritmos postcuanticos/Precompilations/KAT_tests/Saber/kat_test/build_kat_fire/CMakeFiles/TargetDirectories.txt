@@ -1,3 +1,3 @@
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/SaberKAT.dir
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/ALL_BUILD.dir
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/ZERO_CHECK.dir
+C:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/SaberKAT.dir
+C:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/ALL_BUILD.dir
+C:/Users/bogur/Desktop/Proyectos github/TFG2/Codigo/Algoritmos postcuanticos/Precompilations/KAT_tests/Saber/kat_test/build_kat_fire/CMakeFiles/ZERO_CHECK.dir

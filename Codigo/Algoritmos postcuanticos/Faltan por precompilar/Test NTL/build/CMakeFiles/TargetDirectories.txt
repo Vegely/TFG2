@@ -1,4 +1,0 @@
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build/CMakeFiles/ntl_test.dir
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build/CMakeFiles/RUN_TESTS.dir
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/bogurad/Desktop/Proyectos gitHub/TFG2/Codigo/Algoritmos postcuanticos/Faltan por precompilar/Test NTL/build/CMakeFiles/ZERO_CHECK.dir
