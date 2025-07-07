@@ -84,8 +84,11 @@
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{18}
 \glossaryentry{M-LWE?\glossentry{mlwe}|setentrycounter[]{page}"\glsnumberformat}{18}
 \glossaryentry{LWR?\glossentry{lwr}|setentrycounter[]{page}"\glsnumberformat}{18}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{18}
+\glossaryentry{LWR?\glossentry{lwr}|setentrycounter[]{page}"\glsnumberformat}{18}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{18}
 \glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{18}
-\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{21}
-\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{21}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{27}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{28}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{23}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{23}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{29}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{30}

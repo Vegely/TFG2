@@ -480,14 +480,14 @@ A continuación, se presenta una tabla con los parámetros del esquema Kyber1024
 \begin{table}[h]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
-	\begin{tabular}{lcccccccc}
+	\begin{tabular}{lccccccccccc}
 		\hline
-		&\(n\)&\(k\)&\(q\)&\(\eta_1\)&\(\eta_2\)&\(d_u\)&\(d_v\)&\(\delta\)\\
+		&\(n\)&\(k\)&\(q\)&\(\eta_1\)&\(\eta_2\)&\(d_u\)&\(d_v\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(ct (bytes)\)\\
 		\hline
-		Kyber1024&\(256\)&\(4\)&\(3329\)&\(2\)&\(2\)&\(11\)&\(5\)&\(2^{-174}\)\\
+		Kyber1024&\(256\)&\(4\)&\(3329\)&\(2\)&\(2\)&\(11\)&\(5\)&\(2^{-174}\)&\(3168 \ (32)\)&\(1568\)&\(1568\)\\
 		\hline
 	\end{tabular}
-	\caption{Tabla con los parámetros utilizados por Kyber1024. El valor de \(n=256\) se elige para permitir una escalabilidad sencilla y permitir distintos niveles de seguridad sin perder capacidad de tener un nivel de ruido aceptable. El valor de \(k=4\) fija el tamaño de la retícula e implica una seguridad de 256 bits. El valor de \(q=3329\) es un primo que satisface \(n|(q-1)\) para permitir la \gls{ntt}, los primos anterior y siguiente que también satisfacen esta propiedad conllevan probabilidades de fallo demasiado altas. Los valores $\eta_1$ y $\eta_2$ definen el ruido y junto a \(d_u\) y \(d_v\) se usan para equilibrar la seguridad y la tasa de fallos $\delta$.}
+	\caption{Tabla con los parámetros utilizados por Kyber1024. El valor de \(n=256\) se elige para permitir una escalabilidad sencilla y permitir distintos niveles de seguridad sin perder capacidad de tener un nivel de ruido aceptable. El valor de \(k=4\) fija el tamaño de la retícula e implica una seguridad de 256 bits. El valor de \(q=3329\) es un primo que satisface \(n|(q-1)\) para permitir la \gls{ntt}, los primos anterior y siguiente que también satisfacen esta propiedad conllevan probabilidades de fallo demasiado altas. Los valores $\eta_1$ y $\eta_2$ definen el ruido y junto a \(d_u\) y \(d_v\) se usan para equilibrar la seguridad y la tasa de fallos $\delta$. El valor \((32)\) en la llave pública es el tamaño de la semilla necesaria para reconstruirla.}
 	\label{tab:KyberParams}
 \end{table}
 
@@ -683,18 +683,25 @@ En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llav
 \newpage
 
 \subsection{Saber}
-Para elaborar esta sección se parte del artículo de Saber adjuntado con la submission al NIST \cite{saber-spec-2020}. En saber al igual que en Kyber se trabaja en un anillo de la forma:
+Para elaborar esta sección se parte del artículo de Saber adjuntado con la submission al NIST \cite{saber-spec-2020}. En Saber al igual que en Kyber se trabaja en un anillo de la forma:
 \begin{equation}
 	R_q=\dfrac{\mathbb{Z}_q}{X^n+1}
 \end{equation}
 
-Con \(n=256\), pero con la diferencia de que \(q=2^{13}\) por lo cual no se puede utilizar la \gls{ntt}. No obstante, el uso de un número en base \(2\) permite otras ventajas \cite{modlwr} con respecto a la \gls{mlwe}:
+Con \(n=256\), pero con la diferencia de que \(q=2^{13}\), no es posible utilizar la \gls{ntt}, ya que esta requiere un módulo primo adecuado. No obstante, el uso de un módulo en base \(2\) ofrece ciertas ventajas \cite{modlwr} frente a esquemas basados en \gls{mlwe}:
 \begin{itemize}
-	\item \underline{Uso de la \gls{lwr}}:
-	\item  \underline{Uso del módulo \(2\)}:
+	\item \underline{Uso de \gls{lwr}}: a diferencia de los esquemas basados en \gls{lwe}, donde es necesario muestrear errores desde una distribución aleatoria, en \gls{lwr} el error se introduce mediante redondeo determinista.
+	\item \underline{Uso de potencias de \(2\)}: al trabajar con módulos del tipo \(2^k\), las reducciones modulares se pueden implementar de forma eficiente mediante operaciones de desplazamiento de bits (bitshifts), eliminando la necesidad de reducciones modulares explícitas.
 \end{itemize}
+
 \subsubsection{Algoritmos de Toom-Cook y Karatsuba}
-citar \cite{Karatsuba} y \cite{ToomCook}
+Dado que en Saber no se cumple la condición \(n|(q-1)\) para poder utilizar la \gls{ntt}, se recurre a los algoritmos de Karatsuba \cite{Karatsuba} y Toom-Cook-4 \cite{ToomCook} para acelerar las multiplicaciones polinómicas.
+\newline
+
+El algoritmo de Karatsuba....
+\newline
+
+El algoritmo de Toom-Cook-4...
 \subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
 uasd \cite{modlwr}
 \subsubsection{Fundamentos de seguridad de Saber}
@@ -703,6 +710,21 @@ uasd \cite{modlwr}
 \paragraph{Análisis respecto a ataques conocidos}
 \mbox{}\\
 \subsubsection{Parámetros Saber empleados}
+A continuación, se presenta una tabla con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
+\begin{table}[H]
+	\centering
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{lcccccccccc}
+		\hline
+		&\(n\)&\(l\)&\(q\)&\(p\)&\(T\)&\(\mu\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(ct (bytes)\)\\
+		\hline
+		FireSaber&\(256\)&\(4\)&\(2^{13}\)&\(2^{10}\)&\(2^{6}\)&\(6\)&\(2^{-165}\)&\(1312\)&\(3040 \ (1760)\)&\(1472\)\\
+		\hline
+	\end{tabular}
+	\caption{Tabla con los parámetros utilizados por FireSaber. TODO EXPLICAR CADA PARAMETRO}
+	\label{tab:KyberParams}
+\end{table}
+
 \subsubsection{Algoritmos principales \cite{saber-spec-2020}}
 \subsection{Hamming Quasi-Cyclic (HQC)}
 Para  \cite{hqc-spec-2022}
