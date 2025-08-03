@@ -233,6 +233,19 @@ A.~Toom.
   multiplication of integers.
 \newblock {\em Doklady Akademii Nauk SSSR}, 3, 01 1963.
 
+\bibitem{masterTh}
+Jon~Louis Bentley, Dorothea Haken, and James~B. Saxe.
+\newblock A general method for solving divide-and-conquer recurrences.
+\newblock {\em SIGACT News}, 12(3):36?44, September 1980.
+
+\bibitem{toomcook4}
+Marco Bodrato and Alberto Zanoni.
+\newblock Integer and polynomial multiplication: towards optimal toom-cook
+  matrices.
+\newblock In {\em Proceedings of the 2007 International Symposium on Symbolic
+  and Algebraic Computation}, ISSAC '07, page 17?24, New York, NY, USA, 2007.
+  Association for Computing Machinery.
+
 \bibitem{hqc-spec-2022}
 Carlos~Aguilar Melchor, Nicolas Aragon, Slim Bettaieb, Lo{\"\i}c Bidoux,
   Olivier Blazy, Jurjen Bos, Jean-Christophe Deneuville, Arnaud Dion, Philippe

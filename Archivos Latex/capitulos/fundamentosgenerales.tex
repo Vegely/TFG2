@@ -695,13 +695,184 @@ Con \(n=256\), pero con la diferencia de que \(q=2^{13}\), no es posible utiliza
 \end{itemize}
 
 \subsubsection{Algoritmos de Toom-Cook y Karatsuba}
-Dado que en Saber no se cumple la condición \(n|(q-1)\) para poder utilizar la \gls{ntt}, se recurre a los algoritmos de Karatsuba \cite{Karatsuba} y Toom-Cook-4 \cite{ToomCook} para acelerar las multiplicaciones polinómicas.
+Dado que en Saber no se cumple la condición \(n|(q-1)\) para poder utilizar la \gls{ntt}, se recurre a los algoritmos de Karatsuba \cite{Karatsuba} y Toom-Cook-4 \cite{ToomCook} para acelerar las multiplicaciones polinómicas. Para ello se sigue la estructura del diagrama de la figura \ref{fig:ToomKara}.
+\newline
+\begin{figure}[H]
+	\centering
+	\begin{adjustbox}{width=\linewidth}
+	\begin{circuitikz}
+		\tikzstyle{every node}=[font=\normalsize]
+		\draw  (3.5,12.75) rectangle  node {\normalsize $255\times 255$} (6.25,11.75);
+		\node [font=\normalsize] at (4.75,12.5) {};
+		\node [font=\normalsize] at (4.75,12) {};
+		\draw [ color={rgb,255:red,0; green,17; blue,255}, ->, >=Stealth] (6.25,12.5) -- (8.75,12.5);
+		\node [font=\normalsize] at (7.5,13.25) {Toom-Cook-4};
+		\node [font=\normalsize] at (4.75,13.25) {};
+		\node [font=\normalsize] at (7.5,12.75) {$\mathcal{O}(n^{1.404})$};
+		\draw  (8.75,12.75) rectangle  node {\normalsize $63\times 63$} (11.5,11.75);
+		\node [font=\normalsize, color={rgb,255:red,0; green,17; blue,255}] at (4,10.25) {$f(X) \cdot g(X)$};
+		\draw [ color={rgb,255:red,0; green,17; blue,255}, ->, >=Stealth] (4,10.5) -- (4,11.75);
+		\node [font=\normalsize] at (12,12.25) {};
+		\draw [ color={rgb,255:red,0; green,17; blue,255}, ->, >=Stealth] (11.5,12.5) -- (14.25,12.5);
+		\node [font=\normalsize] at (13,12.75) {$\mathcal{O}(n^{1.404})$};
+		\node [font=\normalsize] at (12.75,13.25) {Karatsuba};
+		\draw  (14.25,12.75) rectangle  node {\normalsize $15\times 15$} (17,11.75);
+		\draw [ color={rgb,255:red,0; green,17; blue,255}, ->, >=Stealth] (17,12.5) -- (19,12.5);
+		\draw  (19,12.75) rectangle  node {\normalsize $1\times 1$} (21.75,11.75);
+		\node [font=\normalsize] at (18,13.25) {Tradicional};
+		\node [font=\normalsize] at (18.25,12.75) {$\mathcal{O}(n^{2})$};
+		\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (19,12) -- (17,12);
+		\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (14.25,12) -- (11.5,12);
+		\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (8.75,12) -- (6.25,12);
+		\draw [ color={rgb,255:red,255; green,0; blue,0}, ->, >=Stealth] (5.75,11.75) -- (5.75,10.5);
+		\node [font=\normalsize, color={rgb,255:red,255; green,0; blue,0}] at (5.75,10.25) {$h(X)$};
+		\node [font=\normalsize, color={rgb,255:red,15; green,15; blue,15}] at (5.125,10.25) {$=$};
+	\end{circuitikz}
+	\end{adjustbox}
+	\label{fig:ToomKara}
+	\caption{Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}
+\end{figure}
+
+El algoritmo de Toom-Cook-4 usado en Saber \cite{toomcook4} para hacer más eficiente la multiplicación de dos polinomios \(c=f\cdot g\) con una complejidad de \(\mathcal{O}(n^{\log_4(7)})\approx\mathcal{O}(n^{1.404})\), sigue los siguientes pasos:
+\begin{itemize}
+	\item \textbf{Partición}: en este paso se representan los operandos \(f\), \(g\) mediante 4 bloques iguales teniendo en cuenta que \(n-1\) es el grado del polinomio:
+	\begin{equation}
+		\begin{array}{l}
+			h(T)=h(X,T)=h_0(X)+h_1(X)\cdot T+h_2(X)\cdot T^2+h_3(X)\cdot T^3\\
+			T=X^{n/4}
+		\end{array}
+	\end{equation}
+	\newpage
+	De esta manera, con la introducción de una nueva variable \(T\) se consigue reducir el tamaño efectivo de los polinomios para el paso de la evaluación. La variable \(X\) se utiliza como un parámetro. Aplicado a los polinomios \(f\) y \(g\) con \(n=256\) en Saber:
+	\begin{equation}
+		\begin{array}{l}
+		f(T)=f_0(X)+f_1(X)\cdot T+f_2(X)\cdot T^2+f_3(X)\cdot T^3\\
+		g(T)=g_0(X)+g_1(X)\cdot T+g_2(X)\cdot T^2+g_3(X)\cdot T^3\\
+		\end{array}
+	\end{equation}
+	
+	Donde cada \(f_i\) y \(g_i\) son polinomios de grado \(63\).
+	
+	\item \textbf{Evaluación}: se eligen \(7\) puntos \(v_i\) en los que se evalúan ambos polinomios en \(T\). En \cite{toomcook4} se desarrolla un algoritmo eficiente para luego recuperar adecuadamente los coeficientes en la interpolación y para ello, se deben utilizar los siguientes puntos:
+	\begin{equation}
+		v_i=\left\{\infty, 2, 1, -1, \dfrac{1}{2}, -\dfrac{1}{2},0\right\}
+	\end{equation}
+	
+	De esta manera el producto se convierte en un polinomio de grado \(6\) en \(T\) de la forma:
+	\begin{equation}
+		c(T)=c_0+c_1\cdot T+c_2\cdot T^2+c_3\cdot T^3+c_4\cdot T^4+c_5\cdot T^5+c_6\cdot T^6
+	\end{equation}
+	
+	Con cada \(c_i\) siendo un polinomio de grado \(126\) de la forma:
+	\begin{equation}
+		c_i(X)=c_{i,0}+c_{i,1}\cdot X+c_{i,2}\cdot X^2 + ... + c_{i,126}\cdot X^{126}
+	\end{equation}
+	
+	Analizando este polinomio en todos los puntos se obtiene el producto \(c= A_n \cdot \omega\):
+	\begin{equation}
+		\begin{pmatrix}
+			c_6(X)\\
+			c_5(X)\\
+			c_4(X)\\
+			c_3(X)\\
+			c_2(X)\\
+			c_1(X)\\
+			c_0(X)\\
+		\end{pmatrix}=
+		\begin{pmatrix}
+		1 & 0 & 0 &0 &0 &0&1\\
+		64 & 32 & 16 &8 &4 &2&1\\
+		1&1    &1    &1  & 1 &1 &1\\
+		1&  -1  &  1  &-1 &  1&-1 &1\\
+		1/64&  1/32  & 1/16   &  1/8& 1/4 &1/2 &1\\
+		1/64&  -1/32  & 1/16   &  -1/8& 1/4 &-1/2 &1\\
+		0& 0   &    0&  0& 0 &0 &1\\
+		\end{pmatrix}\cdot
+		\begin{pmatrix}
+			\omega_6(X)\\
+			\omega_5(X)\\
+			\omega_4(X)\\
+			\omega_3(X)\\
+			\omega_2(X)\\
+			\omega_1(X)\\
+			\omega_0(X)\\
+		\end{pmatrix}
+	\end{equation}
+
+	Para implementar las divisiones por potencias de \(2\) en la práctica se utilizan bitshifts. Mientras que para implementar las multiplicaciones de los polinomios de grado 63 se utiliza el algoritmo de Karatsuba.
+	\item \textbf{Interpolación}: se resulve el problema de interpolación \(w(v_i)=\omega_i\) invirtiendo la matriz de Vandermonde \(A_n\) generada mediante \(v_i\) y computando el vector de coeficientes \(w=A_n^{-1}c\). 
+	\newline
+	
+	En este problema de interpolación la matriz se tiene precomputada y una vez obtenidas las inversas se reconstruye el polinomio teniendo en cuenta que este producto se repite para cada uno de los 127 coeficientes del polinomio de salida.
+	\newline
+	
+	Por último, se deshace la división en bloques sustituyendo $T=X^{64}$, que equivale a desplazar los coeficientes, y se aplica la reducción modular correspondiente a $X^{256} + 1$.
+\end{itemize}
+\newpage
+
+El algoritmo de Karatsuba aplica el paradigma de \esquote{divide y vencerás} para multiplicar los polinomios dividiéndolos en dos partes más pequeñas. No obstante, en la implementación de Saber no se usa Karatsuba \esquote{tradicional} pues se divide en cuatro bloques \cite{saber-spec-2020}. Para ello, utilizando los polinomios de grado \(63\) anteriormente divididos en Karatsuba se vuelve a introducir una variable \(T=X^{16}\) para particionar:
+\begin{equation}
+	\begin{array}{l}
+		f=f_0+f_1\cdot T+f_2\cdot T^2+f_3\cdot T^3\\
+		g=g_0+g_1\cdot T+g_2\cdot T^2+g_3\cdot T^3\\
+	\end{array}
+\end{equation}
+
+Entonces su producto queda como:
+\begin{equation}
+	f\cdot g =\left\{ \begin{array}{l}
+		T^{6}\cdot \left(f_3\cdot g_3\right)+\\
+		T^{5}\cdot \left(f_3\cdot g_2+f_2\cdot g_3\right)+\\
+		T^{4}\cdot \left(f_3\cdot g_1+f_2\cdot g_2+f_1\cdot g_3\right)+\\
+		T^{3}\cdot \left(f_3\cdot g_0+f_2\cdot g_1+f_1\cdot g_2+f_0\cdot g_3\right)+\\
+		T^{2}\cdot \left(f_2\cdot g_0+f_1\cdot g_1+f_0\cdot g_2\right)+\\
+		T^{1}\cdot \left(f_1\cdot g_0+f_0\cdot g_1\right)+\\
+		T^{0}\cdot\left(f_0\cdot g_0\right)\\
+	\end{array}\right.
+\end{equation}
+
+
+Descomponiendo adecuadamente en \(9\) productos de polinomios más pequeños \(z_i\) de grado \(15\) que se realizan mediante el método tradicional:
+\begin{equation}
+	\begin{array}{l}
+		z_0=f_0\cdot g_0\\
+		z_1=f_1\cdot g_1\\
+		z_2=f_2\cdot g_2\\
+		z_3=f_3\cdot g_3\\
+		z_4=\left(f_0+f_1\right)\left(g_0+g_1\right)\\
+		z_5=\left(f_0+f_2\right)\left(g_0+g_2\right)\\
+		z_6=\left(f_1+f_3\right)\left(g_1+g_3\right)\\
+		z_7=\left(f_2+f_3\right)\left(g_2+g_3\right)\\
+		z_8=\left(f_0+f_1+f_2+f_3\right)\left(g_0+g_1+g_2+g_3\right)\\
+	\end{array}
+	\label{eq:kar_decom}
+\end{equation}
+
+Con estos términos se puede ver como la ecuación \ref{eq:kar_decom} se puede escribir como una combinación lineal de los términos anteriores:
+\begin{equation}
+	f\cdot g= C_0+C_1 T+C_2 T^{2}+C_3 T^{3}+C_4 T^{4}+C_5 T^{5}+C_6 T^{6}
+\end{equation}
+
+Donde \(C_i\) es:
+\begin{equation}
+	\begin{array}{l}
+		C_0=z_0\\
+		C_1= z_4 - z_1 - z_0\\
+		C_2=z_5 -z_2-z_0+z_1\\
+		C_3=z_8 - \left(z_7+z_6+z_5+z_4\right)+z_3+z_2+z_1+z_0\\
+		C_4=z_6 -z_3-z_1+z_2\\
+		C_5= z_7 -z_3-z_2\\
+		C_6=z_3
+	\end{array}
+\end{equation}
+
+Es relevante señalar que el algoritmo Karatsuba empleado en Saber tiene la misma complejidad asintótica que el tradicional \(\mathcal{O}(n^{\log_2(3)})\approx\mathcal{O}(n^{1.585})\), demostrable de forma directa mediante el teorema maestro \cite{masterTh}. 
 \newline
 
-El algoritmo de Karatsuba....
-\newline
-
-El algoritmo de Toom-Cook-4...
+Una vez hechas estas descomposiciones recursivas se van deshaciendo las particiones hasta llegar al producto deseado. De esta manera, se consigue reducir considerablemente el tiempo de cálculo.
+ 
+ \newpage
+ 
 \subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
 uasd \cite{modlwr}
 \subsubsection{Fundamentos de seguridad de Saber}
