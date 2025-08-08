@@ -27,162 +27,146 @@ Tikzmaker.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{kyber-spec-2021}
-Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint,
-  Vadim Lyubashevsky, John~M. Schanck, Peter Schwabe, Gregor Seiler, and Damien
-  Stehl{\'e}.
+L.~Ducas et~al. R.~Avanzi, J.~Bos.
 \newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
   Documentation (version 3.01)}.
 \newblock Technical report, CRYSTALS Project, January 2021.
 \newblock NIST PQC Round 3 submission.
 
 \bibitem{saber-spec-2020}
-Andrea Basso, Jos{\'e} Mar{\'\i}a~Bermudo Mera, Jan-Pieter D'Anvers, Angshuman
-  Karmakar, Sujoy~Sinha Roy, Michiel~Van Beirendonck, and Frederik Vercauteren.
-\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}.
-\newblock Technical report, Katholieke Universiteit Leuven and University of
-  Birmingham, 2020.
+A.~Basso, J.M.~Bermudo Mera, J.P. Anvers, et~al.
+\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}, 2020.
 \newblock NIST PQC Round 3 submission.
 
 \bibitem{NIST_IR_8413_2022}
-Gorjan Alagic, Daniel Apon, David Cooper, Quynh Dang, Thinh Dang, John Kelsey,
-  Jacob Lichtinger, Carl Miller, Dustin Moody, Rene Peralta, Ray Perlner,
-  Angela Robinson, Daniel Smith-Tone, and Yi-Kai Liu.
+D.~Cooper et~al. G.~Alagic, D.~Apon.
 \newblock Status report on the third round of the nist post-quantum
   cryptography standardization process.
 \newblock NIST Interagency Report NIST IR 8413 (Updated), National Institute of
   Standards and Technology (NIST), July 2022.
 
 \bibitem{NIST_IR_8545_2025}
-Gorjan Alagic, Maxime Bros, Pierre Ciadoux, David Cooper, Quynh Dang, Thinh
-  Dang, John Kelsey, Jacob Lichtinger, Yi-Kai Liu, Carl Miller, Dustin Moody,
-  Rene Peralta, Ray Perlner, Angela Robinson, Hamilton Silberg, Daniel
-  Smith-Tone, and Noah Waller.
+P.~Ciadoux et~al. G.~Alagic, M.~Bros.
 \newblock Status report on the fourth round of the nist post-quantum
   cryptography standardization process.
 \newblock NIST Internal Report NIST IR 8545, National Institute of Standards
   and Technology (NIST), Gaithersburg, MD, March 2025.
 
 \bibitem{011318_1_5.0179566}
-Yichen Zhang, Yiming Bian, Zhengyu Li, Song Yu, and Hong Guo.
+Z.~Li et~al. Y.~Zhang, Y.~Bian.
 \newblock Continuous-variable quantum key distribution system: Past, present,
   and future.
 \newblock {\em Applied Physics Reviews}, 11(1):011318, 03 2024.
 
 \bibitem{s11042-024-20535-x}
-Mandeep Kumar and Bhaskar Mondal.
+M.~Kumar and B.~Mondal.
 \newblock A brief review on quantum key distribution protocols.
 \newblock {\em Multimedia Tools and Applications}, January 2025.
 
 \bibitem{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}
-Akoh Atadoga, Oluwatoyin~Ajoke Farayola, Benjamin~Samson Ayinla,
-  Olukunle~Oladipupo Amoo, Temitayo~Oluwaseun Abrahams, and Femi Osasona.
-\newblock A comparative review of data encryption methods in the usa and
-  europe.
+B.~Samson et~al. A.~Atadoga, O.~Ajoke.
+\newblock A comparative review of data encryption of data methosds in the usa
+  and europe.
 \newblock 5:447--460, Feb. 2024.
 
 \bibitem{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption}
-Qixin Zhang.
+Q.~Zhang.
 \newblock An overview and analysis of hybrid encryption: The combination of
   symmetric encryption and asymmetric encryption.
 \newblock In {\em 2021 2nd International Conference on Computing and Data
   Science (CDS)}, pages 616--622, 2021.
 
 \bibitem{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}
-Basel Halak, Yildiran Yilmaz, and Daniel Shiu.
+Y.~Yilmaz B.~Halak and D.~Shiu.
 \newblock Comparative analysis of energy costs of asymmetric vs symmetric
   encryption-based security applications.
 \newblock {\em IEEE Access}, 10:76707--76719, 2022.
 
 \bibitem{2022-414}
-Mila Anastasova, Panos Kampanakis, and Jake Massimo.
+P.~Kampanakis M.~Anastasova and J.~Massimo.
 \newblock {PQ}-{HPKE}: Post-quantum hybrid public key encryption.
 \newblock Cryptology {ePrint} Archive, Paper 2022/414, 2022.
 
 \bibitem{An_overview_of_Quantum_Cryptography_and}
-C.~H. Ugwuishiwu, U.~E. Orji, C.~I. Ugwu, and C.~N. Asogwa.
+C.I. Ugwu et~al.a C.H.~Ugwuishiwu, U.E.~Orji.
 \newblock An overview of quantum cryptography and shor?s algorithm.
 \newblock {\em International Journal of Advanced Trends in Computer Science and
   Engineering}, 9(5):7487--7495, September 2020.
 
 \bibitem{2502.12252v1}
-David Aasen, Morteza Aghaee, Zulfi Alam, and Mariusz~Andrzejczuk et~al.
+Z.~Alam et~al. D.~Aasen, M.~Aghaee.
 \newblock Roadmap to fault tolerant quantum computation using topological qubit
   arrays, 2025.
 
 \bibitem{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT}
-Fouzia Samiullah, Ming-Lee Gan, Sedat Akleylek, and Y.~Aun.
+S.~Akleylek et~al. F.~Samiullah, M.L.~Gan.
 \newblock Quantum resistance saber-based group key exchange protocol for iot.
 \newblock {\em IEEE Open Journal of the Communications Society}, 6:378--398,
   2025.
 
 \bibitem{NISTFIPS203}
-{National Institute of Standards and Technology}.
-\newblock {FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism
-  Standard}.
+{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard}.
 \newblock Federal Information Processing Standards Publication FIPS 203,
   National Institute of Standards and Technology, Gaithersburg, MD, USA, August
   2024.
 
 \bibitem{FIPS202}
-National~Institute of~Standards, Technology (NIST), and Morris~J. Dworkin.
+M.J. Dworkin.
 \newblock Sha-3 standard: Permutation-based hash and extendable-output
   functions, 2015-08-04 00:08:00 2015.
 
 \bibitem{9508027v2}
-Peter~W. Shor.
+P.W. Shor.
 \newblock Polynomial-time algorithms for prime factorization and discrete
   logarithms on a quantum computer.
 \newblock {\em SIAM Journal on Computing}, 26(5):1484--1509, 1997.
 
 \bibitem{0301141v2}
-John Proos and Christof Zalka.
+J.~Proos and C.~Zalka.
 \newblock Shor's discrete logarithm quantum algorithm for elliptic curves,
   2004.
 
 \bibitem{RESERCHFINAL}
-Siyon Singh and Eric Sakk.
+S.~Singh and E.~Sakk.
 \newblock Implementation and analysis of shor?s algorithm to break rsa
   cryptosystem security.
 \newblock January 2024.
 
 \bibitem{NIST_SP_800_227_ipd_2025}
-Gorjan Alagic, Elaine Barker, Lily Chen, Dustin Moody, Angela Robinson,
-  Hamilton Silberg, and Noah Waller.
+L.~Chen et~al. G.~Alagic, E.~Barker.
 \newblock Recommendations for key-encapsulation mechanisms: Initial public
   draft.
 \newblock NIST Special Publication NIST SP 800-227 ipd, National Institute of
   Standards and Technology (NIST), January 2025.
 
 \bibitem{Fujisaki1999}
-Eiichiro Fujisaki and Tatsuaki Okamoto.
+E.~Fujisaki and T.~Okamoto.
 \newblock Secure integration of asymmetric and symmetric encryption schemes.
 \newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
   99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
   Berlin, Heidelberg, 1999. Springer.
 
 \bibitem{nistPQCround3}
-{National Institute of Standards and Technology}.
-\newblock Post-quantum cryptography - round 3 submissions.
+Post-quantum cryptography - round 3 submissions.
 \newblock
   \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions},
   2020.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{nistPQCround4}
-{National Institute of Standards and Technology}.
-\newblock Post-quantum cryptography - round 4 submissions.
+Post-quantum cryptography - round 4 submissions.
 \newblock
   \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/round-4-submissions},
   2022.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{cryptoeprint:2024/585}
-Ardianto Satriawan, Rella Mareta, and Hanho Lee.
+R.~Mareta A.~Satriawan and H.~Lee.
 \newblock A complete beginner guide to the number theoretic transform ({NTT}).
 \newblock Cryptology {ePrint} Archive, Paper 2024/585, 2024.
 
 \bibitem{moreno-roots}
-Miguel~A. Moreno.
+M.A. Moreno.
 \newblock Primitive $n$-th roots of unity of finite fields.
 \newblock
   \url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html},
@@ -190,40 +174,41 @@ Miguel~A. Moreno.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{CooleyALG}
-James~W. Cooley and John~W. Tukey.
+J.W. Cooley and J.W. Tukey.
 \newblock An algorithm for the machine calculation of complex fourier series.
 \newblock {\em Mathematics of Computation}, 19(90):297--301, 1965.
 
 \bibitem{LWElearning}
-Vadim Lyubashevsky, Chris Peikert, and Oded Regev.
+C.~Peikert V.~Lyubashevsky and O.~Regev.
 \newblock On ideal lattices and learning with errors over rings.
 \newblock {\em J. ACM}, 60(6), November 2013.
 
 \bibitem{Micciancio2009}
-Daniele Micciancio and Oded Regev.
-\newblock {\em Lattice-based Cryptography}, pages 147--191.
-\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2009.
+D.~Micciancio and O.~Regev.
+\newblock Lattice-based cryptography.
+\newblock In Daniel~J. Bernstein, Johannes Buchmann, and Erik Dahmen, editors,
+  {\em Post-Quantum Cryptography}, pages 147--191. Springer Berlin Heidelberg,
+  Berlin, Heidelberg, 2009.
 
 \bibitem{cryptoeprint:2019/930}
-Yang Wang and Mingqiang Wang.
+Y.~Wang and M.~Wang.
 \newblock Module-{LWE} versus ring-{LWE}, revisited.
 \newblock Cryptology {ePrint} Archive, Paper 2019/930, 2019.
 
 \bibitem{pqcrystalssecurity}
-L{\'e}o Ducas and John Schanck.
+L.~Ducas and J.~Schanck.
 \newblock Security estimation scripts for kyber and dilithium.
 \newblock \url{https://github.com/pq-crystals/security-estimates}, 2023.
 \newblock Consultado: 2025-05-31.
 
 \bibitem{modlwr}
-Jan-Pieter D?Anvers, Angshuman Karmakar, Sujoy~Sinha Roy, and Frederik
-  Vercauteren.
+S.~Roy et~al. J.P.~Anvers, A.~Karmakar.
 \newblock Saber: Module-{LWR} based key exchange, {CPA}-secure encryption and
   {CCA}-secure {KEM}.
 \newblock Cryptology {ePrint} Archive, Paper 2018/230, 2018.
 
 \bibitem{Karatsuba}
-Anatolii Karatsuba and Yu~Ofman.
+A.~Karatsuba and Y-Ofman.
 \newblock Multiplication of multidigit numbers on automata.
 \newblock {\em Soviet Physics Doklady}, 7:595, 12 1962.
 
@@ -233,24 +218,21 @@ A.~Toom.
   multiplication of integers.
 \newblock {\em Doklady Akademii Nauk SSSR}, 3, 01 1963.
 
-\bibitem{masterTh}
-Jon~Louis Bentley, Dorothea Haken, and James~B. Saxe.
-\newblock A general method for solving divide-and-conquer recurrences.
-\newblock {\em SIGACT News}, 12(3):36?44, September 1980.
-
 \bibitem{toomcook4}
-Marco Bodrato and Alberto Zanoni.
+M.~Bodrato and A.~Zanoni.
 \newblock Integer and polynomial multiplication: towards optimal toom-cook
   matrices.
 \newblock In {\em Proceedings of the 2007 International Symposium on Symbolic
   and Algebraic Computation}, ISSAC '07, page 17?24, New York, NY, USA, 2007.
   Association for Computing Machinery.
 
+\bibitem{masterTh}
+D.~Haken J.L.~Bentley and J.B. James.
+\newblock A general method for solving divide-and-conquer recurrences.
+\newblock {\em SIGACT News}, 12(3):36?44, September 1980.
+
 \bibitem{hqc-spec-2022}
-Carlos~Aguilar Melchor, Nicolas Aragon, Slim Bettaieb, Lo{\"\i}c Bidoux,
-  Olivier Blazy, Jurjen Bos, Jean-Christophe Deneuville, Arnaud Dion, Philippe
-  Gaborit, J{\'e}r{\^o}me Lacan, Edoardo Persichetti, Jean-Marc Robert, Pascal
-  V{\'e}ron, and Gilles Z{\'e}mor.
+N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
 \newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
 \newblock Technical report, HQC Team, October 2022.
 \newblock NIST PQC Round 4 submission.

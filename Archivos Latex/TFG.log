@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.1)  3 AUG 2025 07:25
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.1)  8 AUG 2025 14:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2030,66 +2030,29 @@ Underfull \hbox (badness 3354) in paragraph at lines 22--28
 
 
 ]
-LaTeX Info: Redefining \. on input line 155.
-LaTeX Info: Redefining \% on input line 155.
- [34]
-Underfull \hbox (badness 10000) in paragraph at lines 164--170
-[]\TU/lmr/m/n/12 National Institute of Standards and Technology.  Post-
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
+[]\TU/lmr/m/n/12 Post-quantum cryptography - round 3 submissions.  [][]$[][][][
+][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--170
-\TU/lmr/m/n/12 quantum cryptography - round 3 submissions.  [][]$[][][][][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--170
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
 [] [] [][][][] [] [][][][] [] [][][] [] [][][][][][][][] [] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--170
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][] [] [][][][][][][][][][][][][][][][][][][][][]$[][]\TU/lmr/m/n/12 ,
  []
 
-
-Underfull \hbox (badness 2894) in paragraph at lines 172--178
-[]\TU/lmr/m/n/12 National Institute of Standards and Technology.  Post-quantum 
-cry-
- []
-
-
-Underfull \hbox (badness 1708) in paragraph at lines 172--178
-\TU/lmr/m/n/12 ptography - round 4 submissions.  [][]$[][][][][] [] [] [] [][][
-][] [] [][][][] [] [][][] [] [][][][][][][][] []
- []
-
-
-Underfull \hbox (badness 2409) in paragraph at lines 172--178
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] [] [][][][][][][][][][][
-][][][][][][][][][][]$[][]\TU/lmr/m/n/12 , 2022.  Consultado:
- []
-
-
-Underfull \hbox (badness 3503) in paragraph at lines 185--191
-[]\TU/lmr/m/n/12 Miguel A. Moreno.  Primitive $\OML/cmm/m/it/12 n$\TU/lmr/m/n/1
-2 -th roots of unity of finite fields.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 185--191
-[][]$[][][][][] [] [] [] [][][] [] [][][] [] [][][] [] [][] [] [][][][][][][][]
-[] [] [][][][][] [] [][][][][][][][] [] [][][][][][][][][][][][][] []
- []
-
-LaTeX Info: Redefining \. on input line 240.
-LaTeX Info: Redefining \% on input line 240.
-[35])
+LaTeX Info: Redefining \. on input line 163.
+LaTeX Info: Redefining \% on input line 163.
+[34])
 LaTeX Info: Redefining \. on input line 151.
 LaTeX Info: Redefining \% on input line 151.
- [36] (./TFG.aux (./capitulos/portada.aux)
+ [35] (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 19.
 LaTeX Info: Redefining \% on input line 19.
  (./capitulos/firmas.aux)
@@ -2117,12 +2080,12 @@ Package rerunfilecheck Info: File `TFG.out' has not changed.
 (rerunfilecheck)             Checksum: 2E2B5EFF6E2386FA6D024C3040375777;20135.
  ) 
 Here is how much of TeX's memory you used:
- 63312 strings out of 474879
- 1574147 string characters out of 5763782
- 2314590 words of memory out of 5000000
- 84436 multiletter control sequences out of 15000+600000
+ 63318 strings out of 474879
+ 1574237 string characters out of 5763782
+ 2314591 words of memory out of 5000000
+ 84442 multiletter control sequences out of 15000+600000
  568608 words of font info for 109 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,16n,107p,2354b,1142s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on TFG.pdf (60 pages).
+Output written on TFG.pdf (59 pages).

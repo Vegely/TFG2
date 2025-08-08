@@ -20,45 +20,45 @@ A level-1 auxiliary file: capitulos/conclusion.aux
 A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 273 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 263 of file bibliografia/bibliografia.bib
  : @misc{First-Order-Masked-Kyber-on-ARM 
  :                                       Cortex-M4,
 I'm skipping whatever remains of this entry
 Warning--entry type for "latex" isn't style-file defined
---line 475 of file bibliografia/bibliografia.bib
+--line 455 of file bibliografia/bibliografia.bib
 Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
+Warning--empty author in NISTFIPS203
 Warning--empty journal in RESERCHFINAL
-Warning--can't use both author and editor fields in Micciancio2009
 You've used 40 entries,
             1791 wiz_defined-function locations,
-            707 strings with 12993 characters,
-and the built_in function-call counts, 8304 in all, are:
-= -- 666
-> -- 505
+            704 strings with 11221 characters,
+and the built_in function-call counts, 7115 in all, are:
+= -- 650
+> -- 235
 < -- 9
-+ -- 185
-- -- 145
-* -- 526
-:= -- 1372
-add.period$ -- 125
++ -- 98
+- -- 58
+* -- 343
+:= -- 1090
+add.period$ -- 122
 call.type$ -- 40
 change.case$ -- 42
 chr.to.int$ -- 0
 cite$ -- 43
-duplicate$ -- 325
-empty$ -- 783
-format.name$ -- 145
-if$ -- 1841
+duplicate$ -- 326
+empty$ -- 793
+format.name$ -- 58
+if$ -- 1653
 int.to.chr$ -- 0
 int.to.str$ -- 40
-missing$ -- 18
-newline$ -- 206
-num.names$ -- 39
-pop$ -- 152
+missing$ -- 17
+newline$ -- 202
+num.names$ -- 38
+pop$ -- 161
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 168
+skip$ -- 178
 stack$ -- 0
 substring$ -- 302
 swap$ -- 77
@@ -67,7 +67,7 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 58
+while$ -- 56
 width$ -- 42
-write$ -- 437
+write$ -- 429
 (There were 2 error messages)
