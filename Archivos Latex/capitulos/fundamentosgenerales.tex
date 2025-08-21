@@ -1,23 +1,64 @@
 \chapter{Fundamentos generales}
 En este capítulo se desarrollan las bases matemáticas de los distintos algoritmos a implementar.
 \section{Introducción}
+Los algoritmos de cifrado asimétrico analizados en este Trabajo Fin de Grado corresponden a mecanismos de intercambio de claves (\gls{kem}), es decir, procedimientos diseñados para establecer un secreto compartido entre dos partes. Este secreto se utiliza posteriormente como clave en algoritmos de cifrado simétrico, con el fin de garantizar una comunicación segura, ya que este tipo de cifrado requiere que ambas partes dispongan previamente de una misma clave secreta.
+\newline
+
+Siguiendo las recomendaciones del \gls{nist} \cite{NIST_SP_800_227_ipd_2025}, uno de los enfoques consiste en establecer dichas claves a través de un canal público de comunicaciones. Para ello, de forma general y en el contexto de los algoritmos considerados en este trabajo, se emplea un esquema como el ilustrado en la figura \ref{fig:mainprotocol} donde Alice y Bob intercambian las claves mediante tres pasos:
+\begin{enumerate}
+	\item \textbf{Generación de llaves}: se generan una llave privada, que Alice debe mantener en secreto para no comprometer la seguridad del protocolo, y una llave pública, derivada de la privada, que Alice enviará a Bob.
+	\item \textbf{Encapsulado}: Bob, usando valores la llave pública de Alice, genera un ciphertexto que enviará a Alice y el secreto compartido.
+	\item \textbf{Decapsulado}: Alice, a partir del ciphertexto recibido y su llave privada, deriva el mismo secreto compartido que Bob.
+\end{enumerate}
+
+
+Por último, es importante señalar que existe un paso adicional denominado confirmación de claves, con el objetivo de verificar que ambas partes han obtenido el mismo secreto compartido. El \gls{nist} propone realizarlo mediante la generación y verificación de un código de autenticación de mensaje utilizando una clave derivada del secreto compartido. Sin embargo, los mecanismos específicos para llevar a cabo esta verificación quedan fuera del alcance del presente trabajo.
+\newpage
+
+\begin{figure}[H]
+	\centering
+	\begin{adjustbox}{width=0.8\textwidth}
+	\begin{circuitikz}
+			\tikzstyle{every node}=[font=\LARGE]
+			\node [font=\LARGE, color={rgb,255:red,187; green,0; blue,255}] at (6.75,13.5) {Alice};
+			\node [font=\LARGE, color={rgb,255:red,17; green,0; blue,255}] at (13.25,13.5) {Bob};
+			\draw [ color={rgb,255:red,187; green,0; blue,255} ] (4.25,13) rectangle  node {\large Generar llaves} (9.25,11.5);
+			\node [font=\normalsize] at (11.5,12.5) {Llave pública (pk)};
+			\draw [ color={rgb,255:red,17; green,0; blue,255} ] (10.75,11) rectangle  node {\large Encapsular} (15.75,9.5);
+			\draw [short] (9.25,12.25) -- (13.25,12.25);
+			\draw [->, >=Stealth] (13.25,12.25) -- (13.25,11);
+			\draw [short] (13.25,9.5) -- (13.25,8.25);
+			\draw [ color={rgb,255:red,187; green,0; blue,255} ] (4.25,9) rectangle  node {\large Decapsular} (9.25,7.5);
+			\draw [->, >=Stealth] (13.25,8.25) -- (9.25,8.25);
+			\draw [->, >=Stealth] (6.75,11.5) -- (6.75,9);
+			\node [font=\normalsize] at (5.25,10.25) {Llave privada (sk)};
+			\node [font=\normalsize] at (11.5,8.5) {Ciphertexto (c)};
+			\draw [->, >=Stealth] (13.25,8.25) -- (13.25,6.25);
+			\draw [->, >=Stealth] (6.75,7.5) -- (6.75,6.25);
+			\node [font=\normalsize] at (7,6) {Secreto compartido (ss)};
+			\node [font=\normalsize] at (13.5,6) {Secreto compartido (ss)};
+			\end{circuitikz}
+		\end{adjustbox}
+		\label{fig:mainprotocol}
+		\caption{Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}
+	\end{figure}
+	
+
 \section{Algoritmos de Hashing }
 Para elaborar esta seccion se sigue la seccion de recomendaciones del nist \cite{FIPS202}
-\section{Métodos clásicos de cifrado asimétrico}
-\subsection{Algoritmo Rivest-Shamir-Adleman (\gls{rsa})}
-\subsection{Criptografía en Curvas Elípticas (\gls{ecc})}
-\subsection{Algoritmo de Shore}
-Generico: \cite{9508027v2} ECC: \cite{0301141v2} RSA: \cite{RESERCHFINAL}
+\begin{itemize}
+	\item algoritmos SHA
+	\item algoritmos SHAKE
+\end{itemize}
 \section{Fundamentos de seguridad de los algoritmos}
-Recomendaciones NIST para intercambio seguro de claves \cite{NIST_SP_800_227_ipd_2025}
 \subsection{Generación de números aleatorios criptográficamente seguros}
 \subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
 \subsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
 \cite{Fujisaki1999}
 \newpage
 \section{Funcionamiento básico de los algoritmos postcuánticos}
-En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el NIST en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
-\subsection{CRYSTALS-Kyber }
+En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el \gls{nist} en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
+\subsection{Fundamentos matemáticos de CRYSTALS-Kyber }
 Se utilizará la misma notación empleada en el artículo \cite{kyber-spec-2021}. El conjunto de los enteros sin signo de 8 bits se denota por \(\mathcal{B} = \{0, \dots, 255\}\). Para representar vectores de tamaño \(k\), se utiliza la notación \(\mathcal{B}^k\), mientras que para vectores de tamaño arbitrario se emplea \(\mathcal{B}^*\).
 \newline
 
@@ -62,7 +103,7 @@ Antes de pasar a explicar el funcionamiento de este método es relevante aclarar
 	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}
 \end{equation}
 
-En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (\gls{ntt}), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la \gls{ntt}. La validez de esta afirmación se fundamenta en el siguiente teorema \cite{moreno-roots}:
+En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (\gls{ntt}), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la \gls{ntt}. La validez de esta afirmación se fundamenta en el siguiente teorema\protect\footnotemark[\value{footnote}]:
 \newline
 
 \begin{theorem}
@@ -103,6 +144,9 @@ En la implementación especificada de Kyber, según el artículo \cite{kyber-spe
 	
 	Por lo tanto, \(\omega\) es una raíz enésima de la unidad en \(\mathbb{Z}_q\).
 \end{proof}
+\footnotetext{
+	Extraído de la siguiente página web: \url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html}
+}
 \newpage
 
 Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos.
@@ -471,18 +515,18 @@ Por tanto, la \gls{mlwe} es un punto intermedio entre ambos esquemas que permite
 
 
 \subsubsection{Fundamentos de seguridad de Kyber}
-\paragraph{Seguridad esperada}
+\paragraph{Seguridad esperada en Kyber}
 \mbox{}\\
-\paragraph{Análisis respecto a ataques conocidos}
+\paragraph{Análisis respecto a ataques conocidos en el esquema Kyber}
 \mbox{}\\
-\subsubsection{Parámetros Kyber empleados}
+\subsubsection{Parámetros empleados en Kyber}
 A continuación, se presenta una tabla con los parámetros del esquema Kyber1024 empleado en este trabajo fin de grado.
 \begin{table}[h]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{lccccccccccc}
 		\hline
-		&\(n\)&\(k\)&\(q\)&\(\eta_1\)&\(\eta_2\)&\(d_u\)&\(d_v\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(ct (bytes)\)\\
+		&\(n\)&\(k\)&\(q\)&\(\eta_1\)&\(\eta_2\)&\(d_u\)&\(d_v\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(c (bytes)\)\\
 		\hline
 		Kyber1024&\(256\)&\(4\)&\(3329\)&\(2\)&\(2\)&\(11\)&\(5\)&\(2^{-174}\)&\(3168 \ (32)\)&\(1568\)&\(1568\)\\
 		\hline
@@ -494,7 +538,7 @@ A continuación, se presenta una tabla con los parámetros del esquema Kyber1024
 
 \newpage
 
-\subsubsection{Algoritmos principales \cite{kyber-spec-2021}}
+\subsubsection{Algoritmos principales de Kyber \cite{kyber-spec-2021}}
 \label{sub:kybAlg}
 El algoritmo de generación de llaves genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:KyberParams}.
 
@@ -556,7 +600,7 @@ El algoritmo de generación de llaves genera las llaves pública \((pk)\) y priv
 \end{algorithm}
 \newpage
 
-En el algoritmo de cifrado Kyber se obtiene el texto cifrado \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\) mediante el uso de la \gls{ntt}.
+En el algoritmo de cifrado Kyber se obtiene el ciphertexto \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\) mediante el uso de la \gls{ntt}.
 \begin{itemize}
 	\item Las funciones $\text{Compress}_q(x,y)$ y $\text{Decompress}_q(x,y)$ se usan para reducir el tamaño de los textos cifrados basándose en el fundamento descrito para los mecanismos basados en la \gls{rlwe}. 
 	\item La función $\text{Decode}_k(x)$  convierte de un polinomio \(f\in R_q\) a un vector de bits \(B\in\mathcal{B}^{32l}\).
@@ -597,7 +641,7 @@ En el algoritmo de cifrado Kyber se obtiene el texto cifrado \(c\) a partir de l
 \end{algorithm}
 \newpage
 
- En el algoritmo de encapsulado Kyber a partir de la llave pública \(pk\) se obtiene el texto cifrado \(c\) y el secreto compartido \(k\). 
+ En el algoritmo de encapsulado Kyber a partir de la llave pública \(pk\) se obtiene el ciphertexto \(c\) y el secreto compartido \(k\). 
 \begin{algorithm}[H]
 	\small 
 	\caption{Encapsulado Kyber}
@@ -624,7 +668,7 @@ En el algoritmo de cifrado Kyber se obtiene el texto cifrado \(c\) a partir de l
 				(\kappa,\gamma):=\text{SHA3-512}[m||\text{SHA3-256}(pk)]
 			\end{array} 
 		\end{equation}
-		\State Obtener el texto cifrado:
+		\State Obtener el ciphertexto:
 		\begin{equation}
 			c \gets \text{Cifrado Kyber}(pk,m,\gamma)
 		\end{equation}
@@ -636,7 +680,7 @@ En el algoritmo de cifrado Kyber se obtiene el texto cifrado \(c\) a partir de l
 	\end{algorithmic}
 \end{algorithm}
 
-En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
+En el algoritmo de decapsulado Kyber a partir del ciphertexto \(c\)  y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
 \begin{algorithm}[H]
 	\small
 	\caption{Decapsulado Kyber}
@@ -659,8 +703,8 @@ En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llav
 		\begin{equation}
 			m':=\text{Encode}_1[\text{Compress}_q\left(v-\text{NTT}^{-1}(\hat{s}^T\circ \text{NTT}(u)),1\right)]
 		\end{equation}
-		\Statex Para Garantizar la seguridad ante ataques de canal lateral se vuelve a calcular el texto cifrado.
-		\State Cifrar \(m'\) con la llave pública \(pk\) y el parámetro \(\gamma\) para obtener el texto cifrado \(c'\):
+		\Statex Para Garantizar la seguridad ante ataques de canal lateral se vuelve a calcular el ciphertexto.
+		\State Cifrar \(m'\) con la llave pública \(pk\) y el parámetro \(\gamma\) para obtener el ciphertexto \(c'\):
 		\begin{equation}
 			\begin{array}{l}
 				pk:=sk+12\cdot k\cdot n/8\\
@@ -682,13 +726,13 @@ En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llav
 \end{algorithm}
 \newpage
 
-\subsection{Saber}
+\subsection{Fundamentos matemáticos de Saber}
 Para elaborar esta sección se parte del artículo de Saber adjuntado con la submission al NIST \cite{saber-spec-2020}. En Saber al igual que en Kyber se trabaja en un anillo de la forma:
 \begin{equation}
 	R_q=\dfrac{\mathbb{Z}_q}{X^n+1}
 \end{equation}
 
-Con \(n=256\), pero con la diferencia de que \(q=2^{13}\), no es posible utilizar la \gls{ntt}, ya que esta requiere un módulo primo adecuado. No obstante, el uso de un módulo en base \(2\) ofrece ciertas ventajas \cite{modlwr} frente a esquemas basados en \gls{mlwe}:
+Con \(n=256\), pero con la diferencia de que como \(q=2^{13}\), no es posible utilizar la \gls{ntt}, ya que esta requiere un módulo primo adecuado. No obstante, el uso de un módulo en base \(2\) ofrece ciertas ventajas \cite{modlwr} frente a esquemas basados en \gls{mlwe}:
 \begin{itemize}
 	\item \underline{Uso de \gls{lwr}}: a diferencia de los esquemas basados en \gls{lwe}, donde es necesario muestrear errores desde una distribución aleatoria, en \gls{lwr} el error se introduce mediante redondeo determinista.
 	\item \underline{Uso de potencias de \(2\)}: al trabajar con módulos del tipo \(2^k\), las reducciones modulares se pueden implementar de forma eficiente mediante operaciones de desplazamiento de bits (bitshifts), eliminando la necesidad de reducciones modulares explícitas.
@@ -874,30 +918,37 @@ Una vez hechas estas descomposiciones recursivas se van deshaciendo las particio
  \newpage
  
 \subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
-uasd \cite{modlwr}
+Para redactar esta sección el desarrollo se fundamenta en el artículo \cite{modlwr}. La 
+
 \subsubsection{Fundamentos de seguridad de Saber}
-\paragraph{Seguridad esperada}
+\paragraph{Seguridad esperada en Saber}
 \mbox{}\\
-\paragraph{Análisis respecto a ataques conocidos}
+\paragraph{Análisis respecto a ataques conocidos en el esquema Saber}
 \mbox{}\\
-\subsubsection{Parámetros Saber empleados}
+\subsubsection{Parámetros empleados en Saber}
 A continuación, se presenta una tabla con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
 	\begin{tabular}{lcccccccccc}
 		\hline
-		&\(n\)&\(l\)&\(q\)&\(p\)&\(t\)&\(\mu\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(ct (bytes)\)\\
+		&\(n\)&\(l\)&\(q\)&\(p\)&\(t\)&\(\mu\)&\(\delta\)&\(pk (bytes)\)&\(sk (bytes)\)&\(c (bytes)\)\\
 		\hline
 		FireSaber&\(256\)&\(4\)&\(2^{13}\)&\(2^{10}\)&\(2^{6}\)&\(6\)&\(2^{-165}\)&\(1312\)&\(3040 \ (1760)\)&\(1472\)\\
 		\hline
 	\end{tabular}
-	\caption{Tabla con los parámetros utilizados por FireSaber. TODO EXPLICAR CADA PARAMETRO}
+	\caption{Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y  \(t\) tienen esos valores para que la probabilidad de fallo \(\delta\) sea baja. El valor \(mu\) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}
 	\label{tab:KyberParams}
 \end{table}
 
-\subsubsection{Algoritmos principales \cite{saber-spec-2020}}
-\subsection{Hamming Quasi-Cyclic (HQC)}
+\subsubsection{Algoritmos principales de Saber \cite{saber-spec-2020} }
+\subsection{Hamming Quasi-Cyclic (\gls{hqc}}
 Para  \cite{hqc-spec-2022}
-
+\subsubsection{Fundamentos de seguridad de \gls{hqc}}
+\paragraph{Seguridad esperada en \gls{hqc}}
+\mbox{}\\
+\paragraph{Análisis respecto a ataques conocidos en el esquema \gls{hqc}}
+\mbox{}\\
+\subsubsection{Parámetros empleados en \gls{hqc}}
+\subsubsection{Algoritmos principales de \gls{hqc} \cite{hqc-spec-2022}}
 

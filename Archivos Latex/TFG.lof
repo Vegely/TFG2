@@ -5,8 +5,9 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \gls {ntt} en comparación con los algoritmos clásicos.}}{10}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{18}{figure.3.2}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}}{6}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \gls {ntt} en comparación con los algoritmos clásicos.}}{11}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{19}{figure.3.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
