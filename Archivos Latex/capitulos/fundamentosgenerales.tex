@@ -52,7 +52,11 @@ Para elaborar esta seccion se sigue la seccion de recomendaciones del nist \cite
 \end{itemize}
 \section{Fundamentos de seguridad de los algoritmos}
 \subsection{Generación de números aleatorios criptográficamente seguros}
+\subsubsection{Generación de números aleatorios en Windows}
+\cite{rngWIN}
+\subsubsection{Generación de números aleatorios en el PSOC}
 \subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
+\cite{CCA2}
 \subsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
 \cite{Fujisaki1999}
 \newpage
@@ -918,8 +922,215 @@ Una vez hechas estas descomposiciones recursivas se van deshaciendo las particio
  \newpage
  
 \subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
-Para redactar esta sección el desarrollo se fundamenta en el artículo \cite{modlwr}. La 
+Los esquemas basados en la \gls{lwr} \cite{modlwr} emplean operadores de redondeo y, a diferencia de los esquemas de \gls{lwe}, no requieren muestrear ruido de forma explícita, ya que éste se obtiene a partir de escalar y redondear los coeficientes. Por esta razón, en ocasiones se hace referencia a estos esquemas como una variante \esquote{desaleatorizada} de \gls{lwe}. 
+\newline
 
+Asimismo, al igual que en el caso de Kyber, con el fin de incrementar la seguridad del esquema y mitigar posibles ataques contra la estructura del anillo, se recurre a la versión modular de la \gls{lwr}, la cual consiste en considerar dicho anillo en un mayor número de dimensiones. 
+\newline
+
+Por tanto, el problema de la \gls{mlwr}se formula como la dificultad de distinguir entre parejas de muestras uniformes \((a,u)\) y parejas \((a,b)\) generadas de la siguiente manera:
+\begin{equation}
+	\begin{array}{l}
+		a \leftarrow \mathcal{U}(R_q^{l\times l}) \\ \\
+		s \leftarrow \beta_\mu (R_q^{l\times 1})) \\ \\
+		b \in R_p^{l\times 1}\\ \\
+		b=\left\lfloor \dfrac{p}{q} (A\cdot s)\right\rceil \\ 
+	\end{array}
+\end{equation}
+
+Donde $\mathcal{U}$ representa una distribución uniforme,  $\beta_\mu$ representa una distribución binomial centrada en $\mu$ y con desviación típica $\sigma=\sqrt{\mu/2}$, y \(l\) es el tamaño de la retícula. Antes de pasar a describir los algoritmos de generación de claves es relevante comentar la definición de la función $\mathtt{bits}(x,i,j)$:
+\begin{equation}
+	\mathtt{bits}(x,i,j)=[x>>(i-j)]\& (2^j-1) =\left\{\begin{array}{l}
+		\dfrac{x}{2^{i-j}}  \ \text{mod}^{+}\text{$2^j$} \ \text{si} \ j\ne i \\ \\
+		x  \ \text{mod}^{+}\text{$2^j$} \ \text{si} \ j= i \\ 	
+	\end{array}\right.
+\end{equation}
+
+En Saber los protocolos de generación de claves se definen de la siguiente manera:
+\begin{algorithm}[H]
+	\caption{Generación claves \gls{mlwe}} 
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(q\), \(p\), \(n\), \(l\), \(\mu\)\\ 
+		\hline
+		\textbf{Salida: } \(sk\), \(b\), \(A\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Muestrear la matriz \(A\in R_q^{l\times l}\) a partir de una distribución uniforme y el secreto \(sk\in R_q^{l\times 1}\) a partir de la distribución \(\beta_\mu\).
+		\State Calcular la llave pública \(b\in R_p^{l\times 1}\):
+		\begin{equation}
+			b:=\texttt{bits}(A\cdot s + h,\varepsilon_q, \varepsilon_p)
+		\end{equation}
+		\State \Return \((sk, b, A)\)
+	\end{algorithmic}
+\end{algorithm}
+
+En este algoritmo los valores $\varepsilon_i$ representan el valor \(\varepsilon_i=\log_2 (i)\) mientras que \(h\in  R_q\) es un polinomio con todos sus coeficientes con iguales a \(2^{\varepsilon_q-\varepsilon_p-1}\) para emular el comportamiento del redondeo.
+
+\begin{algorithm}[H]
+	\caption{Cifrado \gls{mlwr}} 
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(pk\), \(A\), \(q\), \(p\), \(t\), \(n\), \(l\), \(\mu\)\\ 
+		\hline
+		\textbf{Salida: } \(ss'\), \(b'\), \(c\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Muestrear otro secreto \(s'\in R_q^{l\times 1}\) a partir de la distribución \(\beta_\mu\).	
+		\State	Calcular el ciphertexto \(b' \in R_p^{l\times 1}\) y la variable intermedia \(v'\in R_p\) a partir de la matriz \(A\) y la llave pública \(b\):
+		\begin{equation}
+			\begin{array}{l}
+				b':=\texttt{bits}(A^T\cdot s'+h,\varepsilon_q,\varepsilon_p) \\
+				v':=b \cdot \texttt{bits}(s',\varepsilon_p,\varepsilon_p)+ h_1 
+			\end{array}
+		\end{equation}
+		\State Calcular el otro ciphertexto \(c\in R_t\) a partir de la variable \(v'\):
+		\begin{equation}
+			c:=\texttt{bits}(v',\varepsilon_p -1,\varepsilon_t)
+		\end{equation}
+		\State Calcular el secreto compartido \(ss\)
+		\begin{equation}
+			ss':=\texttt{bits}(v',\varepsilon_p,1)
+		\end{equation}
+		\State \Return \((ss', b', c)\)
+	\end{algorithmic}
+\end{algorithm}
+
+En este algoritmo se generan los ciphertextos para que en el descifrado se obtenga el mismo secreto compartido. El valor \(h_1\in  R_q\) es un polinomio con todos sus coeficientes con iguales a \(2^{\varepsilon_q-\varepsilon_p-1}\) para emular el comportamiento del redondeo.
+
+\begin{algorithm}[H]
+	\caption{Descifrado \gls{mlwr}} 
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(sk\), \(b'\), \(c\), \(p\), \(t\)\\ 
+		\hline
+		\textbf{Salida: } \(ss\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Calcular la variable intermedia \(v\in R_p\)
+		\begin{equation}
+			v:=b'^T \cdot \texttt{bits}(s,\varepsilon_p,\varepsilon_p)+ h_1 
+		\end{equation}
+		\State Calcular el valor del secreto compartido \(ss\)
+		\begin{equation}
+			ss:=\texttt{bits}(v-2^{\varepsilon_p-\varepsilon_t-1}\cdot c+ h_2),\varepsilon_p,1
+		\end{equation}
+		\State \Return \(ss\)
+	\end{algorithmic}
+\end{algorithm}
+
+El valor \(h_2\in  R_q\) es un polinomio con todos sus coeficientes con iguales a \(2^{\varepsilon_p-2}-2^{\varepsilon_p-\varepsilon_t-2}\) para emular el comportamiento del redondeo. Es relevante destacar que para FireSaber \cite{saber-spec-2020}, el valor de las constantes corresponde a los de la tabla \ref{tab:SaberParams}, con los cuales se logra una baja probabilidad de fallo.
+\newline
+
+Una vez definidos los algoritmos basados en \gls{mlwr} para el intercambio de claves en Saber, resulta fundamental demostrar que ambas partes obtienen efectivamente el mismo secreto compartido.  Siguiendo el análisis de \cite{Correctness}, la probabilidad de coincidencia del secreto depende de la distancia entre las variables \(v\) y \(v'\). En particular, se cumple que
+\begin{equation}
+	d = \|v - v'\| \quad \Rightarrow \quad
+	\begin{cases}
+		d > \dfrac{p}{4}\left(1+\dfrac{1}{t}\right) = c_1, & \text{el secreto difiere}. \\[2ex]
+		d < \dfrac{p}{4}\left(1-\dfrac{1}{t}\right) = c_2, & \text{el secreto coincide}. \\[2ex]
+		c_2 \leq d \leq c_1, & \text{el secreto coincide con probabilidad intermedia}.
+	\end{cases}
+\end{equation}
+
+Si se le añade a $\Delta v = v-v'$ una distribución de error \(e_r \in R_p\) en el rango \([-p/4t,p/4t)\), se puede calcular la probabilidad \(1-\delta\) de que ambas partes lleguen al mismo secreto compartido como:
+\begin{equation}
+	\label{eq:Frodo}
+	1-\delta= \text{Pr}\left[\|\Delta v + e_r\|< \dfrac{p}{4}\right]
+\end{equation}
+
+En la \gls{mlwr} esta probabilidad se generaliza para que se exprese unicamente en función de las distribuciones de error como se puede ver en el siguiente teorema.
+
+\begin{theorem}
+ Sea una \(A\) una matriz en \(R_q^{l\times l}\), \(s\), \(s'\) vectores en \(R_q^{l\times 1}\) muestreados como se describe en los algoritmos anteriores. Se definen \(e\) y \(e'\) como los errores de redondeo introducidos al reescalar y redondear \(A\cdot s\) y \(A^T\cdot s'\), es decir:
+ \begin{equation}
+ 	\label{eq:bitsec}
+ 	\begin{array}{l}
+ 		\texttt{bits}(A\cdot s+h,\varepsilon_q,\varepsilon_p)=\dfrac{p}{q}\cdot A\cdot
+ 		s +e\\\\
+ 		\texttt{bits}(A^T\cdot s'+h,\varepsilon_q,\varepsilon_p)=\dfrac{p}{q}\cdot A^T\cdot
+ 		s' +e'\\
+ 	\end{array}
+ \end{equation}
+ 
+ Sea \(e_r  \in R_q\) in polinomio con los coeficientes distribuidos uniformemente en el rango \([-p/4t,p/4t]\). Si se define:
+ \begin{equation}
+ 	\label{eq:probrefeSab}
+ 	\delta = \text{Pr}\left[\left\|\left(s'^T\cdot e-e'^T\cdot s+ e_r\right) \ \text{mod}^{+}\text{p}  \right\|_\infty > \dfrac{p}{4}\right]
+ \end{equation}
+ 
+ entonces tras ejecutar el protocolo de intercambio de claves en Saber, ambas partes acuerdan un secreto compartido de n-bits con probabilidad \(1-\delta\).
+\end{theorem} 
+\begin{proof} En la demostración de este teorema se utilizan dos pasos, el primero \cite{modlwr} para demostrar  que las condiciones propuestas son equivalentes a las de la ecuación \ref{eq:Frodo} y el segundo paso de elaboración propia para efectivamente mostrar que ambos secretos coinciden:
+	\newline
+	
+	\textbf{Paso 1: Equivalencia de condiciones}  
+	\smallskip
+	Se despejan los valores de \(b\) y \(b'\) mediante la ecuación \ref{eq:bitsec}:
+	\begin{equation}
+		\begin{array}{l}
+			b=\dfrac{p}{q}\cdot A\cdot s +e \\ \\
+			b'=\dfrac{p}{q}\cdot A^T\cdot s' +e'
+		\end{array}	
+	\end{equation}
+	
+	A continuación se despejan \(v\) y \(v'\):
+	\begin{equation}
+		\begin{array}{l}
+			v=\dfrac{p}{q}s'^T\cdot A\cdot s +h_1+s'^T\cdot e \ \text{mod}^{+}\text{p}  \\ \\
+			v'=\dfrac{p}{q}s'^T\cdot A\cdot s +h_1 +e'^T\cdot s \ \text{mod}^{+}\text{p}
+		\end{array}	
+	\end{equation}
+	
+	Simplemente restando se obtiene $\Delta v$ y se claramente se ve la equivalencia a la ecuación \ref{eq:probrefeSab}.
+	\newline
+	
+	\textbf{Paso 2: Igualdad de secretos} 
+	\smallskip
+	En este paso se hace la demostración empleando los parámetros de FireSaber de la tabla \ref{tab:SaberParams}. Sea \(Q_8 \in R_{128}\):
+	\begin{equation}
+		Q_8=\left\lfloor \dfrac{v'}{8} \right\rfloor
+	\end{equation} 
+	
+	Como se puede definir \(v'\) a través del operador redondeo hacia abajo si se tiene en cuenta un resto \(r \in R_8\):
+	\begin{equation}
+		v'=8\left\lfloor \dfrac{v'}{8} \right\rfloor + r
+	\end{equation}
+	
+	Teniendo en cuenta que \(c\) se encuentra en \(R_{64}\) existe un bit de información, \(\omega\), de \(Q_8\) que se esta perdiendo y por tanto, se cumple que:
+	\begin{equation}
+		c=\left\lfloor \dfrac{v'}{8} \right\rfloor \ \text{mod}^{+}{64}=64\cdot\omega+\left\lfloor \dfrac{v'}{8} \right\rfloor \ \text{mod}^{+}{64}
+	\end{equation}
+	
+	Por tanto, el primer secreto compartido \(ss'\) se puede expresar como:
+	\begin{equation}
+		ss'=\left\lfloor \dfrac{8\cdot (64\cdot \omega+c)+r}{512} \right\rfloor \ \text{mod}^{+}{2}=\left\lfloor \omega +\dfrac{8\cdot c+r}{512} \right\rfloor \ \text{mod}^{+}{2}
+	\end{equation}
+	
+	Donde como \(c < 64\) y \(r < 8\) se obtiene que este secreto solo depende de $\omega$:
+	\begin{equation}
+		ss'=\left\lfloor \omega +\dfrac{511}{512} \right\rfloor \ \text{mod}^{+}{2}= \omega \ \text{mod}^{+}{2}
+	\end{equation}
+	
+	Ahora solo queda comprobar que efectivamente el secreto compartido \(ss\) también acaba teniendo este valor. Partiendo de la definición de \(ss\):
+	\begin{equation}
+		ss=\left\lfloor \dfrac{v-8\cdot c+ h_2}{512}\right\rfloor \ \text{mod}^{+}{2}
+	\end{equation}
+	
+	Sustituyendo \(v\) mediante la definición $\Delta v= v - v'$ y teniendo en cuenta el desarrollo realizado para \(v'\) realizado en las ecuaciones anteriores se obtiene:
+	\begin{equation}
+		ss=\left\lfloor \dfrac{[8\cdot(64\cdot \omega+c)+r+\Delta]-8\cdot c+ h_2}{512}\right\rfloor \ \text{mod}^{+}{2}
+	\end{equation}
+	
+	Despejando:
+	\begin{equation}
+		ss=\left\lfloor \omega +\dfrac{r+\Delta+ h_2}{512}\right\rfloor \ \text{mod}^{+}{2}
+	\end{equation}
+	
+	Donde justamente si se hace el cambio de notación \(e_r:=r\) se obtiene la condición de la ecuación \ref{eq:probrefeSab}, el método falla si:
+	\begin{equation}
+		e_r+\Delta > (512-h_2)= 260 >\dfrac{p}{4}=256
+	\end{equation}
+\end{proof}
 \subsubsection{Fundamentos de seguridad de Saber}
 \paragraph{Seguridad esperada en Saber}
 \mbox{}\\
@@ -937,8 +1148,8 @@ A continuación, se presenta una tabla con los parámetros del esquema FireSaber
 		FireSaber&\(256\)&\(4\)&\(2^{13}\)&\(2^{10}\)&\(2^{6}\)&\(6\)&\(2^{-165}\)&\(1312\)&\(3040 \ (1760)\)&\(1472\)\\
 		\hline
 	\end{tabular}
-	\caption{Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y  \(t\) tienen esos valores para que la probabilidad de fallo \(\delta\) sea baja. El valor \(mu\) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}
-	\label{tab:KyberParams}
+	\caption{Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y  \(t\) tienen esos valores para que la probabilidad de fallo \(\delta\) sea baja. El valor \(\mu\) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}
+	\label{tab:SaberParams}
 \end{table}
 
 \subsubsection{Algoritmos principales de Saber \cite{saber-spec-2020} }

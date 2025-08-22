@@ -1,31 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{latex}
-Leslie Lamport et~al.
-\newblock The latex project, 2024.
-
-\bibitem{tikzmaker}
-Tikzmaker.
-\newblock \url{https://tikzmaker.com/editor}, 2024.
-
-\bibitem{ISO_C}
-{ISO/IEC 9899:2018 Information technology ? Programming languages ? C}.
-\newblock \url{https://www.iso.org/standard/82075.html}, 2024.
-\newblock International Organization for Standardization, Geneva, Switzerland.
-
-\bibitem{ISO_CPP}
-{ISO/IEC 14882:2025 Information technology ? Programming languages ? C++}.
-\newblock \url{https://www.iso.org/standard/83626.html}, 2024.
-\newblock International Organization for Standardization, Geneva, Switzerland.
-
-\bibitem{CY8CPROTO063BLE}
-{Infineon Technologies AG}.
-\newblock {CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.
-\newblock
-  \url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/},
-  2020.
-\newblock Consultado: 2025-05-05.
-
 \bibitem{kyber-spec-2021}
 L.~Ducas et~al. R.~Avanzi, J.~Bos.
 \newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
@@ -37,6 +11,24 @@ L.~Ducas et~al. R.~Avanzi, J.~Bos.
 A.~Basso, J.M.~Bermudo Mera, J.P. Anvers, et~al.
 \newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}, 2020.
 \newblock NIST PQC Round 3 submission.
+
+\bibitem{hqc-spec-2022}
+N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
+\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
+\newblock Technical report, HQC Team, October 2022.
+\newblock NIST PQC Round 4 submission.
+
+\bibitem{tikzmaker}
+Tikzmaker.
+\newblock \url{https://tikzmaker.com/editor}, 2024.
+
+\bibitem{CY8CPROTO063BLE}
+{Infineon Technologies AG}.
+\newblock {CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.
+\newblock
+  \url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/},
+  2020.
+\newblock Consultado: 2025-05-05.
 
 \bibitem{NIST_IR_8413_2022}
 D.~Cooper et~al. G.~Alagic, D.~Apon.
@@ -110,11 +102,6 @@ S.~Akleylek et~al. F.~Samiullah, M.L.~Gan.
   National Institute of Standards and Technology, Gaithersburg, MD, USA, August
   2024.
 
-\bibitem{FIPS202}
-M.J. Dworkin.
-\newblock Sha-3 standard: Permutation-based hash and extendable-output
-  functions, 2015-08-04 00:08:00 2015.
-
 \bibitem{9508027v2}
 P.W. Shor.
 \newblock Polynomial-time algorithms for prime factorization and discrete
@@ -138,6 +125,24 @@ L.~Chen et~al. G.~Alagic, E.~Barker.
   draft.
 \newblock NIST Special Publication NIST SP 800-227 ipd, National Institute of
   Standards and Technology (NIST), January 2025.
+
+\bibitem{FIPS202}
+M.J. Dworkin.
+\newblock Sha-3 standard: Permutation-based hash and extendable-output
+  functions, 2015-08-04 00:08:00 2015.
+
+\bibitem{rngWIN}
+Leo Dorrendorf, Zvi Gutterman, and Benny Pinkas.
+\newblock Cryptanalysis of the random number generator of the windows operating
+  system.
+\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
+
+\bibitem{CCA2}
+Mihir Bellare, Anand Desai, and David Pointcheval.
+\newblock Relations among notions of security for public-key encryption
+  schemes.
+\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
+  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
 
 \bibitem{Fujisaki1999}
 E.~Fujisaki and T.~Okamoto.
@@ -164,14 +169,6 @@ Post-quantum cryptography - round 4 submissions.
 R.~Mareta A.~Satriawan and H.~Lee.
 \newblock A complete beginner guide to the number theoretic transform ({NTT}).
 \newblock Cryptology {ePrint} Archive, Paper 2024/585, 2024.
-
-\bibitem{moreno-roots}
-M.A. Moreno.
-\newblock Primitive $n$-th roots of unity of finite fields.
-\newblock
-  \url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html},
-  n.d.
-\newblock Consultado: 2025-05-05.
 
 \bibitem{CooleyALG}
 J.W. Cooley and J.W. Tukey.
@@ -231,10 +228,11 @@ D.~Haken J.L.~Bentley and J.B. James.
 \newblock A general method for solving divide-and-conquer recurrences.
 \newblock {\em SIGACT News}, 12(3):36?44, September 1980.
 
-\bibitem{hqc-spec-2022}
-N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
-\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
-\newblock Technical report, HQC Team, October 2022.
-\newblock NIST PQC Round 4 submission.
+\bibitem{Correctness}
+Joppe Bos, Craig Costello, Léo Ducas, Ilya Mironov, Michael Naehrig, Valeria
+  Nikolaenko, Ananth Raghunathan, and Douglas Stebila.
+\newblock Frodo: Take off the ring! practical, quantum-secure key exchange from
+  {LWE}.
+\newblock Cryptology {ePrint} Archive, Paper 2016/659, 2016.
 
 \end{thebibliography}

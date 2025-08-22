@@ -1,5 +1,5 @@
-\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
-\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xv}}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
@@ -94,13 +94,23 @@
 \glossaryentry{LWR?\glossentry{lwr}|setentrycounter[]{page}"\glsnumberformat}{19}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{19}
 \glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{22}
-\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{25}
-\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{25}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{31}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{32}
+\glossaryentry{LWR?\glossentry{lwr}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{LWR?\glossentry{lwr}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{M-LWE?\glossentry{mlwe}|setentrycounter[]{page}"\glsnumberformat}{22}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{23}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{23}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{23}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{24}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{26}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{29}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{29}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{35}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{36}

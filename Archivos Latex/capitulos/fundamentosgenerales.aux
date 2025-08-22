@@ -6,12 +6,16 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Introducción}{5}{section.3.1}\protected@file@percent }
 \citation{FIPS202}
+\citation{rngWIN}
+\citation{CCA2}
 \citation{Fujisaki1999}
 \newlabel{fig:mainprotocol}{{3.1}{6}{Introducción}{Item.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}}{6}{figure.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Algoritmos de Hashing }{6}{section.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Fundamentos de seguridad de los algoritmos}{6}{section.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Generación de números aleatorios criptográficamente seguros}{6}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1.1}Generación de números aleatorios en Windows}{6}{subsubsection.3.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1.2}Generación de números aleatorios en el PSOC}{6}{subsubsection.3.3.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Indistinguibilidad bajo ataque de texto cifrado adaptable \gls {cca2}}{6}{subsection.3.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Transformadas Fujisaki-Okamoto \gls {tfo}}{6}{subsection.3.3.3}\protected@file@percent }
 \citation{nistPQCround3}
@@ -70,27 +74,35 @@
 \citation{masterTh}
 \newlabel{eq:kar_decom}{{3.56}{21}{Algoritmos de Toom-Cook y Karatsuba}{equation.3.4.56}{}}
 \citation{modlwr}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.2}Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{22}{subsubsection.3.4.2.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces Generación claves \gls {mlwe}}}{22}{algorithm.8}\protected@file@percent }
+\citation{saber-spec-2020}
+\citation{Correctness}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces Cifrado \gls {mlwr}}}{23}{algorithm.9}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {10}{\ignorespaces Descifrado \gls {mlwr}}}{23}{algorithm.10}\protected@file@percent }
 \citation{modlwr}
+\newlabel{eq:Frodo}{{3.68}{24}{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{equation.3.4.68}{}}
+\newlabel{eq:bitsec}{{3.69}{24}{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{equation.3.4.69}{}}
+\newlabel{eq:probrefeSab}{{3.70}{24}{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{equation.3.4.70}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.3}Fundamentos de seguridad de Saber}{25}{subsubsection.3.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Seguridad esperada en Saber}{25}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema Saber}{25}{section*.17}\protected@file@percent }
 \citation{saber-spec-2020}
 \citation{hqc-spec-2022}
 \citation{hqc-spec-2022}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.2}Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{22}{subsubsection.3.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.3}Fundamentos de seguridad de Saber}{22}{subsubsection.3.4.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Seguridad esperada en Saber}{22}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema Saber}{22}{section*.17}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.4}Parámetros empleados en Saber}{22}{subsubsection.3.4.2.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(mu\) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}}{22}{table.3.3}\protected@file@percent }
-\newlabel{tab:KyberParams}{{3.3}{22}{Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(mu\) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\)}{table.3.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.5}Algoritmos principales de Saber \cite  {saber-spec-2020} }{22}{subsubsection.3.4.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Hamming Quasi-Cyclic (\gls {hqc}}{22}{subsection.3.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.1}Fundamentos de seguridad de \gls {hqc}}{22}{subsubsection.3.4.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Seguridad esperada en \gls {hqc}}{22}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema \gls {hqc}}{22}{section*.19}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.2}Parámetros empleados en \gls {hqc}}{22}{subsubsection.3.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.3}Algoritmos principales de \gls {hqc} \cite  {hqc-spec-2022}}{22}{subsubsection.3.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.4}Parámetros empleados en Saber}{26}{subsubsection.3.4.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(\mu \) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}}{26}{table.3.3}\protected@file@percent }
+\newlabel{tab:SaberParams}{{3.3}{26}{Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(\mu \) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\)}{table.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.5}Algoritmos principales de Saber \cite  {saber-spec-2020} }{26}{subsubsection.3.4.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Hamming Quasi-Cyclic (\gls {hqc}}{26}{subsection.3.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.1}Fundamentos de seguridad de \gls {hqc}}{26}{subsubsection.3.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Seguridad esperada en \gls {hqc}}{26}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema \gls {hqc}}{26}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.2}Parámetros empleados en \gls {hqc}}{26}{subsubsection.3.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.3}Algoritmos principales de \gls {hqc} \cite  {hqc-spec-2022}}{26}{subsubsection.3.4.3.3}\protected@file@percent }
 \@setckpt{capitulos/fundamentosgenerales}{
-\setcounter{page}{23}
-\setcounter{equation}{58}
+\setcounter{page}{27}
+\setcounter{equation}{81}
 \setcounter{enumi}{2}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -120,9 +132,9 @@
 \setcounter{Item}{7}
 \setcounter{Hfootnote}{0}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{57}
-\setcounter{algorithm}{7}
-\setcounter{ALG@line}{9}
+\setcounter{bookmark@seq@number}{59}
+\setcounter{algorithm}{10}
+\setcounter{ALG@line}{3}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}
 \setcounter{ALG@Lnr}{2}
@@ -132,7 +144,7 @@
 \setcounter{su@anzahl}{0}
 \setcounter{LT@tables}{0}
 \setcounter{LT@chunks}{0}
-\setcounter{theorem}{1}
-\setcounter{proof}{1}
+\setcounter{theorem}{2}
+\setcounter{proof}{2}
 \setcounter{lstlisting}{0}
 }

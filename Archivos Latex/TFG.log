@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.1)  15 AUG 2025 21:35
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.2.1)  22 AUG 2025 05:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1281,12 +1281,9 @@ LaTeX Info: Redefining \% on input line 19.
 (./capitulos/licencia.aux) (./capitulos/evaluacion.aux)
 (./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
 (./capitulos/introduccion.aux) (./capitulos/estadoarte.aux)
-(./capitulos/fundamentosgenerales.aux
-
-LaTeX Warning: Label `tab:KyberParams' multiply defined.
-
-) (./capitulos/desarrollo.aux) (./capitulos/resultados.aux)
-(./capitulos/conclusion.aux) (./capitulos/apendice.aux))
+(./capitulos/fundamentosgenerales.aux) (./capitulos/desarrollo.aux)
+(./capitulos/resultados.aux) (./capitulos/conclusion.aux)
+(./capitulos/apendice.aux))
 \openout1 = `TFG.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
@@ -1508,20 +1505,20 @@ Package spanish Warning: Replacing `TU/lmr/bx/sc' by
 (spanish)                faked small caps on input line 7.
 
 
-Overfull \hbox (2.36871pt too wide) in paragraph at lines 31--31
+Overfull \hbox (2.36871pt too wide) in paragraph at lines 33--33
  [][] [][][]\TU/lmr/m/n/12 Indistinguibilidad bajo ataque de texto cifrado adap
 table []IND- 
  []
 
 [15]
-Overfull \hbox (5.95279pt too wide) in paragraph at lines 47--47
+Overfull \hbox (5.95279pt too wide) in paragraph at lines 49--49
  [][] [][][]\TU/lmr/m/n/12 Aprendizaje Con Redondeo Modular o Modular Lear- 
  []
 
-LaTeX Info: Redefining \. on input line 74.
-LaTeX Info: Redefining \% on input line 74.
+LaTeX Info: Redefining \. on input line 73.
+LaTeX Info: Redefining \% on input line 73.
 [16]
-Overfull \hbox (1.9207pt too wide) in paragraph at lines 95--95
+Overfull \hbox (1.9207pt too wide) in paragraph at lines 97--97
  [][] [][][]\TU/lmr/m/n/12 Comparativa entre los distintos algoritmos post-cuán
 ticos ana- 
  []
@@ -1625,124 +1622,119 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--6
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 55.
+(hyperref)                removing `\gls' on input line 58.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 56.
+(hyperref)                removing `\gls' on input line 60.
 
-LaTeX Info: Redefining \. on input line 58.
-LaTeX Info: Redefining \% on input line 58.
+LaTeX Info: Redefining \. on input line 62.
+LaTeX Info: Redefining \% on input line 62.
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 62--64
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
+Underfull \hbox (badness 10000) in paragraph at lines 79--81
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--80
+Underfull \hbox (badness 10000) in paragraph at lines 82--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--83
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
 
  []
 
-LaTeX Info: Redefining \. on input line 95.
-LaTeX Info: Redefining \% on input line 95.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
 [7]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 97.
+(hyperref)                removing `\gls' on input line 101.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--108
+Underfull \hbox (badness 10000) in paragraph at lines 102--104
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 116--119
+Underfull \hbox (badness 10000) in paragraph at lines 110--112
 
  []
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 149.
+Underfull \hbox (badness 10000) in paragraph at lines 120--123
 
-LaTeX Info: Redefining \. on input line 150.
-LaTeX Info: Redefining \% on input line 150.
+ []
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 153.
+
+LaTeX Info: Redefining \. on input line 154.
+LaTeX Info: Redefining \% on input line 154.
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 152--154
+Underfull \hbox (badness 10000) in paragraph at lines 156--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--169
+Underfull \hbox (badness 10000) in paragraph at lines 171--173
 
  []
 
-LaTeX Info: Redefining \. on input line 223.
-LaTeX Info: Redefining \% on input line 223.
+LaTeX Info: Redefining \. on input line 227.
+LaTeX Info: Redefining \% on input line 227.
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 250--252
+Underfull \hbox (badness 10000) in paragraph at lines 254--256
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--255
+Underfull \hbox (badness 10000) in paragraph at lines 257--259
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--258
+Underfull \hbox (badness 10000) in paragraph at lines 260--262
 
  []
 
-LaTeX Info: Redefining \. on input line 280.
-LaTeX Info: Redefining \% on input line 280.
+LaTeX Info: Redefining \. on input line 284.
+LaTeX Info: Redefining \% on input line 284.
 [10]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 317.
+(hyperref)                removing `\gls' on input line 321.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--320
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 326--328
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--331
+Underfull \hbox (badness 10000) in paragraph at lines 330--332
 
  []
 
-LaTeX Info: Redefining \. on input line 332.
-LaTeX Info: Redefining \% on input line 332.
+
+Underfull \hbox (badness 10000) in paragraph at lines 333--335
+
+ []
+
+LaTeX Info: Redefining \. on input line 336.
+LaTeX Info: Redefining \% on input line 336.
 [11]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 334.
+(hyperref)                removing `\gls' on input line 338.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 336--338
+Underfull \hbox (badness 10000) in paragraph at lines 338--339
 
  []
 
@@ -1751,209 +1743,273 @@ Underfull \hbox (badness 10000) in paragraph at lines 340--342
 
  []
 
-LaTeX Info: Redefining \. on input line 381.
-LaTeX Info: Redefining \% on input line 381.
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--346
+
+ []
+
+LaTeX Info: Redefining \. on input line 385.
+LaTeX Info: Redefining \% on input line 385.
 [12]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 384.
+(hyperref)                removing `\gls' on input line 388.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--385
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+Underfull \hbox (badness 10000) in paragraph at lines 390--392
 
  []
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 391.
+put line 395.
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 392--398
+Overfull \hbox (10.0pt too wide) in paragraph at lines 396--402
 []$[]$ 
  []
 
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 412--418
+Overfull \hbox (10.0pt too wide) in paragraph at lines 416--422
 []$[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 433--435
+Underfull \hbox (badness 10000) in paragraph at lines 437--439
 
  []
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 441.
+Package hyperref Warning: Ignoring empty anchor on input line 445.
 
-LaTeX Info: Redefining \. on input line 442.
-LaTeX Info: Redefining \% on input line 442.
+LaTeX Info: Redefining \. on input line 446.
+LaTeX Info: Redefining \% on input line 446.
 [13]
-Overfull \hbox (10.0pt too wide) in paragraph at lines 445--451
+Overfull \hbox (10.0pt too wide) in paragraph at lines 449--455
 []$[]$ 
  []
 
 
-Package hyperref Warning: Ignoring empty anchor on input line 479.
+Package hyperref Warning: Ignoring empty anchor on input line 483.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 483.
+(hyperref)                removing `\gls' on input line 487.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 483--486
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 501--504
+Underfull \hbox (badness 10000) in paragraph at lines 487--490
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 505--507
+Underfull \hbox (badness 10000) in paragraph at lines 505--508
 
  []
 
-LaTeX Info: Redefining \. on input line 512.
-LaTeX Info: Redefining \% on input line 512.
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--511
+
+ []
+
+LaTeX Info: Redefining \. on input line 516.
+LaTeX Info: Redefining \% on input line 516.
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 519--520
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--522
+Underfull \hbox (badness 10000) in paragraph at lines 525--526
 
  []
 
-LaTeX Info: Redefining \. on input line 539.
-LaTeX Info: Redefining \% on input line 539.
+LaTeX Info: Redefining \. on input line 543.
+LaTeX Info: Redefining \% on input line 543.
 [15]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 541.
+(hyperref)                removing `\@ifnextchar' on input line 545.
 
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 554--558
+Overfull \hbox (10.0pt too wide) in paragraph at lines 558--562
 []$[]$ 
  []
 
-LaTeX Info: Redefining \. on input line 601.
-LaTeX Info: Redefining \% on input line 601.
+LaTeX Info: Redefining \. on input line 605.
+LaTeX Info: Redefining \% on input line 605.
 [16]
-Overfull \hbox (10.0pt too wide) in paragraph at lines 611--617
+Overfull \hbox (10.0pt too wide) in paragraph at lines 615--621
 []$[]$ 
  []
 
-LaTeX Info: Redefining \. on input line 642.
-LaTeX Info: Redefining \% on input line 642.
+LaTeX Info: Redefining \. on input line 646.
+LaTeX Info: Redefining \% on input line 646.
 [17]
-Overfull \hbox (10.0pt too wide) in paragraph at lines 648--654
+Overfull \hbox (10.0pt too wide) in paragraph at lines 652--658
 []$[]$ 
  []
 
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 687--693
+Overfull \hbox (10.0pt too wide) in paragraph at lines 691--697
 []$[]$ 
  []
 
-LaTeX Info: Redefining \. on input line 727.
-LaTeX Info: Redefining \% on input line 727.
+LaTeX Info: Redefining \. on input line 731.
+LaTeX Info: Redefining \% on input line 731.
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 742--778
+Underfull \hbox (badness 10000) in paragraph at lines 746--782
 
  []
 
-LaTeX Info: Redefining \. on input line 789.
-LaTeX Info: Redefining \% on input line 789.
+LaTeX Info: Redefining \. on input line 793.
+LaTeX Info: Redefining \% on input line 793.
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 847--849
+Underfull \hbox (badness 10000) in paragraph at lines 851--853
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 850--852
+Underfull \hbox (badness 10000) in paragraph at lines 854--856
 
  []
 
-LaTeX Info: Redefining \. on input line 855.
-LaTeX Info: Redefining \% on input line 855.
+LaTeX Info: Redefining \. on input line 859.
+LaTeX Info: Redefining \% on input line 859.
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 913--915
+Underfull \hbox (badness 10000) in paragraph at lines 917--919
 
  []
 
-LaTeX Info: Redefining \. on input line 918.
-LaTeX Info: Redefining \% on input line 918.
+LaTeX Info: Redefining \. on input line 922.
+LaTeX Info: Redefining \% on input line 922.
 [21]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 920.
+(hyperref)                removing `\gls' on input line 924.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 925--926
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 927--928
+Underfull \hbox (badness 10000) in paragraph at lines 925--927
 
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 928--930
+
+ []
+
+
+LaTeX Warning: Command \guillemotright invalid in math mode on input line 943.
+
+Missing character: There is no » ("BB) in font cmr12!
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 952--958
+[]$[]$ 
+ []
+
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 972--978
+[]$[]$ 
+ []
+
+LaTeX Info: Redefining \. on input line 998.
+LaTeX Info: Redefining \% on input line 998.
+[22]
+Overfull \hbox (10.0pt too wide) in paragraph at lines 1003--1009
+[]$[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1024
+
+ []
+
+
+Overfull \hbox (50.1171pt too wide) detected at line 1033
+[][][]\OML/cmm/m/it/12 d \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 k\OML/cmm/m/it/12 v
+ \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 v[]\OMS/cmsy/m/n/12 k  )  []
+ []
+
+LaTeX Info: Redefining \. on input line 1036.
+LaTeX Info: Redefining \% on input line 1036.
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1065
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
+
+ []
+
+LaTeX Info: Redefining \. on input line 1095.
+LaTeX Info: Redefining \% on input line 1095.
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 1136--1137
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1139
+
+ []
+
+LaTeX Info: Redefining \. on input line 1153.
+LaTeX Info: Redefining \% on input line 1153.
+[25]
+
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 944.
+(hyperref)                removing `\@ifnextchar' on input line 1155.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 945.
+(hyperref)                removing `\gls' on input line 1156.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 947.
+(hyperref)                removing `\gls' on input line 1158.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 949.
+(hyperref)                removing `\gls' on input line 1160.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 949--950
+Underfull \hbox (badness 10000) in paragraph at lines 1160--1161
 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 951.
+(hyperref)                removing `\gls' on input line 1162.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 951--952
+Underfull \hbox (badness 10000) in paragraph at lines 1162--1163
 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 952.
+(hyperref)                removing `\gls' on input line 1163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 953.
+(hyperref)                removing `\gls' on input line 1164.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 953.
+(hyperref)                removing `\@ifnextchar' on input line 1164.
 
 )
 LaTeX Info: Redefining \. on input line 125.
 LaTeX Info: Redefining \% on input line 125.
- [22]
+ [26]
 \openout2 = `capitulos/desarrollo.aux'.
 
  (./capitulos/desarrollo.tex
 Capítulo 4.
-) [23
+) [27
 
 
 
@@ -1961,7 +2017,7 @@ Capítulo 4.
 ]
 LaTeX Info: Redefining \. on input line 127.
 LaTeX Info: Redefining \% on input line 127.
- [24]
+ [28]
 \openout2 = `capitulos/resultados.aux'.
 
  (./capitulos/resultados.tex
@@ -1974,7 +2030,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 9.
 
-) [25
+) [29
 
 
 
@@ -1985,30 +2041,30 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
  (./capitulos/conclusion.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [26
+ [30
 
 
 
 
 ]
 Capítulo 6.
-) [27]
+) [31]
 \openout2 = `capitulos/apendice.aux'.
 
  (./capitulos/apendice.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [28
+ [32
 
 
 
 
 ]
 Apéndice A.
-[29]
+[33]
 LaTeX Info: Redefining \. on input line 3.
 LaTeX Info: Redefining \% on input line 3.
- [30
+ [34
 
 ]
 Apéndice B.
@@ -2021,47 +2077,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--7
 
  []
 
-) [31]
+) [35]
 LaTeX Info: Redefining \. on input line 140.
 LaTeX Info: Redefining \% on input line 140.
- [32
+ [36
 
 
 
 ] (./TFG.bbl
-Underfull \hbox (badness 3354) in paragraph at lines 22--28
+Underfull \hbox (badness 3354) in paragraph at lines 26--32
 \TU/lmr/m/n/12 Kit.  [][]$[][][][][] [] [] [] [][][] [] [][][][][][][][] [] [][
 ][] [] [][][] [] [][] [] [][][][][][][] [] [][][][][][][][][][][][][][][][][][]
  []
  []
 
-[33
+[37
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 150--155
+Underfull \hbox (badness 10000) in paragraph at lines 155--160
 []\TU/lmr/m/n/12 Post-quantum cryptography - round 3 submissions.  [][]$[][][][
 ][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--155
+Underfull \hbox (badness 10000) in paragraph at lines 155--160
 [] [] [][][][] [] [][][][] [] [][][] [] [][][][][][][][] [] [][][][][][][][][][
 ][][][][][][][][][][][][][][][][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--155
+Underfull \hbox (badness 10000) in paragraph at lines 155--160
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][] [] [][][][][][][][][][][][][][][][][][][][][]$[][]\TU/lmr/m/n/12 ,
  []
 
-LaTeX Info: Redefining \. on input line 163.
-LaTeX Info: Redefining \% on input line 163.
-[34])
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
+[38]
+Invalid UTF-8 byte or sequence at line 232 replaced by U+FFFD.
+
+Missing character: There is no � (U+FFFD) in font [lmroman12-regular]:mapping=t
+ex-text;!
+)
 LaTeX Info: Redefining \. on input line 155.
 LaTeX Info: Redefining \% on input line 155.
- [35] (./TFG.aux (./capitulos/portada.aux)
+ [39] (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 19.
 LaTeX Info: Redefining \% on input line 19.
  (./capitulos/firmas.aux)
@@ -2082,19 +2143,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: 687AC13494A9B01353C6843EB137AD1A;21194.
+(rerunfilecheck)             Checksum: E9DF55DAE59E82D21963921A90A946B5;21815.
  ) 
 Here is how much of TeX's memory you used:
- 63418 strings out of 474879
- 1575819 string characters out of 5763782
- 2316790 words of memory out of 5000000
- 84540 multiletter control sequences out of 15000+600000
- 568616 words of font info for 110 fonts, out of 8000000 for 9000
+ 63462 strings out of 474879
+ 1576629 string characters out of 5763782
+ 2318434 words of memory out of 5000000
+ 84567 multiletter control sequences out of 15000+600000
+ 569697 words of font info for 125 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,16n,107p,2354b,1142s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on TFG.pdf (59 pages).
+Output written on TFG.pdf (63 pages).
