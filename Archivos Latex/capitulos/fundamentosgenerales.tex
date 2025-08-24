@@ -60,7 +60,19 @@ Cada permuta dentro del algoritmo \texttt{Keccak-p}[b,n] se especifica mediante 
 	\item \textbf{El ancho de la permuta} \(b \in\{25, 50, 100, 200, 400, 800, 1600\}\): tamaño de las cadenas a permutar.
 	\item \textbf{El número de rondas} \(n_r\in \mathbb{Z}\): el número de iteraciones de una transformación interna. 
 \end{enumerate}
+\newpage
 Además del valor de \(b\) se definen dos magnitudes auxiliares \(w=b/25\) y \(l=\log_2(b/25)\).
+\subsubsection{Notación básica}
+En esta sección se adopta la siguiente notación
+
+\begin{itemize}
+	\item El símbolo $||$ denota la concatenación de dos cadenas.
+	\item La expresión \(0^j\) representa una cadena de \(j\) bits de ceros.
+	\item La función \(\texttt{len}(P)\) indica la longitud de la cadena \(P\).
+	\item La notación \(Z(j)\) corresponde al \(j\)-ésimo bit de la cadena \(Z\). 
+	Por ejemplo, si \(Z = 10010\), entonces \(Z(4) = 1\).
+	\item La función \(\texttt{trunc}_d(Z)\) devuelve los \(d\) primeros bits de \(Z\).
+\end{itemize}
 
 \subsubsection{Vectores de estado}
 En \texttt{Keccak-p} se trabaja mediante vectores de estado de tamaño \(b\), los cuales convierten las cadenas \(S\) en una matriz \(A(x,y,z)\), donde \(x, y \in \{0,1,2,3,4\}\) y \(z\) toma valores en un rango de tamaño \(w\). Esta representación al igual que la nomenclatura se representan en las figuras \ref{fig:state} y \ref{fig:partsstate}.
@@ -85,7 +97,7 @@ Para convertir de la cadena \(S\) en la matriz \(A\) se usa la siguiente expresi
 	A(x,y,z)=S(w\cdot(5y+x)+z)
 \end{equation}
 
-Para convertir de \(A\) a \(S\), se concatenan primero los bits dentro de cada línea, luego las líneas dentro de cada plano y, finalmente, los planos hasta formar la cadena \(S\). Por tanto, si \(||\) denota la concatenación de cadenas, se obtiene:
+Para convertir de \(A\) a \(S\), se concatenan primero los bits dentro de cada línea, luego las líneas dentro de cada plano y, finalmente, los planos hasta formar la cadena \(S\). 
 \begin{equation}
 	\begin{array}{lllll}
 		\text{Linea}(i,j)=&=A(i,j,0)&||A(i,j,1)&|| \hdots &|| A(i,j,w-1)\\
@@ -98,13 +110,13 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 
 \begin{enumerate}
 	\item \textbf{Transformada \(\theta\)}: esta transformada realiza una XOR, $\oplus$, del bit \(A(x,y,z)\) con la paridad de las columnas \(\text{C}(x-1 \ \text{mod } 5,z)\) y $\text{C}(x+1 \ \text{mod } 5,z-1 \ \text{mod w} )$. Para ello, sigue los siguientes pasos:
-	\newpage
+	
 	\begin{algorithm}[H]
 		\caption{Transformada \(\theta\) en Keccak-p}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Matriz \(A\) \\ 
+			\textbf{Entrada: }\(A\) \\ 
 			\hline
-			\textbf{Salida: } Matriz \(A'\) \\ 
+			\textbf{Salida: }\(A'\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
@@ -150,9 +162,9 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 	\begin{algorithm}[H]
 		\caption{Transformada \(\rho\) en Keccak-p}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Matriz \(A\) \\ 
+			\textbf{Entrada: }\(A\) \\ 
 			\hline
-			\textbf{Salida: } Matriz \(A'\) \\ 
+			\textbf{Salida: }\(A'\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
@@ -198,9 +210,9 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 	\begin{algorithm}[H]
 		\caption{Transformada \(\pi\) en Keccak-p}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Matriz \(A\) \\ 
+			\textbf{Entrada: }\(A\) \\ 
 			\hline
-			\textbf{Salida: } Matriz \(A'\) \\ 
+			\textbf{Salida: }\(A'\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
@@ -226,9 +238,9 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 	\begin{algorithm}[H]
 		\caption{Transformada \(\chi\) en Keccak-p}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Matriz \(A\) \\ 
+			\textbf{Entrada: }\(A\) \\ 
 			\hline
-			\textbf{Salida: } Matriz \(A'\) \\ 
+			\textbf{Salida: }\(A'\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
@@ -244,9 +256,9 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 	\begin{algorithm}[H]
 		\caption{Transformada \(\iota\) en Keccak-p}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Matriz \(A\) e Índice de ronda \(i_r\) \\ 
+			\textbf{Entrada: }\(A\), \(i_r\) \\ 
 			\hline
-			\textbf{Salida: } Matriz \(A'\) \\ 
+			\textbf{Salida: }\(A'\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
@@ -274,13 +286,13 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 	\begin{algorithm}[H]
 		\caption{rc}
 		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: } Entero \(t\)\\ 
+			\textbf{Entrada: }\(t\)\\ 
 			\hline
-			\textbf{Salida: } bir \(rc(t)\) \\ 
+			\textbf{Salida: }\(rc(t)\) \\ 
 			\hline
 		\end{array}$
 		\begin{algorithmic}[1]
-			\If{\(t \ \text{mod } 255 =5\)}
+			\If{\(t \ \text{mod } 255 =0\)}
 			\State \Return 1
 			\EndIf
 			\For{i=1:t mod \(255\)}
@@ -289,7 +301,7 @@ Una vez definidos los vectores de estado, estos se manipulan mediante cinco tran
 			\State \(R[4]:=R[4]\oplus R[8]\)
 			\State \(R[5]:=R[5]\oplus R[8]\)
 			\State \(R[6]:=R[6]\oplus R[8]\)
-			\State \(R:=\texttt{Trunc}_8[R]\) \Comment{Los primeros 8 bits de \(R\)}
+			\State \(R:=\texttt{Trunc}_8[R]\) 
 			\EndFor
 			\State \Return \(R[0]\)
 		\end{algorithmic}
@@ -302,14 +314,14 @@ Una vez descritas estas transformadas la función de cada ronda, \(\texttt{Rnd}(
 	\texttt{Rnd}(A,i_r)=\iota(\chi(\pi(\rho(\theta(A)))),i_r)
 \end{equation}
 
-Con esta función ya se puede describir el algoritmo \(\texttt{Keccak-p}(b,n_r)\) que consiste en ejecutar \(n_r\) iteraciones de \texttt{Rnd}:
+Con esta función ya se puede describir el algoritmo \(\texttt{Keccak-p}(b,n_r)\) que consiste en ejecutar \(n_r\) iteraciones de \texttt{Rnd} para una cadena de longitud \(b\):
 
 \begin{algorithm}[H]
 \caption{Keccak-p}
 $\begin{array}{p{\textwidth}}
-	\textbf{Entrada: } Cadena \(S\) de longitud \(b\) y Número de rondas \(n_r\) \\ 
+	\textbf{Entrada: }\(S\), \(n_r\) \\ 
 	\hline
-	\textbf{Salida: } Cadena \(S'\) de longitud \(b\)\\ 
+	\textbf{Salida: }\(S'\)\\ 
 	\hline
 \end{array}$
 \begin{algorithmic}[1]
@@ -322,14 +334,105 @@ $\begin{array}{p{\textwidth}}
 \end{algorithmic}
 \end{algorithm}
 \subsubsection{Función esponja}
-Este tipo de función, $\texttt{sponge}[f,pad,r](N,d)$, permite convertir una entrada binaria, \(N\), de cualquier longitud a una salida de longitud \(d\). Para ello, usa tres componentes:
+Este tipo de función, $\texttt{sponge}[f,pad,r](N,d)$, permite convertir una entrada binaria, \(N\), de cualquier longitud a una salida, \(Z\), de longitud \(d\). Para ello, usa tres componentes:
 \begin{enumerate}
 	\item Una función sobre cadenas de longitud fija, \(f\).
 	\item Un parámetro llamado velocidad, \(r\).
 	\item Una regla de relleno, \(pad\).
 \end{enumerate}
+
+La función \texttt{sponge} se define como:
+\begin{algorithm}[H]
+	\caption{sponge}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: }\(N\), \(d\) \\ 
+		\hline
+		\textbf{Salida: }Z\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Calcular:
+		\begin{equation}
+			P=N||\texttt{pad}(r,\texttt{len}(N))
+		\end{equation}
+		\State Calcular:
+		\begin{equation}
+			n=\dfrac{len(P)}{r}
+		\end{equation}
+		\State Asignar \(c=b-r\) y \(S=0^b\)
+		\State Sea \(P_0,\hdots , P_{n-1}\) la secuencia de cadenas de longitud \(r\) tal que \(P=P_0||\hdots ||P_{n-1}\).
+		\For{i=0:n-1}
+		\State Asignar:
+		\begin{equation}
+			S=f(S\oplus (P_i||0^c))
+		\end{equation}
+		\EndFor
+		\State Inicializar \(Z\) como una cadena vacía
+		\State Asignar 
+		\begin{equation}
+			Z=Z||\texttt{Trunc}_r(S)
+		\end{equation}
+		\If{\(d\le len(Z)\)}
+		\State \Return \(\texttt{Trunc}_d(S)\)
+		\EndIf
+		\State Asignar: 
+		\begin{equation}
+			S=f(S)
+		\end{equation}
+		\State Ir al paso 9		
+	\end{algorithmic}
+\end{algorithm}
+
+El algoritmo de relleno utilizado en la función \texttt{sponge} es el algoritmo \texttt{pad10*1} que dado un entero positivo, \(x\) y un entero no negativo \(m\) se obtiene una cadena, \(P\), de tal manera que:
+ \begin{equation}
+ 	m+\texttt{len}(P)=\lambda x
+ \end{equation}
+ 
+El algoritmo de \texttt{pad10*1}: 
+\begin{algorithm}[H]
+	\caption{pad10*1}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: }\(x\), \(m\) \\ 
+		\hline
+		\textbf{Salida: }P\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Asignar:
+		\begin{equation}
+			j=-m-2 \ \text{mod } x
+		\end{equation}
+		\State Calcular
+		\begin{equation}
+			P=1|| 0^j||1
+		\end{equation}
+		\State \Return $P$
+	\end{algorithmic}
+\end{algorithm}
+
+Definida la función de esponja, para el caso de \(b=1600\) el algoritmo de la familia Keccak se denomina $\texttt{Keccak}[c](N,d)$. Este algoritmo tiene la siguiente definición:
+\begin{equation}
+	\texttt{Keccak}[c](N,d)=\texttt{sponge}[\texttt{Keccak-p}(1600,24),\texttt{pad10*1},1600-c](N,d)
+\end{equation}
+
+
+Por tanto, las funciones de hash se definen como:
+\begin{enumerate}
+	\item \texttt{SHA3-224}$(M)$=\texttt{Keccak}[448]$(M||01,224)$
+	\item \texttt{SHA3-256}$(M)$=\texttt{Keccak}[512]$(M||01,256)$
+	\item \texttt{SHA3-384}$(M)$=\texttt{Keccak}[768]$(M||01,384)$
+	\item \texttt{SHA3-512}$(M)$=\texttt{Keccak}[1024]$(M||01,512)$
+	\item \texttt{SHAKE128}$(M,d)$=\texttt{Keccak}[256]$(M||1111,d)$
+	\item \texttt{SHAKE256}$(M,d)$=\texttt{Keccak}[512]$(M||1111,d)$
+\end{enumerate}
 \subsubsection{Seguridad}
-\section{Fundamentos de seguridad de los algoritmos}
+Mediante la tabla 4 del artículo \cite{FIPS202} se muestra la seguridad en bits que tienen cada uno de los algoritmos \gls{sha}3. Estas tres condiciones de seguridad para un algoritmo de hash son las siguientes:
+\begin{enumerate}
+	\item \textbf{Resistencia a la colisión}: dificultad para encontrar dos entradas diferentes que producen el mismo hash. Esta propiedad previene ataques donde dos mensajes diferentes se pueden sustituir sin que se pueda detectar.
+	\item \textbf{Resistencia a preimagen}: dificultad para que dado un hash, \(h\), se pueda encontrar una entrada, \(x\), tal que \(\texttt{hash}(x)=h\). Esta propiedad permite proteger datos sensibles de tal manera que si el hash se revela no comprometa las contraseñas. 
+	\item \textbf{Resistencia a preimagen secundaria}: dificultad para que dada una entrada, \(x_1\), se pueda encontrar una entrada diferente, \(x_2\), que cumpla \(\texttt{hash}(x_1)=\texttt{hash}(x_2)\). Esta propiedad previene la falsificación de mensajes.
+\end{enumerate}
+\section{Fundamentos de seguridad de los algoritmos asimétricos}
 Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
 
 \subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
