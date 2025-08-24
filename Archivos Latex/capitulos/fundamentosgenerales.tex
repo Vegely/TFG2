@@ -45,20 +45,303 @@ Por último, es importante señalar que existe un paso adicional denominado conf
 	
 
 \section{Algoritmos de Hashing }
-Para elaborar esta seccion se sigue la seccion de recomendaciones del nist \cite{FIPS202}
+Las funciones de hashing son funciones utilizadas para obtener una salida determinista a partir de un mensaje de entrada. Se caracterizan porque, dada la salida, no resulta factible reconstruir el mensaje original de manera eficiente.
+\newline
+
+La familia de funciones de hashing empleada en este trabajo corresponde a \gls{sha}3 (Secure Hash Algorithm), definida en el estándar federal \gls{fips}-202 \cite{FIPS202}. Dichas funciones se fundamentan en el algoritmo \texttt{Keccak-p} \cite{Keccak}, del cual se derivan cuatro funciones de hash y dos funciones de salida extendida.
+
 \begin{itemize}
-	\item algoritmos SHA
-	\item algoritmos SHAKE
+	\item \textbf{Funciones de hash}: transforman un mensaje de entrada en una salida de longitud fija de $224$, $256$, $384$ o $512$ bits, según la variante seleccionada. El nombre del algoritmo refleja dicha longitud. $SHA3-256$ genera salidas de 256 bits.
+	\item \textbf{Funciones de salida extendida}: generan salidas de longitud arbitraria a partir de un mensaje de entrada. En función de la seguridad deseada se utilizan los algoritmos $SHAKE-128$ o $SHAKE-256$.
 \end{itemize}
+\subsection{Algoritmo \texttt{Keccak-p}}
+Cada permuta dentro del algoritmo \texttt{Keccak-p}[b,n] se especifica mediante dos parámetros: 
+\begin{enumerate}
+	\item \textbf{El ancho de la permuta} \(b \in\{25, 50, 100, 200, 400, 800, 1600\}\): tamaño de las cadenas a permutar.
+	\item \textbf{El número de rondas} \(n_r\in \mathbb{Z}\): el número de iteraciones de una transformación interna. 
+\end{enumerate}
+Además del valor de \(b\) se definen dos magnitudes auxiliares \(w=b/25\) y \(l=\log_2(b/25)\).
+
+\subsubsection{Vectores de estado}
+En \texttt{Keccak-p} se trabaja mediante vectores de estado de tamaño \(b\), los cuales convierten las cadenas \(S\) en una matriz \(A(x,y,z)\), donde \(x, y \in \{0,1,2,3,4\}\) y \(z\) toma valores en un rango de tamaño \(w\). Esta representación al igual que la nomenclatura se representan en las figuras \ref{fig:state} y \ref{fig:partsstate}.
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{figuras/State}
+		\caption{\small Dibujo de un vector de estado \cite{FIPS202}.}
+		\label{fig:state}
+	\end{minipage}\hfill
+	\begin{minipage}{0.51\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{figuras/PartsState}
+		\caption{ \small Elementos de un vector de estado \cite{FIPS202}.}
+		\label{fig:partsstate}
+	\end{minipage}
+\end{figure}
+
+Para convertir de la cadena \(S\) en la matriz \(A\) se usa la siguiente expresión:
+\begin{equation}
+	A(x,y,z)=S(w\cdot(5y+x)+z)
+\end{equation}
+
+Para convertir de \(A\) a \(S\), se concatenan primero los bits dentro de cada línea, luego las líneas dentro de cada plano y, finalmente, los planos hasta formar la cadena \(S\). Por tanto, si \(||\) denota la concatenación de cadenas, se obtiene:
+\begin{equation}
+	\begin{array}{lllll}
+		\text{Linea}(i,j)=&=A(i,j,0)&||A(i,j,1)&|| \hdots &|| A(i,j,w-1)\\
+		\text{Plano}(j)&=\text{Linea}(0,j)&||\text{Linea}(1,j)&|| \hdots &||   \text{Linea}(4,j)\\
+		S&=\text{Plano}(0)&||\text{Plano}(1)&||\hdots&|| \text{Plano}(4)
+	\end{array}
+\end{equation}
+
+Una vez definidos los vectores de estado, estos se manipulan mediante cinco transformadas, denotadas \(\theta\), \(\rho\), \(\pi\), \(\chi\) y \(\iota\). Todas las transformadas toman como entrada un vector de estado \(A(x,y,z)\) y lo transforman, devolviendo un nuevo vector de estado como salida \(A'(x,y,z)\). La transformada $\iota$ recibe además como parámetro el índice de ronda \(i_r\).
+
+\begin{enumerate}
+	\item \textbf{Transformada \(\theta\)}: esta transformada realiza una XOR, $\oplus$, del bit \(A(x,y,z)\) con la paridad de las columnas \(\text{C}(x-1 \ \text{mod } 5,z)\) y $\text{C}(x+1 \ \text{mod } 5,z-1 \ \text{mod w} )$. Para ello, sigue los siguientes pasos:
+	\newpage
+	\begin{algorithm}[H]
+		\caption{Transformada \(\theta\) en Keccak-p}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Matriz \(A\) \\ 
+			\hline
+			\textbf{Salida: } Matriz \(A'\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\State Calcular la paridad de cada columna, \(C\):
+			\begin{equation}
+				C(x,z):=A(x,0,z) \oplus A(x,1,z) \oplus A(x,2,z) \oplus A(x,3,z) \oplus A(x,4,z) 
+			\end{equation}
+			\State Combinar la paridad de ambas columnas, \(D\):
+			\begin{equation}
+				D(x,z):=C(x-1 \bmod 5,z) \oplus C(x+1 \bmod 5,z-1 \bmod w)
+			\end{equation}
+			\State Realizar la XOR con el estado:
+			\begin{equation}
+				A'(x,y,z):=A(x,y,z)\oplus D(x,z)
+			\end{equation}
+			\State \Return \(A'\)
+		\end{algorithmic}
+	\end{algorithm}
+	\item \textbf{Transformada \(\rho\)}: esta transformada rota los bits de cada línea un offset módulo la longitud de la línea. Los offsets antes de efectuar el operador módulo se listan en la tabla \ref{tab:rhooffsets}.
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			& $x = 3$ & $x = 4$ & $x = 0$ & $x = 1$ & $x = 2$ \\
+			\hline
+			$y = 2$ & 153 & 231 & 3 & 10 & 171 \\
+			\hline
+			$y = 1$ & 55 & 276 & 36 & 300 & 6 \\
+			\hline
+			$y = 0$ & 28 & 91 & 0 & 1 & 190 \\
+			\hline
+			$y = 4$ & 120 & 78 & 210 & 66 & 253 \\
+			\hline
+			$y = 3$ & 21 & 136 & 105 & 45 & 15 \\
+			\hline
+		\end{tabular}
+		\caption{Offsets de la transformada $\rho$.}
+		\label{tab:rhooffsets}
+	\end{table}
+	
+	Para realizar estas rotaciones sigue los siguientes pasos:
+	\begin{algorithm}[H]
+		\caption{Transformada \(\rho\) en Keccak-p}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Matriz \(A\) \\ 
+			\hline
+			\textbf{Salida: } Matriz \(A'\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\State Asignar el caso especial de \((x,y,z):=(0,0,z)\):
+			\begin{equation}
+				A'(0,0,z):=A(0,0,z)
+			\end{equation}
+			\For{\(t=0:23\)} \Comment{Para los \(23\) valores restantes}
+			\State Asignar el valor de la tabla \ref{tab:rhooffsets} modulo \(w\) a cada punto:
+			\begin{equation}
+				A'(x,y,z):=A(x,y,[z-(t+1)(t+2)/2 \ \text{mod w}])
+			\end{equation}
+			\State Asignar \((x,y):=(y,2x+3y \ \text{mod } 5)\)
+			\EndFor
+			\State \Return \(A'\)
+		\end{algorithmic}
+	\end{algorithm}
+	\newpage
+	\item \textbf{Transformada \(\pi\)}: esta transformada rota las coordenadas de cada rebanada \((x,y)\) tal como se ilustra en la tabla \ref{tab:piTransform}.
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+					\hline
+			& $x = 3$ & $x = 4$ & $x = 0$ & $x = 1$ & $x = 2$ \\
+			\hline
+			$y = 2$ & (4,3) & (0,4) & (1,0) & (2,1) & (3,2) \\
+			\hline
+			$y = 1$ & (1,3) & (2,4) & (3,0) & (4,1) & (0,2) \\
+			\hline
+			$y = 0$ & (3,3) & (4,4) & (0,0) & (1,1) & (2,2) \\
+			\hline
+			$y = 4$ & (0,3) & (1,4) & (2,0) & (3,1) & (4,2) \\
+			\hline
+			$y = 3$ & (2,3) & (3,4) & (4,0) & (0,1) & (1,2) \\
+			\hline
+		\end{tabular}
+		\caption{Tabla de transformación $\pi$. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}
+		\label{tab:piTransform}
+	\end{table}
+	
+	Para realizar esta rotación se sigue el siguiente algoritmo:
+	\begin{algorithm}[H]
+		\caption{Transformada \(\pi\) en Keccak-p}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Matriz \(A\) \\ 
+			\hline
+			\textbf{Salida: } Matriz \(A'\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\State Calcular la rotación:
+			\begin{equation}
+				A'(x,y,z):=A(x+3y \ \text{mod } 5,x,z)
+			\end{equation}
+			\State \Return \(A'\)
+		\end{algorithmic}
+	\end{algorithm}
+	
+	
+	\item \textbf{Transformada \(\chi\)}: esta transformada actualiza cada bit como el XOR entre el bit original y una combinación no lineal de sus vecinos en la misma fila mediante una puerta AND como se puede ver en la figura \ref{fig:chitransform}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{figuras/PartsState1}
+		\caption{Representación de la transformada $\chi$ realizada en cada fila \cite{FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}
+		\label{fig:chitransform}
+	\end{figure}
+	\newpage
+	Para realizar esta rotación se sigue el siguiente algoritmo:
+	\begin{algorithm}[H]
+		\caption{Transformada \(\chi\) en Keccak-p}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Matriz \(A\) \\ 
+			\hline
+			\textbf{Salida: } Matriz \(A'\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\State Calcular la rotación:
+			\begin{equation}
+				A'(x,y,z):=A(x,y,z)\oplus\{[A(x+1 \ \text{mod } 5 ,y,z)\oplus 1]\& A(x+2 \ \text{mod } 5 ,y,z)\}
+			\end{equation}
+			\State \Return \(A'\)
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\item \textbf{Transformada \(\iota\)}: esta transformada modifica solo algunos bits de la línea \((0,0)\) de tal manera que que dependa del índice de ronda \(i_r\). Para ello, se sigue el siguiente algoritmo:
+	\begin{algorithm}[H]
+		\caption{Transformada \(\iota\) en Keccak-p}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Matriz \(A\) e Índice de ronda \(i_r\) \\ 
+			\hline
+			\textbf{Salida: } Matriz \(A'\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\State Asignar:
+			\begin{equation}
+				A'(x,y,z):=A(x,y,z)
+			\end{equation}
+			\State Inicializar el vector de ceros \(RC\) de longitud \(w\):
+			\For{j=0:l} \Comment{\(l=\log_2(b/25)\) }
+			\State Asignar
+			\begin{equation}
+				RC(2^j-1):=\texttt{rc}(j+7i_r)
+			\end{equation}
+			\EndFor
+			\State Asignar:
+			\begin{equation}
+				A'(0,0,z):=A'(0,0,z)\oplus RC(z)
+			\end{equation} 
+			
+			\State \Return \(A'\)
+		\end{algorithmic}
+	\end{algorithm}
+	 
+	Este algoritmo depende de la función \(\texttt{rc}(t)\)la cual, dado un entero, $t$, genera un bit mediante un procedimiento basado en un registro de desplazamiento con retroalimentación lineal como se describe en el siguiente algoritmo:
+	\begin{algorithm}[H]
+		\caption{rc}
+		$\begin{array}{p{\textwidth}}
+			\textbf{Entrada: } Entero \(t\)\\ 
+			\hline
+			\textbf{Salida: } bir \(rc(t)\) \\ 
+			\hline
+		\end{array}$
+		\begin{algorithmic}[1]
+			\If{\(t \ \text{mod } 255 =5\)}
+			\State \Return 1
+			\EndIf
+			\For{i=1:t mod \(255\)}
+			\State \(R:=R||R\)
+			\State \(R[0]:=R[0]\oplus R[8]\)
+			\State \(R[4]:=R[4]\oplus R[8]\)
+			\State \(R[5]:=R[5]\oplus R[8]\)
+			\State \(R[6]:=R[6]\oplus R[8]\)
+			\State \(R:=\texttt{Trunc}_8[R]\) \Comment{Los primeros 8 bits de \(R\)}
+			\EndFor
+			\State \Return \(R[0]\)
+		\end{algorithmic}
+	\end{algorithm}
+\end{enumerate}
+\newpage
+
+Una vez descritas estas transformadas la función de cada ronda, \(\texttt{Rnd}(A,i_r)\) se define como:
+\begin{equation}
+	\texttt{Rnd}(A,i_r)=\iota(\chi(\pi(\rho(\theta(A)))),i_r)
+\end{equation}
+
+Con esta función ya se puede describir el algoritmo \(\texttt{Keccak-p}(b,n_r)\) que consiste en ejecutar \(n_r\) iteraciones de \texttt{Rnd}:
+
+\begin{algorithm}[H]
+\caption{Keccak-p}
+$\begin{array}{p{\textwidth}}
+	\textbf{Entrada: } Cadena \(S\) de longitud \(b\) y Número de rondas \(n_r\) \\ 
+	\hline
+	\textbf{Salida: } Cadena \(S'\) de longitud \(b\)\\ 
+	\hline
+\end{array}$
+\begin{algorithmic}[1]
+	\State Convertir \(S\) en un vector de estado \(A\)
+	\For{$i_r$=12+2l-$n_r$:12+2l-1}
+	\State A=\texttt{Rnd}$(A,i_r)$
+	\EndFor
+	\State Convertir \(A\) en una cadena \(S'\) de longitud \(b\)
+	\State \Return \(S'\)
+\end{algorithmic}
+\end{algorithm}
+\subsubsection{Función esponja}
+Este tipo de función, $\texttt{sponge}[f,pad,r](N,d)$, permite convertir una entrada binaria, \(N\), de cualquier longitud a una salida de longitud \(d\). Para ello, usa tres componentes:
+\begin{enumerate}
+	\item Una función sobre cadenas de longitud fija, \(f\).
+	\item Un parámetro llamado velocidad, \(r\).
+	\item Una regla de relleno, \(pad\).
+\end{enumerate}
+\subsubsection{Seguridad}
 \section{Fundamentos de seguridad de los algoritmos}
+Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
+
+\subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
+\cite{CCA2}
+\subsubsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
+\cite{Fujisaki1999}
+
 \subsection{Generación de números aleatorios criptográficamente seguros}
+En esta sección se analiza el proceso de generación de números aleatorios, con el fin de evitar vulnerabilidades que puedan comprometer la seguridad de los algoritmos criptográficos. Un generador predecible permitiría a un atacante inferir los valores producidos, exponiendo así la información de los secretos.
 \subsubsection{Generación de números aleatorios en Windows}
 \cite{rngWIN}
 \subsubsection{Generación de números aleatorios en el PSOC}
-\subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
-\cite{CCA2}
-\subsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
-\cite{Fujisaki1999}
 \newpage
 \section{Funcionamiento básico de los algoritmos postcuánticos}
 En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el \gls{nist} en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.

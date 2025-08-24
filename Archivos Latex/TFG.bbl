@@ -131,14 +131,14 @@ M.J. Dworkin.
 \newblock Sha-3 standard: Permutation-based hash and extendable-output
   functions, 2015-08-04 00:08:00 2015.
 
-\bibitem{rngWIN}
-Leo Dorrendorf, Zvi Gutterman, and Benny Pinkas.
-\newblock Cryptanalysis of the random number generator of the windows operating
-  system.
-\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
+\bibitem{Keccak}
+J.~Daemen G.~Bertoni and M.~Peeters.
+\newblock The keccak reference.
+\newblock Technical report, NIST SHA-3 Competition, 2011.
+\newblock Round 3 submission.
 
 \bibitem{CCA2}
-Mihir Bellare, Anand Desai, and David Pointcheval.
+A.~Desai M.~Bellare and D.~Pointcheval.
 \newblock Relations among notions of security for public-key encryption
   schemes.
 \newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
@@ -150,6 +150,12 @@ E.~Fujisaki and T.~Okamoto.
 \newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
   99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
   Berlin, Heidelberg, 1999. Springer.
+
+\bibitem{rngWIN}
+Z.~Gutterman L.~Dorrendorf and B.~Pinkas.
+\newblock Cryptanalysis of the random number generator of the windows operating
+  system.
+\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
 
 \bibitem{nistPQCround3}
 Post-quantum cryptography - round 3 submissions.
@@ -205,7 +211,7 @@ S.~Roy et~al. J.P.~Anvers, A.~Karmakar.
 \newblock Cryptology {ePrint} Archive, Paper 2018/230, 2018.
 
 \bibitem{Karatsuba}
-A.~Karatsuba and Y-Ofman.
+A.~Karatsuba and Y.~Ofman.
 \newblock Multiplication of multidigit numbers on automata.
 \newblock {\em Soviet Physics Doklady}, 7:595, 12 1962.
 
@@ -229,8 +235,7 @@ D.~Haken J.L.~Bentley and J.B. James.
 \newblock {\em SIGACT News}, 12(3):36?44, September 1980.
 
 \bibitem{Correctness}
-Joppe Bos, Craig Costello, Léo Ducas, Ilya Mironov, Michael Naehrig, Valeria
-  Nikolaenko, Ananth Raghunathan, and Douglas Stebila.
+L.~Ducas et~al. J.~Bos, C.~Costello.
 \newblock Frodo: Take off the ring! practical, quantum-secure key exchange from
   {LWE}.
 \newblock Cryptology {ePrint} Archive, Paper 2016/659, 2016.
