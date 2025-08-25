@@ -31,79 +31,80 @@
 \contentsline {subsubsection}{\numberline {3.2.1.2}Vectores de estado}{7}{subsubsection.3.2.1.2}%
 \contentsline {subsubsection}{\numberline {3.2.1.3}Función esponja}{11}{subsubsection.3.2.1.3}%
 \contentsline {subsubsection}{\numberline {3.2.1.4}Seguridad}{13}{subsubsection.3.2.1.4}%
-\contentsline {section}{\numberline {3.3}Fundamentos de seguridad de los algoritmos asimétricos}{14}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Indistinguibilidad bajo ataque de texto cifrado adaptable \gls {cca2}}{14}{subsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.1.1}Transformadas Fujisaki-Okamoto \gls {tfo}}{14}{subsubsection.3.3.1.1}%
-\contentsline {subsection}{\numberline {3.3.2}Generación de números aleatorios criptográficamente seguros}{14}{subsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.2.1}Generación de números aleatorios en Windows}{14}{subsubsection.3.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.3.2.2}Generación de números aleatorios en el PSOC}{14}{subsubsection.3.3.2.2}%
-\contentsline {section}{\numberline {3.4}Funcionamiento básico de los algoritmos postcuánticos}{15}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Fundamentos matemáticos de CRYSTALS-Kyber }{15}{subsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.1}Transformada Teórica de Números o Number Theoretic Transform (\gls {ntt})}{16}{subsubsection.3.4.1.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.2}Aprendizaje Con Errores o Learning With Errors (\gls {lwe})}{19}{subsubsection.3.4.1.2}%
-\contentsline {paragraph}{\gls {lwe} en anillos}{20}{section*.9}%
-\contentsline {paragraph}{Aplicación del \gls {rlwe} para el intercambio de claves públicas}{21}{section*.10}%
-\contentsline {paragraph}{Uso de \gls {mlwe} en Kyber}{22}{section*.11}%
-\contentsline {subsubsection}{\numberline {3.4.1.3}Fundamentos de seguridad de Kyber}{23}{subsubsection.3.4.1.3}%
-\contentsline {paragraph}{Seguridad esperada en Kyber}{23}{section*.12}%
-\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema Kyber}{23}{section*.13}%
-\contentsline {subsubsection}{\numberline {3.4.1.4}Parámetros empleados en Kyber}{23}{subsubsection.3.4.1.4}%
-\contentsline {subsubsection}{\numberline {3.4.1.5}Algoritmos principales de Kyber \cite {kyber-spec-2021}}{24}{subsubsection.3.4.1.5}%
-\contentsline {subsection}{\numberline {3.4.2}Fundamentos matemáticos de Saber}{27}{subsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.2.1}Algoritmos de Toom-Cook y Karatsuba}{27}{subsubsection.3.4.2.1}%
-\contentsline {subsubsection}{\numberline {3.4.2.2}Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{30}{subsubsection.3.4.2.2}%
-\contentsline {subsubsection}{\numberline {3.4.2.3}Fundamentos de seguridad de Saber}{34}{subsubsection.3.4.2.3}%
-\contentsline {paragraph}{Seguridad esperada en Saber}{34}{section*.14}%
-\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema Saber}{34}{section*.15}%
-\contentsline {subsubsection}{\numberline {3.4.2.4}Parámetros empleados en Saber}{35}{subsubsection.3.4.2.4}%
-\contentsline {subsubsection}{\numberline {3.4.2.5}Algoritmos principales de Saber \cite {saber-spec-2020} }{35}{subsubsection.3.4.2.5}%
-\contentsline {subsection}{\numberline {3.4.3}Fundamentos matemáticos de Hamming Quasi-Cyclic (\gls {hqc})}{39}{subsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.3.1}Fundamentos de seguridad de \gls {hqc}}{39}{subsubsection.3.4.3.1}%
-\contentsline {paragraph}{Seguridad esperada en \gls {hqc}}{39}{section*.16}%
-\contentsline {paragraph}{Análisis respecto a ataques conocidos en el esquema \gls {hqc}}{39}{section*.17}%
-\contentsline {subsubsection}{\numberline {3.4.3.2}Parámetros empleados en \gls {hqc}}{39}{subsubsection.3.4.3.2}%
-\contentsline {subsubsection}{\numberline {3.4.3.3}Algoritmos principales de \gls {hqc} \cite {hqc-spec-2022}}{39}{subsubsection.3.4.3.3}%
-\contentsline {chapter}{\numberline {4}Desarrollo}{41}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementación comunicación serie}{41}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{41}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementación en el ordenador}{41}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementación en el microprocesador}{41}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Interfaz para los algoritmos de cifrado asimétrico}{41}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Interfaz Kyber}{41}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Interfaz Saber}{41}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Interfaz HQC}{41}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Implementación algoritmos en el PC}{41}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Compilación en librerías}{41}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Diagrama de uso}{41}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Diagrama funcional}{41}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Diagrama de clases}{41}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Implementación de algoritmos en el microcontrolador}{41}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Diagrama de uso}{41}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Diagrama funcional}{41}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}Implementación del intercambio de claves. Creación del secreto compartido}{41}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Modelo 1}{42}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Modelo 2}{42}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Modelo 3}{42}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Tests de rendimiento realizados}{42}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Resultados y discusión}{43}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Resultados}{43}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}(No sé si lo metere) Resultado de ejecución de los algoritmos clásicos}{43}{subsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.1.1}\gls {rsa}}{43}{subsubsection.5.1.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.1.2}\gls {ecc}}{43}{subsubsection.5.1.1.2}%
-\contentsline {subsection}{\numberline {5.1.2}Resultados de ejecución de los algoritmos post-cuánticos}{43}{subsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.1}Kyber}{43}{subsubsection.5.1.2.1}%
-\contentsline {subsubsection}{\numberline {5.1.2.2}Saber}{43}{subsubsection.5.1.2.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.3}HQC}{43}{subsubsection.5.1.2.3}%
-\contentsline {subsection}{\numberline {5.1.3}Resultados de los distintos modelos de comunicación}{43}{subsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.3.1}Modelo 1}{43}{subsubsection.5.1.3.1}%
-\contentsline {subsubsection}{\numberline {5.1.3.2}Modelo 2}{43}{subsubsection.5.1.3.2}%
-\contentsline {subsubsection}{\numberline {5.1.3.3}Modelo 3}{43}{subsubsection.5.1.3.3}%
-\contentsline {section}{\numberline {5.2}Discusión}{43}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Comparativa entre los distintos algoritmos post-cuánticos analizados}{43}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Comparativa entre los distintos modelos de comunicación}{43}{subsection.5.2.2}%
-\contentsline {chapter}{\numberline {6}Conclusiones}{45}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusión}{45}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Desarrollos futuros}{45}{section.6.2}%
-\contentsline {chapter}{\numberline {A}Definiciones básicas}{47}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Ejemplo \gls {rlwe}}{49}{appendix.Alph2}%
-\contentsline {chapter}{Bibliografia}{51}{equation.Alph2.0.7}%
+\contentsline {section}{\numberline {3.3}Funcionamiento básico de los algoritmos postcuánticos}{14}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Fundamentos matemáticos de CRYSTALS-Kyber }{14}{subsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}Transformada Teórica de Números o Number Theoretic Transform (\gls {ntt})}{15}{subsubsection.3.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.3.1.2}Aprendizaje Con Errores o Learning With Errors (\gls {lwe})}{18}{subsubsection.3.3.1.2}%
+\contentsline {paragraph}{\gls {lwe} en anillos}{19}{section*.9}%
+\contentsline {paragraph}{Aplicación del \gls {rlwe} para el intercambio de claves públicas}{20}{section*.10}%
+\contentsline {paragraph}{Uso de \gls {mlwe} en Kyber}{21}{section*.11}%
+\contentsline {subsubsection}{\numberline {3.3.1.3}Parámetros empleados en Kyber}{22}{subsubsection.3.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.3.1.4}Algoritmos principales de Kyber \cite {kyber-spec-2021}}{22}{subsubsection.3.3.1.4}%
+\contentsline {subsection}{\numberline {3.3.2}Fundamentos matemáticos de Saber}{25}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}Algoritmos de Toom-Cook y Karatsuba}{25}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls {mlwr})}{29}{subsubsection.3.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.3}Parámetros empleados en Saber}{33}{subsubsection.3.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.3.2.4}Algoritmos principales de Saber \cite {saber-spec-2020} }{33}{subsubsection.3.3.2.4}%
+\contentsline {subsection}{\numberline {3.3.3}Fundamentos matemáticos de Hamming Quasi-Cyclic (\gls {hqc})}{37}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}Parámetros empleados en \gls {hqc}}{37}{subsubsection.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.3.2}Algoritmos principales de \gls {hqc} \cite {hqc-spec-2022}}{37}{subsubsection.3.3.3.2}%
+\contentsline {section}{\numberline {3.4}Fundamentos de seguridad de los algoritmos asimétricos}{38}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Indistinguibilidad bajo ataque de texto cifrado adaptable \gls {cca2}}{38}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}Transformadas Fujisaki-Okamoto \gls {tfo}}{38}{subsubsection.3.4.1.1}%
+\contentsline {subsection}{\numberline {3.4.2}Generación de números aleatorios criptográficamente seguros}{38}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}Generación de números aleatorios en Windows}{38}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}Generación de números aleatorios en el PSOC}{38}{subsubsection.3.4.2.2}%
+\contentsline {section}{\numberline {3.5}Garantías de seguridad de los algoritmos postcuánticos}{38}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Garantías de seguridad de Kyber}{38}{subsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.1}Seguridad esperada en Kyber}{38}{subsubsection.3.5.1.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.2}Análisis respecto a ataques conocidos en el esquema Kyber}{38}{subsubsection.3.5.1.2}%
+\contentsline {subsection}{\numberline {3.5.2}Garantías de seguridad de Saber}{38}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}Seguridad esperada en Saber}{38}{subsubsection.3.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.5.2.2}Análisis respecto a ataques conocidos en el esquema Saber}{38}{subsubsection.3.5.2.2}%
+\contentsline {subsection}{\numberline {3.5.3}Garantías de seguridad de \gls {hqc}}{38}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}Seguridad esperada en \gls {hqc}}{38}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}Análisis respecto a ataques conocidos en el esquema \gls {hqc}}{38}{subsubsection.3.5.3.2}%
+\contentsline {chapter}{\numberline {4}Desarrollo}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Implementación comunicación serie}{39}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{39}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementación en el ordenador}{39}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementación en el microprocesador}{39}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Interfaz para los algoritmos de cifrado asimétrico}{39}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Interfaz Kyber}{39}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Interfaz Saber}{39}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Interfaz HQC}{39}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Implementación algoritmos en el PC}{39}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Compilación en librerías}{39}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Diagrama de uso}{39}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Diagrama funcional}{39}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Diagrama de clases}{39}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Implementación de algoritmos en el microcontrolador}{39}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Diagrama de uso}{39}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Diagrama funcional}{39}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Implementación del intercambio de claves. Creación del secreto compartido}{39}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Modelo 1}{40}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Modelo 2}{40}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Modelo 3}{40}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Tests de rendimiento realizados}{40}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Resultados y discusión}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Resultados}{41}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}(No sé si lo metere) Resultado de ejecución de los algoritmos clásicos}{41}{subsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.1.1}\gls {rsa}}{41}{subsubsection.5.1.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.1.2}\gls {ecc}}{41}{subsubsection.5.1.1.2}%
+\contentsline {subsection}{\numberline {5.1.2}Resultados de ejecución de los algoritmos post-cuánticos}{41}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.1}Kyber}{41}{subsubsection.5.1.2.1}%
+\contentsline {subsubsection}{\numberline {5.1.2.2}Saber}{41}{subsubsection.5.1.2.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.3}HQC}{41}{subsubsection.5.1.2.3}%
+\contentsline {subsection}{\numberline {5.1.3}Resultados de los distintos modelos de comunicación}{41}{subsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.1}Modelo 1}{41}{subsubsection.5.1.3.1}%
+\contentsline {subsubsection}{\numberline {5.1.3.2}Modelo 2}{41}{subsubsection.5.1.3.2}%
+\contentsline {subsubsection}{\numberline {5.1.3.3}Modelo 3}{41}{subsubsection.5.1.3.3}%
+\contentsline {section}{\numberline {5.2}Discusión}{41}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Comparativa entre los distintos algoritmos post-cuánticos analizados}{41}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Comparativa entre los distintos modelos de comunicación}{41}{subsection.5.2.2}%
+\contentsline {chapter}{\numberline {6}Conclusiones}{43}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusión}{43}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Desarrollos futuros}{43}{section.6.2}%
+\contentsline {chapter}{\numberline {A}Definiciones básicas}{45}{appendix.Alph1}%
+\contentsline {chapter}{\numberline {B}Ejemplo \gls {rlwe}}{47}{appendix.Alph2}%
+\contentsline {chapter}{Bibliografia}{49}{equation.Alph2.0.7}%

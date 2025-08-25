@@ -449,20 +449,8 @@ Mediante la tabla 4 del artículo \cite{FIPS202} se muestra la seguridad en bits
 \end{enumerate}
 \newpage
 
-\section{Fundamentos de seguridad de los algoritmos asimétricos}
-Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
 
-\subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
-\cite{CCA2}
-\subsubsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
-\cite{Fujisaki1999}
 
-\subsection{Generación de números aleatorios criptográficamente seguros}
-En esta sección se analiza el proceso de generación de números aleatorios, con el fin de evitar vulnerabilidades que puedan comprometer la seguridad de los algoritmos criptográficos. Un generador predecible permitiría a un atacante inferir los valores producidos, exponiendo así la información de los secretos.
-\subsubsection{Generación de números aleatorios en Windows}
-\cite{rngWIN}
-\subsubsection{Generación de números aleatorios en el PSOC}
-\newpage
 \section{Funcionamiento básico de los algoritmos postcuánticos}
 En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el \gls{nist} en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
 \subsection{Fundamentos matemáticos de CRYSTALS-Kyber }
@@ -921,11 +909,7 @@ Por tanto, la \gls{mlwe} es un punto intermedio entre ambos esquemas que permite
 \end{itemize}
 
 
-\subsubsection{Fundamentos de seguridad de Kyber}
-\paragraph{Seguridad esperada en Kyber}
-\mbox{}\\
-\paragraph{Análisis respecto a ataques conocidos en el esquema Kyber}
-\mbox{}\\
+
 \subsubsection{Parámetros empleados en Kyber}
 A continuación, se presenta una tabla con los parámetros del esquema Kyber1024 empleado en este trabajo fin de grado.
 \begin{table}[h]
@@ -942,9 +926,6 @@ A continuación, se presenta una tabla con los parámetros del esquema Kyber1024
 	\label{tab:KyberParams}
 \end{table}
 
-
-\newpage
-
 \subsubsection{Algoritmos principales de Kyber \cite{kyber-spec-2021}}
 \label{sub:kybAlg}
 El algoritmo de generación de llaves genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:KyberParams}.
@@ -954,7 +935,7 @@ El algoritmo de generación de llaves genera las llaves pública \((pk)\) y priv
 	\item La función $\text{CBD}_\eta(x)$ muestrea el ruido a partir mediante una distribución binomial. Convierte un vector de bits \(B\in\mathcal{B}^{64\eta}\) a un polinomio \(f\in R_q\).
 	\item La función $\text{Encode}_k(x)$ convierte de un vector de bits \(B\in\mathcal{B}^{32l}\) a un polinomio \(f\in R_q\).
 \end{itemize}
-  
+   \newpage
 
 \begin{algorithm}[H]
 	\caption{Generación llaves en Kyber}
@@ -1005,14 +986,14 @@ El algoritmo de generación de llaves genera las llaves pública \((pk)\) y priv
 		\State \Return $(pk,sk)$
 	\end{algorithmic}
 \end{algorithm}
-\newpage
+
 
 En el algoritmo de cifrado Kyber se obtiene el ciphertexto \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\) mediante el uso de la \gls{ntt}.
 \begin{itemize}
 	\item Las funciones $\text{Compress}_q(x,y)$ y $\text{Decompress}_q(x,y)$ se usan para reducir el tamaño de los textos cifrados basándose en el fundamento descrito para los mecanismos basados en la \gls{rlwe}. 
 	\item La función $\text{Decode}_k(x)$  convierte de un polinomio \(f\in R_q\) a un vector de bits \(B\in\mathcal{B}^{32l}\).
 \end{itemize}
-
+\newpage
 \begin{algorithm}[H]
 	\caption{Cifrado Kyber}
 	$\begin{array}{p{\textwidth}}
@@ -1046,7 +1027,7 @@ En el algoritmo de cifrado Kyber se obtiene el ciphertexto \(c\) a partir de la 
 		\State \Return (\(c:=c1||c2\))
 	\end{algorithmic}
 \end{algorithm}
-\newpage
+
 
  En el algoritmo de encapsulado Kyber a partir de la llave pública \(pk\) se obtiene el ciphertexto \(c\) y el secreto compartido \(k\). 
 \begin{algorithm}[H]
@@ -1131,7 +1112,7 @@ En el algoritmo de decapsulado Kyber a partir del ciphertexto \(c\)  y la llave 
 		\EndIf
 	\end{algorithmic}
 \end{algorithm}
-\newpage
+
 
 \subsection{Fundamentos matemáticos de Saber}
 Para elaborar esta sección se parte del artículo de Saber adjuntado con la submission al NIST \cite{saber-spec-2020}. En Saber al igual que en Kyber se trabaja en un anillo de la forma:
@@ -1193,7 +1174,7 @@ El algoritmo de Toom-Cook-4 usado en Saber \cite{toomcook4} para hacer más efic
 			T=X^{n/4}
 		\end{array}
 	\end{equation}
-	\newpage
+	
 	De esta manera, con la introducción de una nueva variable \(T\) se consigue reducir el tamaño efectivo de los polinomios para el paso de la evaluación. La variable \(X\) se utiliza como un parámetro. Aplicado a los polinomios \(f\) y \(g\) con \(n=256\) en Saber:
 	\begin{equation}
 		\begin{array}{l}
@@ -1259,7 +1240,7 @@ El algoritmo de Toom-Cook-4 usado en Saber \cite{toomcook4} para hacer más efic
 	
 	Por último, se deshace la división en bloques sustituyendo $T=X^{64}$, que equivale a desplazar los coeficientes, y se aplica la reducción modular correspondiente a $X^{256} + 1$.
 \end{itemize}
-\newpage
+
 
 El algoritmo de Karatsuba aplica el paradigma de \esquote{divide y vencerás} para multiplicar los polinomios dividiéndolos en dos partes más pequeñas. No obstante, en la implementación de Saber no se usa Karatsuba \esquote{tradicional} pues se divide en cuatro bloques \cite{saber-spec-2020}. Para ello, utilizando los polinomios de grado \(63\) anteriormente divididos en Karatsuba se vuelve a introducir una variable \(T=X^{16}\) para particionar:
 \begin{equation}
@@ -1281,7 +1262,7 @@ Entonces su producto queda como:
 		T^{0}\cdot\left(f_0\cdot g_0\right)\\
 	\end{array}\right.
 \end{equation}
-
+\newpage
 
 Descomponiendo adecuadamente en \(9\) productos de polinomios más pequeños \(z_i\) de grado \(15\) que se realizan mediante el método tradicional:
 \begin{equation}
@@ -1536,12 +1517,7 @@ En la \gls{mlwr} esta probabilidad se generaliza para que se exprese unicamente 
 	\end{equation}
 \end{proof}
 \newpage
-\subsubsection{Fundamentos de seguridad de Saber}
-\paragraph{Seguridad esperada en Saber}
-\mbox{}\\
-\paragraph{Análisis respecto a ataques conocidos en el esquema Saber}
-\mbox{}\\
-\newpage
+
 \subsubsection{Parámetros empleados en Saber}
 A continuación, se presenta una tabla con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
 \begin{table}[H]
@@ -1756,11 +1732,29 @@ En el algoritmo de decapsulado Saber a partir del ciphertexto \(c\) y la llave s
 \newpage
 \subsection{Fundamentos matemáticos de Hamming Quasi-Cyclic (\gls{hqc})}
 Para  \cite{hqc-spec-2022}
-\subsubsection{Fundamentos de seguridad de \gls{hqc}}
-\paragraph{Seguridad esperada en \gls{hqc}}
-\mbox{}\\
-\paragraph{Análisis respecto a ataques conocidos en el esquema \gls{hqc}}
-\mbox{}\\
 \subsubsection{Parámetros empleados en \gls{hqc}}
 \subsubsection{Algoritmos principales de \gls{hqc} \cite{hqc-spec-2022}}
+\newpage
+\section{Fundamentos de seguridad de los algoritmos asimétricos}
+Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
 
+\subsection{Indistinguibilidad bajo ataque de texto cifrado adaptable \gls{cca2}}
+\cite{CCA2}
+\subsubsection{Transformadas Fujisaki-Okamoto \gls{tfo}}
+\cite{Fujisaki1999}
+
+\subsection{Generación de números aleatorios criptográficamente seguros}
+En esta sección se analiza el proceso de generación de números aleatorios, con el fin de evitar vulnerabilidades que puedan comprometer la seguridad de los algoritmos criptográficos. Un generador predecible permitiría a un atacante inferir los valores producidos, exponiendo así la información de los secretos.
+\subsubsection{Generación de números aleatorios en Windows}
+\cite{rngWIN}
+\subsubsection{Generación de números aleatorios en el PSOC}
+\section{Garantías de seguridad de los algoritmos postcuánticos}
+\subsection{Garantías de seguridad de Kyber}
+\subsubsection{Seguridad esperada en Kyber}
+\subsubsection{Análisis respecto a ataques conocidos en el esquema Kyber}
+\subsection{Garantías de seguridad de Saber}
+\subsubsection{Seguridad esperada en Saber}
+\subsubsection{Análisis respecto a ataques conocidos en el esquema Saber}
+\subsection{Garantías de seguridad de \gls{hqc}}
+\subsubsection{Seguridad esperada en \gls{hqc}}
+\subsubsection{Análisis respecto a ataques conocidos en el esquema \gls{hqc}}
