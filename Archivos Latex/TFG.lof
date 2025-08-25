@@ -9,8 +9,9 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces \small Dibujo de un vector de estado \cite {FIPS202}.}}{7}{figure.3.2}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces \small Elementos de un vector de estado \cite {FIPS202}.}}{7}{figure.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Representación de la transformada $\chi $ realizada en cada fila \cite {FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}}{9}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \gls {ntt} en comparación con los algoritmos clásicos.}}{19}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{27}{figure.3.6}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación visual del funcionamiento del algoritmo \texttt {sponge} \cite {FIPS202}.}}{12}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \gls {ntt} en comparación con los algoritmos clásicos.}}{19}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{27}{figure.3.7}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -39,8 +39,8 @@ Por último, es importante señalar que existe un paso adicional denominado conf
 			\node [font=\normalsize] at (13.5,6) {Secreto compartido (ss)};
 			\end{circuitikz}
 		\end{adjustbox}
-		\label{fig:mainprotocol}
 		\caption{Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}
+		\label{fig:mainprotocol}
 	\end{figure}
 	
 
@@ -337,11 +337,26 @@ $\begin{array}{p{\textwidth}}
 Este tipo de función, $\texttt{sponge}[f,pad,r](N,d)$, permite convertir una entrada binaria, \(N\), de cualquier longitud a una salida, \(Z\), de longitud \(d\). Para ello, usa tres componentes:
 \begin{enumerate}
 	\item Una función sobre cadenas de longitud fija, \(f\).
-	\item Un parámetro llamado velocidad, \(r\).
 	\item Una regla de relleno, \(pad\).
+	\item Un parámetro llamado velocidad, \(r\), menor que la longitud, \(b\), de las cadenas que procesa \(f\).
 \end{enumerate}
 
-La función \texttt{sponge} se define como:
+La función \texttt{sponge}, ilustrada en la figura \ref{fig:esponja}, aplica la regla de relleno sobre la entrada y procesa la información mediante los tres componentes descritos. En la fase de absorción, el mensaje se divide en bloques de longitud \(r\), que se incorporan iterativamente al estado interno de longitud \(b\) utilizando la permutación \(f\), que en este caso es \texttt{keccak-p}. En esta construcción se impone que el parámetro de capacidad sea
+\begin{equation}
+	c = b - r
+\end{equation}
+
+Tras finalizar la fase de absorción, se inicia la fase de extracción, en la que se producen bloques de salida de tamaño \(r\) de manera iterativa hasta obtener los \(d\) bits requeridos.
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/esponja}
+	\caption{Representación visual del funcionamiento del algoritmo \texttt{sponge} \cite{FIPS202}.}
+	\label{fig:esponja}
+\end{figure}
+
+
+Teniendo en cuenta la descripción anterior la función \texttt{sponge} se define como:
 \begin{algorithm}[H]
 	\caption{sponge}
 	$\begin{array}{p{\textwidth}}
@@ -432,6 +447,8 @@ Mediante la tabla 4 del artículo \cite{FIPS202} se muestra la seguridad en bits
 	\item \textbf{Resistencia a preimagen}: dificultad para que dado un hash, \(h\), se pueda encontrar una entrada, \(x\), tal que \(\texttt{hash}(x)=h\). Esta propiedad permite proteger datos sensibles de tal manera que si el hash se revela no comprometa las contraseñas. 
 	\item \textbf{Resistencia a preimagen secundaria}: dificultad para que dada una entrada, \(x_1\), se pueda encontrar una entrada diferente, \(x_2\), que cumpla \(\texttt{hash}(x_1)=\texttt{hash}(x_2)\). Esta propiedad previene la falsificación de mensajes.
 \end{enumerate}
+\newpage
+
 \section{Fundamentos de seguridad de los algoritmos asimétricos}
 Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
 
@@ -699,8 +716,8 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 			\node [font=\LARGE] at (6.5,8.75) {$\hat{f}$ $\circ$ $\hat{g}$};
 			\node [font=\LARGE] at (14.75,8.75) {$\hat{h}$};
 		\end{circuitikz}
-	\label{fig:NTTFigure}
 	\caption{Representación del cálculo de un producto de polinomios mediante \gls{ntt} en comparación con los algoritmos clásicos.}
+	\label{fig:NTTFigure}
 \end{figure}
 
 
@@ -851,7 +868,7 @@ Para mantener este error dentro de niveles aceptables, es fundamental ajustar ad
 		\end{equation} 
 		\Statex \hspace{1em} \textbf{1.2:} Distancia a $\left\lfloor \dfrac{q}{2} \right\rceil$:
 			\begin{equation}
-			\text{d}_i\left(\dfrac{q}{2}\right)=\left\| \left\lfloor \dfrac{q}{2} \right\rceil - \text{d}_i(0)\right\| 
+			\text{d}_i\left(\dfrac{q}{2}\right):=\left\| \left\lfloor \dfrac{q}{2} \right\rceil - \text{d}_i(0)\right\| 
 		\end{equation} 
 		\If{$\text{d}_i(0)<\text{d}_i\left(\dfrac{q}{2}\right)$}
 			\Statex
@@ -1163,8 +1180,8 @@ Dado que en Saber no se cumple la condición \(n|(q-1)\) para poder utilizar la 
 		\node [font=\normalsize, color={rgb,255:red,15; green,15; blue,15}] at (5.125,10.25) {$=$};
 	\end{circuitikz}
 	\end{adjustbox}
-	\label{fig:ToomKara}
 	\caption{Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}
+	\label{fig:ToomKara}
 \end{figure}
 
 El algoritmo de Toom-Cook-4 usado en Saber \cite{toomcook4} para hacer más eficiente la multiplicación de dos polinomios \(c=f\cdot g\) con una complejidad de \(\mathcal{O}(n^{\log_4(7)})\approx\mathcal{O}(n^{1.404})\), sigue los siguientes pasos:
@@ -1307,7 +1324,8 @@ Una vez hechas estas descomposiciones recursivas se van deshaciendo las particio
  
  \newpage
  
-\subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} 
+\subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\gls{mlwr})} +
+\label{sec:lwe}
 Los esquemas basados en la \gls{lwr} \cite{modlwr} emplean operadores de redondeo y, a diferencia de los esquemas de \gls{lwe}, no requieren muestrear ruido de forma explícita, ya que éste se obtiene a partir de escalar y redondear los coeficientes. Por esta razón, en ocasiones se hace referencia a estos esquemas como una variante \esquote{desaleatorizada} de \gls{lwe}. 
 \newline
 
@@ -1468,8 +1486,8 @@ En la \gls{mlwr} esta probabilidad se generaliza para que se exprese unicamente 
 	\end{equation}
 	
 	Simplemente restando se obtiene $\Delta v$ y se claramente se ve la equivalencia a la ecuación \ref{eq:probrefeSab}.
-	\newline
 	
+	\newpage
 	\textbf{Paso 2: Igualdad de secretos} 
 	\smallskip
 	En este paso se hace la demostración empleando los parámetros de FireSaber de la tabla \ref{tab:SaberParams}. Sea \(Q_8 \in R_{128}\):
@@ -1517,11 +1535,13 @@ En la \gls{mlwr} esta probabilidad se generaliza para que se exprese unicamente 
 		e_r+\Delta > (512-h_2)= 260 >\dfrac{p}{4}=256
 	\end{equation}
 \end{proof}
+\newpage
 \subsubsection{Fundamentos de seguridad de Saber}
 \paragraph{Seguridad esperada en Saber}
 \mbox{}\\
 \paragraph{Análisis respecto a ataques conocidos en el esquema Saber}
 \mbox{}\\
+\newpage
 \subsubsection{Parámetros empleados en Saber}
 A continuación, se presenta una tabla con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
 \begin{table}[H]
@@ -1539,7 +1559,202 @@ A continuación, se presenta una tabla con los parámetros del esquema FireSaber
 \end{table}
 
 \subsubsection{Algoritmos principales de Saber \cite{saber-spec-2020} }
-\subsection{Hamming Quasi-Cyclic (\gls{hqc}}
+ El algoritmo de generación de llaves genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:SaberParams}. Teniendo en cuenta que \(\varepsilon_i=\log_2 (i)\).
+ \begin{itemize}
+ 	\item La función $\texttt{POLVEC}_x\texttt{2BS}$(y) convierte un vector \(y\in R_x^{l\times 1}\) en una cadena de bytes de longitud \(l\cdot k \cdot 256/8\) con \(x=2^k\).
+ 	\item El operador \(\circ\) denota la multiplicación estándar de una matriz \(\in R_x^{l\times l}\) por un vector \(\in R_x^{l}\) . Donde uno de los polinomios se multiplica utilizando el algoritmo de la figura \ref{fig:ToomKara}.
+ 	\item La función \texttt{HammingWeight}(x) devuelve la distancia de Hamming del vector \(x\), es decir, el número de simbolos distintos de \(0\) en \(x\).
+ 	\item Se define el símbolo $\varepsilon_i$ como \(\varepsilon_i=\log_2 (i)\).
+ 	\item Los valores de las constantes \(h\), \(h_1\) y \(h_2\) se pueden consultar en la sección \ref{sec:lwe}.
+ \end{itemize}
+ \newpage
+\begin{algorithm}[H]
+	\small
+	\caption{Generación llaves en Saber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Salida: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\), \(sk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_q/8+n\cdot l \cdot \varepsilon_p/8+96}\) \\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Muestrear las semillas de la matriz \(A\), secreto y un parámetro auxiliar \(z\), \(seed_A\), \(seed_s\) y \(z\in B^{32}\) de manera aleatoria usando una distribución uniforme
+		\State Modificar la semilla \(seed_A\) mediante hashing:
+		\begin{equation}
+			seed_A:=\texttt{SHAKE-128}(seed_A,32)
+		\end{equation}
+		\State Se genera la matriz \(A\) a partir de la semilla:
+		\begin{equation}
+			buf:=\texttt{SHAKE-128}(seed_A,l^2\cdot n \cdot \varepsilon_q/8) 
+		\end{equation}
+		\Statex \Comment{Se genera $buf$ un vector de \(l^2\cdot n\) cadenas de longitud $\varepsilon_q$.}
+		\State \(k:=0\)
+		\For{i=0:l-1}
+			\For{j=0:l-1}
+				\For{k=0:n-1}
+				\State $A[i,j][k]:=buf[k]$
+				\State $k:=k+1$
+				\EndFor
+			\EndFor
+		\EndFor
+		\State Se genera el secreto \(s\) a partir de la distribución binomial:
+		\begin{equation}
+			buf:=\texttt{SHAKE-128}(seed_s,l\cdot n \cdot \mu/8) 
+		\end{equation}
+		\Statex \Comment{Se genera $buf$ un vector de \(2\cdot l\cdot n\) cadenas de $\mu/2$ bits.}
+		\State \(k:=0\)
+		\For{i=0:l-1}
+			\For{j=0:n-1}
+				\State $s[i,j]:=\texttt{HammingWeight}(buf[k])-\texttt{HammingWeight}(buf[k+1]) \ \text{mod}^{+}\text{q}$
+				\State $k:=k+2$
+			\EndFor
+		\EndFor
+		\State Se calcula el parámetro \(b\):
+		\begin{equation}
+			b:=\left(A^T\circ s + h  \ \text{mod}^{+}\text{q}\right) / 2^{\varepsilon_q-\varepsilon_p} 
+		\end{equation}
+		\State se calcula la llave pública
+		\begin{equation}
+			pk:=seed_A|| \texttt{POLVEC}_q\texttt{2BS}(b)
+		\end{equation}
+		\State Se calcula la llave secreta
+		\begin{equation}
+			sk:=z||\texttt{SHA3-256}(pk)||pk||\texttt{POLVEC}_q\texttt{2BS}(s)
+		\end{equation}
+		\State \Return $(pk,sk)$
+	\end{algorithmic}
+\end{algorithm}
+
+\newpage
+
+En el algoritmo de cifrado de Saber se obtiene el ciphertexto \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\).
+\begin{itemize}
+	\item La función $\texttt{BS2POLVEC}_x(y)$ convierte una cadena de bytes \(y\) de longitud \(l\cdot k \cdot 256/8\) en un vector en \(R_x^{l\times 1}\).
+	\item La función $\texttt{POL}_x\texttt{2BS}(y)$ convierte un polinomio \(y\in R_x\) en una cadena de bytes de longitud \(k\cdot 256/8\).
+\end{itemize}
+\begin{algorithm}[H]
+	\small
+	\caption{Cifrado Saber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\), \(m\in \mathcal{B}^{32}\) , \(\gamma\in \mathcal{B}^{32}\)\\ 
+		\hline
+		\textbf{Salida: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Se extrae la matriz \(A\) y la llave pública \(pk'\) a partir de \(pk\).
+		\State Se genera un nuevo secreto \(s'\) de manera similar que en el algoritmo de generación de llaves.
+		\State Se calcula el parámetro \(b'\):
+		\begin{equation}
+			b':=\left(A\circ s' + h  \ \text{mod}^{+}\text{q}\right) / 2^{\varepsilon_q-\varepsilon_p} 
+		\end{equation}
+		\State Se obtiene el parámetro \(b\) de la llave pública:
+		\begin{equation}
+			b:=\texttt{BS2POLVEC}_p(pk')
+		\end{equation}
+		\State se calcula el parámetro auxiliar \(v'\):
+		\begin{equation}
+			v':= b^T \circ (s' \ \text{mod}^{+}\text{p}) \ \text{mod}^{+}\text{p}
+		\end{equation}
+		\State Se calcula el ciphertexto \(c\)
+		\begin{equation}
+			c:=(v'-m\cdot 2^{\varepsilon_p-1}+h_1 \ \text{mod}^{+}\text{p} )/2^{\varepsilon_p-\varepsilon_t}
+		\end{equation}
+		\State \Return \(c:=\texttt{POL}_T\texttt{2BS}(c)||\texttt{POLVEC}_p\texttt{2BS}(b')\)
+	\end{algorithmic}
+\end{algorithm}
+ 
+
+En el algoritmo de encapsulado Saber a partir de la llave pública \(pk\) se obtiene el ciphertexto \(c\) y el secreto compartido \(k\). 
+\begin{algorithm}[H]
+	\small 
+	\caption{Encapsulado Saber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\)\\ 
+		\hline
+		\textbf{Salida: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\), \(k\in \mathcal{B}^{*}\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Se muestrea el mensaje \(m\in \mathcal{B}^{32}\) de manera aleatoria usando una distribución uniforme.
+		\State Se hashea el mensaje \(m\) y la llave pública \(pk\) para crear una variable \(buf\):
+		\begin{equation}
+			\begin{array}{l}
+				m:=\texttt{SHA3-256}(m)\\
+				hash_{pk}:=\texttt{SHA3-256}(pk)\\
+				buf:=hash_{pk}||m
+			\end{array}
+		\end{equation}
+		\State Se hashea el buffer para obtener dos cadenas del mismo tamaño y así inicializar la semilla aleatoria $\gamma$:
+		\begin{equation}
+			(\gamma||r):=\texttt{SHA3-512}(buf)
+		\end{equation}
+		\State Se ejecuta el cifrado para obtener el ciphertexto \(c\):
+		\begin{equation}
+			c:=\texttt{Cifrado Saber}(pk,m,\gamma)
+		\end{equation}
+		\State Se calcula el secreto compartido \(k\):
+		\begin{equation}
+			k:=\texttt{SHA3-256}(r||\texttt{SHA3-256}(c))
+		\end{equation}
+		\State \Return (\(c,k\))
+	\end{algorithmic}
+\end{algorithm}
+\newpage
+En el algoritmo de decapsulado Saber a partir del ciphertexto \(c\) y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
+\begin{algorithm}[H]
+	\small
+	\caption{Decapsulado Saber}
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\), \(sk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_q/8+n\cdot l \cdot \varepsilon_p/8+96}\)\\ 
+		\hline
+		\textbf{Salida: } \(k\in \mathcal{B}^{*}\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Obtener el valor de la llave secreta \(sk'\) y el valor \(z\) de \(sk\) 
+		\State Se obtiene el polinomio del secreto \(s\)
+		\begin{equation}
+			s:=\texttt{BS2POLVEC}_q(sk')
+		\end{equation}
+		\State se descompone el ciphertexto en sus partes
+		\begin{equation}
+			(c_m||ct):=c
+		\end{equation}
+		\State A partir de estos valores se calcula el mensaje cifrado anteriormente \(m'\):
+		\begin{equation}
+			\begin{array}{l}
+				c_m:=c_m\cdot 2^{\varepsilon_p-\varepsilon_t}\\
+				b':=\texttt{BS2POLVEC}_p(ct)\\
+				m':=(b'^T \circ (s \ \text{mod}^{+}\text{p}) -c_m +h_2 \ \text{mod}^{+}\text{p})/2^{\varepsilon_p-1}
+			\end{array}
+		\end{equation}
+		\State Una vez obtenido el mensaje se transforma en una cadena \(m\) :
+		\begin{equation}
+			m:=\texttt{POL}_2\texttt{2BS}(m')
+		\end{equation}
+		\State Se calculan las variables \(\gamma\) y \(r\):
+		\begin{equation}
+			(\gamma||r):=\texttt{SHA3-512}(buf)
+		\end{equation}
+		\State Se calcula nuevamente el ciphertexto \(c'\) para comprobar que es igual que \(c\) y cumplir la \gls{tfo}:
+		\begin{equation}
+			c':=\texttt{Cifrado Saber}(pk,m,\gamma)
+		\end{equation}
+		\If{c==c'}
+		\State Asignar \(k\):
+		\begin{equation}
+			k:=\texttt{SHA3-256}(r||\texttt{SHA3-256}(c'))
+		\end{equation}
+		\Else
+		\State Asignar \(k\):
+		\begin{equation}
+			k:=\texttt{SHA3-256}(z||\texttt{SHA3-256}(c'))
+		\end{equation}
+		\EndIf
+		\State \Return k
+	\end{algorithmic}
+\end{algorithm}
+\newpage
+\subsection{Fundamentos matemáticos de Hamming Quasi-Cyclic (\gls{hqc})}
 Para  \cite{hqc-spec-2022}
 \subsubsection{Fundamentos de seguridad de \gls{hqc}}
 \paragraph{Seguridad esperada en \gls{hqc}}
