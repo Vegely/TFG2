@@ -1,0 +1,616 @@
+\glsdefs@newdocentry{ntt}%
+{%
+name={\acronymfont {\glsentryshort {ntt}}},%
+sort={NTT},%
+type={acronym},%
+first={NTT},%
+firstplural={NTTs},%
+text={NTT},%
+plural={NTTs},%
+description={Transformada Teórica de Números},%
+descriptionplural={Transformada Teórica de Números},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Transformada Teórica de Números},%
+longplural={Transformada Teórica de Númeross},%
+short={NTT},%
+shortplural={NTTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dft}%
+{%
+name={\acronymfont {\glsentryshort {dft}}},%
+sort={DFT},%
+type={acronym},%
+first={DFT},%
+firstplural={DFTs},%
+text={DFT},%
+plural={DFTs},%
+description={Transformada Discreta de Fourier},%
+descriptionplural={Transformada Discreta de Fourier},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Transformada Discreta de Fourier},%
+longplural={Transformada Discreta de Fouriers},%
+short={DFT},%
+shortplural={DFTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{lwe}%
+{%
+name={\acronymfont {\glsentryshort {lwe}}},%
+sort={LWE},%
+type={acronym},%
+first={LWE},%
+firstplural={LWEs},%
+text={LWE},%
+plural={LWEs},%
+description={Aprendizaje Con Errores},%
+descriptionplural={Aprendizaje Con Errores},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Aprendizaje Con Errores},%
+longplural={Aprendizaje Con Erroress},%
+short={LWE},%
+shortplural={LWEs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{lwr}%
+{%
+name={\acronymfont {\glsentryshort {lwr}}},%
+sort={LWR},%
+type={acronym},%
+first={LWR},%
+firstplural={LWRs},%
+text={LWR},%
+plural={LWRs},%
+description={Aprendizaje Con Redondeo},%
+descriptionplural={Aprendizaje Con Redondeo},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Aprendizaje Con Redondeo},%
+longplural={Aprendizaje Con Redondeos},%
+short={LWR},%
+shortplural={LWRs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rlwe}%
+{%
+name={\acronymfont {\glsentryshort {rlwe}}},%
+sort={R-LWE},%
+type={acronym},%
+first={R-LWE},%
+firstplural={R-LWEs},%
+text={R-LWE},%
+plural={R-LWEs},%
+description={Aprendizaje Con Errores en Anillos},%
+descriptionplural={Aprendizaje Con Errores en Anillos},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Aprendizaje Con Errores en Anillos},%
+longplural={Aprendizaje Con Errores en Anilloss},%
+short={R-LWE},%
+shortplural={R-LWEs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{mlwe}%
+{%
+name={\acronymfont {\glsentryshort {mlwe}}},%
+sort={M-LWE},%
+type={acronym},%
+first={M-LWE},%
+firstplural={M-LWEs},%
+text={M-LWE},%
+plural={M-LWEs},%
+description={Aprendizaje Con Errores Modular},%
+descriptionplural={Aprendizaje Con Errores Modular},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Aprendizaje Con Errores Modular},%
+longplural={Aprendizaje Con Errores Modulars},%
+short={M-LWE},%
+shortplural={M-LWEs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{mlwr}%
+{%
+name={\acronymfont {\glsentryshort {mlwr}}},%
+sort={Mod-LWR},%
+type={acronym},%
+first={Mod-LWR},%
+firstplural={Mod-LWRs},%
+text={Mod-LWR},%
+plural={Mod-LWRs},%
+description={Aprendizaje Con Redondeo Modular},%
+descriptionplural={Aprendizaje Con Redondeo Modular},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Aprendizaje Con Redondeo Modular},%
+longplural={Aprendizaje Con Redondeo Modulars},%
+short={Mod-LWR},%
+shortplural={Mod-LWRs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cca2}%
+{%
+name={\acronymfont {\glsentryshort {cca2}}},%
+sort={IND-CCA2},%
+type={acronym},%
+first={IND-CCA2},%
+firstplural={IND-CCA2s},%
+text={IND-CCA2},%
+plural={IND-CCA2s},%
+description={Indistinguibilidad bajo ataque de texto cifrado adaptable},%
+descriptionplural={Indistinguibilidad bajo ataque de texto cifrado adaptable},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Indistinguibilidad bajo ataque de texto cifrado adaptable},%
+longplural={Indistinguibilidad bajo ataque de texto cifrado adaptables},%
+short={IND-CCA2},%
+shortplural={IND-CCA2s},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ecc}%
+{%
+name={\acronymfont {\glsentryshort {ecc}}},%
+sort={ECC},%
+type={acronym},%
+first={ECC},%
+firstplural={ECCs},%
+text={ECC},%
+plural={ECCs},%
+description={Criptografía en Curvas Elípticas},%
+descriptionplural={Criptografía en Curvas Elípticas},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Criptografía en Curvas Elípticas},%
+longplural={Criptografía en Curvas Elípticass},%
+short={ECC},%
+shortplural={ECCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rsa}%
+{%
+name={\acronymfont {\glsentryshort {rsa}}},%
+sort={RSA},%
+type={acronym},%
+first={RSA},%
+firstplural={RSAs},%
+text={RSA},%
+plural={RSAs},%
+description={Rivest-Shamir-Adleman},%
+descriptionplural={Rivest-Shamir-Adleman},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Rivest-Shamir-Adleman},%
+longplural={Rivest-Shamir-Adlemans},%
+short={RSA},%
+shortplural={RSAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{tfo}%
+{%
+name={\acronymfont {\glsentryshort {tfo}}},%
+sort={TFO},%
+type={acronym},%
+first={TFO},%
+firstplural={TFOs},%
+text={TFO},%
+plural={TFOs},%
+description={Transformadas Fujisaki-Okamoto},%
+descriptionplural={Transformadas Fujisaki-Okamoto},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Transformadas Fujisaki-Okamoto},%
+longplural={Transformadas Fujisaki-Okamotos},%
+short={TFO},%
+shortplural={TFOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{kem}%
+{%
+name={\acronymfont {\glsentryshort {kem}}},%
+sort={KEM},%
+type={acronym},%
+first={KEM},%
+firstplural={KEMs},%
+text={KEM},%
+plural={KEMs},%
+description={Mecanismo de intercambio de claves},%
+descriptionplural={Mecanismo de intercambio de claves},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Mecanismo de intercambio de claves},%
+longplural={Mecanismo de intercambio de clavess},%
+short={KEM},%
+shortplural={KEMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{nist}%
+{%
+name={\acronymfont {\glsentryshort {nist}}},%
+sort={NIST},%
+type={acronym},%
+first={NIST},%
+firstplural={NISTs},%
+text={NIST},%
+plural={NISTs},%
+description={Instituto Nacional de Seguridad e Información},%
+descriptionplural={Instituto Nacional de Seguridad e Información},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Instituto Nacional de Seguridad e Información},%
+longplural={Instituto Nacional de Seguridad e Informacións},%
+short={NIST},%
+shortplural={NISTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{hqc}%
+{%
+name={\acronymfont {\glsentryshort {hqc}}},%
+sort={HQC},%
+type={acronym},%
+first={HQC},%
+firstplural={HQCs},%
+text={HQC},%
+plural={HQCs},%
+description={Hamming Quasi-Cyclic},%
+descriptionplural={Hamming Quasi-Cyclic},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Hamming Quasi-Cyclic},%
+longplural={Hamming Quasi-Cyclics},%
+short={HQC},%
+shortplural={HQCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{sha}%
+{%
+name={\acronymfont {\glsentryshort {sha}}},%
+sort={SHA},%
+type={acronym},%
+first={SHA},%
+firstplural={SHAs},%
+text={SHA},%
+plural={SHAs},%
+description={Algoritmo Seguro de Hashing},%
+descriptionplural={Algoritmo Seguro de Hashing},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Algoritmo Seguro de Hashing},%
+longplural={Algoritmo Seguro de Hashing s},%
+short={SHA},%
+shortplural={SHAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{fips}%
+{%
+name={\acronymfont {\glsentryshort {fips}}},%
+sort={FIPS},%
+type={acronym},%
+first={FIPS},%
+firstplural={FIPSs},%
+text={FIPS},%
+plural={FIPSs},%
+description={Estandar Federal de Procesamiento de la Información},%
+descriptionplural={Estandar Federal de Procesamiento de la Información},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Estandar Federal de Procesamiento de la Información},%
+longplural={Estandar Federal de Procesamiento de la Informacións},%
+short={FIPS},%
+shortplural={FIPSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{qc}%
+{%
+name={\acronymfont {\glsentryshort {qc}}},%
+sort={QC},%
+type={acronym},%
+first={QC},%
+firstplural={QCs},%
+text={QC},%
+plural={QCs},%
+description={Cuasi-cíclico},%
+descriptionplural={Cuasi-cíclico},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Cuasi-cíclico},%
+longplural={Cuasi-cíclicos},%
+short={QC},%
+shortplural={QCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ind}%
+{%
+name={\acronymfont {\glsentryshort {ind}}},%
+sort={IND},%
+type={acronym},%
+first={IND},%
+firstplural={INDs},%
+text={IND},%
+plural={INDs},%
+description={Indistinguibilidad del cifrado},%
+descriptionplural={Indistinguibilidad del cifrado},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Indistinguibilidad del cifrado},%
+longplural={Indistinguibilidad del cifrados},%
+short={IND},%
+shortplural={INDs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{nm}%
+{%
+name={\acronymfont {\glsentryshort {nm}}},%
+sort={NM},%
+type={acronym},%
+first={NM},%
+firstplural={NMs},%
+text={NM},%
+plural={NMs},%
+description={No maleabilidad del cifrado},%
+descriptionplural={No maleabilidad del cifrado},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={No maleabilidad del cifrado},%
+longplural={No maleabilidad del cifrados},%
+short={NM},%
+shortplural={NMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cpa}%
+{%
+name={\acronymfont {\glsentryshort {cpa}}},%
+sort={CPA},%
+type={acronym},%
+first={CPA},%
+firstplural={CPAs},%
+text={CPA},%
+plural={CPAs},%
+description={Ataque de texto plano},%
+descriptionplural={Ataque de texto plano},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ataque de texto plano},%
+longplural={Ataque de texto planos},%
+short={CPA},%
+shortplural={CPAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cca1}%
+{%
+name={\acronymfont {\glsentryshort {cca1}}},%
+sort={CCA1},%
+type={acronym},%
+first={CCA1},%
+firstplural={CCA1s},%
+text={CCA1},%
+plural={CCA1s},%
+description={Ataque de texto cifrado no adaptable},%
+descriptionplural={Ataque de texto cifrado no adaptable},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ataque de texto cifrado no adaptable},%
+longplural={Ataque de texto cifrado no adaptables},%
+short={CCA1},%
+shortplural={CCA1s},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cca2.}%
+{%
+name={\acronymfont {\glsentryshort {cca2.}}},%
+sort={CCA2},%
+type={acronym},%
+first={CCA2},%
+firstplural={CCA2s},%
+text={CCA2},%
+plural={CCA2s},%
+description={Ataque de texto cifrado adaptable},%
+descriptionplural={Ataque de texto cifrado adaptable},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ataque de texto cifrado adaptable},%
+longplural={Ataque de texto cifrado adaptables},%
+short={CCA2},%
+shortplural={CCA2s},%
+counter={page},%
+parent={},%
+%
+}%
+

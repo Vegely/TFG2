@@ -1,5 +1,3 @@
-\chapter{Definiciones básicas}
-\label{chap:def}
 \chapter{Ejemplo \gls{rlwe}}
 \label{chap:ej:rlwe}
 Sea el espacio de trabajo en $R_{17}=\mathbb{Z}_{17}[X]/\left(X^2+1\right)$ con un mensaje $z\in \{0,1\}^2$ y la distribución del error $e\in \{-1,0,1\}$.
@@ -63,3 +61,296 @@ Para cumplirse la distancia a \(0\) debe ser menor a $q/4$ para cada coeficiente
 		\text{d}_1(0) = 1
 	\end{array} 
 \end{equation}
+
+\chapter{Polinomios generadores acortados de Reed-Solomon en \acrshort{hqc}}
+\label{chap:rsPoly}
+A continuación se exponen los polinomios generadores de Reed-Solomon \cite{hqc2025}:
+\begin{align*}
+	RS-S1: \ g_{1}(x) &= 89 
+	+ 69x + 153x^{2} + 116x^{3} + 176x^{4} + 117x^{5} + 111x^{6} + 75x^{7} \\
+	&\quad + 73x^{8} + 233x^{9} + 242x^{10} + 233x^{11} + 65x^{12} + 210x^{13} \\
+	&\quad + 21x^{14} + 139x^{15} + 103x^{16} + 173x^{17} + 67x^{18} + 118x^{19} \\
+	&\quad + 105x^{20} + 210x^{21} + 174x^{22} + 110x^{23} + 74x^{24} + 69x^{25} \\
+	&\quad + 228x^{26} + 82x^{27} + 255x^{28} + 181x^{29} + x^{30}
+	\\[1em]
+	RS-S2: \ g_{2}(x) &= 45 
+	+ 216x + 239x^{2} + 24x^{3} + 253x^{4} + 104x^{5} + 27x^{6} + 40x^{7} \\
+	&\quad + 107x^{8} + 50x^{9} + 163x^{10} + 210x^{11} + 227x^{12} + 134x^{13} \\
+	&\quad + 224x^{14} + 158x^{15} + 119x^{16} + 13x^{17} + 158x^{18} + x^{19} \\
+	&\quad + 238x^{20} + 164x^{21} + 82x^{22} + 43x^{23} + 15x^{24} + 232x^{25} \\
+	&\quad + 246x^{26} + 142x^{27} + 50x^{28} + 189x^{29} + 29x^{30} \\
+	&\quad + 232x^{31} + x^{32}
+	\\[1em]
+	RS-S3: \ g_{3}(x) &= 49 
+	+ 167x + 49x^{2} + 39x^{3} + 200x^{4} + 121x^{5} + 124x^{6} + 91x^{7} \\
+	&\quad + 240x^{8} + 63x^{9} + 148x^{10} + 71x^{11} + 150x^{12} + 123x^{13} \\
+	&\quad + 87x^{14} + 101x^{15} + 32x^{16} + 215x^{17} + 159x^{18} + 71x^{19} \\
+	&\quad + 201x^{20} + 115x^{21} + 97x^{22} + 210x^{23} + 186x^{24} + 183x^{25} \\
+	&\quad + 141x^{26} + 217x^{27} + 123x^{28} + 12x^{29} + 31x^{30} + 243x^{31} \\
+	&\quad + 180x^{32} + 219x^{33} + 152x^{34} + 239x^{35} + 99x^{36} + 141x^{37} \\
+	&\quad + 4x^{38} + 246x^{39} + 191x^{40} + 144x^{41} + 8x^{42} + 232x^{43} \\
+	&\quad + 47x^{44} + 27x^{45} + 141x^{46} + 178x^{47} + 130x^{48} + 64x^{49} \\
+	&\quad + 124x^{50} + 47x^{51} + 39x^{52} + 188x^{53} + 216x^{54} + 48x^{55} \\
+	&\quad + 199x^{56} + 187x^{57} + x^{58}
+\end{align*}
+
+\chapter{Ejemplo de codificación mediante polinomios de Reed-Solomon y Reed-Muller}
+\label{chap:ReedSM}
+Se trabaja con códigos de menor dimensión para hacer viable mostrar el ejemplo numérico.
+\newline
+
+Sea el código de Reed-Solomon \(RS[7,3,5]\):
+\begin{itemize}
+	\item Cuerpo $\mathbb{F}_{2^3}$ con el polinomio \(x^3+x+1\)
+	\item \(n=7\)
+	\item \(k=3\)
+	\item \(d_{min}=5\)
+\end{itemize}
+
+Sea el código de Reed-Muller \(RM(1,2)=[4,3,2]\):
+\begin{itemize}
+	\item \(n=4\)
+	\item \(k=3\)
+	\item \(d_{min}=2\)
+	\item Se duplica el código 2 veces.
+\end{itemize}
+
+Como se trabaja en Reed-Solomon se trabaja en campos de Galois, en este caso \(GF(8)\) con el polinomio primitivo \(x^3+x+1\) se obtiene el polinomio generador:
+\begin{equation}
+	g(x)=\prod_{i=1}^{4} \left( x + \alpha^i \right)=  (\alpha+1)+ (\alpha^2+\alpha)x+\alpha x^2+(\alpha +1)x^3+x^4=3+6x+2x^2+3x^3+x^4
+\end{equation}
+
+La equivalencia de $\alpha$ a binario y decimal en \(GF(8)\) se puede obtener en la tabla \ref{tab:GF(8)}:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		$\alpha^i$ & $\alpha^i$ (polinomial) & $\alpha^i$ (binario) & $\alpha^i$ (decimal) \\
+		\hline
+		$\alpha^0$ & 1 & 001 & 1 \\
+		$\alpha^1$ & $\alpha$ & 010 & 2 \\
+		$\alpha^2$ & $\alpha^2$ & 100 & 4 \\
+		$\alpha^3$ & $\alpha + 1$ & 011 & 3 \\
+		$\alpha^4$ & $\alpha^2 + \alpha$ & 110 & 6 \\
+		$\alpha^5$ & $\alpha^2 + \alpha + 1$ & 111 & 7 \\
+		$\alpha^6$ & $\alpha^2 + 1$ & 101 & 5 \\
+		$\alpha^7$ & 1 & 001 & 1 \\
+		\hline
+	\end{tabular}
+	\caption{Potencias de $\alpha$ en $\text{GF}(2^3)$ con representación en forma de potencia, binaria y decimal.}
+	\label{tab:GF(8)}
+\end{table}
+
+Sea el mensaje \(u\) el mensaje a codificar:
+\begin{equation}
+	u=(u_0,u_1,u_2)=(\alpha^1,\alpha^2,1)\rightarrow u(x)=2+4x+x^2
+\end{equation}
+
+Codificando mediante Reed-Solomon:
+\begin{enumerate}
+	\item Obtener \(y(x)\)
+	\begin{equation}
+		y(x)=x^{n-k}=x^4\cdot u(x)=2x^4+4x^5+x^6
+	\end{equation}
+	\item Obtener \(b(x)\) como el resto de \(y(x)/(g(x)\) mediante división larga, como \(GF(8)\) es de característica \(2\) la inversa aditiva de $\alpha$ es \(-\alpha=\alpha\). Por tanto $b(x)$:
+	\begin{equation}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{array}{cccccccccr}
+			y(x)=&x^6&+\alpha^2x^5&+\alpha x^4&+0&+0&+0&+0 &\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg& g(x)=x^4+\alpha^3x^3+\alpha x^2+\alpha^4 x+\alpha^3\\
+			\cline{10-10}
+			+&x^6&+\alpha^3x^5&+\alpha x^4&+\alpha^4x^3&+\alpha^2x^2&+0&+0&&x^2+\alpha^5x+\alpha\\
+			\cline{2-8}
+			&&\alpha^5x^5&+0&+\alpha^4x^3&+\alpha^2x^2&+0&+0&&\\
+			&+&\alpha^5x^5&+\alpha x^4&+\alpha^6x^3&+\alpha^2x^2&+\alpha x&+0&&\\
+			\cline{3-8}
+			&&&\alpha x^4&+\alpha^3x^3&+0&+\alpha x&+0&&\\
+			&&+&\alpha x^4&+\alpha^4x^3&+\alpha^2x^2&+\alpha^5x&+\alpha^4&&\\
+			\cline{4-8}
+			&&&b(x)=&\alpha^6x^3&+\alpha^2x^2&+\alpha^6x&+\alpha^4&&\\
+		\end{array}
+	\end{equation}
+	\item El mensaje codificado \(c\) quedaría como:
+	\begin{equation}
+		c(x)=\alpha^4+\alpha^6x+\alpha^2x^2+\alpha^6x^3+\alpha x^4+\alpha^2x^5+x^6\rightarrow c=(6,5,4,5,2,4,1)
+	\end{equation}
+\end{enumerate}
+
+Ahora mediante Reed-Muller se codifica el mensaje \(c\):
+\begin{itemize}
+	\item Calcular la matriz generadora \(G\) para el código[4,3,2]:
+	\begin{equation}
+		G=\begin{pmatrix}
+			1&0&0&1\\
+			0&1&0&1\\
+			0&0&1&1
+		\end{pmatrix}
+	\end{equation}
+	\item Codificar cada una de las palabras en \(c\) para obtener el código \(u\). Para ello se trabaja con los símbolos o números de \(c\) en su codificación binaria como se puede ver en la tabla \ref{tab:GF(8)}.
+	\begin{equation}
+		\begin{array}{ccccccc}
+			c_0=6&:&110&\rightarrow &  c_0 \cdot G&=&1100\\
+			c_1=5&:&101&\rightarrow & c_1 \cdot G&=&1010\\
+			c_2=4&:&100&\rightarrow & c_2 \cdot G&=&1001\\
+			c_3=5&:&101&\rightarrow & c_3 \cdot G&=&1010\\
+			c_4=2&:&010&\rightarrow & c_4 \cdot G&=&0101\\
+			c_5=4&:&100&\rightarrow & c_5 \cdot G&=&1001\\
+			c_6=1&:&001&\rightarrow & c_6 \cdot G&=&0011\\
+		\end{array}
+	\end{equation}
+	\item Se repite cada bloque 2 veces para producir el código final \(v\):
+	\begin{equation}
+		v=11001100101010101001100110101010010101011001100100110011
+	\end{equation}
+\end{itemize}
+
+Ahora al mensaje se le añadiría ruido aleatorio \(r\) para que el atacante no conozca el mensaje enviado:
+\begin{equation}
+	v'=v+r=11001000101010100110010010111010010111011001101100010011
+\end{equation}
+
+Para decodificar con Reed-Muller se siguen los siguientes pasos:
+\begin{itemize}
+	\item Dividir el mensaje \(v'\) en bloques
+	\begin{equation}
+		\begin{array}{ccc}
+			\text{Bloque}_0 &=& 1100 1000\\
+			\text{Bloque}_1	&=& 1010 1010\\
+			\text{Bloque}_2	&=& 0110 0100\\
+			\text{Bloque}_3	&=& 1011 1010\\
+			\text{Bloque}_4	&=& 0101 1101\\
+			\text{Bloque}_5	&=& 1001 1011\\
+			\text{Bloque}_6	&=& 0001 0011\\			
+		\end{array}
+	\end{equation}
+	\item Para cada bloque se aplica la función \(F\), en la tabla \ref{tab:majority} se ve el ejemplo del $\text{Bloque}_0$ y se obtienen los siguientes resultados para cada bloque:
+	\begin{equation}
+		\begin{array}{ccc}
+			F(\text{Bloque}_0) &=& (-2,0,2,2)\\
+			F(\text{Bloque}_1)	&=& (-2,2,-2,2)\\
+			F(\text{Bloque}_2)	&=& (2,-2,0,2)\\
+			F(\text{Bloque}_3)	&=& (-2,2,-2,0)\\
+			F(\text{Bloque}_4)	&=& (0,-2,2,-2)\\
+			F(\text{Bloque}_5)	&=& (-2,2,0,-2)\\
+			F(\text{Bloque}_6)	&=& (2,2,0,-2)\\			
+		\end{array}
+	\end{equation}
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Bit & 1 & 2 & 3 & 4 \\
+			\hline
+			Mitad 1 & 1 & 1 & 0 & 0 \\
+			Mitad 2 & 1 & 0 & 0 & 0 \\
+			\hline
+			\(F\) & -2 & 0 & 2 & 2 \\
+			\hline
+		\end{tabular}
+		\caption{Ejemplo de aplicación de \(F\) sobre el $\text{Bloque}_0$.}
+		\label{tab:majority}
+	\end{table}
+	\item Se construye la matriz de Hadamant \(H_4\) y se multiplica cada fila:
+	\begin{equation}
+		H_4=\begin{pmatrix}
+			1&1&1&1\\
+			1&-1&1&-1\\
+			1&1&-1&-1\\
+			1&-1&-1&1
+		\end{pmatrix}
+	\end{equation}
+	\begin{equation}
+		\begin{array}{ccc}
+		H_4\cdot F(\text{Bloque}_0) &=& (2,-2,-6,-2)\\
+		H_4\cdot F(\text{Bloque}_1)	&=& (0,-8,0,0)\\
+		H_4\cdot F(\text{Bloque}_2)	&=& (2,2,-2,6)\\
+		H_4\cdot F(\text{Bloque}_3)	&=& (-2,-6,2,-2)\\
+		H_4\cdot F(\text{Bloque}_4)	&=& (-2,6,-2,-2)\\
+		H_4\cdot F(\text{Bloque}_5)	&=& (-2,-2,2,-6)\\
+		H_4\cdot F(\text{Bloque}_6)	&=& (2,2,6,-2)\\
+	\end{array}	
+	\end{equation}
+	\item Viendo que los picos se descifra para cada bloque su mensaje como la fila de \(H_4\) en la cual se da el mayor valor en valor absoluto. Donde si este valor es negativo se cambia el signo de la fila. Por tanto, el código descifrado por Reed-Muller es \(r\):
+	\begin{equation}
+		\begin{array}{ccccccc}
+			r_0=6&:&110&\rightarrow & c_0 \cdot G&=&1100\\ 
+			r_1=5&:&101&\rightarrow & c_1 \cdot G&=&1010\\ 
+			r_2=3&:&011&\rightarrow & c_2 \cdot G&=&0110\\ 
+			r_3=5&:&101&\rightarrow & c_3 \cdot G&=&1010\\ 
+			r_4=2&:&010&\rightarrow & c_4 \cdot G&=&0101\\ 
+			r_5=4&:&100&\rightarrow & c_5 \cdot G&=&1001\\ 
+			r_6=1&:&001&\rightarrow & c_6 \cdot G&=&0011\\ 
+		\end{array}
+	\end{equation}
+\end{itemize}
+
+A continuación se decodifica con Reed-Solomon:
+\begin{itemize}
+	\item Se calcula el número de síndromes posibles \(2\delta\):
+	\begin{equation}
+		\delta= \dfrac{d_{min}-1}{2}=2
+	\end{equation}
+	\item Se calculan los $2\delta$ síndromes para \(r(x)\) :
+	\begin{equation}
+		\begin{array}{l}
+			r(x)=\alpha^4+\alpha^6x+\alpha^3 x^2+\alpha^6x^3+\alpha x^4+\alpha^2x^5+x^6 \leftarrow r=(6,5,3,5,2,4,1)\\
+			S_1=r(\alpha ^1)=1\\
+			S_2=r(\alpha ^2)=\alpha^4\\
+			S_3=r(\alpha ^3)=\alpha^2\\
+			S_4=r(\alpha ^4)=1\\
+		\end{array}
+	\end{equation}
+	
+	\item Se construye el polinomio \(\sigma\) que como máximo puede tener \(\delta\) errores:
+	\begin{equation}
+		\sigma=\prod_{i=1}^{2} \left( 1 + \beta_ix  \right)=1+\sigma_1x+\sigma_2x^2\rightarrow\begin{pmatrix}
+			S_1 & S_2\\
+			S_2 & S_3
+		\end{pmatrix}\begin{pmatrix}
+		\sigma_2 \\
+		\sigma_1
+		\end{pmatrix}=\begin{pmatrix}
+		-S_3 \\
+		-S_4
+		\end{pmatrix}
+	\end{equation}
+	\begin{equation}
+		\begin{pmatrix}
+			1 & \alpha^4\\
+			\alpha^4 & \alpha^2
+		\end{pmatrix}\begin{pmatrix}
+			\sigma_2 \\
+			\sigma_1
+		\end{pmatrix}=\begin{pmatrix}
+			\alpha^2 \\
+			1
+		\end{pmatrix} \rightarrow  1+\alpha^2x
+	\end{equation}
+	\item Se obtienen las raíz $\beta^{-1}$ de $\sigma$
+	\begin{equation}
+		\begin{array}{l}
+			\beta^{-1}=\alpha^2\\
+		\end{array}
+	\end{equation}
+	
+	\item Se calcula el polinomio \(Z(x)\):
+	\begin{equation}
+		Z(x)=\sum_{i=0}^{2\delta-1}\sum_{j=0}^i S_j\cdot \sigma_{i-j} x^i=1+(S_1+\sigma_1)x+(S_2+S_1\sigma_1)x^2+(S_3+S_2\sigma_1)x^3
+	\end{equation}
+	\begin{equation}
+		Z(x)=1+\alpha^6x+\alpha x^2 + x^3
+	\end{equation}
+	\item La magnitud del error:
+	\begin{equation}
+		e_{jl}=\dfrac{Z(\beta_l^{-1})}{\prod\limits_{\substack{i=1 \\ i \neq l}}^t \left( 1 + \beta_i \beta_l^{-1} \right)}
+	\end{equation}
+	\begin{equation}
+			e=\dfrac{\alpha}{1}=\alpha\\
+	\end{equation}
+	\item Se corrigen los errores en la posición \(\log_\alpha{\beta^{-1}}\) y se obtiene el mensaje \(c\):
+	\begin{equation}
+		c=r+e=(6,5,4,5,2,4,1)
+	\end{equation}
+	
+\end{itemize}
+
+Como se puede ver el decodificador ha sido capaz de descifrar el código.

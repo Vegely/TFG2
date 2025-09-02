@@ -7,6 +7,7 @@ A level-1 auxiliary file: capitulos/licencia.aux
 A level-1 auxiliary file: capitulos/evaluacion.aux
 A level-1 auxiliary file: capitulos/agradecimientos.aux
 A level-1 auxiliary file: capitulos/resumen.aux
+A level-1 auxiliary file: capitulos/glosario.aux
 A level-1 auxiliary file: capitulos/introduccion.aux
 A level-1 auxiliary file: capitulos/estadoarte.aux
 White space in argument---line 10 of file capitulos/estadoarte.aux
@@ -20,52 +21,54 @@ A level-1 auxiliary file: capitulos/conclusion.aux
 A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 335 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 377 of file bibliografia/bibliografia.bib
  : @misc{First-Order-Masked-Kyber-on-ARM 
  :                                       Cortex-M4,
 I'm skipping whatever remains of this entry
 Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
 Warning--empty author in NISTFIPS203
 Warning--empty journal in RESERCHFINAL
-You've used 40 entries,
+Warning--empty booktitle in Gaborit2005ShorterKF
+Warning--empty publisher in 24hqc
+You've used 45 entries,
             1791 wiz_defined-function locations,
-            713 strings with 11333 characters,
-and the built_in function-call counts, 7397 in all, are:
-= -- 681
-> -- 253
+            738 strings with 11840 characters,
+and the built_in function-call counts, 8149 in all, are:
+= -- 740
+> -- 281
 < -- 10
-+ -- 103
-- -- 63
-* -- 366
-:= -- 1148
-add.period$ -- 124
-call.type$ -- 40
-change.case$ -- 43
++ -- 115
+- -- 70
+* -- 391
+:= -- 1268
+add.period$ -- 139
+call.type$ -- 45
+change.case$ -- 46
 chr.to.int$ -- 0
-cite$ -- 43
-duplicate$ -- 341
-empty$ -- 803
-format.name$ -- 63
-if$ -- 1713
+cite$ -- 50
+duplicate$ -- 385
+empty$ -- 896
+format.name$ -- 70
+if$ -- 1887
 int.to.chr$ -- 0
-int.to.str$ -- 40
-missing$ -- 18
-newline$ -- 203
-num.names$ -- 42
-pop$ -- 152
+int.to.str$ -- 45
+missing$ -- 24
+newline$ -- 228
+num.names$ -- 47
+pop$ -- 181
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 186
+skip$ -- 202
 stack$ -- 0
 substring$ -- 326
-swap$ -- 83
+swap$ -- 88
 text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 3
-while$ -- 62
-width$ -- 42
-write$ -- 435
+warning$ -- 5
+while$ -- 67
+width$ -- 47
+write$ -- 485
 (There were 2 error messages)

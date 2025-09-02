@@ -12,11 +12,15 @@ A.~Basso, J.M.~Bermudo Mera, J.P. Anvers, et~al.
 \newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}, 2020.
 \newblock NIST PQC Round 3 submission.
 
-\bibitem{hqc-spec-2022}
-N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
-\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
-\newblock Technical report, HQC Team, October 2022.
-\newblock NIST PQC Round 4 submission.
+\bibitem{hqc2025}
+N.~Aragon et~al. P.~Gaborit, C. Aguilar-Melchor.
+\newblock Hamming quasi-cyclic (hqc) specification.
+\newblock \url{https://pqc-hqc.org/resources.html}, August 2025.
+
+\bibitem{FIPS202}
+M.J. Dworkin.
+\newblock Sha-3 standard: Permutation-based hash and extendable-output
+  functions, 2015-08-04 00:08:00 2015.
 
 \bibitem{tikzmaker}
 Tikzmaker.
@@ -119,6 +123,11 @@ S.~Singh and E.~Sakk.
   cryptosystem security.
 \newblock January 2024.
 
+\bibitem{SurveyCOdeBAsed}
+N.~Gassner V.~Weger and J.~Rosenthal.
+\newblock A survey on code-based cryptography.
+\newblock {\em CoRR}, abs/2201.07119, 2022.
+
 \bibitem{NIST_SP_800_227_ipd_2025}
 L.~Chen et~al. G.~Alagic, E.~Barker.
 \newblock Recommendations for key-encapsulation mechanisms: Initial public
@@ -126,36 +135,11 @@ L.~Chen et~al. G.~Alagic, E.~Barker.
 \newblock NIST Special Publication NIST SP 800-227 ipd, National Institute of
   Standards and Technology (NIST), January 2025.
 
-\bibitem{FIPS202}
-M.J. Dworkin.
-\newblock Sha-3 standard: Permutation-based hash and extendable-output
-  functions, 2015-08-04 00:08:00 2015.
-
 \bibitem{Keccak}
 J.~Daemen G.~Bertoni and M.~Peeters.
 \newblock The keccak reference.
 \newblock Technical report, NIST SHA-3 Competition, 2011.
 \newblock Round 3 submission.
-
-\bibitem{CCA2}
-A.~Desai M.~Bellare and D.~Pointcheval.
-\newblock Relations among notions of security for public-key encryption
-  schemes.
-\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
-  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
-
-\bibitem{Fujisaki1999}
-E.~Fujisaki and T.~Okamoto.
-\newblock Secure integration of asymmetric and symmetric encryption schemes.
-\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
-  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
-  Berlin, Heidelberg, 1999. Springer.
-
-\bibitem{rngWIN}
-Z.~Gutterman L.~Dorrendorf and B.~Pinkas.
-\newblock Cryptanalysis of the random number generator of the windows operating
-  system.
-\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
 
 \bibitem{nistPQCround3}
 Post-quantum cryptography - round 3 submissions.
@@ -239,5 +223,46 @@ L.~Ducas et~al. J.~Bos, C.~Costello.
 \newblock Frodo: Take off the ring! practical, quantum-secure key exchange from
   {LWE}.
 \newblock Cryptology {ePrint} Archive, Paper 2016/659, 2016.
+
+\bibitem{hqc-spec-2022}
+N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
+\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
+\newblock Technical report, HQC Team, October 2022.
+\newblock NIST PQC Round 4 submission.
+
+\bibitem{Gaborit2005ShorterKF}
+P.~Gaborit.
+\newblock Shorter keys for code-based cryptography.
+\newblock 2005.
+
+\bibitem{forney1966concatenated}
+G.~David Forney.
+\newblock {\em Concatenated Codes}.
+\newblock MIT Press, Cambridge, MA, 1966.
+
+\bibitem{24hqc}
+Shu Lin and Daniel Costello.
+\newblock {\em Error Control Coding}.
+\newblock 01 2004.
+
+\bibitem{CCA2}
+A.~Desai M.~Bellare and D.~Pointcheval.
+\newblock Relations among notions of security for public-key encryption
+  schemes.
+\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
+  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
+
+\bibitem{Fujisaki1999}
+E.~Fujisaki and T.~Okamoto.
+\newblock Secure integration of asymmetric and symmetric encryption schemes.
+\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
+  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
+  Berlin, Heidelberg, 1999. Springer.
+
+\bibitem{rngWIN}
+Z.~Gutterman L.~Dorrendorf and B.~Pinkas.
+\newblock Cryptanalysis of the random number generator of the windows operating
+  system.
+\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
 
 \end{thebibliography}
