@@ -141,28 +141,33 @@
 \citation{CCA2}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Fundamentos de seguridad de los algoritmos asimétricos}{44}{section.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Indistinguibilidad bajo ataque de texto cifrado adaptable \acrshort {cca2}}{44}{subsection.3.4.1}\protected@file@percent }
-\citation{Fujisaki1999}
-\citation{rngWIN}
+\citation{CCA2}
+\citation{CCA2}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado.}}{45}{figure.3.9}\protected@file@percent }
 \newlabel{fig:attacksOracles}{{3.9}{45}{Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado}{figure.3.9}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1.1}Transformadas Fujisaki-Okamoto \acrshort {tfo}}{45}{subsubsection.3.4.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Generación de números aleatorios criptográficamente seguros}{45}{subsection.3.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.1}Generación de números aleatorios en Windows}{45}{subsubsection.3.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2.2}Generación de números aleatorios en el PSOC}{45}{subsubsection.3.4.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Garantías de seguridad de los algoritmos postcuánticos}{46}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Garantías de seguridad de Kyber}{46}{subsection.3.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.1}Seguridad esperada en Kyber}{46}{subsubsection.3.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1.2}Análisis respecto a ataques conocidos en el esquema Kyber}{46}{subsubsection.3.5.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Garantías de seguridad de Saber}{46}{subsection.3.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.1}Seguridad esperada en Saber}{46}{subsubsection.3.5.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2.2}Análisis respecto a ataques conocidos en el esquema Saber}{46}{subsubsection.3.5.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Garantías de seguridad de \acrshort {hqc}}{46}{subsection.3.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.1}Seguridad esperada en \acrshort {hqc}}{46}{subsubsection.3.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3.2}Análisis respecto a ataques conocidos en el esquema \acrshort {hqc}}{46}{subsubsection.3.5.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite  {CCA2} que demuestran estas relaciones, unicamente no es necesario demostrar que si un esquema mas restrictivo se cumple su esquema más laxo también.}}{45}{figure.3.10}\protected@file@percent }
+\newlabel{fig:EQUIVALENTSECURITY}{{3.10}{45}{Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite {CCA2} que demuestran estas relaciones, unicamente no es necesario demostrar que si un esquema mas restrictivo se cumple su esquema más laxo también}{figure.3.10}{}}
+\citation{CCA2}
+\citation{QROM}
+\citation{Nielsen_Chuang_2010}
+\citation{QROM}
+\citation{yamakawa2021classical}
+\citation{Fujisaki1999}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Transformadas Fujisaki-Okamoto \acrshort {tfo}}{48}{subsection.3.4.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {28}{\ignorespaces Cifrado $\mathcal  {E}^{hy}_{pk}$}}{48}{algorithm.28}\protected@file@percent }
+\citation{Fujisaki1999}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {29}{\ignorespaces Descifrado $\mathcal  {D}^{hy}_{sk}$}}{49}{algorithm.29}\protected@file@percent }
+\citation{kyber-spec-2021}
+\citation{saber-spec-2020}
+\citation{hqc2025}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Garantías de seguridad de los algoritmos postcuánticos}{50}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Seguridad esperada en Kyber}{50}{subsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Seguridad esperada en Saber}{50}{subsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Seguridad esperada en \acrshort {hqc}}{50}{subsection.3.5.3}\protected@file@percent }
 \@setckpt{capitulos/fundamentosgenerales}{
-\setcounter{page}{47}
-\setcounter{equation}{180}
-\setcounter{enumi}{3}
+\setcounter{page}{51}
+\setcounter{equation}{198}
+\setcounter{enumi}{2}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
@@ -172,10 +177,10 @@
 \setcounter{chapter}{3}
 \setcounter{section}{5}
 \setcounter{subsection}{3}
-\setcounter{subsubsection}{2}
+\setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{9}
+\setcounter{figure}{10}
 \setcounter{table}{6}
 \setcounter{subfigure}{0}
 \setcounter{lofdepth}{1}
@@ -187,13 +192,13 @@
 \setcounter{@ppsaveapp}{0}
 \setcounter{float@type}{16}
 \setcounter{parentequation}{0}
-\setcounter{section@level}{3}
-\setcounter{Item}{33}
+\setcounter{section@level}{2}
+\setcounter{Item}{38}
 \setcounter{Hfootnote}{0}
 \setcounter{Hy@AnnotLevel}{0}
-\setcounter{bookmark@seq@number}{69}
-\setcounter{algorithm}{27}
-\setcounter{ALG@line}{12}
+\setcounter{bookmark@seq@number}{60}
+\setcounter{algorithm}{29}
+\setcounter{ALG@line}{11}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}
 \setcounter{ALG@Lnr}{2}

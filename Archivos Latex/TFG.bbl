@@ -22,6 +22,13 @@ M.J. Dworkin.
 \newblock Sha-3 standard: Permutation-based hash and extendable-output
   functions, 2015-08-04 00:08:00 2015.
 
+\bibitem{CCA2}
+A.~Desai M.~Bellare and D.~Pointcheval.
+\newblock Relations among notions of security for public-key encryption
+  schemes.
+\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
+  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
+
 \bibitem{tikzmaker}
 Tikzmaker.
 \newblock \url{https://tikzmaker.com/editor}, 2024.
@@ -225,7 +232,7 @@ L.~Ducas et~al. J.~Bos, C.~Costello.
 \newblock Cryptology {ePrint} Archive, Paper 2016/659, 2016.
 
 \bibitem{hqc-spec-2022}
-N.~Aragon C.~Aguilar~Melchor and S.~Bettaieb et~al.
+N.~Aragon C.~Aguilar~Melchor and et~al. S.~Bettaieb.
 \newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
 \newblock Technical report, HQC Team, October 2022.
 \newblock NIST PQC Round 4 submission.
@@ -245,12 +252,22 @@ Shu Lin and Daniel Costello.
 \newblock {\em Error Control Coding}.
 \newblock 01 2004.
 
-\bibitem{CCA2}
-A.~Desai M.~Bellare and D.~Pointcheval.
-\newblock Relations among notions of security for public-key encryption
-  schemes.
-\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
-  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
+\bibitem{QROM}
+M.~Fischlin et~al. D.~Boneh, O.~Dagdelen.
+\newblock {\em Random Oracles in a Quantum World}, pages 13--59.
+\newblock Springer Berlin Heidelberg, 2011.
+
+\bibitem{Nielsen_Chuang_2010}
+M.A. Nielsen and I.L. Chuang.
+\newblock {\em Quantum Computation and Quantum Information: 10th Anniversary
+  Edition}.
+\newblock Cambridge University Press, Cambridge, 2010.
+
+\bibitem{yamakawa2021classical}
+T.~Yamakawa and M.~Zhandry.
+\newblock Classical vs quantum random oracles.
+\newblock In {\em Annual International Conference on the Theory and
+  Applications of Cryptographic Techniques}, pages 568--597. Springer, 2021.
 
 \bibitem{Fujisaki1999}
 E.~Fujisaki and T.~Okamoto.
@@ -258,11 +275,5 @@ E.~Fujisaki and T.~Okamoto.
 \newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
   99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
   Berlin, Heidelberg, 1999. Springer.
-
-\bibitem{rngWIN}
-Z.~Gutterman L.~Dorrendorf and B.~Pinkas.
-\newblock Cryptanalysis of the random number generator of the windows operating
-  system.
-\newblock Cryptology {ePrint} Archive, Paper 2007/419, 2007.
 
 \end{thebibliography}

@@ -10,12 +10,10 @@
 \glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
 \glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
 \glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xviii}}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xix}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xix}}
 \glossaryentry{LWE?\glossentry{lwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
@@ -149,12 +147,28 @@
 \glossaryentry{CCA1?\glossentry{cca1}|setentrycounter[]{page}"\glsnumberformat}{44}
 \glossaryentry{CCA2?\glossentry{cca2.}|setentrycounter[]{page}"\glsnumberformat}{44}
 \glossaryentry{CCA1?\glossentry{cca1}|setentrycounter[]{page}"\glsnumberformat}{44}
-\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{45}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{46}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{46}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{46}
-\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{49}
-\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{49}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{54}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{IND?\glossentry{ind}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{IND?\glossentry{ind}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{CPA?\glossentry{cpa}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{CCA1?\glossentry{cca1}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{CCA2?\glossentry{cca2.}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{IND?\glossentry{ind}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{PA?\glossentry{pa}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{PA?\glossentry{pa}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{PA?\glossentry{pa}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{46}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{47}
+\glossaryentry{PA?\glossentry{pa}|setentrycounter[]{page}"\glsnumberformat}{47}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{47}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{48}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{48}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{48}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{49}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{49}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{50}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{50}
+\glossaryentry{RSA?\glossentry{rsa}|setentrycounter[]{page}"\glsnumberformat}{53}
+\glossaryentry{ECC?\glossentry{ecc}|setentrycounter[]{page}"\glsnumberformat}{53}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{57}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{58}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{59}

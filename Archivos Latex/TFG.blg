@@ -21,54 +21,80 @@ A level-1 auxiliary file: capitulos/conclusion.aux
 A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 377 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 431 of file bibliografia/bibliografia.bib
  : @misc{First-Order-Masked-Kyber-on-ARM 
  :                                       Cortex-M4,
 I'm skipping whatever remains of this entry
+Too many commas in name 1 of "R. Avanzi, J. Bos, L. Ducas, et al." for entry kyber-spec-2021
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "P. Gaborit, C. Aguilar-Melchor, N. Aragon, et al." for entry hqc2025
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "G. Alagic, D. Apon, D. Cooper, et al." for entry NIST_IR_8413_2022
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "G. Alagic, M. Bros, P. Ciadoux, et al." for entry NIST_IR_8545_2025
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "Y. Zhang, Y. Bian, Z. Li, et al." for entry 011318_1_5.0179566
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "A. Atadoga, O. Ajoke, B. Samson, et al." for entry A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
+while executing---line 944 of file unsrt.bst
 Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
+Too many commas in name 1 of "C.H. Ugwuishiwu, U.E. Orji, C.I. Ugwu, et al.a" for entry An_overview_of_Quantum_Cryptography_and
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "D. Aasen, M. Aghaee, Z. Alam, et al." for entry 2502.12252v1
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "F. Samiullah, M.L. Gan, S. Akleylek, et al." for entry Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT
+while executing---line 944 of file unsrt.bst
 Warning--empty author in NISTFIPS203
 Warning--empty journal in RESERCHFINAL
+Too many commas in name 1 of "G. Alagic, E. Barker, L. Chen, et al." for entry NIST_SP_800_227_ipd_2025
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "J.P. Anvers, A. Karmakar, S. Roy, et al." for entry modlwr
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "J. Bos, C. Costello, L. Ducas, et al." for entry Correctness
+while executing---line 944 of file unsrt.bst
 Warning--empty booktitle in Gaborit2005ShorterKF
 Warning--empty publisher in 24hqc
-You've used 45 entries,
+Too many commas in name 1 of "D. Boneh, O. Dagdelen, M. Fischlin, et al." for entry QROM
+while executing---line 944 of file unsrt.bst
+You've used 47 entries,
             1791 wiz_defined-function locations,
-            738 strings with 11840 characters,
-and the built_in function-call counts, 8149 in all, are:
-= -- 740
-> -- 281
-< -- 10
-+ -- 115
-- -- 70
-* -- 391
-:= -- 1268
-add.period$ -- 139
-call.type$ -- 45
+            751 strings with 12163 characters,
+and the built_in function-call counts, 8838 in all, are:
+= -- 814
+> -- 293
+< -- 12
++ -- 120
+- -- 73
+* -- 424
+:= -- 1355
+add.period$ -- 146
+call.type$ -- 47
 change.case$ -- 46
 chr.to.int$ -- 0
-cite$ -- 50
-duplicate$ -- 385
-empty$ -- 896
-format.name$ -- 70
-if$ -- 1887
+cite$ -- 52
+duplicate$ -- 429
+empty$ -- 967
+format.name$ -- 73
+if$ -- 2062
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 24
-newline$ -- 228
-num.names$ -- 47
-pop$ -- 181
+int.to.str$ -- 47
+missing$ -- 29
+newline$ -- 238
+num.names$ -- 49
+pop$ -- 194
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 202
+skip$ -- 228
 stack$ -- 0
-substring$ -- 326
-swap$ -- 88
-text.length$ -- 10
+substring$ -- 382
+swap$ -- 107
+text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 5
-while$ -- 67
-width$ -- 47
-write$ -- 485
-(There were 2 error messages)
+while$ -- 75
+width$ -- 49
+write$ -- 509
+(There were 15 error messages)

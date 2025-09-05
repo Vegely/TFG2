@@ -614,3 +614,31 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{pa}%
+{%
+name={\acronymfont {\glsentryshort {pa}}},%
+sort={PA},%
+type={acronym},%
+first={PA},%
+firstplural={PAs},%
+text={PA},%
+plural={PAs},%
+description={Ataque de texto cifrado adaptable},%
+descriptionplural={Ataque de texto cifrado adaptable},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ataque de texto cifrado adaptable},%
+longplural={Ataque de texto cifrado adaptables},%
+short={PA},%
+shortplural={PAs},%
+counter={page},%
+parent={},%
+%
+}%
+

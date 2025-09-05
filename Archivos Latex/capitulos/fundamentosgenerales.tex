@@ -2260,12 +2260,15 @@ En el cifrado se buscan dos objetivos:
 \end{enumerate}
 \newline
 
-Un atacante puede realizar tres tipos de ataques teóricos, es decir, estos ataques no son ataques físicos al sistema si no :
+Un atacante puede realizar tres tipos de ataques teóricos, es decir, no constituyen ataques físicos al sistema, sino análisis de seguridad formal:
 \begin{enumerate}
 	\item \textbf{Ataque de texto plano} (\acrshort{cpa}): el adversario puede obtener textos cifrados de textos planos a su elección. Un esquema es seguro frente a \acrshort{cpa} si el adversario no puede distinguir cuál de dos mensajes elegidos ha sido cifrado en el texto cifrado de desafío. Es decir, puede realizar la fase 1 de la figura \ref{fig:attacksOracles}.
 	\item \textbf{Ataque de texto cifrado no adaptable} (\acrshort{cca1}): el adversario tiene acceso a un oráculo de descifrado, es decir, puede enviar textos cifrados y obtener sus correspondientes textos planos. Sin embargo, este acceso es limitado: el oráculo solo puede consultarse antes de recibir el texto cifrado de desafío. Es decir, puede realizar la fase 1 y la fase 2 del ataque mientras no se dé la fase de desafío como se puede ver en la figura \ref{fig:attacksOracles}.
 	\item \textbf{Ataque de texto cifrado adaptable} (\acrshort{cca2.}): es similar al ataque \acrshort{cca1}, pero el acceso al oráculo de descifrado no se pierde. La única limitación es que no se puede utilizar esta función con el propio texto cifrado de desafío. Se denomina adaptable debido a que los textos cifrados utilizados pueden depender del propio texto cifrado de desafío. Es decir, puede realizar todas las fases de la figura \ref{fig:attacksOracles}.
 \end{enumerate}
+\newline
+
+
 \newpage
 \begin{figure}[H]
 	\centering
@@ -2298,23 +2301,261 @@ Un atacante puede realizar tres tipos de ataques teóricos, es decir, estos ataq
 	\caption{Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado.}
 	\label{fig:attacksOracles}
 \end{figure}
-\subsubsection{Transformadas Fujisaki-Okamoto \acrshort{tfo}}
-\cite{Fujisaki1999}
 
-\subsection{Generación de números aleatorios criptográficamente seguros}
-En esta sección se analiza el proceso de generación de números aleatorios, con el fin de evitar vulnerabilidades que puedan comprometer la seguridad de los algoritmos criptográficos. Un generador predecible permitiría a un atacante inferir los valores producidos, exponiendo así la información de los secretos.
-\subsubsection{Generación de números aleatorios en Windows}
-\cite{rngWIN}
-\subsubsection{Generación de números aleatorios en el PSOC}
+Estos objetivos y tipos de ataques se agrupan en conjunto creando un total de 6 posibles esquemas como se ve en la figura \ref{fig:EQUIVALENTSECURITY}. 
+\begin{figure}[H]
+	\centering
+	\begin{circuitikz}
+		\tikzstyle{every node}=[font=\normalsize]
+		\node [font=\normalsize] at (6.25,14.75) {NM-CPA};
+		\node [font=\normalsize] at (10,14.75) {NM-CCA1};
+		\node [font=\normalsize] at (14,14.75) {NM-CCA2};
+		\node [font=\normalsize] at (6.25,12.75) {IND-CPA};
+		\node [font=\normalsize] at (10,12.75) {IND-CCA1};
+		\node [font=\normalsize] at (14,12.75) {IND-CCA2};
+		\draw [->, >=Stealth] (9,14.75) -- (7.25,14.75);
+		\draw [->, >=Stealth] (11,15) -- (13,15);
+		\draw [->, >=Stealth] (13,12.75) -- (11,12.75);
+		\draw [->, >=Stealth] (9,12.75) -- (7.25,12.75);
+		\draw [->, >=Stealth] (6.25,14.5) -- (6.25,13);
+		\draw [->, >=Stealth] (10,14.5) -- (10,13);
+		\draw [->, >=Stealth] (13,14.75) -- (11,14.75);
+		\draw [->, >=Stealth] (13.75,13) -- (13.75,14.5);
+		\draw [->, >=Stealth] (14,14.5) -- (14,13);
+		\node [font=\normalsize] at (13.5,13.75) {3.1};
+		\node [font=\normalsize] at (9.75,13.75) {3.1};
+		\node [font=\normalsize] at (6,13.75) {3.1};
+		\node [font=\normalsize] at (14.5,13.75) {3.3};
+		\node [font=\normalsize] at (12,15.25) {3.7};
+	\end{circuitikz}
+	\caption{Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite{CCA2} que demuestran estas relaciones, unicamente no es necesario demostrar que si un esquema mas restrictivo se cumple su esquema más laxo también.}
+	\label{fig:EQUIVALENTSECURITY}
+\end{figure}
+
+Para definir de manera formal los ataques \acrshort{ind} se utiliza el siguiente experimento. Sea \(A_1\) un algoritmo que, a partir de la llave pública \({pk}\), obtiene como salida \((x_0,x_1,s)\), donde \(x_0\) y \(x_1\) son mensajes de la misma longitud y \(s\) es información del estado que se quiere conservar. Uno de estos mensajes se elige al azar denotado como \(x_b\). Entonces, el reto \(y\) se obtiene al cifrar \(x_b\) con la llave pública. Finalmente, mediante el algoritmo \(A_2\) se debe determinar cuál es el texto de entrada, valor de \(b\), dado el estado \(s\) y el reto \(y\).
+\newline
+
+Por tanto se definen los esquemas \acrshort{ind}-\{\acrshort{cpa}, \acrshort{cca1}, \acrshort{cca2.}\}. Sea un esquema de cifrado asimétrico \(\mathcal{PE}=(\mathcal{K},\mathcal{E},\mathcal{D})\) con \((\mathcal{K},\mathcal{E},\mathcal{D})\) la función generadora de claves, el cifrado y el descifrado respectivamente. Sea un adversario \(A=(A_1,A_2)\) para los ataques \(atq\in \{cpa, cca1, cca2\}\) y \(k\in\mathbb{Z}\):
+\begin{equation}
+	\text{Adv}_{\mathcal{PE},A}^{\text{ind-atk}}(k)=\text{P}\left(\texttt{Exp}_{\mathcal{PE},A}^{\text{ind-atk-1}}(k)=1\right)-\text{P}\left(\texttt{Exp}_{\mathcal{PE},A}^{\text{ind-atk-0}}(k)=1\right)
+\end{equation}
+donde Adv denota la ventaja de un adversario de lograr el ataque, P denota la probabilidad de un suceso y Exp denota el experimento:
+\begin{equation}
+	\begin{array}{llll}
+		b\in\{0,1\}&\\
+		\texttt{Exp}_{\mathcal{PE},A}^{\text{ind-atk-1}}(k)=&\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg&(pk,sk):=\mathcal{K}(k)\\
+		&\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg&(x_0,x_1,s):=A_1^{\mathcal{O}_1(.)}(pk)\\
+		&\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg&y:=\mathcal{E}_{pk}(x_b)\\
+		&\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg&d:=A_2^{\mathcal{O}_2(.)}(x_0,x_1,s,y)\\
+		&\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg&\text{Return } d\\
+		\\
+		\text{con:}& \kern\arraycolsep\vline\kern-\arraycolsep\hfilneg& \text{atk=cpa }\rightarrow \mathcal{O}_1(.)=\varepsilon & \mathcal{O}_2(.)=\varepsilon\\
+		& \kern\arraycolsep\vline\kern-\arraycolsep\hfilneg& \text{atk=cca1}\rightarrow \mathcal{O}_1(.)=\mathcal{D}_{sk}(.) & \mathcal{O}_2(.)=\varepsilon\\
+		& \kern\arraycolsep\vline\kern-\arraycolsep\hfilneg& \text{atk=cca2}\rightarrow \mathcal{O}_1(.)=\mathcal{D}_{sk}(.) & \mathcal{O}_2(.)=\mathcal{D}_{sk}(.)\\
+	\end{array}
+\end{equation}
+donde $\varepsilon$ denota que o esta disponible la función. Por tanto, viendo esta definición formal se puede ver que el esquema es seguro ande un ataque \acrshort{ind} si para \(A\) en tiempo polinómico la ventaja obtenida es despreciable.
+\newline
+
+Un concepto relevante dentro de la seguridad es el concepto de \esquote{plaintext awarness} \acrshort{pa} o consciencia de texto plano que formaliza la incapacidad de un adversario para crear un texto cifrado \(y\) sin conocer el texto plano \(x\) que lo genera. Normalmente este concepto solo se define en el modelo de oráculo aleatorio donde todas las partes tienen acceso a una función aleatoria \(H\) que conviertes del conjunto de todas las funciones a un dominio del rango adecuado. En la práctica \(H\) se implementa mediante una función de hashing. En la definición formal anterior implica modificar las funciones \(\mathcal{E}_{pk}\rightarrow\mathcal{E}_{pk}^H\) y \(\mathcal{D}_{sk}\rightarrow\mathcal{D}_{sk}^H\).
+\newline
+
+Estos cambios implican que un adversario \(B\) para tener consciencia de texto plano se dan una llave pública \(pk\) y acceso al oráculo aleatorio \(H\). El adversario computa un texto cifrado \(y\) y, para ser consciente necesita conocer el valor del descifrado \(x\) de dicho texto cifrado. Esto se formaliza mediante un algoritmo \(K\) denominado extractor de textos planos que obtendría \(x\) solo al ver la llave pública \(pk\), las consultas de \(B\) al oráculo \(H\) y sus respuestas \(\mathcal{E}_{pk}^H\).
+\newline
+
+La función $\texttt{run } B^{H,\mathcal{E}_{pk}^H}(pk)$ es una función auxiliar devuelve \(hH\), \(C\) e \(y\):
+\begin{enumerate}
+	\item \(hH\) representa una lista de parejas \((h_i,H_i)\) obtenidas mediante el oráculo aleatorio, es decir, una caja negra que genera números aleatorios.
+	\item \(C\) representa una lista de de todos los textos cifrados obtenidos como resultado de las \(\mathcal{E}_{pk}^H\) peticiones.
+	\item \(y\) representa el texto cifrado final obtenido por el adversario a partir de toda esta información.
+\end{enumerate}
+
+Por tanto, se define la probabilidad de que el adversario \(B\) consiga extraer mediante un extractor \(K\) correctamente el texto plano \(x\) a partir del texto cifrado \(y\) como:
+\begin{equation}
+ 	\text{Succ}_{\mathcal{PE},B,K}^{\text{pa}}(k)=\text{P}\left(
+ 	\begin{array}{lcl}
+ 		H \leftarrow \text{Hash}:&&\\
+ 		(pk,sk)=\mathcal{K}(k):&&\\
+ 		(hH,C,y)=\texttt{run } B^{H,\mathcal{E}_{pk}^H}(pk):&&\\
+ 		&\rightarrow &K(hH,C,y,pk)==\mathcal{D}_{sk}^H
+ 	\end{array}
+ 	\right)
+\end{equation}
+
+Con esta definición y fijando que \(y\notin C\) se dice que \(K\) es un $\lambda(k)$ extractor si \(K\) con tiempo de ejecución polinomial y para todo adversario \(B\) con  $\text{Succ}_{\mathcal{PE},B,K}^{\text{pa}}(k)\ge \lambda(k)$. Se dice que el algoritmo de cifrado asimétrico es seguro en \acrshort{pa} si \(1-\lambda(k)\) es despreciable.
+\newline
+
+Por último es relevante destacar que se cumplen las siguientes afirmaciones demostradas en el articulo \cite{CCA2}:
+\begin{enumerate}
+	\item Si un esquema es seguro en sentido \acrshort{pa} también es seguro en el modelo de oráculo aleatorio en el sentido \acrshort{cca2}.
+	\item Si un esquema es seguro en el modelo de oráculo aleatorio en el sentido \acrshort{cca2} no implica que sea seguro en sentido \acrshort{pa}.
+\end{enumerate}
+
+Este modelo presentado no es suficiente, pues los algoritmos Kyber, Saber y \acrshort{hqc} no se enfrentan al oráculo aleatorio tradicional sino que su rival es un atacante cuántico. En el artículo \cite{QROM} se desarrolla en detalle la equivalencia entre ambos aunque a continuación se presentan algunas nociones básicas.
+\newline
+
+Antes de pasar a comentar las diferencias con respecto a un atacante cuántico es necesario dar unas nociones básicas sobre el funcionamiento de este tipo de atacante \cite{Nielsen_Chuang_2010}:
+\begin{itemize}
+	\item El atacante trabaja mediante Qubits. Un Qubit se define como la combinación lineal de varios estados posibles, donde el Qubit más sencillo $|\varphi \rangle$ esta formado por dos estados o base $|0\rangle$ y $|1\rangle$:
+	\begin{equation}
+		\begin{array}{l}
+			|\varphi\rangle=\alpha|0\rangle+\beta|1\rangle, \ \text{con } \alpha, \beta \in \mathbb{C}\\
+			|0\rangle=\begin{pmatrix}
+				0\\
+				1
+			\end{pmatrix}\\\\
+			|1\rangle=\begin{pmatrix}
+				1\\
+				0
+			\end{pmatrix}
+		\end{array}
+	\end{equation}
+	\item Se habla de un estado en superposición porque los coeficientes $\alpha$ y $\beta$ determinan las probabilidades (\(\alpha^2\) y \(\beta^2\), respectivamente) de que el estado $\varphi$ colapse en cada uno de sus estados posibles. Desde un enfoque estocástico, puede afirmarse que $\varphi$ permanece en superposición hasta que se mide la variable, momento en el cual colapsa en uno de los dos estados. Además, dichas probabilidades deben satisfacer la condición:
+	\begin{equation}
+		\alpha^2 + \beta^2 = 1
+	\end{equation}
+	
+	Aunque este ejemplo se ha planteado con dos vectores como base, el concepto es completamente generalizable a bases de dimensión \(n\). 
+	\item La principal ventaja de estos sistemas es que permiten trabajar en un espacio de dimensión \(n\), lo que posibilita representar un número infinito de estados dentro de la esfera correspondiente.
+	\newline
+	
+	Un elemento fundamental en este marco es la \textbf{puerta cuántica CNOT}, definida como
+	\begin{equation}
+	\texttt{CNOT}(|A\rangle,|B\rangle)=|A, B \oplus A\rangle ,
+	\end{equation}
+	donde \(\oplus\) denota la suma módulo 2. Esta puerta puede entenderse como una generalización cuántica de la puerta clásica \texttt{XOR}. De manera análoga a cómo la puerta \texttt{NAND} permite construir cualquier operación lógica en la computación clásica, la puerta \texttt{CNOT} constituye un bloque básico universal para la computación cuántica.
+\end{itemize}
+
+Por tanto, la principal diferencia entre un oráculo clásico y un oráculo cuántico es la capacidad del segundo para poder evaluar la función en superposición, es decir, cuando se introduce un estado cuántico \(\lvert \varphi \rangle = \sum \alpha_x \lvert x \rangle\) al oráculo \(O\) se obtiene el estado \(\lvert \varphi \rangle = \sum \alpha_x \lvert O(x) \rangle\). Es decir, en cada iteración se evalúan exponencialmente más puntos.
+\newline
+
+Esto implica que las demostraciones clásicas no son suficientes para demostrar que un algoritmo cuánticamente seguro, pues demostraciones algunas demostraciones clásicas no se cumplen:
+\begin{itemize}
+	\item Programación adaptativa: el modelo clásico permite simular las respuestas del oráculo para un adversario de manera adaptativa, sin embargo, en el modelo cuántico el adversario puede consultar el oráculo para un estado en superposición y, por tanto obtener una cantidad exponencial de información desde el inicio.
+	\item Consciencia de preimagen: en algunas demostraciones es relevante conocer en que datos esta interesado el atacante, que en el caso cuántico puede estar escondido tras un estado en superposición.
+	\item Simulación eficiente: en los algoritmos clásicos se pueden generar nuevas respuestas aleatorias bajo demanda para simular el crecimiento exponencial de un oráculo lo cual es imposible para un entorno cuántico porque todos los estados están presentes desde el inicio.  
+\end{itemize}
+
+No obstante, muchas de las pruebas clásicas siguen siendo aplicables. En \cite{QROM} y \cite{yamakawa2021classical} se establecen las condiciones bajo las cuales una demostración en el modelo clásico puede extenderse y garantizar seguridad frente a adversarios cuánticos. Sin embargo, en otros casos es necesario recurrir a nuevas técnicas de reducción específicas para el paradigma de modelo de oráculo cuántico aleatorio, las cuales quedan fuera del alcance de este trabajo.
+
+\subsection{Transformadas Fujisaki-Okamoto \acrshort{tfo}}
+Las transformadas Fujisaki-Okamoto (\acrshort{tfo}) son una herramienta que permite convertir un algoritmo asimétrico débil en un algoritmo que cumple seguridad \acrshort{cca2} en el modelo de oráculo aleatorio \cite{Fujisaki1999}.
+\newline
+
+Para lograr esta seguridad se crea un esquema híbrido entre el algoritmo asimétrico que se quiere blindar y un esquema de algoritmo simétrico implementado mediante una función de relleno.
+\newline
+
+Sea \(\mathcal{PE}^{hy}=(\mathcal{K}^{hy},\mathcal{E}^{hy},\mathcal{D}^{hy})\) el esquema de intercambio de claves híbrido implementado a partir de los esquemas asimétrico \(\mathcal{PE}^{asym}\) y simétrico \(\mathcal{PE}^{sym}\). La función $\mathcal{K}^{hy}$ tiene el mismo funcionamiento que el algoritmo asimétrico, es decir, $\mathcal{K}^{hy}=\mathcal{K}^{asym}$. La función de cifrado \(\mathcal{E}^{hy}\) se define como:
+\begin{algorithm}[H]
+	\caption{Cifrado $\mathcal{E}^{hy}_{pk}$} 
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(m\)\\ 
+		\hline
+		\textbf{Salida: } \(c\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Obtener la semilla aleatoria $\gamma$ del espacio de diseño del algoritmo asimétrico $\Omega$.
+		\State Calcular el valor \(r_1\) como aleatoriedad para el cifrado del algoritmo asimétrico a partir de la función de hash de salida extendida \(H\):
+		\begin{equation}
+			r_1:=H(\gamma,\|m\|)
+		\end{equation}
+		\State Calcular el valor \(r_2\) como aleatoriedad para el cifrado del algoritmo simétrico a partir de la función de hash de tamaño fijo \(G\):
+		\begin{equation}
+			r_2:=G(\gamma)
+		\end{equation}
+		\State Obtener la primera mitad del texto cifrado \(c_1\) a partir del algoritmo asimétrico con la introducción del ruido \(r_1\):
+		\begin{equation}
+			c_1:=\mathcal{E}^{asym}_{pk}(\gamma||r_1)
+		\end{equation}
+		\State Obtener la segunda mitad del texto cifrado \(c_2\) a partir del algoritmo simétrico:
+		\begin{equation}
+			c_2:=\mathcal{E}^{sym}_{r_2}(m)
+		\end{equation}
+		\State \Return \(c_1||c_2\)
+	\end{algorithmic}
+\end{algorithm}
+
+En el algoritmo anterior la función de cifrado simétrico \(\mathcal{E}^{sym}_{a}(m)\) al igual que su función de descifrado \(\mathcal{D}^{sym}_{a}(c)\) se definen mediante el operador \texttt{XOR} como:
+\begin{equation}
+	\begin{array}{l}
+		\mathcal{E}^{sym}_{a}(m)=a\oplus m\\
+		\mathcal{D}^{sym}_{a}(c)=a\oplus c
+	\end{array}
+\end{equation}
 \newpage
+
+Por otro lado, la función de descifrado del algoritmo con la transformada \acrshort{tfo} \(\mathcal{D}^{hy}_{sk}\) se define como:
+\begin{algorithm}[H]
+	\caption{Descifrado $\mathcal{D}^{hy}_{sk}$} 
+	$\begin{array}{p{\textwidth}}
+		\textbf{Entrada: } \(c\)\\ 
+		\hline
+		\textbf{Salida: } \(m\)\\ 
+		\hline
+	\end{array}$
+	\begin{algorithmic}[1]
+		\State Se obtiene el valor \(\hat{\gamma}\) como el valor de la aleatoriedad calculado en la función de cifrado:
+		\begin{equation}
+			\hat{\gamma}:=\mathcal{D}^{asym}_{sk}(c_1)
+		\end{equation}
+		\State Calcular nuevamente el valor \(r_1\) a partir de la aleatoriedad recuperada \(\hat{\gamma}\):
+		\begin{equation}
+			r_1:=H(\hat{\gamma},\|m\|)
+		\end{equation}
+		\State Calcular el valor \(r_2\):
+		\begin{equation}
+			r_2:=G(\hat{\gamma})
+		\end{equation}
+		\State Calcular el mensaje descifrado \(\hat{m}\):
+		\begin{equation}
+			\hat{m}:=\mathcal{D}^{sym}_{r_2}(c_2)
+		\end{equation}
+		\State Comprobar si se obtiene el mismo mensaje:
+		\If{$c_1==\mathcal{E}^{asym}_{pk}(\hat{\gamma}||r_1)$}
+			\State Devolver el mensaje \(m'\) que coincide con el original \(m\):
+			\begin{equation}
+				m:=m'
+			\end{equation}
+		\Else
+		\State El algoritmo ha fallado, se debe devolver un mensaje de rechazo:
+		\begin{equation}
+			m:=\perp
+		\end{equation}
+		\EndIf
+		\State \Return \(m\)
+	\end{algorithmic}
+\end{algorithm}
+
+Es importante recalcar que un atacante no puede distinguir si el mensaje obtenido es el original o un mensaje de rechazo, ya que este último mantiene la misma distribución y estructura aleatoria que un mensaje válido.
+\newline
+
+Por último, en el artículo \cite{Fujisaki1999} se demuestra que si el esquema asimétrico es \(\gamma\)-uniforme y \((t_1,\varepsilon_1)\)-seguro en el cifrado de una dirección, entonces el esquema híbrido resultante es \((t,\varepsilon)\)-seguro en el sentido de \acrshort{cca2}. Los términos y parámetros de la definición se describen a continuación:
+\begin{itemize}
+	\item  Se define la seguridad de cifrado de una dirección para un algoritmo asimétrico como la probabilidad de que un adversario \(A\) sea capaz de obtener el valor de un mensaje plano \(x\) a partir de la llave pública \(pk\) y el texto cifrado \(y\). Este adversario no tiene acceso a ninguna función del protocolo.
+	\item Se habla de un algoritmo \((t,\varepsilon)\)-seguro si se cumple que no existe ningún adversario que en tiempo \(t\) sea capaz de tener una ventaja mayor a \(\varepsilon\).
+	\item Se habla de que un algoritmo es \(\gamma\)-uniforme si para un texto plano \(x\) y un texto cifrado \(y\) cualesquiera se cumple que la probabilidad de que cifre en \(y\) es menor a $\gamma$. Esta propiedad asegura que los textos cifrados se distribuyen uniformemente y que conociendo \(y\) es difícil conocer \(x\).
+	\item En la demostración se calculan los valores de \((t,\varepsilon)\) en función de los siguientes parámetros:
+	\begin{itemize}
+		\item Tamaño del espacio de diseño de los algoritmos asimétrico \(l_1\) y simétrico \(l_2\).
+		\item Peticiones que hace el atacante a los distintos oráculos a los que tiene acceso en el modelo de oráculo aleatorio para atacar la parte del algoritmo asimétrico \(q_g\) y la parte del algoritmo simétrico \(q_h\).  
+		\item Se asume que el algoritmo simétrico es \((t_2,\varepsilon_2)\)-seguro.
+	\end{itemize}
+	\item En consecuencia la demostración muestra que el algoritmo asimétrico que tenia menores garantías de seguridad acaba siendo \((t,\varepsilon)\)-seguro en el sentido de \acrshort{cca2}:
+	\begin{equation}
+		\begin{array}{l}
+			t=\texttt{min}(t_1,t_2)-\mathcal{O}((q_g+q_h)(l_1+l_2))\\
+			\varepsilon=\left[2(q_g+q_h)\varepsilon_1+\varepsilon_2+1\right]\left(1-2\varepsilon_1-2\varepsilon_2-\gamma-2^{-l_2}\right)^{-q_d}-1
+		\end{array}
+	\end{equation}
+\end{itemize}
+
 \section{Garantías de seguridad de los algoritmos postcuánticos}
 En esta sección se hace un breve resumen de las garantías de seguridad de los diferentes algoritmos sin entrar en el desarrollo matemático que justifica el mismo.
-\subsection{Garantías de seguridad de Kyber}
-\subsubsection{Seguridad esperada en Kyber}
-\subsubsection{Análisis respecto a ataques conocidos en el esquema Kyber}
-\subsection{Garantías de seguridad de Saber}
-\subsubsection{Seguridad esperada en Saber}
-\subsubsection{Análisis respecto a ataques conocidos en el esquema Saber}
-\subsection{Garantías de seguridad de \acrshort{hqc}}
-\subsubsection{Seguridad esperada en \acrshort{hqc}}
-\subsubsection{Análisis respecto a ataques conocidos en el esquema \acrshort{hqc}}
+\subsection{Seguridad esperada en Kyber}
+Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{kyber-spec-2021}.
+\subsection{Seguridad esperada en Saber}
+Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{saber-spec-2020}.
+\subsection{Seguridad esperada en \acrshort{hqc}}
+Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{hqc2025}.
+
