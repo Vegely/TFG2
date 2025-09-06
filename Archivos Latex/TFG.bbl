@@ -276,4 +276,35 @@ E.~Fujisaki and T.~Okamoto.
   99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
   Berlin, Heidelberg, 1999. Springer.
 
+\bibitem{KirchnerFouque2015}
+P.~Kirchner and P.A. Fouque.
+\newblock An improved bkw algorithm for lwe with applications to cryptography
+  and lattices.
+\newblock In {\em Advances in Cryptology -- CRYPTO 2015}, pages 43--62, Berlin,
+  Heidelberg, 2015. Springer Berlin Heidelberg.
+
+\bibitem{AroraGe2011}
+S.~Arora and R.~Ge.
+\newblock New algorithms for learning in presence of errors.
+\newblock In {\em Automata, Languages and Programming}, pages 403--415, Berlin,
+  Heidelberg, 2011. Springer Berlin Heidelberg.
+
+\bibitem{SchnorrEuchner1994}
+C.~P. Schnorr and M.~Euchner.
+\newblock Lattice basis reduction: Improved practical algorithms and solving
+  subset sum problems.
+\newblock {\em Mathematical Programming}, 66(1):181--199, 1994.
+
+\bibitem{Peng_Kuhn_2025}
+C.~Yu E.~Peng and M.G. Kuhn.
+\newblock Adaptive template attacks on the kyber binomial sampler.
+\newblock {\em IACR Transactions on Cryptographic Hardware and Embedded
+  Systems}, 2025(3):470?492, Jun. 2025.
+
+\bibitem{cryptoeprint:2019/795}
+P.~Pessl and R.~Primas.
+\newblock More practical single-trace attacks on the number theoretic
+  transform.
+\newblock Cryptology {ePrint} Archive, Paper 2019/795, 2019.
+
 \end{thebibliography}

@@ -586,9 +586,9 @@ parent={},%
 %
 }%
 
-\glsdefs@newdocentry{cca2.}%
+\glsdefs@newdocentry{cca22}%
 {%
-name={\acronymfont {\glsentryshort {cca2.}}},%
+name={\acronymfont {\glsentryshort {cca22}}},%
 sort={CCA2},%
 type={acronym},%
 first={CCA2},%
@@ -623,8 +623,8 @@ first={PA},%
 firstplural={PAs},%
 text={PA},%
 plural={PAs},%
-description={Ataque de texto cifrado adaptable},%
-descriptionplural={Ataque de texto cifrado adaptable},%
+description={Consciencia de texto plano},%
+descriptionplural={Consciencia de texto plano},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
@@ -633,10 +633,66 @@ user3={},%
 user4={},%
 user5={},%
 user6={},%
-long={Ataque de texto cifrado adaptable},%
-longplural={Ataque de texto cifrado adaptables},%
+long={Consciencia de texto plano},%
+longplural={Consciencia de texto planos},%
 short={PA},%
 shortplural={PAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rom}%
+{%
+name={\acronymfont {\glsentryshort {rom}}},%
+sort={ROM},%
+type={acronym},%
+first={ROM},%
+firstplural={ROMs},%
+text={ROM},%
+plural={ROMs},%
+description={Modelo de oráculo aleatorio},%
+descriptionplural={Modelo de oráculo aleatorio},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Modelo de oráculo aleatorio},%
+longplural={Modelo de oráculo aleatorios},%
+short={ROM},%
+shortplural={ROMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{qrom}%
+{%
+name={\acronymfont {\glsentryshort {qrom}}},%
+sort={QROM},%
+type={acronym},%
+first={QROM},%
+firstplural={QROMs},%
+text={QROM},%
+plural={QROMs},%
+description={Modelo de oráculo cuántico aleatorio},%
+descriptionplural={Modelo de oráculo cuántico aleatorio},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Modelo de oráculo cuántico aleatorio},%
+longplural={Modelo de oráculo cuántico aleatorios},%
+short={QROM},%
+shortplural={QROMs},%
 counter={page},%
 parent={},%
 %

@@ -21,7 +21,12 @@ A level-1 auxiliary file: capitulos/conclusion.aux
 A level-1 auxiliary file: capitulos/apendice.aux
 The style file: unsrt.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 431 of file bibliografia/bibliografia.bib
+I was expecting an "="---line 71 of file bibliografia/bibliografia.bib
+ : 
+ : }
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 539 of file bibliografia/bibliografia.bib
  : @misc{First-Order-Masked-Kyber-on-ARM 
  :                                       Cortex-M4,
 I'm skipping whatever remains of this entry
@@ -56,45 +61,45 @@ Warning--empty booktitle in Gaborit2005ShorterKF
 Warning--empty publisher in 24hqc
 Too many commas in name 1 of "D. Boneh, O. Dagdelen, M. Fischlin, et al." for entry QROM
 while executing---line 944 of file unsrt.bst
-You've used 47 entries,
+You've used 52 entries,
             1791 wiz_defined-function locations,
-            751 strings with 12163 characters,
-and the built_in function-call counts, 8838 in all, are:
-= -- 814
-> -- 293
-< -- 12
-+ -- 120
-- -- 73
-* -- 424
-:= -- 1355
-add.period$ -- 146
-call.type$ -- 47
-change.case$ -- 46
+            782 strings with 13010 characters,
+and the built_in function-call counts, 10158 in all, are:
+= -- 949
+> -- 333
+< -- 14
++ -- 135
+- -- 83
+* -- 502
+:= -- 1542
+add.period$ -- 163
+call.type$ -- 52
+change.case$ -- 51
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 429
-empty$ -- 967
-format.name$ -- 73
-if$ -- 2062
+cite$ -- 57
+duplicate$ -- 492
+empty$ -- 1102
+format.name$ -- 83
+if$ -- 2377
 int.to.chr$ -- 0
-int.to.str$ -- 47
-missing$ -- 29
-newline$ -- 238
-num.names$ -- 49
-pop$ -- 194
+int.to.str$ -- 52
+missing$ -- 33
+newline$ -- 263
+num.names$ -- 54
+pop$ -- 212
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 228
+skip$ -- 267
 stack$ -- 0
-substring$ -- 382
-swap$ -- 107
-text.length$ -- 12
+substring$ -- 484
+swap$ -- 128
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 5
-while$ -- 75
-width$ -- 49
-write$ -- 509
-(There were 15 error messages)
+while$ -- 89
+width$ -- 54
+write$ -- 567
+(There were 16 error messages)

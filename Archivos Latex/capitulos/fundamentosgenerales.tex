@@ -710,6 +710,7 @@ En la figura \ref{fig:NTTFigure} se puede ver una representación gráfica de co
 
 
 \subsubsection{Aprendizaje Con Errores o Learning With Errors (\acrshort{lwe})}
+\label{sec:lwe}
 Para la elaboración de esta sección, se ha utilizado la información contenida en el artículo \cite{LWElearning}, el cual expone los fundamentos matemáticos del problema de Aprendizaje con Errores (Learning With Errors, \acrshort{lwe}). Este problema constituye la base teórica sobre la que se sustenta el esquema criptográfico Kyber.
 \newline
 
@@ -1306,7 +1307,7 @@ Una vez hechas estas descomposiciones recursivas se van deshaciendo las particio
  \newpage
  
 \subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\acrshort{mlwr})} +
-\label{sec:lwe}
+\label{sec:lwr}
 Los esquemas basados en la \acrshort{lwr} \cite{modlwr} emplean operadores de redondeo y, a diferencia de los esquemas de \acrshort{lwe}, no requieren muestrear ruido de forma explícita, ya que éste se obtiene a partir de escalar y redondear los coeficientes. Por esta razón, en ocasiones se hace referencia a estos esquemas como una variante \esquote{desaleatorizada} de \acrshort{lwe}. 
 \newline
 
@@ -1541,7 +1542,7 @@ A continuación, se presenta una tabla con los parámetros del esquema FireSaber
  	\item El operador \(\circ\) denota la multiplicación estándar de una matriz \(\in R_x^{l\times l}\) por un vector \(\in R_x^{l}\) . Donde uno de los polinomios se multiplica utilizando el algoritmo de la figura \ref{fig:ToomKara}.
  	\item La función \texttt{HammingWeight}(x) devuelve la distancia de Hamming del vector \(x\), es decir, el número de simbolos distintos de \(0\) en \(x\).
  	\item Se define el símbolo $\varepsilon_i$ como \(\varepsilon_i=\log_2 (i)\).
- 	\item Los valores de las constantes \(h\), \(h_1\) y \(h_2\) se pueden consultar en la sección \ref{sec:lwe}.
+ 	\item Los valores de las constantes \(h\), \(h_1\) y \(h_2\) se pueden consultar en la sección \ref{sec:lwr}.
  \end{itemize}
  \newpage
 \begin{algorithm}[H]
@@ -2264,7 +2265,7 @@ Un atacante puede realizar tres tipos de ataques teóricos, es decir, no constit
 \begin{enumerate}
 	\item \textbf{Ataque de texto plano} (\acrshort{cpa}): el adversario puede obtener textos cifrados de textos planos a su elección. Un esquema es seguro frente a \acrshort{cpa} si el adversario no puede distinguir cuál de dos mensajes elegidos ha sido cifrado en el texto cifrado de desafío. Es decir, puede realizar la fase 1 de la figura \ref{fig:attacksOracles}.
 	\item \textbf{Ataque de texto cifrado no adaptable} (\acrshort{cca1}): el adversario tiene acceso a un oráculo de descifrado, es decir, puede enviar textos cifrados y obtener sus correspondientes textos planos. Sin embargo, este acceso es limitado: el oráculo solo puede consultarse antes de recibir el texto cifrado de desafío. Es decir, puede realizar la fase 1 y la fase 2 del ataque mientras no se dé la fase de desafío como se puede ver en la figura \ref{fig:attacksOracles}.
-	\item \textbf{Ataque de texto cifrado adaptable} (\acrshort{cca2.}): es similar al ataque \acrshort{cca1}, pero el acceso al oráculo de descifrado no se pierde. La única limitación es que no se puede utilizar esta función con el propio texto cifrado de desafío. Se denomina adaptable debido a que los textos cifrados utilizados pueden depender del propio texto cifrado de desafío. Es decir, puede realizar todas las fases de la figura \ref{fig:attacksOracles}.
+	\item \textbf{Ataque de texto cifrado adaptable} (\acrshort{cca22}): es similar al ataque \acrshort{cca1}, pero el acceso al oráculo de descifrado no se pierde. La única limitación es que no se puede utilizar esta función con el propio texto cifrado de desafío. Se denomina adaptable debido a que los textos cifrados utilizados pueden depender del propio texto cifrado de desafío. Es decir, puede realizar todas las fases de la figura \ref{fig:attacksOracles}.
 \end{enumerate}
 \newline
 
@@ -2335,7 +2336,7 @@ Estos objetivos y tipos de ataques se agrupan en conjunto creando un total de 6 
 Para definir de manera formal los ataques \acrshort{ind} se utiliza el siguiente experimento. Sea \(A_1\) un algoritmo que, a partir de la llave pública \({pk}\), obtiene como salida \((x_0,x_1,s)\), donde \(x_0\) y \(x_1\) son mensajes de la misma longitud y \(s\) es información del estado que se quiere conservar. Uno de estos mensajes se elige al azar denotado como \(x_b\). Entonces, el reto \(y\) se obtiene al cifrar \(x_b\) con la llave pública. Finalmente, mediante el algoritmo \(A_2\) se debe determinar cuál es el texto de entrada, valor de \(b\), dado el estado \(s\) y el reto \(y\).
 \newline
 
-Por tanto se definen los esquemas \acrshort{ind}-\{\acrshort{cpa}, \acrshort{cca1}, \acrshort{cca2.}\}. Sea un esquema de cifrado asimétrico \(\mathcal{PE}=(\mathcal{K},\mathcal{E},\mathcal{D})\) con \((\mathcal{K},\mathcal{E},\mathcal{D})\) la función generadora de claves, el cifrado y el descifrado respectivamente. Sea un adversario \(A=(A_1,A_2)\) para los ataques \(atq\in \{cpa, cca1, cca2\}\) y \(k\in\mathbb{Z}\):
+Por tanto se definen los esquemas \acrshort{ind}-\{\acrshort{cpa}, \acrshort{cca1}, \acrshort{cca22}\}. Sea un esquema de cifrado asimétrico \(\mathcal{PE}=(\mathcal{K},\mathcal{E},\mathcal{D})\) con \((\mathcal{K},\mathcal{E},\mathcal{D})\) la función generadora de claves, el cifrado y el descifrado respectivamente. Sea un adversario \(A=(A_1,A_2)\) para los ataques \(atq\in \{cpa, cca1, cca2\}\) y \(k\in\mathbb{Z}\):
 \begin{equation}
 	\text{Adv}_{\mathcal{PE},A}^{\text{ind-atk}}(k)=\text{P}\left(\texttt{Exp}_{\mathcal{PE},A}^{\text{ind-atk-1}}(k)=1\right)-\text{P}\left(\texttt{Exp}_{\mathcal{PE},A}^{\text{ind-atk-0}}(k)=1\right)
 \end{equation}
@@ -2549,13 +2550,112 @@ Por último, en el artículo \cite{Fujisaki1999} se demuestra que si el esquema 
 		\end{array}
 	\end{equation}
 \end{itemize}
-
 \section{Garantías de seguridad de los algoritmos postcuánticos}
 En esta sección se hace un breve resumen de las garantías de seguridad de los diferentes algoritmos sin entrar en el desarrollo matemático que justifica el mismo.
 \subsection{Seguridad esperada en Kyber}
 Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{kyber-spec-2021}.
+\newline
+
+En primer lugar, el artículo presenta la seguridad frente a ataques \acrshort{cca2} tanto para adversarios clásicos como cuánticos. En este contexto, se establece una cota superior para la ventaja del adversario en romper la seguridad en el esquema Kyber:
+\begin{itemize}
+	\item Se define la ventaja de un aversario \(A\) en el esquema \acrshort{mlwe}, denotada por 
+	\(\text{Adv}^{\text{mlwe}}_{m,k,\eta}(A)\), en función de los parámetros 
+	de la tabla \ref{tab:KyberParams} y del número de muestras \(m\). 
+	Dicha ventaja corresponde a la probabilidad de que un adversario 
+	distingua entre un par de muestras uniformes \((a,b)\) y un par 
+	generado de acuerdo con el procedimiento descrito en la 
+	sección \ref{sec:lwe}.
+	\item Se denota la ventaja de un adversario \(A\) para distinguir una función pseudoaleatoria de una función verdaderamente aleatoria mediante 
+	\(\text{Adv}^{\text{prf}}_{\text{PRF}}(A)\). 
+	Esta ventaja aparece porque las semillas \(\gamma\) utilizadas para generar la aleatoriedad en el cifrado
+	se derivan de manera pseudoaleatoria, lo que las hace difíciles de diferenciar de valores verdaderamente aleatorios.
+	\item En el caso de un oráculo aleatorio clásico (\acrshort{rom}), el artículo demuestra que se puede obtener la siguiente cota superior para la ventaja de un adversario \(A\) que realiza \(q_{\text{\acrshort{rom}}}\) consultas a los oráculos aleatorios. La cota se expresa en función de los adversarios \(B\) y \(C\), que tienen un tiempo de ejecución similar al de \(A\):
+	\begin{equation}
+		\text{Adv}^{\text{cca}}_{\text{Kyber}_{\text{\acrshort{rom}}}}(A)
+		\le \text{Adv}^{\text{mlwe}}_{k+1,k,\eta}(B)+ \text{Adv}^{\text{prf}}_{\text{PRF}}(C)+4q_{\text{\acrshort{rom}}}\delta
+	\end{equation}
+	\item En la deducción para el caso de un oráculo cuántico, se asume que la función de cifrado es pseudoaleatoria. Es decir, resulta difícil para un adversario distinguir un texto cifrado generado por la función de cifrado de uno elegido uniformemente al azar. 
+	Esta dificultad se cuantifica mediante la ventaja del adversario \(A\), denotada por \(\text{Adv}^{\text{pr}}_{\text{Cifrado}}(A)\). Esta conjetura se puede realizar debido a que como se dice en el artículo se desconoce la existencia de un ataque sobre la estructura de cifrado que sea más eficiente que atacar a la \acrshort{mlwe}.
+	\item En el caso de un oráculo cuántico aleatorio (\acrshort{qrom}), el artículo demuestra que se puede obtener la siguiente cota superior para la ventaja de un adversario \(A\) que realiza \(q_{\text{\acrshort{qrom}}}\) consultas a los oráculos aleatorios. La cota se expresa en función de los adversarios \(B\), \(C\) y \(D\), que tienen un tiempo de ejecución similar al de \(A\):
+	\begin{equation}
+		\text{Adv}^{\text{cca}}_{\text{Kyber}_{\text{\acrshort{qrom}}}}(A)
+		\le 2\text{Adv}^{\text{mlwe}}_{k+1,k,\eta}(B)+
+		\text{Adv}^{\text{pr}}_{\text{Cifrado}}(C)+ \text{Adv}^{\text{prf}}_{\text{PRF}}(D)+8q_{\text{\acrshort{rom}}}^2\delta
+	\end{equation}
+\end{itemize}
+
+Considerando estas definiciones, para evaluar la seguridad real del esquema es necesario determinar la solidez del esquema \acrshort{mlwe}. Los demás términos se refieren a ataques contra los algoritmos simétricos implementados mediante las funciones del estándar \acrshort{fips} \cite{FIPS202}, así como a la posibilidad de explotar fallos en el descifrado. Sin embargo, dado que el valor de $\delta$ es tan bajo, el número de peticiones requerido resulta tan elevado que no representa una amenaza práctica.
+\newline
+
+Por tanto, el análisis de seguridad se centra en los ataques conocidos contra la \acrshort{mlwe}, tal como se describe en \cite{kyber-spec-2021}. Debido a las altas dimensiones de la retícula, actualmente no existen ataques prácticos que comprometan la estructura del anillo, por lo que todos los ataques conocidos se enfocan en romper la \acrshort{lwe}.  
+\newline
+
+Tal como se describe en \cite{kyber-spec-2021} existen numerosos algoritmos para atacar la \acrshort{lwe}. Sin embargo, en Kyber, dado que el atacante solo dispone de \(m=(k+1)n\) muestras, pueden descartarse los vectores de ataque Blum-Kalai-Wasserman \cite{KirchnerFouque2015} y los ataques de linealización \cite{AroraGe2011}. En consecuencia, la seguridad práctica de Kyber, según lo descrito en \cite{kyber-spec-2021}, se analiza únicamente considerando los ataques basados en los algoritmos de Korkine-Zolatarev \cite{SchnorrEuchner1994}.
+\newline
+
+Por último, en el articulo se describe la seguridad frente a ataques de canal lateral:
+\begin{itemize}
+	\item \textbf{Ataque de temporización}: en la implementación de Kyber no se utilizan ramas condicionales que dependan de información secreta. Es decir, las sentencias \texttt{if} únicamente evalúan valores binarios obtenidos a partir de funciones de comparación diseñadas para ejecutarse siempre en tiempo constante. Tampoco se emplean \textit{look-up tables}, eliminando así otra posible fuente de filtración de información que un atacante puede aprovechar viendo el tiempo de ejecución del programa.
+	\newline
+	
+	Por otra parte, tampoco es viable explotar el tiempo requerido para la multiplicación de números en función de su tamaño, ya que se trabajan con entradas de 16 bits cuya multiplicación presenta un tiempo de ejecución constante. Finalmente, el problema de la reducción modular queda resuelto mediante algoritmos alternativos al uso directo del operador \% en C, cuya duración de ejecución depende del divisor y del dividendo.
+	\item \textbf{Ataque diferencial}: La implementación actual de Kyber no incluye protecciones específicas frente a ataques basados en la medición del consumo del dispositivo o de sus emisiones electromagnéticas durante la fase de descifrado. Para mitigar este tipo de ataques, se podrían emplear técnicas de enmascarado, aunque, según indica el artículo, esto podría aumentar el tiempo de ejecución hasta $5.5$ veces. Alternativamente, se puede proteger físicamente el microcontrolador para que no sea accesible a un atacante, lo cual resulta más práctico, especialmente considerando que la principal limitación en este trabajo son los recursos del microprocesador. Además, en un entorno industrial, normalmente ruidoso, este tipo de ataques se vuelve más difícil de llevar a cabo.
+	
+	\item \textbf{Ataque de plantilla}: El esquema Kyber presenta actualmente dos vectores de ataque debido a su funcionamiento: el muestreo binomial \cite{Peng_Kuhn_2025} y la operación de la \acrshort{ntt} \cite{cryptoeprint:2019/795}. Este riesgo podría mitigarse mediante algoritmos de enmascarado; sin embargo, al igual que en el caso del ataque diferencial, resulta preferible proteger el microcontrolador, ya que el ruido típico de un entorno industrial dificulta la ejecución de este tipo de ataques.
+	\newline
+	
+	Este ataque consiste en ejecutar el cifrado o descifrado con múltiples claves conocidas en un dispositivo similar al microcontrolador y analizar cómo varía su consumo para cada clave. Una vez precomputada esta base de datos, basta comparar las mediciones obtenidas durante la operación con las muestras registradas para extraer información sobre la clave desconocida. La diferencia con el ataque diferencial radica en que, dado que se conoce el comportamiento exacto del filtrado de información, se requiere recopilar menos datos para el análisis.
+\end{itemize}
+\newpage
 \subsection{Seguridad esperada en Saber}
 Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{saber-spec-2020}.
+\newline
+
+En primer lugar, el artículo presenta la seguridad frente a ataques \acrshort{cca2} tanto para adversarios clásicos como cuánticos. En este contexto, se establece una cota superior para la ventaja del adversario en romper la seguridad en el esquema Saber:
+\begin{itemize}
+
+	\item Al igual que en Kyber, en Saber uno de los adversarios \(A\) ataca la estructura de la \acrshort{mlwr}. Su ventaja se denota \(\mathrm{Adv}^{\mathrm{mlwr}}_{l,l,\nu,q,p}(A)\), con los parámetros de la tabla \ref{tab:SaberParams}. El objetivo de este adversario es distinguir entre muestras uniformes \((a,b)\) y pares generados según el procedimiento descrito en la sección \ref{sec:lwr}.
+	\item Además, se define un adversario \(A\) cuya misión es distinguir si la matriz \texttt{A} usada para generar la clave pública proviene de una semilla o si es una matriz completamente uniforme. Esta ventaja se denota \(\mathrm{Adv}^{\mathrm{prf}}_{\mathrm{gen}}(A)\). No obstante, en la práctica esta ventaja es nula, puesto que la semilla se muestrea de forma uniforme en el protocolo real.
+	
+	\item En el caso de un oráculo aleatorio clásico (\acrshort{rom}) para la seguridad \acrshort{ind}-\acrshort{cpa}, el artículo demuestra que la ventaja de un adversario \(A\) queda acotada por las ventajas de tres adversarios \(B\), \(C\) y \(D\). Dichos adversarios modelan, respectivamente, la generación, el cifrado y la pseudoaleatoriedad en la generación de claves, y sus tiempos de ejecución son comparables al de \(A\). Por tanto, la cota de la ventaja de \(A\):	
+	\begin{equation}
+		\text{Adv}^{\text{cpa}}_{\text{Saber}}(A)\le 
+			\text{Adv}^{\text{mlwr}}_{l,l,\nu,q,p}(B)+
+			\text{Adv}^{\text{mlwr}}_{l+1,l,\nu,q,q/\xi}(C)+
+			\text{Adv}^{\text{prf}}_{gen}(D)
+	\end{equation}
+	
+	donde \(\xi=\texttt{min}\left(\dfrac{q}{p},\dfrac{p}{t}\right)\) 
+	
+	\item Para seguridad \acrshort{cca2} el artículo demuestra que para un adversario \(A\) que realiza \(q_{\mathcal{H}}\) consultas al oráculo \(\mathcal{H}\) (función de hash de salida fija) y \(q_{\mathcal{G}}\) consultas al oráculo \(\mathcal{G}\) (función de salida extendida), entonces su ventaja viene acotada por una expresión que depende de las ventajas de un adversario \(B\) de la forma:
+	\begin{equation}
+		\text{Adv}^{\text{cca}}_{\text{Saber}_{\text{\acrshort{rom}}}}(A)
+		\le 3\text{Adv}^{\text{cpa}}_{\text{Saber}}(B)+ q_\mathcal{G}\delta+\dfrac{2q_\mathcal{G}+g_\mathcal{H}+1}{2^{256}}
+	\end{equation}
+	
+	\item En el caso de un oráculo cuántico aleatorio (\acrshort{qrom}) con seguridad \acrshort{cca2}, el artículo demuestra que la ventaja de un adversario \(A\) que realiza \(q_{\mathcal{H}}\) consultas al oráculo \(\mathcal{H}\) y \(q_{\mathcal{G}}\) consultas al oráculo \(\mathcal{G}\), para mensajes de tamaño \(|M|\) y en presencia de un adversario \(B\), puede acotarse superiormente de la siguiente manera:
+	\begin{equation}
+		\text{Adv}^{\text{cca}}_{\text{Saber}_{\text{\acrshort{qrom}}}}(A)
+		\le \dfrac{2q_\mathcal{H}}{\sqrt{2^{256}}} +4q_\mathcal{G}\sqrt{\delta}+2(q_\mathcal{G}+q_\mathcal{H})\sqrt{\text{Adv}^{\text{cpa}}_{\text{Saber}}(B)+ \dfrac{1}{\|M\|}}
+		\label{eq:saberSEc}
+	\end{equation}
+\end{itemize}
+
+Con estas definiciones presentes, para evaluar la seguridad del esquema resulta fundamental analizar todos los elementos de la ecuación \ref{eq:saberSEc}. Al igual que en Kyber, aparecen términos lineales que dependen de la cantidad de consultas a los oráculos aleatorios, con un orden de magnitud similar y que, en la práctica, pueden despreciarse. Sin embargo, también existe un término no lineal con respecto al número de consultas realizadas y a la ventaja obtenida en la \acrshort{mlwr}. En consecuencia, este esquema puede considerarse menos seguro que Kyber, pues la ventaja escala de manera no lineal con el número de consultas. 
+\newline
+
+Además, como se señala en \cite{modlwr}, no se han identificado ataques específicos contra la \acrshort{mlwr}, por lo que se considera que la ventaja es equivalente a la de romper la \acrshort{lwe} mediante ataques basados en los algoritmos de Korkine-Zolatarev \cite{SchnorrEuchner1994}. Sin embargo, el propio \acrshort{nist} descartó a Saber en la tercera ronda, ya que, aunque comparte la misma base en retículas que Kyber, disponía de menos respaldo en la literatura que confirmara que la \acrshort{mlwr} no presentase vulnerabilidades particulares \cite{nistPQCround3}.
+
+
+Por último, en el articulo se describe la seguridad frente a ataques de canal lateral:
+\begin{itemize}
+	\item \textbf{Ataque de temporización}: no supone un problema en Saber debido a que todos los algoritmos se diseñan para funcionar en tiempo constante. Además, el uso del módulo 2 facilita estas operaciones.
+	\item \textbf{Ataque diferencial}: aunque existen ataques dirigidos a la estructura de Saber, el artículo original sugiere una implementación enmascarada que protege frente a ataques simples o de primer orden. En este trabajo no se utiliza dicha implementación enmascarada, sino la versión \esquote{limpia}. Sin embargo, debido a que las operaciones se realizan en módulo 2, la máscara resulta ser muy eficiente.
+	\item \textbf{Ataque de plantilla}: al igual que en el esquema Kyber, existen ataques dirigidos a la implementación de las multiplicaciones matriciales en Saber. Aunque aún no se han incorporado técnicas para reordenar aleatoriamente las operaciones en este esquema, se ha demostrado que estas estrategias son muy eficaces para algoritmos similares sin tener mucha pérdida de rendimiento.
+\end{itemize}
+\newpage
+
 \subsection{Seguridad esperada en \acrshort{hqc}}
 Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{hqc2025}.
+
 
