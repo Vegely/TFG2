@@ -1,310 +1,278 @@
 \begin{thebibliography}{10}
 
 \bibitem{kyber-spec-2021}
-L.~Ducas et~al. R.~Avanzi, J.~Bos.
-\newblock {CRYSTALS-Kyber: Algorithm Specifications and Supporting
-  Documentation (version 3.01)}.
-\newblock Technical report, CRYSTALS Project, January 2021.
-\newblock NIST PQC Round 3 submission.
+R.~Avanzi, J.~Bos, L.~Ducas, E.~Kiltz, T.~Lepoint, V.~Lyubashevsky, J.~M.
+  Schanck, P.~Schwabe, G.~Seiler, D.~Stehl{\'e}, {\em et~al.}, ``Crystals-kyber
+  algorithm specifications and supporting documentation,'' {\em NIST PQC Round
+  3 submission}, January 2021.
 
 \bibitem{saber-spec-2020}
-A.~Basso, J.M.~Bermudo Mera, J.P. Anvers, et~al.
-\newblock {SABER: Mod-LWR based KEM (Round 3 Submission)}, 2020.
-\newblock NIST PQC Round 3 submission.
+A.~Basso, J.~M.~B. Mera, J.-P. D'Anvers, A.~Karmakar, S.~S. Roy, M.~V.
+  Beirendonck, and F.~Vercauteren, ``Saber: Mod-lwr based kem (round 3
+  submission),'' {\em NIST PQC Round 3 submission}, September 2020.
 
 \bibitem{hqc2025}
-N.~Aragon et~al. P.~Gaborit, C. Aguilar-Melchor.
-\newblock Hamming quasi-cyclic (hqc) specification.
-\newblock \url{https://pqc-hqc.org/resources.html}, August 2025.
+C.~A. Melchor, N.~Aragon, S.~Bettaieb, L.~Bidoux, O.~Blazy, J.-C. Deneuville,
+  P.~Gaborit, E.~Persichetti, G.~Z{\'e}mor, and I.~Bourges, ``Hamming
+  quasi-cyclic (hqc) specification,'' {\em NIST PQC Round 4 submission}, Aug.
+  2025.
 
 \bibitem{FIPS202}
-M.J. Dworkin.
-\newblock Sha-3 standard: Permutation-based hash and extendable-output
-  functions, 2015-08-04 00:08:00 2015.
+M.~J. Dworkin {\em et~al.}, ``Sha-3 standard: Permutation-based hash and
+  extendable-output functions,'' 2015.
 
 \bibitem{CCA2}
-A.~Desai M.~Bellare and D.~Pointcheval.
-\newblock Relations among notions of security for public-key encryption
-  schemes.
-\newblock In Hugo Krawczyk, editor, {\em Advances in Cryptology --- CRYPTO
-  '98}, pages 26--45, Berlin, Heidelberg, 1998. Springer Berlin Heidelberg.
+M.~Bellare, A.~Desai, D.~Pointcheval, and P.~Rogaway, ``Relations among notions
+  of security for public-key encryption schemes,'' in {\em Annual International
+  Cryptology Conference}, pp.~26--45, Springer, 1998.
 
 \bibitem{tikzmaker}
-Tikzmaker.
-\newblock \url{https://tikzmaker.com/editor}, 2024.
+``Tikzmaker.'' \url{https://tikzmaker.com/editor}, 2024.
 
 \bibitem{CY8CPROTO063BLE}
-{Infineon Technologies AG}.
-\newblock {CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.
-\newblock
+{Infineon Technologies AG}, ``{CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.''
   \url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/},
   2020.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{NIST_IR_8413_2022}
-D.~Cooper et~al. G.~Alagic, D.~Apon.
-\newblock Status report on the third round of the nist post-quantum
-  cryptography standardization process.
-\newblock NIST Interagency Report NIST IR 8413 (Updated), National Institute of
-  Standards and Technology (NIST), July 2022.
+G.~Alagic, G.~Alagic, D.~Apon, D.~Cooper, Q.~Dang, T.~Dang, J.~Kelsey,
+  J.~Lichtinger, Y.-K. Liu, C.~Miller, {\em et~al.}, ``Status report on the
+  third round of the nist post-quantum cryptography standardization process,''
+  tech. rep., 2022.
 
 \bibitem{NIST_IR_8545_2025}
-P.~Ciadoux et~al. G.~Alagic, M.~Bros.
-\newblock Status report on the fourth round of the nist post-quantum
-  cryptography standardization process.
-\newblock NIST Internal Report NIST IR 8545, National Institute of Standards
-  and Technology (NIST), Gaithersburg, MD, March 2025.
+G.~Alagic, G.~Alagic, D.~Apon, D.~Cooper, Q.~Dang, T.~Dang, J.~Kelsey,
+  J.~Lichtinger, Y.-K. Liu, C.~Miller, {\em et~al.}, ``Status report on the
+  third round of the nist post-quantum cryptography standardization process,''
+  tech. rep., 2022.
 
 \bibitem{011318_1_5.0179566}
-Z.~Li et~al. Y.~Zhang, Y.~Bian.
-\newblock Continuous-variable quantum key distribution system: Past, present,
-  and future.
-\newblock {\em Applied Physics Reviews}, 11(1):011318, 03 2024.
+Y.~Zhang, Y.~Bian, Z.~Li, S.~Yu, and H.~Guo, ``Continuous-variable quantum key
+  distribution system: Past, present, and future,'' {\em Applied Physics
+  Reviews}, vol.~11, no.~1, 2024.
 
 \bibitem{s11042-024-20535-x}
-M.~Kumar and B.~Mondal.
-\newblock A brief review on quantum key distribution protocols.
-\newblock {\em Multimedia Tools and Applications}, January 2025.
+M.~Kumar and B.~Mondal, ``A brief review on quantum key distribution
+  protocols,'' {\em Multimedia Tools and Applications}, pp.~1--40, 2025.
 
 \bibitem{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}
-B.~Samson et~al. A.~Atadoga, O.~Ajoke.
-\newblock A comparative review of data encryption of data methosds in the usa
-  and europe.
-\newblock 5:447--460, Feb. 2024.
+A.~Atadoga, O.~A. Farayola, B.~S. Ayinla, O.~O. Amoo, T.~O. Abrahams, and
+  F.~Osasona, ``A comparative review of data encryption methods in the usa and
+  europe,'' {\em Computer Science \& IT Research Journal}, vol.~5, no.~2,
+  pp.~447--460, 2024.
 
 \bibitem{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption}
-Q.~Zhang.
-\newblock An overview and analysis of hybrid encryption: The combination of
-  symmetric encryption and asymmetric encryption.
-\newblock In {\em 2021 2nd International Conference on Computing and Data
-  Science (CDS)}, pages 616--622, 2021.
+Q.~Zhang, ``An overview and analysis of hybrid encryption: the combination of
+  symmetric encryption and asymmetric encryption,'' in {\em 2021 2nd
+  international conference on computing and data science (CDS)}, pp.~616--622,
+  IEEE, 2021.
 
 \bibitem{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}
-Y.~Yilmaz B.~Halak and D.~Shiu.
-\newblock Comparative analysis of energy costs of asymmetric vs symmetric
-  encryption-based security applications.
-\newblock {\em IEEE Access}, 10:76707--76719, 2022.
+B.~Halak, Y.~Yilmaz, and D.~Shiu, ``Comparative analysis of energy costs of
+  asymmetric vs symmetric encryption-based security applications,'' {\em Ieee
+  Access}, vol.~10, pp.~76707--76719, 2022.
+
+\bibitem{First-Order-Masked-Kyber-on-ARM-Cortex-M4}
+D.~Heinz, M.~J. Kannwischer, G.~Land, T.~P{\"o}ppelmann, P.~Schwabe, and
+  A.~Sprenkels, ``First-order masked kyber on arm cortex-m4,'' {\em Cryptology
+  ePrint Archive}, 2022.
 
 \bibitem{2022-414}
-P.~Kampanakis M.~Anastasova and J.~Massimo.
-\newblock {PQ}-{HPKE}: Post-quantum hybrid public key encryption.
-\newblock Cryptology {ePrint} Archive, Paper 2022/414, 2022.
+M.~Anastasova, P.~Kampanakis, and J.~Massimo, ``Pq-hpke: post-quantum hybrid
+  public key encryption,'' {\em Cryptology ePrint Archive}, 2022.
 
 \bibitem{An_overview_of_Quantum_Cryptography_and}
-C.I. Ugwu et~al.a C.H.~Ugwuishiwu, U.E.~Orji.
-\newblock An overview of quantum cryptography and shor?s algorithm.
-\newblock {\em International Journal of Advanced Trends in Computer Science and
-  Engineering}, 9(5):7487--7495, September 2020.
+C.~Ugwuishiwu, U.~Orji, C.~Ugwu, and C.~Asogwa, ``An overview of quantum
+  cryptography and shor?s algorithm,'' {\em Int. J. Adv. Trends Comput. Sci.
+  Eng}, vol.~9, no.~5, 2020.
 
 \bibitem{2502.12252v1}
-Z.~Alam et~al. D.~Aasen, M.~Aghaee.
-\newblock Roadmap to fault tolerant quantum computation using topological qubit
-  arrays, 2025.
+D.~Aasen, M.~Aghaee, Z.~Alam, M.~Andrzejczuk, A.~Antipov, M.~Astafev,
+  L.~Avilovas, A.~Barzegar, B.~Bauer, J.~Becker, {\em et~al.}, ``Roadmap to
+  fault tolerant quantum computation using topological qubit arrays,'' 2025.
 
 \bibitem{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT}
-S.~Akleylek et~al. F.~Samiullah, M.L.~Gan.
-\newblock Quantum resistance saber-based group key exchange protocol for iot.
-\newblock {\em IEEE Open Journal of the Communications Society}, 6:378--398,
-  2025.
+F.~Samiullah, M.-L. Gan, S.~Akleylek, and Y.~Aun, ``Quantum resistance
+  saber-based group key exchange protocol for iots,'' {\em IEEE Open Journal of
+  the Communications Society}, 2024.
 
 \bibitem{NISTFIPS203}
-{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard}.
-\newblock Federal Information Processing Standards Publication FIPS 203,
-  National Institute of Standards and Technology, Gaithersburg, MD, USA, August
-  2024.
+``{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard},''
+  Federal Information Processing Standards Publication FIPS 203, National
+  Institute of Standards and Technology, Gaithersburg, MD, USA, Aug. 2024.
 
 \bibitem{9508027v2}
-P.W. Shor.
-\newblock Polynomial-time algorithms for prime factorization and discrete
-  logarithms on a quantum computer.
-\newblock {\em SIAM Journal on Computing}, 26(5):1484--1509, 1997.
+P.~W. Shor, ``Polynomial-time algorithms for prime factorization and discrete
+  logarithms on a quantum computer,'' {\em SIAM review}, vol.~41, no.~2,
+  pp.~303--332, 1999.
 
 \bibitem{0301141v2}
-J.~Proos and C.~Zalka.
-\newblock Shor's discrete logarithm quantum algorithm for elliptic curves,
-  2004.
+J.~Proos and C.~Zalka, ``Shor's discrete logarithm quantum algorithm for
+  elliptic curves,'' {\em arXiv preprint quant-ph/0301141}, 2003.
 
 \bibitem{RESERCHFINAL}
-S.~Singh and E.~Sakk.
-\newblock Implementation and analysis of shor?s algorithm to break rsa
-  cryptosystem security.
-\newblock January 2024.
+S.~Singh and E.~Sakk, ``Implementation and analysis of shor?s algorithm to
+  break rsa cryptosystem security,'' 2024.
 
 \bibitem{SurveyCOdeBAsed}
-N.~Gassner V.~Weger and J.~Rosenthal.
-\newblock A survey on code-based cryptography.
-\newblock {\em CoRR}, abs/2201.07119, 2022.
+V.~Weger, N.~Gassner, and J.~Rosenthal, ``A survey on code-based
+  cryptography,'' {\em arXiv preprint arXiv:2201.07119}, 2022.
 
 \bibitem{NIST_SP_800_227_ipd_2025}
-L.~Chen et~al. G.~Alagic, E.~Barker.
-\newblock Recommendations for key-encapsulation mechanisms: Initial public
-  draft.
-\newblock NIST Special Publication NIST SP 800-227 ipd, National Institute of
-  Standards and Technology (NIST), January 2025.
+G.~Alagic, E.~Barker, L.~Chen, D.~Moody, A.~Robinson, H.~Silberg, and
+  N.~Waller, ``Recommendations for key-encapsulation mechanisms,'' tech. rep.,
+  National Institute of Standards and Technology, 2025.
 
 \bibitem{Keccak}
-J.~Daemen G.~Bertoni and M.~Peeters.
-\newblock The keccak reference.
-\newblock Technical report, NIST SHA-3 Competition, 2011.
+G.~Bertoni, J.~Daemen, M.~Peeters, G.~V. Assche, and R.~V. Keer, ``The keccak
+  reference,'' tech. rep., NIST SHA-3 Competition, 2011.
 \newblock Round 3 submission.
 
 \bibitem{nistPQCround3}
-Post-quantum cryptography - round 3 submissions.
-\newblock
-  \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions},
-  2020.
+``Post-quantum cryptography - round 3 submissions,'' 2020.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{nistPQCround4}
-Post-quantum cryptography - round 4 submissions.
-\newblock
-  \url{https://csrc.nist.gov/Projects/post-quantum-cryptography/round-4-submissions},
-  2022.
+``Post-quantum cryptography - round 4 submissions,'' 2022.
 \newblock Consultado: 2025-05-05.
 
 \bibitem{cryptoeprint:2024/585}
-R.~Mareta A.~Satriawan and H.~Lee.
-\newblock A complete beginner guide to the number theoretic transform ({NTT}).
-\newblock Cryptology {ePrint} Archive, Paper 2024/585, 2024.
+A.~Satriawan, R.~Mareta, and H.~Lee, ``A complete beginner guide to the number
+  theoretic transform (ntt),'' {\em Cryptology ePrint Archive}, 2024.
 
 \bibitem{CooleyALG}
-J.W. Cooley and J.W. Tukey.
-\newblock An algorithm for the machine calculation of complex fourier series.
-\newblock {\em Mathematics of Computation}, 19(90):297--301, 1965.
+J.~W. Cooley and J.~W. Tukey, ``An algorithm for the machine calculation of
+  complex fourier series,'' {\em Mathematics of computation}, vol.~19, no.~90,
+  pp.~297--301, 1965.
 
 \bibitem{LWElearning}
-C.~Peikert V.~Lyubashevsky and O.~Regev.
-\newblock On ideal lattices and learning with errors over rings.
-\newblock {\em J. ACM}, 60(6), November 2013.
+V.~Lyubashevsky, C.~Peikert, and O.~Regev, ``On ideal lattices and learning
+  with errors over rings,'' {\em Journal of the ACM (JACM)}, vol.~60, no.~6,
+  pp.~1--35, 2013.
 
 \bibitem{Micciancio2009}
-D.~Micciancio and O.~Regev.
-\newblock Lattice-based cryptography.
-\newblock In Daniel~J. Bernstein, Johannes Buchmann, and Erik Dahmen, editors,
-  {\em Post-Quantum Cryptography}, pages 147--191. Springer Berlin Heidelberg,
-  Berlin, Heidelberg, 2009.
+D.~Micciancio and O.~Regev, ``Lattice-based cryptography,'' in {\em
+  Post-Quantum Cryptography}, pp.~147--191, Berlin, Heidelberg: Springer Berlin
+  Heidelberg, 2009.
 
 \bibitem{cryptoeprint:2019/930}
-Y.~Wang and M.~Wang.
-\newblock Module-{LWE} versus ring-{LWE}, revisited.
-\newblock Cryptology {ePrint} Archive, Paper 2019/930, 2019.
+Y.~Wang and M.~Wang, ``Module-lwe versus ring-lwe, revisited,'' {\em Cryptology
+  ePrint Archive}, 2019.
 
 \bibitem{pqcrystalssecurity}
-L.~Ducas and J.~Schanck.
-\newblock Security estimation scripts for kyber and dilithium.
-\newblock \url{https://github.com/pq-crystals/security-estimates}, 2023.
+L.~Ducas and J.~Schanck, ``Security estimation scripts for kyber and
+  dilithium,'' 2023.
 \newblock Consultado: 2025-05-31.
 
 \bibitem{modlwr}
-S.~Roy et~al. J.P.~Anvers, A.~Karmakar.
-\newblock Saber: Module-{LWR} based key exchange, {CPA}-secure encryption and
-  {CCA}-secure {KEM}.
-\newblock Cryptology {ePrint} Archive, Paper 2018/230, 2018.
+J.-P. D?Anvers, A.~Karmakar, S.~Sinha~Roy, and F.~Vercauteren, ``Saber:
+  Module-{LWR} based key exchange, {CPA}-secure encryption and {CCA}-secure
+  {KEM},'' 2018.
 
 \bibitem{Karatsuba}
-A.~Karatsuba and Y.~Ofman.
-\newblock Multiplication of multidigit numbers on automata.
-\newblock {\em Soviet Physics Doklady}, 7:595, 12 1962.
+A.~Karatsuba, ``Multiplication of multidigit numbers on automata,'' vol.~7,
+  pp.~595--596, 1963.
 
 \bibitem{ToomCook}
-A.~Toom.
-\newblock The complexity of a scheme of functional elements realizing the
-  multiplication of integers.
-\newblock {\em Doklady Akademii Nauk SSSR}, 3, 01 1963.
+A.~L. Toom, ``The complexity of a scheme of functional elements realizing the
+  multiplication of integers,'' {\em Doklady Akademii Nauk SSSR}, vol.~3, 1963.
 
 \bibitem{toomcook4}
-M.~Bodrato and A.~Zanoni.
-\newblock Integer and polynomial multiplication: towards optimal toom-cook
-  matrices.
-\newblock In {\em Proceedings of the 2007 International Symposium on Symbolic
-  and Algebraic Computation}, ISSAC '07, page 17?24, New York, NY, USA, 2007.
-  Association for Computing Machinery.
+M.~Bodrato and A.~Zanoni, ``Integer and polynomial multiplication: Towards
+  optimal toom-cook matrices,'' in {\em Proceedings of the 2007 international
+  symposium on Symbolic and algebraic computation}, pp.~17--24, 2007.
 
 \bibitem{masterTh}
-D.~Haken J.L.~Bentley and J.B. James.
-\newblock A general method for solving divide-and-conquer recurrences.
-\newblock {\em SIGACT News}, 12(3):36?44, September 1980.
+J.~L. Bentley, D.~Haken, and J.~B. Saxe, ``A general method for solving
+  divide-and-conquer recurrences,'' {\em ACM SIGACT News}, vol.~12, no.~3,
+  pp.~36--44, 1980.
 
 \bibitem{Correctness}
-L.~Ducas et~al. J.~Bos, C.~Costello.
-\newblock Frodo: Take off the ring! practical, quantum-secure key exchange from
-  {LWE}.
-\newblock Cryptology {ePrint} Archive, Paper 2016/659, 2016.
+J.~Bos, C.~Costello, L.~Ducas, I.~Mironov, M.~Naehrig, V.~Nikolaenko,
+  A.~Raghunathan, and D.~Stebila, ``Frodo: Take off the ring! practical,
+  quantum-secure key exchange from lwe,'' 2016.
 
 \bibitem{hqc-spec-2022}
-N.~Aragon C.~Aguilar~Melchor and et~al. S.~Bettaieb.
-\newblock {HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}.
-\newblock Technical report, HQC Team, October 2022.
-\newblock NIST PQC Round 4 submission.
+C.~A. Melchor, N.~Aragon, S.~Bettaieb, L.~Bidoux, O.~Blazy, J.-C. Deneuville,
+  P.~Gaborit, E.~Persichetti, G.~Z{\'e}mor, and I.~Bourges, ``{HQC: Hamming
+  Quasi-Cyclic (Fourth Round Submission)},'' {\em NIST PQC Round 4 submission},
+  October 2022.
 
 \bibitem{Gaborit2005ShorterKF}
-P.~Gaborit.
-\newblock Shorter keys for code-based cryptography.
-\newblock 2005.
+P.~Gaborit, ``Shorter keys for code based cryptography,'' in {\em Proceedings
+  of the 2005 International Workshop on Coding and Cryptography (WCC 2005)},
+  pp.~81--91, 2005.
 
 \bibitem{forney1966concatenated}
-G.~David Forney.
-\newblock {\em Concatenated Codes}.
-\newblock MIT Press, Cambridge, MA, 1966.
+G.~D. Forney, {\em Concatenated Codes}.
+\newblock Cambridge, MA: MIT Press, 1966.
 
 \bibitem{24hqc}
-Shu Lin and Daniel Costello.
-\newblock {\em Error Control Coding}.
-\newblock 01 2004.
+S.~Lin and D.~J. Costello, {\em Error control coding}, vol.~2.
+\newblock Prentice hall Scarborough, 2001.
 
 \bibitem{QROM}
-M.~Fischlin et~al. D.~Boneh, O.~Dagdelen.
-\newblock {\em Random Oracles in a Quantum World}, pages 13--59.
-\newblock Springer Berlin Heidelberg, 2011.
+D.~Boneh, {\"O}.~Dagdelen, M.~Fischlin, A.~Lehmann, C.~Schaffner, and
+  M.~Zhandry, {\em Random oracles in a quantum world}, pp.~41--69.
+\newblock 2011.
 
 \bibitem{Nielsen_Chuang_2010}
-M.A. Nielsen and I.L. Chuang.
-\newblock {\em Quantum Computation and Quantum Information: 10th Anniversary
-  Edition}.
-\newblock Cambridge University Press, Cambridge, 2010.
+M.~A. Nielsen and I.~L. Chuang, {\em Quantum Computation and Quantum
+  Information: 10th Anniversary Edition}.
+\newblock Cambridge: Cambridge University Press, 2010.
 
 \bibitem{yamakawa2021classical}
-T.~Yamakawa and M.~Zhandry.
-\newblock Classical vs quantum random oracles.
-\newblock In {\em Annual International Conference on the Theory and
-  Applications of Cryptographic Techniques}, pages 568--597. Springer, 2021.
+T.~Yamakawa and M.~Zhandry, ``Classical vs quantum random oracles,'' in {\em
+  Annual International Conference on the Theory and Applications of
+  Cryptographic Techniques}, pp.~568--597, Springer, 2021.
 
 \bibitem{Fujisaki1999}
-E.~Fujisaki and T.~Okamoto.
-\newblock Secure integration of asymmetric and symmetric encryption schemes.
-\newblock In Michael Wiener, editor, {\em Advances in Cryptology --- CRYPTO'
-  99}, volume 1666 of {\em Lecture Notes in Computer Science}, pages 537--554,
-  Berlin, Heidelberg, 1999. Springer.
+E.~Fujisaki and T.~Okamoto, ``Secure integration of asymmetric and symmetric
+  encryption schemes,'' in {\em Annual international cryptology conference},
+  pp.~537--554, Springer, 1999.
 
 \bibitem{KirchnerFouque2015}
-P.~Kirchner and P.A. Fouque.
-\newblock An improved bkw algorithm for lwe with applications to cryptography
-  and lattices.
-\newblock In {\em Advances in Cryptology -- CRYPTO 2015}, pages 43--62, Berlin,
-  Heidelberg, 2015. Springer Berlin Heidelberg.
+P.~Kirchner and P.-A. Fouque, ``An improved bkw algorithm for lwe with
+  applications to cryptography and lattices,'' in {\em Annual Cryptology
+  Conference}, pp.~43--62, Springer, 2015.
 
 \bibitem{AroraGe2011}
-S.~Arora and R.~Ge.
-\newblock New algorithms for learning in presence of errors.
-\newblock In {\em Automata, Languages and Programming}, pages 403--415, Berlin,
-  Heidelberg, 2011. Springer Berlin Heidelberg.
+S.~Arora and R.~Ge, ``New algorithms for learning in presence of errors,'' in
+  {\em International Colloquium on Automata, Languages, and Programming},
+  pp.~403--415, Springer, 2011.
 
 \bibitem{SchnorrEuchner1994}
-C.~P. Schnorr and M.~Euchner.
-\newblock Lattice basis reduction: Improved practical algorithms and solving
-  subset sum problems.
-\newblock {\em Mathematical Programming}, 66(1):181--199, 1994.
+C.-P. Schnorr and M.~Euchner, ``Lattice basis reduction: Improved practical
+  algorithms and solving subset sum problems,'' {\em Mathematical programming},
+  vol.~66, no.~1, pp.~181--199, 1994.
 
 \bibitem{Peng_Kuhn_2025}
-C.~Yu E.~Peng and M.G. Kuhn.
-\newblock Adaptive template attacks on the kyber binomial sampler.
-\newblock {\em IACR Transactions on Cryptographic Hardware and Embedded
-  Systems}, 2025(3):470?492, Jun. 2025.
+E.~C.-Y. Peng and M.~G. Kuhn, ``Adaptive template attacks on the kyber binomial
+  sampler,'' {\em IACR Transactions on Cryptographic Hardware and Embedded
+  Systems}, vol.~2025, pp.~470--492, June 2025.
 
 \bibitem{cryptoeprint:2019/795}
-P.~Pessl and R.~Primas.
-\newblock More practical single-trace attacks on the number theoretic
-  transform.
-\newblock Cryptology {ePrint} Archive, Paper 2019/795, 2019.
+P.~Pessl and R.~Primas, ``More practical single-trace attacks on the number
+  theoretic transform,'' 2019.
+
+\bibitem{dumer}
+I.~Dumer, ``On minimum distance decoding of linear codes,'' in {\em Proc. 5th
+  Joint Soviet-Swedish Int. Workshop Inform. Theory}, pp.~50--52, Moscow, 1991.
+
+\bibitem{Sendrier2011}
+N.~Sendrier, ``Decoding one out of many,'' in {\em International Workshop on
+  Post-Quantum Cryptography}, pp.~51--67, Springer, 2011.
+
+\bibitem{GoyGaborit}
+G.~Goy, A.~Loiseau, and P.~Gaborit, ``A new key recovery side-channel attack on
+  hqc with chosen ciphertext,'' in {\em International Conference on
+  Post-Quantum Cryptography}, pp.~353--371, Springer, 2022.
+
+\bibitem{cryptoeprint:2025/1344}
+G.~Goy, M.~Spyropoulos, N.~Aragon, P.~Gaborit, R.~Pacalet, F.~Perion,
+  L.~Sauvage, and D.~Vigilant, ``Side-channel sensitivity analysis on hqc:
+  Towards a fully masked implementation,'' {\em Cryptology ePrint Archive},
+  2025.
 
 \end{thebibliography}

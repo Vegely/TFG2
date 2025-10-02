@@ -10,96 +10,66 @@ A level-1 auxiliary file: capitulos/resumen.aux
 A level-1 auxiliary file: capitulos/glosario.aux
 A level-1 auxiliary file: capitulos/introduccion.aux
 A level-1 auxiliary file: capitulos/estadoarte.aux
-White space in argument---line 10 of file capitulos/estadoarte.aux
- : \citation{First-Order-Masked-Kyber-on-ARM
- :                                           Cortex-M4}
-I'm skipping whatever remains of this command
 A level-1 auxiliary file: capitulos/fundamentosgenerales.aux
 A level-1 auxiliary file: capitulos/desarrollo.aux
 A level-1 auxiliary file: capitulos/resultados.aux
 A level-1 auxiliary file: capitulos/conclusion.aux
 A level-1 auxiliary file: capitulos/apendice.aux
-The style file: unsrt.bst
+The style file: ieeetr.bst
 Database file #1: bibliografia/bibliografia.bib
-I was expecting an "="---line 71 of file bibliografia/bibliografia.bib
- : 
- : }
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 539 of file bibliografia/bibliografia.bib
- : @misc{First-Order-Masked-Kyber-on-ARM 
- :                                       Cortex-M4,
-I'm skipping whatever remains of this entry
-Too many commas in name 1 of "R. Avanzi, J. Bos, L. Ducas, et al." for entry kyber-spec-2021
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "P. Gaborit, C. Aguilar-Melchor, N. Aragon, et al." for entry hqc2025
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "G. Alagic, D. Apon, D. Cooper, et al." for entry NIST_IR_8413_2022
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "G. Alagic, M. Bros, P. Ciadoux, et al." for entry NIST_IR_8545_2025
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "Y. Zhang, Y. Bian, Z. Li, et al." for entry 011318_1_5.0179566
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "A. Atadoga, O. Ajoke, B. Samson, et al." for entry A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
-while executing---line 944 of file unsrt.bst
-Warning--empty journal in A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE
-Too many commas in name 1 of "C.H. Ugwuishiwu, U.E. Orji, C.I. Ugwu, et al.a" for entry An_overview_of_Quantum_Cryptography_and
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "D. Aasen, M. Aghaee, Z. Alam, et al." for entry 2502.12252v1
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "F. Samiullah, M.L. Gan, S. Akleylek, et al." for entry Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT
-while executing---line 944 of file unsrt.bst
+Warning--empty journal in FIPS202
+Warning--empty institution in NIST_IR_8413_2022
+Warning--empty institution in NIST_IR_8545_2025
 Warning--empty author in NISTFIPS203
 Warning--empty journal in RESERCHFINAL
-Too many commas in name 1 of "G. Alagic, E. Barker, L. Chen, et al." for entry NIST_SP_800_227_ipd_2025
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "J.P. Anvers, A. Karmakar, S. Roy, et al." for entry modlwr
-while executing---line 944 of file unsrt.bst
-Too many commas in name 1 of "J. Bos, C. Costello, L. Ducas, et al." for entry Correctness
-while executing---line 944 of file unsrt.bst
-Warning--empty booktitle in Gaborit2005ShorterKF
-Warning--empty publisher in 24hqc
-Too many commas in name 1 of "D. Boneh, O. Dagdelen, M. Fischlin, et al." for entry QROM
-while executing---line 944 of file unsrt.bst
-You've used 52 entries,
-            1791 wiz_defined-function locations,
-            782 strings with 13010 characters,
-and the built_in function-call counts, 10158 in all, are:
-= -- 949
-> -- 333
-< -- 14
-+ -- 135
-- -- 83
-* -- 502
-:= -- 1542
-add.period$ -- 163
-call.type$ -- 52
-change.case$ -- 51
+Warning--empty author in nistPQCround3
+Warning--empty journal in nistPQCround3
+Warning--empty author in nistPQCround4
+Warning--empty journal in nistPQCround4
+Warning--empty journal in pqcrystalssecurity
+Warning--empty journal in modlwr
+Warning--empty journal in Karatsuba
+Warning--can't use both volume and number fields in 24hqc
+Warning--empty publisher in QROM
+You've used 57 entries,
+            1876 wiz_defined-function locations,
+            828 strings with 15434 characters,
+and the built_in function-call counts, 13668 in all, are:
+= -- 1222
+> -- 713
+< -- 1
++ -- 261
+- -- 204
+* -- 1006
+:= -- 2040
+add.period$ -- 66
+call.type$ -- 57
+change.case$ -- 57
 chr.to.int$ -- 0
-cite$ -- 57
-duplicate$ -- 492
-empty$ -- 1102
-format.name$ -- 83
-if$ -- 2377
+cite$ -- 71
+duplicate$ -- 680
+empty$ -- 1311
+format.name$ -- 204
+if$ -- 3233
 int.to.chr$ -- 0
-int.to.str$ -- 52
-missing$ -- 33
-newline$ -- 263
-num.names$ -- 54
-pop$ -- 212
+int.to.str$ -- 57
+missing$ -- 51
+newline$ -- 183
+num.names$ -- 53
+pop$ -- 243
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 267
+skip$ -- 375
 stack$ -- 0
-substring$ -- 484
-swap$ -- 128
-text.length$ -- 14
+substring$ -- 662
+swap$ -- 206
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 5
-while$ -- 89
-width$ -- 54
-write$ -- 567
-(There were 16 error messages)
+warning$ -- 14
+while$ -- 122
+width$ -- 59
+write$ -- 515
+(There were 14 warnings)

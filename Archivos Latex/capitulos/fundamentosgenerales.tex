@@ -832,8 +832,8 @@ En el algoritmo de descifrado, a partir de los textos cifrados \(u\) y \(v\)se r
 Para mantener este error dentro de niveles aceptables, es fundamental ajustar adecuadamente los parámetros de las distribuciones de ruido en el algoritmo Kyber. En la versión empleada en este trabajo (Kyber1024), esto se traduce en una tasa de error de $2^{-174}$ \cite{pqcrystalssecurity}.
 \footnotetext{
 	En Kyber se usa la variante \acrshort{mlwe}, donde
-	\(s\in R_q^d\), \(A\in R_q^{d\times d}\) y \(b=A\cdot s + e \in R_q^d\);
-	el pseudocódigo completo en \acrshort{mlwe} aparece en la sección \ref{sub:kybAlg}.
+	\(s\in R_q^d\), \(A\in R_q^{d\times d}\) y \(b=A\cdot s + e \in R_q^d\).
+	El pseudocódigo completo en \acrshort{mlwe} aparece en la sección \ref{sub:kybAlg}.
 }
 \newpage
 \begin{algorithm}[H]
@@ -870,8 +870,8 @@ Para mantener este error dentro de niveles aceptables, es fundamental ajustar ad
 \end{algorithm}
  \footnotetext{
  	En Kyber se usa la variante \acrshort{mlwe}, donde
- 	\(s\in R_q^d\), \(A\in R_q^{d\times d}\) y \(b=A\cdot s + e \in R_q^d\);
- 	el pseudocódigo completo en \acrshort{mlwe} aparece en la sección \ref{sub:kybAlg}.
+ 	\(s\in R_q^d\), \(A\in R_q^{d\times d}\) y \(b=A\cdot s + e \in R_q^d\).
+ 	El pseudocódigo completo en \acrshort{mlwe} aparece en la sección \ref{sub:kybAlg}.
  }
  En el anexo \ref{chap:ej:rlwe} se puede ver un breve ejemplo de aplicación numérica de funcionamiento de los algoritmos anteriores.
 
@@ -1827,6 +1827,7 @@ Un código \acrshort{qc} es sistemático de índice \(s\) y razón \(1/s\) sí s
 donde \(I_n\) es la matriz identidad y \(A_i\) son matrices circulantes de tamaño \(n\times n\).
 \newline
 
+\label{sec:hqc}
 En relación con el problema de seguridad para un código lineal \acrshort{qc} y los enteros \(n\), \(w\) y \(s\), se define la distribución cuasi-lineal del síndrome \texttt{s-QCSD}\((n,w)\) como la función que selecciona aleatoriamente una matriz de paridad \(H \in \mathbb{F}_2^{(sn-n)\times sn}\), correspondiente a un código sistemático \acrshort{qc} de índice \(s\) y razón \(1/s\), junto con un vector \(x \in \mathbb{F}_2^{sn}\) tal que \(\omega(x_i) = w\) para todo \(i=0,\ldots,s-1\), y devuelve la pareja \((H, Hx^T)\).
 \newline
 
@@ -2135,6 +2136,7 @@ En el algoritmo de cifrado de \acrshort{hqc} se obtiene el texto cifrado \(c\) a
 \begin{algorithm}[H]
 	\small
 	\caption{Cifrado \acrshort{hqc}}
+	\label{alg:hqc}
 	$\begin{array}{p{\textwidth}}
 		\textbf{Entrada: } \(pk\in \mathcal{B}^{\lceil n/8 \rceil+32}\), \(m\in \mathcal{B}^{256}\) , \(\gamma\in \mathcal{B}^{16}\)\\ 
 		\hline
@@ -2315,7 +2317,6 @@ Estos objetivos y tipos de ataques se agrupan en conjunto creando un total de 6 
 		\node [font=\normalsize] at (10,12.75) {IND-CCA1};
 		\node [font=\normalsize] at (14,12.75) {IND-CCA2};
 		\draw [->, >=Stealth] (9,14.75) -- (7.25,14.75);
-		\draw [->, >=Stealth] (11,15) -- (13,15);
 		\draw [->, >=Stealth] (13,12.75) -- (11,12.75);
 		\draw [->, >=Stealth] (9,12.75) -- (7.25,12.75);
 		\draw [->, >=Stealth] (6.25,14.5) -- (6.25,13);
@@ -2327,7 +2328,6 @@ Estos objetivos y tipos de ataques se agrupan en conjunto creando un total de 6 
 		\node [font=\normalsize] at (9.75,13.75) {3.1};
 		\node [font=\normalsize] at (6,13.75) {3.1};
 		\node [font=\normalsize] at (14.5,13.75) {3.3};
-		\node [font=\normalsize] at (12,15.25) {3.7};
 	\end{circuitikz}
 	\caption{Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite{CCA2} que demuestran estas relaciones, unicamente no es necesario demostrar que si un esquema mas restrictivo se cumple su esquema más laxo también.}
 	\label{fig:EQUIVALENTSECURITY}
@@ -2601,7 +2601,7 @@ Por último, en el articulo se describe la seguridad frente a ataques de canal l
 	Por otra parte, tampoco es viable explotar el tiempo requerido para la multiplicación de números en función de su tamaño, ya que se trabajan con entradas de 16 bits cuya multiplicación presenta un tiempo de ejecución constante. Finalmente, el problema de la reducción modular queda resuelto mediante algoritmos alternativos al uso directo del operador \% en C, cuya duración de ejecución depende del divisor y del dividendo.
 	\item \textbf{Ataque diferencial}: La implementación actual de Kyber no incluye protecciones específicas frente a ataques basados en la medición del consumo del dispositivo o de sus emisiones electromagnéticas durante la fase de descifrado. Para mitigar este tipo de ataques, se podrían emplear técnicas de enmascarado, aunque, según indica el artículo, esto podría aumentar el tiempo de ejecución hasta $5.5$ veces. Alternativamente, se puede proteger físicamente el microcontrolador para que no sea accesible a un atacante, lo cual resulta más práctico, especialmente considerando que la principal limitación en este trabajo son los recursos del microprocesador. Además, en un entorno industrial, normalmente ruidoso, este tipo de ataques se vuelve más difícil de llevar a cabo.
 	
-	\item \textbf{Ataque de plantilla}: El esquema Kyber presenta actualmente dos vectores de ataque debido a su funcionamiento: el muestreo binomial \cite{Peng_Kuhn_2025} y la operación de la \acrshort{ntt} \cite{cryptoeprint:2019/795}. Este riesgo podría mitigarse mediante algoritmos de enmascarado; sin embargo, al igual que en el caso del ataque diferencial, resulta preferible proteger el microcontrolador, ya que el ruido típico de un entorno industrial dificulta la ejecución de este tipo de ataques.
+	\item \textbf{Ataque de plantilla}: El esquema Kyber presenta actualmente dos vectores de ataque debido a su funcionamiento: el muestreo binomial \cite{Peng_Kuhn_2025} y la operación de la \acrshort{ntt} \cite{cryptoeprint:2019/795}. Este riesgo podría mitigarse mediante algoritmos de enmascarado. Sin embargo, al igual que en el caso del ataque diferencial, resulta preferible proteger el microcontrolador, ya que el ruido típico de un entorno industrial dificulta la ejecución de este tipo de ataques.
 	\newline
 	
 	Este ataque consiste en ejecutar el cifrado o descifrado con múltiples claves conocidas en un dispositivo similar al microcontrolador y analizar cómo varía su consumo para cada clave. Una vez precomputada esta base de datos, basta comparar las mediciones obtenidas durante la operación con las muestras registradas para extraer información sobre la clave desconocida. La diferencia con el ataque diferencial radica en que, dado que se conoce el comportamiento exacto del filtrado de información, se requiere recopilar menos datos para el análisis.
@@ -2653,9 +2653,38 @@ Por último, en el articulo se describe la seguridad frente a ataques de canal l
 	\item \textbf{Ataque diferencial}: aunque existen ataques dirigidos a la estructura de Saber, el artículo original sugiere una implementación enmascarada que protege frente a ataques simples o de primer orden. En este trabajo no se utiliza dicha implementación enmascarada, sino la versión \esquote{limpia}. Sin embargo, debido a que las operaciones se realizan en módulo 2, la máscara resulta ser muy eficiente.
 	\item \textbf{Ataque de plantilla}: al igual que en el esquema Kyber, existen ataques dirigidos a la implementación de las multiplicaciones matriciales en Saber. Aunque aún no se han incorporado técnicas para reordenar aleatoriamente las operaciones en este esquema, se ha demostrado que estas estrategias son muy eficaces para algoritmos similares sin tener mucha pérdida de rendimiento.
 \end{itemize}
-\newpage
+
 
 \subsection{Seguridad esperada en \acrshort{hqc}}
 Para escribir esta sección se resume brevemente la información proporcionada en el artículo \cite{hqc2025}.
+\newline
 
+En primer lugar y al igual que para los algoritmos anteriores se presenta la reducción de seguridad en el esquema \acrshort{cca2}:
+\begin{itemize}
+	\item En este caso el ataque fundamental que realiza un adversario \(A\) es contra el problema decisional de descifrado de síndromes en códigos cuasi-cíclicos (\texttt{s-QCSD}) tal como se describe en la sección \ref{sec:hqc}. La ventaja \(\text{Adv}_{\text{s-DQSCSD}(A)\) se define como la capacidad del adversario de difrenciar parejas aleatorias \((a,b)\) de las creadas mediante los códigos lineales.
+	\item Teniendo esto en cuenta esto, en el modelo de oráculo aleatorio clásico \acrshort{rom} se modela la ventaja de un adversario \(A\) en el esquema \acrshort{ind}-\acrshort{cpa} en base a dos adversarios \(B\) y \(C\) que representan la ventaja que tiene el adversario en romper los bloques \(u\) y \(v\) del algoritmo \ref{alg:hqc} respectivamente:
+	\begin{equation}
+		\text{Adv}^{\text{cpa}}_{\text{\acrshort{hqc}}_{\text{\acrshort{rom}}}}(A)
+		\le 	\text{Adv}_{\text{2-DQSCSD}(B)+\text{Adv}_{\text{3-DQSCSD}(C)
+	\end{equation}
+	
+	\item En el modelo \acrshort{cca2} se tiene en cuenta el error introducido por la resolución de muestreador, el número de peticiones al oráculo aleatorio \(q_{\acrshort{rom}}\) y al oráculo de descifrado \(q_{\mathbb{D}}\). Por tanto, la ventaja en de un adversario \(A\) en función del adversario \(B\) queda como:
+	\begin{equation}
+		\text{Adv}^{\text{cca}}_{\text{\acrshort{hqc}}_{\text{\acrshort{rom}}}}(A)
+		\le \dfrac{1}{2^{256}\cdot2^{16}}+
+		\dfrac{3q_{\text{\acrshort{rom}}}}{2^{256}}+
+		(q_{\text{\acrshort{rom}}}+q_D)\delta +	2\text{Adv}^{\text{cpa}}_{\text{\acrshort{hqc}}_{\text{\acrshort{rom}}}}(B)
+	\end{equation}
+	\item En agosto de 2025 no existe, que conozca, una reducción \acrshort{qrom} completa que demuestre seguridad \acrshort{cca2} para \acrshort{hqc}. Los trabajos existentes tratan nociones más genéricas o más débiles y no se aplican directamente. \cite{hqc2025} admite además una pérdida de seguridad de aproximadamente la mitad en el \acrshort{qrom}, por lo que la reducción sería similar a la de Saber. En consecuencia, la confianza en su resistencia cuántica es menor que la de Kyber o Saber, aunque \acrshort{hqc} fue seleccionado en la ronda 4 del \acrshort{nist} entre otros candidatos basados en código que comparten esta problemática \cite{nistPQCround4}.
+\end{itemize}
 
+Con esta reducción de seguridad, aunque no exista una demostración rigurosa para el modelo \acrshort{qrom} y, a diferencia de los esquemas Kyber y Saber cuyas garantías se basan en la \acrshort{lwe}, la seguridad de \acrshort{hqc} se fundamenta en la resistencia al problema de decodificación de síndromes en códigos \acrshort{qc}. Por ello fue seleccionado en la ronda 4 del \acrshort{nist} \cite{nistPQCround4}.
+\newline
+
+La vulnerabilidad principal por tanto reside en la decodificación de síndromes, un problema ampliamente estudiado durante más de cincuenta años \cite{hqc2025} donde el mejor ataque contra este esquema \cite{dumer} tiene complejidad exponencial. Por otro lado, en cuanto a ataques que explotan la estructura \acrshort{qc}, se ha descrito un ataque \cite{Sendrier2011} que depende de que el polinomio \(X^n-1\) se descomponga en muchos factores lineales. No obstante, para \(n=57637\), valor elegido en \acrshort{hqc}-5, dicha descomposición contiene únicamente dos factores lineales. Por tanto, ese ataque no compromete la seguridad del esquema.
+\newline
+
+Por último, se describe las vulnerabilidades de \acrshort{hqc} frente a ataques de canal lateral. En el artículo \cite{hqc2025} solo se abordan ataques de temporización.
+\begin{itemize}
+	\item \textbf{Ataque diferencial}: Para analizar este ataque se recurre al artículo \cite{GoyGaborit}, en el que se examinan las trazas de consumo del dispositivo durante la fase de descapsulado. Los autores demuestran que el decodificador Reed–Muller presenta fugas de información y proponen, como contramedida, dividir las palabras procesadas en un mayor número de bloques y tratar cada bloque de forma independiente. Según ellos, esta técnica incrementa la resistencia frente a ataques diferenciales. No obstante, no aportan un análisis detallado del coste ni del impacto en la eficiencia de la implementación. Otros estudios que realizan un análisis general del enmascarado en \acrshort{hqc} \cite{cryptoeprint:2025/1344} concluyen que este tipo de enmascarado puede resultar muy costoso. Por ello, al igual que en trabajos sobre Kyber y Saber, se sugiere que una barrera física podría ser una solución más adecuada.
+\end{itemize}

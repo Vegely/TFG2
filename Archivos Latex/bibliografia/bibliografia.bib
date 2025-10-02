@@ -1,81 +1,92 @@
 %este es el formato común de citar artículos. El formato Bibtex facilita el trabajo.
 @inproceedings{Gaborit2005ShorterKF,
-	title={Shorter keys for code-based cryptography},
-	author={P. Gaborit},
-	year={2005},
-	url={https://api.semanticscholar.org/CorpusID:125326012}
+	title={Shorter keys for code based cryptography},
+	author={Gaborit, Philippe},
+	booktitle={Proceedings of the 2005 International Workshop on Coding and Cryptography (WCC 2005)},
+	pages={81--91},
+	year={2005}
 }
+
+@InProceedings{Sendrier2011,
+	title={Decoding one out of many},
+	author={Sendrier, Nicolas},
+	booktitle={International Workshop on Post-Quantum Cryptography},
+	pages={51--67},
+	year={2011},
+	organization={Springer}
+}
+
+
+@inproceedings{dumer,
+	title={On minimum distance decoding of linear codes},
+	author={Dumer, Ilya},
+	booktitle={Proc. 5th Joint Soviet-Swedish Int. Workshop Inform. Theory},
+	pages={50--52},
+	year={1991},
+	organization={Moscow}
+}
+
 @misc{cryptoeprint:2019/795,
-	author = {P. Pessl and R. Primas},
-	title = {More Practical Single-Trace Attacks on the Number Theoretic Transform},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2019/795},
-	year = {2019},
-	url = {https://eprint.iacr.org/2019/795}
+	title={More practical single-trace attacks on the number theoretic transform},
+	author={Pessl, Peter and Primas, Robert},
+	booktitle={International Conference on Cryptology and Information Security in Latin America},
+	pages={130--149},
+	year={2019},
+	organization={Springer}
 }
+
 @article{Peng_Kuhn_2025, 
-	title={Adaptive Template Attacks on the Kyber Binomial Sampler}, 
-	volume={2025}, 
-	url={https://tches.iacr.org/index.php/TCHES/article/view/12224}, 
-	DOI={10.46586/tches.v2025.i3.470-492}, 
-	number={3}, 
-	journal={IACR Transactions on Cryptographic Hardware and Embedded Systems}, 
-	author={E. Peng, C. Yu and M.G. Kuhn},
-	 year={2025},
-	  month={Jun.}, 
-	  pages={470?492} }
-@InProceedings{AroraGe2011,
-	author    = {S. Arora and R. Ge},
-	title     = {New Algorithms for Learning in Presence of Errors},
-	booktitle = {Automata, Languages and Programming},
-	year      = {2011},
-	publisher = {Springer Berlin Heidelberg},
-	address   = {Berlin, Heidelberg},
-	pages     = {403--415},
-	abstract  = {We give new algorithms for a variety of randomly-generated instances of computational problems using a linearization technique that reduces to solving a system of linear equations.},
-	isbn
+  title     = {Adaptive Template Attacks on the Kyber Binomial Sampler},
+  author    = {Peng, Eric Chun-Yu and Kuhn, Markus G.},
+  journal   = {IACR Transactions on Cryptographic Hardware and Embedded Systems},
+  volume    = {2025},
+  number    = {3},
+  pages     = {470--492},
+  year      = {2025},
+  month     = jun,
+  publisher = {Universitätsbibliothek der Ruhr-Universität Bochum},
+  issn      = {2569-2925},
+  doi       = {10.46586/tches.v2025.i3.470-492},
+  url       = {http://dx.doi.org/10.46586/tches.v2025.i3.470-492}
 }
+
+@InProceedings{AroraGe2011,
+ 	title={New algorithms for learning in presence of errors},
+	author={Arora, Sanjeev and Ge, Rong},
+	booktitle={International Colloquium on Automata, Languages, and Programming},
+	pages={403--415},
+	year={2011},
+	organization={Springer}
+}
+
 @Article{SchnorrEuchner1994,
-	author  = {C. P. Schnorr and M. Euchner},
-	title   = {Lattice basis reduction: Improved practical algorithms and solving subset sum problems},
-	journal = {Mathematical Programming},
-	year    = {1994},
-	volume  = {66},
-	number  = {1},
-	pages   = {181--199},
-	doi     = {10.1007/BF01581144},
-	url     = {https://doi.org/10.1007/BF01581144},
-	abstract= {We report on improved practical algorithms for lattice basis reduction. We propose a practical floating point version of the L3-algorithm of Lenstra, Lenstra, Lovász (1982). We present a variant of the L3-algorithm with ?deep insertions? and a practical algorithm for block Korkin?Zolotarev reduction, a concept introduced by Schnorr (1987). Empirical tests show that the strongest of these algorithms solves almost all subset sum problems with up to 66 random weights of arbitrary bit length within at most a few hours on a UNISYS 6000/70 or within a couple of minutes on a SPARC1+ computer.},
-	issn    = {1436-4646}
+	title={Lattice basis reduction: Improved practical algorithms and solving subset sum problems},
+	author={Schnorr, Claus-Peter and Euchner, Martin},
+	journal={Mathematical programming},
+	volume={66},
+	number={1},
+	pages={181--199},
+	year={1994},
+	publisher={Springer}
 }
 @InProceedings{KirchnerFouque2015,
-	author    = {P. Kirchner and P.A. Fouque},
-	title     = {An Improved BKW Algorithm for LWE with Applications to Cryptography and Lattices},
-	booktitle = {Advances in Cryptology -- CRYPTO 2015},
-	year      = {2015},
-	publisher = {Springer Berlin Heidelberg},
-	address   = {Berlin, Heidelberg},
-	pages     = {43--62},
-	abstract  = {In this paper, we study the Learning With Errors problem and its binary variant, where secrets and errors are binary or taken in a small interval. We introduce a new variant of the Blum, Kalai and Wasserman algorithm, relying on a quantization step that generalizes and fine-tunes modulus switching. In general this new technique yields a significant gain in the constant in front of the exponent in the overall complexity. We illustrate this by solving within half a day a LWE instance with dimension n=128, modulus q=n^2, Gaussian noise ? = 1/(sqrt{n/?} log^2 n) and binary secret, using 2^28 samples, while the previous best result based on BKW claims a time complexity of 2^74 with 2^60 samples for the same parameters.},
-	isbn      = {978-3-662-47989-6}
+	title={An improved BKW algorithm for LWE with applications to cryptography and lattices},
+	author={Kirchner, Paul and Fouque, Pierre-Alain},
+	booktitle={Annual Cryptology Conference},
+	pages={43--62},
+	year={2015},
+	organization={Springer}
 }
 
 @article{SurveyCOdeBAsed,
-	author       = {V. Weger,
-	N. Gassner and
-	J. Rosenthal},
-	title        = {A Survey on Code-Based Cryptography},
-	journal      = {CoRR},
-	volume       = {abs/2201.07119},
-	year         = {2022},
-	url          = {https://arxiv.org/abs/2201.07119},
-	eprinttype    = {arXiv},
-	eprint       = {2201.07119},
-	timestamp    = {Fri, 21 Jan 2022 13:57:15 +0100},
-	biburl       = {https://dblp.org/rec/journals/corr/abs-2201-07119.bib},
-	bibsource    = {dblp computer science bibliography, https://dblp.org}
+	title={A survey on code-based cryptography},
+	author={Weger, Violetta and Gassner, Niklas and Rosenthal, Joachim},
+	journal={arXiv preprint arXiv:2201.07119},
+	year={2022}
 }
+
 @techreport{Keccak,
-	author       = {G. Bertoni, J. Daemen and M. Peeters},
+	author = {Guido Bertoni and Joan Daemen and Micha{\"e}l Peeters and Gilles Van Assche and Ronny Van Keer},
 	title        = {The Keccak Reference},
 	institution  = {NIST SHA-3 Competition},
 	year         = {2011},
@@ -83,257 +94,208 @@
 }
 
 @inproceedings{yamakawa2021classical,
-	title={Classical vs quantum random oracles},
-	author={T. Yamakawa and M. Zhandry},
+  title={Classical vs quantum random oracles},
+	author={Yamakawa, Takashi and Zhandry, Mark},
 	booktitle={Annual International Conference on the Theory and Applications of Cryptographic Techniques},
 	pages={568--597},
 	year={2021},
 	organization={Springer}
 }
+
 @book{Nielsen_Chuang_2010,
 	title     = {Quantum Computation and Quantum Information: 10th Anniversary Edition},
-	author    = {M.A. Nielsen and I.L. Chuang},
+	author={Nielsen, Michael A and Chuang, Isaac L},
 	year      = {2010},
 	publisher = {Cambridge University Press},
 	address   = {Cambridge}
 }
+
 @inbook{QROM,
-	title={Random Oracles in a Quantum World},
-	ISBN={9783642253850},
-	ISSN={1611-3349},
-	url={http://dx.doi.org/10.1007/978-3-642-25385-0_3},
-	DOI={10.1007/978-3-642-25385-0_3},
-	booktitle={Advances in Cryptology ? ASIACRYPT 2011},
-	publisher={Springer Berlin Heidelberg},
-	author={D. Boneh, O. Dagdelen, M. Fischlin, et al.},
+	title={Random oracles in a quantum world},
+	author={Boneh, Dan and Dagdelen, {\"O}zg{\"u}r and Fischlin, Marc and Lehmann, Anja and Schaffner, Christian and Zhandry, Mark},
+	booktitle={International conference on the theory and application of cryptology and information security},
+	pages={41--69},
 	year={2011},
-	pages={13--59} }
+	organization={Springer}
+}
 
 @inproceedings{toomcook4,
-	author = {M. Bodrato and A. Zanoni},
-	title = {Integer and polynomial multiplication: towards optimal toom-cook matrices},
-	year = {2007},
-	isbn = {9781595937438},
-	publisher = {Association for Computing Machinery},
-	address = {New York, NY, USA},
-	url = {https://doi.org/10.1145/1277548.1277552},
-	doi = {10.1145/1277548.1277552},
-	booktitle = {Proceedings of the 2007 International Symposium on Symbolic and Algebraic Computation},
-	pages = {17?24},
-	numpages = {8},
-	location = {Waterloo, Ontario, Canada},
-	series = {ISSAC '07}
+	title={Integer and polynomial multiplication: Towards optimal Toom-Cook matrices},
+	author={Bodrato, Marco and Zanoni, Alberto},
+	booktitle={Proceedings of the 2007 international symposium on Symbolic and algebraic computation},
+	pages={17--24},
+	year={2007}
 }
+
 @article{masterTh,
-	author = {J.L. Bentley, D. Haken and J.B. James},
-	title = {A general method for solving divide-and-conquer recurrences},
-	year = {1980},
-	issue_date = {Fall 1980},
-	publisher = {Association for Computing Machinery},
-	address = {New York, NY, USA},
-	volume = {12},
-	number = {3},
-	issn = {0163-5700},
-	url = {https://doi.org/10.1145/1008861.1008865},
-	doi = {10.1145/1008861.1008865},
-	journal = {SIGACT News},
-	month = sep,
-	pages = {36?44},
-	numpages = {9}
+	title={A general method for solving divide-and-conquer recurrences},
+	author={Bentley, Jon Louis and Haken, Dorothea and Saxe, James B},
+	journal={ACM SIGACT News},
+	volume={12},
+	number={3},
+	pages={36--44},
+	year={1980},
+	publisher={ACM New York, NY, USA}
 }
+
 @inproceedings{CCA2,
-	author    = {M. Bellare, A. Desai and D. Pointcheval},
-	title     = {Relations among notions of security for public-key encryption schemes},
-	booktitle = {Advances in Cryptology --- CRYPTO '98},
-	editor    = {Hugo Krawczyk},
-	year      = {1998},
-	publisher = {Springer Berlin Heidelberg},
-	address   = {Berlin, Heidelberg},
-	pages     = {26--45},
-	doi       = {10.1007/BFb0055718},
-	isbn      = {978-3-540-68462-6},
-	url       = {https://doi.org/10.1007/BFb0055718},
+	title={Relations among notions of security for public-key encryption schemes},
+	author={Bellare, Mihir and Desai, Anand and Pointcheval, David and Rogaway, Phillip},
+	booktitle={Annual International Cryptology Conference},
+	pages={26--45},
+	year={1998},
+	organization={Springer}
 }
-@misc{rngWIN,
-	author = {L. Dorrendorf, Z. Gutterman and B. Pinkas},
-	title = {Cryptanalysis of the Random Number Generator of the Windows Operating System},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2007/419},
-	year = {2007},
-	url = {https://eprint.iacr.org/2007/419}
-}
+
+
 @misc{Correctness,
-	author = {J. Bos, C. Costello, L. Ducas, et al.},
-	title = {Frodo: Take off the ring! Practical, Quantum-Secure Key Exchange from {LWE}},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2016/659},
-	year = {2016},
-	doi = {10.1145/2976749.2978425},
-	url = {https://eprint.iacr.org/2016/659}
+	title={Frodo: Take off the ring! practical, quantum-secure key exchange from LWE},
+	author={Bos, Joppe and Costello, Craig and Ducas, L{\'e}o and Mironov, Ilya and Naehrig, Michael and Nikolaenko, Valeria and Raghunathan, Ananth and Stebila, Douglas},
+	booktitle={Proceedings of the 2016 ACM SIGSAC conference on computer and communications security},
+	pages={1006--1018},
+	year={2016}
 }
+
 @techreport{NIST_IR_8413_2022,
-	author       = {G. Alagic, D. Apon, D. Cooper, et al.},
-	title        = {Status Report on the Third Round of the NIST Post-Quantum Cryptography Standardization Process},
-	institution  = {National Institute of Standards and Technology (NIST)},
-	type         = {NIST Interagency Report},
-	number       = {NIST IR 8413 (Updated)},
-	year         = {2022},
-	month        = jul,
-	url          = {https://doi.org/10.6028/NIST.IR.8413-upd1},
+	title={Status report on the third round of the NIST post-quantum cryptography standardization process},
+	author={Alagic, Gorjan and Alagic, Gorjan and Apon, Daniel and Cooper, David and Dang, Quynh and Dang, Thinh and Kelsey, John and Lichtinger, Jacob and Liu, Yi-Kai and Miller, Carl and others},
+	year={2022},
+	publisher={US Department of Commerce, National Institute of Standards and Technology}
 }
+
 @article{ToomCook,
-	author = {A. Toom},
+	author={Toom, Andrei L},
 	year = {1963},
-	month = {01},
 	title = {The complexity of a scheme of functional elements realizing the multiplication of integers},
 	volume = {3},
 	journal = {Doklady Akademii Nauk SSSR}
 }
+
 @article{Karatsuba,
-	author = {A. Karatsuba and Y. Ofman},
-	year = {1962},
-	month = {12},
-	pages = {595},
-	title = {Multiplication of Multidigit Numbers on Automata},
-	volume = {7},
-	journal = {Soviet Physics Doklady}
+	title={Multiplication of multidigit numbers on automata},
+	author={Karatsuba, Anatolii},
+	booktitle={Soviet physics doklady},
+	volume={7},
+	pages={595--596},
+	year={1963}
 }
-@misc{modlwr,
-	author = {J.P. Anvers, A. Karmakar, S. Roy, et al.},
+
+@article{modlwr,
+	author={D?Anvers, Jan-Pieter and Karmakar, Angshuman and Sinha Roy, Sujoy and Vercauteren, Frederik},
 	title = {Saber: Module-{LWR} based key exchange, {CPA}-secure encryption and {CCA}-secure {KEM}},
 	howpublished = {Cryptology {ePrint} Archive, Paper 2018/230},
 	year = {2018},
 	url = {https://eprint.iacr.org/2018/230}
 }
+
 @techreport{NIST_IR_8545_2025,
-	author       = {G. Alagic, M. Bros, P. Ciadoux, et al.},
-	title        = {Status Report on the Fourth Round of the NIST Post-Quantum Cryptography Standardization Process},
-	institution  = {National Institute of Standards and Technology (NIST)},
-	type         = {NIST Internal Report},
-	number       = {NIST IR 8545},
-	year         = {2025},
-	month        = mar,
-	url          = {https://doi.org/10.6028/NIST.IR.8545},
-	address      = {Gaithersburg, MD},
+	title={Status report on the third round of the NIST post-quantum cryptography standardization process},
+	author={Alagic, Gorjan and Alagic, Gorjan and Apon, Daniel and Cooper, David and Dang, Quynh and Dang, Thinh and Kelsey, John and Lichtinger, Jacob and Liu, Yi-Kai and Miller, Carl and others},
+	year={2022},
+	publisher={US Department of Commerce, National Institute of Standards and Technology}
 }
 
 @techreport{NIST_SP_800_227_ipd_2025,
-	author       = {G. Alagic, E. Barker, L. Chen, et al.},
-	title        = {Recommendations for Key-Encapsulation Mechanisms: Initial Public Draft},
-	institution  = {National Institute of Standards and Technology (NIST)},
-	type         = {NIST Special Publication},
-	number       = {NIST SP 800-227 ipd},
-	year         = {2025},
-	month        = jan,
-	url          = {https://doi.org/10.6028/NIST.SP.800-227.ipd},
-}
-@article{011318_1_5.0179566,
-	author = {Y. Zhang, Y. Bian, Z. Li, et al.},
-	title = {Continuous-variable quantum key distribution system: Past, present, and future},
-	journal = {Applied Physics Reviews},
-	volume = {11},
-	number = {1},
-	pages = {011318},
-	year = {2024},
-	month = {03},
-	issn = {1931-9401},
-	doi = {10.1063/5.0179566},
-	url = {https://doi.org/10.1063/5.0179566},
-	eprint = {https://pubs.aip.org/aip/apr/article-pdf/doi/10.1063/5.0179566/19855574/011318\_1\_5.0179566.pdf},
-}
-@article{s11042-024-20535-x,
-	author       = {M. Kumar and B. Mondal},
-	title        = {A brief review on Quantum Key Distribution Protocols},
-	journal      = {Multimedia Tools and Applications},
-	year         = {2025},
-	month        = jan,
-	doi          = {10.1007/s11042-024-20535-x},
-	url          = {https://doi.org/10.1007/s11042-024-20535-x},
-	issn         = {1573-7721},
-}
-@article{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE, 
-title={A comparative review of data encryption of data methosds in the USA and Europe}, 
-volume={5}, 
-url={https://fepbl.com/index.php/csitrj/article/view/815}, 
-DOI={10.51594/csitrj.v5i2.815},  
-author={A. Atadoga, O. Ajoke, B. Samson, et al.},
-year={2024},
-month={Feb.}, 
-pages={447-460} }
-@article{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications,
-	author={B. Halak, Y. Yilmaz and D. Shiu},
-	journal={IEEE Access}, 
-	title={Comparative Analysis of Energy Costs of Asymmetric vs Symmetric Encryption-Based Security Applications}, 
-	year={2022},
-	volume={10},
-	number={},
-	pages={76707-76719},
-	doi={10.1109/ACCESS.2022.3192970}}
-@misc{First-Order-Masked-Kyber-on-ARM Cortex-M4,
-	author = {D. Heinz, J.K. Matthias, L. Georg, et al.},
-	title = {First-Order Masked Kyber on {ARM} Cortex-M4},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2022/058},
-	year = {2022},
-	url = {https://eprint.iacr.org/2022/058}
-}
-@misc{2022-414,
-	author = {M. Anastasova, P. Kampanakis and J. Massimo},
-	title = {{PQ}-{HPKE}: Post-Quantum Hybrid Public Key Encryption},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2022/414},
-	year = {2022},
-	url = {https://eprint.iacr.org/2022/414}
-}
-@article{An_overview_of_Quantum_Cryptography_and,
-	author       = {C.H. Ugwuishiwu, U.E. Orji, C.I. Ugwu, et al.a},
-	title        = {An overview of Quantum Cryptography and Shor?s Algorithm},
-	journal      = {International Journal of Advanced Trends in Computer Science and Engineering},
-	volume       = {9},
-	number       = {5},
-	pages        = {7487--7495},
-	year         = {2020},
-	month        = sep,
-	issn         = {2278-3091},
-	doi          = {10.30534/ijatcse/2020/82952020},
-	url          = {http://www.warse.org/IJATCSE/static/pdf/file/ijatcse82952020.pdf},
-}
-@article{9508027v2,
-	author = {P.W. Shor},
-	title = {Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer},
-	journal = {SIAM Journal on Computing},
-	volume = {26},
-	number = {5},
-	pages = {1484-1509},
-	year = {1997},
-	doi = {10.1137/S0097539795293172},
-	URL = { https://doi.org/10.1137/S0097539795293172},
-	eprint = { https://doi.org/10.1137/S0097539795293172}
-	,
-
-}
-@misc{0301141v2,
-	title={Shor's discrete logarithm quantum algorithm for elliptic curves}, 
-	author={J. Proos and C. Zalka},
-	year={2004},
-	eprint={quant-ph/0301141},
-	archivePrefix={arXiv},
-	primaryClass={quant-ph},
-	url={https://arxiv.org/abs/quant-ph/0301141}, 
-}
- @article{RESERCHFINAL,
-	title={Implementation and Analysis of Shor?s Algorithm to Break RSA Cryptosystem Security},
-	url={http://dx.doi.org/10.36227/techrxiv.170259160.05374043/v2},
-	DOI={10.36227/techrxiv.170259160.05374043/v2},
-	publisher={Institute of Electrical and Electronics Engineers (IEEE)},
-	author={S. Singh and E. Sakk},
-	year={2024},
-	month=jan }
-@misc{2502.12252v1,
-	title={Roadmap to fault tolerant quantum computation using topological qubit arrays}, 
-	author={D. Aasen, M. Aghaee, Z. Alam, et al.},
+	title={Recommendations for Key-Encapsulation Mechanisms},
+	author={Alagic, Gorjan and Barker, Elaine and Chen, Lily and Moody, Dustin and Robinson, Angela and Silberg, Hamilton and Waller, Noah},
 	year={2025},
-	eprint={2502.12252},
-	archivePrefix={arXiv},
-	primaryClass={quant-ph},
-	url={https://arxiv.org/abs/2502.12252}, 
+	institution={National Institute of Standards and Technology}
 }
+
+@article{011318_1_5.0179566,
+	title={Continuous-variable quantum key distribution system: Past, present, and future},
+	author={Zhang, Yichen and Bian, Yiming and Li, Zhengyu and Yu, Song and Guo, Hong},
+	journal={Applied Physics Reviews},
+	volume={11},
+	number={1},
+	year={2024},
+	publisher={AIP Publishing}
+}
+
+@article{s11042-024-20535-x,
+	title={A brief review on Quantum Key Distribution Protocols},
+	author={Kumar, Mandeep and Mondal, Bhaskar},
+	journal={Multimedia Tools and Applications},
+	pages={1--40},
+	year={2025},
+	publisher={Springer}
+}
+
+@article{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE, 
+	title={A comparative review of data encryption methods in the USA and Europe},
+	author={Atadoga, Akoh and Farayola, Oluwatoyin Ajoke and Ayinla, Benjamin Samson and Amoo, Olukunle Oladipupo and Abrahams, Temitayo Oluwaseun and Osasona, Femi},
+	journal={Computer Science \& IT Research Journal},
+	volume={5},
+	number={2},
+	pages={447--460},
+	year={2024}
+}
+	
+@article{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications,
+	title={Comparative analysis of energy costs of asymmetric vs symmetric encryption-based security applications},
+	author={Halak, Basel and Yilmaz, Yildiran and Shiu, Daniel},
+	journal={Ieee Access},
+	volume={10},
+	pages={76707--76719},
+	year={2022},
+	publisher={IEEE}
+}
+	
+@article{First-Order-Masked-Kyber-on-ARM-Cortex-M4,
+	title={First-order masked Kyber on ARM Cortex-M4},
+	author={Heinz, Daniel and Kannwischer, Matthias J and Land, Georg and P{\"o}ppelmann, Thomas and Schwabe, Peter and Sprenkels, Amber},
+	journal={Cryptology ePrint Archive},
+	year={2022}
+}
+
+@article{2022-414,
+	title={PQ-HPKE: post-quantum hybrid public key encryption},
+	author={Anastasova, Mila and Kampanakis, Panos and Massimo, Jake},
+	journal={Cryptology ePrint Archive},
+	year={2022}
+}
+
+@article{An_overview_of_Quantum_Cryptography_and,
+	title={An overview of quantum cryptography and shor?s algorithm},
+	author={Ugwuishiwu, CH and Orji, UE and Ugwu, CI and Asogwa, CN},
+	journal={Int. J. Adv. Trends Comput. Sci. Eng},
+	volume={9},
+	number={5},
+	year={2020}
+}
+
+@article{9508027v2,
+	title={Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer},
+	author={Shor, Peter W},
+	journal={SIAM review},
+	volume={41},
+	number={2},
+	pages={303--332},
+	year={1999},
+	publisher={SIAM}
+}
+
+@article{0301141v2,
+	title={Shor's discrete logarithm quantum algorithm for elliptic curves},
+	author={Proos, John and Zalka, Christof},
+	journal={arXiv preprint quant-ph/0301141},
+	year={2003}
+}
+
+@article{RESERCHFINAL,
+	title={Implementation and Analysis of Shor?s Algorithm to Break RSA Cryptosystem Security},
+	publisher={Institute of Electrical and Electronics Engineers (IEEE)},
+	author = {Singh, Siyon and Sakk, Eric},
+	year={2024}
+}
+
+@misc{2502.12252v1,
+	title={Roadmap to fault tolerant quantum computation using topological qubit arrays},
+	author={Aasen, David and Aghaee, Morteza and Alam, Zulfi and Andrzejczuk, Mariusz and Antipov, Andrey and Astafev, Mikhail and Avilovas, Lukas and Barzegar, Amin and Bauer, Bela and Becker, Jonathan and others},
+	journal={arXiv preprint arXiv:2502.12252},
+	year={2025}
+}
+
 @techreport{NISTFIPS203,
 	title        = {{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard}},
 	institution  = {National Institute of Standards and Technology},
@@ -341,51 +303,60 @@ pages={447-460} }
 	type         = {Federal Information Processing Standards Publication},
 	number       = {FIPS 203},
 	year         = {2024},
-	month        = aug,
-	url          = {https://doi.org/10.6028/NIST.FIPS.203},
+	month        = aug
 }
-	
-@ARTICLE{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT,
-	author={F. Samiullah, M.L. Gan, S. Akleylek, et al.},
-	journal={IEEE Open Journal of the Communications Society}, 
-	title={Quantum Resistance Saber-Based Group Key Exchange Protocol for IoT}, 
-	year={2025},
-	volume={6},
-	number={},
-	pages={378-398},
-	doi={10.1109/OJCOMS.2024.3516005}}
 
-@INPROCEEDINGS{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption,
-	author={Q. Zhang},
-	booktitle={2021 2nd International Conference on Computing and Data Science (CDS)}, 
-	title={An Overview and Analysis of Hybrid Encryption: The Combination of Symmetric Encryption and Asymmetric Encryption}, 
+@article{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT,
+	title={Quantum Resistance Saber-Based Group Key Exchange Protocol for IoTs},
+	author={Samiullah, Fouzia and Gan, Ming-Lee and Akleylek, Sedat and Aun, Y},
+	journal={IEEE Open Journal of the Communications Society},
+	year={2024},
+	publisher={IEEE}
+}
+
+@inproceedings{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption,
+	title={An overview and analysis of hybrid encryption: the combination of symmetric encryption and asymmetric encryption},
+	author={Zhang, Qixin},
+	booktitle={2021 2nd international conference on computing and data science (CDS)},
+	pages={616--622},
 	year={2021},
-	pages={616-622},
-	doi={10.1109/CDS52072.2021.00111}}
+	organization={IEEE}
+}
 
 @software{latex,
 	year = {2024},
 	author = {Leslie Lamport and others},
 	title = {The LaTex project},
 	url = {https://www.latex-project.org/},
-	urldate = {2024-06-13 }
-	
+	urldate = {2024-06-13 }	
 }
+
 @incollection{Micciancio2009,
-	author       = {D. Micciancio and O. Regev},
+	author    = {Daniele Micciancio and Oded Regev},
 	title        = {Lattice-based Cryptography},
 	booktitle    = {Post-Quantum Cryptography},
-	editor       = {Daniel J. Bernstein and Johannes Buchmann and Erik Dahmen},
 	publisher    = {Springer Berlin Heidelberg},
 	address      = {Berlin, Heidelberg},
 	year         = {2009},
 	pages        = {147--191},
-	isbn         = {978-3-540-88702-7},
-	doi          = {10.1007/978-3-540-88702-7_5},
-	url          = {https://doi.org/10.1007/978-3-540-88702-7_5}
+	isbn         = {978-3-540-88702-7}
 }
 
+@article{cryptoeprint:2025/1344,
+	title={Side-Channel Sensitivity Analysis on HQC: Towards a Fully Masked Implementation},
+	author={Goy, Guillaume and Spyropoulos, Maxime and Aragon, Nicolas and Gaborit, Philippe and Pacalet, Renaud and Perion, Fabrice and Sauvage, Laurent and Vigilant, David},
+	journal={Cryptology ePrint Archive},
+	year={2025}
+}
 
+@inproceedings{GoyGaborit,
+	title={A new key recovery side-channel attack on HQC with chosen ciphertext},
+	author={Goy, Guillaume and Loiseau, Antoine and Gaborit, Philippe},
+	booktitle={International Conference on Post-Quantum Cryptography},
+	pages={353--371},
+	year={2022},
+	organization={Springer}
+}
 
 @misc{tikzmaker,
 	title = {TikzMaker},
@@ -396,178 +367,135 @@ pages={447-460} }
 }
 
 
-@techreport{kyber-spec-2021,
-	title        = {{CRYSTALS-Kyber: Algorithm Specifications and Supporting Documentation (version 3.01)}},
-	author       = {R. Avanzi, J. Bos, L. Ducas, et al.},
+@article{kyber-spec-2021,
+	title        = {CRYSTALS-Kyber algorithm specifications and supporting documentation},
+	author={Avanzi, Roberto and Bos, Joppe and Ducas, L{\'e}o and Kiltz, Eike and Lepoint, Tancr{\`e}de and Lyubashevsky, Vadim and Schanck, John M and Schwabe, Peter and Seiler, Gregor and Stehl{\'e}, Damien and others},
 	institution  = {CRYSTALS Project},
 	year         = {2021},
 	month        = {January},
-	url          = {https://pq-crystals.org/kyber/data/kyber-specification-round3-20210131.pdf},
-	howpublished = {\url{https://pq-crystals.org/kyber/}},
-	note         = {NIST PQC Round 3 submission}
+	journal={NIST PQC Round 3 submission}
 }
 
-
-
-@misc{saber-spec-2020,
-	title        = {{SABER: Mod-LWR based KEM (Round 3 Submission)}},
-	author       = {A. Basso and J.M. Bermudo Mera and J.P. Anvers and others},
-	institution  = {Katholieke Universiteit Leuven and University of Birmingham},
+@article{saber-spec-2020,
+	title        = {SABER: Mod-LWR based KEM (Round 3 Submission)},
+	author       = {Andrea Basso and Jose Maria Bermudo Mera and Jan-Pieter D'Anvers and Angshuman Karmakar and Sujoy Sinha Roy and Michiel Van Beirendonck and Frederik Vercauteren},
+	institution  = {KU Leuven, imec-COSIC and University of Birmingham},
 	year         = {2020},
-	url          = {https://www.esat.kuleuven.be/cosic/pqcrypto/saber/},
-	note         = {NIST PQC Round 3 submission}
+	month        = {September},
+	journal      = {NIST PQC Round 3 submission}
 }
-@misc{moreno-roots,
-	author       = {M.A. Moreno},
-	title        = {Primitive $n$-th roots of unity of finite fields},
-	year         = {n.d.},
-	howpublished = {\url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html}},
-	note         = {Consultado: 2025-05-05}
-}
-@misc{pqcrystalssecurity,
-	author       = {L. Ducas and J. Schanck},
+
+
+@article{pqcrystalssecurity,
+	author={Ducas, L{\'e}o and Schanck, John},
 	title        = {Security Estimation Scripts for Kyber and Dilithium},
 	howpublished = {\url{https://github.com/pq-crystals/security-estimates}},
 	note         = {Consultado: 2025-05-31},
 	year         = {2023}
 }
-@misc{hqc2025,
+
+@article{hqc2025,
 	title        = {Hamming Quasi-Cyclic (HQC) Specification},
-	author       = {P. Gaborit, C. Aguilar-Melchor, N. Aragon, et al.},
+	author={Melchor, Carlos Aguilar and Aragon, Nicolas and Bettaieb, Slim and Bidoux, Lo{\i}c and Blazy, Olivier and Deneuville, Jean-Christophe and Gaborit, Philippe and Persichetti, Edoardo and Z{\'e}mor, Gilles and Bourges, IC},
+	journal      = {NIST PQC Round 4 submission},
 	year         = {2025},
 	month        = aug,
 	day          = 22,
 	howpublished = {\url{https://pqc-hqc.org/resources.html}},
 }
+
 @book{24hqc,
-	author = {Lin, Shu and Costello, Daniel},
-	year = {2004},
-	month = {01},
-	pages = {},
-	title = {Error Control Coding},
-	isbn = {978-1-4613-6787-1},
-	doi = {10.1007/978-1-4615-3998-8_3}
+	title={Error control coding},
+	author={Lin, Shu and Costello, Daniel J},
+	volume={2},
+	number={4},
+	year={2001},
+	publisher={Prentice hall Scarborough}
 }
+
 @book{forney1966concatenated,
 	title={Concatenated Codes},
-	author={Forney, G. David},
+	author={Forney, G David},	
 	year={1966},
 	publisher={MIT Press},
 	address={Cambridge, MA},
 	isbn={9780262190350}
 }
-@misc{mullerSOlomon,
+
+@article{mullerSOlomon,
 	title={HQC-RMRS, an instantiation of the HQC encryption framework with a more efficient auxiliary error-correcting code}, 
-	author={Nicolas Aragon and Philippe Gaborit and Gilles Zémor},
+	author={Aragon, Nicolas and Gaborit, Philippe and Z{\'e}mor, Gilles},
 	year={2020},
 	eprint={2005.10741},
 	archivePrefix={arXiv},
 	primaryClass={cs.CR},
 	url={https://arxiv.org/abs/2005.10741}, 
 }
-@misc{cryptoeprint:2019/930,
-	author = {Y. Wang and M. Wang},
-	title = {Module-{LWE} versus Ring-{LWE}, Revisited},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2019/930},
-	year = {2019},
-	url = {https://eprint.iacr.org/2019/930}
+
+@article{cryptoeprint:2019/930,
+	title={Module-lwe versus ring-lwe, revisited},
+	author={Wang, Yang and Wang, Mingqiang},
+	journal={Cryptology ePrint Archive},
+	year={2019}
 }
 
-@techreport{bike-spec-2022,
-	title        = {{BIKE: Bit Flipping Key Encapsulation (Round 4 Submission)}},
-	author       = {N. Aragon, P.S.L.M. Barreto, S. Bettaieb, et al.},
-	institution  = {BIKE Team},
-	year         = {2022},
-	month        = {October},
-	version      = {5.1},
-	url          = {https://bikesuite.org/},
-	howpublished = {\url{https://bikesuite.org/}},
-	note         = {NIST PQC Round 4 submission}
-}
 
-@techreport{hqc-spec-2022,
+@article{hqc-spec-2022,
 	title        = {{HQC: Hamming Quasi-Cyclic (Fourth Round Submission)}},
-	author       = {C. Aguilar Melchor, N. Aragon and S. Bettaieb, et al.},
+	author={Melchor, Carlos Aguilar and Aragon, Nicolas and Bettaieb, Slim and Bidoux, Lo{\i}c and Blazy, Olivier and Deneuville, Jean-Christophe and Gaborit, Philippe and Persichetti, Edoardo and Z{\'e}mor, Gilles and Bourges, IC},
 	institution  = {HQC Team},
+	journal      = {NIST PQC Round 4 submission},
 	year         = {2022},
 	month        = {October},
 	url          = {https://pqc-hqc.org/},
 	howpublished = {\url{https://pqc-hqc.org/}},
-	note         = {NIST PQC Round 4 submission}
 }
 
-@misc{FIPS202,
-	author = {M.J. Dworkin},
-	title = {SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions},
-	year = {2015},
-	month = {2015-08-04 00:08:00},
-	institution  = {National Institute of Standards and Technology},
-	url = {https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=919061},
-	doi = {https://doi.org/10.6028/NIST.FIPS.202},
-	language = {en},
+@article{FIPS202,
+	title={SHA-3 standard: Permutation-based hash and extendable-output functions},
+	author={Dworkin, Morris J and others},
+	year={2015},
+	publisher={National Institute of Standards and Technology (NIST), Morris J. Dworkin},
+	institution  = {National Institute of Standards and Technology}
 }
 
 
-@misc{nistPQCround4,
+@article{nistPQCround4,
 	title        = {Post-Quantum Cryptography - Round 4 Submissions},
 	year         = {2022},
 	institution  = {National Institute of Standards and Technology},
 	howpublished = {\url{https://csrc.nist.gov/Projects/post-quantum-cryptography/round-4-submissions}},
 	note         = {Consultado: 2025-05-05}
 }
-@misc{cryptoeprint:2024/585,
-	author = {A. Satriawan, R. Mareta and H. Lee},
-	title = {A Complete Beginner Guide to the Number Theoretic Transform ({NTT})},
-	howpublished = {Cryptology {ePrint} Archive, Paper 2024/585},
-	year = {2024},
-	doi = {10.1109/ACCESS.2023.3294446},
-	url = {https://eprint.iacr.org/2024/585}
+
+@article{cryptoeprint:2024/585,
+	title={A complete beginner guide to the number theoretic transform (NTT)},
+	author={Satriawan, Ardianto and Mareta, Rella and Lee, Hanho},
+	journal={Cryptology ePrint Archive},
+	year={2024}
 }
+
 @article{LWElearning,
-	author = {V. Lyubashevsky, C. Peikert and O. Regev},
-	title = {On Ideal Lattices and Learning with Errors over Rings},
-	year = {2013},
-	issue_date = {November 2013},
-	publisher = {Association for Computing Machinery},
-	address = {New York, NY, USA},
-	volume = {60},
-	number = {6},
-	issn = {0004-5411},
-	url = {https://doi.org/10.1145/2535925},
-	doi = {10.1145/2535925},
-	journal = {J. ACM},
-	month = nov,
-	articleno = {43},
-	numpages = {35}
+	title={On ideal lattices and learning with errors over rings},
+	author={Lyubashevsky, Vadim and Peikert, Chris and Regev, Oded},
+	journal={Journal of the ACM (JACM)},
+	volume={60},
+	number={6},
+	pages={1--35},
+	year={2013},
+	publisher={ACM New York, NY, USA}
 }
+
 @inproceedings{Fujisaki1999,
-	author    = {E. Fujisaki and T. Okamoto},
-	editor    = {Michael Wiener},
-	title     = {Secure Integration of Asymmetric and Symmetric Encryption Schemes},
-	booktitle = {Advances in Cryptology --- CRYPTO' 99},
-	series    = {Lecture Notes in Computer Science},
-	volume    = {1666},
-	pages     = {537--554},
-	year      = {1999},
-	publisher = {Springer},
-	address   = {Berlin, Heidelberg},
-	doi       = {10.1007/3-540-48405-1_34},
-	isbn      = {978-3-540-48405-9}
+	title={Secure integration of asymmetric and symmetric encryption schemes},
+	author={Fujisaki, Eiichiro and Okamoto, Tatsuaki},
+	booktitle={Annual international cryptology conference},
+	pages={537--554},
+	year={1999},
+	organization={Springer}
 }
 
 
-@misc{ISO_C,
-	title        = {{ISO/IEC 9899:2018 Information technology ? Programming languages ? C}},
-	howpublished = {\url{https://www.iso.org/standard/82075.html}},
-	note         = {International Organization for Standardization, Geneva, Switzerland},
-	year         = {2024}
-}
-@misc{ISO_CPP,
-	title        = {{ISO/IEC 14882:2025 Information technology ? Programming languages ? C++}},
-	howpublished = {\url{https://www.iso.org/standard/83626.html}}, 
-	note         = {International Organization for Standardization, Geneva, Switzerland},
-	year         = {2024}
-}
 @misc{CY8CPROTO063BLE,
 	author       = {{Infineon Technologies AG}},
 	title        = {{CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}},
@@ -575,24 +503,22 @@ pages={447-460} }
 	howpublished = {\url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/}},
 	note         = {Consultado: 2025-05-05}
 }
+
 @article{CooleyALG,
-	ISSN = {00255718, 10886842},
-	URL = {http://www.jstor.org/stable/2003354},
-	author = {J.W. Cooley and J.W. Tukey},
-	journal = {Mathematics of Computation},
-	number = {90},
-	pages = {297--301},
-	publisher = {American Mathematical Society},
-	title = {An Algorithm for the Machine Calculation of Complex Fourier Series},
-	urldate = {2025-05-07},
-	volume = {19},
-	year = {1965}
+	title={An algorithm for the machine calculation of complex Fourier series},
+	author={Cooley, James W and Tukey, John W},
+	journal={Mathematics of computation},
+	volume={19},
+	number={90},
+	pages={297--301},
+	year={1965},
+	publisher={JSTOR}
 }
 
-@misc{nistPQCround3,
-title        = {Post-Quantum Cryptography - Round 3 Submissions},
-year         = {2020},
-institution  = {National Institute of Standards and Technology},
-howpublished = {\url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions}},
-note         = {Consultado: 2025-05-05}
+@article{nistPQCround3,
+	title        = {Post-Quantum Cryptography - Round 3 Submissions},
+	year         = {2020},
+	institution  = {National Institute of Standards and Technology},
+	howpublished = {\url{https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions}},
+	note         = {Consultado: 2025-05-05}
 }

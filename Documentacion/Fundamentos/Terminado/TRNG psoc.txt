@@ -1,1 +1,0 @@
-https://github.com/Infineon/mtb-example-psoc4-cryptography-true-random-number-generation
