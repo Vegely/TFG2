@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\randombytes.c">
+<ExpandedNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\TopDesign</v>
+<v>Kyber\Kyber\Kyber.cydwr</v>
+<v>Kyber\Kyber\Kyber.cydwr\Pins</v>
+<v>Kyber\Kyber\Kyber.cydwr\Analog</v>
+<v>Kyber\Kyber\Kyber.cydwr\DMA</v>
+<v>Kyber\Kyber\Kyber.cydwr\Clocks</v>
+<v>Kyber\Kyber\Kyber.cydwr\Interrupts</v>
+<v>Kyber\Kyber\Kyber.cydwr\System</v>
+<v>Kyber\Kyber\Kyber.cydwr\Directives</v>
+<v>Kyber\Kyber\CM0p (Core 0)</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Header Files</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\aes256ctr.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\api.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\cbd.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\fips202.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\indcpa.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\kem.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\kyber_wrapper.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\ntt.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\params.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\poly.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\polyvec.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\randombytes.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\reduce.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\sha2.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\symmetric.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\verify.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\FreeRTOSConfig.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM GCC Generic\startup_psoc6_01_cm4.S</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\aes256ctr.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\cbd.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\fips202.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\indcpa.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\kem.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\kyber_wrapper.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\ntt.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\poly.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\polyvec.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\randombytes.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\reduce.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\sha256.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\sha512.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\symmetric-aes.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\symmetric-shake.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\Kyber\verify.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\main_cm4.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
+<v>Kyber\Kyber\Shared Files</v>
+<v>Kyber\Kyber\Shared Files\cyapicallbacks.h</v>
+<v>Kyber\Kyber\Shared Files\stdio_user.c</v>
+<v>Kyber\Kyber\Shared Files\stdio_user.h</v>
+<v>Kyber\Kyber\Shared Files\system_psoc6.h</v>
+<v>Kyber\Kyber\Generated_Source</v>
+<v>Kyber\Kyber\Generated_Source\PSoC6</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\TopDesign</v>
+<v>Kyber\Kyber\Kyber.cydwr</v>
+<v>Kyber\Kyber\Kyber.cydwr\Pins</v>
+<v>Kyber\Kyber\Kyber.cydwr\Analog</v>
+<v>Kyber\Kyber\Kyber.cydwr\DMA</v>
+<v>Kyber\Kyber\Kyber.cydwr\Clocks</v>
+<v>Kyber\Kyber\Kyber.cydwr\Interrupts</v>
+<v>Kyber\Kyber\Kyber.cydwr\System</v>
+<v>Kyber\Kyber\Kyber.cydwr\Directives</v>
+<v>Kyber\Kyber\CM0p (Core 0)</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Header Files</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>Kyber\Kyber\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
+<v>Kyber\Kyber\CM4 (Core 1)</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM GCC Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM IAR Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM MDK Generic</v>
+<v>Kyber\Kyber\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\aes256ctr.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\api.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\cbd.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\fips202.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\indcpa.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\kem.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\kyber_wrapper.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\ntt.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\params.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\poly.h</v>
+<v>Kyber\Kyber\CM4 (Core 1)\Header Files\Kyber\polyvec.h</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\TopDesign</v>
+<v>Kyber\Kyber\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\TopDesign</v>
+<v>Kyber\Kyber\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\CortexM0p</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\main_cm0p.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.elf</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.hex</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.map</v>
+<v>Kyber\Kyber\CortexM4</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.elf</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.hex</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.map</v>
+<v>Kyber\Kyber\Kyber.gpdsc</v>
+<v>Kyber\Kyber\Kyber.rpt</v>
+<v>Kyber\Kyber\Kyber_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\CortexM0p</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\main_cm0p.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.elf</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.hex</v>
+<v>Kyber\Kyber\CortexM0p\ARM_GCC_541\Debug\Kyber.map</v>
+<v>Kyber\Kyber\CortexM4</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.elf</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.hex</v>
+<v>Kyber\Kyber\CortexM4\ARM_GCC_541\Debug\Kyber.map</v>
+<v>Kyber\Kyber\Kyber.gpdsc</v>
+<v>Kyber\Kyber\Kyber.rpt</v>
+<v>Kyber\Kyber\Kyber_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\PSoC 6 Architecture TRM</v>
+<v>Kyber\Kyber\PSoC 63 Family Datasheet</v>
+<v>Kyber\Kyber\Peripheral Driver Library</v>
+<v>Kyber\Kyber\System Reference Guides</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Kyber</v>
+<v>Kyber\Kyber</v>
+<v>Kyber\Kyber\PSoC 6 Architecture TRM</v>
+<v>Kyber\Kyber\PSoC 63 Family Datasheet</v>
+<v>Kyber\Kyber\Peripheral Driver Library</v>
+<v>Kyber\Kyber\System Reference Guides</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\Kyber.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\randombytes.h" />
+<name v=".\randombytes.c" />
+<name v=".\Kyber.cydsn\stdio_user.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1108, 703" SelectedTabbedMdiWindow="0ada9fd3-eb05-4032-816c-056d36bc6220"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="9e6ae13d-cfbd-431e-a4ac-c21ecbf0d125" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\Kyber.cydsn\TopDesign\TopDesign.cysch" Guid="69289ef6-904b-4c0f-8a59-bcf614ca4687" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\randombytes.h" Guid="b47693cb-bf5b-4b16-8829-ede691572d5d" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\randombytes.c" Guid="8e73df8a-40c1-4ff0-89b3-493b3029610b" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\Kyber.cydsn\stdio_user.h" Guid="0ada9fd3-eb05-4032-816c-056d36bc6220" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

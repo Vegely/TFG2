@@ -1,0 +1,2 @@
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\Kyber.cydsn\TopDesign\TopDesign.cysch
+C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\KYBER\Kyber\Kyber.cydsn\Kyber.cydwr
