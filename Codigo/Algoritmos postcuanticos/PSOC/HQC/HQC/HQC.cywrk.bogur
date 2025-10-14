@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="HQC\HQC\CM4 (Core 1)\Source Files\HQC\randombytes.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="HQC\HQC">
 <ExpandedNodeIds>
 <v>HQC</v>
 <v>HQC\HQC</v>
@@ -27,10 +27,29 @@
 <v>HQC\HQC\HQC.cydwr\System</v>
 <v>HQC\HQC\HQC.cydwr\Directives</v>
 <v>HQC\HQC\CM0p (Core 0)</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM GCC Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM IAR Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM MDK Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
 <v>HQC\HQC\CM0p (Core 0)\Header Files</v>
 <v>HQC\HQC\CM0p (Core 0)\Source Files</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
 <v>HQC\HQC\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
 <v>HQC\HQC\CM4 (Core 1)</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM GCC Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM IAR Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM MDK Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\api.h</v>
@@ -50,7 +69,14 @@
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\shake_ds.h</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\shake_prng.h</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\vector.h</v>
+<v>HQC\HQC\CM4 (Core 1)\Header Files\FreeRTOSConfig.h</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM GCC Generic\startup_psoc6_01_cm4.S</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM IAR Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files\HQC</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\code.c</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\fft.c</v>
@@ -68,26 +94,44 @@
 <v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\shake_prng.c</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\vector.c</v>
 <v>HQC\HQC\CM4 (Core 1)\Source Files\main_cm4.c</v>
+<v>HQC\HQC\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
 <v>HQC\HQC\Shared Files</v>
 <v>HQC\HQC\Shared Files\cyapicallbacks.h</v>
+<v>HQC\HQC\Shared Files\stdio_user.c</v>
+<v>HQC\HQC\Shared Files\stdio_user.h</v>
+<v>HQC\HQC\Shared Files\system_psoc6.h</v>
+<v>HQC\HQC\Generated_Source</v>
+<v>HQC\HQC\Generated_Source\PSoC6</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>HQC</v>
-<v>HQC\HQC</v>
-<v>HQC\HQC\TopDesign</v>
-<v>HQC\HQC\HQC.cydwr</v>
-<v>HQC\HQC\HQC.cydwr\Pins</v>
-<v>HQC\HQC\HQC.cydwr\Analog</v>
-<v>HQC\HQC\HQC.cydwr\DMA</v>
 <v>HQC\HQC\HQC.cydwr\Clocks</v>
 <v>HQC\HQC\HQC.cydwr\Interrupts</v>
 <v>HQC\HQC\HQC.cydwr\System</v>
 <v>HQC\HQC\HQC.cydwr\Directives</v>
 <v>HQC\HQC\CM0p (Core 0)</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM GCC Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM IAR Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM MDK Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
 <v>HQC\HQC\CM0p (Core 0)\Header Files</v>
 <v>HQC\HQC\CM0p (Core 0)\Source Files</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
 <v>HQC\HQC\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>HQC\HQC\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
 <v>HQC\HQC\CM4 (Core 1)</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM GCC Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM IAR Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM MDK Generic</v>
+<v>HQC\HQC\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\api.h</v>
@@ -107,19 +151,7 @@
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\shake_ds.h</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\shake_prng.h</v>
 <v>HQC\HQC\CM4 (Core 1)\Header Files\HQC\vector.h</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\code.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\fft.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\fips202.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\gf.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\gf2x.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\hqc.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\hqc_wrapper.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\kem.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\parsing.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\randombytes.c</v>
-<v>HQC\HQC\CM4 (Core 1)\Source Files\HQC\reed_muller.c</v>
+<v>HQC\HQC\CM4 (Core 1)\Header Files\FreeRTOSConfig.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -140,6 +172,22 @@
 <ExpandedNodeIds>
 <v>HQC</v>
 <v>HQC\HQC</v>
+<v>HQC\HQC\CortexM0p</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\main_cm0p.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.elf</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.hex</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.map</v>
+<v>HQC\HQC\CortexM4</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.elf</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.hex</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.map</v>
 <v>HQC\HQC\HQC.gpdsc</v>
 <v>HQC\HQC\HQC.rpt</v>
 <v>HQC\HQC\HQC_timing.html</v>
@@ -147,6 +195,22 @@
 <VisibleNodeIds>
 <v>HQC</v>
 <v>HQC\HQC</v>
+<v>HQC\HQC\CortexM0p</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\main_cm0p.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.elf</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.hex</v>
+<v>HQC\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.map</v>
+<v>HQC\HQC\CortexM4</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.elf</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.hex</v>
+<v>HQC\HQC\CortexM4\ARM_GCC_541\Debug\HQC.map</v>
 <v>HQC\HQC\HQC.gpdsc</v>
 <v>HQC\HQC\HQC.rpt</v>
 <v>HQC\HQC\HQC_timing.html</v>
@@ -163,6 +227,7 @@
 <v>HQC\HQC</v>
 <v>HQC\HQC\PSoC 6 Architecture TRM</v>
 <v>HQC\HQC\PSoC 63 Family Datasheet</v>
+<v>HQC\HQC\Peripheral Driver Library</v>
 <v>HQC\HQC\System Reference Guides</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
@@ -170,6 +235,7 @@
 <v>HQC\HQC</v>
 <v>HQC\HQC\PSoC 6 Architecture TRM</v>
 <v>HQC\HQC\PSoC 63 Family Datasheet</v>
+<v>HQC\HQC\Peripheral Driver Library</v>
 <v>HQC\HQC\System Reference Guides</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
@@ -180,11 +246,8 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\HQC.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\HQC.cydsn\HQC.cydwr" />
-<name v=".\api.h" />
-<name v=".\randombytes.h" />
-<name v=".\randombytes.c" />
+<name v=".\HQC.cydsn\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -192,7 +255,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1222, 703" SelectedTabbedMdiWindow="f6c85f79-9ab5-429a-b46f-25342df64684"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="8342e15b-a0c8-4974-b49c-d1b1237b9a6d" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\TopDesign\TopDesign.cysch" Guid="b9a285b1-50e1-4a7e-8770-b43648f33320" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\HQC.cydwr" Guid="29131b0d-9b60-4f6d-8302-6282cc9a103f" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\api.h" Guid="1efa1850-1f50-40ae-845d-1bfde3626dab" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\randombytes.h" Guid="7dfa5fd2-4d6b-448d-9078-40fdca24030c" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\randombytes.c" Guid="f6c85f79-9ab5-429a-b46f-25342df64684" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1072, 703" SelectedTabbedMdiWindow="b2f579fa-e4ab-4dfe-8540-b4f9b2651054"><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\HQC.cydwr" Guid="7c20f1d9-26fa-4057-a11c-52a354f90150" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\TopDesign\TopDesign.cysch" Guid="b2f579fa-e4ab-4dfe-8540-b4f9b2651054" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="8342e15b-a0c8-4974-b49c-d1b1237b9a6d" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

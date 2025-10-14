@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC 6 serial\SerialComunication\SerialComunication.cydwr\Pins">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC 6 serial\SerialComunication">
 <ExpandedNodeIds>
 <v>PSoC 6 serial</v>
 <v>PSoC 6 serial\SerialComunication</v>
@@ -324,7 +324,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="935, 694" SelectedTabbedMdiWindow="bea77505-b168-4575-8612-bebd7707bec0"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="8342e15b-a0c8-4974-b49c-d1b1237b9a6d" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Comunicacion Serial\PSOC\PSoC 6 serial\SerialComunication.cydsn\SerialComunication.cydwr" Guid="bea77505-b168-4575-8612-bebd7707bec0" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1326, 703" SelectedTabbedMdiWindow="bea77505-b168-4575-8612-bebd7707bec0"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="8342e15b-a0c8-4974-b49c-d1b1237b9a6d" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Comunicacion Serial\PSOC\PSoC 6 serial\SerialComunication.cydsn\SerialComunication.cydwr" Guid="bea77505-b168-4575-8612-bebd7707bec0" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

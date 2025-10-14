@@ -1,0 +1,2 @@
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\TopDesign\TopDesign.cysch
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\HQC.cydwr
