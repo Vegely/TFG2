@@ -1,6 +1,0 @@
-C:\Users\bogurad\Documents\PSoC Creator\PSoC 6 serial\Micro Implementation.cydsn\Micro Implementation.cyprj|d0a9e808-f201-43f6-a72b-e952fe52ddd0
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a6511074-2797-4c35-969b-c616e625f24a
-C:\Users\bogurad\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|e3a67627-7122-44bb-a363-bf9a8d22dcce
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b26c7cac-61cf-45fd-88d1-d056cc5e62d5
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|d1a0e6fe-9bcc-49de-9bcd-bcbe8e9cd17b
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|1e173ba2-6735-4ff8-a2a1-16cfd6f9a04c
