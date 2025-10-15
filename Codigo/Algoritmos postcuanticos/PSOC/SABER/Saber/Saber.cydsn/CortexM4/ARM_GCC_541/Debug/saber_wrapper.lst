@@ -1,0 +1,1548 @@
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"saber_wrapper.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.saber_init,"ax",%progbits
+  21              		.align	2
+  22              		.global	saber_init
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	saber_init, %function
+  26              	saber_init:
+  27              	.LFB0:
+  28              		.file 1 "..\\saber_wrapper.c"
+   1:..\saber_wrapper.c **** #include "saber_wrapper.h"
+   2:..\saber_wrapper.c **** #include "SABER_params.h"
+   3:..\saber_wrapper.c **** #include "api.h"
+   4:..\saber_wrapper.c **** 
+   5:..\saber_wrapper.c **** // Current security level
+   6:..\saber_wrapper.c **** static saber_security_level_t current_security_level = SABER_SECURITY_FIRE;
+   7:..\saber_wrapper.c **** 
+   8:..\saber_wrapper.c **** // Static flag to indicate if the library has been initialized
+   9:..\saber_wrapper.c **** static int is_initialized = 0;
+  10:..\saber_wrapper.c **** 
+  11:..\saber_wrapper.c **** int saber_init(saber_security_level_t security_level) {
+  29              		.loc 1 11 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  12:..\saber_wrapper.c ****     // Validate security level
+  13:..\saber_wrapper.c ****     if (security_level != SABER_SECURITY_LIGHT && 
+  14:..\saber_wrapper.c ****         security_level != SABER_SECURITY_SABER && 
+  35              		.loc 1 14 0
+  36 0000 831E     		subs	r3, r0, #2
+  37 0002 DBB2     		uxtb	r3, r3
+  13:..\saber_wrapper.c ****         security_level != SABER_SECURITY_SABER && 
+  38              		.loc 1 13 0
+  39 0004 022B     		cmp	r3, #2
+  40 0006 06D8     		bhi	.L3
+  15:..\saber_wrapper.c ****         security_level != SABER_SECURITY_FIRE) {
+  16:..\saber_wrapper.c ****         return -1;
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 2
+
+
+  17:..\saber_wrapper.c ****     }
+  18:..\saber_wrapper.c ****     
+  19:..\saber_wrapper.c ****     // Check if the compiled version matches the requested security level
+  20:..\saber_wrapper.c ****     #if SABER_L == 2
+  21:..\saber_wrapper.c ****         if (security_level != SABER_SECURITY_LIGHT) {
+  22:..\saber_wrapper.c ****             return -2; // Compiled for LightSaber but different level requested
+  23:..\saber_wrapper.c ****         }
+  24:..\saber_wrapper.c ****     #elif SABER_L == 3
+  25:..\saber_wrapper.c ****         if (security_level != SABER_SECURITY_SABER) {
+  26:..\saber_wrapper.c ****             return -2; // Compiled for Saber but different level requested
+  27:..\saber_wrapper.c ****         }
+  28:..\saber_wrapper.c ****     #elif SABER_L == 4
+  29:..\saber_wrapper.c ****         if (security_level != SABER_SECURITY_FIRE) {
+  41              		.loc 1 29 0
+  42 0008 0428     		cmp	r0, #4
+  43 000a 07D1     		bne	.L4
+  30:..\saber_wrapper.c ****             return -2; // Compiled for FireSaber but different level requested
+  31:..\saber_wrapper.c ****         }
+  32:..\saber_wrapper.c ****     #else
+  33:..\saber_wrapper.c ****         return -3; // Unsupported SABER_L value
+  34:..\saber_wrapper.c ****     #endif
+  35:..\saber_wrapper.c ****     
+  36:..\saber_wrapper.c ****     // Store security level (for runtime checking)
+  37:..\saber_wrapper.c ****     current_security_level = security_level;
+  38:..\saber_wrapper.c ****     is_initialized = 1;
+  44              		.loc 1 38 0
+  45 000c 0122     		movs	r2, #1
+  46 000e 054B     		ldr	r3, .L5
+  47 0010 1A60     		str	r2, [r3]
+  39:..\saber_wrapper.c ****     
+  40:..\saber_wrapper.c ****     return 0;
+  48              		.loc 1 40 0
+  49 0012 0020     		movs	r0, #0
+  50              	.LVL1:
+  51 0014 7047     		bx	lr
+  52              	.LVL2:
+  53              	.L3:
+  16:..\saber_wrapper.c ****     }
+  54              		.loc 1 16 0
+  55 0016 4FF0FF30 		mov	r0, #-1
+  56              	.LVL3:
+  57 001a 7047     		bx	lr
+  58              	.LVL4:
+  59              	.L4:
+  30:..\saber_wrapper.c ****             return -2; // Compiled for FireSaber but different level requested
+  60              		.loc 1 30 0
+  61 001c 6FF00100 		mvn	r0, #1
+  62              	.LVL5:
+  41:..\saber_wrapper.c **** }
+  63              		.loc 1 41 0
+  64 0020 7047     		bx	lr
+  65              	.L6:
+  66 0022 00BF     		.align	2
+  67              	.L5:
+  68 0024 00000000 		.word	.LANCHOR0
+  69              		.cfi_endproc
+  70              	.LFE0:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 3
+
+
+  71              		.size	saber_init, .-saber_init
+  72              		.section	.text.saber_get_public_key_size,"ax",%progbits
+  73              		.align	2
+  74              		.global	saber_get_public_key_size
+  75              		.thumb
+  76              		.thumb_func
+  77              		.type	saber_get_public_key_size, %function
+  78              	saber_get_public_key_size:
+  79              	.LFB1:
+  42:..\saber_wrapper.c **** 
+  43:..\saber_wrapper.c **** size_t saber_get_public_key_size(void) {
+  80              		.loc 1 43 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  44:..\saber_wrapper.c ****     return CRYPTO_PUBLICKEYBYTES;
+  45:..\saber_wrapper.c **** }
+  85              		.loc 1 45 0
+  86 0000 4FF4A460 		mov	r0, #1312
+  87 0004 7047     		bx	lr
+  88              		.cfi_endproc
+  89              	.LFE1:
+  90              		.size	saber_get_public_key_size, .-saber_get_public_key_size
+  91 0006 00BF     		.section	.text.saber_get_secret_key_size,"ax",%progbits
+  92              		.align	2
+  93              		.global	saber_get_secret_key_size
+  94              		.thumb
+  95              		.thumb_func
+  96              		.type	saber_get_secret_key_size, %function
+  97              	saber_get_secret_key_size:
+  98              	.LFB2:
+  46:..\saber_wrapper.c **** 
+  47:..\saber_wrapper.c **** size_t saber_get_secret_key_size(void) {
+  99              		.loc 1 47 0
+ 100              		.cfi_startproc
+ 101              		@ args = 0, pretend = 0, frame = 0
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103              		@ link register save eliminated.
+  48:..\saber_wrapper.c ****     return CRYPTO_SECRETKEYBYTES;
+  49:..\saber_wrapper.c **** }
+ 104              		.loc 1 49 0
+ 105 0000 4FF43E60 		mov	r0, #3040
+ 106 0004 7047     		bx	lr
+ 107              		.cfi_endproc
+ 108              	.LFE2:
+ 109              		.size	saber_get_secret_key_size, .-saber_get_secret_key_size
+ 110 0006 00BF     		.section	.text.saber_get_ciphertext_size,"ax",%progbits
+ 111              		.align	2
+ 112              		.global	saber_get_ciphertext_size
+ 113              		.thumb
+ 114              		.thumb_func
+ 115              		.type	saber_get_ciphertext_size, %function
+ 116              	saber_get_ciphertext_size:
+ 117              	.LFB3:
+  50:..\saber_wrapper.c **** 
+  51:..\saber_wrapper.c **** size_t saber_get_ciphertext_size(void) {
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 4
+
+
+ 118              		.loc 1 51 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+  52:..\saber_wrapper.c ****     return CRYPTO_CIPHERTEXTBYTES;
+  53:..\saber_wrapper.c **** }
+ 123              		.loc 1 53 0
+ 124 0000 4FF4B860 		mov	r0, #1472
+ 125 0004 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE3:
+ 128              		.size	saber_get_ciphertext_size, .-saber_get_ciphertext_size
+ 129 0006 00BF     		.section	.text.saber_get_shared_secret_size,"ax",%progbits
+ 130              		.align	2
+ 131              		.global	saber_get_shared_secret_size
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.type	saber_get_shared_secret_size, %function
+ 135              	saber_get_shared_secret_size:
+ 136              	.LFB4:
+  54:..\saber_wrapper.c **** 
+  55:..\saber_wrapper.c **** size_t saber_get_shared_secret_size(void) {
+ 137              		.loc 1 55 0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+  56:..\saber_wrapper.c ****     return CRYPTO_BYTES;
+  57:..\saber_wrapper.c **** }
+ 142              		.loc 1 57 0
+ 143 0000 2020     		movs	r0, #32
+ 144 0002 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE4:
+ 147              		.size	saber_get_shared_secret_size, .-saber_get_shared_secret_size
+ 148              		.section	.text.saber_keypair,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	saber_keypair
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	saber_keypair, %function
+ 154              	saber_keypair:
+ 155              	.LFB5:
+  58:..\saber_wrapper.c **** 
+  59:..\saber_wrapper.c **** int saber_keypair(unsigned char *pk, unsigned char *sk) {
+ 156              		.loc 1 59 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160              	.LVL6:
+ 161 0000 08B5     		push	{r3, lr}
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 3, -8
+ 164              		.cfi_offset 14, -4
+  60:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 165              		.loc 1 60 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 5
+
+
+ 166 0002 084B     		ldr	r3, .L17
+ 167 0004 1B68     		ldr	r3, [r3]
+ 168 0006 23B1     		cbz	r3, .L13
+  61:..\saber_wrapper.c ****     if (pk == NULL || sk == NULL) return -2;
+ 169              		.loc 1 61 0
+ 170 0008 30B1     		cbz	r0, .L14
+ 171              		.loc 1 61 0 is_stmt 0 discriminator 2
+ 172 000a 41B1     		cbz	r1, .L15
+  62:..\saber_wrapper.c ****     return crypto_kem_keypair(pk, sk);
+ 173              		.loc 1 62 0 is_stmt 1
+ 174 000c FFF7FEFF 		bl	crypto_kem_keypair
+ 175              	.LVL7:
+ 176 0010 08BD     		pop	{r3, pc}
+ 177              	.LVL8:
+ 178              	.L13:
+  60:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 179              		.loc 1 60 0
+ 180 0012 4FF0FF30 		mov	r0, #-1
+ 181              	.LVL9:
+ 182 0016 08BD     		pop	{r3, pc}
+ 183              	.LVL10:
+ 184              	.L14:
+  61:..\saber_wrapper.c ****     if (pk == NULL || sk == NULL) return -2;
+ 185              		.loc 1 61 0
+ 186 0018 6FF00100 		mvn	r0, #1
+ 187              	.LVL11:
+ 188 001c 08BD     		pop	{r3, pc}
+ 189              	.LVL12:
+ 190              	.L15:
+ 191 001e 6FF00100 		mvn	r0, #1
+ 192              	.LVL13:
+  63:..\saber_wrapper.c **** }
+ 193              		.loc 1 63 0
+ 194 0022 08BD     		pop	{r3, pc}
+ 195              	.L18:
+ 196              		.align	2
+ 197              	.L17:
+ 198 0024 00000000 		.word	.LANCHOR0
+ 199              		.cfi_endproc
+ 200              	.LFE5:
+ 201              		.size	saber_keypair, .-saber_keypair
+ 202              		.section	.text.saber_encapsulate,"ax",%progbits
+ 203              		.align	2
+ 204              		.global	saber_encapsulate
+ 205              		.thumb
+ 206              		.thumb_func
+ 207              		.type	saber_encapsulate, %function
+ 208              	saber_encapsulate:
+ 209              	.LFB6:
+  64:..\saber_wrapper.c **** 
+  65:..\saber_wrapper.c **** int saber_encapsulate(unsigned char *ct, unsigned char *ss, const unsigned char *pk) {
+ 210              		.loc 1 65 0
+ 211              		.cfi_startproc
+ 212              		@ args = 0, pretend = 0, frame = 0
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214              	.LVL14:
+ 215 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 6
+
+
+ 216              		.cfi_def_cfa_offset 8
+ 217              		.cfi_offset 3, -8
+ 218              		.cfi_offset 14, -4
+  66:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 219              		.loc 1 66 0
+ 220 0002 0A4B     		ldr	r3, .L26
+ 221 0004 1B68     		ldr	r3, [r3]
+ 222 0006 2BB1     		cbz	r3, .L21
+  67:..\saber_wrapper.c ****     if (ct == NULL || ss == NULL || pk == NULL) return -2;
+ 223              		.loc 1 67 0
+ 224 0008 38B1     		cbz	r0, .L22
+ 225              		.loc 1 67 0 is_stmt 0 discriminator 2
+ 226 000a 49B1     		cbz	r1, .L23
+ 227              		.loc 1 67 0 discriminator 4
+ 228 000c 5AB1     		cbz	r2, .L24
+  68:..\saber_wrapper.c ****     return crypto_kem_enc(ct, ss, pk);
+ 229              		.loc 1 68 0 is_stmt 1
+ 230 000e FFF7FEFF 		bl	crypto_kem_enc
+ 231              	.LVL15:
+ 232 0012 08BD     		pop	{r3, pc}
+ 233              	.LVL16:
+ 234              	.L21:
+  66:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 235              		.loc 1 66 0
+ 236 0014 4FF0FF30 		mov	r0, #-1
+ 237              	.LVL17:
+ 238 0018 08BD     		pop	{r3, pc}
+ 239              	.LVL18:
+ 240              	.L22:
+  67:..\saber_wrapper.c ****     if (ct == NULL || ss == NULL || pk == NULL) return -2;
+ 241              		.loc 1 67 0
+ 242 001a 6FF00100 		mvn	r0, #1
+ 243              	.LVL19:
+ 244 001e 08BD     		pop	{r3, pc}
+ 245              	.LVL20:
+ 246              	.L23:
+ 247 0020 6FF00100 		mvn	r0, #1
+ 248              	.LVL21:
+ 249 0024 08BD     		pop	{r3, pc}
+ 250              	.LVL22:
+ 251              	.L24:
+ 252 0026 6FF00100 		mvn	r0, #1
+ 253              	.LVL23:
+  69:..\saber_wrapper.c **** }
+ 254              		.loc 1 69 0
+ 255 002a 08BD     		pop	{r3, pc}
+ 256              	.L27:
+ 257              		.align	2
+ 258              	.L26:
+ 259 002c 00000000 		.word	.LANCHOR0
+ 260              		.cfi_endproc
+ 261              	.LFE6:
+ 262              		.size	saber_encapsulate, .-saber_encapsulate
+ 263              		.section	.text.saber_decapsulate,"ax",%progbits
+ 264              		.align	2
+ 265              		.global	saber_decapsulate
+ 266              		.thumb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 7
+
+
+ 267              		.thumb_func
+ 268              		.type	saber_decapsulate, %function
+ 269              	saber_decapsulate:
+ 270              	.LFB7:
+  70:..\saber_wrapper.c **** 
+  71:..\saber_wrapper.c **** int saber_decapsulate(unsigned char *ss, const unsigned char *ct, const unsigned char *sk) {
+ 271              		.loc 1 71 0
+ 272              		.cfi_startproc
+ 273              		@ args = 0, pretend = 0, frame = 0
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275              	.LVL24:
+ 276 0000 08B5     		push	{r3, lr}
+ 277              		.cfi_def_cfa_offset 8
+ 278              		.cfi_offset 3, -8
+ 279              		.cfi_offset 14, -4
+  72:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 280              		.loc 1 72 0
+ 281 0002 0A4B     		ldr	r3, .L35
+ 282 0004 1B68     		ldr	r3, [r3]
+ 283 0006 2BB1     		cbz	r3, .L30
+  73:..\saber_wrapper.c ****     if (ss == NULL || ct == NULL || sk == NULL) return -2;
+ 284              		.loc 1 73 0
+ 285 0008 38B1     		cbz	r0, .L31
+ 286              		.loc 1 73 0 is_stmt 0 discriminator 2
+ 287 000a 49B1     		cbz	r1, .L32
+ 288              		.loc 1 73 0 discriminator 4
+ 289 000c 5AB1     		cbz	r2, .L33
+  74:..\saber_wrapper.c ****     return crypto_kem_dec(ss, ct, sk);
+ 290              		.loc 1 74 0 is_stmt 1
+ 291 000e FFF7FEFF 		bl	crypto_kem_dec
+ 292              	.LVL25:
+ 293 0012 08BD     		pop	{r3, pc}
+ 294              	.LVL26:
+ 295              	.L30:
+  72:..\saber_wrapper.c ****     if (!is_initialized) return -1;
+ 296              		.loc 1 72 0
+ 297 0014 4FF0FF30 		mov	r0, #-1
+ 298              	.LVL27:
+ 299 0018 08BD     		pop	{r3, pc}
+ 300              	.LVL28:
+ 301              	.L31:
+  73:..\saber_wrapper.c ****     if (ss == NULL || ct == NULL || sk == NULL) return -2;
+ 302              		.loc 1 73 0
+ 303 001a 6FF00100 		mvn	r0, #1
+ 304              	.LVL29:
+ 305 001e 08BD     		pop	{r3, pc}
+ 306              	.LVL30:
+ 307              	.L32:
+ 308 0020 6FF00100 		mvn	r0, #1
+ 309              	.LVL31:
+ 310 0024 08BD     		pop	{r3, pc}
+ 311              	.LVL32:
+ 312              	.L33:
+ 313 0026 6FF00100 		mvn	r0, #1
+ 314              	.LVL33:
+  75:..\saber_wrapper.c **** }...
+ 315              		.loc 1 75 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 8
+
+
+ 316 002a 08BD     		pop	{r3, pc}
+ 317              	.L36:
+ 318              		.align	2
+ 319              	.L35:
+ 320 002c 00000000 		.word	.LANCHOR0
+ 321              		.cfi_endproc
+ 322              	.LFE7:
+ 323              		.size	saber_decapsulate, .-saber_decapsulate
+ 324              		.bss
+ 325              		.align	2
+ 326              		.set	.LANCHOR0,. + 0
+ 327              		.type	is_initialized, %object
+ 328              		.size	is_initialized, 4
+ 329              	is_initialized:
+ 330 0000 00000000 		.space	4
+ 331              		.text
+ 332              	.Letext0:
+ 333              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 334              		.file 3 "..\\saber_wrapper.h"
+ 335              		.file 4 "..\\api.h"
+ 336              		.section	.debug_info,"",%progbits
+ 337              	.Ldebug_info0:
+ 338 0000 59020000 		.4byte	0x259
+ 339 0004 0400     		.2byte	0x4
+ 340 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 341 000a 04       		.byte	0x4
+ 342 000b 01       		.uleb128 0x1
+ 343 000c B7010000 		.4byte	.LASF21
+ 344 0010 0C       		.byte	0xc
+ 345 0011 58010000 		.4byte	.LASF22
+ 346 0015 72000000 		.4byte	.LASF23
+ 347 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 348 001d 00000000 		.4byte	0
+ 349 0021 00000000 		.4byte	.Ldebug_line0
+ 350 0025 02       		.uleb128 0x2
+ 351 0026 04       		.byte	0x4
+ 352 0027 05       		.byte	0x5
+ 353 0028 696E7400 		.ascii	"int\000"
+ 354 002c 03       		.uleb128 0x3
+ 355 002d 0E000000 		.4byte	.LASF7
+ 356 0031 02       		.byte	0x2
+ 357 0032 D8       		.byte	0xd8
+ 358 0033 37000000 		.4byte	0x37
+ 359 0037 04       		.uleb128 0x4
+ 360 0038 04       		.byte	0x4
+ 361 0039 07       		.byte	0x7
+ 362 003a A7020000 		.4byte	.LASF0
+ 363 003e 04       		.uleb128 0x4
+ 364 003f 08       		.byte	0x8
+ 365 0040 05       		.byte	0x5
+ 366 0041 00000000 		.4byte	.LASF1
+ 367 0045 04       		.uleb128 0x4
+ 368 0046 08       		.byte	0x8
+ 369 0047 04       		.byte	0x4
+ 370 0048 9B020000 		.4byte	.LASF2
+ 371 004c 05       		.uleb128 0x5
+ 372 004d 01       		.byte	0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 9
+
+
+ 373 004e 6B000000 		.4byte	0x6b
+ 374 0052 03       		.byte	0x3
+ 375 0053 0A       		.byte	0xa
+ 376 0054 6B000000 		.4byte	0x6b
+ 377 0058 06       		.uleb128 0x6
+ 378 0059 29000000 		.4byte	.LASF3
+ 379 005d 02       		.byte	0x2
+ 380 005e 06       		.uleb128 0x6
+ 381 005f 90010000 		.4byte	.LASF4
+ 382 0063 03       		.byte	0x3
+ 383 0064 06       		.uleb128 0x6
+ 384 0065 15000000 		.4byte	.LASF5
+ 385 0069 04       		.byte	0x4
+ 386 006a 00       		.byte	0
+ 387 006b 04       		.uleb128 0x4
+ 388 006c 01       		.byte	0x1
+ 389 006d 08       		.byte	0x8
+ 390 006e 6B010000 		.4byte	.LASF6
+ 391 0072 03       		.uleb128 0x3
+ 392 0073 79010000 		.4byte	.LASF8
+ 393 0077 03       		.byte	0x3
+ 394 0078 0E       		.byte	0xe
+ 395 0079 4C000000 		.4byte	0x4c
+ 396 007d 07       		.uleb128 0x7
+ 397 007e 50000000 		.4byte	.LASF13
+ 398 0082 01       		.byte	0x1
+ 399 0083 0B       		.byte	0xb
+ 400 0084 25000000 		.4byte	0x25
+ 401 0088 00000000 		.4byte	.LFB0
+ 402 008c 28000000 		.4byte	.LFE0-.LFB0
+ 403 0090 01       		.uleb128 0x1
+ 404 0091 9C       		.byte	0x9c
+ 405 0092 A6000000 		.4byte	0xa6
+ 406 0096 08       		.uleb128 0x8
+ 407 0097 6A020000 		.4byte	.LASF15
+ 408 009b 01       		.byte	0x1
+ 409 009c 0B       		.byte	0xb
+ 410 009d 72000000 		.4byte	0x72
+ 411 00a1 00000000 		.4byte	.LLST0
+ 412 00a5 00       		.byte	0
+ 413 00a6 09       		.uleb128 0x9
+ 414 00a7 06010000 		.4byte	.LASF9
+ 415 00ab 01       		.byte	0x1
+ 416 00ac 2B       		.byte	0x2b
+ 417 00ad 2C000000 		.4byte	0x2c
+ 418 00b1 00000000 		.4byte	.LFB1
+ 419 00b5 06000000 		.4byte	.LFE1-.LFB1
+ 420 00b9 01       		.uleb128 0x1
+ 421 00ba 9C       		.byte	0x9c
+ 422 00bb 09       		.uleb128 0x9
+ 423 00bc 3E010000 		.4byte	.LASF10
+ 424 00c0 01       		.byte	0x1
+ 425 00c1 2F       		.byte	0x2f
+ 426 00c2 2C000000 		.4byte	0x2c
+ 427 00c6 00000000 		.4byte	.LFB2
+ 428 00ca 06000000 		.4byte	.LFE2-.LFB2
+ 429 00ce 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 10
+
+
+ 430 00cf 9C       		.byte	0x9c
+ 431 00d0 09       		.uleb128 0x9
+ 432 00d1 DE000000 		.4byte	.LASF11
+ 433 00d5 01       		.byte	0x1
+ 434 00d6 33       		.byte	0x33
+ 435 00d7 2C000000 		.4byte	0x2c
+ 436 00db 00000000 		.4byte	.LFB3
+ 437 00df 06000000 		.4byte	.LFE3-.LFB3
+ 438 00e3 01       		.uleb128 0x1
+ 439 00e4 9C       		.byte	0x9c
+ 440 00e5 09       		.uleb128 0x9
+ 441 00e6 B4020000 		.4byte	.LASF12
+ 442 00ea 01       		.byte	0x1
+ 443 00eb 37       		.byte	0x37
+ 444 00ec 2C000000 		.4byte	0x2c
+ 445 00f0 00000000 		.4byte	.LFB4
+ 446 00f4 04000000 		.4byte	.LFE4-.LFB4
+ 447 00f8 01       		.uleb128 0x1
+ 448 00f9 9C       		.byte	0x9c
+ 449 00fa 07       		.uleb128 0x7
+ 450 00fb F8000000 		.4byte	.LASF14
+ 451 00ff 01       		.byte	0x1
+ 452 0100 3B       		.byte	0x3b
+ 453 0101 25000000 		.4byte	0x25
+ 454 0105 00000000 		.4byte	.LFB5
+ 455 0109 28000000 		.4byte	.LFE5-.LFB5
+ 456 010d 01       		.uleb128 0x1
+ 457 010e 9C       		.byte	0x9c
+ 458 010f 48010000 		.4byte	0x148
+ 459 0113 0A       		.uleb128 0xa
+ 460 0114 706B00   		.ascii	"pk\000"
+ 461 0117 01       		.byte	0x1
+ 462 0118 3B       		.byte	0x3b
+ 463 0119 48010000 		.4byte	0x148
+ 464 011d 53000000 		.4byte	.LLST1
+ 465 0121 0A       		.uleb128 0xa
+ 466 0122 736B00   		.ascii	"sk\000"
+ 467 0125 01       		.byte	0x1
+ 468 0126 3B       		.byte	0x3b
+ 469 0127 48010000 		.4byte	0x148
+ 470 012b BF000000 		.4byte	.LLST2
+ 471 012f 0B       		.uleb128 0xb
+ 472 0130 10000000 		.4byte	.LVL7
+ 473 0134 3B020000 		.4byte	0x23b
+ 474 0138 0C       		.uleb128 0xc
+ 475 0139 01       		.uleb128 0x1
+ 476 013a 50       		.byte	0x50
+ 477 013b 03       		.uleb128 0x3
+ 478 013c F3       		.byte	0xf3
+ 479 013d 01       		.uleb128 0x1
+ 480 013e 50       		.byte	0x50
+ 481 013f 0C       		.uleb128 0xc
+ 482 0140 01       		.uleb128 0x1
+ 483 0141 51       		.byte	0x51
+ 484 0142 03       		.uleb128 0x3
+ 485 0143 F3       		.byte	0xf3
+ 486 0144 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 11
+
+
+ 487 0145 51       		.byte	0x51
+ 488 0146 00       		.byte	0
+ 489 0147 00       		.byte	0
+ 490 0148 0D       		.uleb128 0xd
+ 491 0149 04       		.byte	0x4
+ 492 014a 6B000000 		.4byte	0x6b
+ 493 014e 07       		.uleb128 0x7
+ 494 014f A5010000 		.4byte	.LASF16
+ 495 0153 01       		.byte	0x1
+ 496 0154 41       		.byte	0x41
+ 497 0155 25000000 		.4byte	0x25
+ 498 0159 00000000 		.4byte	.LFB6
+ 499 015d 30000000 		.4byte	.LFE6-.LFB6
+ 500 0161 01       		.uleb128 0x1
+ 501 0162 9C       		.byte	0x9c
+ 502 0163 B1010000 		.4byte	0x1b1
+ 503 0167 0A       		.uleb128 0xa
+ 504 0168 637400   		.ascii	"ct\000"
+ 505 016b 01       		.byte	0x1
+ 506 016c 41       		.byte	0x41
+ 507 016d 48010000 		.4byte	0x148
+ 508 0171 EB000000 		.4byte	.LLST3
+ 509 0175 0A       		.uleb128 0xa
+ 510 0176 737300   		.ascii	"ss\000"
+ 511 0179 01       		.byte	0x1
+ 512 017a 41       		.byte	0x41
+ 513 017b 48010000 		.4byte	0x148
+ 514 017f 70010000 		.4byte	.LLST4
+ 515 0183 0A       		.uleb128 0xa
+ 516 0184 706B00   		.ascii	"pk\000"
+ 517 0187 01       		.byte	0x1
+ 518 0188 41       		.byte	0x41
+ 519 0189 B1010000 		.4byte	0x1b1
+ 520 018d 9C010000 		.4byte	.LLST5
+ 521 0191 0B       		.uleb128 0xb
+ 522 0192 12000000 		.4byte	.LVL15
+ 523 0196 46020000 		.4byte	0x246
+ 524 019a 0C       		.uleb128 0xc
+ 525 019b 01       		.uleb128 0x1
+ 526 019c 50       		.byte	0x50
+ 527 019d 03       		.uleb128 0x3
+ 528 019e F3       		.byte	0xf3
+ 529 019f 01       		.uleb128 0x1
+ 530 01a0 50       		.byte	0x50
+ 531 01a1 0C       		.uleb128 0xc
+ 532 01a2 01       		.uleb128 0x1
+ 533 01a3 51       		.byte	0x51
+ 534 01a4 03       		.uleb128 0x3
+ 535 01a5 F3       		.byte	0xf3
+ 536 01a6 01       		.uleb128 0x1
+ 537 01a7 51       		.byte	0x51
+ 538 01a8 0C       		.uleb128 0xc
+ 539 01a9 01       		.uleb128 0x1
+ 540 01aa 52       		.byte	0x52
+ 541 01ab 03       		.uleb128 0x3
+ 542 01ac F3       		.byte	0xf3
+ 543 01ad 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 12
+
+
+ 544 01ae 52       		.byte	0x52
+ 545 01af 00       		.byte	0
+ 546 01b0 00       		.byte	0
+ 547 01b1 0D       		.uleb128 0xd
+ 548 01b2 04       		.byte	0x4
+ 549 01b3 B7010000 		.4byte	0x1b7
+ 550 01b7 0E       		.uleb128 0xe
+ 551 01b8 6B000000 		.4byte	0x6b
+ 552 01bc 07       		.uleb128 0x7
+ 553 01bd 3E000000 		.4byte	.LASF17
+ 554 01c1 01       		.byte	0x1
+ 555 01c2 47       		.byte	0x47
+ 556 01c3 25000000 		.4byte	0x25
+ 557 01c7 00000000 		.4byte	.LFB7
+ 558 01cb 30000000 		.4byte	.LFE7-.LFB7
+ 559 01cf 01       		.uleb128 0x1
+ 560 01d0 9C       		.byte	0x9c
+ 561 01d1 1F020000 		.4byte	0x21f
+ 562 01d5 0A       		.uleb128 0xa
+ 563 01d6 737300   		.ascii	"ss\000"
+ 564 01d9 01       		.byte	0x1
+ 565 01da 47       		.byte	0x47
+ 566 01db 48010000 		.4byte	0x148
+ 567 01df C8010000 		.4byte	.LLST6
+ 568 01e3 0A       		.uleb128 0xa
+ 569 01e4 637400   		.ascii	"ct\000"
+ 570 01e7 01       		.byte	0x1
+ 571 01e8 47       		.byte	0x47
+ 572 01e9 B1010000 		.4byte	0x1b1
+ 573 01ed 4D020000 		.4byte	.LLST7
+ 574 01f1 0A       		.uleb128 0xa
+ 575 01f2 736B00   		.ascii	"sk\000"
+ 576 01f5 01       		.byte	0x1
+ 577 01f6 47       		.byte	0x47
+ 578 01f7 B1010000 		.4byte	0x1b1
+ 579 01fb 79020000 		.4byte	.LLST8
+ 580 01ff 0B       		.uleb128 0xb
+ 581 0200 12000000 		.4byte	.LVL25
+ 582 0204 51020000 		.4byte	0x251
+ 583 0208 0C       		.uleb128 0xc
+ 584 0209 01       		.uleb128 0x1
+ 585 020a 50       		.byte	0x50
+ 586 020b 03       		.uleb128 0x3
+ 587 020c F3       		.byte	0xf3
+ 588 020d 01       		.uleb128 0x1
+ 589 020e 50       		.byte	0x50
+ 590 020f 0C       		.uleb128 0xc
+ 591 0210 01       		.uleb128 0x1
+ 592 0211 51       		.byte	0x51
+ 593 0212 03       		.uleb128 0x3
+ 594 0213 F3       		.byte	0xf3
+ 595 0214 01       		.uleb128 0x1
+ 596 0215 51       		.byte	0x51
+ 597 0216 0C       		.uleb128 0xc
+ 598 0217 01       		.uleb128 0x1
+ 599 0218 52       		.byte	0x52
+ 600 0219 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 13
+
+
+ 601 021a F3       		.byte	0xf3
+ 602 021b 01       		.uleb128 0x1
+ 603 021c 52       		.byte	0x52
+ 604 021d 00       		.byte	0
+ 605 021e 00       		.byte	0
+ 606 021f 0F       		.uleb128 0xf
+ 607 0220 5B000000 		.4byte	.LASF24
+ 608 0224 01       		.byte	0x1
+ 609 0225 06       		.byte	0x6
+ 610 0226 72000000 		.4byte	0x72
+ 611 022a 10       		.uleb128 0x10
+ 612 022b 2F010000 		.4byte	.LASF25
+ 613 022f 01       		.byte	0x1
+ 614 0230 09       		.byte	0x9
+ 615 0231 25000000 		.4byte	0x25
+ 616 0235 05       		.uleb128 0x5
+ 617 0236 03       		.byte	0x3
+ 618 0237 00000000 		.4byte	is_initialized
+ 619 023b 11       		.uleb128 0x11
+ 620 023c 88020000 		.4byte	.LASF18
+ 621 0240 88020000 		.4byte	.LASF18
+ 622 0244 04       		.byte	0x4
+ 623 0245 15       		.byte	0x15
+ 624 0246 11       		.uleb128 0x11
+ 625 0247 20010000 		.4byte	.LASF19
+ 626 024b 20010000 		.4byte	.LASF19
+ 627 024f 04       		.byte	0x4
+ 628 0250 16       		.byte	0x16
+ 629 0251 11       		.uleb128 0x11
+ 630 0252 79020000 		.4byte	.LASF20
+ 631 0256 79020000 		.4byte	.LASF20
+ 632 025a 04       		.byte	0x4
+ 633 025b 17       		.byte	0x17
+ 634 025c 00       		.byte	0
+ 635              		.section	.debug_abbrev,"",%progbits
+ 636              	.Ldebug_abbrev0:
+ 637 0000 01       		.uleb128 0x1
+ 638 0001 11       		.uleb128 0x11
+ 639 0002 01       		.byte	0x1
+ 640 0003 25       		.uleb128 0x25
+ 641 0004 0E       		.uleb128 0xe
+ 642 0005 13       		.uleb128 0x13
+ 643 0006 0B       		.uleb128 0xb
+ 644 0007 03       		.uleb128 0x3
+ 645 0008 0E       		.uleb128 0xe
+ 646 0009 1B       		.uleb128 0x1b
+ 647 000a 0E       		.uleb128 0xe
+ 648 000b 55       		.uleb128 0x55
+ 649 000c 17       		.uleb128 0x17
+ 650 000d 11       		.uleb128 0x11
+ 651 000e 01       		.uleb128 0x1
+ 652 000f 10       		.uleb128 0x10
+ 653 0010 17       		.uleb128 0x17
+ 654 0011 00       		.byte	0
+ 655 0012 00       		.byte	0
+ 656 0013 02       		.uleb128 0x2
+ 657 0014 24       		.uleb128 0x24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 14
+
+
+ 658 0015 00       		.byte	0
+ 659 0016 0B       		.uleb128 0xb
+ 660 0017 0B       		.uleb128 0xb
+ 661 0018 3E       		.uleb128 0x3e
+ 662 0019 0B       		.uleb128 0xb
+ 663 001a 03       		.uleb128 0x3
+ 664 001b 08       		.uleb128 0x8
+ 665 001c 00       		.byte	0
+ 666 001d 00       		.byte	0
+ 667 001e 03       		.uleb128 0x3
+ 668 001f 16       		.uleb128 0x16
+ 669 0020 00       		.byte	0
+ 670 0021 03       		.uleb128 0x3
+ 671 0022 0E       		.uleb128 0xe
+ 672 0023 3A       		.uleb128 0x3a
+ 673 0024 0B       		.uleb128 0xb
+ 674 0025 3B       		.uleb128 0x3b
+ 675 0026 0B       		.uleb128 0xb
+ 676 0027 49       		.uleb128 0x49
+ 677 0028 13       		.uleb128 0x13
+ 678 0029 00       		.byte	0
+ 679 002a 00       		.byte	0
+ 680 002b 04       		.uleb128 0x4
+ 681 002c 24       		.uleb128 0x24
+ 682 002d 00       		.byte	0
+ 683 002e 0B       		.uleb128 0xb
+ 684 002f 0B       		.uleb128 0xb
+ 685 0030 3E       		.uleb128 0x3e
+ 686 0031 0B       		.uleb128 0xb
+ 687 0032 03       		.uleb128 0x3
+ 688 0033 0E       		.uleb128 0xe
+ 689 0034 00       		.byte	0
+ 690 0035 00       		.byte	0
+ 691 0036 05       		.uleb128 0x5
+ 692 0037 04       		.uleb128 0x4
+ 693 0038 01       		.byte	0x1
+ 694 0039 0B       		.uleb128 0xb
+ 695 003a 0B       		.uleb128 0xb
+ 696 003b 49       		.uleb128 0x49
+ 697 003c 13       		.uleb128 0x13
+ 698 003d 3A       		.uleb128 0x3a
+ 699 003e 0B       		.uleb128 0xb
+ 700 003f 3B       		.uleb128 0x3b
+ 701 0040 0B       		.uleb128 0xb
+ 702 0041 01       		.uleb128 0x1
+ 703 0042 13       		.uleb128 0x13
+ 704 0043 00       		.byte	0
+ 705 0044 00       		.byte	0
+ 706 0045 06       		.uleb128 0x6
+ 707 0046 28       		.uleb128 0x28
+ 708 0047 00       		.byte	0
+ 709 0048 03       		.uleb128 0x3
+ 710 0049 0E       		.uleb128 0xe
+ 711 004a 1C       		.uleb128 0x1c
+ 712 004b 0B       		.uleb128 0xb
+ 713 004c 00       		.byte	0
+ 714 004d 00       		.byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 15
+
+
+ 715 004e 07       		.uleb128 0x7
+ 716 004f 2E       		.uleb128 0x2e
+ 717 0050 01       		.byte	0x1
+ 718 0051 3F       		.uleb128 0x3f
+ 719 0052 19       		.uleb128 0x19
+ 720 0053 03       		.uleb128 0x3
+ 721 0054 0E       		.uleb128 0xe
+ 722 0055 3A       		.uleb128 0x3a
+ 723 0056 0B       		.uleb128 0xb
+ 724 0057 3B       		.uleb128 0x3b
+ 725 0058 0B       		.uleb128 0xb
+ 726 0059 27       		.uleb128 0x27
+ 727 005a 19       		.uleb128 0x19
+ 728 005b 49       		.uleb128 0x49
+ 729 005c 13       		.uleb128 0x13
+ 730 005d 11       		.uleb128 0x11
+ 731 005e 01       		.uleb128 0x1
+ 732 005f 12       		.uleb128 0x12
+ 733 0060 06       		.uleb128 0x6
+ 734 0061 40       		.uleb128 0x40
+ 735 0062 18       		.uleb128 0x18
+ 736 0063 9742     		.uleb128 0x2117
+ 737 0065 19       		.uleb128 0x19
+ 738 0066 01       		.uleb128 0x1
+ 739 0067 13       		.uleb128 0x13
+ 740 0068 00       		.byte	0
+ 741 0069 00       		.byte	0
+ 742 006a 08       		.uleb128 0x8
+ 743 006b 05       		.uleb128 0x5
+ 744 006c 00       		.byte	0
+ 745 006d 03       		.uleb128 0x3
+ 746 006e 0E       		.uleb128 0xe
+ 747 006f 3A       		.uleb128 0x3a
+ 748 0070 0B       		.uleb128 0xb
+ 749 0071 3B       		.uleb128 0x3b
+ 750 0072 0B       		.uleb128 0xb
+ 751 0073 49       		.uleb128 0x49
+ 752 0074 13       		.uleb128 0x13
+ 753 0075 02       		.uleb128 0x2
+ 754 0076 17       		.uleb128 0x17
+ 755 0077 00       		.byte	0
+ 756 0078 00       		.byte	0
+ 757 0079 09       		.uleb128 0x9
+ 758 007a 2E       		.uleb128 0x2e
+ 759 007b 00       		.byte	0
+ 760 007c 3F       		.uleb128 0x3f
+ 761 007d 19       		.uleb128 0x19
+ 762 007e 03       		.uleb128 0x3
+ 763 007f 0E       		.uleb128 0xe
+ 764 0080 3A       		.uleb128 0x3a
+ 765 0081 0B       		.uleb128 0xb
+ 766 0082 3B       		.uleb128 0x3b
+ 767 0083 0B       		.uleb128 0xb
+ 768 0084 27       		.uleb128 0x27
+ 769 0085 19       		.uleb128 0x19
+ 770 0086 49       		.uleb128 0x49
+ 771 0087 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 16
+
+
+ 772 0088 11       		.uleb128 0x11
+ 773 0089 01       		.uleb128 0x1
+ 774 008a 12       		.uleb128 0x12
+ 775 008b 06       		.uleb128 0x6
+ 776 008c 40       		.uleb128 0x40
+ 777 008d 18       		.uleb128 0x18
+ 778 008e 9742     		.uleb128 0x2117
+ 779 0090 19       		.uleb128 0x19
+ 780 0091 00       		.byte	0
+ 781 0092 00       		.byte	0
+ 782 0093 0A       		.uleb128 0xa
+ 783 0094 05       		.uleb128 0x5
+ 784 0095 00       		.byte	0
+ 785 0096 03       		.uleb128 0x3
+ 786 0097 08       		.uleb128 0x8
+ 787 0098 3A       		.uleb128 0x3a
+ 788 0099 0B       		.uleb128 0xb
+ 789 009a 3B       		.uleb128 0x3b
+ 790 009b 0B       		.uleb128 0xb
+ 791 009c 49       		.uleb128 0x49
+ 792 009d 13       		.uleb128 0x13
+ 793 009e 02       		.uleb128 0x2
+ 794 009f 17       		.uleb128 0x17
+ 795 00a0 00       		.byte	0
+ 796 00a1 00       		.byte	0
+ 797 00a2 0B       		.uleb128 0xb
+ 798 00a3 898201   		.uleb128 0x4109
+ 799 00a6 01       		.byte	0x1
+ 800 00a7 11       		.uleb128 0x11
+ 801 00a8 01       		.uleb128 0x1
+ 802 00a9 31       		.uleb128 0x31
+ 803 00aa 13       		.uleb128 0x13
+ 804 00ab 00       		.byte	0
+ 805 00ac 00       		.byte	0
+ 806 00ad 0C       		.uleb128 0xc
+ 807 00ae 8A8201   		.uleb128 0x410a
+ 808 00b1 00       		.byte	0
+ 809 00b2 02       		.uleb128 0x2
+ 810 00b3 18       		.uleb128 0x18
+ 811 00b4 9142     		.uleb128 0x2111
+ 812 00b6 18       		.uleb128 0x18
+ 813 00b7 00       		.byte	0
+ 814 00b8 00       		.byte	0
+ 815 00b9 0D       		.uleb128 0xd
+ 816 00ba 0F       		.uleb128 0xf
+ 817 00bb 00       		.byte	0
+ 818 00bc 0B       		.uleb128 0xb
+ 819 00bd 0B       		.uleb128 0xb
+ 820 00be 49       		.uleb128 0x49
+ 821 00bf 13       		.uleb128 0x13
+ 822 00c0 00       		.byte	0
+ 823 00c1 00       		.byte	0
+ 824 00c2 0E       		.uleb128 0xe
+ 825 00c3 26       		.uleb128 0x26
+ 826 00c4 00       		.byte	0
+ 827 00c5 49       		.uleb128 0x49
+ 828 00c6 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 17
+
+
+ 829 00c7 00       		.byte	0
+ 830 00c8 00       		.byte	0
+ 831 00c9 0F       		.uleb128 0xf
+ 832 00ca 34       		.uleb128 0x34
+ 833 00cb 00       		.byte	0
+ 834 00cc 03       		.uleb128 0x3
+ 835 00cd 0E       		.uleb128 0xe
+ 836 00ce 3A       		.uleb128 0x3a
+ 837 00cf 0B       		.uleb128 0xb
+ 838 00d0 3B       		.uleb128 0x3b
+ 839 00d1 0B       		.uleb128 0xb
+ 840 00d2 49       		.uleb128 0x49
+ 841 00d3 13       		.uleb128 0x13
+ 842 00d4 00       		.byte	0
+ 843 00d5 00       		.byte	0
+ 844 00d6 10       		.uleb128 0x10
+ 845 00d7 34       		.uleb128 0x34
+ 846 00d8 00       		.byte	0
+ 847 00d9 03       		.uleb128 0x3
+ 848 00da 0E       		.uleb128 0xe
+ 849 00db 3A       		.uleb128 0x3a
+ 850 00dc 0B       		.uleb128 0xb
+ 851 00dd 3B       		.uleb128 0x3b
+ 852 00de 0B       		.uleb128 0xb
+ 853 00df 49       		.uleb128 0x49
+ 854 00e0 13       		.uleb128 0x13
+ 855 00e1 02       		.uleb128 0x2
+ 856 00e2 18       		.uleb128 0x18
+ 857 00e3 00       		.byte	0
+ 858 00e4 00       		.byte	0
+ 859 00e5 11       		.uleb128 0x11
+ 860 00e6 2E       		.uleb128 0x2e
+ 861 00e7 00       		.byte	0
+ 862 00e8 3F       		.uleb128 0x3f
+ 863 00e9 19       		.uleb128 0x19
+ 864 00ea 3C       		.uleb128 0x3c
+ 865 00eb 19       		.uleb128 0x19
+ 866 00ec 6E       		.uleb128 0x6e
+ 867 00ed 0E       		.uleb128 0xe
+ 868 00ee 03       		.uleb128 0x3
+ 869 00ef 0E       		.uleb128 0xe
+ 870 00f0 3A       		.uleb128 0x3a
+ 871 00f1 0B       		.uleb128 0xb
+ 872 00f2 3B       		.uleb128 0x3b
+ 873 00f3 0B       		.uleb128 0xb
+ 874 00f4 00       		.byte	0
+ 875 00f5 00       		.byte	0
+ 876 00f6 00       		.byte	0
+ 877              		.section	.debug_loc,"",%progbits
+ 878              	.Ldebug_loc0:
+ 879              	.LLST0:
+ 880 0000 00000000 		.4byte	.LVL0
+ 881 0004 14000000 		.4byte	.LVL1
+ 882 0008 0100     		.2byte	0x1
+ 883 000a 50       		.byte	0x50
+ 884 000b 14000000 		.4byte	.LVL1
+ 885 000f 16000000 		.4byte	.LVL2
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 18
+
+
+ 886 0013 0400     		.2byte	0x4
+ 887 0015 F3       		.byte	0xf3
+ 888 0016 01       		.uleb128 0x1
+ 889 0017 50       		.byte	0x50
+ 890 0018 9F       		.byte	0x9f
+ 891 0019 16000000 		.4byte	.LVL2
+ 892 001d 1A000000 		.4byte	.LVL3
+ 893 0021 0100     		.2byte	0x1
+ 894 0023 50       		.byte	0x50
+ 895 0024 1A000000 		.4byte	.LVL3
+ 896 0028 1C000000 		.4byte	.LVL4
+ 897 002c 0400     		.2byte	0x4
+ 898 002e F3       		.byte	0xf3
+ 899 002f 01       		.uleb128 0x1
+ 900 0030 50       		.byte	0x50
+ 901 0031 9F       		.byte	0x9f
+ 902 0032 1C000000 		.4byte	.LVL4
+ 903 0036 20000000 		.4byte	.LVL5
+ 904 003a 0100     		.2byte	0x1
+ 905 003c 50       		.byte	0x50
+ 906 003d 20000000 		.4byte	.LVL5
+ 907 0041 28000000 		.4byte	.LFE0
+ 908 0045 0400     		.2byte	0x4
+ 909 0047 F3       		.byte	0xf3
+ 910 0048 01       		.uleb128 0x1
+ 911 0049 50       		.byte	0x50
+ 912 004a 9F       		.byte	0x9f
+ 913 004b 00000000 		.4byte	0
+ 914 004f 00000000 		.4byte	0
+ 915              	.LLST1:
+ 916 0053 00000000 		.4byte	.LVL6
+ 917 0057 0F000000 		.4byte	.LVL7-1
+ 918 005b 0100     		.2byte	0x1
+ 919 005d 50       		.byte	0x50
+ 920 005e 0F000000 		.4byte	.LVL7-1
+ 921 0062 12000000 		.4byte	.LVL8
+ 922 0066 0400     		.2byte	0x4
+ 923 0068 F3       		.byte	0xf3
+ 924 0069 01       		.uleb128 0x1
+ 925 006a 50       		.byte	0x50
+ 926 006b 9F       		.byte	0x9f
+ 927 006c 12000000 		.4byte	.LVL8
+ 928 0070 16000000 		.4byte	.LVL9
+ 929 0074 0100     		.2byte	0x1
+ 930 0076 50       		.byte	0x50
+ 931 0077 16000000 		.4byte	.LVL9
+ 932 007b 18000000 		.4byte	.LVL10
+ 933 007f 0400     		.2byte	0x4
+ 934 0081 F3       		.byte	0xf3
+ 935 0082 01       		.uleb128 0x1
+ 936 0083 50       		.byte	0x50
+ 937 0084 9F       		.byte	0x9f
+ 938 0085 18000000 		.4byte	.LVL10
+ 939 0089 1C000000 		.4byte	.LVL11
+ 940 008d 0100     		.2byte	0x1
+ 941 008f 50       		.byte	0x50
+ 942 0090 1C000000 		.4byte	.LVL11
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 19
+
+
+ 943 0094 1E000000 		.4byte	.LVL12
+ 944 0098 0400     		.2byte	0x4
+ 945 009a F3       		.byte	0xf3
+ 946 009b 01       		.uleb128 0x1
+ 947 009c 50       		.byte	0x50
+ 948 009d 9F       		.byte	0x9f
+ 949 009e 1E000000 		.4byte	.LVL12
+ 950 00a2 22000000 		.4byte	.LVL13
+ 951 00a6 0100     		.2byte	0x1
+ 952 00a8 50       		.byte	0x50
+ 953 00a9 22000000 		.4byte	.LVL13
+ 954 00ad 28000000 		.4byte	.LFE5
+ 955 00b1 0400     		.2byte	0x4
+ 956 00b3 F3       		.byte	0xf3
+ 957 00b4 01       		.uleb128 0x1
+ 958 00b5 50       		.byte	0x50
+ 959 00b6 9F       		.byte	0x9f
+ 960 00b7 00000000 		.4byte	0
+ 961 00bb 00000000 		.4byte	0
+ 962              	.LLST2:
+ 963 00bf 00000000 		.4byte	.LVL6
+ 964 00c3 0F000000 		.4byte	.LVL7-1
+ 965 00c7 0100     		.2byte	0x1
+ 966 00c9 51       		.byte	0x51
+ 967 00ca 0F000000 		.4byte	.LVL7-1
+ 968 00ce 12000000 		.4byte	.LVL8
+ 969 00d2 0400     		.2byte	0x4
+ 970 00d4 F3       		.byte	0xf3
+ 971 00d5 01       		.uleb128 0x1
+ 972 00d6 51       		.byte	0x51
+ 973 00d7 9F       		.byte	0x9f
+ 974 00d8 12000000 		.4byte	.LVL8
+ 975 00dc 28000000 		.4byte	.LFE5
+ 976 00e0 0100     		.2byte	0x1
+ 977 00e2 51       		.byte	0x51
+ 978 00e3 00000000 		.4byte	0
+ 979 00e7 00000000 		.4byte	0
+ 980              	.LLST3:
+ 981 00eb 00000000 		.4byte	.LVL14
+ 982 00ef 11000000 		.4byte	.LVL15-1
+ 983 00f3 0100     		.2byte	0x1
+ 984 00f5 50       		.byte	0x50
+ 985 00f6 11000000 		.4byte	.LVL15-1
+ 986 00fa 14000000 		.4byte	.LVL16
+ 987 00fe 0400     		.2byte	0x4
+ 988 0100 F3       		.byte	0xf3
+ 989 0101 01       		.uleb128 0x1
+ 990 0102 50       		.byte	0x50
+ 991 0103 9F       		.byte	0x9f
+ 992 0104 14000000 		.4byte	.LVL16
+ 993 0108 18000000 		.4byte	.LVL17
+ 994 010c 0100     		.2byte	0x1
+ 995 010e 50       		.byte	0x50
+ 996 010f 18000000 		.4byte	.LVL17
+ 997 0113 1A000000 		.4byte	.LVL18
+ 998 0117 0400     		.2byte	0x4
+ 999 0119 F3       		.byte	0xf3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 20
+
+
+ 1000 011a 01       		.uleb128 0x1
+ 1001 011b 50       		.byte	0x50
+ 1002 011c 9F       		.byte	0x9f
+ 1003 011d 1A000000 		.4byte	.LVL18
+ 1004 0121 1E000000 		.4byte	.LVL19
+ 1005 0125 0100     		.2byte	0x1
+ 1006 0127 50       		.byte	0x50
+ 1007 0128 1E000000 		.4byte	.LVL19
+ 1008 012c 20000000 		.4byte	.LVL20
+ 1009 0130 0400     		.2byte	0x4
+ 1010 0132 F3       		.byte	0xf3
+ 1011 0133 01       		.uleb128 0x1
+ 1012 0134 50       		.byte	0x50
+ 1013 0135 9F       		.byte	0x9f
+ 1014 0136 20000000 		.4byte	.LVL20
+ 1015 013a 24000000 		.4byte	.LVL21
+ 1016 013e 0100     		.2byte	0x1
+ 1017 0140 50       		.byte	0x50
+ 1018 0141 24000000 		.4byte	.LVL21
+ 1019 0145 26000000 		.4byte	.LVL22
+ 1020 0149 0400     		.2byte	0x4
+ 1021 014b F3       		.byte	0xf3
+ 1022 014c 01       		.uleb128 0x1
+ 1023 014d 50       		.byte	0x50
+ 1024 014e 9F       		.byte	0x9f
+ 1025 014f 26000000 		.4byte	.LVL22
+ 1026 0153 2A000000 		.4byte	.LVL23
+ 1027 0157 0100     		.2byte	0x1
+ 1028 0159 50       		.byte	0x50
+ 1029 015a 2A000000 		.4byte	.LVL23
+ 1030 015e 30000000 		.4byte	.LFE6
+ 1031 0162 0400     		.2byte	0x4
+ 1032 0164 F3       		.byte	0xf3
+ 1033 0165 01       		.uleb128 0x1
+ 1034 0166 50       		.byte	0x50
+ 1035 0167 9F       		.byte	0x9f
+ 1036 0168 00000000 		.4byte	0
+ 1037 016c 00000000 		.4byte	0
+ 1038              	.LLST4:
+ 1039 0170 00000000 		.4byte	.LVL14
+ 1040 0174 11000000 		.4byte	.LVL15-1
+ 1041 0178 0100     		.2byte	0x1
+ 1042 017a 51       		.byte	0x51
+ 1043 017b 11000000 		.4byte	.LVL15-1
+ 1044 017f 14000000 		.4byte	.LVL16
+ 1045 0183 0400     		.2byte	0x4
+ 1046 0185 F3       		.byte	0xf3
+ 1047 0186 01       		.uleb128 0x1
+ 1048 0187 51       		.byte	0x51
+ 1049 0188 9F       		.byte	0x9f
+ 1050 0189 14000000 		.4byte	.LVL16
+ 1051 018d 30000000 		.4byte	.LFE6
+ 1052 0191 0100     		.2byte	0x1
+ 1053 0193 51       		.byte	0x51
+ 1054 0194 00000000 		.4byte	0
+ 1055 0198 00000000 		.4byte	0
+ 1056              	.LLST5:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 21
+
+
+ 1057 019c 00000000 		.4byte	.LVL14
+ 1058 01a0 11000000 		.4byte	.LVL15-1
+ 1059 01a4 0100     		.2byte	0x1
+ 1060 01a6 52       		.byte	0x52
+ 1061 01a7 11000000 		.4byte	.LVL15-1
+ 1062 01ab 14000000 		.4byte	.LVL16
+ 1063 01af 0400     		.2byte	0x4
+ 1064 01b1 F3       		.byte	0xf3
+ 1065 01b2 01       		.uleb128 0x1
+ 1066 01b3 52       		.byte	0x52
+ 1067 01b4 9F       		.byte	0x9f
+ 1068 01b5 14000000 		.4byte	.LVL16
+ 1069 01b9 30000000 		.4byte	.LFE6
+ 1070 01bd 0100     		.2byte	0x1
+ 1071 01bf 52       		.byte	0x52
+ 1072 01c0 00000000 		.4byte	0
+ 1073 01c4 00000000 		.4byte	0
+ 1074              	.LLST6:
+ 1075 01c8 00000000 		.4byte	.LVL24
+ 1076 01cc 11000000 		.4byte	.LVL25-1
+ 1077 01d0 0100     		.2byte	0x1
+ 1078 01d2 50       		.byte	0x50
+ 1079 01d3 11000000 		.4byte	.LVL25-1
+ 1080 01d7 14000000 		.4byte	.LVL26
+ 1081 01db 0400     		.2byte	0x4
+ 1082 01dd F3       		.byte	0xf3
+ 1083 01de 01       		.uleb128 0x1
+ 1084 01df 50       		.byte	0x50
+ 1085 01e0 9F       		.byte	0x9f
+ 1086 01e1 14000000 		.4byte	.LVL26
+ 1087 01e5 18000000 		.4byte	.LVL27
+ 1088 01e9 0100     		.2byte	0x1
+ 1089 01eb 50       		.byte	0x50
+ 1090 01ec 18000000 		.4byte	.LVL27
+ 1091 01f0 1A000000 		.4byte	.LVL28
+ 1092 01f4 0400     		.2byte	0x4
+ 1093 01f6 F3       		.byte	0xf3
+ 1094 01f7 01       		.uleb128 0x1
+ 1095 01f8 50       		.byte	0x50
+ 1096 01f9 9F       		.byte	0x9f
+ 1097 01fa 1A000000 		.4byte	.LVL28
+ 1098 01fe 1E000000 		.4byte	.LVL29
+ 1099 0202 0100     		.2byte	0x1
+ 1100 0204 50       		.byte	0x50
+ 1101 0205 1E000000 		.4byte	.LVL29
+ 1102 0209 20000000 		.4byte	.LVL30
+ 1103 020d 0400     		.2byte	0x4
+ 1104 020f F3       		.byte	0xf3
+ 1105 0210 01       		.uleb128 0x1
+ 1106 0211 50       		.byte	0x50
+ 1107 0212 9F       		.byte	0x9f
+ 1108 0213 20000000 		.4byte	.LVL30
+ 1109 0217 24000000 		.4byte	.LVL31
+ 1110 021b 0100     		.2byte	0x1
+ 1111 021d 50       		.byte	0x50
+ 1112 021e 24000000 		.4byte	.LVL31
+ 1113 0222 26000000 		.4byte	.LVL32
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 22
+
+
+ 1114 0226 0400     		.2byte	0x4
+ 1115 0228 F3       		.byte	0xf3
+ 1116 0229 01       		.uleb128 0x1
+ 1117 022a 50       		.byte	0x50
+ 1118 022b 9F       		.byte	0x9f
+ 1119 022c 26000000 		.4byte	.LVL32
+ 1120 0230 2A000000 		.4byte	.LVL33
+ 1121 0234 0100     		.2byte	0x1
+ 1122 0236 50       		.byte	0x50
+ 1123 0237 2A000000 		.4byte	.LVL33
+ 1124 023b 30000000 		.4byte	.LFE7
+ 1125 023f 0400     		.2byte	0x4
+ 1126 0241 F3       		.byte	0xf3
+ 1127 0242 01       		.uleb128 0x1
+ 1128 0243 50       		.byte	0x50
+ 1129 0244 9F       		.byte	0x9f
+ 1130 0245 00000000 		.4byte	0
+ 1131 0249 00000000 		.4byte	0
+ 1132              	.LLST7:
+ 1133 024d 00000000 		.4byte	.LVL24
+ 1134 0251 11000000 		.4byte	.LVL25-1
+ 1135 0255 0100     		.2byte	0x1
+ 1136 0257 51       		.byte	0x51
+ 1137 0258 11000000 		.4byte	.LVL25-1
+ 1138 025c 14000000 		.4byte	.LVL26
+ 1139 0260 0400     		.2byte	0x4
+ 1140 0262 F3       		.byte	0xf3
+ 1141 0263 01       		.uleb128 0x1
+ 1142 0264 51       		.byte	0x51
+ 1143 0265 9F       		.byte	0x9f
+ 1144 0266 14000000 		.4byte	.LVL26
+ 1145 026a 30000000 		.4byte	.LFE7
+ 1146 026e 0100     		.2byte	0x1
+ 1147 0270 51       		.byte	0x51
+ 1148 0271 00000000 		.4byte	0
+ 1149 0275 00000000 		.4byte	0
+ 1150              	.LLST8:
+ 1151 0279 00000000 		.4byte	.LVL24
+ 1152 027d 11000000 		.4byte	.LVL25-1
+ 1153 0281 0100     		.2byte	0x1
+ 1154 0283 52       		.byte	0x52
+ 1155 0284 11000000 		.4byte	.LVL25-1
+ 1156 0288 14000000 		.4byte	.LVL26
+ 1157 028c 0400     		.2byte	0x4
+ 1158 028e F3       		.byte	0xf3
+ 1159 028f 01       		.uleb128 0x1
+ 1160 0290 52       		.byte	0x52
+ 1161 0291 9F       		.byte	0x9f
+ 1162 0292 14000000 		.4byte	.LVL26
+ 1163 0296 30000000 		.4byte	.LFE7
+ 1164 029a 0100     		.2byte	0x1
+ 1165 029c 52       		.byte	0x52
+ 1166 029d 00000000 		.4byte	0
+ 1167 02a1 00000000 		.4byte	0
+ 1168              		.section	.debug_aranges,"",%progbits
+ 1169 0000 54000000 		.4byte	0x54
+ 1170 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 23
+
+
+ 1171 0006 00000000 		.4byte	.Ldebug_info0
+ 1172 000a 04       		.byte	0x4
+ 1173 000b 00       		.byte	0
+ 1174 000c 0000     		.2byte	0
+ 1175 000e 0000     		.2byte	0
+ 1176 0010 00000000 		.4byte	.LFB0
+ 1177 0014 28000000 		.4byte	.LFE0-.LFB0
+ 1178 0018 00000000 		.4byte	.LFB1
+ 1179 001c 06000000 		.4byte	.LFE1-.LFB1
+ 1180 0020 00000000 		.4byte	.LFB2
+ 1181 0024 06000000 		.4byte	.LFE2-.LFB2
+ 1182 0028 00000000 		.4byte	.LFB3
+ 1183 002c 06000000 		.4byte	.LFE3-.LFB3
+ 1184 0030 00000000 		.4byte	.LFB4
+ 1185 0034 04000000 		.4byte	.LFE4-.LFB4
+ 1186 0038 00000000 		.4byte	.LFB5
+ 1187 003c 28000000 		.4byte	.LFE5-.LFB5
+ 1188 0040 00000000 		.4byte	.LFB6
+ 1189 0044 30000000 		.4byte	.LFE6-.LFB6
+ 1190 0048 00000000 		.4byte	.LFB7
+ 1191 004c 30000000 		.4byte	.LFE7-.LFB7
+ 1192 0050 00000000 		.4byte	0
+ 1193 0054 00000000 		.4byte	0
+ 1194              		.section	.debug_ranges,"",%progbits
+ 1195              	.Ldebug_ranges0:
+ 1196 0000 00000000 		.4byte	.LFB0
+ 1197 0004 28000000 		.4byte	.LFE0
+ 1198 0008 00000000 		.4byte	.LFB1
+ 1199 000c 06000000 		.4byte	.LFE1
+ 1200 0010 00000000 		.4byte	.LFB2
+ 1201 0014 06000000 		.4byte	.LFE2
+ 1202 0018 00000000 		.4byte	.LFB3
+ 1203 001c 06000000 		.4byte	.LFE3
+ 1204 0020 00000000 		.4byte	.LFB4
+ 1205 0024 04000000 		.4byte	.LFE4
+ 1206 0028 00000000 		.4byte	.LFB5
+ 1207 002c 28000000 		.4byte	.LFE5
+ 1208 0030 00000000 		.4byte	.LFB6
+ 1209 0034 30000000 		.4byte	.LFE6
+ 1210 0038 00000000 		.4byte	.LFB7
+ 1211 003c 30000000 		.4byte	.LFE7
+ 1212 0040 00000000 		.4byte	0
+ 1213 0044 00000000 		.4byte	0
+ 1214              		.section	.debug_line,"",%progbits
+ 1215              	.Ldebug_line0:
+ 1216 0000 94010000 		.section	.debug_str,"MS",%progbits,1
+ 1216      0200CD00 
+ 1216      00000201 
+ 1216      FB0E0D00 
+ 1216      01010101 
+ 1217              	.LASF1:
+ 1218 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1218      206C6F6E 
+ 1218      6720696E 
+ 1218      7400
+ 1219              	.LASF7:
+ 1220 000e 73697A65 		.ascii	"size_t\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 24
+
+
+ 1220      5F7400
+ 1221              	.LASF5:
+ 1222 0015 53414245 		.ascii	"SABER_SECURITY_FIRE\000"
+ 1222      525F5345 
+ 1222      43555249 
+ 1222      54595F46 
+ 1222      49524500 
+ 1223              	.LASF3:
+ 1224 0029 53414245 		.ascii	"SABER_SECURITY_LIGHT\000"
+ 1224      525F5345 
+ 1224      43555249 
+ 1224      54595F4C 
+ 1224      49474854 
+ 1225              	.LASF17:
+ 1226 003e 73616265 		.ascii	"saber_decapsulate\000"
+ 1226      725F6465 
+ 1226      63617073 
+ 1226      756C6174 
+ 1226      6500
+ 1227              	.LASF13:
+ 1228 0050 73616265 		.ascii	"saber_init\000"
+ 1228      725F696E 
+ 1228      697400
+ 1229              	.LASF24:
+ 1230 005b 63757272 		.ascii	"current_security_level\000"
+ 1230      656E745F 
+ 1230      73656375 
+ 1230      72697479 
+ 1230      5F6C6576 
+ 1231              	.LASF23:
+ 1232 0072 433A5C55 		.ascii	"C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2"
+ 1232      73657273 
+ 1232      5C626F67 
+ 1232      75726164 
+ 1232      5C446573 
+ 1233 00a0 5C436F64 		.ascii	"\\Codigo\\Algoritmos postcuanticos\\PSOC\\SABER\\Sa"
+ 1233      69676F5C 
+ 1233      416C676F 
+ 1233      7269746D 
+ 1233      6F732070 
+ 1234 00ce 6265725C 		.ascii	"ber\\Saber.cydsn\000"
+ 1234      53616265 
+ 1234      722E6379 
+ 1234      64736E00 
+ 1235              	.LASF11:
+ 1236 00de 73616265 		.ascii	"saber_get_ciphertext_size\000"
+ 1236      725F6765 
+ 1236      745F6369 
+ 1236      70686572 
+ 1236      74657874 
+ 1237              	.LASF14:
+ 1238 00f8 73616265 		.ascii	"saber_keypair\000"
+ 1238      725F6B65 
+ 1238      79706169 
+ 1238      7200
+ 1239              	.LASF9:
+ 1240 0106 73616265 		.ascii	"saber_get_public_key_size\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 25
+
+
+ 1240      725F6765 
+ 1240      745F7075 
+ 1240      626C6963 
+ 1240      5F6B6579 
+ 1241              	.LASF19:
+ 1242 0120 63727970 		.ascii	"crypto_kem_enc\000"
+ 1242      746F5F6B 
+ 1242      656D5F65 
+ 1242      6E6300
+ 1243              	.LASF25:
+ 1244 012f 69735F69 		.ascii	"is_initialized\000"
+ 1244      6E697469 
+ 1244      616C697A 
+ 1244      656400
+ 1245              	.LASF10:
+ 1246 013e 73616265 		.ascii	"saber_get_secret_key_size\000"
+ 1246      725F6765 
+ 1246      745F7365 
+ 1246      63726574 
+ 1246      5F6B6579 
+ 1247              	.LASF22:
+ 1248 0158 2E2E5C73 		.ascii	"..\\saber_wrapper.c\000"
+ 1248      61626572 
+ 1248      5F777261 
+ 1248      70706572 
+ 1248      2E6300
+ 1249              	.LASF6:
+ 1250 016b 756E7369 		.ascii	"unsigned char\000"
+ 1250      676E6564 
+ 1250      20636861 
+ 1250      7200
+ 1251              	.LASF8:
+ 1252 0179 73616265 		.ascii	"saber_security_level_t\000"
+ 1252      725F7365 
+ 1252      63757269 
+ 1252      74795F6C 
+ 1252      6576656C 
+ 1253              	.LASF4:
+ 1254 0190 53414245 		.ascii	"SABER_SECURITY_SABER\000"
+ 1254      525F5345 
+ 1254      43555249 
+ 1254      54595F53 
+ 1254      41424552 
+ 1255              	.LASF16:
+ 1256 01a5 73616265 		.ascii	"saber_encapsulate\000"
+ 1256      725F656E 
+ 1256      63617073 
+ 1256      756C6174 
+ 1256      6500
+ 1257              	.LASF21:
+ 1258 01b7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1258      43313120 
+ 1258      352E342E 
+ 1258      31203230 
+ 1258      31363036 
+ 1259 01ea 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1259      20726576 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccyuUxoV.s 			page 26
+
+
+ 1259      6973696F 
+ 1259      6E203233 
+ 1259      37373135 
+ 1260 021d 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1260      70202D6D 
+ 1260      6670753D 
+ 1260      66707634 
+ 1260      2D73702D 
+ 1261 0250 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1261      6F6E7320 
+ 1261      2D666661 
+ 1261      742D6C74 
+ 1261      6F2D6F62 
+ 1262              	.LASF15:
+ 1263 026a 73656375 		.ascii	"security_level\000"
+ 1263      72697479 
+ 1263      5F6C6576 
+ 1263      656C00
+ 1264              	.LASF20:
+ 1265 0279 63727970 		.ascii	"crypto_kem_dec\000"
+ 1265      746F5F6B 
+ 1265      656D5F64 
+ 1265      656300
+ 1266              	.LASF18:
+ 1267 0288 63727970 		.ascii	"crypto_kem_keypair\000"
+ 1267      746F5F6B 
+ 1267      656D5F6B 
+ 1267      65797061 
+ 1267      697200
+ 1268              	.LASF2:
+ 1269 029b 6C6F6E67 		.ascii	"long double\000"
+ 1269      20646F75 
+ 1269      626C6500 
+ 1270              	.LASF0:
+ 1271 02a7 756E7369 		.ascii	"unsigned int\000"
+ 1271      676E6564 
+ 1271      20696E74 
+ 1271      00
+ 1272              	.LASF12:
+ 1273 02b4 73616265 		.ascii	"saber_get_shared_secret_size\000"
+ 1273      725F6765 
+ 1273      745F7368 
+ 1273      61726564 
+ 1273      5F736563 
+ 1274              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

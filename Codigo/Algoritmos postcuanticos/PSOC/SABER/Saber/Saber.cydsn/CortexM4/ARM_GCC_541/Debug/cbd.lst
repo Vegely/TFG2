@@ -1,0 +1,1098 @@
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"cbd.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.load_littleendian,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	load_littleendian, %function
+  25              	load_littleendian:
+  26              	.LFB0:
+  27              		.file 1 "..\\cbd.c"
+   1:..\cbd.c      **** /*---------------------------------------------------------------------
+   2:..\cbd.c      **** This file has been adapted from the implementation 
+   3:..\cbd.c      **** (available at, Public Domain https://github.com/pq-crystals/kyber) 
+   4:..\cbd.c      **** of "CRYSTALS – Kyber: a CCA-secure module-lattice-based KEM"
+   5:..\cbd.c      **** by : Joppe Bos, Leo Ducas, Eike Kiltz, Tancrede Lepoint, 
+   6:..\cbd.c      **** Vadim Lyubashevsky, John M. Schanck, Peter Schwabe & Damien stehle
+   7:..\cbd.c      **** ----------------------------------------------------------------------*/
+   8:..\cbd.c      **** 
+   9:..\cbd.c      **** #include "SABER_params.h"
+  10:..\cbd.c      **** #include "api.h"
+  11:..\cbd.c      **** #include "cbd.h"
+  12:..\cbd.c      **** #include <stdint.h>
+  13:..\cbd.c      **** 
+  14:..\cbd.c      **** static uint64_t load_littleendian(const uint8_t *x, int bytes)
+  15:..\cbd.c      **** {
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  34              		.cfi_def_cfa_offset 24
+  35              		.cfi_offset 4, -24
+  36              		.cfi_offset 5, -20
+  37              		.cfi_offset 6, -16
+  38              		.cfi_offset 7, -12
+  39              		.cfi_offset 8, -8
+  40              		.cfi_offset 14, -4
+  41 0004 8446     		mov	ip, r0
+  42 0006 8846     		mov	r8, r1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 2
+
+
+  16:..\cbd.c      ****   int i;
+  17:..\cbd.c      ****   uint64_t r = x[0];
+  43              		.loc 1 17 0
+  44 0008 9CF80000 		ldrb	r0, [ip]	@ zero_extendqisi2
+  45              	.LVL1:
+  46 000c 0021     		movs	r1, #0
+  47              	.LVL2:
+  18:..\cbd.c      ****   for (i = 1; i < bytes; i++)
+  48              		.loc 1 18 0
+  49 000e 0124     		movs	r4, #1
+  50 0010 13E0     		b	.L2
+  51              	.LVL3:
+  52              	.L3:
+  19:..\cbd.c      ****     r |= (uint64_t)x[i] << (8 * i);
+  53              		.loc 1 19 0 discriminator 3
+  54 0012 1CF80460 		ldrb	r6, [ip, r4]	@ zero_extendqisi2
+  55 0016 E500     		lsls	r5, r4, #3
+  56 0018 A5F1200E 		sub	lr, r5, #32
+  57 001c C5F12007 		rsb	r7, r5, #32
+  58 0020 0023     		movs	r3, #0
+  59 0022 06FA0EFE 		lsl	lr, r6, lr
+  60 0026 43EA0E03 		orr	r3, r3, lr
+  61 002a 26FA07F7 		lsr	r7, r6, r7
+  62 002e 3B43     		orrs	r3, r3, r7
+  63 0030 06FA05F2 		lsl	r2, r6, r5
+  64 0034 1043     		orrs	r0, r0, r2
+  65              	.LVL4:
+  66 0036 1943     		orrs	r1, r1, r3
+  67              	.LVL5:
+  18:..\cbd.c      ****   for (i = 1; i < bytes; i++)
+  68              		.loc 1 18 0 discriminator 3
+  69 0038 0134     		adds	r4, r4, #1
+  70              	.LVL6:
+  71              	.L2:
+  18:..\cbd.c      ****   for (i = 1; i < bytes; i++)
+  72              		.loc 1 18 0 is_stmt 0 discriminator 1
+  73 003a 4445     		cmp	r4, r8
+  74 003c E9DB     		blt	.L3
+  20:..\cbd.c      ****   return r;
+  21:..\cbd.c      **** }
+  75              		.loc 1 21 0 is_stmt 1
+  76 003e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  77              		.cfi_endproc
+  78              	.LFE0:
+  79              		.size	load_littleendian, .-load_littleendian
+  80 0042 00BF     		.section	.text.cbd,"ax",%progbits
+  81              		.align	2
+  82              		.global	cbd
+  83              		.thumb
+  84              		.thumb_func
+  85              		.type	cbd, %function
+  86              	cbd:
+  87              	.LFB1:
+  22:..\cbd.c      **** 
+  23:..\cbd.c      **** void cbd(uint16_t s[SABER_N], const uint8_t buf[SABER_POLYCOINBYTES])
+  24:..\cbd.c      **** {
+  88              		.loc 1 24 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 3
+
+
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              	.LVL7:
+  93 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+  94              		.cfi_def_cfa_offset 32
+  95              		.cfi_offset 3, -32
+  96              		.cfi_offset 4, -28
+  97              		.cfi_offset 5, -24
+  98              		.cfi_offset 6, -20
+  99              		.cfi_offset 7, -16
+ 100              		.cfi_offset 8, -12
+ 101              		.cfi_offset 9, -8
+ 102              		.cfi_offset 14, -4
+ 103 0004 0546     		mov	r5, r0
+ 104 0006 0E46     		mov	r6, r1
+ 105              	.LVL8:
+  25:..\cbd.c      **** #if SABER_MU == 6
+  26:..\cbd.c      ****   uint32_t t, d, a[4], b[4];
+  27:..\cbd.c      ****   int i, j;
+  28:..\cbd.c      **** 
+  29:..\cbd.c      ****   for (i = 0; i < SABER_N / 4; i++)
+ 106              		.loc 1 29 0
+ 107 0008 0024     		movs	r4, #0
+ 108 000a 32E0     		b	.L6
+ 109              	.LVL9:
+ 110              	.L9:
+  30:..\cbd.c      ****   {
+  31:..\cbd.c      ****     t = load_littleendian(buf + 3 * i, 3);
+ 111              		.loc 1 31 0
+ 112 000c 04EB4400 		add	r0, r4, r4, lsl #1
+ 113 0010 0321     		movs	r1, #3
+ 114 0012 3044     		add	r0, r0, r6
+ 115 0014 FFF7FEFF 		bl	load_littleendian
+ 116              	.LVL10:
+  32:..\cbd.c      ****     d = 0;
+  33:..\cbd.c      ****     for (j = 0; j < 3; j++)
+ 117              		.loc 1 33 0
+ 118 0018 0022     		movs	r2, #0
+  32:..\cbd.c      ****     d = 0;
+ 119              		.loc 1 32 0
+ 120 001a 1346     		mov	r3, r2
+ 121              		.loc 1 33 0
+ 122 001c 05E0     		b	.L7
+ 123              	.LVL11:
+ 124              	.L8:
+  34:..\cbd.c      ****       d += (t >> j) & 0x249249;
+ 125              		.loc 1 34 0 discriminator 3
+ 126 001e 20FA02F7 		lsr	r7, r0, r2
+ 127 0022 1649     		ldr	r1, .L11
+ 128 0024 3940     		ands	r1, r1, r7
+ 129 0026 0B44     		add	r3, r3, r1
+ 130              	.LVL12:
+  33:..\cbd.c      ****       d += (t >> j) & 0x249249;
+ 131              		.loc 1 33 0 discriminator 3
+ 132 0028 0132     		adds	r2, r2, #1
+ 133              	.LVL13:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 4
+
+
+ 134              	.L7:
+  33:..\cbd.c      ****       d += (t >> j) & 0x249249;
+ 135              		.loc 1 33 0 is_stmt 0 discriminator 1
+ 136 002a 022A     		cmp	r2, #2
+ 137 002c F7DD     		ble	.L8
+  35:..\cbd.c      **** 
+  36:..\cbd.c      ****     a[0] = d & 0x7;
+ 138              		.loc 1 36 0 is_stmt 1 discriminator 2
+ 139 002e 03F0070E 		and	lr, r3, #7
+  37:..\cbd.c      ****     b[0] = (d >> 3) & 0x7;
+ 140              		.loc 1 37 0 discriminator 2
+ 141 0032 C3F3C209 		ubfx	r9, r3, #3, #3
+  38:..\cbd.c      ****     a[1] = (d >> 6) & 0x7;
+ 142              		.loc 1 38 0 discriminator 2
+ 143 0036 C3F38217 		ubfx	r7, r3, #6, #3
+  39:..\cbd.c      ****     b[1] = (d >> 9) & 0x7;
+ 144              		.loc 1 39 0 discriminator 2
+ 145 003a C3F34228 		ubfx	r8, r3, #9, #3
+  40:..\cbd.c      ****     a[2] = (d >> 12) & 0x7;
+ 146              		.loc 1 40 0 discriminator 2
+ 147 003e C3F30230 		ubfx	r0, r3, #12, #3
+ 148              	.LVL14:
+  41:..\cbd.c      ****     b[2] = (d >> 15) & 0x7;
+ 149              		.loc 1 41 0 discriminator 2
+ 150 0042 C3F3C23C 		ubfx	ip, r3, #15, #3
+  42:..\cbd.c      ****     a[3] = (d >> 18) & 0x7;
+ 151              		.loc 1 42 0 discriminator 2
+ 152 0046 C3F38241 		ubfx	r1, r3, #18, #3
+  43:..\cbd.c      ****     b[3] = (d >> 21);
+  44:..\cbd.c      **** 
+  45:..\cbd.c      ****     s[4 * i + 0] = (uint16_t)(a[0] - b[0]);
+ 153              		.loc 1 45 0 discriminator 2
+ 154 004a E200     		lsls	r2, r4, #3
+ 155              	.LVL15:
+ 156 004c C9EB0E0E 		rsb	lr, r9, lr
+ 157 0050 25F834E0 		strh	lr, [r5, r4, lsl #3]	@ movhi
+  46:..\cbd.c      ****     s[4 * i + 1] = (uint16_t)(a[1] - b[1]);
+ 158              		.loc 1 46 0 discriminator 2
+ 159 0054 02F1020E 		add	lr, r2, #2
+ 160 0058 C8EB0707 		rsb	r7, r8, r7
+ 161 005c 25F80E70 		strh	r7, [r5, lr]	@ movhi
+  47:..\cbd.c      ****     s[4 * i + 2] = (uint16_t)(a[2] - b[2]);
+ 162              		.loc 1 47 0 discriminator 2
+ 163 0060 171D     		adds	r7, r2, #4
+ 164 0062 CCEB0000 		rsb	r0, ip, r0
+ 165 0066 E853     		strh	r0, [r5, r7]	@ movhi
+  48:..\cbd.c      ****     s[4 * i + 3] = (uint16_t)(a[3] - b[3]);
+ 166              		.loc 1 48 0 discriminator 2
+ 167 0068 0632     		adds	r2, r2, #6
+ 168 006a A1EB5353 		sub	r3, r1, r3, lsr #21
+ 169              	.LVL16:
+ 170 006e AB52     		strh	r3, [r5, r2]	@ movhi
+  29:..\cbd.c      ****   {
+ 171              		.loc 1 29 0 discriminator 2
+ 172 0070 0134     		adds	r4, r4, #1
+ 173              	.LVL17:
+ 174              	.L6:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 5
+
+
+  29:..\cbd.c      ****   {
+ 175              		.loc 1 29 0 is_stmt 0 discriminator 1
+ 176 0072 3F2C     		cmp	r4, #63
+ 177 0074 CADD     		ble	.L9
+  49:..\cbd.c      ****   }
+  50:..\cbd.c      **** #elif SABER_MU == 8 
+  51:..\cbd.c      ****   uint32_t t, d, a[4], b[4];
+  52:..\cbd.c      ****   int i, j;
+  53:..\cbd.c      **** 
+  54:..\cbd.c      ****   for (i = 0; i < SABER_N / 4; i++)
+  55:..\cbd.c      ****   {
+  56:..\cbd.c      ****     t = load_littleendian(buf + 4 * i, 4);
+  57:..\cbd.c      ****     d = 0;
+  58:..\cbd.c      ****     for (j = 0; j < 4; j++)
+  59:..\cbd.c      ****       d += (t >> j) & 0x11111111;
+  60:..\cbd.c      **** 
+  61:..\cbd.c      ****     a[0] = d & 0xf;
+  62:..\cbd.c      ****     b[0] = (d >> 4) & 0xf;
+  63:..\cbd.c      ****     a[1] = (d >> 8) & 0xf;
+  64:..\cbd.c      ****     b[1] = (d >> 12) & 0xf;
+  65:..\cbd.c      ****     a[2] = (d >> 16) & 0xf;
+  66:..\cbd.c      ****     b[2] = (d >> 20) & 0xf;
+  67:..\cbd.c      ****     a[3] = (d >> 24) & 0xf;
+  68:..\cbd.c      ****     b[3] = (d >> 28);
+  69:..\cbd.c      **** 
+  70:..\cbd.c      ****     s[4 * i + 0] = (uint16_t)(a[0] - b[0]);
+  71:..\cbd.c      ****     s[4 * i + 1] = (uint16_t)(a[1] - b[1]);
+  72:..\cbd.c      ****     s[4 * i + 2] = (uint16_t)(a[2] - b[2]);
+  73:..\cbd.c      ****     s[4 * i + 3] = (uint16_t)(a[3] - b[3]);
+  74:..\cbd.c      ****   }
+  75:..\cbd.c      **** #elif SABER_MU == 10
+  76:..\cbd.c      ****   uint64_t t, d, a[4], b[4];
+  77:..\cbd.c      ****   int i, j;
+  78:..\cbd.c      **** 
+  79:..\cbd.c      ****   for (i = 0; i < SABER_N / 4; i++)
+  80:..\cbd.c      ****   {
+  81:..\cbd.c      ****     t = load_littleendian(buf + 5 * i, 5);
+  82:..\cbd.c      ****     d = 0;
+  83:..\cbd.c      ****     for (j = 0; j < 5; j++)
+  84:..\cbd.c      ****       d += (t >> j) & 0x0842108421UL;
+  85:..\cbd.c      **** 
+  86:..\cbd.c      ****     a[0] = d & 0x1f;
+  87:..\cbd.c      ****     b[0] = (d >> 5) & 0x1f;
+  88:..\cbd.c      ****     a[1] = (d >> 10) & 0x1f;
+  89:..\cbd.c      ****     b[1] = (d >> 15) & 0x1f;
+  90:..\cbd.c      ****     a[2] = (d >> 20) & 0x1f;
+  91:..\cbd.c      ****     b[2] = (d >> 25) & 0x1f;
+  92:..\cbd.c      ****     a[3] = (d >> 30) & 0x1f;
+  93:..\cbd.c      ****     b[3] = (d >> 35);
+  94:..\cbd.c      **** 
+  95:..\cbd.c      ****     s[4 * i + 0] = (uint16_t)(a[0] - b[0]);
+  96:..\cbd.c      ****     s[4 * i + 1] = (uint16_t)(a[1] - b[1]);
+  97:..\cbd.c      ****     s[4 * i + 2] = (uint16_t)(a[2] - b[2]);
+  98:..\cbd.c      ****     s[4 * i + 3] = (uint16_t)(a[3] - b[3]);
+  99:..\cbd.c      ****   }
+ 100:..\cbd.c      **** #else
+ 101:..\cbd.c      **** #error "Unsupported SABER parameter."
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 6
+
+
+ 102:..\cbd.c      **** #endif
+ 103:..\cbd.c      **** }
+ 178              		.loc 1 103 0 is_stmt 1
+ 179 0076 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 180              	.LVL18:
+ 181              	.L12:
+ 182 007a 00BF     		.align	2
+ 183              	.L11:
+ 184 007c 49922400 		.word	2396745
+ 185              		.cfi_endproc
+ 186              	.LFE1:
+ 187              		.size	cbd, .-cbd
+ 188              		.text
+ 189              	.Letext0:
+ 190              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 191              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 192              		.section	.debug_info,"",%progbits
+ 193              	.Ldebug_info0:
+ 194 0000 CD010000 		.4byte	0x1cd
+ 195 0004 0400     		.2byte	0x4
+ 196 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 197 000a 04       		.byte	0x4
+ 198 000b 01       		.uleb128 0x1
+ 199 000c 0F010000 		.4byte	.LASF19
+ 200 0010 0C       		.byte	0xc
+ 201 0011 33000000 		.4byte	.LASF20
+ 202 0015 77000000 		.4byte	.LASF21
+ 203 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 204 001d 00000000 		.4byte	0
+ 205 0021 00000000 		.4byte	.Ldebug_line0
+ 206 0025 02       		.uleb128 0x2
+ 207 0026 01       		.byte	0x1
+ 208 0027 06       		.byte	0x6
+ 209 0028 0F020000 		.4byte	.LASF0
+ 210 002c 03       		.uleb128 0x3
+ 211 002d 00000000 		.4byte	.LASF3
+ 212 0031 02       		.byte	0x2
+ 213 0032 1D       		.byte	0x1d
+ 214 0033 37000000 		.4byte	0x37
+ 215 0037 02       		.uleb128 0x2
+ 216 0038 01       		.byte	0x1
+ 217 0039 08       		.byte	0x8
+ 218 003a 13000000 		.4byte	.LASF1
+ 219 003e 02       		.uleb128 0x2
+ 220 003f 02       		.byte	0x2
+ 221 0040 05       		.byte	0x5
+ 222 0041 D9010000 		.4byte	.LASF2
+ 223 0045 03       		.uleb128 0x3
+ 224 0046 61000000 		.4byte	.LASF4
+ 225 004a 02       		.byte	0x2
+ 226 004b 2B       		.byte	0x2b
+ 227 004c 50000000 		.4byte	0x50
+ 228 0050 02       		.uleb128 0x2
+ 229 0051 02       		.byte	0x2
+ 230 0052 07       		.byte	0x7
+ 231 0053 3C000000 		.4byte	.LASF5
+ 232 0057 02       		.uleb128 0x2
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 7
+
+
+ 233 0058 04       		.byte	0x4
+ 234 0059 05       		.byte	0x5
+ 235 005a 00020000 		.4byte	.LASF6
+ 236 005e 03       		.uleb128 0x3
+ 237 005f 6C000000 		.4byte	.LASF7
+ 238 0063 02       		.byte	0x2
+ 239 0064 41       		.byte	0x41
+ 240 0065 69000000 		.4byte	0x69
+ 241 0069 02       		.uleb128 0x2
+ 242 006a 04       		.byte	0x4
+ 243 006b 07       		.byte	0x7
+ 244 006c 21000000 		.4byte	.LASF8
+ 245 0070 02       		.uleb128 0x2
+ 246 0071 08       		.byte	0x8
+ 247 0072 05       		.byte	0x5
+ 248 0073 CB010000 		.4byte	.LASF9
+ 249 0077 03       		.uleb128 0x3
+ 250 0078 E3010000 		.4byte	.LASF10
+ 251 007c 02       		.byte	0x2
+ 252 007d 5B       		.byte	0x5b
+ 253 007e 82000000 		.4byte	0x82
+ 254 0082 02       		.uleb128 0x2
+ 255 0083 08       		.byte	0x8
+ 256 0084 07       		.byte	0x7
+ 257 0085 F0000000 		.4byte	.LASF11
+ 258 0089 04       		.uleb128 0x4
+ 259 008a 04       		.byte	0x4
+ 260 008b 05       		.byte	0x5
+ 261 008c 696E7400 		.ascii	"int\000"
+ 262 0090 02       		.uleb128 0x2
+ 263 0091 04       		.byte	0x4
+ 264 0092 07       		.byte	0x7
+ 265 0093 E3000000 		.4byte	.LASF12
+ 266 0097 03       		.uleb128 0x3
+ 267 0098 07010000 		.4byte	.LASF13
+ 268 009c 03       		.byte	0x3
+ 269 009d 18       		.byte	0x18
+ 270 009e 2C000000 		.4byte	0x2c
+ 271 00a2 03       		.uleb128 0x3
+ 272 00a3 EE010000 		.4byte	.LASF14
+ 273 00a7 03       		.byte	0x3
+ 274 00a8 24       		.byte	0x24
+ 275 00a9 45000000 		.4byte	0x45
+ 276 00ad 03       		.uleb128 0x3
+ 277 00ae F7010000 		.4byte	.LASF15
+ 278 00b2 03       		.byte	0x3
+ 279 00b3 30       		.byte	0x30
+ 280 00b4 5E000000 		.4byte	0x5e
+ 281 00b8 03       		.uleb128 0x3
+ 282 00b9 0A000000 		.4byte	.LASF16
+ 283 00bd 03       		.byte	0x3
+ 284 00be 3C       		.byte	0x3c
+ 285 00bf 77000000 		.4byte	0x77
+ 286 00c3 05       		.uleb128 0x5
+ 287 00c4 4F000000 		.4byte	.LASF22
+ 288 00c8 01       		.byte	0x1
+ 289 00c9 0E       		.byte	0xe
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 8
+
+
+ 290 00ca B8000000 		.4byte	0xb8
+ 291 00ce 00000000 		.4byte	.LFB0
+ 292 00d2 42000000 		.4byte	.LFE0-.LFB0
+ 293 00d6 01       		.uleb128 0x1
+ 294 00d7 9C       		.byte	0x9c
+ 295 00d8 13010000 		.4byte	0x113
+ 296 00dc 06       		.uleb128 0x6
+ 297 00dd 7800     		.ascii	"x\000"
+ 298 00df 01       		.byte	0x1
+ 299 00e0 0E       		.byte	0xe
+ 300 00e1 13010000 		.4byte	0x113
+ 301 00e5 00000000 		.4byte	.LLST0
+ 302 00e9 07       		.uleb128 0x7
+ 303 00ea 09020000 		.4byte	.LASF17
+ 304 00ee 01       		.byte	0x1
+ 305 00ef 0E       		.byte	0xe
+ 306 00f0 89000000 		.4byte	0x89
+ 307 00f4 1E000000 		.4byte	.LLST1
+ 308 00f8 08       		.uleb128 0x8
+ 309 00f9 6900     		.ascii	"i\000"
+ 310 00fb 01       		.byte	0x1
+ 311 00fc 10       		.byte	0x10
+ 312 00fd 89000000 		.4byte	0x89
+ 313 0101 3C000000 		.4byte	.LLST2
+ 314 0105 08       		.uleb128 0x8
+ 315 0106 7200     		.ascii	"r\000"
+ 316 0108 01       		.byte	0x1
+ 317 0109 11       		.byte	0x11
+ 318 010a B8000000 		.4byte	0xb8
+ 319 010e 5B000000 		.4byte	.LLST3
+ 320 0112 00       		.byte	0
+ 321 0113 09       		.uleb128 0x9
+ 322 0114 04       		.byte	0x4
+ 323 0115 19010000 		.4byte	0x119
+ 324 0119 0A       		.uleb128 0xa
+ 325 011a 97000000 		.4byte	0x97
+ 326 011e 0B       		.uleb128 0xb
+ 327 011f 63626400 		.ascii	"cbd\000"
+ 328 0123 01       		.byte	0x1
+ 329 0124 17       		.byte	0x17
+ 330 0125 00000000 		.4byte	.LFB1
+ 331 0129 80000000 		.4byte	.LFE1-.LFB1
+ 332 012d 01       		.uleb128 0x1
+ 333 012e 9C       		.byte	0x9c
+ 334 012f B3010000 		.4byte	0x1b3
+ 335 0133 06       		.uleb128 0x6
+ 336 0134 7300     		.ascii	"s\000"
+ 337 0136 01       		.byte	0x1
+ 338 0137 17       		.byte	0x17
+ 339 0138 B3010000 		.4byte	0x1b3
+ 340 013c 83000000 		.4byte	.LLST4
+ 341 0140 06       		.uleb128 0x6
+ 342 0141 62756600 		.ascii	"buf\000"
+ 343 0145 01       		.byte	0x1
+ 344 0146 17       		.byte	0x17
+ 345 0147 13010000 		.4byte	0x113
+ 346 014b AF000000 		.4byte	.LLST5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 9
+
+
+ 347 014f 08       		.uleb128 0x8
+ 348 0150 7400     		.ascii	"t\000"
+ 349 0152 01       		.byte	0x1
+ 350 0153 1A       		.byte	0x1a
+ 351 0154 AD000000 		.4byte	0xad
+ 352 0158 DB000000 		.4byte	.LLST6
+ 353 015c 08       		.uleb128 0x8
+ 354 015d 6400     		.ascii	"d\000"
+ 355 015f 01       		.byte	0x1
+ 356 0160 1A       		.byte	0x1a
+ 357 0161 AD000000 		.4byte	0xad
+ 358 0165 EE000000 		.4byte	.LLST7
+ 359 0169 0C       		.uleb128 0xc
+ 360 016a 6100     		.ascii	"a\000"
+ 361 016c 01       		.byte	0x1
+ 362 016d 1A       		.byte	0x1a
+ 363 016e B9010000 		.4byte	0x1b9
+ 364 0172 0C       		.uleb128 0xc
+ 365 0173 6200     		.ascii	"b\000"
+ 366 0175 01       		.byte	0x1
+ 367 0176 1A       		.byte	0x1a
+ 368 0177 B9010000 		.4byte	0x1b9
+ 369 017b 08       		.uleb128 0x8
+ 370 017c 6900     		.ascii	"i\000"
+ 371 017e 01       		.byte	0x1
+ 372 017f 1B       		.byte	0x1b
+ 373 0180 89000000 		.4byte	0x89
+ 374 0184 0D010000 		.4byte	.LLST8
+ 375 0188 08       		.uleb128 0x8
+ 376 0189 6A00     		.ascii	"j\000"
+ 377 018b 01       		.byte	0x1
+ 378 018c 1B       		.byte	0x1b
+ 379 018d 89000000 		.4byte	0x89
+ 380 0191 2C010000 		.4byte	.LLST9
+ 381 0195 0D       		.uleb128 0xd
+ 382 0196 18000000 		.4byte	.LVL10
+ 383 019a C3000000 		.4byte	0xc3
+ 384 019e 0E       		.uleb128 0xe
+ 385 019f 01       		.uleb128 0x1
+ 386 01a0 50       		.byte	0x50
+ 387 01a1 0A       		.uleb128 0xa
+ 388 01a2 74       		.byte	0x74
+ 389 01a3 00       		.sleb128 0
+ 390 01a4 31       		.byte	0x31
+ 391 01a5 24       		.byte	0x24
+ 392 01a6 76       		.byte	0x76
+ 393 01a7 00       		.sleb128 0
+ 394 01a8 22       		.byte	0x22
+ 395 01a9 74       		.byte	0x74
+ 396 01aa 00       		.sleb128 0
+ 397 01ab 22       		.byte	0x22
+ 398 01ac 0E       		.uleb128 0xe
+ 399 01ad 01       		.uleb128 0x1
+ 400 01ae 51       		.byte	0x51
+ 401 01af 01       		.uleb128 0x1
+ 402 01b0 33       		.byte	0x33
+ 403 01b1 00       		.byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 10
+
+
+ 404 01b2 00       		.byte	0
+ 405 01b3 09       		.uleb128 0x9
+ 406 01b4 04       		.byte	0x4
+ 407 01b5 A2000000 		.4byte	0xa2
+ 408 01b9 0F       		.uleb128 0xf
+ 409 01ba AD000000 		.4byte	0xad
+ 410 01be C9010000 		.4byte	0x1c9
+ 411 01c2 10       		.uleb128 0x10
+ 412 01c3 C9010000 		.4byte	0x1c9
+ 413 01c7 03       		.byte	0x3
+ 414 01c8 00       		.byte	0
+ 415 01c9 02       		.uleb128 0x2
+ 416 01ca 04       		.byte	0x4
+ 417 01cb 07       		.byte	0x7
+ 418 01cc C2010000 		.4byte	.LASF18
+ 419 01d0 00       		.byte	0
+ 420              		.section	.debug_abbrev,"",%progbits
+ 421              	.Ldebug_abbrev0:
+ 422 0000 01       		.uleb128 0x1
+ 423 0001 11       		.uleb128 0x11
+ 424 0002 01       		.byte	0x1
+ 425 0003 25       		.uleb128 0x25
+ 426 0004 0E       		.uleb128 0xe
+ 427 0005 13       		.uleb128 0x13
+ 428 0006 0B       		.uleb128 0xb
+ 429 0007 03       		.uleb128 0x3
+ 430 0008 0E       		.uleb128 0xe
+ 431 0009 1B       		.uleb128 0x1b
+ 432 000a 0E       		.uleb128 0xe
+ 433 000b 55       		.uleb128 0x55
+ 434 000c 17       		.uleb128 0x17
+ 435 000d 11       		.uleb128 0x11
+ 436 000e 01       		.uleb128 0x1
+ 437 000f 10       		.uleb128 0x10
+ 438 0010 17       		.uleb128 0x17
+ 439 0011 00       		.byte	0
+ 440 0012 00       		.byte	0
+ 441 0013 02       		.uleb128 0x2
+ 442 0014 24       		.uleb128 0x24
+ 443 0015 00       		.byte	0
+ 444 0016 0B       		.uleb128 0xb
+ 445 0017 0B       		.uleb128 0xb
+ 446 0018 3E       		.uleb128 0x3e
+ 447 0019 0B       		.uleb128 0xb
+ 448 001a 03       		.uleb128 0x3
+ 449 001b 0E       		.uleb128 0xe
+ 450 001c 00       		.byte	0
+ 451 001d 00       		.byte	0
+ 452 001e 03       		.uleb128 0x3
+ 453 001f 16       		.uleb128 0x16
+ 454 0020 00       		.byte	0
+ 455 0021 03       		.uleb128 0x3
+ 456 0022 0E       		.uleb128 0xe
+ 457 0023 3A       		.uleb128 0x3a
+ 458 0024 0B       		.uleb128 0xb
+ 459 0025 3B       		.uleb128 0x3b
+ 460 0026 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 11
+
+
+ 461 0027 49       		.uleb128 0x49
+ 462 0028 13       		.uleb128 0x13
+ 463 0029 00       		.byte	0
+ 464 002a 00       		.byte	0
+ 465 002b 04       		.uleb128 0x4
+ 466 002c 24       		.uleb128 0x24
+ 467 002d 00       		.byte	0
+ 468 002e 0B       		.uleb128 0xb
+ 469 002f 0B       		.uleb128 0xb
+ 470 0030 3E       		.uleb128 0x3e
+ 471 0031 0B       		.uleb128 0xb
+ 472 0032 03       		.uleb128 0x3
+ 473 0033 08       		.uleb128 0x8
+ 474 0034 00       		.byte	0
+ 475 0035 00       		.byte	0
+ 476 0036 05       		.uleb128 0x5
+ 477 0037 2E       		.uleb128 0x2e
+ 478 0038 01       		.byte	0x1
+ 479 0039 03       		.uleb128 0x3
+ 480 003a 0E       		.uleb128 0xe
+ 481 003b 3A       		.uleb128 0x3a
+ 482 003c 0B       		.uleb128 0xb
+ 483 003d 3B       		.uleb128 0x3b
+ 484 003e 0B       		.uleb128 0xb
+ 485 003f 27       		.uleb128 0x27
+ 486 0040 19       		.uleb128 0x19
+ 487 0041 49       		.uleb128 0x49
+ 488 0042 13       		.uleb128 0x13
+ 489 0043 11       		.uleb128 0x11
+ 490 0044 01       		.uleb128 0x1
+ 491 0045 12       		.uleb128 0x12
+ 492 0046 06       		.uleb128 0x6
+ 493 0047 40       		.uleb128 0x40
+ 494 0048 18       		.uleb128 0x18
+ 495 0049 9742     		.uleb128 0x2117
+ 496 004b 19       		.uleb128 0x19
+ 497 004c 01       		.uleb128 0x1
+ 498 004d 13       		.uleb128 0x13
+ 499 004e 00       		.byte	0
+ 500 004f 00       		.byte	0
+ 501 0050 06       		.uleb128 0x6
+ 502 0051 05       		.uleb128 0x5
+ 503 0052 00       		.byte	0
+ 504 0053 03       		.uleb128 0x3
+ 505 0054 08       		.uleb128 0x8
+ 506 0055 3A       		.uleb128 0x3a
+ 507 0056 0B       		.uleb128 0xb
+ 508 0057 3B       		.uleb128 0x3b
+ 509 0058 0B       		.uleb128 0xb
+ 510 0059 49       		.uleb128 0x49
+ 511 005a 13       		.uleb128 0x13
+ 512 005b 02       		.uleb128 0x2
+ 513 005c 17       		.uleb128 0x17
+ 514 005d 00       		.byte	0
+ 515 005e 00       		.byte	0
+ 516 005f 07       		.uleb128 0x7
+ 517 0060 05       		.uleb128 0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 12
+
+
+ 518 0061 00       		.byte	0
+ 519 0062 03       		.uleb128 0x3
+ 520 0063 0E       		.uleb128 0xe
+ 521 0064 3A       		.uleb128 0x3a
+ 522 0065 0B       		.uleb128 0xb
+ 523 0066 3B       		.uleb128 0x3b
+ 524 0067 0B       		.uleb128 0xb
+ 525 0068 49       		.uleb128 0x49
+ 526 0069 13       		.uleb128 0x13
+ 527 006a 02       		.uleb128 0x2
+ 528 006b 17       		.uleb128 0x17
+ 529 006c 00       		.byte	0
+ 530 006d 00       		.byte	0
+ 531 006e 08       		.uleb128 0x8
+ 532 006f 34       		.uleb128 0x34
+ 533 0070 00       		.byte	0
+ 534 0071 03       		.uleb128 0x3
+ 535 0072 08       		.uleb128 0x8
+ 536 0073 3A       		.uleb128 0x3a
+ 537 0074 0B       		.uleb128 0xb
+ 538 0075 3B       		.uleb128 0x3b
+ 539 0076 0B       		.uleb128 0xb
+ 540 0077 49       		.uleb128 0x49
+ 541 0078 13       		.uleb128 0x13
+ 542 0079 02       		.uleb128 0x2
+ 543 007a 17       		.uleb128 0x17
+ 544 007b 00       		.byte	0
+ 545 007c 00       		.byte	0
+ 546 007d 09       		.uleb128 0x9
+ 547 007e 0F       		.uleb128 0xf
+ 548 007f 00       		.byte	0
+ 549 0080 0B       		.uleb128 0xb
+ 550 0081 0B       		.uleb128 0xb
+ 551 0082 49       		.uleb128 0x49
+ 552 0083 13       		.uleb128 0x13
+ 553 0084 00       		.byte	0
+ 554 0085 00       		.byte	0
+ 555 0086 0A       		.uleb128 0xa
+ 556 0087 26       		.uleb128 0x26
+ 557 0088 00       		.byte	0
+ 558 0089 49       		.uleb128 0x49
+ 559 008a 13       		.uleb128 0x13
+ 560 008b 00       		.byte	0
+ 561 008c 00       		.byte	0
+ 562 008d 0B       		.uleb128 0xb
+ 563 008e 2E       		.uleb128 0x2e
+ 564 008f 01       		.byte	0x1
+ 565 0090 3F       		.uleb128 0x3f
+ 566 0091 19       		.uleb128 0x19
+ 567 0092 03       		.uleb128 0x3
+ 568 0093 08       		.uleb128 0x8
+ 569 0094 3A       		.uleb128 0x3a
+ 570 0095 0B       		.uleb128 0xb
+ 571 0096 3B       		.uleb128 0x3b
+ 572 0097 0B       		.uleb128 0xb
+ 573 0098 27       		.uleb128 0x27
+ 574 0099 19       		.uleb128 0x19
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 13
+
+
+ 575 009a 11       		.uleb128 0x11
+ 576 009b 01       		.uleb128 0x1
+ 577 009c 12       		.uleb128 0x12
+ 578 009d 06       		.uleb128 0x6
+ 579 009e 40       		.uleb128 0x40
+ 580 009f 18       		.uleb128 0x18
+ 581 00a0 9742     		.uleb128 0x2117
+ 582 00a2 19       		.uleb128 0x19
+ 583 00a3 01       		.uleb128 0x1
+ 584 00a4 13       		.uleb128 0x13
+ 585 00a5 00       		.byte	0
+ 586 00a6 00       		.byte	0
+ 587 00a7 0C       		.uleb128 0xc
+ 588 00a8 34       		.uleb128 0x34
+ 589 00a9 00       		.byte	0
+ 590 00aa 03       		.uleb128 0x3
+ 591 00ab 08       		.uleb128 0x8
+ 592 00ac 3A       		.uleb128 0x3a
+ 593 00ad 0B       		.uleb128 0xb
+ 594 00ae 3B       		.uleb128 0x3b
+ 595 00af 0B       		.uleb128 0xb
+ 596 00b0 49       		.uleb128 0x49
+ 597 00b1 13       		.uleb128 0x13
+ 598 00b2 00       		.byte	0
+ 599 00b3 00       		.byte	0
+ 600 00b4 0D       		.uleb128 0xd
+ 601 00b5 898201   		.uleb128 0x4109
+ 602 00b8 01       		.byte	0x1
+ 603 00b9 11       		.uleb128 0x11
+ 604 00ba 01       		.uleb128 0x1
+ 605 00bb 31       		.uleb128 0x31
+ 606 00bc 13       		.uleb128 0x13
+ 607 00bd 00       		.byte	0
+ 608 00be 00       		.byte	0
+ 609 00bf 0E       		.uleb128 0xe
+ 610 00c0 8A8201   		.uleb128 0x410a
+ 611 00c3 00       		.byte	0
+ 612 00c4 02       		.uleb128 0x2
+ 613 00c5 18       		.uleb128 0x18
+ 614 00c6 9142     		.uleb128 0x2111
+ 615 00c8 18       		.uleb128 0x18
+ 616 00c9 00       		.byte	0
+ 617 00ca 00       		.byte	0
+ 618 00cb 0F       		.uleb128 0xf
+ 619 00cc 01       		.uleb128 0x1
+ 620 00cd 01       		.byte	0x1
+ 621 00ce 49       		.uleb128 0x49
+ 622 00cf 13       		.uleb128 0x13
+ 623 00d0 01       		.uleb128 0x1
+ 624 00d1 13       		.uleb128 0x13
+ 625 00d2 00       		.byte	0
+ 626 00d3 00       		.byte	0
+ 627 00d4 10       		.uleb128 0x10
+ 628 00d5 21       		.uleb128 0x21
+ 629 00d6 00       		.byte	0
+ 630 00d7 49       		.uleb128 0x49
+ 631 00d8 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 14
+
+
+ 632 00d9 2F       		.uleb128 0x2f
+ 633 00da 0B       		.uleb128 0xb
+ 634 00db 00       		.byte	0
+ 635 00dc 00       		.byte	0
+ 636 00dd 00       		.byte	0
+ 637              		.section	.debug_loc,"",%progbits
+ 638              	.Ldebug_loc0:
+ 639              	.LLST0:
+ 640 0000 00000000 		.4byte	.LVL0
+ 641 0004 0C000000 		.4byte	.LVL1
+ 642 0008 0100     		.2byte	0x1
+ 643 000a 50       		.byte	0x50
+ 644 000b 0C000000 		.4byte	.LVL1
+ 645 000f 42000000 		.4byte	.LFE0
+ 646 0013 0100     		.2byte	0x1
+ 647 0015 5C       		.byte	0x5c
+ 648 0016 00000000 		.4byte	0
+ 649 001a 00000000 		.4byte	0
+ 650              	.LLST1:
+ 651 001e 00000000 		.4byte	.LVL0
+ 652 0022 0E000000 		.4byte	.LVL2
+ 653 0026 0100     		.2byte	0x1
+ 654 0028 51       		.byte	0x51
+ 655 0029 0E000000 		.4byte	.LVL2
+ 656 002d 42000000 		.4byte	.LFE0
+ 657 0031 0100     		.2byte	0x1
+ 658 0033 58       		.byte	0x58
+ 659 0034 00000000 		.4byte	0
+ 660 0038 00000000 		.4byte	0
+ 661              	.LLST2:
+ 662 003c 0E000000 		.4byte	.LVL2
+ 663 0040 12000000 		.4byte	.LVL3
+ 664 0044 0200     		.2byte	0x2
+ 665 0046 31       		.byte	0x31
+ 666 0047 9F       		.byte	0x9f
+ 667 0048 12000000 		.4byte	.LVL3
+ 668 004c 42000000 		.4byte	.LFE0
+ 669 0050 0100     		.2byte	0x1
+ 670 0052 54       		.byte	0x54
+ 671 0053 00000000 		.4byte	0
+ 672 0057 00000000 		.4byte	0
+ 673              	.LLST3:
+ 674 005b 0E000000 		.4byte	.LVL2
+ 675 005f 36000000 		.4byte	.LVL4
+ 676 0063 0600     		.2byte	0x6
+ 677 0065 50       		.byte	0x50
+ 678 0066 93       		.byte	0x93
+ 679 0067 04       		.uleb128 0x4
+ 680 0068 51       		.byte	0x51
+ 681 0069 93       		.byte	0x93
+ 682 006a 04       		.uleb128 0x4
+ 683 006b 38000000 		.4byte	.LVL5
+ 684 006f 42000000 		.4byte	.LFE0
+ 685 0073 0600     		.2byte	0x6
+ 686 0075 50       		.byte	0x50
+ 687 0076 93       		.byte	0x93
+ 688 0077 04       		.uleb128 0x4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 15
+
+
+ 689 0078 51       		.byte	0x51
+ 690 0079 93       		.byte	0x93
+ 691 007a 04       		.uleb128 0x4
+ 692 007b 00000000 		.4byte	0
+ 693 007f 00000000 		.4byte	0
+ 694              	.LLST4:
+ 695 0083 00000000 		.4byte	.LVL7
+ 696 0087 0C000000 		.4byte	.LVL9
+ 697 008b 0100     		.2byte	0x1
+ 698 008d 50       		.byte	0x50
+ 699 008e 0C000000 		.4byte	.LVL9
+ 700 0092 7A000000 		.4byte	.LVL18
+ 701 0096 0100     		.2byte	0x1
+ 702 0098 55       		.byte	0x55
+ 703 0099 7A000000 		.4byte	.LVL18
+ 704 009d 80000000 		.4byte	.LFE1
+ 705 00a1 0400     		.2byte	0x4
+ 706 00a3 F3       		.byte	0xf3
+ 707 00a4 01       		.uleb128 0x1
+ 708 00a5 50       		.byte	0x50
+ 709 00a6 9F       		.byte	0x9f
+ 710 00a7 00000000 		.4byte	0
+ 711 00ab 00000000 		.4byte	0
+ 712              	.LLST5:
+ 713 00af 00000000 		.4byte	.LVL7
+ 714 00b3 0C000000 		.4byte	.LVL9
+ 715 00b7 0100     		.2byte	0x1
+ 716 00b9 51       		.byte	0x51
+ 717 00ba 0C000000 		.4byte	.LVL9
+ 718 00be 7A000000 		.4byte	.LVL18
+ 719 00c2 0100     		.2byte	0x1
+ 720 00c4 56       		.byte	0x56
+ 721 00c5 7A000000 		.4byte	.LVL18
+ 722 00c9 80000000 		.4byte	.LFE1
+ 723 00cd 0400     		.2byte	0x4
+ 724 00cf F3       		.byte	0xf3
+ 725 00d0 01       		.uleb128 0x1
+ 726 00d1 51       		.byte	0x51
+ 727 00d2 9F       		.byte	0x9f
+ 728 00d3 00000000 		.4byte	0
+ 729 00d7 00000000 		.4byte	0
+ 730              	.LLST6:
+ 731 00db 18000000 		.4byte	.LVL10
+ 732 00df 42000000 		.4byte	.LVL14
+ 733 00e3 0100     		.2byte	0x1
+ 734 00e5 50       		.byte	0x50
+ 735 00e6 00000000 		.4byte	0
+ 736 00ea 00000000 		.4byte	0
+ 737              	.LLST7:
+ 738 00ee 18000000 		.4byte	.LVL10
+ 739 00f2 1E000000 		.4byte	.LVL11
+ 740 00f6 0200     		.2byte	0x2
+ 741 00f8 30       		.byte	0x30
+ 742 00f9 9F       		.byte	0x9f
+ 743 00fa 1E000000 		.4byte	.LVL11
+ 744 00fe 6E000000 		.4byte	.LVL16
+ 745 0102 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 16
+
+
+ 746 0104 53       		.byte	0x53
+ 747 0105 00000000 		.4byte	0
+ 748 0109 00000000 		.4byte	0
+ 749              	.LLST8:
+ 750 010d 08000000 		.4byte	.LVL8
+ 751 0111 0C000000 		.4byte	.LVL9
+ 752 0115 0200     		.2byte	0x2
+ 753 0117 30       		.byte	0x30
+ 754 0118 9F       		.byte	0x9f
+ 755 0119 0C000000 		.4byte	.LVL9
+ 756 011d 7A000000 		.4byte	.LVL18
+ 757 0121 0100     		.2byte	0x1
+ 758 0123 54       		.byte	0x54
+ 759 0124 00000000 		.4byte	0
+ 760 0128 00000000 		.4byte	0
+ 761              	.LLST9:
+ 762 012c 18000000 		.4byte	.LVL10
+ 763 0130 1E000000 		.4byte	.LVL11
+ 764 0134 0200     		.2byte	0x2
+ 765 0136 30       		.byte	0x30
+ 766 0137 9F       		.byte	0x9f
+ 767 0138 1E000000 		.4byte	.LVL11
+ 768 013c 4C000000 		.4byte	.LVL15
+ 769 0140 0100     		.2byte	0x1
+ 770 0142 52       		.byte	0x52
+ 771 0143 00000000 		.4byte	0
+ 772 0147 00000000 		.4byte	0
+ 773              		.section	.debug_aranges,"",%progbits
+ 774 0000 24000000 		.4byte	0x24
+ 775 0004 0200     		.2byte	0x2
+ 776 0006 00000000 		.4byte	.Ldebug_info0
+ 777 000a 04       		.byte	0x4
+ 778 000b 00       		.byte	0
+ 779 000c 0000     		.2byte	0
+ 780 000e 0000     		.2byte	0
+ 781 0010 00000000 		.4byte	.LFB0
+ 782 0014 42000000 		.4byte	.LFE0-.LFB0
+ 783 0018 00000000 		.4byte	.LFB1
+ 784 001c 80000000 		.4byte	.LFE1-.LFB1
+ 785 0020 00000000 		.4byte	0
+ 786 0024 00000000 		.4byte	0
+ 787              		.section	.debug_ranges,"",%progbits
+ 788              	.Ldebug_ranges0:
+ 789 0000 00000000 		.4byte	.LFB0
+ 790 0004 42000000 		.4byte	.LFE0
+ 791 0008 00000000 		.4byte	.LFB1
+ 792 000c 80000000 		.4byte	.LFE1
+ 793 0010 00000000 		.4byte	0
+ 794 0014 00000000 		.4byte	0
+ 795              		.section	.debug_line,"",%progbits
+ 796              	.Ldebug_line0:
+ 797 0000 B4010000 		.section	.debug_str,"MS",%progbits,1
+ 797      02001C01 
+ 797      00000201 
+ 797      FB0E0D00 
+ 797      01010101 
+ 798              	.LASF3:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 17
+
+
+ 799 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 799      6E74385F 
+ 799      7400
+ 800              	.LASF16:
+ 801 000a 75696E74 		.ascii	"uint64_t\000"
+ 801      36345F74 
+ 801      00
+ 802              	.LASF1:
+ 803 0013 756E7369 		.ascii	"unsigned char\000"
+ 803      676E6564 
+ 803      20636861 
+ 803      7200
+ 804              	.LASF8:
+ 805 0021 6C6F6E67 		.ascii	"long unsigned int\000"
+ 805      20756E73 
+ 805      69676E65 
+ 805      6420696E 
+ 805      7400
+ 806              	.LASF20:
+ 807 0033 2E2E5C63 		.ascii	"..\\cbd.c\000"
+ 807      62642E63 
+ 807      00
+ 808              	.LASF5:
+ 809 003c 73686F72 		.ascii	"short unsigned int\000"
+ 809      7420756E 
+ 809      7369676E 
+ 809      65642069 
+ 809      6E7400
+ 810              	.LASF22:
+ 811 004f 6C6F6164 		.ascii	"load_littleendian\000"
+ 811      5F6C6974 
+ 811      746C6565 
+ 811      6E646961 
+ 811      6E00
+ 812              	.LASF4:
+ 813 0061 5F5F7569 		.ascii	"__uint16_t\000"
+ 813      6E743136 
+ 813      5F7400
+ 814              	.LASF7:
+ 815 006c 5F5F7569 		.ascii	"__uint32_t\000"
+ 815      6E743332 
+ 815      5F7400
+ 816              	.LASF21:
+ 817 0077 433A5C55 		.ascii	"C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2"
+ 817      73657273 
+ 817      5C626F67 
+ 817      75726164 
+ 817      5C446573 
+ 818 00a5 5C436F64 		.ascii	"\\Codigo\\Algoritmos postcuanticos\\PSOC\\SABER\\Sa"
+ 818      69676F5C 
+ 818      416C676F 
+ 818      7269746D 
+ 818      6F732070 
+ 819 00d3 6265725C 		.ascii	"ber\\Saber.cydsn\000"
+ 819      53616265 
+ 819      722E6379 
+ 819      64736E00 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 18
+
+
+ 820              	.LASF12:
+ 821 00e3 756E7369 		.ascii	"unsigned int\000"
+ 821      676E6564 
+ 821      20696E74 
+ 821      00
+ 822              	.LASF11:
+ 823 00f0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 823      206C6F6E 
+ 823      6720756E 
+ 823      7369676E 
+ 823      65642069 
+ 824              	.LASF13:
+ 825 0107 75696E74 		.ascii	"uint8_t\000"
+ 825      385F7400 
+ 826              	.LASF19:
+ 827 010f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 827      43313120 
+ 827      352E342E 
+ 827      31203230 
+ 827      31363036 
+ 828 0142 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 828      20726576 
+ 828      6973696F 
+ 828      6E203233 
+ 828      37373135 
+ 829 0175 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 829      70202D6D 
+ 829      6670753D 
+ 829      66707634 
+ 829      2D73702D 
+ 830 01a8 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 830      6F6E7320 
+ 830      2D666661 
+ 830      742D6C74 
+ 830      6F2D6F62 
+ 831              	.LASF18:
+ 832 01c2 73697A65 		.ascii	"sizetype\000"
+ 832      74797065 
+ 832      00
+ 833              	.LASF9:
+ 834 01cb 6C6F6E67 		.ascii	"long long int\000"
+ 834      206C6F6E 
+ 834      6720696E 
+ 834      7400
+ 835              	.LASF2:
+ 836 01d9 73686F72 		.ascii	"short int\000"
+ 836      7420696E 
+ 836      7400
+ 837              	.LASF10:
+ 838 01e3 5F5F7569 		.ascii	"__uint64_t\000"
+ 838      6E743634 
+ 838      5F7400
+ 839              	.LASF14:
+ 840 01ee 75696E74 		.ascii	"uint16_t\000"
+ 840      31365F74 
+ 840      00
+ 841              	.LASF15:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLJLXFI.s 			page 19
+
+
+ 842 01f7 75696E74 		.ascii	"uint32_t\000"
+ 842      33325F74 
+ 842      00
+ 843              	.LASF6:
+ 844 0200 6C6F6E67 		.ascii	"long int\000"
+ 844      20696E74 
+ 844      00
+ 845              	.LASF17:
+ 846 0209 62797465 		.ascii	"bytes\000"
+ 846      7300
+ 847              	.LASF0:
+ 848 020f 7369676E 		.ascii	"signed char\000"
+ 848      65642063 
+ 848      68617200 
+ 849              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

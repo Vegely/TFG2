@@ -1,0 +1,4572 @@
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"poly_mul.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.karatsuba_simple,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	karatsuba_simple, %function
+  25              	karatsuba_simple:
+  26              	.LFB0:
+  27              		.file 1 "..\\poly_mul.c"
+   1:..\poly_mul.c **** #include "poly_mul.h"
+   2:..\poly_mul.c **** #include <stdint.h>
+   3:..\poly_mul.c **** #include <string.h>
+   4:..\poly_mul.c **** 
+   5:..\poly_mul.c **** #define SCHB_N 16
+   6:..\poly_mul.c **** 
+   7:..\poly_mul.c **** #define N_RES (SABER_N << 1)
+   8:..\poly_mul.c **** #define N_SB (SABER_N >> 2)
+   9:..\poly_mul.c **** #define N_SB_RES (2*N_SB-1)
+  10:..\poly_mul.c **** 
+  11:..\poly_mul.c **** #define OVERFLOWING_MUL(X, Y) ((uint16_t)((uint32_t)(X) * (uint32_t)(Y)))
+  12:..\poly_mul.c **** 
+  13:..\poly_mul.c **** #define KARATSUBA_N 64
+  14:..\poly_mul.c **** static void karatsuba_simple(const uint16_t *a_1, const uint16_t *b_1, uint16_t *result_final) {
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 344
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  34              		.cfi_def_cfa_offset 36
+  35              		.cfi_offset 4, -36
+  36              		.cfi_offset 5, -32
+  37              		.cfi_offset 6, -28
+  38              		.cfi_offset 7, -24
+  39              		.cfi_offset 8, -20
+  40              		.cfi_offset 9, -16
+  41              		.cfi_offset 10, -12
+  42              		.cfi_offset 11, -8
+  43              		.cfi_offset 14, -4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 2
+
+
+  44 0004 D7B0     		sub	sp, sp, #348
+  45              		.cfi_def_cfa_offset 384
+  46 0006 0590     		str	r0, [sp, #20]
+  47 0008 8946     		mov	r9, r1
+  48 000a 9046     		mov	r8, r2
+  15:..\poly_mul.c ****     uint16_t d01[KARATSUBA_N / 2 - 1];
+  16:..\poly_mul.c ****     uint16_t d0123[KARATSUBA_N / 2 - 1];
+  17:..\poly_mul.c ****     uint16_t d23[KARATSUBA_N / 2 - 1];
+  18:..\poly_mul.c ****     uint16_t result_d01[KARATSUBA_N - 1];
+  19:..\poly_mul.c **** 
+  20:..\poly_mul.c ****     int32_t i, j;
+  21:..\poly_mul.c **** 
+  22:..\poly_mul.c ****     memset(result_d01, 0, (KARATSUBA_N - 1)*sizeof(uint16_t));
+  49              		.loc 1 22 0
+  50 000c 7E22     		movs	r2, #126
+  51              	.LVL1:
+  52 000e 0021     		movs	r1, #0
+  53              	.LVL2:
+  54 0010 06A8     		add	r0, sp, #24
+  55              	.LVL3:
+  56 0012 FFF7FEFF 		bl	memset
+  57              	.LVL4:
+  23:..\poly_mul.c ****     memset(d01, 0, (KARATSUBA_N / 2 - 1)*sizeof(uint16_t));
+  58              		.loc 1 23 0
+  59 0016 3E24     		movs	r4, #62
+  60 0018 2246     		mov	r2, r4
+  61 001a 0021     		movs	r1, #0
+  62 001c 46A8     		add	r0, sp, #280
+  63 001e FFF7FEFF 		bl	memset
+  64              	.LVL5:
+  24:..\poly_mul.c ****     memset(d0123, 0, (KARATSUBA_N / 2 - 1)*sizeof(uint16_t));
+  65              		.loc 1 24 0
+  66 0022 2246     		mov	r2, r4
+  67 0024 0021     		movs	r1, #0
+  68 0026 36A8     		add	r0, sp, #216
+  69 0028 FFF7FEFF 		bl	memset
+  70              	.LVL6:
+  25:..\poly_mul.c ****     memset(d23, 0, (KARATSUBA_N / 2 - 1)*sizeof(uint16_t));
+  71              		.loc 1 25 0
+  72 002c 2246     		mov	r2, r4
+  73 002e 0021     		movs	r1, #0
+  74 0030 26A8     		add	r0, sp, #152
+  75 0032 FFF7FEFF 		bl	memset
+  76              	.LVL7:
+  26:..\poly_mul.c ****     memset(result_final, 0, (2 * KARATSUBA_N - 1)*sizeof(uint16_t));
+  77              		.loc 1 26 0
+  78 0036 FE22     		movs	r2, #254
+  79 0038 0021     		movs	r1, #0
+  80 003a 4046     		mov	r0, r8
+  81 003c FFF7FEFF 		bl	memset
+  82              	.LVL8:
+  27:..\poly_mul.c **** 
+  28:..\poly_mul.c ****     uint16_t acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8, acc9, acc10;
+  29:..\poly_mul.c **** 
+  30:..\poly_mul.c **** 
+  31:..\poly_mul.c ****     for (i = 0; i < KARATSUBA_N / 4; i++) {
+  83              		.loc 1 31 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 3
+
+
+  84 0040 0023     		movs	r3, #0
+  85 0042 0493     		str	r3, [sp, #16]
+  86 0044 9EE0     		b	.L2
+  87              	.LVL9:
+  88              	.L5:
+  32:..\poly_mul.c ****         acc1 = a_1[i]; //a0
+  89              		.loc 1 32 0
+  90 0046 059A     		ldr	r2, [sp, #20]
+  91 0048 0498     		ldr	r0, [sp, #16]
+  92 004a 32F810B0 		ldrh	fp, [r2, r0, lsl #1]
+  93              	.LVL10:
+  33:..\poly_mul.c ****         acc2 = a_1[i + KARATSUBA_N / 4]; //a1
+  94              		.loc 1 33 0
+  95 004e 0346     		mov	r3, r0
+  96              	.LVL11:
+  97 0050 1033     		adds	r3, r3, #16
+  98 0052 1146     		mov	r1, r2
+  99 0054 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 100 0058 0193     		str	r3, [sp, #4]
+ 101              	.LVL12:
+  34:..\poly_mul.c ****         acc3 = a_1[i + 2 * KARATSUBA_N / 4]; //a2
+ 102              		.loc 1 34 0
+ 103 005a 00F12003 		add	r3, r0, #32
+ 104 005e 31F81330 		ldrh	r3, [r1, r3, lsl #1]
+ 105 0062 0293     		str	r3, [sp, #8]
+ 106              	.LVL13:
+  35:..\poly_mul.c ****         acc4 = a_1[i + 3 * KARATSUBA_N / 4]; //a3
+ 107              		.loc 1 35 0
+ 108 0064 0346     		mov	r3, r0
+ 109 0066 3033     		adds	r3, r3, #48
+ 110 0068 31F81330 		ldrh	r3, [r1, r3, lsl #1]
+ 111 006c 0393     		str	r3, [sp, #12]
+ 112              	.LVL14:
+  36:..\poly_mul.c ****         for (j = 0; j < KARATSUBA_N / 4; j++) {
+ 113              		.loc 1 36 0
+ 114 006e 4FF0000E 		mov	lr, #0
+ 115 0072 80E0     		b	.L3
+ 116              	.LVL15:
+ 117              	.L4:
+  37:..\poly_mul.c **** 
+  38:..\poly_mul.c ****             acc5 = b_1[j]; //b0
+ 118              		.loc 1 38 0 discriminator 3
+ 119 0074 39F81E70 		ldrh	r7, [r9, lr, lsl #1]
+ 120              	.LVL16:
+  39:..\poly_mul.c ****             acc6 = b_1[j + KARATSUBA_N / 4]; //b1
+ 121              		.loc 1 39 0 discriminator 3
+ 122 0078 0EF11003 		add	r3, lr, #16
+ 123 007c 39F81360 		ldrh	r6, [r9, r3, lsl #1]
+ 124              	.LVL17:
+  40:..\poly_mul.c **** 
+  41:..\poly_mul.c ****             result_final[i + j + 0 * KARATSUBA_N / 4] =
+ 125              		.loc 1 41 0 discriminator 3
+ 126 0080 049B     		ldr	r3, [sp, #16]
+ 127 0082 03EB0E01 		add	r1, r3, lr
+  42:..\poly_mul.c ****                 result_final[i + j + 0 * KARATSUBA_N / 4] +
+ 128              		.loc 1 42 0 discriminator 3
+ 129 0086 38F81120 		ldrh	r2, [r8, r1, lsl #1]
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 4
+
+
+  43:..\poly_mul.c ****                 OVERFLOWING_MUL(acc1, acc5);
+ 130              		.loc 1 43 0 discriminator 3
+ 131 008a 1BFB07F3 		smulbb	r3, fp, r7
+  41:..\poly_mul.c ****                 result_final[i + j + 0 * KARATSUBA_N / 4] +
+ 132              		.loc 1 41 0 discriminator 3
+ 133 008e 12FA83F3 		uxtah	r3, r2, r3
+ 134 0092 28F81130 		strh	r3, [r8, r1, lsl #1]	@ movhi
+  44:..\poly_mul.c ****             result_final[i + j + 2 * KARATSUBA_N / 4] =
+ 135              		.loc 1 44 0 discriminator 3
+ 136 0096 01F12005 		add	r5, r1, #32
+  45:..\poly_mul.c ****                 result_final[i + j + 2 * KARATSUBA_N / 4] +
+ 137              		.loc 1 45 0 discriminator 3
+ 138 009a 38F81520 		ldrh	r2, [r8, r5, lsl #1]
+  46:..\poly_mul.c ****                 OVERFLOWING_MUL(acc2, acc6);
+ 139              		.loc 1 46 0 discriminator 3
+ 140 009e 0198     		ldr	r0, [sp, #4]
+ 141 00a0 10FB06F3 		smulbb	r3, r0, r6
+  44:..\poly_mul.c ****             result_final[i + j + 2 * KARATSUBA_N / 4] =
+ 142              		.loc 1 44 0 discriminator 3
+ 143 00a4 12FA83F3 		uxtah	r3, r2, r3
+ 144 00a8 28F81530 		strh	r3, [r8, r5, lsl #1]	@ movhi
+  47:..\poly_mul.c **** 
+  48:..\poly_mul.c ****             acc7 = acc5 + acc6; //b01
+ 145              		.loc 1 48 0 discriminator 3
+ 146 00ac BC19     		adds	r4, r7, r6
+ 147              	.LVL18:
+  49:..\poly_mul.c ****             acc8 = acc1 + acc2; //a01
+ 148              		.loc 1 49 0 discriminator 3
+ 149 00ae 0BEB0003 		add	r3, fp, r0
+  50:..\poly_mul.c ****             d01[i + j] = d01[i + j] + (uint16_t)(acc7 * (uint64_t)acc8);
+ 150              		.loc 1 50 0 discriminator 3
+ 151 00b2 56AA     		add	r2, sp, #344
+ 152 00b4 02EB4100 		add	r0, r2, r1, lsl #1
+ 153 00b8 30F8402C 		ldrh	r2, [r0, #-64]
+ 154 00bc 14FB03F3 		smulbb	r3, r4, r3
+ 155 00c0 12FA83F3 		uxtah	r3, r2, r3
+ 156 00c4 20F8403C 		strh	r3, [r0, #-64]	@ movhi
+  51:..\poly_mul.c ****             //--------------------------------------------------------
+  52:..\poly_mul.c **** 
+  53:..\poly_mul.c ****             acc7 = b_1[j + 2 * KARATSUBA_N / 4]; //b2
+ 157              		.loc 1 53 0 discriminator 3
+ 158 00c8 0EF12003 		add	r3, lr, #32
+ 159 00cc 39F81320 		ldrh	r2, [r9, r3, lsl #1]
+ 160              	.LVL19:
+  54:..\poly_mul.c ****             acc8 = b_1[j + 3 * KARATSUBA_N / 4]; //b3
+ 161              		.loc 1 54 0 discriminator 3
+ 162 00d0 0EF13003 		add	r3, lr, #48
+ 163 00d4 39F81330 		ldrh	r3, [r9, r3, lsl #1]
+ 164              	.LVL20:
+  55:..\poly_mul.c ****             result_final[i + j + 4 * KARATSUBA_N / 4] =
+ 165              		.loc 1 55 0 discriminator 3
+ 166 00d8 01F1400C 		add	ip, r1, #64
+  56:..\poly_mul.c ****                 result_final[i + j + 4 * KARATSUBA_N / 4] +
+ 167              		.loc 1 56 0 discriminator 3
+ 168 00dc 38F81CA0 		ldrh	r10, [r8, ip, lsl #1]
+  57:..\poly_mul.c ****                 OVERFLOWING_MUL(acc7, acc3);
+ 169              		.loc 1 57 0 discriminator 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 5
+
+
+ 170 00e0 BDF80840 		ldrh	r4, [sp, #8]
+ 171 00e4 14FB02F4 		smulbb	r4, r4, r2
+  55:..\poly_mul.c ****             result_final[i + j + 4 * KARATSUBA_N / 4] =
+ 172              		.loc 1 55 0 discriminator 3
+ 173 00e8 1AFA84F4 		uxtah	r4, r10, r4
+ 174 00ec 28F81C40 		strh	r4, [r8, ip, lsl #1]	@ movhi
+  58:..\poly_mul.c **** 
+  59:..\poly_mul.c ****             result_final[i + j + 6 * KARATSUBA_N / 4] =
+ 175              		.loc 1 59 0 discriminator 3
+ 176 00f0 01F1600C 		add	ip, r1, #96
+  60:..\poly_mul.c ****                 result_final[i + j + 6 * KARATSUBA_N / 4] +
+ 177              		.loc 1 60 0 discriminator 3
+ 178 00f4 38F81CA0 		ldrh	r10, [r8, ip, lsl #1]
+  61:..\poly_mul.c ****                 OVERFLOWING_MUL(acc8, acc4);
+ 179              		.loc 1 61 0 discriminator 3
+ 180 00f8 BDF80C40 		ldrh	r4, [sp, #12]
+ 181 00fc 14FB03F4 		smulbb	r4, r4, r3
+  59:..\poly_mul.c ****                 result_final[i + j + 6 * KARATSUBA_N / 4] +
+ 182              		.loc 1 59 0 discriminator 3
+ 183 0100 1AFA84F4 		uxtah	r4, r10, r4
+ 184 0104 28F81C40 		strh	r4, [r8, ip, lsl #1]	@ movhi
+  62:..\poly_mul.c **** 
+  63:..\poly_mul.c ****             acc9 = acc3 + acc4;
+ 185              		.loc 1 63 0 discriminator 3
+ 186 0108 029C     		ldr	r4, [sp, #8]
+ 187 010a A446     		mov	ip, r4
+ 188 010c 039C     		ldr	r4, [sp, #12]
+ 189 010e A444     		add	ip, ip, r4
+  64:..\poly_mul.c ****             acc10 = acc7 + acc8;
+ 190              		.loc 1 64 0 discriminator 3
+ 191 0110 D418     		adds	r4, r2, r3
+ 192              	.LVL21:
+  65:..\poly_mul.c ****             d23[i + j] = d23[i + j] + OVERFLOWING_MUL(acc9, acc10);
+ 193              		.loc 1 65 0 discriminator 3
+ 194 0112 30F8C0AC 		ldrh	r10, [r0, #-192]
+ 195 0116 1CFB04F4 		smulbb	r4, ip, r4
+ 196              	.LVL22:
+ 197 011a 1AFA84F4 		uxtah	r4, r10, r4
+ 198 011e 20F8C04C 		strh	r4, [r0, #-192]	@ movhi
+  66:..\poly_mul.c ****             //--------------------------------------------------------
+  67:..\poly_mul.c **** 
+  68:..\poly_mul.c ****             acc5 = acc5 + acc7; //b02
+ 199              		.loc 1 68 0 discriminator 3
+ 200 0122 3A44     		add	r2, r2, r7
+ 201              	.LVL23:
+ 202 0124 92B2     		uxth	r2, r2
+ 203              	.LVL24:
+  69:..\poly_mul.c ****             acc7 = acc1 + acc3; //a02
+ 204              		.loc 1 69 0 discriminator 3
+ 205 0126 029C     		ldr	r4, [sp, #8]
+ 206 0128 5C44     		add	r4, fp, r4
+ 207 012a A4B2     		uxth	r4, r4
+ 208              	.LVL25:
+  70:..\poly_mul.c ****             result_d01[i + j + 0 * KARATSUBA_N / 4] =
+  71:..\poly_mul.c ****                 result_d01[i + j + 0 * KARATSUBA_N / 4] +
+ 209              		.loc 1 71 0 discriminator 3
+ 210 012c 06AF     		add	r7, sp, #24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 6
+
+
+ 211 012e 37F811C0 		ldrh	ip, [r7, r1, lsl #1]
+  72:..\poly_mul.c ****                 OVERFLOWING_MUL(acc5, acc7);
+ 212              		.loc 1 72 0 discriminator 3
+ 213 0132 12FB04F7 		smulbb	r7, r2, r4
+  70:..\poly_mul.c ****             result_d01[i + j + 0 * KARATSUBA_N / 4] =
+ 214              		.loc 1 70 0 discriminator 3
+ 215 0136 1CFA87F7 		uxtah	r7, ip, r7
+ 216 013a 0DF1180C 		add	ip, sp, #24
+ 217 013e 2CF81170 		strh	r7, [ip, r1, lsl #1]	@ movhi
+  73:..\poly_mul.c **** 
+  74:..\poly_mul.c ****             acc6 = acc6 + acc8; //b13
+ 218              		.loc 1 74 0 discriminator 3
+ 219 0142 3344     		add	r3, r3, r6
+ 220              	.LVL26:
+ 221 0144 9BB2     		uxth	r3, r3
+ 222              	.LVL27:
+  75:..\poly_mul.c ****             acc8 = acc2 + acc4;
+ 223              		.loc 1 75 0 discriminator 3
+ 224 0146 0199     		ldr	r1, [sp, #4]
+ 225 0148 039E     		ldr	r6, [sp, #12]
+ 226 014a 3144     		add	r1, r1, r6
+ 227 014c 89B2     		uxth	r1, r1
+ 228              	.LVL28:
+  76:..\poly_mul.c ****             result_d01[i + j + 2 * KARATSUBA_N / 4] =
+  77:..\poly_mul.c ****                 result_d01[i + j + 2 * KARATSUBA_N / 4] +
+ 229              		.loc 1 77 0 discriminator 3
+ 230 014e 3CF81570 		ldrh	r7, [ip, r5, lsl #1]
+  78:..\poly_mul.c ****                 OVERFLOWING_MUL(acc6, acc8);
+ 231              		.loc 1 78 0 discriminator 3
+ 232 0152 13FB01F6 		smulbb	r6, r3, r1
+  76:..\poly_mul.c ****             result_d01[i + j + 2 * KARATSUBA_N / 4] =
+ 233              		.loc 1 76 0 discriminator 3
+ 234 0156 17FA86F6 		uxtah	r6, r7, r6
+ 235 015a 2CF81560 		strh	r6, [ip, r5, lsl #1]	@ movhi
+  79:..\poly_mul.c **** 
+  80:..\poly_mul.c ****             acc5 = acc5 + acc6;
+ 236              		.loc 1 80 0 discriminator 3
+ 237 015e 1A44     		add	r2, r2, r3
+ 238              	.LVL29:
+  81:..\poly_mul.c ****             acc7 = acc7 + acc8;
+ 239              		.loc 1 81 0 discriminator 3
+ 240 0160 2144     		add	r1, r1, r4
+ 241              	.LVL30:
+  82:..\poly_mul.c ****             d0123[i + j] = d0123[i + j] + OVERFLOWING_MUL(acc5, acc7);
+ 242              		.loc 1 82 0 discriminator 3
+ 243 0162 30F8803C 		ldrh	r3, [r0, #-128]
+ 244              	.LVL31:
+ 245 0166 12FB01F4 		smulbb	r4, r2, r1
+ 246 016a 13FA84F4 		uxtah	r4, r3, r4
+ 247 016e 20F8804C 		strh	r4, [r0, #-128]	@ movhi
+  36:..\poly_mul.c **** 
+ 248              		.loc 1 36 0 discriminator 3
+ 249 0172 0EF1010E 		add	lr, lr, #1
+ 250              	.LVL32:
+ 251              	.L3:
+  36:..\poly_mul.c **** 
+ 252              		.loc 1 36 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 7
+
+
+ 253 0176 BEF10F0F 		cmp	lr, #15
+ 254 017a 7FF77BAF 		ble	.L4
+  31:..\poly_mul.c ****         acc1 = a_1[i]; //a0
+ 255              		.loc 1 31 0 is_stmt 1 discriminator 2
+ 256 017e 049B     		ldr	r3, [sp, #16]
+ 257 0180 0133     		adds	r3, r3, #1
+ 258 0182 0493     		str	r3, [sp, #16]
+ 259              	.LVL33:
+ 260              	.L2:
+  31:..\poly_mul.c ****         acc1 = a_1[i]; //a0
+ 261              		.loc 1 31 0 is_stmt 0 discriminator 1
+ 262 0184 049B     		ldr	r3, [sp, #16]
+ 263 0186 0F2B     		cmp	r3, #15
+ 264 0188 7FF75DAF 		ble	.L5
+ 265 018c 0020     		movs	r0, #0
+ 266 018e 29E0     		b	.L6
+ 267              	.LVL34:
+ 268              	.L7:
+  83:..\poly_mul.c ****         }
+  84:..\poly_mul.c ****     }
+  85:..\poly_mul.c **** 
+  86:..\poly_mul.c ****     // 2nd last stage
+  87:..\poly_mul.c **** 
+  88:..\poly_mul.c ****     for (i = 0; i < KARATSUBA_N / 2 - 1; i++) {
+  89:..\poly_mul.c ****         d0123[i] = d0123[i] - result_d01[i + 0 * KARATSUBA_N / 4] - result_d01[i + 2 * KARATSUBA_N 
+ 269              		.loc 1 89 0 is_stmt 1 discriminator 3
+ 270 0190 56AB     		add	r3, sp, #344
+ 271 0192 03EB4003 		add	r3, r3, r0, lsl #1
+ 272 0196 33F8801C 		ldrh	r1, [r3, #-128]
+ 273 019a 06AA     		add	r2, sp, #24
+ 274 019c 32F81020 		ldrh	r2, [r2, r0, lsl #1]
+ 275 01a0 00F12004 		add	r4, r0, #32
+ 276 01a4 06AD     		add	r5, sp, #24
+ 277 01a6 35F81450 		ldrh	r5, [r5, r4, lsl #1]
+ 278 01aa 8A1A     		subs	r2, r1, r2
+ 279 01ac 521B     		subs	r2, r2, r5
+ 280 01ae 23F8802C 		strh	r2, [r3, #-128]	@ movhi
+  90:..\poly_mul.c ****         d01[i] = d01[i] - result_final[i + 0 * KARATSUBA_N / 4] - result_final[i + 2 * KARATSUBA_N 
+ 281              		.loc 1 90 0 discriminator 3
+ 282 01b2 33F8401C 		ldrh	r1, [r3, #-64]
+ 283 01b6 38F81020 		ldrh	r2, [r8, r0, lsl #1]
+ 284 01ba 38F81440 		ldrh	r4, [r8, r4, lsl #1]
+ 285 01be 8A1A     		subs	r2, r1, r2
+ 286 01c0 121B     		subs	r2, r2, r4
+ 287 01c2 23F8402C 		strh	r2, [r3, #-64]	@ movhi
+  91:..\poly_mul.c ****         d23[i] = d23[i] - result_final[i + 4 * KARATSUBA_N / 4] - result_final[i + 6 * KARATSUBA_N 
+ 288              		.loc 1 91 0 discriminator 3
+ 289 01c6 33F8C01C 		ldrh	r1, [r3, #-192]
+ 290 01ca 00F14002 		add	r2, r0, #64
+ 291 01ce 38F81220 		ldrh	r2, [r8, r2, lsl #1]
+ 292 01d2 00F16004 		add	r4, r0, #96
+ 293 01d6 38F81440 		ldrh	r4, [r8, r4, lsl #1]
+ 294 01da 8A1A     		subs	r2, r1, r2
+ 295 01dc 121B     		subs	r2, r2, r4
+ 296 01de 23F8C02C 		strh	r2, [r3, #-192]	@ movhi
+  88:..\poly_mul.c ****         d0123[i] = d0123[i] - result_d01[i + 0 * KARATSUBA_N / 4] - result_d01[i + 2 * KARATSUBA_N 
+ 297              		.loc 1 88 0 discriminator 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 8
+
+
+ 298 01e2 0130     		adds	r0, r0, #1
+ 299              	.LVL35:
+ 300              	.L6:
+  88:..\poly_mul.c ****         d0123[i] = d0123[i] - result_d01[i + 0 * KARATSUBA_N / 4] - result_d01[i + 2 * KARATSUBA_N 
+ 301              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 302 01e4 1E28     		cmp	r0, #30
+ 303 01e6 D3DD     		ble	.L7
+ 304 01e8 0023     		movs	r3, #0
+ 305 01ea 1EE0     		b	.L8
+ 306              	.LVL36:
+ 307              	.L9:
+  92:..\poly_mul.c ****     }
+  93:..\poly_mul.c **** 
+  94:..\poly_mul.c ****     for (i = 0; i < KARATSUBA_N / 2 - 1; i++) {
+  95:..\poly_mul.c ****         result_d01[i + 1 * KARATSUBA_N / 4] = result_d01[i + 1 * KARATSUBA_N / 4] + d0123[i];
+ 308              		.loc 1 95 0 is_stmt 1 discriminator 3
+ 309 01ec 03F11002 		add	r2, r3, #16
+ 310 01f0 06A9     		add	r1, sp, #24
+ 311 01f2 31F81240 		ldrh	r4, [r1, r2, lsl #1]
+ 312 01f6 56A9     		add	r1, sp, #344
+ 313 01f8 01EB4301 		add	r1, r1, r3, lsl #1
+ 314 01fc 31F8800C 		ldrh	r0, [r1, #-128]
+ 315 0200 2044     		add	r0, r0, r4
+ 316 0202 06AC     		add	r4, sp, #24
+ 317 0204 24F81200 		strh	r0, [r4, r2, lsl #1]	@ movhi
+  96:..\poly_mul.c ****         result_final[i + 1 * KARATSUBA_N / 4] = result_final[i + 1 * KARATSUBA_N / 4] + d01[i];
+ 318              		.loc 1 96 0 discriminator 3
+ 319 0208 38F81240 		ldrh	r4, [r8, r2, lsl #1]
+ 320 020c 31F8400C 		ldrh	r0, [r1, #-64]
+ 321 0210 2044     		add	r0, r0, r4
+ 322 0212 28F81200 		strh	r0, [r8, r2, lsl #1]	@ movhi
+  97:..\poly_mul.c ****         result_final[i + 5 * KARATSUBA_N / 4] = result_final[i + 5 * KARATSUBA_N / 4] + d23[i];
+ 323              		.loc 1 97 0 discriminator 3
+ 324 0216 03F15000 		add	r0, r3, #80
+ 325 021a 38F81040 		ldrh	r4, [r8, r0, lsl #1]
+ 326 021e 31F8C02C 		ldrh	r2, [r1, #-192]
+ 327 0222 2244     		add	r2, r2, r4
+ 328 0224 28F81020 		strh	r2, [r8, r0, lsl #1]	@ movhi
+  94:..\poly_mul.c ****         result_d01[i + 1 * KARATSUBA_N / 4] = result_d01[i + 1 * KARATSUBA_N / 4] + d0123[i];
+ 329              		.loc 1 94 0 discriminator 3
+ 330 0228 0133     		adds	r3, r3, #1
+ 331              	.LVL37:
+ 332              	.L8:
+  94:..\poly_mul.c ****         result_d01[i + 1 * KARATSUBA_N / 4] = result_d01[i + 1 * KARATSUBA_N / 4] + d0123[i];
+ 333              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 334 022a 1E2B     		cmp	r3, #30
+ 335 022c DEDD     		ble	.L9
+ 336 022e 0020     		movs	r0, #0
+ 337 0230 0EE0     		b	.L10
+ 338              	.LVL38:
+ 339              	.L11:
+  98:..\poly_mul.c ****     }
+  99:..\poly_mul.c **** 
+ 100:..\poly_mul.c ****     // Last stage
+ 101:..\poly_mul.c ****     for (i = 0; i < KARATSUBA_N - 1; i++) {
+ 102:..\poly_mul.c ****         result_d01[i] = result_d01[i] - result_final[i] - result_final[i + KARATSUBA_N];
+ 340              		.loc 1 102 0 is_stmt 1 discriminator 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 9
+
+
+ 341 0232 06AB     		add	r3, sp, #24
+ 342 0234 33F81020 		ldrh	r2, [r3, r0, lsl #1]
+ 343 0238 38F81030 		ldrh	r3, [r8, r0, lsl #1]
+ 344 023c 00F14001 		add	r1, r0, #64
+ 345 0240 38F81110 		ldrh	r1, [r8, r1, lsl #1]
+ 346 0244 D31A     		subs	r3, r2, r3
+ 347 0246 5B1A     		subs	r3, r3, r1
+ 348 0248 06AA     		add	r2, sp, #24
+ 349 024a 22F81030 		strh	r3, [r2, r0, lsl #1]	@ movhi
+ 101:..\poly_mul.c ****         result_d01[i] = result_d01[i] - result_final[i] - result_final[i + KARATSUBA_N];
+ 350              		.loc 1 101 0 discriminator 3
+ 351 024e 0130     		adds	r0, r0, #1
+ 352              	.LVL39:
+ 353              	.L10:
+ 101:..\poly_mul.c ****         result_d01[i] = result_d01[i] - result_final[i] - result_final[i + KARATSUBA_N];
+ 354              		.loc 1 101 0 is_stmt 0 discriminator 1
+ 355 0250 3E28     		cmp	r0, #62
+ 356 0252 EEDD     		ble	.L11
+ 357 0254 0021     		movs	r1, #0
+ 358 0256 0AE0     		b	.L12
+ 359              	.LVL40:
+ 360              	.L13:
+ 103:..\poly_mul.c ****     }
+ 104:..\poly_mul.c **** 
+ 105:..\poly_mul.c ****     for (i = 0; i < KARATSUBA_N - 1; i++) {
+ 106:..\poly_mul.c ****         result_final[i + 1 * KARATSUBA_N / 2] = result_final[i + 1 * KARATSUBA_N / 2] + result_d01[
+ 361              		.loc 1 106 0 is_stmt 1 discriminator 3
+ 362 0258 01F12002 		add	r2, r1, #32
+ 363 025c 38F81200 		ldrh	r0, [r8, r2, lsl #1]
+ 364 0260 06AB     		add	r3, sp, #24
+ 365 0262 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 366 0266 0344     		add	r3, r3, r0
+ 367 0268 28F81230 		strh	r3, [r8, r2, lsl #1]	@ movhi
+ 105:..\poly_mul.c ****         result_final[i + 1 * KARATSUBA_N / 2] = result_final[i + 1 * KARATSUBA_N / 2] + result_d01[
+ 368              		.loc 1 105 0 discriminator 3
+ 369 026c 0131     		adds	r1, r1, #1
+ 370              	.LVL41:
+ 371              	.L12:
+ 105:..\poly_mul.c ****         result_final[i + 1 * KARATSUBA_N / 2] = result_final[i + 1 * KARATSUBA_N / 2] + result_d01[
+ 372              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 373 026e 3E29     		cmp	r1, #62
+ 374 0270 F2DD     		ble	.L13
+ 107:..\poly_mul.c ****     }
+ 108:..\poly_mul.c **** 
+ 109:..\poly_mul.c **** }
+ 375              		.loc 1 109 0 is_stmt 1
+ 376 0272 57B0     		add	sp, sp, #348
+ 377              		.cfi_def_cfa_offset 36
+ 378              		@ sp needed
+ 379 0274 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 380              		.cfi_endproc
+ 381              	.LFE0:
+ 382              		.size	karatsuba_simple, .-karatsuba_simple
+ 383              		.section	.text.toom_cook_4way,"ax",%progbits
+ 384              		.align	2
+ 385              		.thumb
+ 386              		.thumb_func
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 10
+
+
+ 387              		.type	toom_cook_4way, %function
+ 388              	toom_cook_4way:
+ 389              	.LFB1:
+ 110:..\poly_mul.c **** 
+ 111:..\poly_mul.c **** 
+ 112:..\poly_mul.c **** 
+ 113:..\poly_mul.c **** static void toom_cook_4way (const uint16_t *a1, const uint16_t *b1, uint16_t *result) {
+ 390              		.loc 1 113 0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 3584
+ 393              		@ frame_needed = 0, uses_anonymous_args = 0
+ 394              	.LVL42:
+ 395 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 396              		.cfi_def_cfa_offset 28
+ 397              		.cfi_offset 4, -28
+ 398              		.cfi_offset 5, -24
+ 399              		.cfi_offset 6, -20
+ 400              		.cfi_offset 7, -16
+ 401              		.cfi_offset 8, -12
+ 402              		.cfi_offset 9, -8
+ 403              		.cfi_offset 14, -4
+ 404 0004 ADF6046D 		subw	sp, sp, #3588
+ 405              		.cfi_def_cfa_offset 3616
+ 406 0008 0646     		mov	r6, r0
+ 407 000a 0D46     		mov	r5, r1
+ 408 000c 1446     		mov	r4, r2
+ 409              	.LVL43:
+ 114:..\poly_mul.c ****     uint16_t inv3 = 43691, inv9 = 36409, inv15 = 61167;
+ 115:..\poly_mul.c **** 
+ 116:..\poly_mul.c ****     uint16_t aw1[N_SB], aw2[N_SB], aw3[N_SB], aw4[N_SB], aw5[N_SB], aw6[N_SB], aw7[N_SB];
+ 117:..\poly_mul.c ****     uint16_t bw1[N_SB], bw2[N_SB], bw3[N_SB], bw4[N_SB], bw5[N_SB], bw6[N_SB], bw7[N_SB];
+ 118:..\poly_mul.c ****     uint16_t w1[N_SB_RES] = {0}, w2[N_SB_RES] = {0}, w3[N_SB_RES] = {0}, w4[N_SB_RES] = {0},
+ 410              		.loc 1 118 0
+ 411 000e FE27     		movs	r7, #254
+ 412 0010 3A46     		mov	r2, r7
+ 413              	.LVL44:
+ 414 0012 0021     		movs	r1, #0
+ 415              	.LVL45:
+ 416 0014 0DF5C060 		add	r0, sp, #1536
+ 417              	.LVL46:
+ 418 0018 FFF7FEFF 		bl	memset
+ 419              	.LVL47:
+ 420 001c 3A46     		mov	r2, r7
+ 421 001e 0021     		movs	r1, #0
+ 422 0020 0DF5A060 		add	r0, sp, #1280
+ 423 0024 FFF7FEFF 		bl	memset
+ 424              	.LVL48:
+ 425 0028 3A46     		mov	r2, r7
+ 426 002a 0021     		movs	r1, #0
+ 427 002c 0DF58060 		add	r0, sp, #1024
+ 428 0030 FFF7FEFF 		bl	memset
+ 429              	.LVL49:
+ 430 0034 3A46     		mov	r2, r7
+ 431 0036 0021     		movs	r1, #0
+ 432 0038 C0A8     		add	r0, sp, #768
+ 433 003a FFF7FEFF 		bl	memset
+ 434              	.LVL50:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 11
+
+
+ 119:..\poly_mul.c ****                             w5[N_SB_RES] = {0}, w6[N_SB_RES] = {0}, w7[N_SB_RES] = {0};
+ 435              		.loc 1 119 0
+ 436 003e 3A46     		mov	r2, r7
+ 437 0040 0021     		movs	r1, #0
+ 438 0042 80A8     		add	r0, sp, #512
+ 439 0044 FFF7FEFF 		bl	memset
+ 440              	.LVL51:
+ 441 0048 3A46     		mov	r2, r7
+ 442 004a 0021     		movs	r1, #0
+ 443 004c 40A8     		add	r0, sp, #256
+ 444 004e FFF7FEFF 		bl	memset
+ 445              	.LVL52:
+ 446 0052 3A46     		mov	r2, r7
+ 447 0054 0021     		movs	r1, #0
+ 448 0056 6846     		mov	r0, sp
+ 449 0058 FFF7FEFF 		bl	memset
+ 450              	.LVL53:
+ 120:..\poly_mul.c ****     uint16_t r0, r1, r2, r3, r4, r5, r6, r7;
+ 121:..\poly_mul.c ****     uint16_t *A0, *A1, *A2, *A3, *B0, *B1, *B2, *B3;
+ 122:..\poly_mul.c ****     A0 = (uint16_t *)a1;
+ 123:..\poly_mul.c ****     A1 = (uint16_t *)&a1[N_SB];
+ 124:..\poly_mul.c ****     A2 = (uint16_t *)&a1[2 * N_SB];
+ 125:..\poly_mul.c ****     A3 = (uint16_t *)&a1[3 * N_SB];
+ 126:..\poly_mul.c ****     B0 = (uint16_t *)b1;
+ 127:..\poly_mul.c ****     B1 = (uint16_t *)&b1[N_SB];
+ 128:..\poly_mul.c ****     B2 = (uint16_t *)&b1[2 * N_SB];
+ 129:..\poly_mul.c ****     B3 = (uint16_t *)&b1[3 * N_SB];
+ 130:..\poly_mul.c **** 
+ 131:..\poly_mul.c ****     uint16_t *C;
+ 132:..\poly_mul.c ****     C = result;
+ 133:..\poly_mul.c **** 
+ 134:..\poly_mul.c ****     int i, j;
+ 135:..\poly_mul.c **** 
+ 136:..\poly_mul.c ****     // EVALUATION
+ 137:..\poly_mul.c ****     for (j = 0; j < N_SB; ++j) {
+ 451              		.loc 1 137 0
+ 452 005c 0022     		movs	r2, #0
+ 453 005e 47E0     		b	.L16
+ 454              	.LVL54:
+ 455              	.L17:
+ 138:..\poly_mul.c ****         r0 = A0[j];
+ 456              		.loc 1 138 0 discriminator 3
+ 457 0060 5000     		lsls	r0, r2, #1
+ 458 0062 36F812E0 		ldrh	lr, [r6, r2, lsl #1]
+ 459              	.LVL55:
+ 139:..\poly_mul.c ****         r1 = A1[j];
+ 460              		.loc 1 139 0 discriminator 3
+ 461 0066 00F18003 		add	r3, r0, #128
+ 462 006a 36F803C0 		ldrh	ip, [r6, r3]
+ 463              	.LVL56:
+ 140:..\poly_mul.c ****         r2 = A2[j];
+ 464              		.loc 1 140 0 discriminator 3
+ 465 006e 00F58073 		add	r3, r0, #256
+ 466 0072 F35A     		ldrh	r3, [r6, r3]
+ 467              	.LVL57:
+ 141:..\poly_mul.c ****         r3 = A3[j];
+ 468              		.loc 1 141 0 discriminator 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 12
+
+
+ 469 0074 00F5C071 		add	r1, r0, #384
+ 470 0078 775A     		ldrh	r7, [r6, r1]
+ 471              	.LVL58:
+ 142:..\poly_mul.c ****         r4 = r0 + r2;
+ 472              		.loc 1 142 0 discriminator 3
+ 473 007a 0EEB0301 		add	r1, lr, r3
+ 474 007e 89B2     		uxth	r1, r1
+ 475              	.LVL59:
+ 143:..\poly_mul.c ****         r5 = r1 + r3;
+ 476              		.loc 1 143 0 discriminator 3
+ 477 0080 0CEB0708 		add	r8, ip, r7
+ 478 0084 1FFA88F8 		uxth	r8, r8
+ 479              	.LVL60:
+ 144:..\poly_mul.c ****         r6 = r4 + r5;
+ 480              		.loc 1 144 0 discriminator 3
+ 481 0088 01EB0809 		add	r9, r1, r8
+ 482              	.LVL61:
+ 145:..\poly_mul.c ****         r7 = r4 - r5;
+ 483              		.loc 1 145 0 discriminator 3
+ 484 008c C8EB0101 		rsb	r1, r8, r1
+ 485              	.LVL62:
+ 146:..\poly_mul.c ****         aw3[j] = r6;
+ 486              		.loc 1 146 0 discriminator 3
+ 487 0090 0DF54868 		add	r8, sp, #3200
+ 488              	.LVL63:
+ 489 0094 28F81290 		strh	r9, [r8, r2, lsl #1]	@ movhi
+ 147:..\poly_mul.c ****         aw4[j] = r7;
+ 490              		.loc 1 147 0 discriminator 3
+ 491 0098 0DF54068 		add	r8, sp, #3072
+ 492 009c 28F81210 		strh	r1, [r8, r2, lsl #1]	@ movhi
+ 148:..\poly_mul.c ****         r4 = ((r0 << 2) + r2) << 1;
+ 493              		.loc 1 148 0 discriminator 3
+ 494 00a0 03EB8E01 		add	r1, r3, lr, lsl #2
+ 495              	.LVL64:
+ 496 00a4 4900     		lsls	r1, r1, #1
+ 497 00a6 89B2     		uxth	r1, r1
+ 498              	.LVL65:
+ 149:..\poly_mul.c ****         r5 = (r1 << 2) + r3;
+ 499              		.loc 1 149 0 discriminator 3
+ 500 00a8 07EB8C08 		add	r8, r7, ip, lsl #2
+ 501              	.LVL66:
+ 502 00ac 1FFA88F8 		uxth	r8, r8
+ 503              	.LVL67:
+ 150:..\poly_mul.c ****         r6 = r4 + r5;
+ 504              		.loc 1 150 0 discriminator 3
+ 505 00b0 01EB0809 		add	r9, r1, r8
+ 506              	.LVL68:
+ 151:..\poly_mul.c ****         r7 = r4 - r5;
+ 507              		.loc 1 151 0 discriminator 3
+ 508 00b4 C8EB0101 		rsb	r1, r8, r1
+ 509              	.LVL69:
+ 152:..\poly_mul.c ****         aw5[j] = r6;
+ 510              		.loc 1 152 0 discriminator 3
+ 511 00b8 0DF53868 		add	r8, sp, #2944
+ 512              	.LVL70:
+ 513 00bc 28F81290 		strh	r9, [r8, r2, lsl #1]	@ movhi
+ 153:..\poly_mul.c ****         aw6[j] = r7;
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 13
+
+
+ 514              		.loc 1 153 0 discriminator 3
+ 515 00c0 0DF53068 		add	r8, sp, #2816
+ 516 00c4 28F81210 		strh	r1, [r8, r2, lsl #1]	@ movhi
+ 154:..\poly_mul.c ****         r4 = (r3 << 3) + (r2 << 2) + (r1 << 1) + r0;
+ 517              		.loc 1 154 0 discriminator 3
+ 518 00c8 9B00     		lsls	r3, r3, #2
+ 519              	.LVL71:
+ 520 00ca 03EBC703 		add	r3, r3, r7, lsl #3
+ 521 00ce 03EB4C03 		add	r3, r3, ip, lsl #1
+ 522 00d2 7344     		add	r3, r3, lr
+ 523              	.LVL72:
+ 155:..\poly_mul.c ****         aw2[j] = r4;
+ 524              		.loc 1 155 0 discriminator 3
+ 525 00d4 0DF55061 		add	r1, sp, #3328
+ 526              	.LVL73:
+ 527 00d8 21F81230 		strh	r3, [r1, r2, lsl #1]	@ movhi
+ 156:..\poly_mul.c ****         aw7[j] = r0;
+ 528              		.loc 1 156 0 discriminator 3
+ 529 00dc 0DF52863 		add	r3, sp, #2688
+ 530              	.LVL74:
+ 531 00e0 23F812E0 		strh	lr, [r3, r2, lsl #1]	@ movhi
+ 157:..\poly_mul.c ****         aw1[j] = r3;
+ 532              		.loc 1 157 0 discriminator 3
+ 533 00e4 0DF56063 		add	r3, sp, #3584
+ 534 00e8 1844     		add	r0, r0, r3
+ 535 00ea 20F8807C 		strh	r7, [r0, #-128]	@ movhi
+ 137:..\poly_mul.c ****         r0 = A0[j];
+ 536              		.loc 1 137 0 discriminator 3
+ 537 00ee 0132     		adds	r2, r2, #1
+ 538              	.LVL75:
+ 539              	.L16:
+ 137:..\poly_mul.c ****         r0 = A0[j];
+ 540              		.loc 1 137 0 is_stmt 0 discriminator 1
+ 541 00f0 3F2A     		cmp	r2, #63
+ 542 00f2 B5DD     		ble	.L17
+ 543 00f4 0023     		movs	r3, #0
+ 544 00f6 44E0     		b	.L18
+ 545              	.LVL76:
+ 546              	.L19:
+ 158:..\poly_mul.c ****     }
+ 159:..\poly_mul.c ****     for (j = 0; j < N_SB; ++j) {
+ 160:..\poly_mul.c ****         r0 = B0[j];
+ 547              		.loc 1 160 0 is_stmt 1 discriminator 3
+ 548 00f8 5900     		lsls	r1, r3, #1
+ 549 00fa 35F81360 		ldrh	r6, [r5, r3, lsl #1]
+ 550              	.LVL77:
+ 161:..\poly_mul.c ****         r1 = B1[j];
+ 551              		.loc 1 161 0 discriminator 3
+ 552 00fe 01F18002 		add	r2, r1, #128
+ 553 0102 AF5A     		ldrh	r7, [r5, r2]
+ 554              	.LVL78:
+ 162:..\poly_mul.c ****         r2 = B2[j];
+ 555              		.loc 1 162 0 discriminator 3
+ 556 0104 01F58072 		add	r2, r1, #256
+ 557 0108 AA5A     		ldrh	r2, [r5, r2]
+ 558              	.LVL79:
+ 163:..\poly_mul.c ****         r3 = B3[j];
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 14
+
+
+ 559              		.loc 1 163 0 discriminator 3
+ 560 010a 01F5C071 		add	r1, r1, #384
+ 561 010e 685A     		ldrh	r0, [r5, r1]
+ 562              	.LVL80:
+ 164:..\poly_mul.c ****         r4 = r0 + r2;
+ 563              		.loc 1 164 0 discriminator 3
+ 564 0110 B118     		adds	r1, r6, r2
+ 565 0112 89B2     		uxth	r1, r1
+ 566              	.LVL81:
+ 165:..\poly_mul.c ****         r5 = r1 + r3;
+ 567              		.loc 1 165 0 discriminator 3
+ 568 0114 07EB000E 		add	lr, r7, r0
+ 569 0118 1FFA8EFE 		uxth	lr, lr
+ 570              	.LVL82:
+ 166:..\poly_mul.c ****         r6 = r4 + r5;
+ 571              		.loc 1 166 0 discriminator 3
+ 572 011c 01EB0E0C 		add	ip, r1, lr
+ 573              	.LVL83:
+ 167:..\poly_mul.c ****         r7 = r4 - r5;
+ 574              		.loc 1 167 0 discriminator 3
+ 575 0120 CEEB0101 		rsb	r1, lr, r1
+ 576              	.LVL84:
+ 168:..\poly_mul.c ****         bw3[j] = r6;
+ 577              		.loc 1 168 0 discriminator 3
+ 578 0124 0DF5106E 		add	lr, sp, #2304
+ 579              	.LVL85:
+ 580 0128 2EF813C0 		strh	ip, [lr, r3, lsl #1]	@ movhi
+ 169:..\poly_mul.c ****         bw4[j] = r7;
+ 581              		.loc 1 169 0 discriminator 3
+ 582 012c 0DF5086E 		add	lr, sp, #2176
+ 583 0130 2EF81310 		strh	r1, [lr, r3, lsl #1]	@ movhi
+ 170:..\poly_mul.c ****         r4 = ((r0 << 2) + r2) << 1;
+ 584              		.loc 1 170 0 discriminator 3
+ 585 0134 02EB8601 		add	r1, r2, r6, lsl #2
+ 586              	.LVL86:
+ 587 0138 4900     		lsls	r1, r1, #1
+ 588 013a 89B2     		uxth	r1, r1
+ 589              	.LVL87:
+ 171:..\poly_mul.c ****         r5 = (r1 << 2) + r3;
+ 590              		.loc 1 171 0 discriminator 3
+ 591 013c 00EB870E 		add	lr, r0, r7, lsl #2
+ 592              	.LVL88:
+ 593 0140 1FFA8EFE 		uxth	lr, lr
+ 594              	.LVL89:
+ 172:..\poly_mul.c ****         r6 = r4 + r5;
+ 595              		.loc 1 172 0 discriminator 3
+ 596 0144 01EB0E0C 		add	ip, r1, lr
+ 597              	.LVL90:
+ 173:..\poly_mul.c ****         r7 = r4 - r5;
+ 598              		.loc 1 173 0 discriminator 3
+ 599 0148 CEEB0101 		rsb	r1, lr, r1
+ 600              	.LVL91:
+ 174:..\poly_mul.c ****         bw5[j] = r6;
+ 601              		.loc 1 174 0 discriminator 3
+ 602 014c 0DF5006E 		add	lr, sp, #2048
+ 603              	.LVL92:
+ 604 0150 2EF813C0 		strh	ip, [lr, r3, lsl #1]	@ movhi
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 15
+
+
+ 175:..\poly_mul.c ****         bw6[j] = r7;
+ 605              		.loc 1 175 0 discriminator 3
+ 606 0154 0DF5F06E 		add	lr, sp, #1920
+ 607 0158 2EF81310 		strh	r1, [lr, r3, lsl #1]	@ movhi
+ 176:..\poly_mul.c ****         r4 = (r3 << 3) + (r2 << 2) + (r1 << 1) + r0;
+ 608              		.loc 1 176 0 discriminator 3
+ 609 015c 9200     		lsls	r2, r2, #2
+ 610              	.LVL93:
+ 611 015e 02EBC002 		add	r2, r2, r0, lsl #3
+ 612 0162 02EB4702 		add	r2, r2, r7, lsl #1
+ 613 0166 3244     		add	r2, r2, r6
+ 614              	.LVL94:
+ 177:..\poly_mul.c ****         bw2[j] = r4;
+ 615              		.loc 1 177 0 discriminator 3
+ 616 0168 0DF51861 		add	r1, sp, #2432
+ 617              	.LVL95:
+ 618 016c 21F81320 		strh	r2, [r1, r3, lsl #1]	@ movhi
+ 178:..\poly_mul.c ****         bw7[j] = r0;
+ 619              		.loc 1 178 0 discriminator 3
+ 620 0170 0DF5E062 		add	r2, sp, #1792
+ 621              	.LVL96:
+ 622 0174 22F81360 		strh	r6, [r2, r3, lsl #1]	@ movhi
+ 179:..\poly_mul.c ****         bw1[j] = r3;
+ 623              		.loc 1 179 0 discriminator 3
+ 624 0178 0DF52062 		add	r2, sp, #2560
+ 625 017c 22F81300 		strh	r0, [r2, r3, lsl #1]	@ movhi
+ 159:..\poly_mul.c ****         r0 = B0[j];
+ 626              		.loc 1 159 0 discriminator 3
+ 627 0180 0133     		adds	r3, r3, #1
+ 628              	.LVL97:
+ 629              	.L18:
+ 159:..\poly_mul.c ****         r0 = B0[j];
+ 630              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 631 0182 3F2B     		cmp	r3, #63
+ 632 0184 B8DD     		ble	.L19
+ 180:..\poly_mul.c ****     }
+ 181:..\poly_mul.c **** 
+ 182:..\poly_mul.c ****     // MULTIPLICATION
+ 183:..\poly_mul.c **** 
+ 184:..\poly_mul.c ****     karatsuba_simple(aw1, bw1, w1);
+ 633              		.loc 1 184 0 is_stmt 1
+ 634 0186 0DF5C062 		add	r2, sp, #1536
+ 635 018a 0DF52061 		add	r1, sp, #2560
+ 636 018e 0DF55860 		add	r0, sp, #3456
+ 637 0192 FFF7FEFF 		bl	karatsuba_simple
+ 638              	.LVL98:
+ 185:..\poly_mul.c ****     karatsuba_simple(aw2, bw2, w2);
+ 639              		.loc 1 185 0
+ 640 0196 0DF5A062 		add	r2, sp, #1280
+ 641 019a 0DF51861 		add	r1, sp, #2432
+ 642 019e 0DF55060 		add	r0, sp, #3328
+ 643 01a2 FFF7FEFF 		bl	karatsuba_simple
+ 644              	.LVL99:
+ 186:..\poly_mul.c ****     karatsuba_simple(aw3, bw3, w3);
+ 645              		.loc 1 186 0
+ 646 01a6 0DF58062 		add	r2, sp, #1024
+ 647 01aa 0DF51061 		add	r1, sp, #2304
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 16
+
+
+ 648 01ae 0DF54860 		add	r0, sp, #3200
+ 649 01b2 FFF7FEFF 		bl	karatsuba_simple
+ 650              	.LVL100:
+ 187:..\poly_mul.c ****     karatsuba_simple(aw4, bw4, w4);
+ 651              		.loc 1 187 0
+ 652 01b6 C0AA     		add	r2, sp, #768
+ 653 01b8 0DF50861 		add	r1, sp, #2176
+ 654 01bc 0DF54060 		add	r0, sp, #3072
+ 655 01c0 FFF7FEFF 		bl	karatsuba_simple
+ 656              	.LVL101:
+ 188:..\poly_mul.c ****     karatsuba_simple(aw5, bw5, w5);
+ 657              		.loc 1 188 0
+ 658 01c4 80AA     		add	r2, sp, #512
+ 659 01c6 0DF50061 		add	r1, sp, #2048
+ 660 01ca 0DF53860 		add	r0, sp, #2944
+ 661 01ce FFF7FEFF 		bl	karatsuba_simple
+ 662              	.LVL102:
+ 189:..\poly_mul.c ****     karatsuba_simple(aw6, bw6, w6);
+ 663              		.loc 1 189 0
+ 664 01d2 40AA     		add	r2, sp, #256
+ 665 01d4 0DF5F061 		add	r1, sp, #1920
+ 666 01d8 0DF53060 		add	r0, sp, #2816
+ 667 01dc FFF7FEFF 		bl	karatsuba_simple
+ 668              	.LVL103:
+ 190:..\poly_mul.c ****     karatsuba_simple(aw7, bw7, w7);
+ 669              		.loc 1 190 0
+ 670 01e0 6A46     		mov	r2, sp
+ 671 01e2 0DF5E061 		add	r1, sp, #1792
+ 672 01e6 0DF52860 		add	r0, sp, #2688
+ 673 01ea FFF7FEFF 		bl	karatsuba_simple
+ 674              	.LVL104:
+ 191:..\poly_mul.c **** 
+ 192:..\poly_mul.c ****     // INTERPOLATION
+ 193:..\poly_mul.c ****     for (i = 0; i < N_SB_RES; ++i) {
+ 675              		.loc 1 193 0
+ 676 01ee 0021     		movs	r1, #0
+ 677 01f0 93E0     		b	.L20
+ 678              	.LVL105:
+ 679              	.L21:
+ 194:..\poly_mul.c ****         r0 = w1[i];
+ 680              		.loc 1 194 0 discriminator 3
+ 681 01f2 0DF5C063 		add	r3, sp, #1536
+ 682 01f6 33F81170 		ldrh	r7, [r3, r1, lsl #1]
+ 683              	.LVL106:
+ 195:..\poly_mul.c ****         r1 = w2[i];
+ 684              		.loc 1 195 0 discriminator 3
+ 685 01fa 0DF5A063 		add	r3, sp, #1280
+ 686 01fe 33F811C0 		ldrh	ip, [r3, r1, lsl #1]
+ 687              	.LVL107:
+ 196:..\poly_mul.c ****         r2 = w3[i];
+ 688              		.loc 1 196 0 discriminator 3
+ 689 0202 0DF58063 		add	r3, sp, #1024
+ 690 0206 33F81130 		ldrh	r3, [r3, r1, lsl #1]
+ 691              	.LVL108:
+ 197:..\poly_mul.c ****         r3 = w4[i];
+ 692              		.loc 1 197 0 discriminator 3
+ 693 020a C0AA     		add	r2, sp, #768
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 17
+
+
+ 694 020c 32F81160 		ldrh	r6, [r2, r1, lsl #1]
+ 695              	.LVL109:
+ 198:..\poly_mul.c ****         r4 = w5[i];
+ 696              		.loc 1 198 0 discriminator 3
+ 697 0210 80AA     		add	r2, sp, #512
+ 698 0212 32F81120 		ldrh	r2, [r2, r1, lsl #1]
+ 699              	.LVL110:
+ 199:..\poly_mul.c ****         r5 = w6[i];
+ 700              		.loc 1 199 0 discriminator 3
+ 701 0216 40A8     		add	r0, sp, #256
+ 702 0218 30F81100 		ldrh	r0, [r0, r1, lsl #1]
+ 703              	.LVL111:
+ 200:..\poly_mul.c ****         r6 = w7[i];
+ 704              		.loc 1 200 0 discriminator 3
+ 705 021c 3DF811E0 		ldrh	lr, [sp, r1, lsl #1]
+ 706              	.LVL112:
+ 201:..\poly_mul.c **** 
+ 202:..\poly_mul.c ****         r1 = r1 + r4;
+ 707              		.loc 1 202 0 discriminator 3
+ 708 0220 9444     		add	ip, ip, r2
+ 709              	.LVL113:
+ 710 0222 1FFA8CFC 		uxth	ip, ip
+ 711              	.LVL114:
+ 203:..\poly_mul.c ****         r5 = r5 - r4;
+ 712              		.loc 1 203 0 discriminator 3
+ 713 0226 801A     		subs	r0, r0, r2
+ 714              	.LVL115:
+ 715 0228 80B2     		uxth	r0, r0
+ 716              	.LVL116:
+ 204:..\poly_mul.c ****         r3 = ((r3 - r2) >> 1);
+ 717              		.loc 1 204 0 discriminator 3
+ 718 022a F61A     		subs	r6, r6, r3
+ 719              	.LVL117:
+ 720 022c 7610     		asrs	r6, r6, #1
+ 721 022e B5B2     		uxth	r5, r6
+ 722              	.LVL118:
+ 205:..\poly_mul.c ****         r4 = r4 - r0;
+ 723              		.loc 1 205 0 discriminator 3
+ 724 0230 D21B     		subs	r2, r2, r7
+ 725              	.LVL119:
+ 726 0232 92B2     		uxth	r2, r2
+ 727              	.LVL120:
+ 206:..\poly_mul.c ****         r4 = r4 - (r6 << 6);
+ 728              		.loc 1 206 0 discriminator 3
+ 729 0234 A2EB8E12 		sub	r2, r2, lr, lsl #6
+ 730              	.LVL121:
+ 731 0238 92B2     		uxth	r2, r2
+ 732              	.LVL122:
+ 207:..\poly_mul.c ****         r4 = (r4 << 1) + r5;
+ 733              		.loc 1 207 0 discriminator 3
+ 734 023a 5200     		lsls	r2, r2, #1
+ 735              	.LVL123:
+ 736 023c 92B2     		uxth	r2, r2
+ 737 023e 0244     		add	r2, r2, r0
+ 738 0240 92B2     		uxth	r2, r2
+ 739              	.LVL124:
+ 208:..\poly_mul.c ****         r2 = r2 + r3;
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 18
+
+
+ 740              		.loc 1 208 0 discriminator 3
+ 741 0242 2B44     		add	r3, r3, r5
+ 742              	.LVL125:
+ 743 0244 9BB2     		uxth	r3, r3
+ 744              	.LVL126:
+ 209:..\poly_mul.c ****         r1 = r1 - (r2 << 6) - r2;
+ 745              		.loc 1 209 0 discriminator 3
+ 746 0246 ACEB8318 		sub	r8, ip, r3, lsl #6
+ 747 024a 1FFA88F8 		uxth	r8, r8
+ 748 024e C3EB0808 		rsb	r8, r3, r8
+ 749              	.LVL127:
+ 210:..\poly_mul.c ****         r2 = r2 - r6;
+ 750              		.loc 1 210 0 discriminator 3
+ 751 0252 CEEB0303 		rsb	r3, lr, r3
+ 752              	.LVL128:
+ 753 0256 9BB2     		uxth	r3, r3
+ 754              	.LVL129:
+ 211:..\poly_mul.c ****         r2 = r2 - r0;
+ 755              		.loc 1 211 0 discriminator 3
+ 756 0258 DB1B     		subs	r3, r3, r7
+ 757              	.LVL130:
+ 758 025a 9BB2     		uxth	r3, r3
+ 759              	.LVL131:
+ 212:..\poly_mul.c ****         r1 = r1 + 45 * r2;
+ 760              		.loc 1 212 0 discriminator 3
+ 761 025c 03EB430C 		add	ip, r3, r3, lsl #1
+ 762 0260 CCEB0C1C 		rsb	ip, ip, ip, lsl #4
+ 763 0264 1CFA88FC 		uxtah	ip, ip, r8
+ 764 0268 1FFA8CFC 		uxth	ip, ip
+ 765              	.LVL132:
+ 213:..\poly_mul.c ****         r4 = (uint16_t)(((r4 - (r2 << 3)) * (uint32_t)inv3) >> 3);
+ 766              		.loc 1 213 0 discriminator 3
+ 767 026c A2EBC302 		sub	r2, r2, r3, lsl #3
+ 768              	.LVL133:
+ 769 0270 4AF6AB28 		movw	r8, #43691
+ 770 0274 08FB02F2 		mul	r2, r8, r2
+ 771 0278 C2F3CF02 		ubfx	r2, r2, #3, #16
+ 772              	.LVL134:
+ 214:..\poly_mul.c ****         r5 = r5 + r1;
+ 773              		.loc 1 214 0 discriminator 3
+ 774 027c 6044     		add	r0, r0, ip
+ 775              	.LVL135:
+ 776 027e 80B2     		uxth	r0, r0
+ 777              	.LVL136:
+ 215:..\poly_mul.c ****         r1 = (uint16_t)(((r1 + (r3 << 4)) * (uint32_t)inv9) >> 1);
+ 778              		.loc 1 215 0 discriminator 3
+ 779 0280 DFF8A480 		ldr	r8, .L23
+ 780 0284 08EA0616 		and	r6, r8, r6, lsl #4
+ 781 0288 B444     		add	ip, ip, r6
+ 782              	.LVL137:
+ 783 028a 48F63966 		movw	r6, #36409
+ 784 028e 06FB0CFC 		mul	ip, r6, ip
+ 785 0292 CCF34F06 		ubfx	r6, ip, #1, #16
+ 786              	.LVL138:
+ 216:..\poly_mul.c ****         r3 = -(r3 + r1);
+ 787              		.loc 1 216 0 discriminator 3
+ 788 0296 3544     		add	r5, r5, r6
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 19
+
+
+ 789              	.LVL139:
+ 790 0298 ADB2     		uxth	r5, r5
+ 791              	.LVL140:
+ 217:..\poly_mul.c ****         r5 = (uint16_t)(((30 * r1 - r5) * (uint32_t)inv15) >> 2);
+ 792              		.loc 1 217 0 discriminator 3
+ 793 029a C6EB0618 		rsb	r8, r6, r6, lsl #4
+ 794 029e 4FEA480C 		lsl	ip, r8, #1
+ 795 02a2 C0EB0C00 		rsb	r0, r0, ip
+ 796              	.LVL141:
+ 797 02a6 4EF6EF6C 		movw	ip, #61167
+ 798 02aa 0CFB00F0 		mul	r0, ip, r0
+ 799 02ae C0F38F00 		ubfx	r0, r0, #2, #16
+ 800              	.LVL142:
+ 218:..\poly_mul.c ****         r2 = r2 - r4;
+ 801              		.loc 1 218 0 discriminator 3
+ 802 02b2 9B1A     		subs	r3, r3, r2
+ 803              	.LVL143:
+ 219:..\poly_mul.c ****         r1 = r1 - r5;
+ 804              		.loc 1 219 0 discriminator 3
+ 805 02b4 361A     		subs	r6, r6, r0
+ 806              	.LVL144:
+ 220:..\poly_mul.c **** 
+ 221:..\poly_mul.c ****         C[i]     += r6;
+ 807              		.loc 1 221 0 discriminator 3
+ 808 02b6 34F811C0 		ldrh	ip, [r4, r1, lsl #1]
+ 809 02ba E644     		add	lr, lr, ip
+ 810              	.LVL145:
+ 811 02bc 24F811E0 		strh	lr, [r4, r1, lsl #1]	@ movhi
+ 812              	.LVL146:
+ 222:..\poly_mul.c ****         C[i + 64]  += r5;
+ 813              		.loc 1 222 0 discriminator 3
+ 814 02c0 01F1400C 		add	ip, r1, #64
+ 815 02c4 34F81CE0 		ldrh	lr, [r4, ip, lsl #1]
+ 816 02c8 7044     		add	r0, r0, lr
+ 817              	.LVL147:
+ 818 02ca 24F81C00 		strh	r0, [r4, ip, lsl #1]	@ movhi
+ 223:..\poly_mul.c ****         C[i + 128] += r4;
+ 819              		.loc 1 223 0 discriminator 3
+ 820 02ce 01F1800E 		add	lr, r1, #128
+ 821 02d2 34F81E00 		ldrh	r0, [r4, lr, lsl #1]
+ 822 02d6 0244     		add	r2, r2, r0
+ 823              	.LVL148:
+ 824 02d8 24F81E20 		strh	r2, [r4, lr, lsl #1]	@ movhi
+ 224:..\poly_mul.c ****         C[i + 192] += r3;
+ 825              		.loc 1 224 0 discriminator 3
+ 826 02dc 01F1C000 		add	r0, r1, #192
+ 827 02e0 34F81020 		ldrh	r2, [r4, r0, lsl #1]
+ 828 02e4 551B     		subs	r5, r2, r5
+ 829              	.LVL149:
+ 830 02e6 24F81050 		strh	r5, [r4, r0, lsl #1]	@ movhi
+ 225:..\poly_mul.c ****         C[i + 256] += r2;
+ 831              		.loc 1 225 0 discriminator 3
+ 832 02ea 01F58072 		add	r2, r1, #256
+ 833 02ee 34F81200 		ldrh	r0, [r4, r2, lsl #1]
+ 834 02f2 10FA83F3 		uxtah	r3, r0, r3
+ 835              	.LVL150:
+ 836 02f6 24F81230 		strh	r3, [r4, r2, lsl #1]	@ movhi
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 20
+
+
+ 226:..\poly_mul.c ****         C[i + 320] += r1;
+ 837              		.loc 1 226 0 discriminator 3
+ 838 02fa 01F5A073 		add	r3, r1, #320
+ 839 02fe 34F81320 		ldrh	r2, [r4, r3, lsl #1]
+ 840 0302 12FA86F6 		uxtah	r6, r2, r6
+ 841              	.LVL151:
+ 842 0306 24F81360 		strh	r6, [r4, r3, lsl #1]	@ movhi
+ 227:..\poly_mul.c ****         C[i + 384] += r0;
+ 843              		.loc 1 227 0 discriminator 3
+ 844 030a 01F5C072 		add	r2, r1, #384
+ 845 030e 34F81230 		ldrh	r3, [r4, r2, lsl #1]
+ 846 0312 1F44     		add	r7, r7, r3
+ 847              	.LVL152:
+ 848 0314 24F81270 		strh	r7, [r4, r2, lsl #1]	@ movhi
+ 193:..\poly_mul.c ****         r0 = w1[i];
+ 849              		.loc 1 193 0 discriminator 3
+ 850 0318 0131     		adds	r1, r1, #1
+ 851              	.LVL153:
+ 852              	.L20:
+ 193:..\poly_mul.c ****         r0 = w1[i];
+ 853              		.loc 1 193 0 is_stmt 0 discriminator 1
+ 854 031a 7E29     		cmp	r1, #126
+ 855 031c 7FF769AF 		ble	.L21
+ 228:..\poly_mul.c ****     }
+ 229:..\poly_mul.c **** }
+ 856              		.loc 1 229 0 is_stmt 1
+ 857 0320 0DF6046D 		addw	sp, sp, #3588
+ 858              		.cfi_def_cfa_offset 28
+ 859              		@ sp needed
+ 860 0324 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 861              	.LVL154:
+ 862              	.L24:
+ 863              		.align	2
+ 864              	.L23:
+ 865 0328 F0FF0F00 		.word	1048560
+ 866              		.cfi_endproc
+ 867              	.LFE1:
+ 868              		.size	toom_cook_4way, .-toom_cook_4way
+ 869              		.section	.text.poly_mul_acc,"ax",%progbits
+ 870              		.align	2
+ 871              		.global	poly_mul_acc
+ 872              		.thumb
+ 873              		.thumb_func
+ 874              		.type	poly_mul_acc, %function
+ 875              	poly_mul_acc:
+ 876              	.LFB2:
+ 230:..\poly_mul.c **** 
+ 231:..\poly_mul.c **** /* res += a*b */
+ 232:..\poly_mul.c **** void poly_mul_acc(const uint16_t a[SABER_N], const uint16_t b[SABER_N], uint16_t res[SABER_N])
+ 233:..\poly_mul.c **** {
+ 877              		.loc 1 233 0
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 1024
+ 880              		@ frame_needed = 0, uses_anonymous_args = 0
+ 881              	.LVL155:
+ 882 0000 70B5     		push	{r4, r5, r6, lr}
+ 883              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 21
+
+
+ 884              		.cfi_offset 4, -16
+ 885              		.cfi_offset 5, -12
+ 886              		.cfi_offset 6, -8
+ 887              		.cfi_offset 14, -4
+ 888 0002 ADF5806D 		sub	sp, sp, #1024
+ 889              		.cfi_def_cfa_offset 1040
+ 890 0006 0546     		mov	r5, r0
+ 891 0008 0E46     		mov	r6, r1
+ 892 000a 1446     		mov	r4, r2
+ 234:..\poly_mul.c **** 	uint16_t c[2 * SABER_N] = {0};
+ 893              		.loc 1 234 0
+ 894 000c 4FF48062 		mov	r2, #1024
+ 895              	.LVL156:
+ 896 0010 0021     		movs	r1, #0
+ 897              	.LVL157:
+ 898 0012 6846     		mov	r0, sp
+ 899              	.LVL158:
+ 900 0014 FFF7FEFF 		bl	memset
+ 901              	.LVL159:
+ 235:..\poly_mul.c **** 	int i;
+ 236:..\poly_mul.c **** 
+ 237:..\poly_mul.c **** 	toom_cook_4way(a, b, c);
+ 902              		.loc 1 237 0
+ 903 0018 6A46     		mov	r2, sp
+ 904 001a 3146     		mov	r1, r6
+ 905 001c 2846     		mov	r0, r5
+ 906 001e FFF7FEFF 		bl	toom_cook_4way
+ 907              	.LVL160:
+ 238:..\poly_mul.c **** 
+ 239:..\poly_mul.c **** 	/* reduction */
+ 240:..\poly_mul.c **** 	for (i = SABER_N; i < 2 * SABER_N; i++)
+ 908              		.loc 1 240 0
+ 909 0022 4FF48073 		mov	r3, #256
+ 910 0026 10E0     		b	.L26
+ 911              	.LVL161:
+ 912              	.L27:
+ 241:..\poly_mul.c **** 	{
+ 242:..\poly_mul.c **** 		res[i - SABER_N] += (c[i - SABER_N] - c[i]);
+ 913              		.loc 1 242 0 discriminator 3
+ 914 0028 03F10042 		add	r2, r3, #-2147483648
+ 915 002c A2F58072 		sub	r2, r2, #256
+ 916 0030 A3F58071 		sub	r1, r3, #256
+ 917 0034 3DF81110 		ldrh	r1, [sp, r1, lsl #1]
+ 918 0038 3DF81300 		ldrh	r0, [sp, r3, lsl #1]
+ 919 003c 081A     		subs	r0, r1, r0
+ 920 003e 34F81210 		ldrh	r1, [r4, r2, lsl #1]
+ 921 0042 0144     		add	r1, r1, r0
+ 922 0044 24F81210 		strh	r1, [r4, r2, lsl #1]	@ movhi
+ 240:..\poly_mul.c **** 	{
+ 923              		.loc 1 240 0 discriminator 3
+ 924 0048 0133     		adds	r3, r3, #1
+ 925              	.LVL162:
+ 926              	.L26:
+ 240:..\poly_mul.c **** 	{
+ 927              		.loc 1 240 0 is_stmt 0 discriminator 1
+ 928 004a B3F5007F 		cmp	r3, #512
+ 929 004e EBDB     		blt	.L27
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 22
+
+
+ 243:..\poly_mul.c **** 	}
+ 244:..\poly_mul.c **** }
+ 930              		.loc 1 244 0 is_stmt 1
+ 931 0050 0DF5806D 		add	sp, sp, #1024
+ 932              		.cfi_def_cfa_offset 16
+ 933              		@ sp needed
+ 934 0054 70BD     		pop	{r4, r5, r6, pc}
+ 935              		.cfi_endproc
+ 936              	.LFE2:
+ 937              		.size	poly_mul_acc, .-poly_mul_acc
+ 938 0056 00BF     		.text
+ 939              	.Letext0:
+ 940              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 941              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 942              		.section	.debug_info,"",%progbits
+ 943              	.Ldebug_info0:
+ 944 0000 0F080000 		.4byte	0x80f
+ 945 0004 0400     		.2byte	0x4
+ 946 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 947 000a 04       		.byte	0x4
+ 948 000b 01       		.uleb128 0x1
+ 949 000c 7D010000 		.4byte	.LASF38
+ 950 0010 0C       		.byte	0xc
+ 951 0011 88020000 		.4byte	.LASF39
+ 952 0015 A8000000 		.4byte	.LASF40
+ 953 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 954 001d 00000000 		.4byte	0
+ 955 0021 00000000 		.4byte	.Ldebug_line0
+ 956 0025 02       		.uleb128 0x2
+ 957 0026 01       		.byte	0x1
+ 958 0027 06       		.byte	0x6
+ 959 0028 68000000 		.4byte	.LASF0
+ 960 002c 02       		.uleb128 0x2
+ 961 002d 01       		.byte	0x1
+ 962 002e 08       		.byte	0x8
+ 963 002f 43020000 		.4byte	.LASF1
+ 964 0033 02       		.uleb128 0x2
+ 965 0034 02       		.byte	0x2
+ 966 0035 05       		.byte	0x5
+ 967 0036 56020000 		.4byte	.LASF2
+ 968 003a 03       		.uleb128 0x3
+ 969 003b 73020000 		.4byte	.LASF4
+ 970 003f 02       		.byte	0x2
+ 971 0040 2B       		.byte	0x2b
+ 972 0041 45000000 		.4byte	0x45
+ 973 0045 02       		.uleb128 0x2
+ 974 0046 02       		.byte	0x2
+ 975 0047 07       		.byte	0x7
+ 976 0048 33010000 		.4byte	.LASF3
+ 977 004c 03       		.uleb128 0x3
+ 978 004d 7E020000 		.4byte	.LASF5
+ 979 0051 02       		.byte	0x2
+ 980 0052 3F       		.byte	0x3f
+ 981 0053 57000000 		.4byte	0x57
+ 982 0057 02       		.uleb128 0x2
+ 983 0058 04       		.byte	0x4
+ 984 0059 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 23
+
+
+ 985 005a 8B000000 		.4byte	.LASF6
+ 986 005e 03       		.uleb128 0x3
+ 987 005f 9D000000 		.4byte	.LASF7
+ 988 0063 02       		.byte	0x2
+ 989 0064 41       		.byte	0x41
+ 990 0065 69000000 		.4byte	0x69
+ 991 0069 02       		.uleb128 0x2
+ 992 006a 04       		.byte	0x4
+ 993 006b 07       		.byte	0x7
+ 994 006c 21010000 		.4byte	.LASF8
+ 995 0070 02       		.uleb128 0x2
+ 996 0071 08       		.byte	0x8
+ 997 0072 05       		.byte	0x5
+ 998 0073 5A000000 		.4byte	.LASF9
+ 999 0077 03       		.uleb128 0x3
+ 1000 0078 30020000 		.4byte	.LASF10
+ 1001 007c 02       		.byte	0x2
+ 1002 007d 5B       		.byte	0x5b
+ 1003 007e 82000000 		.4byte	0x82
+ 1004 0082 02       		.uleb128 0x2
+ 1005 0083 08       		.byte	0x8
+ 1006 0084 07       		.byte	0x7
+ 1007 0085 43000000 		.4byte	.LASF11
+ 1008 0089 04       		.uleb128 0x4
+ 1009 008a 04       		.byte	0x4
+ 1010 008b 05       		.byte	0x5
+ 1011 008c 696E7400 		.ascii	"int\000"
+ 1012 0090 02       		.uleb128 0x2
+ 1013 0091 04       		.byte	0x4
+ 1014 0092 07       		.byte	0x7
+ 1015 0093 14010000 		.4byte	.LASF12
+ 1016 0097 03       		.uleb128 0x3
+ 1017 0098 94000000 		.4byte	.LASF13
+ 1018 009c 03       		.byte	0x3
+ 1019 009d 24       		.byte	0x24
+ 1020 009e 3A000000 		.4byte	0x3a
+ 1021 00a2 03       		.uleb128 0x3
+ 1022 00a3 3B020000 		.4byte	.LASF14
+ 1023 00a7 03       		.byte	0x3
+ 1024 00a8 2C       		.byte	0x2c
+ 1025 00a9 4C000000 		.4byte	0x4c
+ 1026 00ad 03       		.uleb128 0x3
+ 1027 00ae 65020000 		.4byte	.LASF15
+ 1028 00b2 03       		.byte	0x3
+ 1029 00b3 30       		.byte	0x30
+ 1030 00b4 5E000000 		.4byte	0x5e
+ 1031 00b8 03       		.uleb128 0x3
+ 1032 00b9 3A000000 		.4byte	.LASF16
+ 1033 00bd 03       		.byte	0x3
+ 1034 00be 3C       		.byte	0x3c
+ 1035 00bf 77000000 		.4byte	0x77
+ 1036 00c3 02       		.uleb128 0x2
+ 1037 00c4 08       		.byte	0x8
+ 1038 00c5 04       		.byte	0x4
+ 1039 00c6 4F010000 		.4byte	.LASF17
+ 1040 00ca 02       		.uleb128 0x2
+ 1041 00cb 04       		.byte	0x4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 24
+
+
+ 1042 00cc 07       		.byte	0x7
+ 1043 00cd 46010000 		.4byte	.LASF18
+ 1044 00d1 02       		.uleb128 0x2
+ 1045 00d2 01       		.byte	0x1
+ 1046 00d3 08       		.byte	0x8
+ 1047 00d4 6E020000 		.4byte	.LASF19
+ 1048 00d8 05       		.uleb128 0x5
+ 1049 00d9 74000000 		.4byte	.LASF32
+ 1050 00dd 01       		.byte	0x1
+ 1051 00de 0E       		.byte	0xe
+ 1052 00df 00000000 		.4byte	.LFB0
+ 1053 00e3 78020000 		.4byte	.LFE0-.LFB0
+ 1054 00e7 01       		.uleb128 0x1
+ 1055 00e8 9C       		.byte	0x9c
+ 1056 00e9 9E020000 		.4byte	0x29e
+ 1057 00ed 06       		.uleb128 0x6
+ 1058 00ee 615F3100 		.ascii	"a_1\000"
+ 1059 00f2 01       		.byte	0x1
+ 1060 00f3 0E       		.byte	0xe
+ 1061 00f4 9E020000 		.4byte	0x29e
+ 1062 00f8 00000000 		.4byte	.LLST0
+ 1063 00fc 06       		.uleb128 0x6
+ 1064 00fd 625F3100 		.ascii	"b_1\000"
+ 1065 0101 01       		.byte	0x1
+ 1066 0102 0E       		.byte	0xe
+ 1067 0103 9E020000 		.4byte	0x29e
+ 1068 0107 20000000 		.4byte	.LLST1
+ 1069 010b 07       		.uleb128 0x7
+ 1070 010c 6A010000 		.4byte	.LASF20
+ 1071 0110 01       		.byte	0x1
+ 1072 0111 0E       		.byte	0xe
+ 1073 0112 A9020000 		.4byte	0x2a9
+ 1074 0116 3E000000 		.4byte	.LLST2
+ 1075 011a 08       		.uleb128 0x8
+ 1076 011b 64303100 		.ascii	"d01\000"
+ 1077 011f 01       		.byte	0x1
+ 1078 0120 0F       		.byte	0xf
+ 1079 0121 AF020000 		.4byte	0x2af
+ 1080 0125 03       		.uleb128 0x3
+ 1081 0126 91       		.byte	0x91
+ 1082 0127 987F     		.sleb128 -104
+ 1083 0129 09       		.uleb128 0x9
+ 1084 012a 96020000 		.4byte	.LASF21
+ 1085 012e 01       		.byte	0x1
+ 1086 012f 10       		.byte	0x10
+ 1087 0130 AF020000 		.4byte	0x2af
+ 1088 0134 03       		.uleb128 0x3
+ 1089 0135 91       		.byte	0x91
+ 1090 0136 D87E     		.sleb128 -168
+ 1091 0138 08       		.uleb128 0x8
+ 1092 0139 64323300 		.ascii	"d23\000"
+ 1093 013d 01       		.byte	0x1
+ 1094 013e 11       		.byte	0x11
+ 1095 013f AF020000 		.4byte	0x2af
+ 1096 0143 03       		.uleb128 0x3
+ 1097 0144 91       		.byte	0x91
+ 1098 0145 987E     		.sleb128 -232
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 25
+
+
+ 1099 0147 09       		.uleb128 0x9
+ 1100 0148 AA020000 		.4byte	.LASF22
+ 1101 014c 01       		.byte	0x1
+ 1102 014d 12       		.byte	0x12
+ 1103 014e BF020000 		.4byte	0x2bf
+ 1104 0152 03       		.uleb128 0x3
+ 1105 0153 91       		.byte	0x91
+ 1106 0154 987D     		.sleb128 -360
+ 1107 0156 0A       		.uleb128 0xa
+ 1108 0157 6900     		.ascii	"i\000"
+ 1109 0159 01       		.byte	0x1
+ 1110 015a 14       		.byte	0x14
+ 1111 015b A2000000 		.4byte	0xa2
+ 1112 015f 5C000000 		.4byte	.LLST3
+ 1113 0163 0A       		.uleb128 0xa
+ 1114 0164 6A00     		.ascii	"j\000"
+ 1115 0166 01       		.byte	0x1
+ 1116 0167 14       		.byte	0x14
+ 1117 0168 A2000000 		.4byte	0xa2
+ 1118 016c B4000000 		.4byte	.LLST4
+ 1119 0170 0B       		.uleb128 0xb
+ 1120 0171 00000000 		.4byte	.LASF23
+ 1121 0175 01       		.byte	0x1
+ 1122 0176 1C       		.byte	0x1c
+ 1123 0177 97000000 		.4byte	0x97
+ 1124 017b D3000000 		.4byte	.LLST5
+ 1125 017f 0B       		.uleb128 0xb
+ 1126 0180 05000000 		.4byte	.LASF24
+ 1127 0184 01       		.byte	0x1
+ 1128 0185 1C       		.byte	0x1c
+ 1129 0186 97000000 		.4byte	0x97
+ 1130 018a E6000000 		.4byte	.LLST6
+ 1131 018e 0B       		.uleb128 0xb
+ 1132 018f 0A000000 		.4byte	.LASF25
+ 1133 0193 01       		.byte	0x1
+ 1134 0194 1C       		.byte	0x1c
+ 1135 0195 97000000 		.4byte	0x97
+ 1136 0199 FB000000 		.4byte	.LLST7
+ 1137 019d 0B       		.uleb128 0xb
+ 1138 019e 0F000000 		.4byte	.LASF26
+ 1139 01a2 01       		.byte	0x1
+ 1140 01a3 1C       		.byte	0x1c
+ 1141 01a4 97000000 		.4byte	0x97
+ 1142 01a8 10010000 		.4byte	.LLST8
+ 1143 01ac 0B       		.uleb128 0xb
+ 1144 01ad 14000000 		.4byte	.LASF27
+ 1145 01b1 01       		.byte	0x1
+ 1146 01b2 1C       		.byte	0x1c
+ 1147 01b3 97000000 		.4byte	0x97
+ 1148 01b7 25010000 		.4byte	.LLST9
+ 1149 01bb 0B       		.uleb128 0xb
+ 1150 01bc 19000000 		.4byte	.LASF28
+ 1151 01c0 01       		.byte	0x1
+ 1152 01c1 1C       		.byte	0x1c
+ 1153 01c2 97000000 		.4byte	0x97
+ 1154 01c6 43010000 		.4byte	.LLST10
+ 1155 01ca 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 26
+
+
+ 1156 01cb 1E000000 		.4byte	.LASF29
+ 1157 01cf 01       		.byte	0x1
+ 1158 01d0 1C       		.byte	0x1c
+ 1159 01d1 97000000 		.4byte	0x97
+ 1160 01d5 61010000 		.4byte	.LLST11
+ 1161 01d9 0B       		.uleb128 0xb
+ 1162 01da 23000000 		.4byte	.LASF30
+ 1163 01de 01       		.byte	0x1
+ 1164 01df 1C       		.byte	0x1c
+ 1165 01e0 97000000 		.4byte	0x97
+ 1166 01e4 95010000 		.4byte	.LLST12
+ 1167 01e8 0C       		.uleb128 0xc
+ 1168 01e9 28000000 		.4byte	.LASF41
+ 1169 01ed 01       		.byte	0x1
+ 1170 01ee 1C       		.byte	0x1c
+ 1171 01ef 97000000 		.4byte	0x97
+ 1172 01f3 0B       		.uleb128 0xb
+ 1173 01f4 85000000 		.4byte	.LASF31
+ 1174 01f8 01       		.byte	0x1
+ 1175 01f9 1C       		.byte	0x1c
+ 1176 01fa 97000000 		.4byte	0x97
+ 1177 01fe C7010000 		.4byte	.LLST13
+ 1178 0202 0D       		.uleb128 0xd
+ 1179 0203 16000000 		.4byte	.LVL4
+ 1180 0207 09080000 		.4byte	0x809
+ 1181 020b 22020000 		.4byte	0x222
+ 1182 020f 0E       		.uleb128 0xe
+ 1183 0210 01       		.uleb128 0x1
+ 1184 0211 50       		.byte	0x50
+ 1185 0212 03       		.uleb128 0x3
+ 1186 0213 91       		.byte	0x91
+ 1187 0214 987D     		.sleb128 -360
+ 1188 0216 0E       		.uleb128 0xe
+ 1189 0217 01       		.uleb128 0x1
+ 1190 0218 51       		.byte	0x51
+ 1191 0219 01       		.uleb128 0x1
+ 1192 021a 30       		.byte	0x30
+ 1193 021b 0E       		.uleb128 0xe
+ 1194 021c 01       		.uleb128 0x1
+ 1195 021d 52       		.byte	0x52
+ 1196 021e 02       		.uleb128 0x2
+ 1197 021f 08       		.byte	0x8
+ 1198 0220 7E       		.byte	0x7e
+ 1199 0221 00       		.byte	0
+ 1200 0222 0D       		.uleb128 0xd
+ 1201 0223 22000000 		.4byte	.LVL5
+ 1202 0227 09080000 		.4byte	0x809
+ 1203 022b 42020000 		.4byte	0x242
+ 1204 022f 0E       		.uleb128 0xe
+ 1205 0230 01       		.uleb128 0x1
+ 1206 0231 50       		.byte	0x50
+ 1207 0232 03       		.uleb128 0x3
+ 1208 0233 91       		.byte	0x91
+ 1209 0234 987F     		.sleb128 -104
+ 1210 0236 0E       		.uleb128 0xe
+ 1211 0237 01       		.uleb128 0x1
+ 1212 0238 51       		.byte	0x51
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 27
+
+
+ 1213 0239 01       		.uleb128 0x1
+ 1214 023a 30       		.byte	0x30
+ 1215 023b 0E       		.uleb128 0xe
+ 1216 023c 01       		.uleb128 0x1
+ 1217 023d 52       		.byte	0x52
+ 1218 023e 02       		.uleb128 0x2
+ 1219 023f 74       		.byte	0x74
+ 1220 0240 00       		.sleb128 0
+ 1221 0241 00       		.byte	0
+ 1222 0242 0D       		.uleb128 0xd
+ 1223 0243 2C000000 		.4byte	.LVL6
+ 1224 0247 09080000 		.4byte	0x809
+ 1225 024b 62020000 		.4byte	0x262
+ 1226 024f 0E       		.uleb128 0xe
+ 1227 0250 01       		.uleb128 0x1
+ 1228 0251 50       		.byte	0x50
+ 1229 0252 03       		.uleb128 0x3
+ 1230 0253 91       		.byte	0x91
+ 1231 0254 D87E     		.sleb128 -168
+ 1232 0256 0E       		.uleb128 0xe
+ 1233 0257 01       		.uleb128 0x1
+ 1234 0258 51       		.byte	0x51
+ 1235 0259 01       		.uleb128 0x1
+ 1236 025a 30       		.byte	0x30
+ 1237 025b 0E       		.uleb128 0xe
+ 1238 025c 01       		.uleb128 0x1
+ 1239 025d 52       		.byte	0x52
+ 1240 025e 02       		.uleb128 0x2
+ 1241 025f 74       		.byte	0x74
+ 1242 0260 00       		.sleb128 0
+ 1243 0261 00       		.byte	0
+ 1244 0262 0D       		.uleb128 0xd
+ 1245 0263 36000000 		.4byte	.LVL7
+ 1246 0267 09080000 		.4byte	0x809
+ 1247 026b 82020000 		.4byte	0x282
+ 1248 026f 0E       		.uleb128 0xe
+ 1249 0270 01       		.uleb128 0x1
+ 1250 0271 50       		.byte	0x50
+ 1251 0272 03       		.uleb128 0x3
+ 1252 0273 91       		.byte	0x91
+ 1253 0274 987E     		.sleb128 -232
+ 1254 0276 0E       		.uleb128 0xe
+ 1255 0277 01       		.uleb128 0x1
+ 1256 0278 51       		.byte	0x51
+ 1257 0279 01       		.uleb128 0x1
+ 1258 027a 30       		.byte	0x30
+ 1259 027b 0E       		.uleb128 0xe
+ 1260 027c 01       		.uleb128 0x1
+ 1261 027d 52       		.byte	0x52
+ 1262 027e 02       		.uleb128 0x2
+ 1263 027f 74       		.byte	0x74
+ 1264 0280 00       		.sleb128 0
+ 1265 0281 00       		.byte	0
+ 1266 0282 0F       		.uleb128 0xf
+ 1267 0283 40000000 		.4byte	.LVL8
+ 1268 0287 09080000 		.4byte	0x809
+ 1269 028b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 28
+
+
+ 1270 028c 01       		.uleb128 0x1
+ 1271 028d 50       		.byte	0x50
+ 1272 028e 02       		.uleb128 0x2
+ 1273 028f 78       		.byte	0x78
+ 1274 0290 00       		.sleb128 0
+ 1275 0291 0E       		.uleb128 0xe
+ 1276 0292 01       		.uleb128 0x1
+ 1277 0293 51       		.byte	0x51
+ 1278 0294 01       		.uleb128 0x1
+ 1279 0295 30       		.byte	0x30
+ 1280 0296 0E       		.uleb128 0xe
+ 1281 0297 01       		.uleb128 0x1
+ 1282 0298 52       		.byte	0x52
+ 1283 0299 02       		.uleb128 0x2
+ 1284 029a 08       		.byte	0x8
+ 1285 029b FE       		.byte	0xfe
+ 1286 029c 00       		.byte	0
+ 1287 029d 00       		.byte	0
+ 1288 029e 10       		.uleb128 0x10
+ 1289 029f 04       		.byte	0x4
+ 1290 02a0 A4020000 		.4byte	0x2a4
+ 1291 02a4 11       		.uleb128 0x11
+ 1292 02a5 97000000 		.4byte	0x97
+ 1293 02a9 10       		.uleb128 0x10
+ 1294 02aa 04       		.byte	0x4
+ 1295 02ab 97000000 		.4byte	0x97
+ 1296 02af 12       		.uleb128 0x12
+ 1297 02b0 97000000 		.4byte	0x97
+ 1298 02b4 BF020000 		.4byte	0x2bf
+ 1299 02b8 13       		.uleb128 0x13
+ 1300 02b9 CA000000 		.4byte	0xca
+ 1301 02bd 1E       		.byte	0x1e
+ 1302 02be 00       		.byte	0
+ 1303 02bf 12       		.uleb128 0x12
+ 1304 02c0 97000000 		.4byte	0x97
+ 1305 02c4 CF020000 		.4byte	0x2cf
+ 1306 02c8 13       		.uleb128 0x13
+ 1307 02c9 CA000000 		.4byte	0xca
+ 1308 02cd 3E       		.byte	0x3e
+ 1309 02ce 00       		.byte	0
+ 1310 02cf 05       		.uleb128 0x5
+ 1311 02d0 5B010000 		.4byte	.LASF33
+ 1312 02d4 01       		.byte	0x1
+ 1313 02d5 71       		.byte	0x71
+ 1314 02d6 00000000 		.4byte	.LFB1
+ 1315 02da 2C030000 		.4byte	.LFE1-.LFB1
+ 1316 02de 01       		.uleb128 0x1
+ 1317 02df 9C       		.byte	0x9c
+ 1318 02e0 43070000 		.4byte	0x743
+ 1319 02e4 06       		.uleb128 0x6
+ 1320 02e5 613100   		.ascii	"a1\000"
+ 1321 02e8 01       		.byte	0x1
+ 1322 02e9 71       		.byte	0x71
+ 1323 02ea 9E020000 		.4byte	0x29e
+ 1324 02ee EA010000 		.4byte	.LLST14
+ 1325 02f2 06       		.uleb128 0x6
+ 1326 02f3 623100   		.ascii	"b1\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 29
+
+
+ 1327 02f6 01       		.byte	0x1
+ 1328 02f7 71       		.byte	0x71
+ 1329 02f8 9E020000 		.4byte	0x29e
+ 1330 02fc 16020000 		.4byte	.LLST15
+ 1331 0300 07       		.uleb128 0x7
+ 1332 0301 A3020000 		.4byte	.LASF34
+ 1333 0305 01       		.byte	0x1
+ 1334 0306 71       		.byte	0x71
+ 1335 0307 A9020000 		.4byte	0x2a9
+ 1336 030b 42020000 		.4byte	.LLST16
+ 1337 030f 14       		.uleb128 0x14
+ 1338 0310 51020000 		.4byte	.LASF35
+ 1339 0314 01       		.byte	0x1
+ 1340 0315 72       		.byte	0x72
+ 1341 0316 97000000 		.4byte	0x97
+ 1342 031a ABD57E   		.sleb128 -21845
+ 1343 031d 14       		.uleb128 0x14
+ 1344 031e 60020000 		.4byte	.LASF36
+ 1345 0322 01       		.byte	0x1
+ 1346 0323 72       		.byte	0x72
+ 1347 0324 97000000 		.4byte	0x97
+ 1348 0328 B99C7E   		.sleb128 -29127
+ 1349 032b 14       		.uleb128 0x14
+ 1350 032c 77010000 		.4byte	.LASF37
+ 1351 0330 01       		.byte	0x1
+ 1352 0331 72       		.byte	0x72
+ 1353 0332 97000000 		.4byte	0x97
+ 1354 0336 EF5D     		.sleb128 -4369
+ 1355 0338 08       		.uleb128 0x8
+ 1356 0339 61773100 		.ascii	"aw1\000"
+ 1357 033d 01       		.byte	0x1
+ 1358 033e 74       		.byte	0x74
+ 1359 033f 43070000 		.4byte	0x743
+ 1360 0343 03       		.uleb128 0x3
+ 1361 0344 91       		.byte	0x91
+ 1362 0345 E07E     		.sleb128 -160
+ 1363 0347 08       		.uleb128 0x8
+ 1364 0348 61773200 		.ascii	"aw2\000"
+ 1365 034c 01       		.byte	0x1
+ 1366 034d 74       		.byte	0x74
+ 1367 034e 43070000 		.4byte	0x743
+ 1368 0352 03       		.uleb128 0x3
+ 1369 0353 91       		.byte	0x91
+ 1370 0354 E07D     		.sleb128 -288
+ 1371 0356 08       		.uleb128 0x8
+ 1372 0357 61773300 		.ascii	"aw3\000"
+ 1373 035b 01       		.byte	0x1
+ 1374 035c 74       		.byte	0x74
+ 1375 035d 43070000 		.4byte	0x743
+ 1376 0361 03       		.uleb128 0x3
+ 1377 0362 91       		.byte	0x91
+ 1378 0363 E07C     		.sleb128 -416
+ 1379 0365 08       		.uleb128 0x8
+ 1380 0366 61773400 		.ascii	"aw4\000"
+ 1381 036a 01       		.byte	0x1
+ 1382 036b 74       		.byte	0x74
+ 1383 036c 43070000 		.4byte	0x743
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 30
+
+
+ 1384 0370 03       		.uleb128 0x3
+ 1385 0371 91       		.byte	0x91
+ 1386 0372 E07B     		.sleb128 -544
+ 1387 0374 08       		.uleb128 0x8
+ 1388 0375 61773500 		.ascii	"aw5\000"
+ 1389 0379 01       		.byte	0x1
+ 1390 037a 74       		.byte	0x74
+ 1391 037b 43070000 		.4byte	0x743
+ 1392 037f 03       		.uleb128 0x3
+ 1393 0380 91       		.byte	0x91
+ 1394 0381 E07A     		.sleb128 -672
+ 1395 0383 08       		.uleb128 0x8
+ 1396 0384 61773600 		.ascii	"aw6\000"
+ 1397 0388 01       		.byte	0x1
+ 1398 0389 74       		.byte	0x74
+ 1399 038a 43070000 		.4byte	0x743
+ 1400 038e 03       		.uleb128 0x3
+ 1401 038f 91       		.byte	0x91
+ 1402 0390 E079     		.sleb128 -800
+ 1403 0392 08       		.uleb128 0x8
+ 1404 0393 61773700 		.ascii	"aw7\000"
+ 1405 0397 01       		.byte	0x1
+ 1406 0398 74       		.byte	0x74
+ 1407 0399 43070000 		.4byte	0x743
+ 1408 039d 03       		.uleb128 0x3
+ 1409 039e 91       		.byte	0x91
+ 1410 039f E078     		.sleb128 -928
+ 1411 03a1 08       		.uleb128 0x8
+ 1412 03a2 62773100 		.ascii	"bw1\000"
+ 1413 03a6 01       		.byte	0x1
+ 1414 03a7 75       		.byte	0x75
+ 1415 03a8 43070000 		.4byte	0x743
+ 1416 03ac 03       		.uleb128 0x3
+ 1417 03ad 91       		.byte	0x91
+ 1418 03ae E077     		.sleb128 -1056
+ 1419 03b0 08       		.uleb128 0x8
+ 1420 03b1 62773200 		.ascii	"bw2\000"
+ 1421 03b5 01       		.byte	0x1
+ 1422 03b6 75       		.byte	0x75
+ 1423 03b7 43070000 		.4byte	0x743
+ 1424 03bb 03       		.uleb128 0x3
+ 1425 03bc 91       		.byte	0x91
+ 1426 03bd E076     		.sleb128 -1184
+ 1427 03bf 08       		.uleb128 0x8
+ 1428 03c0 62773300 		.ascii	"bw3\000"
+ 1429 03c4 01       		.byte	0x1
+ 1430 03c5 75       		.byte	0x75
+ 1431 03c6 43070000 		.4byte	0x743
+ 1432 03ca 03       		.uleb128 0x3
+ 1433 03cb 91       		.byte	0x91
+ 1434 03cc E075     		.sleb128 -1312
+ 1435 03ce 08       		.uleb128 0x8
+ 1436 03cf 62773400 		.ascii	"bw4\000"
+ 1437 03d3 01       		.byte	0x1
+ 1438 03d4 75       		.byte	0x75
+ 1439 03d5 43070000 		.4byte	0x743
+ 1440 03d9 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 31
+
+
+ 1441 03da 91       		.byte	0x91
+ 1442 03db E074     		.sleb128 -1440
+ 1443 03dd 08       		.uleb128 0x8
+ 1444 03de 62773500 		.ascii	"bw5\000"
+ 1445 03e2 01       		.byte	0x1
+ 1446 03e3 75       		.byte	0x75
+ 1447 03e4 43070000 		.4byte	0x743
+ 1448 03e8 03       		.uleb128 0x3
+ 1449 03e9 91       		.byte	0x91
+ 1450 03ea E073     		.sleb128 -1568
+ 1451 03ec 08       		.uleb128 0x8
+ 1452 03ed 62773600 		.ascii	"bw6\000"
+ 1453 03f1 01       		.byte	0x1
+ 1454 03f2 75       		.byte	0x75
+ 1455 03f3 43070000 		.4byte	0x743
+ 1456 03f7 03       		.uleb128 0x3
+ 1457 03f8 91       		.byte	0x91
+ 1458 03f9 E072     		.sleb128 -1696
+ 1459 03fb 08       		.uleb128 0x8
+ 1460 03fc 62773700 		.ascii	"bw7\000"
+ 1461 0400 01       		.byte	0x1
+ 1462 0401 75       		.byte	0x75
+ 1463 0402 43070000 		.4byte	0x743
+ 1464 0406 03       		.uleb128 0x3
+ 1465 0407 91       		.byte	0x91
+ 1466 0408 E071     		.sleb128 -1824
+ 1467 040a 08       		.uleb128 0x8
+ 1468 040b 773100   		.ascii	"w1\000"
+ 1469 040e 01       		.byte	0x1
+ 1470 040f 76       		.byte	0x76
+ 1471 0410 53070000 		.4byte	0x753
+ 1472 0414 03       		.uleb128 0x3
+ 1473 0415 91       		.byte	0x91
+ 1474 0416 E06F     		.sleb128 -2080
+ 1475 0418 08       		.uleb128 0x8
+ 1476 0419 773200   		.ascii	"w2\000"
+ 1477 041c 01       		.byte	0x1
+ 1478 041d 76       		.byte	0x76
+ 1479 041e 53070000 		.4byte	0x753
+ 1480 0422 03       		.uleb128 0x3
+ 1481 0423 91       		.byte	0x91
+ 1482 0424 E06D     		.sleb128 -2336
+ 1483 0426 08       		.uleb128 0x8
+ 1484 0427 773300   		.ascii	"w3\000"
+ 1485 042a 01       		.byte	0x1
+ 1486 042b 76       		.byte	0x76
+ 1487 042c 53070000 		.4byte	0x753
+ 1488 0430 03       		.uleb128 0x3
+ 1489 0431 91       		.byte	0x91
+ 1490 0432 E06B     		.sleb128 -2592
+ 1491 0434 08       		.uleb128 0x8
+ 1492 0435 773400   		.ascii	"w4\000"
+ 1493 0438 01       		.byte	0x1
+ 1494 0439 76       		.byte	0x76
+ 1495 043a 53070000 		.4byte	0x753
+ 1496 043e 03       		.uleb128 0x3
+ 1497 043f 91       		.byte	0x91
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 32
+
+
+ 1498 0440 E069     		.sleb128 -2848
+ 1499 0442 08       		.uleb128 0x8
+ 1500 0443 773500   		.ascii	"w5\000"
+ 1501 0446 01       		.byte	0x1
+ 1502 0447 77       		.byte	0x77
+ 1503 0448 53070000 		.4byte	0x753
+ 1504 044c 03       		.uleb128 0x3
+ 1505 044d 91       		.byte	0x91
+ 1506 044e E067     		.sleb128 -3104
+ 1507 0450 08       		.uleb128 0x8
+ 1508 0451 773600   		.ascii	"w6\000"
+ 1509 0454 01       		.byte	0x1
+ 1510 0455 77       		.byte	0x77
+ 1511 0456 53070000 		.4byte	0x753
+ 1512 045a 03       		.uleb128 0x3
+ 1513 045b 91       		.byte	0x91
+ 1514 045c E065     		.sleb128 -3360
+ 1515 045e 08       		.uleb128 0x8
+ 1516 045f 773700   		.ascii	"w7\000"
+ 1517 0462 01       		.byte	0x1
+ 1518 0463 77       		.byte	0x77
+ 1519 0464 53070000 		.4byte	0x753
+ 1520 0468 03       		.uleb128 0x3
+ 1521 0469 91       		.byte	0x91
+ 1522 046a E063     		.sleb128 -3616
+ 1523 046c 0A       		.uleb128 0xa
+ 1524 046d 723000   		.ascii	"r0\000"
+ 1525 0470 01       		.byte	0x1
+ 1526 0471 78       		.byte	0x78
+ 1527 0472 97000000 		.4byte	0x97
+ 1528 0476 6E020000 		.4byte	.LLST17
+ 1529 047a 0A       		.uleb128 0xa
+ 1530 047b 723100   		.ascii	"r1\000"
+ 1531 047e 01       		.byte	0x1
+ 1532 047f 78       		.byte	0x78
+ 1533 0480 97000000 		.4byte	0x97
+ 1534 0484 97020000 		.4byte	.LLST18
+ 1535 0488 0A       		.uleb128 0xa
+ 1536 0489 723200   		.ascii	"r2\000"
+ 1537 048c 01       		.byte	0x1
+ 1538 048d 78       		.byte	0x78
+ 1539 048e 97000000 		.4byte	0x97
+ 1540 0492 81030000 		.4byte	.LLST19
+ 1541 0496 0A       		.uleb128 0xa
+ 1542 0497 723300   		.ascii	"r3\000"
+ 1543 049a 01       		.byte	0x1
+ 1544 049b 78       		.byte	0x78
+ 1545 049c 97000000 		.4byte	0x97
+ 1546 04a0 25040000 		.4byte	.LLST20
+ 1547 04a4 0A       		.uleb128 0xa
+ 1548 04a5 723400   		.ascii	"r4\000"
+ 1549 04a8 01       		.byte	0x1
+ 1550 04a9 78       		.byte	0x78
+ 1551 04aa 97000000 		.4byte	0x97
+ 1552 04ae AC040000 		.4byte	.LLST21
+ 1553 04b2 0A       		.uleb128 0xa
+ 1554 04b3 723500   		.ascii	"r5\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 33
+
+
+ 1555 04b6 01       		.byte	0x1
+ 1556 04b7 78       		.byte	0x78
+ 1557 04b8 97000000 		.4byte	0x97
+ 1558 04bc 24060000 		.4byte	.LLST22
+ 1559 04c0 0A       		.uleb128 0xa
+ 1560 04c1 723600   		.ascii	"r6\000"
+ 1561 04c4 01       		.byte	0x1
+ 1562 04c5 78       		.byte	0x78
+ 1563 04c6 97000000 		.4byte	0x97
+ 1564 04ca 05080000 		.4byte	.LLST23
+ 1565 04ce 0A       		.uleb128 0xa
+ 1566 04cf 723700   		.ascii	"r7\000"
+ 1567 04d2 01       		.byte	0x1
+ 1568 04d3 78       		.byte	0x78
+ 1569 04d4 97000000 		.4byte	0x97
+ 1570 04d8 43080000 		.4byte	.LLST24
+ 1571 04dc 0A       		.uleb128 0xa
+ 1572 04dd 413000   		.ascii	"A0\000"
+ 1573 04e0 01       		.byte	0x1
+ 1574 04e1 79       		.byte	0x79
+ 1575 04e2 A9020000 		.4byte	0x2a9
+ 1576 04e6 E5080000 		.4byte	.LLST25
+ 1577 04ea 0A       		.uleb128 0xa
+ 1578 04eb 413100   		.ascii	"A1\000"
+ 1579 04ee 01       		.byte	0x1
+ 1580 04ef 79       		.byte	0x79
+ 1581 04f0 A9020000 		.4byte	0x2a9
+ 1582 04f4 06090000 		.4byte	.LLST26
+ 1583 04f8 0A       		.uleb128 0xa
+ 1584 04f9 413200   		.ascii	"A2\000"
+ 1585 04fc 01       		.byte	0x1
+ 1586 04fd 79       		.byte	0x79
+ 1587 04fe A9020000 		.4byte	0x2a9
+ 1588 0502 2D090000 		.4byte	.LLST27
+ 1589 0506 0A       		.uleb128 0xa
+ 1590 0507 413300   		.ascii	"A3\000"
+ 1591 050a 01       		.byte	0x1
+ 1592 050b 79       		.byte	0x79
+ 1593 050c A9020000 		.4byte	0x2a9
+ 1594 0510 54090000 		.4byte	.LLST28
+ 1595 0514 0A       		.uleb128 0xa
+ 1596 0515 423000   		.ascii	"B0\000"
+ 1597 0518 01       		.byte	0x1
+ 1598 0519 79       		.byte	0x79
+ 1599 051a A9020000 		.4byte	0x2a9
+ 1600 051e 7B090000 		.4byte	.LLST29
+ 1601 0522 0A       		.uleb128 0xa
+ 1602 0523 423100   		.ascii	"B1\000"
+ 1603 0526 01       		.byte	0x1
+ 1604 0527 79       		.byte	0x79
+ 1605 0528 A9020000 		.4byte	0x2a9
+ 1606 052c 9C090000 		.4byte	.LLST30
+ 1607 0530 0A       		.uleb128 0xa
+ 1608 0531 423200   		.ascii	"B2\000"
+ 1609 0534 01       		.byte	0x1
+ 1610 0535 79       		.byte	0x79
+ 1611 0536 A9020000 		.4byte	0x2a9
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 34
+
+
+ 1612 053a C3090000 		.4byte	.LLST31
+ 1613 053e 0A       		.uleb128 0xa
+ 1614 053f 423300   		.ascii	"B3\000"
+ 1615 0542 01       		.byte	0x1
+ 1616 0543 79       		.byte	0x79
+ 1617 0544 A9020000 		.4byte	0x2a9
+ 1618 0548 EA090000 		.4byte	.LLST32
+ 1619 054c 0A       		.uleb128 0xa
+ 1620 054d 4300     		.ascii	"C\000"
+ 1621 054f 01       		.byte	0x1
+ 1622 0550 83       		.byte	0x83
+ 1623 0551 A9020000 		.4byte	0x2a9
+ 1624 0555 110A0000 		.4byte	.LLST33
+ 1625 0559 0A       		.uleb128 0xa
+ 1626 055a 6900     		.ascii	"i\000"
+ 1627 055c 01       		.byte	0x1
+ 1628 055d 86       		.byte	0x86
+ 1629 055e 89000000 		.4byte	0x89
+ 1630 0562 320A0000 		.4byte	.LLST34
+ 1631 0566 0A       		.uleb128 0xa
+ 1632 0567 6A00     		.ascii	"j\000"
+ 1633 0569 01       		.byte	0x1
+ 1634 056a 86       		.byte	0x86
+ 1635 056b 89000000 		.4byte	0x89
+ 1636 056f 510A0000 		.4byte	.LLST35
+ 1637 0573 0D       		.uleb128 0xd
+ 1638 0574 1C000000 		.4byte	.LVL47
+ 1639 0578 09080000 		.4byte	0x809
+ 1640 057c 93050000 		.4byte	0x593
+ 1641 0580 0E       		.uleb128 0xe
+ 1642 0581 01       		.uleb128 0x1
+ 1643 0582 50       		.byte	0x50
+ 1644 0583 03       		.uleb128 0x3
+ 1645 0584 91       		.byte	0x91
+ 1646 0585 E06F     		.sleb128 -2080
+ 1647 0587 0E       		.uleb128 0xe
+ 1648 0588 01       		.uleb128 0x1
+ 1649 0589 51       		.byte	0x51
+ 1650 058a 01       		.uleb128 0x1
+ 1651 058b 30       		.byte	0x30
+ 1652 058c 0E       		.uleb128 0xe
+ 1653 058d 01       		.uleb128 0x1
+ 1654 058e 52       		.byte	0x52
+ 1655 058f 02       		.uleb128 0x2
+ 1656 0590 77       		.byte	0x77
+ 1657 0591 00       		.sleb128 0
+ 1658 0592 00       		.byte	0
+ 1659 0593 0D       		.uleb128 0xd
+ 1660 0594 28000000 		.4byte	.LVL48
+ 1661 0598 09080000 		.4byte	0x809
+ 1662 059c B3050000 		.4byte	0x5b3
+ 1663 05a0 0E       		.uleb128 0xe
+ 1664 05a1 01       		.uleb128 0x1
+ 1665 05a2 50       		.byte	0x50
+ 1666 05a3 03       		.uleb128 0x3
+ 1667 05a4 91       		.byte	0x91
+ 1668 05a5 E06D     		.sleb128 -2336
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 35
+
+
+ 1669 05a7 0E       		.uleb128 0xe
+ 1670 05a8 01       		.uleb128 0x1
+ 1671 05a9 51       		.byte	0x51
+ 1672 05aa 01       		.uleb128 0x1
+ 1673 05ab 30       		.byte	0x30
+ 1674 05ac 0E       		.uleb128 0xe
+ 1675 05ad 01       		.uleb128 0x1
+ 1676 05ae 52       		.byte	0x52
+ 1677 05af 02       		.uleb128 0x2
+ 1678 05b0 77       		.byte	0x77
+ 1679 05b1 00       		.sleb128 0
+ 1680 05b2 00       		.byte	0
+ 1681 05b3 0D       		.uleb128 0xd
+ 1682 05b4 34000000 		.4byte	.LVL49
+ 1683 05b8 09080000 		.4byte	0x809
+ 1684 05bc D3050000 		.4byte	0x5d3
+ 1685 05c0 0E       		.uleb128 0xe
+ 1686 05c1 01       		.uleb128 0x1
+ 1687 05c2 50       		.byte	0x50
+ 1688 05c3 03       		.uleb128 0x3
+ 1689 05c4 91       		.byte	0x91
+ 1690 05c5 E06B     		.sleb128 -2592
+ 1691 05c7 0E       		.uleb128 0xe
+ 1692 05c8 01       		.uleb128 0x1
+ 1693 05c9 51       		.byte	0x51
+ 1694 05ca 01       		.uleb128 0x1
+ 1695 05cb 30       		.byte	0x30
+ 1696 05cc 0E       		.uleb128 0xe
+ 1697 05cd 01       		.uleb128 0x1
+ 1698 05ce 52       		.byte	0x52
+ 1699 05cf 02       		.uleb128 0x2
+ 1700 05d0 77       		.byte	0x77
+ 1701 05d1 00       		.sleb128 0
+ 1702 05d2 00       		.byte	0
+ 1703 05d3 0D       		.uleb128 0xd
+ 1704 05d4 3E000000 		.4byte	.LVL50
+ 1705 05d8 09080000 		.4byte	0x809
+ 1706 05dc F3050000 		.4byte	0x5f3
+ 1707 05e0 0E       		.uleb128 0xe
+ 1708 05e1 01       		.uleb128 0x1
+ 1709 05e2 50       		.byte	0x50
+ 1710 05e3 03       		.uleb128 0x3
+ 1711 05e4 91       		.byte	0x91
+ 1712 05e5 E069     		.sleb128 -2848
+ 1713 05e7 0E       		.uleb128 0xe
+ 1714 05e8 01       		.uleb128 0x1
+ 1715 05e9 51       		.byte	0x51
+ 1716 05ea 01       		.uleb128 0x1
+ 1717 05eb 30       		.byte	0x30
+ 1718 05ec 0E       		.uleb128 0xe
+ 1719 05ed 01       		.uleb128 0x1
+ 1720 05ee 52       		.byte	0x52
+ 1721 05ef 02       		.uleb128 0x2
+ 1722 05f0 77       		.byte	0x77
+ 1723 05f1 00       		.sleb128 0
+ 1724 05f2 00       		.byte	0
+ 1725 05f3 0D       		.uleb128 0xd
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 36
+
+
+ 1726 05f4 48000000 		.4byte	.LVL51
+ 1727 05f8 09080000 		.4byte	0x809
+ 1728 05fc 13060000 		.4byte	0x613
+ 1729 0600 0E       		.uleb128 0xe
+ 1730 0601 01       		.uleb128 0x1
+ 1731 0602 50       		.byte	0x50
+ 1732 0603 03       		.uleb128 0x3
+ 1733 0604 91       		.byte	0x91
+ 1734 0605 E067     		.sleb128 -3104
+ 1735 0607 0E       		.uleb128 0xe
+ 1736 0608 01       		.uleb128 0x1
+ 1737 0609 51       		.byte	0x51
+ 1738 060a 01       		.uleb128 0x1
+ 1739 060b 30       		.byte	0x30
+ 1740 060c 0E       		.uleb128 0xe
+ 1741 060d 01       		.uleb128 0x1
+ 1742 060e 52       		.byte	0x52
+ 1743 060f 02       		.uleb128 0x2
+ 1744 0610 77       		.byte	0x77
+ 1745 0611 00       		.sleb128 0
+ 1746 0612 00       		.byte	0
+ 1747 0613 0D       		.uleb128 0xd
+ 1748 0614 52000000 		.4byte	.LVL52
+ 1749 0618 09080000 		.4byte	0x809
+ 1750 061c 33060000 		.4byte	0x633
+ 1751 0620 0E       		.uleb128 0xe
+ 1752 0621 01       		.uleb128 0x1
+ 1753 0622 50       		.byte	0x50
+ 1754 0623 03       		.uleb128 0x3
+ 1755 0624 91       		.byte	0x91
+ 1756 0625 E065     		.sleb128 -3360
+ 1757 0627 0E       		.uleb128 0xe
+ 1758 0628 01       		.uleb128 0x1
+ 1759 0629 51       		.byte	0x51
+ 1760 062a 01       		.uleb128 0x1
+ 1761 062b 30       		.byte	0x30
+ 1762 062c 0E       		.uleb128 0xe
+ 1763 062d 01       		.uleb128 0x1
+ 1764 062e 52       		.byte	0x52
+ 1765 062f 02       		.uleb128 0x2
+ 1766 0630 77       		.byte	0x77
+ 1767 0631 00       		.sleb128 0
+ 1768 0632 00       		.byte	0
+ 1769 0633 0D       		.uleb128 0xd
+ 1770 0634 5C000000 		.4byte	.LVL53
+ 1771 0638 09080000 		.4byte	0x809
+ 1772 063c 52060000 		.4byte	0x652
+ 1773 0640 0E       		.uleb128 0xe
+ 1774 0641 01       		.uleb128 0x1
+ 1775 0642 50       		.byte	0x50
+ 1776 0643 02       		.uleb128 0x2
+ 1777 0644 7D       		.byte	0x7d
+ 1778 0645 00       		.sleb128 0
+ 1779 0646 0E       		.uleb128 0xe
+ 1780 0647 01       		.uleb128 0x1
+ 1781 0648 51       		.byte	0x51
+ 1782 0649 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 37
+
+
+ 1783 064a 30       		.byte	0x30
+ 1784 064b 0E       		.uleb128 0xe
+ 1785 064c 01       		.uleb128 0x1
+ 1786 064d 52       		.byte	0x52
+ 1787 064e 02       		.uleb128 0x2
+ 1788 064f 77       		.byte	0x77
+ 1789 0650 00       		.sleb128 0
+ 1790 0651 00       		.byte	0
+ 1791 0652 0D       		.uleb128 0xd
+ 1792 0653 96010000 		.4byte	.LVL98
+ 1793 0657 D8000000 		.4byte	0xd8
+ 1794 065b 75060000 		.4byte	0x675
+ 1795 065f 0E       		.uleb128 0xe
+ 1796 0660 01       		.uleb128 0x1
+ 1797 0661 50       		.byte	0x50
+ 1798 0662 03       		.uleb128 0x3
+ 1799 0663 91       		.byte	0x91
+ 1800 0664 E07E     		.sleb128 -160
+ 1801 0666 0E       		.uleb128 0xe
+ 1802 0667 01       		.uleb128 0x1
+ 1803 0668 51       		.byte	0x51
+ 1804 0669 03       		.uleb128 0x3
+ 1805 066a 91       		.byte	0x91
+ 1806 066b E077     		.sleb128 -1056
+ 1807 066d 0E       		.uleb128 0xe
+ 1808 066e 01       		.uleb128 0x1
+ 1809 066f 52       		.byte	0x52
+ 1810 0670 03       		.uleb128 0x3
+ 1811 0671 91       		.byte	0x91
+ 1812 0672 E06F     		.sleb128 -2080
+ 1813 0674 00       		.byte	0
+ 1814 0675 0D       		.uleb128 0xd
+ 1815 0676 A6010000 		.4byte	.LVL99
+ 1816 067a D8000000 		.4byte	0xd8
+ 1817 067e 98060000 		.4byte	0x698
+ 1818 0682 0E       		.uleb128 0xe
+ 1819 0683 01       		.uleb128 0x1
+ 1820 0684 50       		.byte	0x50
+ 1821 0685 03       		.uleb128 0x3
+ 1822 0686 91       		.byte	0x91
+ 1823 0687 E07D     		.sleb128 -288
+ 1824 0689 0E       		.uleb128 0xe
+ 1825 068a 01       		.uleb128 0x1
+ 1826 068b 51       		.byte	0x51
+ 1827 068c 03       		.uleb128 0x3
+ 1828 068d 91       		.byte	0x91
+ 1829 068e E076     		.sleb128 -1184
+ 1830 0690 0E       		.uleb128 0xe
+ 1831 0691 01       		.uleb128 0x1
+ 1832 0692 52       		.byte	0x52
+ 1833 0693 03       		.uleb128 0x3
+ 1834 0694 91       		.byte	0x91
+ 1835 0695 E06D     		.sleb128 -2336
+ 1836 0697 00       		.byte	0
+ 1837 0698 0D       		.uleb128 0xd
+ 1838 0699 B6010000 		.4byte	.LVL100
+ 1839 069d D8000000 		.4byte	0xd8
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 38
+
+
+ 1840 06a1 BB060000 		.4byte	0x6bb
+ 1841 06a5 0E       		.uleb128 0xe
+ 1842 06a6 01       		.uleb128 0x1
+ 1843 06a7 50       		.byte	0x50
+ 1844 06a8 03       		.uleb128 0x3
+ 1845 06a9 91       		.byte	0x91
+ 1846 06aa E07C     		.sleb128 -416
+ 1847 06ac 0E       		.uleb128 0xe
+ 1848 06ad 01       		.uleb128 0x1
+ 1849 06ae 51       		.byte	0x51
+ 1850 06af 03       		.uleb128 0x3
+ 1851 06b0 91       		.byte	0x91
+ 1852 06b1 E075     		.sleb128 -1312
+ 1853 06b3 0E       		.uleb128 0xe
+ 1854 06b4 01       		.uleb128 0x1
+ 1855 06b5 52       		.byte	0x52
+ 1856 06b6 03       		.uleb128 0x3
+ 1857 06b7 91       		.byte	0x91
+ 1858 06b8 E06B     		.sleb128 -2592
+ 1859 06ba 00       		.byte	0
+ 1860 06bb 0D       		.uleb128 0xd
+ 1861 06bc C4010000 		.4byte	.LVL101
+ 1862 06c0 D8000000 		.4byte	0xd8
+ 1863 06c4 DE060000 		.4byte	0x6de
+ 1864 06c8 0E       		.uleb128 0xe
+ 1865 06c9 01       		.uleb128 0x1
+ 1866 06ca 50       		.byte	0x50
+ 1867 06cb 03       		.uleb128 0x3
+ 1868 06cc 91       		.byte	0x91
+ 1869 06cd E07B     		.sleb128 -544
+ 1870 06cf 0E       		.uleb128 0xe
+ 1871 06d0 01       		.uleb128 0x1
+ 1872 06d1 51       		.byte	0x51
+ 1873 06d2 03       		.uleb128 0x3
+ 1874 06d3 91       		.byte	0x91
+ 1875 06d4 E074     		.sleb128 -1440
+ 1876 06d6 0E       		.uleb128 0xe
+ 1877 06d7 01       		.uleb128 0x1
+ 1878 06d8 52       		.byte	0x52
+ 1879 06d9 03       		.uleb128 0x3
+ 1880 06da 91       		.byte	0x91
+ 1881 06db E069     		.sleb128 -2848
+ 1882 06dd 00       		.byte	0
+ 1883 06de 0D       		.uleb128 0xd
+ 1884 06df D2010000 		.4byte	.LVL102
+ 1885 06e3 D8000000 		.4byte	0xd8
+ 1886 06e7 01070000 		.4byte	0x701
+ 1887 06eb 0E       		.uleb128 0xe
+ 1888 06ec 01       		.uleb128 0x1
+ 1889 06ed 50       		.byte	0x50
+ 1890 06ee 03       		.uleb128 0x3
+ 1891 06ef 91       		.byte	0x91
+ 1892 06f0 E07A     		.sleb128 -672
+ 1893 06f2 0E       		.uleb128 0xe
+ 1894 06f3 01       		.uleb128 0x1
+ 1895 06f4 51       		.byte	0x51
+ 1896 06f5 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 39
+
+
+ 1897 06f6 91       		.byte	0x91
+ 1898 06f7 E073     		.sleb128 -1568
+ 1899 06f9 0E       		.uleb128 0xe
+ 1900 06fa 01       		.uleb128 0x1
+ 1901 06fb 52       		.byte	0x52
+ 1902 06fc 03       		.uleb128 0x3
+ 1903 06fd 91       		.byte	0x91
+ 1904 06fe E067     		.sleb128 -3104
+ 1905 0700 00       		.byte	0
+ 1906 0701 0D       		.uleb128 0xd
+ 1907 0702 E0010000 		.4byte	.LVL103
+ 1908 0706 D8000000 		.4byte	0xd8
+ 1909 070a 24070000 		.4byte	0x724
+ 1910 070e 0E       		.uleb128 0xe
+ 1911 070f 01       		.uleb128 0x1
+ 1912 0710 50       		.byte	0x50
+ 1913 0711 03       		.uleb128 0x3
+ 1914 0712 91       		.byte	0x91
+ 1915 0713 E079     		.sleb128 -800
+ 1916 0715 0E       		.uleb128 0xe
+ 1917 0716 01       		.uleb128 0x1
+ 1918 0717 51       		.byte	0x51
+ 1919 0718 03       		.uleb128 0x3
+ 1920 0719 91       		.byte	0x91
+ 1921 071a E072     		.sleb128 -1696
+ 1922 071c 0E       		.uleb128 0xe
+ 1923 071d 01       		.uleb128 0x1
+ 1924 071e 52       		.byte	0x52
+ 1925 071f 03       		.uleb128 0x3
+ 1926 0720 91       		.byte	0x91
+ 1927 0721 E065     		.sleb128 -3360
+ 1928 0723 00       		.byte	0
+ 1929 0724 0F       		.uleb128 0xf
+ 1930 0725 EE010000 		.4byte	.LVL104
+ 1931 0729 D8000000 		.4byte	0xd8
+ 1932 072d 0E       		.uleb128 0xe
+ 1933 072e 01       		.uleb128 0x1
+ 1934 072f 50       		.byte	0x50
+ 1935 0730 03       		.uleb128 0x3
+ 1936 0731 91       		.byte	0x91
+ 1937 0732 E078     		.sleb128 -928
+ 1938 0734 0E       		.uleb128 0xe
+ 1939 0735 01       		.uleb128 0x1
+ 1940 0736 51       		.byte	0x51
+ 1941 0737 03       		.uleb128 0x3
+ 1942 0738 91       		.byte	0x91
+ 1943 0739 E071     		.sleb128 -1824
+ 1944 073b 0E       		.uleb128 0xe
+ 1945 073c 01       		.uleb128 0x1
+ 1946 073d 52       		.byte	0x52
+ 1947 073e 02       		.uleb128 0x2
+ 1948 073f 7D       		.byte	0x7d
+ 1949 0740 00       		.sleb128 0
+ 1950 0741 00       		.byte	0
+ 1951 0742 00       		.byte	0
+ 1952 0743 12       		.uleb128 0x12
+ 1953 0744 97000000 		.4byte	0x97
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 40
+
+
+ 1954 0748 53070000 		.4byte	0x753
+ 1955 074c 13       		.uleb128 0x13
+ 1956 074d CA000000 		.4byte	0xca
+ 1957 0751 3F       		.byte	0x3f
+ 1958 0752 00       		.byte	0
+ 1959 0753 12       		.uleb128 0x12
+ 1960 0754 97000000 		.4byte	0x97
+ 1961 0758 63070000 		.4byte	0x763
+ 1962 075c 13       		.uleb128 0x13
+ 1963 075d CA000000 		.4byte	0xca
+ 1964 0761 7E       		.byte	0x7e
+ 1965 0762 00       		.byte	0
+ 1966 0763 15       		.uleb128 0x15
+ 1967 0764 2D000000 		.4byte	.LASF42
+ 1968 0768 01       		.byte	0x1
+ 1969 0769 E8       		.byte	0xe8
+ 1970 076a 00000000 		.4byte	.LFB2
+ 1971 076e 56000000 		.4byte	.LFE2-.LFB2
+ 1972 0772 01       		.uleb128 0x1
+ 1973 0773 9C       		.byte	0x9c
+ 1974 0774 F8070000 		.4byte	0x7f8
+ 1975 0778 06       		.uleb128 0x6
+ 1976 0779 6100     		.ascii	"a\000"
+ 1977 077b 01       		.byte	0x1
+ 1978 077c E8       		.byte	0xe8
+ 1979 077d 9E020000 		.4byte	0x29e
+ 1980 0781 7B0A0000 		.4byte	.LLST36
+ 1981 0785 06       		.uleb128 0x6
+ 1982 0786 6200     		.ascii	"b\000"
+ 1983 0788 01       		.byte	0x1
+ 1984 0789 E8       		.byte	0xe8
+ 1985 078a 9E020000 		.4byte	0x29e
+ 1986 078e 990A0000 		.4byte	.LLST37
+ 1987 0792 06       		.uleb128 0x6
+ 1988 0793 72657300 		.ascii	"res\000"
+ 1989 0797 01       		.byte	0x1
+ 1990 0798 E8       		.byte	0xe8
+ 1991 0799 A9020000 		.4byte	0x2a9
+ 1992 079d B70A0000 		.4byte	.LLST38
+ 1993 07a1 08       		.uleb128 0x8
+ 1994 07a2 6300     		.ascii	"c\000"
+ 1995 07a4 01       		.byte	0x1
+ 1996 07a5 EA       		.byte	0xea
+ 1997 07a6 F8070000 		.4byte	0x7f8
+ 1998 07aa 03       		.uleb128 0x3
+ 1999 07ab 91       		.byte	0x91
+ 2000 07ac F077     		.sleb128 -1040
+ 2001 07ae 0A       		.uleb128 0xa
+ 2002 07af 6900     		.ascii	"i\000"
+ 2003 07b1 01       		.byte	0x1
+ 2004 07b2 EB       		.byte	0xeb
+ 2005 07b3 89000000 		.4byte	0x89
+ 2006 07b7 D50A0000 		.4byte	.LLST39
+ 2007 07bb 0D       		.uleb128 0xd
+ 2008 07bc 18000000 		.4byte	.LVL159
+ 2009 07c0 09080000 		.4byte	0x809
+ 2010 07c4 DB070000 		.4byte	0x7db
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 41
+
+
+ 2011 07c8 0E       		.uleb128 0xe
+ 2012 07c9 01       		.uleb128 0x1
+ 2013 07ca 50       		.byte	0x50
+ 2014 07cb 02       		.uleb128 0x2
+ 2015 07cc 7D       		.byte	0x7d
+ 2016 07cd 00       		.sleb128 0
+ 2017 07ce 0E       		.uleb128 0xe
+ 2018 07cf 01       		.uleb128 0x1
+ 2019 07d0 51       		.byte	0x51
+ 2020 07d1 01       		.uleb128 0x1
+ 2021 07d2 30       		.byte	0x30
+ 2022 07d3 0E       		.uleb128 0xe
+ 2023 07d4 01       		.uleb128 0x1
+ 2024 07d5 52       		.byte	0x52
+ 2025 07d6 03       		.uleb128 0x3
+ 2026 07d7 0A       		.byte	0xa
+ 2027 07d8 0004     		.2byte	0x400
+ 2028 07da 00       		.byte	0
+ 2029 07db 0F       		.uleb128 0xf
+ 2030 07dc 22000000 		.4byte	.LVL160
+ 2031 07e0 CF020000 		.4byte	0x2cf
+ 2032 07e4 0E       		.uleb128 0xe
+ 2033 07e5 01       		.uleb128 0x1
+ 2034 07e6 50       		.byte	0x50
+ 2035 07e7 02       		.uleb128 0x2
+ 2036 07e8 75       		.byte	0x75
+ 2037 07e9 00       		.sleb128 0
+ 2038 07ea 0E       		.uleb128 0xe
+ 2039 07eb 01       		.uleb128 0x1
+ 2040 07ec 51       		.byte	0x51
+ 2041 07ed 02       		.uleb128 0x2
+ 2042 07ee 76       		.byte	0x76
+ 2043 07ef 00       		.sleb128 0
+ 2044 07f0 0E       		.uleb128 0xe
+ 2045 07f1 01       		.uleb128 0x1
+ 2046 07f2 52       		.byte	0x52
+ 2047 07f3 02       		.uleb128 0x2
+ 2048 07f4 7D       		.byte	0x7d
+ 2049 07f5 00       		.sleb128 0
+ 2050 07f6 00       		.byte	0
+ 2051 07f7 00       		.byte	0
+ 2052 07f8 12       		.uleb128 0x12
+ 2053 07f9 97000000 		.4byte	0x97
+ 2054 07fd 09080000 		.4byte	0x809
+ 2055 0801 16       		.uleb128 0x16
+ 2056 0802 CA000000 		.4byte	0xca
+ 2057 0806 FF01     		.2byte	0x1ff
+ 2058 0808 00       		.byte	0
+ 2059 0809 17       		.uleb128 0x17
+ 2060 080a 9C020000 		.4byte	.LASF43
+ 2061 080e 9C020000 		.4byte	.LASF43
+ 2062 0812 00       		.byte	0
+ 2063              		.section	.debug_abbrev,"",%progbits
+ 2064              	.Ldebug_abbrev0:
+ 2065 0000 01       		.uleb128 0x1
+ 2066 0001 11       		.uleb128 0x11
+ 2067 0002 01       		.byte	0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 42
+
+
+ 2068 0003 25       		.uleb128 0x25
+ 2069 0004 0E       		.uleb128 0xe
+ 2070 0005 13       		.uleb128 0x13
+ 2071 0006 0B       		.uleb128 0xb
+ 2072 0007 03       		.uleb128 0x3
+ 2073 0008 0E       		.uleb128 0xe
+ 2074 0009 1B       		.uleb128 0x1b
+ 2075 000a 0E       		.uleb128 0xe
+ 2076 000b 55       		.uleb128 0x55
+ 2077 000c 17       		.uleb128 0x17
+ 2078 000d 11       		.uleb128 0x11
+ 2079 000e 01       		.uleb128 0x1
+ 2080 000f 10       		.uleb128 0x10
+ 2081 0010 17       		.uleb128 0x17
+ 2082 0011 00       		.byte	0
+ 2083 0012 00       		.byte	0
+ 2084 0013 02       		.uleb128 0x2
+ 2085 0014 24       		.uleb128 0x24
+ 2086 0015 00       		.byte	0
+ 2087 0016 0B       		.uleb128 0xb
+ 2088 0017 0B       		.uleb128 0xb
+ 2089 0018 3E       		.uleb128 0x3e
+ 2090 0019 0B       		.uleb128 0xb
+ 2091 001a 03       		.uleb128 0x3
+ 2092 001b 0E       		.uleb128 0xe
+ 2093 001c 00       		.byte	0
+ 2094 001d 00       		.byte	0
+ 2095 001e 03       		.uleb128 0x3
+ 2096 001f 16       		.uleb128 0x16
+ 2097 0020 00       		.byte	0
+ 2098 0021 03       		.uleb128 0x3
+ 2099 0022 0E       		.uleb128 0xe
+ 2100 0023 3A       		.uleb128 0x3a
+ 2101 0024 0B       		.uleb128 0xb
+ 2102 0025 3B       		.uleb128 0x3b
+ 2103 0026 0B       		.uleb128 0xb
+ 2104 0027 49       		.uleb128 0x49
+ 2105 0028 13       		.uleb128 0x13
+ 2106 0029 00       		.byte	0
+ 2107 002a 00       		.byte	0
+ 2108 002b 04       		.uleb128 0x4
+ 2109 002c 24       		.uleb128 0x24
+ 2110 002d 00       		.byte	0
+ 2111 002e 0B       		.uleb128 0xb
+ 2112 002f 0B       		.uleb128 0xb
+ 2113 0030 3E       		.uleb128 0x3e
+ 2114 0031 0B       		.uleb128 0xb
+ 2115 0032 03       		.uleb128 0x3
+ 2116 0033 08       		.uleb128 0x8
+ 2117 0034 00       		.byte	0
+ 2118 0035 00       		.byte	0
+ 2119 0036 05       		.uleb128 0x5
+ 2120 0037 2E       		.uleb128 0x2e
+ 2121 0038 01       		.byte	0x1
+ 2122 0039 03       		.uleb128 0x3
+ 2123 003a 0E       		.uleb128 0xe
+ 2124 003b 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 43
+
+
+ 2125 003c 0B       		.uleb128 0xb
+ 2126 003d 3B       		.uleb128 0x3b
+ 2127 003e 0B       		.uleb128 0xb
+ 2128 003f 27       		.uleb128 0x27
+ 2129 0040 19       		.uleb128 0x19
+ 2130 0041 11       		.uleb128 0x11
+ 2131 0042 01       		.uleb128 0x1
+ 2132 0043 12       		.uleb128 0x12
+ 2133 0044 06       		.uleb128 0x6
+ 2134 0045 40       		.uleb128 0x40
+ 2135 0046 18       		.uleb128 0x18
+ 2136 0047 9742     		.uleb128 0x2117
+ 2137 0049 19       		.uleb128 0x19
+ 2138 004a 01       		.uleb128 0x1
+ 2139 004b 13       		.uleb128 0x13
+ 2140 004c 00       		.byte	0
+ 2141 004d 00       		.byte	0
+ 2142 004e 06       		.uleb128 0x6
+ 2143 004f 05       		.uleb128 0x5
+ 2144 0050 00       		.byte	0
+ 2145 0051 03       		.uleb128 0x3
+ 2146 0052 08       		.uleb128 0x8
+ 2147 0053 3A       		.uleb128 0x3a
+ 2148 0054 0B       		.uleb128 0xb
+ 2149 0055 3B       		.uleb128 0x3b
+ 2150 0056 0B       		.uleb128 0xb
+ 2151 0057 49       		.uleb128 0x49
+ 2152 0058 13       		.uleb128 0x13
+ 2153 0059 02       		.uleb128 0x2
+ 2154 005a 17       		.uleb128 0x17
+ 2155 005b 00       		.byte	0
+ 2156 005c 00       		.byte	0
+ 2157 005d 07       		.uleb128 0x7
+ 2158 005e 05       		.uleb128 0x5
+ 2159 005f 00       		.byte	0
+ 2160 0060 03       		.uleb128 0x3
+ 2161 0061 0E       		.uleb128 0xe
+ 2162 0062 3A       		.uleb128 0x3a
+ 2163 0063 0B       		.uleb128 0xb
+ 2164 0064 3B       		.uleb128 0x3b
+ 2165 0065 0B       		.uleb128 0xb
+ 2166 0066 49       		.uleb128 0x49
+ 2167 0067 13       		.uleb128 0x13
+ 2168 0068 02       		.uleb128 0x2
+ 2169 0069 17       		.uleb128 0x17
+ 2170 006a 00       		.byte	0
+ 2171 006b 00       		.byte	0
+ 2172 006c 08       		.uleb128 0x8
+ 2173 006d 34       		.uleb128 0x34
+ 2174 006e 00       		.byte	0
+ 2175 006f 03       		.uleb128 0x3
+ 2176 0070 08       		.uleb128 0x8
+ 2177 0071 3A       		.uleb128 0x3a
+ 2178 0072 0B       		.uleb128 0xb
+ 2179 0073 3B       		.uleb128 0x3b
+ 2180 0074 0B       		.uleb128 0xb
+ 2181 0075 49       		.uleb128 0x49
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 44
+
+
+ 2182 0076 13       		.uleb128 0x13
+ 2183 0077 02       		.uleb128 0x2
+ 2184 0078 18       		.uleb128 0x18
+ 2185 0079 00       		.byte	0
+ 2186 007a 00       		.byte	0
+ 2187 007b 09       		.uleb128 0x9
+ 2188 007c 34       		.uleb128 0x34
+ 2189 007d 00       		.byte	0
+ 2190 007e 03       		.uleb128 0x3
+ 2191 007f 0E       		.uleb128 0xe
+ 2192 0080 3A       		.uleb128 0x3a
+ 2193 0081 0B       		.uleb128 0xb
+ 2194 0082 3B       		.uleb128 0x3b
+ 2195 0083 0B       		.uleb128 0xb
+ 2196 0084 49       		.uleb128 0x49
+ 2197 0085 13       		.uleb128 0x13
+ 2198 0086 02       		.uleb128 0x2
+ 2199 0087 18       		.uleb128 0x18
+ 2200 0088 00       		.byte	0
+ 2201 0089 00       		.byte	0
+ 2202 008a 0A       		.uleb128 0xa
+ 2203 008b 34       		.uleb128 0x34
+ 2204 008c 00       		.byte	0
+ 2205 008d 03       		.uleb128 0x3
+ 2206 008e 08       		.uleb128 0x8
+ 2207 008f 3A       		.uleb128 0x3a
+ 2208 0090 0B       		.uleb128 0xb
+ 2209 0091 3B       		.uleb128 0x3b
+ 2210 0092 0B       		.uleb128 0xb
+ 2211 0093 49       		.uleb128 0x49
+ 2212 0094 13       		.uleb128 0x13
+ 2213 0095 02       		.uleb128 0x2
+ 2214 0096 17       		.uleb128 0x17
+ 2215 0097 00       		.byte	0
+ 2216 0098 00       		.byte	0
+ 2217 0099 0B       		.uleb128 0xb
+ 2218 009a 34       		.uleb128 0x34
+ 2219 009b 00       		.byte	0
+ 2220 009c 03       		.uleb128 0x3
+ 2221 009d 0E       		.uleb128 0xe
+ 2222 009e 3A       		.uleb128 0x3a
+ 2223 009f 0B       		.uleb128 0xb
+ 2224 00a0 3B       		.uleb128 0x3b
+ 2225 00a1 0B       		.uleb128 0xb
+ 2226 00a2 49       		.uleb128 0x49
+ 2227 00a3 13       		.uleb128 0x13
+ 2228 00a4 02       		.uleb128 0x2
+ 2229 00a5 17       		.uleb128 0x17
+ 2230 00a6 00       		.byte	0
+ 2231 00a7 00       		.byte	0
+ 2232 00a8 0C       		.uleb128 0xc
+ 2233 00a9 34       		.uleb128 0x34
+ 2234 00aa 00       		.byte	0
+ 2235 00ab 03       		.uleb128 0x3
+ 2236 00ac 0E       		.uleb128 0xe
+ 2237 00ad 3A       		.uleb128 0x3a
+ 2238 00ae 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 45
+
+
+ 2239 00af 3B       		.uleb128 0x3b
+ 2240 00b0 0B       		.uleb128 0xb
+ 2241 00b1 49       		.uleb128 0x49
+ 2242 00b2 13       		.uleb128 0x13
+ 2243 00b3 00       		.byte	0
+ 2244 00b4 00       		.byte	0
+ 2245 00b5 0D       		.uleb128 0xd
+ 2246 00b6 898201   		.uleb128 0x4109
+ 2247 00b9 01       		.byte	0x1
+ 2248 00ba 11       		.uleb128 0x11
+ 2249 00bb 01       		.uleb128 0x1
+ 2250 00bc 31       		.uleb128 0x31
+ 2251 00bd 13       		.uleb128 0x13
+ 2252 00be 01       		.uleb128 0x1
+ 2253 00bf 13       		.uleb128 0x13
+ 2254 00c0 00       		.byte	0
+ 2255 00c1 00       		.byte	0
+ 2256 00c2 0E       		.uleb128 0xe
+ 2257 00c3 8A8201   		.uleb128 0x410a
+ 2258 00c6 00       		.byte	0
+ 2259 00c7 02       		.uleb128 0x2
+ 2260 00c8 18       		.uleb128 0x18
+ 2261 00c9 9142     		.uleb128 0x2111
+ 2262 00cb 18       		.uleb128 0x18
+ 2263 00cc 00       		.byte	0
+ 2264 00cd 00       		.byte	0
+ 2265 00ce 0F       		.uleb128 0xf
+ 2266 00cf 898201   		.uleb128 0x4109
+ 2267 00d2 01       		.byte	0x1
+ 2268 00d3 11       		.uleb128 0x11
+ 2269 00d4 01       		.uleb128 0x1
+ 2270 00d5 31       		.uleb128 0x31
+ 2271 00d6 13       		.uleb128 0x13
+ 2272 00d7 00       		.byte	0
+ 2273 00d8 00       		.byte	0
+ 2274 00d9 10       		.uleb128 0x10
+ 2275 00da 0F       		.uleb128 0xf
+ 2276 00db 00       		.byte	0
+ 2277 00dc 0B       		.uleb128 0xb
+ 2278 00dd 0B       		.uleb128 0xb
+ 2279 00de 49       		.uleb128 0x49
+ 2280 00df 13       		.uleb128 0x13
+ 2281 00e0 00       		.byte	0
+ 2282 00e1 00       		.byte	0
+ 2283 00e2 11       		.uleb128 0x11
+ 2284 00e3 26       		.uleb128 0x26
+ 2285 00e4 00       		.byte	0
+ 2286 00e5 49       		.uleb128 0x49
+ 2287 00e6 13       		.uleb128 0x13
+ 2288 00e7 00       		.byte	0
+ 2289 00e8 00       		.byte	0
+ 2290 00e9 12       		.uleb128 0x12
+ 2291 00ea 01       		.uleb128 0x1
+ 2292 00eb 01       		.byte	0x1
+ 2293 00ec 49       		.uleb128 0x49
+ 2294 00ed 13       		.uleb128 0x13
+ 2295 00ee 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 46
+
+
+ 2296 00ef 13       		.uleb128 0x13
+ 2297 00f0 00       		.byte	0
+ 2298 00f1 00       		.byte	0
+ 2299 00f2 13       		.uleb128 0x13
+ 2300 00f3 21       		.uleb128 0x21
+ 2301 00f4 00       		.byte	0
+ 2302 00f5 49       		.uleb128 0x49
+ 2303 00f6 13       		.uleb128 0x13
+ 2304 00f7 2F       		.uleb128 0x2f
+ 2305 00f8 0B       		.uleb128 0xb
+ 2306 00f9 00       		.byte	0
+ 2307 00fa 00       		.byte	0
+ 2308 00fb 14       		.uleb128 0x14
+ 2309 00fc 34       		.uleb128 0x34
+ 2310 00fd 00       		.byte	0
+ 2311 00fe 03       		.uleb128 0x3
+ 2312 00ff 0E       		.uleb128 0xe
+ 2313 0100 3A       		.uleb128 0x3a
+ 2314 0101 0B       		.uleb128 0xb
+ 2315 0102 3B       		.uleb128 0x3b
+ 2316 0103 0B       		.uleb128 0xb
+ 2317 0104 49       		.uleb128 0x49
+ 2318 0105 13       		.uleb128 0x13
+ 2319 0106 1C       		.uleb128 0x1c
+ 2320 0107 0D       		.uleb128 0xd
+ 2321 0108 00       		.byte	0
+ 2322 0109 00       		.byte	0
+ 2323 010a 15       		.uleb128 0x15
+ 2324 010b 2E       		.uleb128 0x2e
+ 2325 010c 01       		.byte	0x1
+ 2326 010d 3F       		.uleb128 0x3f
+ 2327 010e 19       		.uleb128 0x19
+ 2328 010f 03       		.uleb128 0x3
+ 2329 0110 0E       		.uleb128 0xe
+ 2330 0111 3A       		.uleb128 0x3a
+ 2331 0112 0B       		.uleb128 0xb
+ 2332 0113 3B       		.uleb128 0x3b
+ 2333 0114 0B       		.uleb128 0xb
+ 2334 0115 27       		.uleb128 0x27
+ 2335 0116 19       		.uleb128 0x19
+ 2336 0117 11       		.uleb128 0x11
+ 2337 0118 01       		.uleb128 0x1
+ 2338 0119 12       		.uleb128 0x12
+ 2339 011a 06       		.uleb128 0x6
+ 2340 011b 40       		.uleb128 0x40
+ 2341 011c 18       		.uleb128 0x18
+ 2342 011d 9742     		.uleb128 0x2117
+ 2343 011f 19       		.uleb128 0x19
+ 2344 0120 01       		.uleb128 0x1
+ 2345 0121 13       		.uleb128 0x13
+ 2346 0122 00       		.byte	0
+ 2347 0123 00       		.byte	0
+ 2348 0124 16       		.uleb128 0x16
+ 2349 0125 21       		.uleb128 0x21
+ 2350 0126 00       		.byte	0
+ 2351 0127 49       		.uleb128 0x49
+ 2352 0128 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 47
+
+
+ 2353 0129 2F       		.uleb128 0x2f
+ 2354 012a 05       		.uleb128 0x5
+ 2355 012b 00       		.byte	0
+ 2356 012c 00       		.byte	0
+ 2357 012d 17       		.uleb128 0x17
+ 2358 012e 2E       		.uleb128 0x2e
+ 2359 012f 00       		.byte	0
+ 2360 0130 3F       		.uleb128 0x3f
+ 2361 0131 19       		.uleb128 0x19
+ 2362 0132 3C       		.uleb128 0x3c
+ 2363 0133 19       		.uleb128 0x19
+ 2364 0134 6E       		.uleb128 0x6e
+ 2365 0135 0E       		.uleb128 0xe
+ 2366 0136 03       		.uleb128 0x3
+ 2367 0137 0E       		.uleb128 0xe
+ 2368 0138 00       		.byte	0
+ 2369 0139 00       		.byte	0
+ 2370 013a 00       		.byte	0
+ 2371              		.section	.debug_loc,"",%progbits
+ 2372              	.Ldebug_loc0:
+ 2373              	.LLST0:
+ 2374 0000 00000000 		.4byte	.LVL0
+ 2375 0004 12000000 		.4byte	.LVL3
+ 2376 0008 0100     		.2byte	0x1
+ 2377 000a 50       		.byte	0x50
+ 2378 000b 12000000 		.4byte	.LVL3
+ 2379 000f 78020000 		.4byte	.LFE0
+ 2380 0013 0300     		.2byte	0x3
+ 2381 0015 91       		.byte	0x91
+ 2382 0016 947D     		.sleb128 -364
+ 2383 0018 00000000 		.4byte	0
+ 2384 001c 00000000 		.4byte	0
+ 2385              	.LLST1:
+ 2386 0020 00000000 		.4byte	.LVL0
+ 2387 0024 10000000 		.4byte	.LVL2
+ 2388 0028 0100     		.2byte	0x1
+ 2389 002a 51       		.byte	0x51
+ 2390 002b 10000000 		.4byte	.LVL2
+ 2391 002f 78020000 		.4byte	.LFE0
+ 2392 0033 0100     		.2byte	0x1
+ 2393 0035 59       		.byte	0x59
+ 2394 0036 00000000 		.4byte	0
+ 2395 003a 00000000 		.4byte	0
+ 2396              	.LLST2:
+ 2397 003e 00000000 		.4byte	.LVL0
+ 2398 0042 0E000000 		.4byte	.LVL1
+ 2399 0046 0100     		.2byte	0x1
+ 2400 0048 52       		.byte	0x52
+ 2401 0049 0E000000 		.4byte	.LVL1
+ 2402 004d 78020000 		.4byte	.LFE0
+ 2403 0051 0100     		.2byte	0x1
+ 2404 0053 58       		.byte	0x58
+ 2405 0054 00000000 		.4byte	0
+ 2406 0058 00000000 		.4byte	0
+ 2407              	.LLST3:
+ 2408 005c 40000000 		.4byte	.LVL8
+ 2409 0060 46000000 		.4byte	.LVL9
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 48
+
+
+ 2410 0064 0200     		.2byte	0x2
+ 2411 0066 30       		.byte	0x30
+ 2412 0067 9F       		.byte	0x9f
+ 2413 0068 46000000 		.4byte	.LVL9
+ 2414 006c 50000000 		.4byte	.LVL11
+ 2415 0070 0100     		.2byte	0x1
+ 2416 0072 53       		.byte	0x53
+ 2417 0073 50000000 		.4byte	.LVL11
+ 2418 0077 90010000 		.4byte	.LVL34
+ 2419 007b 0300     		.2byte	0x3
+ 2420 007d 91       		.byte	0x91
+ 2421 007e 907D     		.sleb128 -368
+ 2422 0080 90010000 		.4byte	.LVL34
+ 2423 0084 EC010000 		.4byte	.LVL36
+ 2424 0088 0100     		.2byte	0x1
+ 2425 008a 50       		.byte	0x50
+ 2426 008b EC010000 		.4byte	.LVL36
+ 2427 008f 32020000 		.4byte	.LVL38
+ 2428 0093 0100     		.2byte	0x1
+ 2429 0095 53       		.byte	0x53
+ 2430 0096 32020000 		.4byte	.LVL38
+ 2431 009a 58020000 		.4byte	.LVL40
+ 2432 009e 0100     		.2byte	0x1
+ 2433 00a0 50       		.byte	0x50
+ 2434 00a1 58020000 		.4byte	.LVL40
+ 2435 00a5 78020000 		.4byte	.LFE0
+ 2436 00a9 0100     		.2byte	0x1
+ 2437 00ab 51       		.byte	0x51
+ 2438 00ac 00000000 		.4byte	0
+ 2439 00b0 00000000 		.4byte	0
+ 2440              	.LLST4:
+ 2441 00b4 6E000000 		.4byte	.LVL14
+ 2442 00b8 74000000 		.4byte	.LVL15
+ 2443 00bc 0200     		.2byte	0x2
+ 2444 00be 30       		.byte	0x30
+ 2445 00bf 9F       		.byte	0x9f
+ 2446 00c0 74000000 		.4byte	.LVL15
+ 2447 00c4 84010000 		.4byte	.LVL33
+ 2448 00c8 0100     		.2byte	0x1
+ 2449 00ca 5E       		.byte	0x5e
+ 2450 00cb 00000000 		.4byte	0
+ 2451 00cf 00000000 		.4byte	0
+ 2452              	.LLST5:
+ 2453 00d3 4E000000 		.4byte	.LVL10
+ 2454 00d7 84010000 		.4byte	.LVL33
+ 2455 00db 0100     		.2byte	0x1
+ 2456 00dd 5B       		.byte	0x5b
+ 2457 00de 00000000 		.4byte	0
+ 2458 00e2 00000000 		.4byte	0
+ 2459              	.LLST6:
+ 2460 00e6 5A000000 		.4byte	.LVL12
+ 2461 00ea 84010000 		.4byte	.LVL33
+ 2462 00ee 0300     		.2byte	0x3
+ 2463 00f0 91       		.byte	0x91
+ 2464 00f1 847D     		.sleb128 -380
+ 2465 00f3 00000000 		.4byte	0
+ 2466 00f7 00000000 		.4byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 49
+
+
+ 2467              	.LLST7:
+ 2468 00fb 64000000 		.4byte	.LVL13
+ 2469 00ff 84010000 		.4byte	.LVL33
+ 2470 0103 0300     		.2byte	0x3
+ 2471 0105 91       		.byte	0x91
+ 2472 0106 887D     		.sleb128 -376
+ 2473 0108 00000000 		.4byte	0
+ 2474 010c 00000000 		.4byte	0
+ 2475              	.LLST8:
+ 2476 0110 6E000000 		.4byte	.LVL14
+ 2477 0114 84010000 		.4byte	.LVL33
+ 2478 0118 0300     		.2byte	0x3
+ 2479 011a 91       		.byte	0x91
+ 2480 011b 8C7D     		.sleb128 -372
+ 2481 011d 00000000 		.4byte	0
+ 2482 0121 00000000 		.4byte	0
+ 2483              	.LLST9:
+ 2484 0125 78000000 		.4byte	.LVL16
+ 2485 0129 26010000 		.4byte	.LVL24
+ 2486 012d 0100     		.2byte	0x1
+ 2487 012f 57       		.byte	0x57
+ 2488 0130 26010000 		.4byte	.LVL24
+ 2489 0134 76010000 		.4byte	.LVL32
+ 2490 0138 0100     		.2byte	0x1
+ 2491 013a 52       		.byte	0x52
+ 2492 013b 00000000 		.4byte	0
+ 2493 013f 00000000 		.4byte	0
+ 2494              	.LLST10:
+ 2495 0143 80000000 		.4byte	.LVL17
+ 2496 0147 46010000 		.4byte	.LVL27
+ 2497 014b 0100     		.2byte	0x1
+ 2498 014d 56       		.byte	0x56
+ 2499 014e 46010000 		.4byte	.LVL27
+ 2500 0152 66010000 		.4byte	.LVL31
+ 2501 0156 0100     		.2byte	0x1
+ 2502 0158 53       		.byte	0x53
+ 2503 0159 00000000 		.4byte	0
+ 2504 015d 00000000 		.4byte	0
+ 2505              	.LLST11:
+ 2506 0161 AE000000 		.4byte	.LVL18
+ 2507 0165 D0000000 		.4byte	.LVL19
+ 2508 0169 0100     		.2byte	0x1
+ 2509 016b 54       		.byte	0x54
+ 2510 016c D0000000 		.4byte	.LVL19
+ 2511 0170 24010000 		.4byte	.LVL23
+ 2512 0174 0100     		.2byte	0x1
+ 2513 0176 52       		.byte	0x52
+ 2514 0177 2C010000 		.4byte	.LVL25
+ 2515 017b 62010000 		.4byte	.LVL30
+ 2516 017f 0100     		.2byte	0x1
+ 2517 0181 54       		.byte	0x54
+ 2518 0182 62010000 		.4byte	.LVL30
+ 2519 0186 76010000 		.4byte	.LVL32
+ 2520 018a 0100     		.2byte	0x1
+ 2521 018c 51       		.byte	0x51
+ 2522 018d 00000000 		.4byte	0
+ 2523 0191 00000000 		.4byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 50
+
+
+ 2524              	.LLST12:
+ 2525 0195 D8000000 		.4byte	.LVL20
+ 2526 0199 44010000 		.4byte	.LVL26
+ 2527 019d 0100     		.2byte	0x1
+ 2528 019f 53       		.byte	0x53
+ 2529 01a0 4E010000 		.4byte	.LVL28
+ 2530 01a4 62010000 		.4byte	.LVL30
+ 2531 01a8 0100     		.2byte	0x1
+ 2532 01aa 51       		.byte	0x51
+ 2533 01ab 62010000 		.4byte	.LVL30
+ 2534 01af 76010000 		.4byte	.LVL32
+ 2535 01b3 0A00     		.2byte	0xa
+ 2536 01b5 91       		.byte	0x91
+ 2537 01b6 847D     		.sleb128 -380
+ 2538 01b8 06       		.byte	0x6
+ 2539 01b9 91       		.byte	0x91
+ 2540 01ba 8C7D     		.sleb128 -372
+ 2541 01bc 06       		.byte	0x6
+ 2542 01bd 22       		.byte	0x22
+ 2543 01be 9F       		.byte	0x9f
+ 2544 01bf 00000000 		.4byte	0
+ 2545 01c3 00000000 		.4byte	0
+ 2546              	.LLST13:
+ 2547 01c7 12010000 		.4byte	.LVL21
+ 2548 01cb 1A010000 		.4byte	.LVL22
+ 2549 01cf 0100     		.2byte	0x1
+ 2550 01d1 54       		.byte	0x54
+ 2551 01d2 1A010000 		.4byte	.LVL22
+ 2552 01d6 24010000 		.4byte	.LVL23
+ 2553 01da 0600     		.2byte	0x6
+ 2554 01dc 72       		.byte	0x72
+ 2555 01dd 00       		.sleb128 0
+ 2556 01de 73       		.byte	0x73
+ 2557 01df 00       		.sleb128 0
+ 2558 01e0 22       		.byte	0x22
+ 2559 01e1 9F       		.byte	0x9f
+ 2560 01e2 00000000 		.4byte	0
+ 2561 01e6 00000000 		.4byte	0
+ 2562              	.LLST14:
+ 2563 01ea 00000000 		.4byte	.LVL42
+ 2564 01ee 18000000 		.4byte	.LVL46
+ 2565 01f2 0100     		.2byte	0x1
+ 2566 01f4 50       		.byte	0x50
+ 2567 01f5 18000000 		.4byte	.LVL46
+ 2568 01f9 F8000000 		.4byte	.LVL76
+ 2569 01fd 0100     		.2byte	0x1
+ 2570 01ff 56       		.byte	0x56
+ 2571 0200 F8000000 		.4byte	.LVL76
+ 2572 0204 2C030000 		.4byte	.LFE1
+ 2573 0208 0400     		.2byte	0x4
+ 2574 020a F3       		.byte	0xf3
+ 2575 020b 01       		.uleb128 0x1
+ 2576 020c 50       		.byte	0x50
+ 2577 020d 9F       		.byte	0x9f
+ 2578 020e 00000000 		.4byte	0
+ 2579 0212 00000000 		.4byte	0
+ 2580              	.LLST15:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 51
+
+
+ 2581 0216 00000000 		.4byte	.LVL42
+ 2582 021a 14000000 		.4byte	.LVL45
+ 2583 021e 0100     		.2byte	0x1
+ 2584 0220 51       		.byte	0x51
+ 2585 0221 14000000 		.4byte	.LVL45
+ 2586 0225 F2010000 		.4byte	.LVL105
+ 2587 0229 0100     		.2byte	0x1
+ 2588 022b 55       		.byte	0x55
+ 2589 022c F2010000 		.4byte	.LVL105
+ 2590 0230 2C030000 		.4byte	.LFE1
+ 2591 0234 0400     		.2byte	0x4
+ 2592 0236 F3       		.byte	0xf3
+ 2593 0237 01       		.uleb128 0x1
+ 2594 0238 51       		.byte	0x51
+ 2595 0239 9F       		.byte	0x9f
+ 2596 023a 00000000 		.4byte	0
+ 2597 023e 00000000 		.4byte	0
+ 2598              	.LLST16:
+ 2599 0242 00000000 		.4byte	.LVL42
+ 2600 0246 12000000 		.4byte	.LVL44
+ 2601 024a 0100     		.2byte	0x1
+ 2602 024c 52       		.byte	0x52
+ 2603 024d 12000000 		.4byte	.LVL44
+ 2604 0251 28030000 		.4byte	.LVL154
+ 2605 0255 0100     		.2byte	0x1
+ 2606 0257 54       		.byte	0x54
+ 2607 0258 28030000 		.4byte	.LVL154
+ 2608 025c 2C030000 		.4byte	.LFE1
+ 2609 0260 0400     		.2byte	0x4
+ 2610 0262 F3       		.byte	0xf3
+ 2611 0263 01       		.uleb128 0x1
+ 2612 0264 52       		.byte	0x52
+ 2613 0265 9F       		.byte	0x9f
+ 2614 0266 00000000 		.4byte	0
+ 2615 026a 00000000 		.4byte	0
+ 2616              	.LLST17:
+ 2617 026e 66000000 		.4byte	.LVL55
+ 2618 0272 F0000000 		.4byte	.LVL75
+ 2619 0276 0100     		.2byte	0x1
+ 2620 0278 5E       		.byte	0x5e
+ 2621 0279 FE000000 		.4byte	.LVL77
+ 2622 027d 82010000 		.4byte	.LVL97
+ 2623 0281 0100     		.2byte	0x1
+ 2624 0283 56       		.byte	0x56
+ 2625 0284 FA010000 		.4byte	.LVL106
+ 2626 0288 14030000 		.4byte	.LVL152
+ 2627 028c 0100     		.2byte	0x1
+ 2628 028e 57       		.byte	0x57
+ 2629 028f 00000000 		.4byte	0
+ 2630 0293 00000000 		.4byte	0
+ 2631              	.LLST18:
+ 2632 0297 6E000000 		.4byte	.LVL56
+ 2633 029b F0000000 		.4byte	.LVL75
+ 2634 029f 0100     		.2byte	0x1
+ 2635 02a1 5C       		.byte	0x5c
+ 2636 02a2 04010000 		.4byte	.LVL78
+ 2637 02a6 82010000 		.4byte	.LVL97
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 52
+
+
+ 2638 02aa 0100     		.2byte	0x1
+ 2639 02ac 57       		.byte	0x57
+ 2640 02ad 02020000 		.4byte	.LVL107
+ 2641 02b1 22020000 		.4byte	.LVL113
+ 2642 02b5 0100     		.2byte	0x1
+ 2643 02b7 5C       		.byte	0x5c
+ 2644 02b8 22020000 		.4byte	.LVL113
+ 2645 02bc 26020000 		.4byte	.LVL114
+ 2646 02c0 0B00     		.2byte	0xb
+ 2647 02c2 71       		.byte	0x71
+ 2648 02c3 00       		.sleb128 0
+ 2649 02c4 31       		.byte	0x31
+ 2650 02c5 24       		.byte	0x24
+ 2651 02c6 91       		.byte	0x91
+ 2652 02c7 00       		.sleb128 0
+ 2653 02c8 22       		.byte	0x22
+ 2654 02c9 0A       		.byte	0xa
+ 2655 02ca 2009     		.2byte	0x920
+ 2656 02cc 1C       		.byte	0x1c
+ 2657 02cd 26020000 		.4byte	.LVL114
+ 2658 02d1 52020000 		.4byte	.LVL127
+ 2659 02d5 0100     		.2byte	0x1
+ 2660 02d7 5C       		.byte	0x5c
+ 2661 02d8 52020000 		.4byte	.LVL127
+ 2662 02dc 6C020000 		.4byte	.LVL132
+ 2663 02e0 0100     		.2byte	0x1
+ 2664 02e2 58       		.byte	0x58
+ 2665 02e3 6C020000 		.4byte	.LVL132
+ 2666 02e7 8A020000 		.4byte	.LVL137
+ 2667 02eb 0100     		.2byte	0x1
+ 2668 02ed 5C       		.byte	0x5c
+ 2669 02ee 8A020000 		.4byte	.LVL137
+ 2670 02f2 96020000 		.4byte	.LVL138
+ 2671 02f6 7600     		.2byte	0x76
+ 2672 02f8 73       		.byte	0x73
+ 2673 02f9 00       		.sleb128 0
+ 2674 02fa 31       		.byte	0x31
+ 2675 02fb 24       		.byte	0x24
+ 2676 02fc 73       		.byte	0x73
+ 2677 02fd 00       		.sleb128 0
+ 2678 02fe 22       		.byte	0x22
+ 2679 02ff 34       		.byte	0x34
+ 2680 0300 24       		.byte	0x24
+ 2681 0301 73       		.byte	0x73
+ 2682 0302 00       		.sleb128 0
+ 2683 0303 31       		.byte	0x31
+ 2684 0304 24       		.byte	0x24
+ 2685 0305 1C       		.byte	0x1c
+ 2686 0306 71       		.byte	0x71
+ 2687 0307 00       		.sleb128 0
+ 2688 0308 31       		.byte	0x31
+ 2689 0309 24       		.byte	0x24
+ 2690 030a 91       		.byte	0x91
+ 2691 030b 00       		.sleb128 0
+ 2692 030c 22       		.byte	0x22
+ 2693 030d 0A       		.byte	0xa
+ 2694 030e 2009     		.2byte	0x920
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 53
+
+
+ 2695 0310 1C       		.byte	0x1c
+ 2696 0311 94       		.byte	0x94
+ 2697 0312 02       		.byte	0x2
+ 2698 0313 0A       		.byte	0xa
+ 2699 0314 FFFF     		.2byte	0xffff
+ 2700 0316 1A       		.byte	0x1a
+ 2701 0317 71       		.byte	0x71
+ 2702 0318 00       		.sleb128 0
+ 2703 0319 31       		.byte	0x31
+ 2704 031a 24       		.byte	0x24
+ 2705 031b 91       		.byte	0x91
+ 2706 031c 00       		.sleb128 0
+ 2707 031d 22       		.byte	0x22
+ 2708 031e 0A       		.byte	0xa
+ 2709 031f 200C     		.2byte	0xc20
+ 2710 0321 1C       		.byte	0x1c
+ 2711 0322 94       		.byte	0x94
+ 2712 0323 02       		.byte	0x2
+ 2713 0324 0A       		.byte	0xa
+ 2714 0325 FFFF     		.2byte	0xffff
+ 2715 0327 1A       		.byte	0x1a
+ 2716 0328 22       		.byte	0x22
+ 2717 0329 0A       		.byte	0xa
+ 2718 032a FFFF     		.2byte	0xffff
+ 2719 032c 1A       		.byte	0x1a
+ 2720 032d 71       		.byte	0x71
+ 2721 032e 00       		.sleb128 0
+ 2722 032f 31       		.byte	0x31
+ 2723 0330 24       		.byte	0x24
+ 2724 0331 91       		.byte	0x91
+ 2725 0332 00       		.sleb128 0
+ 2726 0333 22       		.byte	0x22
+ 2727 0334 0A       		.byte	0xa
+ 2728 0335 200A     		.2byte	0xa20
+ 2729 0337 1C       		.byte	0x1c
+ 2730 0338 94       		.byte	0x94
+ 2731 0339 02       		.byte	0x2
+ 2732 033a 0A       		.byte	0xa
+ 2733 033b FFFF     		.2byte	0xffff
+ 2734 033d 1A       		.byte	0x1a
+ 2735 033e 75       		.byte	0x75
+ 2736 033f 00       		.sleb128 0
+ 2737 0340 22       		.byte	0x22
+ 2738 0341 0A       		.byte	0xa
+ 2739 0342 FFFF     		.2byte	0xffff
+ 2740 0344 1A       		.byte	0x1a
+ 2741 0345 36       		.byte	0x36
+ 2742 0346 24       		.byte	0x24
+ 2743 0347 1C       		.byte	0x1c
+ 2744 0348 0A       		.byte	0xa
+ 2745 0349 FFFF     		.2byte	0xffff
+ 2746 034b 1A       		.byte	0x1a
+ 2747 034c 71       		.byte	0x71
+ 2748 034d 00       		.sleb128 0
+ 2749 034e 31       		.byte	0x31
+ 2750 034f 24       		.byte	0x24
+ 2751 0350 91       		.byte	0x91
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 54
+
+
+ 2752 0351 00       		.sleb128 0
+ 2753 0352 22       		.byte	0x22
+ 2754 0353 0A       		.byte	0xa
+ 2755 0354 200A     		.2byte	0xa20
+ 2756 0356 1C       		.byte	0x1c
+ 2757 0357 94       		.byte	0x94
+ 2758 0358 02       		.byte	0x2
+ 2759 0359 0A       		.byte	0xa
+ 2760 035a FFFF     		.2byte	0xffff
+ 2761 035c 1A       		.byte	0x1a
+ 2762 035d 75       		.byte	0x75
+ 2763 035e 00       		.sleb128 0
+ 2764 035f 22       		.byte	0x22
+ 2765 0360 0A       		.byte	0xa
+ 2766 0361 FFFF     		.2byte	0xffff
+ 2767 0363 1A       		.byte	0x1a
+ 2768 0364 1C       		.byte	0x1c
+ 2769 0365 0A       		.byte	0xa
+ 2770 0366 FFFF     		.2byte	0xffff
+ 2771 0368 1A       		.byte	0x1a
+ 2772 0369 22       		.byte	0x22
+ 2773 036a 73       		.byte	0x73
+ 2774 036b 00       		.sleb128 0
+ 2775 036c 1C       		.byte	0x1c
+ 2776 036d 9F       		.byte	0x9f
+ 2777 036e 96020000 		.4byte	.LVL138
+ 2778 0372 06030000 		.4byte	.LVL151
+ 2779 0376 0100     		.2byte	0x1
+ 2780 0378 56       		.byte	0x56
+ 2781 0379 00000000 		.4byte	0
+ 2782 037d 00000000 		.4byte	0
+ 2783              	.LLST19:
+ 2784 0381 74000000 		.4byte	.LVL57
+ 2785 0385 CA000000 		.4byte	.LVL71
+ 2786 0389 0100     		.2byte	0x1
+ 2787 038b 53       		.byte	0x53
+ 2788 038c 0A010000 		.4byte	.LVL79
+ 2789 0390 5E010000 		.4byte	.LVL93
+ 2790 0394 0100     		.2byte	0x1
+ 2791 0396 52       		.byte	0x52
+ 2792 0397 0A020000 		.4byte	.LVL108
+ 2793 039b 44020000 		.4byte	.LVL125
+ 2794 039f 0100     		.2byte	0x1
+ 2795 03a1 53       		.byte	0x53
+ 2796 03a2 44020000 		.4byte	.LVL125
+ 2797 03a6 46020000 		.4byte	.LVL126
+ 2798 03aa 0B00     		.2byte	0xb
+ 2799 03ac 71       		.byte	0x71
+ 2800 03ad 00       		.sleb128 0
+ 2801 03ae 31       		.byte	0x31
+ 2802 03af 24       		.byte	0x24
+ 2803 03b0 91       		.byte	0x91
+ 2804 03b1 00       		.sleb128 0
+ 2805 03b2 22       		.byte	0x22
+ 2806 03b3 0A       		.byte	0xa
+ 2807 03b4 200A     		.2byte	0xa20
+ 2808 03b6 1C       		.byte	0x1c
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 55
+
+
+ 2809 03b7 46020000 		.4byte	.LVL126
+ 2810 03bb 56020000 		.4byte	.LVL128
+ 2811 03bf 0100     		.2byte	0x1
+ 2812 03c1 53       		.byte	0x53
+ 2813 03c2 56020000 		.4byte	.LVL128
+ 2814 03c6 58020000 		.4byte	.LVL129
+ 2815 03ca 1500     		.2byte	0x15
+ 2816 03cc 71       		.byte	0x71
+ 2817 03cd 00       		.sleb128 0
+ 2818 03ce 31       		.byte	0x31
+ 2819 03cf 24       		.byte	0x24
+ 2820 03d0 91       		.byte	0x91
+ 2821 03d1 00       		.sleb128 0
+ 2822 03d2 22       		.byte	0x22
+ 2823 03d3 0A       		.byte	0xa
+ 2824 03d4 200A     		.2byte	0xa20
+ 2825 03d6 1C       		.byte	0x1c
+ 2826 03d7 94       		.byte	0x94
+ 2827 03d8 02       		.byte	0x2
+ 2828 03d9 0A       		.byte	0xa
+ 2829 03da FFFF     		.2byte	0xffff
+ 2830 03dc 1A       		.byte	0x1a
+ 2831 03dd 75       		.byte	0x75
+ 2832 03de 00       		.sleb128 0
+ 2833 03df 22       		.byte	0x22
+ 2834 03e0 9F       		.byte	0x9f
+ 2835 03e1 58020000 		.4byte	.LVL129
+ 2836 03e5 5A020000 		.4byte	.LVL130
+ 2837 03e9 0100     		.2byte	0x1
+ 2838 03eb 53       		.byte	0x53
+ 2839 03ec 5A020000 		.4byte	.LVL130
+ 2840 03f0 5C020000 		.4byte	.LVL131
+ 2841 03f4 1C00     		.2byte	0x1c
+ 2842 03f6 71       		.byte	0x71
+ 2843 03f7 00       		.sleb128 0
+ 2844 03f8 31       		.byte	0x31
+ 2845 03f9 24       		.byte	0x24
+ 2846 03fa 91       		.byte	0x91
+ 2847 03fb 00       		.sleb128 0
+ 2848 03fc 22       		.byte	0x22
+ 2849 03fd 0A       		.byte	0xa
+ 2850 03fe 200A     		.2byte	0xa20
+ 2851 0400 1C       		.byte	0x1c
+ 2852 0401 94       		.byte	0x94
+ 2853 0402 02       		.byte	0x2
+ 2854 0403 0A       		.byte	0xa
+ 2855 0404 FFFF     		.2byte	0xffff
+ 2856 0406 1A       		.byte	0x1a
+ 2857 0407 75       		.byte	0x75
+ 2858 0408 00       		.sleb128 0
+ 2859 0409 22       		.byte	0x22
+ 2860 040a 0A       		.byte	0xa
+ 2861 040b FFFF     		.2byte	0xffff
+ 2862 040d 1A       		.byte	0x1a
+ 2863 040e 7E       		.byte	0x7e
+ 2864 040f 00       		.sleb128 0
+ 2865 0410 1C       		.byte	0x1c
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 56
+
+
+ 2866 0411 9F       		.byte	0x9f
+ 2867 0412 5C020000 		.4byte	.LVL131
+ 2868 0416 F6020000 		.4byte	.LVL150
+ 2869 041a 0100     		.2byte	0x1
+ 2870 041c 53       		.byte	0x53
+ 2871 041d 00000000 		.4byte	0
+ 2872 0421 00000000 		.4byte	0
+ 2873              	.LLST20:
+ 2874 0425 7A000000 		.4byte	.LVL58
+ 2875 0429 F0000000 		.4byte	.LVL75
+ 2876 042d 0100     		.2byte	0x1
+ 2877 042f 57       		.byte	0x57
+ 2878 0430 10010000 		.4byte	.LVL80
+ 2879 0434 82010000 		.4byte	.LVL97
+ 2880 0438 0100     		.2byte	0x1
+ 2881 043a 50       		.byte	0x50
+ 2882 043b 10020000 		.4byte	.LVL109
+ 2883 043f 2C020000 		.4byte	.LVL117
+ 2884 0443 0100     		.2byte	0x1
+ 2885 0445 56       		.byte	0x56
+ 2886 0446 2C020000 		.4byte	.LVL117
+ 2887 044a 30020000 		.4byte	.LVL118
+ 2888 044e 0B00     		.2byte	0xb
+ 2889 0450 71       		.byte	0x71
+ 2890 0451 00       		.sleb128 0
+ 2891 0452 31       		.byte	0x31
+ 2892 0453 24       		.byte	0x24
+ 2893 0454 91       		.byte	0x91
+ 2894 0455 00       		.sleb128 0
+ 2895 0456 22       		.byte	0x22
+ 2896 0457 0A       		.byte	0xa
+ 2897 0458 200B     		.2byte	0xb20
+ 2898 045a 1C       		.byte	0x1c
+ 2899 045b 30020000 		.4byte	.LVL118
+ 2900 045f 98020000 		.4byte	.LVL139
+ 2901 0463 0100     		.2byte	0x1
+ 2902 0465 55       		.byte	0x55
+ 2903 0466 98020000 		.4byte	.LVL139
+ 2904 046a 9A020000 		.4byte	.LVL140
+ 2905 046e 2600     		.2byte	0x26
+ 2906 0470 71       		.byte	0x71
+ 2907 0471 00       		.sleb128 0
+ 2908 0472 31       		.byte	0x31
+ 2909 0473 24       		.byte	0x24
+ 2910 0474 91       		.byte	0x91
+ 2911 0475 00       		.sleb128 0
+ 2912 0476 22       		.byte	0x22
+ 2913 0477 0A       		.byte	0xa
+ 2914 0478 200B     		.2byte	0xb20
+ 2915 047a 1C       		.byte	0x1c
+ 2916 047b 94       		.byte	0x94
+ 2917 047c 02       		.byte	0x2
+ 2918 047d 0A       		.byte	0xa
+ 2919 047e FFFF     		.2byte	0xffff
+ 2920 0480 1A       		.byte	0x1a
+ 2921 0481 71       		.byte	0x71
+ 2922 0482 00       		.sleb128 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 57
+
+
+ 2923 0483 31       		.byte	0x31
+ 2924 0484 24       		.byte	0x24
+ 2925 0485 91       		.byte	0x91
+ 2926 0486 00       		.sleb128 0
+ 2927 0487 22       		.byte	0x22
+ 2928 0488 0A       		.byte	0xa
+ 2929 0489 200A     		.2byte	0xa20
+ 2930 048b 1C       		.byte	0x1c
+ 2931 048c 94       		.byte	0x94
+ 2932 048d 02       		.byte	0x2
+ 2933 048e 0A       		.byte	0xa
+ 2934 048f FFFF     		.2byte	0xffff
+ 2935 0491 1A       		.byte	0x1a
+ 2936 0492 1C       		.byte	0x1c
+ 2937 0493 31       		.byte	0x31
+ 2938 0494 26       		.byte	0x26
+ 2939 0495 9F       		.byte	0x9f
+ 2940 0496 9A020000 		.4byte	.LVL140
+ 2941 049a E6020000 		.4byte	.LVL149
+ 2942 049e 0400     		.2byte	0x4
+ 2943 04a0 75       		.byte	0x75
+ 2944 04a1 00       		.sleb128 0
+ 2945 04a2 1F       		.byte	0x1f
+ 2946 04a3 9F       		.byte	0x9f
+ 2947 04a4 00000000 		.4byte	0
+ 2948 04a8 00000000 		.4byte	0
+ 2949              	.LLST21:
+ 2950 04ac 80000000 		.4byte	.LVL59
+ 2951 04b0 90000000 		.4byte	.LVL62
+ 2952 04b4 0100     		.2byte	0x1
+ 2953 04b6 51       		.byte	0x51
+ 2954 04b7 90000000 		.4byte	.LVL62
+ 2955 04bb A8000000 		.4byte	.LVL65
+ 2956 04bf 0600     		.2byte	0x6
+ 2957 04c1 7E       		.byte	0x7e
+ 2958 04c2 00       		.sleb128 0
+ 2959 04c3 73       		.byte	0x73
+ 2960 04c4 00       		.sleb128 0
+ 2961 04c5 22       		.byte	0x22
+ 2962 04c6 9F       		.byte	0x9f
+ 2963 04c7 A8000000 		.4byte	.LVL65
+ 2964 04cb B8000000 		.4byte	.LVL69
+ 2965 04cf 0100     		.2byte	0x1
+ 2966 04d1 51       		.byte	0x51
+ 2967 04d2 B8000000 		.4byte	.LVL69
+ 2968 04d6 CA000000 		.4byte	.LVL71
+ 2969 04da 0A00     		.2byte	0xa
+ 2970 04dc 7E       		.byte	0x7e
+ 2971 04dd 00       		.sleb128 0
+ 2972 04de 32       		.byte	0x32
+ 2973 04df 24       		.byte	0x24
+ 2974 04e0 73       		.byte	0x73
+ 2975 04e1 00       		.sleb128 0
+ 2976 04e2 22       		.byte	0x22
+ 2977 04e3 31       		.byte	0x31
+ 2978 04e4 24       		.byte	0x24
+ 2979 04e5 9F       		.byte	0x9f
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 58
+
+
+ 2980 04e6 D4000000 		.4byte	.LVL72
+ 2981 04ea E0000000 		.4byte	.LVL74
+ 2982 04ee 0100     		.2byte	0x1
+ 2983 04f0 53       		.byte	0x53
+ 2984 04f1 E0000000 		.4byte	.LVL74
+ 2985 04f5 F0000000 		.4byte	.LVL75
+ 2986 04f9 0700     		.2byte	0x7
+ 2987 04fb 72       		.byte	0x72
+ 2988 04fc 00       		.sleb128 0
+ 2989 04fd 31       		.byte	0x31
+ 2990 04fe 24       		.byte	0x24
+ 2991 04ff 71       		.byte	0x71
+ 2992 0500 00       		.sleb128 0
+ 2993 0501 22       		.byte	0x22
+ 2994 0502 14010000 		.4byte	.LVL81
+ 2995 0506 24010000 		.4byte	.LVL84
+ 2996 050a 0100     		.2byte	0x1
+ 2997 050c 51       		.byte	0x51
+ 2998 050d 24010000 		.4byte	.LVL84
+ 2999 0511 3C010000 		.4byte	.LVL87
+ 3000 0515 0600     		.2byte	0x6
+ 3001 0517 76       		.byte	0x76
+ 3002 0518 00       		.sleb128 0
+ 3003 0519 72       		.byte	0x72
+ 3004 051a 00       		.sleb128 0
+ 3005 051b 22       		.byte	0x22
+ 3006 051c 9F       		.byte	0x9f
+ 3007 051d 3C010000 		.4byte	.LVL87
+ 3008 0521 4C010000 		.4byte	.LVL91
+ 3009 0525 0100     		.2byte	0x1
+ 3010 0527 51       		.byte	0x51
+ 3011 0528 4C010000 		.4byte	.LVL91
+ 3012 052c 5E010000 		.4byte	.LVL93
+ 3013 0530 0A00     		.2byte	0xa
+ 3014 0532 76       		.byte	0x76
+ 3015 0533 00       		.sleb128 0
+ 3016 0534 32       		.byte	0x32
+ 3017 0535 24       		.byte	0x24
+ 3018 0536 72       		.byte	0x72
+ 3019 0537 00       		.sleb128 0
+ 3020 0538 22       		.byte	0x22
+ 3021 0539 31       		.byte	0x31
+ 3022 053a 24       		.byte	0x24
+ 3023 053b 9F       		.byte	0x9f
+ 3024 053c 68010000 		.4byte	.LVL94
+ 3025 0540 74010000 		.4byte	.LVL96
+ 3026 0544 0100     		.2byte	0x1
+ 3027 0546 52       		.byte	0x52
+ 3028 0547 74010000 		.4byte	.LVL96
+ 3029 054b 82010000 		.4byte	.LVL97
+ 3030 054f 0700     		.2byte	0x7
+ 3031 0551 73       		.byte	0x73
+ 3032 0552 00       		.sleb128 0
+ 3033 0553 31       		.byte	0x31
+ 3034 0554 24       		.byte	0x24
+ 3035 0555 71       		.byte	0x71
+ 3036 0556 00       		.sleb128 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 59
+
+
+ 3037 0557 22       		.byte	0x22
+ 3038 0558 16020000 		.4byte	.LVL110
+ 3039 055c 32020000 		.4byte	.LVL119
+ 3040 0560 0100     		.2byte	0x1
+ 3041 0562 52       		.byte	0x52
+ 3042 0563 32020000 		.4byte	.LVL119
+ 3043 0567 34020000 		.4byte	.LVL120
+ 3044 056b 0B00     		.2byte	0xb
+ 3045 056d 71       		.byte	0x71
+ 3046 056e 00       		.sleb128 0
+ 3047 056f 31       		.byte	0x31
+ 3048 0570 24       		.byte	0x24
+ 3049 0571 91       		.byte	0x91
+ 3050 0572 00       		.sleb128 0
+ 3051 0573 22       		.byte	0x22
+ 3052 0574 0A       		.byte	0xa
+ 3053 0575 200C     		.2byte	0xc20
+ 3054 0577 1C       		.byte	0x1c
+ 3055 0578 34020000 		.4byte	.LVL120
+ 3056 057c 38020000 		.4byte	.LVL121
+ 3057 0580 0100     		.2byte	0x1
+ 3058 0582 52       		.byte	0x52
+ 3059 0583 38020000 		.4byte	.LVL121
+ 3060 0587 3A020000 		.4byte	.LVL122
+ 3061 058b 1500     		.2byte	0x15
+ 3062 058d 71       		.byte	0x71
+ 3063 058e 00       		.sleb128 0
+ 3064 058f 31       		.byte	0x31
+ 3065 0590 24       		.byte	0x24
+ 3066 0591 91       		.byte	0x91
+ 3067 0592 00       		.sleb128 0
+ 3068 0593 22       		.byte	0x22
+ 3069 0594 0A       		.byte	0xa
+ 3070 0595 200C     		.2byte	0xc20
+ 3071 0597 1C       		.byte	0x1c
+ 3072 0598 94       		.byte	0x94
+ 3073 0599 02       		.byte	0x2
+ 3074 059a 0A       		.byte	0xa
+ 3075 059b FFFF     		.2byte	0xffff
+ 3076 059d 1A       		.byte	0x1a
+ 3077 059e 77       		.byte	0x77
+ 3078 059f 00       		.sleb128 0
+ 3079 05a0 1C       		.byte	0x1c
+ 3080 05a1 9F       		.byte	0x9f
+ 3081 05a2 3A020000 		.4byte	.LVL122
+ 3082 05a6 3C020000 		.4byte	.LVL123
+ 3083 05aa 0100     		.2byte	0x1
+ 3084 05ac 52       		.byte	0x52
+ 3085 05ad 3C020000 		.4byte	.LVL123
+ 3086 05b1 42020000 		.4byte	.LVL124
+ 3087 05b5 1E00     		.2byte	0x1e
+ 3088 05b7 71       		.byte	0x71
+ 3089 05b8 00       		.sleb128 0
+ 3090 05b9 31       		.byte	0x31
+ 3091 05ba 24       		.byte	0x24
+ 3092 05bb 91       		.byte	0x91
+ 3093 05bc 00       		.sleb128 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 60
+
+
+ 3094 05bd 22       		.byte	0x22
+ 3095 05be 0A       		.byte	0xa
+ 3096 05bf 200C     		.2byte	0xc20
+ 3097 05c1 1C       		.byte	0x1c
+ 3098 05c2 94       		.byte	0x94
+ 3099 05c3 02       		.byte	0x2
+ 3100 05c4 0A       		.byte	0xa
+ 3101 05c5 FFFF     		.2byte	0xffff
+ 3102 05c7 1A       		.byte	0x1a
+ 3103 05c8 77       		.byte	0x77
+ 3104 05c9 00       		.sleb128 0
+ 3105 05ca 1C       		.byte	0x1c
+ 3106 05cb 0A       		.byte	0xa
+ 3107 05cc FFFF     		.2byte	0xffff
+ 3108 05ce 1A       		.byte	0x1a
+ 3109 05cf 7E       		.byte	0x7e
+ 3110 05d0 00       		.sleb128 0
+ 3111 05d1 36       		.byte	0x36
+ 3112 05d2 24       		.byte	0x24
+ 3113 05d3 1C       		.byte	0x1c
+ 3114 05d4 9F       		.byte	0x9f
+ 3115 05d5 42020000 		.4byte	.LVL124
+ 3116 05d9 70020000 		.4byte	.LVL133
+ 3117 05dd 0100     		.2byte	0x1
+ 3118 05df 52       		.byte	0x52
+ 3119 05e0 70020000 		.4byte	.LVL133
+ 3120 05e4 7C020000 		.4byte	.LVL134
+ 3121 05e8 2700     		.2byte	0x27
+ 3122 05ea 71       		.byte	0x71
+ 3123 05eb 00       		.sleb128 0
+ 3124 05ec 31       		.byte	0x31
+ 3125 05ed 24       		.byte	0x24
+ 3126 05ee 91       		.byte	0x91
+ 3127 05ef 00       		.sleb128 0
+ 3128 05f0 22       		.byte	0x22
+ 3129 05f1 0A       		.byte	0xa
+ 3130 05f2 200C     		.2byte	0xc20
+ 3131 05f4 1C       		.byte	0x1c
+ 3132 05f5 94       		.byte	0x94
+ 3133 05f6 02       		.byte	0x2
+ 3134 05f7 0A       		.byte	0xa
+ 3135 05f8 FFFF     		.2byte	0xffff
+ 3136 05fa 1A       		.byte	0x1a
+ 3137 05fb 77       		.byte	0x77
+ 3138 05fc 00       		.sleb128 0
+ 3139 05fd 1C       		.byte	0x1c
+ 3140 05fe 0A       		.byte	0xa
+ 3141 05ff FFFF     		.2byte	0xffff
+ 3142 0601 1A       		.byte	0x1a
+ 3143 0602 7E       		.byte	0x7e
+ 3144 0603 00       		.sleb128 0
+ 3145 0604 36       		.byte	0x36
+ 3146 0605 24       		.byte	0x24
+ 3147 0606 1C       		.byte	0x1c
+ 3148 0607 31       		.byte	0x31
+ 3149 0608 24       		.byte	0x24
+ 3150 0609 0A       		.byte	0xa
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 61
+
+
+ 3151 060a FFFF     		.2byte	0xffff
+ 3152 060c 1A       		.byte	0x1a
+ 3153 060d 70       		.byte	0x70
+ 3154 060e 00       		.sleb128 0
+ 3155 060f 22       		.byte	0x22
+ 3156 0610 9F       		.byte	0x9f
+ 3157 0611 7C020000 		.4byte	.LVL134
+ 3158 0615 D8020000 		.4byte	.LVL148
+ 3159 0619 0100     		.2byte	0x1
+ 3160 061b 52       		.byte	0x52
+ 3161 061c 00000000 		.4byte	0
+ 3162 0620 00000000 		.4byte	0
+ 3163              	.LLST22:
+ 3164 0624 88000000 		.4byte	.LVL60
+ 3165 0628 94000000 		.4byte	.LVL63
+ 3166 062c 0100     		.2byte	0x1
+ 3167 062e 58       		.byte	0x58
+ 3168 062f 94000000 		.4byte	.LVL63
+ 3169 0633 B0000000 		.4byte	.LVL67
+ 3170 0637 0600     		.2byte	0x6
+ 3171 0639 7C       		.byte	0x7c
+ 3172 063a 00       		.sleb128 0
+ 3173 063b 77       		.byte	0x77
+ 3174 063c 00       		.sleb128 0
+ 3175 063d 22       		.byte	0x22
+ 3176 063e 9F       		.byte	0x9f
+ 3177 063f B0000000 		.4byte	.LVL67
+ 3178 0643 BC000000 		.4byte	.LVL70
+ 3179 0647 0100     		.2byte	0x1
+ 3180 0649 58       		.byte	0x58
+ 3181 064a BC000000 		.4byte	.LVL70
+ 3182 064e F0000000 		.4byte	.LVL75
+ 3183 0652 0800     		.2byte	0x8
+ 3184 0654 7C       		.byte	0x7c
+ 3185 0655 00       		.sleb128 0
+ 3186 0656 32       		.byte	0x32
+ 3187 0657 24       		.byte	0x24
+ 3188 0658 77       		.byte	0x77
+ 3189 0659 00       		.sleb128 0
+ 3190 065a 22       		.byte	0x22
+ 3191 065b 9F       		.byte	0x9f
+ 3192 065c 1C010000 		.4byte	.LVL82
+ 3193 0660 28010000 		.4byte	.LVL85
+ 3194 0664 0100     		.2byte	0x1
+ 3195 0666 5E       		.byte	0x5e
+ 3196 0667 28010000 		.4byte	.LVL85
+ 3197 066b 44010000 		.4byte	.LVL89
+ 3198 066f 0600     		.2byte	0x6
+ 3199 0671 77       		.byte	0x77
+ 3200 0672 00       		.sleb128 0
+ 3201 0673 70       		.byte	0x70
+ 3202 0674 00       		.sleb128 0
+ 3203 0675 22       		.byte	0x22
+ 3204 0676 9F       		.byte	0x9f
+ 3205 0677 44010000 		.4byte	.LVL89
+ 3206 067b 50010000 		.4byte	.LVL92
+ 3207 067f 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 62
+
+
+ 3208 0681 5E       		.byte	0x5e
+ 3209 0682 50010000 		.4byte	.LVL92
+ 3210 0686 82010000 		.4byte	.LVL97
+ 3211 068a 0800     		.2byte	0x8
+ 3212 068c 77       		.byte	0x77
+ 3213 068d 00       		.sleb128 0
+ 3214 068e 32       		.byte	0x32
+ 3215 068f 24       		.byte	0x24
+ 3216 0690 70       		.byte	0x70
+ 3217 0691 00       		.sleb128 0
+ 3218 0692 22       		.byte	0x22
+ 3219 0693 9F       		.byte	0x9f
+ 3220 0694 1C020000 		.4byte	.LVL111
+ 3221 0698 28020000 		.4byte	.LVL115
+ 3222 069c 0100     		.2byte	0x1
+ 3223 069e 50       		.byte	0x50
+ 3224 069f 28020000 		.4byte	.LVL115
+ 3225 06a3 2A020000 		.4byte	.LVL116
+ 3226 06a7 0B00     		.2byte	0xb
+ 3227 06a9 71       		.byte	0x71
+ 3228 06aa 00       		.sleb128 0
+ 3229 06ab 31       		.byte	0x31
+ 3230 06ac 24       		.byte	0x24
+ 3231 06ad 91       		.byte	0x91
+ 3232 06ae 00       		.sleb128 0
+ 3233 06af 22       		.byte	0x22
+ 3234 06b0 0A       		.byte	0xa
+ 3235 06b1 200D     		.2byte	0xd20
+ 3236 06b3 1C       		.byte	0x1c
+ 3237 06b4 2A020000 		.4byte	.LVL116
+ 3238 06b8 7E020000 		.4byte	.LVL135
+ 3239 06bc 0100     		.2byte	0x1
+ 3240 06be 50       		.byte	0x50
+ 3241 06bf 7E020000 		.4byte	.LVL135
+ 3242 06c3 80020000 		.4byte	.LVL136
+ 3243 06c7 2400     		.2byte	0x24
+ 3244 06c9 71       		.byte	0x71
+ 3245 06ca 00       		.sleb128 0
+ 3246 06cb 31       		.byte	0x31
+ 3247 06cc 24       		.byte	0x24
+ 3248 06cd 91       		.byte	0x91
+ 3249 06ce 00       		.sleb128 0
+ 3250 06cf 22       		.byte	0x22
+ 3251 06d0 0A       		.byte	0xa
+ 3252 06d1 200D     		.2byte	0xd20
+ 3253 06d3 1C       		.byte	0x1c
+ 3254 06d4 94       		.byte	0x94
+ 3255 06d5 02       		.byte	0x2
+ 3256 06d6 0A       		.byte	0xa
+ 3257 06d7 FFFF     		.2byte	0xffff
+ 3258 06d9 1A       		.byte	0x1a
+ 3259 06da 71       		.byte	0x71
+ 3260 06db 00       		.sleb128 0
+ 3261 06dc 31       		.byte	0x31
+ 3262 06dd 24       		.byte	0x24
+ 3263 06de 91       		.byte	0x91
+ 3264 06df 00       		.sleb128 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 63
+
+
+ 3265 06e0 22       		.byte	0x22
+ 3266 06e1 0A       		.byte	0xa
+ 3267 06e2 200C     		.2byte	0xc20
+ 3268 06e4 1C       		.byte	0x1c
+ 3269 06e5 94       		.byte	0x94
+ 3270 06e6 02       		.byte	0x2
+ 3271 06e7 0A       		.byte	0xa
+ 3272 06e8 FFFF     		.2byte	0xffff
+ 3273 06ea 1A       		.byte	0x1a
+ 3274 06eb 1C       		.byte	0x1c
+ 3275 06ec 9F       		.byte	0x9f
+ 3276 06ed 80020000 		.4byte	.LVL136
+ 3277 06f1 A6020000 		.4byte	.LVL141
+ 3278 06f5 0100     		.2byte	0x1
+ 3279 06f7 50       		.byte	0x50
+ 3280 06f8 A6020000 		.4byte	.LVL141
+ 3281 06fc B2020000 		.4byte	.LVL142
+ 3282 0700 F000     		.2byte	0xf0
+ 3283 0702 71       		.byte	0x71
+ 3284 0703 00       		.sleb128 0
+ 3285 0704 31       		.byte	0x31
+ 3286 0705 24       		.byte	0x24
+ 3287 0706 91       		.byte	0x91
+ 3288 0707 00       		.sleb128 0
+ 3289 0708 22       		.byte	0x22
+ 3290 0709 0A       		.byte	0xa
+ 3291 070a 200D     		.2byte	0xd20
+ 3292 070c 1C       		.byte	0x1c
+ 3293 070d 94       		.byte	0x94
+ 3294 070e 02       		.byte	0x2
+ 3295 070f 0A       		.byte	0xa
+ 3296 0710 FFFF     		.2byte	0xffff
+ 3297 0712 1A       		.byte	0x1a
+ 3298 0713 71       		.byte	0x71
+ 3299 0714 00       		.sleb128 0
+ 3300 0715 31       		.byte	0x31
+ 3301 0716 24       		.byte	0x24
+ 3302 0717 91       		.byte	0x91
+ 3303 0718 00       		.sleb128 0
+ 3304 0719 22       		.byte	0x22
+ 3305 071a 0A       		.byte	0xa
+ 3306 071b 200C     		.2byte	0xc20
+ 3307 071d 1C       		.byte	0x1c
+ 3308 071e 94       		.byte	0x94
+ 3309 071f 02       		.byte	0x2
+ 3310 0720 0A       		.byte	0xa
+ 3311 0721 FFFF     		.2byte	0xffff
+ 3312 0723 1A       		.byte	0x1a
+ 3313 0724 1C       		.byte	0x1c
+ 3314 0725 0A       		.byte	0xa
+ 3315 0726 FFFF     		.2byte	0xffff
+ 3316 0728 1A       		.byte	0x1a
+ 3317 0729 73       		.byte	0x73
+ 3318 072a 00       		.sleb128 0
+ 3319 072b 31       		.byte	0x31
+ 3320 072c 24       		.byte	0x24
+ 3321 072d 73       		.byte	0x73
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 64
+
+
+ 3322 072e 00       		.sleb128 0
+ 3323 072f 22       		.byte	0x22
+ 3324 0730 34       		.byte	0x34
+ 3325 0731 24       		.byte	0x24
+ 3326 0732 73       		.byte	0x73
+ 3327 0733 00       		.sleb128 0
+ 3328 0734 31       		.byte	0x31
+ 3329 0735 24       		.byte	0x24
+ 3330 0736 1C       		.byte	0x1c
+ 3331 0737 71       		.byte	0x71
+ 3332 0738 00       		.sleb128 0
+ 3333 0739 31       		.byte	0x31
+ 3334 073a 24       		.byte	0x24
+ 3335 073b 91       		.byte	0x91
+ 3336 073c 00       		.sleb128 0
+ 3337 073d 22       		.byte	0x22
+ 3338 073e 0A       		.byte	0xa
+ 3339 073f 2009     		.2byte	0x920
+ 3340 0741 1C       		.byte	0x1c
+ 3341 0742 94       		.byte	0x94
+ 3342 0743 02       		.byte	0x2
+ 3343 0744 0A       		.byte	0xa
+ 3344 0745 FFFF     		.2byte	0xffff
+ 3345 0747 1A       		.byte	0x1a
+ 3346 0748 71       		.byte	0x71
+ 3347 0749 00       		.sleb128 0
+ 3348 074a 31       		.byte	0x31
+ 3349 074b 24       		.byte	0x24
+ 3350 074c 91       		.byte	0x91
+ 3351 074d 00       		.sleb128 0
+ 3352 074e 22       		.byte	0x22
+ 3353 074f 0A       		.byte	0xa
+ 3354 0750 200C     		.2byte	0xc20
+ 3355 0752 1C       		.byte	0x1c
+ 3356 0753 94       		.byte	0x94
+ 3357 0754 02       		.byte	0x2
+ 3358 0755 0A       		.byte	0xa
+ 3359 0756 FFFF     		.2byte	0xffff
+ 3360 0758 1A       		.byte	0x1a
+ 3361 0759 22       		.byte	0x22
+ 3362 075a 0A       		.byte	0xa
+ 3363 075b FFFF     		.2byte	0xffff
+ 3364 075d 1A       		.byte	0x1a
+ 3365 075e 71       		.byte	0x71
+ 3366 075f 00       		.sleb128 0
+ 3367 0760 31       		.byte	0x31
+ 3368 0761 24       		.byte	0x24
+ 3369 0762 91       		.byte	0x91
+ 3370 0763 00       		.sleb128 0
+ 3371 0764 22       		.byte	0x22
+ 3372 0765 0A       		.byte	0xa
+ 3373 0766 200A     		.2byte	0xa20
+ 3374 0768 1C       		.byte	0x1c
+ 3375 0769 94       		.byte	0x94
+ 3376 076a 02       		.byte	0x2
+ 3377 076b 0A       		.byte	0xa
+ 3378 076c FFFF     		.2byte	0xffff
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 65
+
+
+ 3379 076e 1A       		.byte	0x1a
+ 3380 076f 71       		.byte	0x71
+ 3381 0770 00       		.sleb128 0
+ 3382 0771 31       		.byte	0x31
+ 3383 0772 24       		.byte	0x24
+ 3384 0773 91       		.byte	0x91
+ 3385 0774 00       		.sleb128 0
+ 3386 0775 22       		.byte	0x22
+ 3387 0776 0A       		.byte	0xa
+ 3388 0777 200B     		.2byte	0xb20
+ 3389 0779 1C       		.byte	0x1c
+ 3390 077a 94       		.byte	0x94
+ 3391 077b 02       		.byte	0x2
+ 3392 077c 0A       		.byte	0xa
+ 3393 077d FFFF     		.2byte	0xffff
+ 3394 077f 1A       		.byte	0x1a
+ 3395 0780 71       		.byte	0x71
+ 3396 0781 00       		.sleb128 0
+ 3397 0782 31       		.byte	0x31
+ 3398 0783 24       		.byte	0x24
+ 3399 0784 91       		.byte	0x91
+ 3400 0785 00       		.sleb128 0
+ 3401 0786 22       		.byte	0x22
+ 3402 0787 0A       		.byte	0xa
+ 3403 0788 200A     		.2byte	0xa20
+ 3404 078a 1C       		.byte	0x1c
+ 3405 078b 94       		.byte	0x94
+ 3406 078c 02       		.byte	0x2
+ 3407 078d 0A       		.byte	0xa
+ 3408 078e FFFF     		.2byte	0xffff
+ 3409 0790 1A       		.byte	0x1a
+ 3410 0791 1C       		.byte	0x1c
+ 3411 0792 31       		.byte	0x31
+ 3412 0793 26       		.byte	0x26
+ 3413 0794 0A       		.byte	0xa
+ 3414 0795 FFFF     		.2byte	0xffff
+ 3415 0797 1A       		.byte	0x1a
+ 3416 0798 22       		.byte	0x22
+ 3417 0799 0A       		.byte	0xa
+ 3418 079a FFFF     		.2byte	0xffff
+ 3419 079c 1A       		.byte	0x1a
+ 3420 079d 36       		.byte	0x36
+ 3421 079e 24       		.byte	0x24
+ 3422 079f 1C       		.byte	0x1c
+ 3423 07a0 0A       		.byte	0xa
+ 3424 07a1 FFFF     		.2byte	0xffff
+ 3425 07a3 1A       		.byte	0x1a
+ 3426 07a4 71       		.byte	0x71
+ 3427 07a5 00       		.sleb128 0
+ 3428 07a6 31       		.byte	0x31
+ 3429 07a7 24       		.byte	0x24
+ 3430 07a8 91       		.byte	0x91
+ 3431 07a9 00       		.sleb128 0
+ 3432 07aa 22       		.byte	0x22
+ 3433 07ab 0A       		.byte	0xa
+ 3434 07ac 200A     		.2byte	0xa20
+ 3435 07ae 1C       		.byte	0x1c
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 66
+
+
+ 3436 07af 94       		.byte	0x94
+ 3437 07b0 02       		.byte	0x2
+ 3438 07b1 0A       		.byte	0xa
+ 3439 07b2 FFFF     		.2byte	0xffff
+ 3440 07b4 1A       		.byte	0x1a
+ 3441 07b5 71       		.byte	0x71
+ 3442 07b6 00       		.sleb128 0
+ 3443 07b7 31       		.byte	0x31
+ 3444 07b8 24       		.byte	0x24
+ 3445 07b9 91       		.byte	0x91
+ 3446 07ba 00       		.sleb128 0
+ 3447 07bb 22       		.byte	0x22
+ 3448 07bc 0A       		.byte	0xa
+ 3449 07bd 200B     		.2byte	0xb20
+ 3450 07bf 1C       		.byte	0x1c
+ 3451 07c0 94       		.byte	0x94
+ 3452 07c1 02       		.byte	0x2
+ 3453 07c2 0A       		.byte	0xa
+ 3454 07c3 FFFF     		.2byte	0xffff
+ 3455 07c5 1A       		.byte	0x1a
+ 3456 07c6 71       		.byte	0x71
+ 3457 07c7 00       		.sleb128 0
+ 3458 07c8 31       		.byte	0x31
+ 3459 07c9 24       		.byte	0x24
+ 3460 07ca 91       		.byte	0x91
+ 3461 07cb 00       		.sleb128 0
+ 3462 07cc 22       		.byte	0x22
+ 3463 07cd 0A       		.byte	0xa
+ 3464 07ce 200A     		.2byte	0xa20
+ 3465 07d0 1C       		.byte	0x1c
+ 3466 07d1 94       		.byte	0x94
+ 3467 07d2 02       		.byte	0x2
+ 3468 07d3 0A       		.byte	0xa
+ 3469 07d4 FFFF     		.2byte	0xffff
+ 3470 07d6 1A       		.byte	0x1a
+ 3471 07d7 1C       		.byte	0x1c
+ 3472 07d8 31       		.byte	0x31
+ 3473 07d9 26       		.byte	0x26
+ 3474 07da 0A       		.byte	0xa
+ 3475 07db FFFF     		.2byte	0xffff
+ 3476 07dd 1A       		.byte	0x1a
+ 3477 07de 22       		.byte	0x22
+ 3478 07df 0A       		.byte	0xa
+ 3479 07e0 FFFF     		.2byte	0xffff
+ 3480 07e2 1A       		.byte	0x1a
+ 3481 07e3 1C       		.byte	0x1c
+ 3482 07e4 0A       		.byte	0xa
+ 3483 07e5 FFFF     		.2byte	0xffff
+ 3484 07e7 1A       		.byte	0x1a
+ 3485 07e8 22       		.byte	0x22
+ 3486 07e9 73       		.byte	0x73
+ 3487 07ea 00       		.sleb128 0
+ 3488 07eb 1C       		.byte	0x1c
+ 3489 07ec 0A       		.byte	0xa
+ 3490 07ed FFFF     		.2byte	0xffff
+ 3491 07ef 1A       		.byte	0x1a
+ 3492 07f0 22       		.byte	0x22
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 67
+
+
+ 3493 07f1 9F       		.byte	0x9f
+ 3494 07f2 B2020000 		.4byte	.LVL142
+ 3495 07f6 CA020000 		.4byte	.LVL147
+ 3496 07fa 0100     		.2byte	0x1
+ 3497 07fc 50       		.byte	0x50
+ 3498 07fd 00000000 		.4byte	0
+ 3499 0801 00000000 		.4byte	0
+ 3500              	.LLST23:
+ 3501 0805 8C000000 		.4byte	.LVL61
+ 3502 0809 F0000000 		.4byte	.LVL75
+ 3503 080d 0100     		.2byte	0x1
+ 3504 080f 59       		.byte	0x59
+ 3505 0810 20010000 		.4byte	.LVL83
+ 3506 0814 82010000 		.4byte	.LVL97
+ 3507 0818 0100     		.2byte	0x1
+ 3508 081a 5C       		.byte	0x5c
+ 3509 081b 20020000 		.4byte	.LVL112
+ 3510 081f BC020000 		.4byte	.LVL145
+ 3511 0823 0100     		.2byte	0x1
+ 3512 0825 5E       		.byte	0x5e
+ 3513 0826 BC020000 		.4byte	.LVL145
+ 3514 082a C0020000 		.4byte	.LVL146
+ 3515 082e 0B00     		.2byte	0xb
+ 3516 0830 71       		.byte	0x71
+ 3517 0831 00       		.sleb128 0
+ 3518 0832 31       		.byte	0x31
+ 3519 0833 24       		.byte	0x24
+ 3520 0834 91       		.byte	0x91
+ 3521 0835 00       		.sleb128 0
+ 3522 0836 22       		.byte	0x22
+ 3523 0837 0A       		.byte	0xa
+ 3524 0838 200E     		.2byte	0xe20
+ 3525 083a 1C       		.byte	0x1c
+ 3526 083b 00000000 		.4byte	0
+ 3527 083f 00000000 		.4byte	0
+ 3528              	.LLST24:
+ 3529 0843 90000000 		.4byte	.LVL62
+ 3530 0847 A4000000 		.4byte	.LVL64
+ 3531 084b 0100     		.2byte	0x1
+ 3532 084d 51       		.byte	0x51
+ 3533 084e A4000000 		.4byte	.LVL64
+ 3534 0852 AC000000 		.4byte	.LVL66
+ 3535 0856 0700     		.2byte	0x7
+ 3536 0858 72       		.byte	0x72
+ 3537 0859 00       		.sleb128 0
+ 3538 085a 31       		.byte	0x31
+ 3539 085b 24       		.byte	0x24
+ 3540 085c 78       		.byte	0x78
+ 3541 085d 00       		.sleb128 0
+ 3542 085e 22       		.byte	0x22
+ 3543 085f AC000000 		.4byte	.LVL66
+ 3544 0863 B8000000 		.4byte	.LVL69
+ 3545 0867 0B00     		.2byte	0xb
+ 3546 0869 72       		.byte	0x72
+ 3547 086a 00       		.sleb128 0
+ 3548 086b 31       		.byte	0x31
+ 3549 086c 24       		.byte	0x24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 68
+
+
+ 3550 086d 91       		.byte	0x91
+ 3551 086e 00       		.sleb128 0
+ 3552 086f 22       		.byte	0x22
+ 3553 0870 0A       		.byte	0xa
+ 3554 0871 2002     		.2byte	0x220
+ 3555 0873 1C       		.byte	0x1c
+ 3556 0874 B8000000 		.4byte	.LVL69
+ 3557 0878 D8000000 		.4byte	.LVL73
+ 3558 087c 0100     		.2byte	0x1
+ 3559 087e 51       		.byte	0x51
+ 3560 087f D8000000 		.4byte	.LVL73
+ 3561 0883 F0000000 		.4byte	.LVL75
+ 3562 0887 0700     		.2byte	0x7
+ 3563 0889 72       		.byte	0x72
+ 3564 088a 00       		.sleb128 0
+ 3565 088b 31       		.byte	0x31
+ 3566 088c 24       		.byte	0x24
+ 3567 088d 78       		.byte	0x78
+ 3568 088e 00       		.sleb128 0
+ 3569 088f 22       		.byte	0x22
+ 3570 0890 24010000 		.4byte	.LVL84
+ 3571 0894 38010000 		.4byte	.LVL86
+ 3572 0898 0100     		.2byte	0x1
+ 3573 089a 51       		.byte	0x51
+ 3574 089b 38010000 		.4byte	.LVL86
+ 3575 089f 40010000 		.4byte	.LVL88
+ 3576 08a3 0700     		.2byte	0x7
+ 3577 08a5 73       		.byte	0x73
+ 3578 08a6 00       		.sleb128 0
+ 3579 08a7 31       		.byte	0x31
+ 3580 08a8 24       		.byte	0x24
+ 3581 08a9 7E       		.byte	0x7e
+ 3582 08aa 00       		.sleb128 0
+ 3583 08ab 22       		.byte	0x22
+ 3584 08ac 40010000 		.4byte	.LVL88
+ 3585 08b0 4C010000 		.4byte	.LVL91
+ 3586 08b4 0B00     		.2byte	0xb
+ 3587 08b6 73       		.byte	0x73
+ 3588 08b7 00       		.sleb128 0
+ 3589 08b8 31       		.byte	0x31
+ 3590 08b9 24       		.byte	0x24
+ 3591 08ba 91       		.byte	0x91
+ 3592 08bb 00       		.sleb128 0
+ 3593 08bc 22       		.byte	0x22
+ 3594 08bd 0A       		.byte	0xa
+ 3595 08be A005     		.2byte	0x5a0
+ 3596 08c0 1C       		.byte	0x1c
+ 3597 08c1 4C010000 		.4byte	.LVL91
+ 3598 08c5 6C010000 		.4byte	.LVL95
+ 3599 08c9 0100     		.2byte	0x1
+ 3600 08cb 51       		.byte	0x51
+ 3601 08cc 6C010000 		.4byte	.LVL95
+ 3602 08d0 82010000 		.4byte	.LVL97
+ 3603 08d4 0700     		.2byte	0x7
+ 3604 08d6 73       		.byte	0x73
+ 3605 08d7 00       		.sleb128 0
+ 3606 08d8 31       		.byte	0x31
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 69
+
+
+ 3607 08d9 24       		.byte	0x24
+ 3608 08da 7E       		.byte	0x7e
+ 3609 08db 00       		.sleb128 0
+ 3610 08dc 22       		.byte	0x22
+ 3611 08dd 00000000 		.4byte	0
+ 3612 08e1 00000000 		.4byte	0
+ 3613              	.LLST25:
+ 3614 08e5 5C000000 		.4byte	.LVL53
+ 3615 08e9 F8000000 		.4byte	.LVL76
+ 3616 08ed 0100     		.2byte	0x1
+ 3617 08ef 56       		.byte	0x56
+ 3618 08f0 F8000000 		.4byte	.LVL76
+ 3619 08f4 2C030000 		.4byte	.LFE1
+ 3620 08f8 0400     		.2byte	0x4
+ 3621 08fa F3       		.byte	0xf3
+ 3622 08fb 01       		.uleb128 0x1
+ 3623 08fc 50       		.byte	0x50
+ 3624 08fd 9F       		.byte	0x9f
+ 3625 08fe 00000000 		.4byte	0
+ 3626 0902 00000000 		.4byte	0
+ 3627              	.LLST26:
+ 3628 0906 5C000000 		.4byte	.LVL53
+ 3629 090a F8000000 		.4byte	.LVL76
+ 3630 090e 0400     		.2byte	0x4
+ 3631 0910 76       		.byte	0x76
+ 3632 0911 8001     		.sleb128 128
+ 3633 0913 9F       		.byte	0x9f
+ 3634 0914 F8000000 		.4byte	.LVL76
+ 3635 0918 2C030000 		.4byte	.LFE1
+ 3636 091c 0700     		.2byte	0x7
+ 3637 091e F3       		.byte	0xf3
+ 3638 091f 01       		.uleb128 0x1
+ 3639 0920 50       		.byte	0x50
+ 3640 0921 23       		.byte	0x23
+ 3641 0922 8001     		.uleb128 0x80
+ 3642 0924 9F       		.byte	0x9f
+ 3643 0925 00000000 		.4byte	0
+ 3644 0929 00000000 		.4byte	0
+ 3645              	.LLST27:
+ 3646 092d 5C000000 		.4byte	.LVL53
+ 3647 0931 F8000000 		.4byte	.LVL76
+ 3648 0935 0400     		.2byte	0x4
+ 3649 0937 76       		.byte	0x76
+ 3650 0938 8002     		.sleb128 256
+ 3651 093a 9F       		.byte	0x9f
+ 3652 093b F8000000 		.4byte	.LVL76
+ 3653 093f 2C030000 		.4byte	.LFE1
+ 3654 0943 0700     		.2byte	0x7
+ 3655 0945 F3       		.byte	0xf3
+ 3656 0946 01       		.uleb128 0x1
+ 3657 0947 50       		.byte	0x50
+ 3658 0948 23       		.byte	0x23
+ 3659 0949 8002     		.uleb128 0x100
+ 3660 094b 9F       		.byte	0x9f
+ 3661 094c 00000000 		.4byte	0
+ 3662 0950 00000000 		.4byte	0
+ 3663              	.LLST28:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 70
+
+
+ 3664 0954 5C000000 		.4byte	.LVL53
+ 3665 0958 F8000000 		.4byte	.LVL76
+ 3666 095c 0400     		.2byte	0x4
+ 3667 095e 76       		.byte	0x76
+ 3668 095f 8003     		.sleb128 384
+ 3669 0961 9F       		.byte	0x9f
+ 3670 0962 F8000000 		.4byte	.LVL76
+ 3671 0966 2C030000 		.4byte	.LFE1
+ 3672 096a 0700     		.2byte	0x7
+ 3673 096c F3       		.byte	0xf3
+ 3674 096d 01       		.uleb128 0x1
+ 3675 096e 50       		.byte	0x50
+ 3676 096f 23       		.byte	0x23
+ 3677 0970 8003     		.uleb128 0x180
+ 3678 0972 9F       		.byte	0x9f
+ 3679 0973 00000000 		.4byte	0
+ 3680 0977 00000000 		.4byte	0
+ 3681              	.LLST29:
+ 3682 097b 5C000000 		.4byte	.LVL53
+ 3683 097f F2010000 		.4byte	.LVL105
+ 3684 0983 0100     		.2byte	0x1
+ 3685 0985 55       		.byte	0x55
+ 3686 0986 F2010000 		.4byte	.LVL105
+ 3687 098a 2C030000 		.4byte	.LFE1
+ 3688 098e 0400     		.2byte	0x4
+ 3689 0990 F3       		.byte	0xf3
+ 3690 0991 01       		.uleb128 0x1
+ 3691 0992 51       		.byte	0x51
+ 3692 0993 9F       		.byte	0x9f
+ 3693 0994 00000000 		.4byte	0
+ 3694 0998 00000000 		.4byte	0
+ 3695              	.LLST30:
+ 3696 099c 5C000000 		.4byte	.LVL53
+ 3697 09a0 F2010000 		.4byte	.LVL105
+ 3698 09a4 0400     		.2byte	0x4
+ 3699 09a6 75       		.byte	0x75
+ 3700 09a7 8001     		.sleb128 128
+ 3701 09a9 9F       		.byte	0x9f
+ 3702 09aa F2010000 		.4byte	.LVL105
+ 3703 09ae 2C030000 		.4byte	.LFE1
+ 3704 09b2 0700     		.2byte	0x7
+ 3705 09b4 F3       		.byte	0xf3
+ 3706 09b5 01       		.uleb128 0x1
+ 3707 09b6 51       		.byte	0x51
+ 3708 09b7 23       		.byte	0x23
+ 3709 09b8 8001     		.uleb128 0x80
+ 3710 09ba 9F       		.byte	0x9f
+ 3711 09bb 00000000 		.4byte	0
+ 3712 09bf 00000000 		.4byte	0
+ 3713              	.LLST31:
+ 3714 09c3 5C000000 		.4byte	.LVL53
+ 3715 09c7 F2010000 		.4byte	.LVL105
+ 3716 09cb 0400     		.2byte	0x4
+ 3717 09cd 75       		.byte	0x75
+ 3718 09ce 8002     		.sleb128 256
+ 3719 09d0 9F       		.byte	0x9f
+ 3720 09d1 F2010000 		.4byte	.LVL105
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 71
+
+
+ 3721 09d5 2C030000 		.4byte	.LFE1
+ 3722 09d9 0700     		.2byte	0x7
+ 3723 09db F3       		.byte	0xf3
+ 3724 09dc 01       		.uleb128 0x1
+ 3725 09dd 51       		.byte	0x51
+ 3726 09de 23       		.byte	0x23
+ 3727 09df 8002     		.uleb128 0x100
+ 3728 09e1 9F       		.byte	0x9f
+ 3729 09e2 00000000 		.4byte	0
+ 3730 09e6 00000000 		.4byte	0
+ 3731              	.LLST32:
+ 3732 09ea 5C000000 		.4byte	.LVL53
+ 3733 09ee F2010000 		.4byte	.LVL105
+ 3734 09f2 0400     		.2byte	0x4
+ 3735 09f4 75       		.byte	0x75
+ 3736 09f5 8003     		.sleb128 384
+ 3737 09f7 9F       		.byte	0x9f
+ 3738 09f8 F2010000 		.4byte	.LVL105
+ 3739 09fc 2C030000 		.4byte	.LFE1
+ 3740 0a00 0700     		.2byte	0x7
+ 3741 0a02 F3       		.byte	0xf3
+ 3742 0a03 01       		.uleb128 0x1
+ 3743 0a04 51       		.byte	0x51
+ 3744 0a05 23       		.byte	0x23
+ 3745 0a06 8003     		.uleb128 0x180
+ 3746 0a08 9F       		.byte	0x9f
+ 3747 0a09 00000000 		.4byte	0
+ 3748 0a0d 00000000 		.4byte	0
+ 3749              	.LLST33:
+ 3750 0a11 5C000000 		.4byte	.LVL53
+ 3751 0a15 28030000 		.4byte	.LVL154
+ 3752 0a19 0100     		.2byte	0x1
+ 3753 0a1b 54       		.byte	0x54
+ 3754 0a1c 28030000 		.4byte	.LVL154
+ 3755 0a20 2C030000 		.4byte	.LFE1
+ 3756 0a24 0400     		.2byte	0x4
+ 3757 0a26 F3       		.byte	0xf3
+ 3758 0a27 01       		.uleb128 0x1
+ 3759 0a28 52       		.byte	0x52
+ 3760 0a29 9F       		.byte	0x9f
+ 3761 0a2a 00000000 		.4byte	0
+ 3762 0a2e 00000000 		.4byte	0
+ 3763              	.LLST34:
+ 3764 0a32 EE010000 		.4byte	.LVL104
+ 3765 0a36 F2010000 		.4byte	.LVL105
+ 3766 0a3a 0200     		.2byte	0x2
+ 3767 0a3c 30       		.byte	0x30
+ 3768 0a3d 9F       		.byte	0x9f
+ 3769 0a3e F2010000 		.4byte	.LVL105
+ 3770 0a42 2C030000 		.4byte	.LFE1
+ 3771 0a46 0100     		.2byte	0x1
+ 3772 0a48 51       		.byte	0x51
+ 3773 0a49 00000000 		.4byte	0
+ 3774 0a4d 00000000 		.4byte	0
+ 3775              	.LLST35:
+ 3776 0a51 5C000000 		.4byte	.LVL53
+ 3777 0a55 60000000 		.4byte	.LVL54
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 72
+
+
+ 3778 0a59 0200     		.2byte	0x2
+ 3779 0a5b 30       		.byte	0x30
+ 3780 0a5c 9F       		.byte	0x9f
+ 3781 0a5d 60000000 		.4byte	.LVL54
+ 3782 0a61 F8000000 		.4byte	.LVL76
+ 3783 0a65 0100     		.2byte	0x1
+ 3784 0a67 52       		.byte	0x52
+ 3785 0a68 F8000000 		.4byte	.LVL76
+ 3786 0a6c 95010000 		.4byte	.LVL98-1
+ 3787 0a70 0100     		.2byte	0x1
+ 3788 0a72 53       		.byte	0x53
+ 3789 0a73 00000000 		.4byte	0
+ 3790 0a77 00000000 		.4byte	0
+ 3791              	.LLST36:
+ 3792 0a7b 00000000 		.4byte	.LVL155
+ 3793 0a7f 14000000 		.4byte	.LVL158
+ 3794 0a83 0100     		.2byte	0x1
+ 3795 0a85 50       		.byte	0x50
+ 3796 0a86 14000000 		.4byte	.LVL158
+ 3797 0a8a 56000000 		.4byte	.LFE2
+ 3798 0a8e 0100     		.2byte	0x1
+ 3799 0a90 55       		.byte	0x55
+ 3800 0a91 00000000 		.4byte	0
+ 3801 0a95 00000000 		.4byte	0
+ 3802              	.LLST37:
+ 3803 0a99 00000000 		.4byte	.LVL155
+ 3804 0a9d 12000000 		.4byte	.LVL157
+ 3805 0aa1 0100     		.2byte	0x1
+ 3806 0aa3 51       		.byte	0x51
+ 3807 0aa4 12000000 		.4byte	.LVL157
+ 3808 0aa8 56000000 		.4byte	.LFE2
+ 3809 0aac 0100     		.2byte	0x1
+ 3810 0aae 56       		.byte	0x56
+ 3811 0aaf 00000000 		.4byte	0
+ 3812 0ab3 00000000 		.4byte	0
+ 3813              	.LLST38:
+ 3814 0ab7 00000000 		.4byte	.LVL155
+ 3815 0abb 10000000 		.4byte	.LVL156
+ 3816 0abf 0100     		.2byte	0x1
+ 3817 0ac1 52       		.byte	0x52
+ 3818 0ac2 10000000 		.4byte	.LVL156
+ 3819 0ac6 56000000 		.4byte	.LFE2
+ 3820 0aca 0100     		.2byte	0x1
+ 3821 0acc 54       		.byte	0x54
+ 3822 0acd 00000000 		.4byte	0
+ 3823 0ad1 00000000 		.4byte	0
+ 3824              	.LLST39:
+ 3825 0ad5 22000000 		.4byte	.LVL160
+ 3826 0ad9 28000000 		.4byte	.LVL161
+ 3827 0add 0400     		.2byte	0x4
+ 3828 0adf 0A       		.byte	0xa
+ 3829 0ae0 0001     		.2byte	0x100
+ 3830 0ae2 9F       		.byte	0x9f
+ 3831 0ae3 28000000 		.4byte	.LVL161
+ 3832 0ae7 56000000 		.4byte	.LFE2
+ 3833 0aeb 0100     		.2byte	0x1
+ 3834 0aed 53       		.byte	0x53
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 73
+
+
+ 3835 0aee 00000000 		.4byte	0
+ 3836 0af2 00000000 		.4byte	0
+ 3837              		.section	.debug_aranges,"",%progbits
+ 3838 0000 2C000000 		.4byte	0x2c
+ 3839 0004 0200     		.2byte	0x2
+ 3840 0006 00000000 		.4byte	.Ldebug_info0
+ 3841 000a 04       		.byte	0x4
+ 3842 000b 00       		.byte	0
+ 3843 000c 0000     		.2byte	0
+ 3844 000e 0000     		.2byte	0
+ 3845 0010 00000000 		.4byte	.LFB0
+ 3846 0014 78020000 		.4byte	.LFE0-.LFB0
+ 3847 0018 00000000 		.4byte	.LFB1
+ 3848 001c 2C030000 		.4byte	.LFE1-.LFB1
+ 3849 0020 00000000 		.4byte	.LFB2
+ 3850 0024 56000000 		.4byte	.LFE2-.LFB2
+ 3851 0028 00000000 		.4byte	0
+ 3852 002c 00000000 		.4byte	0
+ 3853              		.section	.debug_ranges,"",%progbits
+ 3854              	.Ldebug_ranges0:
+ 3855 0000 00000000 		.4byte	.LFB0
+ 3856 0004 78020000 		.4byte	.LFE0
+ 3857 0008 00000000 		.4byte	.LFB1
+ 3858 000c 2C030000 		.4byte	.LFE1
+ 3859 0010 00000000 		.4byte	.LFB2
+ 3860 0014 56000000 		.4byte	.LFE2
+ 3861 0018 00000000 		.4byte	0
+ 3862 001c 00000000 		.4byte	0
+ 3863              		.section	.debug_line,"",%progbits
+ 3864              	.Ldebug_line0:
+ 3865 0000 56040000 		.section	.debug_str,"MS",%progbits,1
+ 3865      02002101 
+ 3865      00000201 
+ 3865      FB0E0D00 
+ 3865      01010101 
+ 3866              	.LASF23:
+ 3867 0000 61636331 		.ascii	"acc1\000"
+ 3867      00
+ 3868              	.LASF24:
+ 3869 0005 61636332 		.ascii	"acc2\000"
+ 3869      00
+ 3870              	.LASF25:
+ 3871 000a 61636333 		.ascii	"acc3\000"
+ 3871      00
+ 3872              	.LASF26:
+ 3873 000f 61636334 		.ascii	"acc4\000"
+ 3873      00
+ 3874              	.LASF27:
+ 3875 0014 61636335 		.ascii	"acc5\000"
+ 3875      00
+ 3876              	.LASF28:
+ 3877 0019 61636336 		.ascii	"acc6\000"
+ 3877      00
+ 3878              	.LASF29:
+ 3879 001e 61636337 		.ascii	"acc7\000"
+ 3879      00
+ 3880              	.LASF30:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 74
+
+
+ 3881 0023 61636338 		.ascii	"acc8\000"
+ 3881      00
+ 3882              	.LASF41:
+ 3883 0028 61636339 		.ascii	"acc9\000"
+ 3883      00
+ 3884              	.LASF42:
+ 3885 002d 706F6C79 		.ascii	"poly_mul_acc\000"
+ 3885      5F6D756C 
+ 3885      5F616363 
+ 3885      00
+ 3886              	.LASF16:
+ 3887 003a 75696E74 		.ascii	"uint64_t\000"
+ 3887      36345F74 
+ 3887      00
+ 3888              	.LASF11:
+ 3889 0043 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3889      206C6F6E 
+ 3889      6720756E 
+ 3889      7369676E 
+ 3889      65642069 
+ 3890              	.LASF9:
+ 3891 005a 6C6F6E67 		.ascii	"long long int\000"
+ 3891      206C6F6E 
+ 3891      6720696E 
+ 3891      7400
+ 3892              	.LASF0:
+ 3893 0068 7369676E 		.ascii	"signed char\000"
+ 3893      65642063 
+ 3893      68617200 
+ 3894              	.LASF32:
+ 3895 0074 6B617261 		.ascii	"karatsuba_simple\000"
+ 3895      74737562 
+ 3895      615F7369 
+ 3895      6D706C65 
+ 3895      00
+ 3896              	.LASF31:
+ 3897 0085 61636331 		.ascii	"acc10\000"
+ 3897      3000
+ 3898              	.LASF6:
+ 3899 008b 6C6F6E67 		.ascii	"long int\000"
+ 3899      20696E74 
+ 3899      00
+ 3900              	.LASF13:
+ 3901 0094 75696E74 		.ascii	"uint16_t\000"
+ 3901      31365F74 
+ 3901      00
+ 3902              	.LASF7:
+ 3903 009d 5F5F7569 		.ascii	"__uint32_t\000"
+ 3903      6E743332 
+ 3903      5F7400
+ 3904              	.LASF40:
+ 3905 00a8 433A5C55 		.ascii	"C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2"
+ 3905      73657273 
+ 3905      5C626F67 
+ 3905      75726164 
+ 3905      5C446573 
+ 3906 00d6 5C436F64 		.ascii	"\\Codigo\\Algoritmos postcuanticos\\PSOC\\SABER\\Sa"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 75
+
+
+ 3906      69676F5C 
+ 3906      416C676F 
+ 3906      7269746D 
+ 3906      6F732070 
+ 3907 0104 6265725C 		.ascii	"ber\\Saber.cydsn\000"
+ 3907      53616265 
+ 3907      722E6379 
+ 3907      64736E00 
+ 3908              	.LASF12:
+ 3909 0114 756E7369 		.ascii	"unsigned int\000"
+ 3909      676E6564 
+ 3909      20696E74 
+ 3909      00
+ 3910              	.LASF8:
+ 3911 0121 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3911      20756E73 
+ 3911      69676E65 
+ 3911      6420696E 
+ 3911      7400
+ 3912              	.LASF3:
+ 3913 0133 73686F72 		.ascii	"short unsigned int\000"
+ 3913      7420756E 
+ 3913      7369676E 
+ 3913      65642069 
+ 3913      6E7400
+ 3914              	.LASF18:
+ 3915 0146 73697A65 		.ascii	"sizetype\000"
+ 3915      74797065 
+ 3915      00
+ 3916              	.LASF17:
+ 3917 014f 6C6F6E67 		.ascii	"long double\000"
+ 3917      20646F75 
+ 3917      626C6500 
+ 3918              	.LASF33:
+ 3919 015b 746F6F6D 		.ascii	"toom_cook_4way\000"
+ 3919      5F636F6F 
+ 3919      6B5F3477 
+ 3919      617900
+ 3920              	.LASF20:
+ 3921 016a 72657375 		.ascii	"result_final\000"
+ 3921      6C745F66 
+ 3921      696E616C 
+ 3921      00
+ 3922              	.LASF37:
+ 3923 0177 696E7631 		.ascii	"inv15\000"
+ 3923      3500
+ 3924              	.LASF38:
+ 3925 017d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3925      43313120 
+ 3925      352E342E 
+ 3925      31203230 
+ 3925      31363036 
+ 3926 01b0 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 3926      20726576 
+ 3926      6973696F 
+ 3926      6E203233 
+ 3926      37373135 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 76
+
+
+ 3927 01e3 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 3927      70202D6D 
+ 3927      6670753D 
+ 3927      66707634 
+ 3927      2D73702D 
+ 3928 0216 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 3928      6F6E7320 
+ 3928      2D666661 
+ 3928      742D6C74 
+ 3928      6F2D6F62 
+ 3929              	.LASF10:
+ 3930 0230 5F5F7569 		.ascii	"__uint64_t\000"
+ 3930      6E743634 
+ 3930      5F7400
+ 3931              	.LASF14:
+ 3932 023b 696E7433 		.ascii	"int32_t\000"
+ 3932      325F7400 
+ 3933              	.LASF1:
+ 3934 0243 756E7369 		.ascii	"unsigned char\000"
+ 3934      676E6564 
+ 3934      20636861 
+ 3934      7200
+ 3935              	.LASF35:
+ 3936 0251 696E7633 		.ascii	"inv3\000"
+ 3936      00
+ 3937              	.LASF2:
+ 3938 0256 73686F72 		.ascii	"short int\000"
+ 3938      7420696E 
+ 3938      7400
+ 3939              	.LASF36:
+ 3940 0260 696E7639 		.ascii	"inv9\000"
+ 3940      00
+ 3941              	.LASF15:
+ 3942 0265 75696E74 		.ascii	"uint32_t\000"
+ 3942      33325F74 
+ 3942      00
+ 3943              	.LASF19:
+ 3944 026e 63686172 		.ascii	"char\000"
+ 3944      00
+ 3945              	.LASF4:
+ 3946 0273 5F5F7569 		.ascii	"__uint16_t\000"
+ 3946      6E743136 
+ 3946      5F7400
+ 3947              	.LASF5:
+ 3948 027e 5F5F696E 		.ascii	"__int32_t\000"
+ 3948      7433325F 
+ 3948      7400
+ 3949              	.LASF39:
+ 3950 0288 2E2E5C70 		.ascii	"..\\poly_mul.c\000"
+ 3950      6F6C795F 
+ 3950      6D756C2E 
+ 3950      6300
+ 3951              	.LASF21:
+ 3952 0296 64303132 		.ascii	"d0123\000"
+ 3952      3300
+ 3953              	.LASF43:
+ 3954 029c 6D656D73 		.ascii	"memset\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8KaL8p.s 			page 77
+
+
+ 3954      657400
+ 3955              	.LASF34:
+ 3956 02a3 72657375 		.ascii	"result\000"
+ 3956      6C7400
+ 3957              	.LASF22:
+ 3958 02aa 72657375 		.ascii	"result_d01\000"
+ 3958      6C745F64 
+ 3958      303100
+ 3959              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
