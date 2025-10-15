@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 1
 
 
    1              		.syntax unified
@@ -48,25 +48,25 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 1
   17:main_cm4.c    **** #include <stdio.h>
   18:main_cm4.c    **** #include "../Serial/uartTask.h"
   19:main_cm4.c    **** #include "../saber_wrapper.h"
-  20:main_cm4.c    **** 
-  21:main_cm4.c    **** int main(void)
-  22:main_cm4.c    **** {
-  29              		.loc 1 22 0
+  20:main_cm4.c    **** #include <stdlib.h>
+  21:main_cm4.c    **** 
+  22:main_cm4.c    **** int main(void)
+  23:main_cm4.c    **** {
+  29              		.loc 1 23 0
   30              		.cfi_startproc
-  31              		@ Volatile: function does not return.
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34 0000 00B5     		push	{lr}
-  35              		.cfi_def_cfa_offset 4
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 2
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 00B5     		push	{lr}
+  34              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 2
 
 
-  36              		.cfi_offset 14, -4
-  37 0002 83B0     		sub	sp, sp, #12
-  38              		.cfi_def_cfa_offset 16
-  39              	.LBB4:
-  40              	.LBB5:
-  41              		.file 2 "Generated_Source\\PSoC6\\pdl\\cmsis/include/cmsis_gcc.h"
+  35              		.cfi_offset 14, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              		.cfi_def_cfa_offset 16
+  38              	.LBB4:
+  39              	.LBB5:
+  40              		.file 2 "Generated_Source\\PSoC6\\pdl\\cmsis/include/cmsis_gcc.h"
    1:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** /**************************************************************************//**
    2:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 1
   49:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
   50:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
   51:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif                                           
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 3
 
 
   52:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __NO_RETURN
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 1
  106:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
  107:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
  108:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 4
 
 
  109:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
@@ -204,2052 +204,2248 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 1
  129:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
  130:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** {
  131:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
-  42              		.loc 2 131 0
-  43              		.syntax unified
-  44              	@ 131 "Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h" 1
-  45 0004 62B6     		cpsie i
-  46              	@ 0 "" 2
-  47              		.thumb
-  48              		.syntax unified
-  49              	.LBE5:
-  50              	.LBE4:
-  23:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
-  24:main_cm4.c    ****     
-  25:main_cm4.c    ****     /* Create RTOS tasks and start the scheduler */
-  26:main_cm4.c    ****     xTaskCreate ( uartTask, "UART Task", 400, 0, 2, 0);
-  51              		.loc 1 26 0
-  52 0006 0023     		movs	r3, #0
-  53 0008 0193     		str	r3, [sp, #4]
-  54 000a 0222     		movs	r2, #2
-  55 000c 0092     		str	r2, [sp]
-  56 000e 4FF4C872 		mov	r2, #400
-  57 0012 0349     		ldr	r1, .L4
-  58 0014 0348     		ldr	r0, .L4+4
-  59 0016 FFF7FEFF 		bl	xTaskCreate
-  60              	.LVL0:
-  27:main_cm4.c    ****     vTaskStartScheduler();
-  61              		.loc 1 27 0
-  62 001a FFF7FEFF 		bl	vTaskStartScheduler
-  63              	.LVL1:
-  64              	.L2:
-  65 001e FEE7     		b	.L2
-  66              	.L5:
-  67              		.align	2
-  68              	.L4:
-  69 0020 00000000 		.word	.LC0
-  70 0024 00000000 		.word	uartTask
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 5
+  41              		.loc 2 131 0
+  42              		.syntax unified
+  43              	@ 131 "Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h" 1
+  44 0004 62B6     		cpsie i
+  45              	@ 0 "" 2
+  46              		.thumb
+  47              		.syntax unified
+  48              	.LBE5:
+  49              	.LBE4:
+  24:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
+  25:main_cm4.c    ****     
+  26:main_cm4.c    ****     /* Create RTOS tasks and start the scheduler */
+  27:main_cm4.c    ****     xTaskCreate ( uartTask, "UART Task", 400, 0, 2, 0);
+  50              		.loc 1 27 0
+  51 0006 0023     		movs	r3, #0
+  52 0008 0193     		str	r3, [sp, #4]
+  53 000a 0222     		movs	r2, #2
+  54 000c 0092     		str	r2, [sp]
+  55 000e 4FF4C872 		mov	r2, #400
+  56 0012 0749     		ldr	r1, .L4
+  57 0014 0748     		ldr	r0, .L4+4
+  58 0016 FFF7FEFF 		bl	xTaskCreate
+  59              	.LVL0:
+  28:main_cm4.c    ****     vTaskStartScheduler();
+  60              		.loc 1 28 0
+  61 001a FFF7FEFF 		bl	vTaskStartScheduler
+  62              	.LVL1:
+  29:main_cm4.c    ****     
+  30:main_cm4.c    ****     const size_t BYTES_SK = saber_get_secret_key_size();
+  63              		.loc 1 30 0
+  64 001e FFF7FEFF 		bl	saber_get_secret_key_size
+  65              	.LVL2:
+  31:main_cm4.c    ****     const size_t BYTES_PK = saber_get_public_key_size();
+  66              		.loc 1 31 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 5
 
 
-  71              		.cfi_endproc
-  72              	.LFE485:
-  73              		.size	main, .-main
-  74              		.section	.rodata.str1.4,"aMS",%progbits,1
-  75              		.align	2
-  76              	.LC0:
-  77 0000 55415254 		.ascii	"UART Task\000"
-  77      20546173 
-  77      6B00
-  78              		.text
-  79              	.Letext0:
-  80              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  81              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  82              		.file 5 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
-  83              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
-  84              		.file 7 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
-  85              		.file 8 "Generated_Source\\PSoC6/UART.h"
-  86              		.file 9 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/task.h"
-  87              		.section	.debug_info,"",%progbits
-  88              	.Ldebug_info0:
-  89 0000 C3060000 		.4byte	0x6c3
-  90 0004 0400     		.2byte	0x4
-  91 0006 00000000 		.4byte	.Ldebug_abbrev0
-  92 000a 04       		.byte	0x4
-  93 000b 01       		.uleb128 0x1
-  94 000c 60050000 		.4byte	.LASF133
-  95 0010 0C       		.byte	0xc
-  96 0011 AD080000 		.4byte	.LASF134
-  97 0015 5C040000 		.4byte	.LASF135
-  98 0019 00000000 		.4byte	.Ldebug_ranges0+0
-  99 001d 00000000 		.4byte	0
- 100 0021 00000000 		.4byte	.Ldebug_line0
- 101 0025 02       		.uleb128 0x2
- 102 0026 02       		.byte	0x2
- 103 0027 05       		.byte	0x5
- 104 0028 9F060000 		.4byte	.LASF0
- 105 002c 02       		.uleb128 0x2
- 106 002d 01       		.byte	0x1
- 107 002e 06       		.byte	0x6
- 108 002f 73010000 		.4byte	.LASF1
- 109 0033 03       		.uleb128 0x3
- 110 0034 94000000 		.4byte	.LASF3
- 111 0038 03       		.byte	0x3
- 112 0039 1D       		.byte	0x1d
- 113 003a 3E000000 		.4byte	0x3e
- 114 003e 02       		.uleb128 0x2
- 115 003f 01       		.byte	0x1
- 116 0040 08       		.byte	0x8
- 117 0041 7D060000 		.4byte	.LASF2
- 118 0045 03       		.uleb128 0x3
- 119 0046 9E020000 		.4byte	.LASF4
- 120 004a 03       		.byte	0x3
- 121 004b 29       		.byte	0x29
- 122 004c 25000000 		.4byte	0x25
- 123 0050 03       		.uleb128 0x3
- 124 0051 24070000 		.4byte	.LASF5
- 125 0055 03       		.byte	0x3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 6
+  67 0022 FFF7FEFF 		bl	saber_get_public_key_size
+  68              	.LVL3:
+  32:main_cm4.c    ****     const size_t BYTES_CT = saber_get_ciphertext_size();
+  69              		.loc 1 32 0
+  70 0026 FFF7FEFF 		bl	saber_get_ciphertext_size
+  71              	.LVL4:
+  33:main_cm4.c    ****     const size_t BYTES_SS = saber_get_shared_secret_size();
+  72              		.loc 1 33 0
+  73 002a FFF7FEFF 		bl	saber_get_shared_secret_size
+  74              	.LVL5:
+  75              	.L2:
+  76 002e FEE7     		b	.L2
+  77              	.L5:
+  78              		.align	2
+  79              	.L4:
+  80 0030 00000000 		.word	.LC0
+  81 0034 00000000 		.word	uartTask
+  82              		.cfi_endproc
+  83              	.LFE485:
+  84              		.size	main, .-main
+  85              		.section	.rodata.str1.4,"aMS",%progbits,1
+  86              		.align	2
+  87              	.LC0:
+  88 0000 55415254 		.ascii	"UART Task\000"
+  88      20546173 
+  88      6B00
+  89              		.text
+  90              	.Letext0:
+  91              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  92              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  93              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  94              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+  95              		.file 7 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
+  96              		.file 8 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+  97              		.file 9 "Generated_Source\\PSoC6/UART.h"
+  98              		.file 10 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/task.h"
+  99              		.file 11 "../saber_wrapper.h"
+ 100              		.section	.debug_info,"",%progbits
+ 101              	.Ldebug_info0:
+ 102 0000 7D070000 		.4byte	0x77d
+ 103 0004 0400     		.2byte	0x4
+ 104 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 105 000a 04       		.byte	0x4
+ 106 000b 01       		.uleb128 0x1
+ 107 000c 97050000 		.4byte	.LASF142
+ 108 0010 0C       		.byte	0xc
+ 109 0011 43090000 		.4byte	.LASF143
+ 110 0015 79040000 		.4byte	.LASF144
+ 111 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 112 001d 00000000 		.4byte	0
+ 113 0021 00000000 		.4byte	.Ldebug_line0
+ 114 0025 02       		.uleb128 0x2
+ 115 0026 02       		.byte	0x2
+ 116 0027 05       		.byte	0x5
+ 117 0028 F3060000 		.4byte	.LASF0
+ 118 002c 02       		.uleb128 0x2
+ 119 002d 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 6
 
 
- 126 0056 2B       		.byte	0x2b
- 127 0057 5B000000 		.4byte	0x5b
- 128 005b 02       		.uleb128 0x2
- 129 005c 02       		.byte	0x2
- 130 005d 07       		.byte	0x7
- 131 005e 79070000 		.4byte	.LASF6
- 132 0062 03       		.uleb128 0x3
- 133 0063 42070000 		.4byte	.LASF7
- 134 0067 03       		.byte	0x3
- 135 0068 3F       		.byte	0x3f
- 136 0069 6D000000 		.4byte	0x6d
- 137 006d 02       		.uleb128 0x2
- 138 006e 04       		.byte	0x4
- 139 006f 05       		.byte	0x5
- 140 0070 D6010000 		.4byte	.LASF8
- 141 0074 03       		.uleb128 0x3
- 142 0075 6F020000 		.4byte	.LASF9
- 143 0079 03       		.byte	0x3
- 144 007a 41       		.byte	0x41
- 145 007b 7F000000 		.4byte	0x7f
- 146 007f 02       		.uleb128 0x2
- 147 0080 04       		.byte	0x4
- 148 0081 07       		.byte	0x7
- 149 0082 2C030000 		.4byte	.LASF10
- 150 0086 02       		.uleb128 0x2
- 151 0087 08       		.byte	0x8
- 152 0088 05       		.byte	0x5
- 153 0089 65010000 		.4byte	.LASF11
- 154 008d 02       		.uleb128 0x2
- 155 008e 08       		.byte	0x8
- 156 008f 07       		.byte	0x7
- 157 0090 E3000000 		.4byte	.LASF12
- 158 0094 04       		.uleb128 0x4
- 159 0095 04       		.byte	0x4
- 160 0096 05       		.byte	0x5
- 161 0097 696E7400 		.ascii	"int\000"
- 162 009b 02       		.uleb128 0x2
- 163 009c 04       		.byte	0x4
- 164 009d 07       		.byte	0x7
- 165 009e F0020000 		.4byte	.LASF13
- 166 00a2 03       		.uleb128 0x3
- 167 00a3 0E080000 		.4byte	.LASF14
- 168 00a7 04       		.byte	0x4
- 169 00a8 18       		.byte	0x18
- 170 00a9 33000000 		.4byte	0x33
- 171 00ad 03       		.uleb128 0x3
- 172 00ae 5D010000 		.4byte	.LASF15
- 173 00b2 04       		.byte	0x4
- 174 00b3 20       		.byte	0x20
- 175 00b4 45000000 		.4byte	0x45
- 176 00b8 03       		.uleb128 0x3
- 177 00b9 FD020000 		.4byte	.LASF16
- 178 00bd 04       		.byte	0x4
- 179 00be 24       		.byte	0x24
- 180 00bf 50000000 		.4byte	0x50
- 181 00c3 03       		.uleb128 0x3
- 182 00c4 75060000 		.4byte	.LASF17
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 7
+ 120 002e 06       		.byte	0x6
+ 121 002f 61010000 		.4byte	.LASF1
+ 122 0033 03       		.uleb128 0x3
+ 123 0034 87000000 		.4byte	.LASF3
+ 124 0038 03       		.byte	0x3
+ 125 0039 1D       		.byte	0x1d
+ 126 003a 3E000000 		.4byte	0x3e
+ 127 003e 02       		.uleb128 0x2
+ 128 003f 01       		.byte	0x1
+ 129 0040 08       		.byte	0x8
+ 130 0041 B4060000 		.4byte	.LASF2
+ 131 0045 03       		.uleb128 0x3
+ 132 0046 BB020000 		.4byte	.LASF4
+ 133 004a 03       		.byte	0x3
+ 134 004b 29       		.byte	0x29
+ 135 004c 25000000 		.4byte	0x25
+ 136 0050 03       		.uleb128 0x3
+ 137 0051 83070000 		.4byte	.LASF5
+ 138 0055 03       		.byte	0x3
+ 139 0056 2B       		.byte	0x2b
+ 140 0057 5B000000 		.4byte	0x5b
+ 141 005b 02       		.uleb128 0x2
+ 142 005c 02       		.byte	0x2
+ 143 005d 07       		.byte	0x7
+ 144 005e D8070000 		.4byte	.LASF6
+ 145 0062 03       		.uleb128 0x3
+ 146 0063 A1070000 		.4byte	.LASF7
+ 147 0067 03       		.byte	0x3
+ 148 0068 3F       		.byte	0x3f
+ 149 0069 6D000000 		.4byte	0x6d
+ 150 006d 02       		.uleb128 0x2
+ 151 006e 04       		.byte	0x4
+ 152 006f 05       		.byte	0x5
+ 153 0070 C4010000 		.4byte	.LASF8
+ 154 0074 03       		.uleb128 0x3
+ 155 0075 8C020000 		.4byte	.LASF9
+ 156 0079 03       		.byte	0x3
+ 157 007a 41       		.byte	0x41
+ 158 007b 7F000000 		.4byte	0x7f
+ 159 007f 02       		.uleb128 0x2
+ 160 0080 04       		.byte	0x4
+ 161 0081 07       		.byte	0x7
+ 162 0082 49030000 		.4byte	.LASF10
+ 163 0086 02       		.uleb128 0x2
+ 164 0087 08       		.byte	0x8
+ 165 0088 05       		.byte	0x5
+ 166 0089 53010000 		.4byte	.LASF11
+ 167 008d 02       		.uleb128 0x2
+ 168 008e 08       		.byte	0x8
+ 169 008f 07       		.byte	0x7
+ 170 0090 D1000000 		.4byte	.LASF12
+ 171 0094 04       		.uleb128 0x4
+ 172 0095 04       		.byte	0x4
+ 173 0096 05       		.byte	0x5
+ 174 0097 696E7400 		.ascii	"int\000"
+ 175 009b 02       		.uleb128 0x2
+ 176 009c 04       		.byte	0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 7
 
 
- 183 00c8 04       		.byte	0x4
- 184 00c9 2C       		.byte	0x2c
- 185 00ca 62000000 		.4byte	0x62
- 186 00ce 03       		.uleb128 0x3
- 187 00cf DB060000 		.4byte	.LASF18
- 188 00d3 04       		.byte	0x4
- 189 00d4 30       		.byte	0x30
- 190 00d5 74000000 		.4byte	0x74
- 191 00d9 02       		.uleb128 0x2
- 192 00da 04       		.byte	0x4
- 193 00db 07       		.byte	0x7
- 194 00dc BE040000 		.4byte	.LASF19
- 195 00e0 05       		.uleb128 0x5
- 196 00e1 CE000000 		.4byte	0xce
- 197 00e5 02       		.uleb128 0x2
- 198 00e6 08       		.byte	0x8
- 199 00e7 04       		.byte	0x4
- 200 00e8 F9060000 		.4byte	.LASF20
- 201 00ec 06       		.uleb128 0x6
- 202 00ed B8       		.byte	0xb8
- 203 00ee 05       		.byte	0x5
- 204 00ef 34       		.byte	0x34
- 205 00f0 FD040000 		.4byte	0x4fd
- 206 00f4 07       		.uleb128 0x7
- 207 00f5 CA000000 		.4byte	.LASF21
- 208 00f9 05       		.byte	0x5
- 209 00fa 37       		.byte	0x37
- 210 00fb CE000000 		.4byte	0xce
- 211 00ff 00       		.byte	0
- 212 0100 07       		.uleb128 0x7
- 213 0101 64020000 		.4byte	.LASF22
- 214 0105 05       		.byte	0x5
- 215 0106 38       		.byte	0x38
- 216 0107 CE000000 		.4byte	0xce
- 217 010b 04       		.byte	0x4
- 218 010c 07       		.uleb128 0x7
- 219 010d ED010000 		.4byte	.LASF23
- 220 0111 05       		.byte	0x5
- 221 0112 39       		.byte	0x39
- 222 0113 CE000000 		.4byte	0xce
- 223 0117 08       		.byte	0x8
- 224 0118 07       		.uleb128 0x7
- 225 0119 67060000 		.4byte	.LASF24
- 226 011d 05       		.byte	0x5
- 227 011e 3A       		.byte	0x3a
- 228 011f CE000000 		.4byte	0xce
- 229 0123 0C       		.byte	0xc
- 230 0124 07       		.uleb128 0x7
- 231 0125 94010000 		.4byte	.LASF25
- 232 0129 05       		.byte	0x5
- 233 012a 3B       		.byte	0x3b
- 234 012b CE000000 		.4byte	0xce
- 235 012f 10       		.byte	0x10
- 236 0130 07       		.uleb128 0x7
- 237 0131 CC010000 		.4byte	.LASF26
- 238 0135 05       		.byte	0x5
- 239 0136 3C       		.byte	0x3c
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 8
+ 177 009d 07       		.byte	0x7
+ 178 009e 0D030000 		.4byte	.LASF13
+ 179 00a2 03       		.uleb128 0x3
+ 180 00a3 87080000 		.4byte	.LASF14
+ 181 00a7 04       		.byte	0x4
+ 182 00a8 18       		.byte	0x18
+ 183 00a9 33000000 		.4byte	0x33
+ 184 00ad 03       		.uleb128 0x3
+ 185 00ae 4B010000 		.4byte	.LASF15
+ 186 00b2 04       		.byte	0x4
+ 187 00b3 20       		.byte	0x20
+ 188 00b4 45000000 		.4byte	0x45
+ 189 00b8 03       		.uleb128 0x3
+ 190 00b9 1A030000 		.4byte	.LASF16
+ 191 00bd 04       		.byte	0x4
+ 192 00be 24       		.byte	0x24
+ 193 00bf 50000000 		.4byte	0x50
+ 194 00c3 03       		.uleb128 0x3
+ 195 00c4 AC060000 		.4byte	.LASF17
+ 196 00c8 04       		.byte	0x4
+ 197 00c9 2C       		.byte	0x2c
+ 198 00ca 62000000 		.4byte	0x62
+ 199 00ce 03       		.uleb128 0x3
+ 200 00cf 3A070000 		.4byte	.LASF18
+ 201 00d3 04       		.byte	0x4
+ 202 00d4 30       		.byte	0x30
+ 203 00d5 74000000 		.4byte	0x74
+ 204 00d9 02       		.uleb128 0x2
+ 205 00da 04       		.byte	0x4
+ 206 00db 07       		.byte	0x7
+ 207 00dc DB040000 		.4byte	.LASF19
+ 208 00e0 05       		.uleb128 0x5
+ 209 00e1 CE000000 		.4byte	0xce
+ 210 00e5 03       		.uleb128 0x3
+ 211 00e6 4F000000 		.4byte	.LASF20
+ 212 00ea 05       		.byte	0x5
+ 213 00eb D8       		.byte	0xd8
+ 214 00ec 9B000000 		.4byte	0x9b
+ 215 00f0 02       		.uleb128 0x2
+ 216 00f1 08       		.byte	0x8
+ 217 00f2 04       		.byte	0x4
+ 218 00f3 58070000 		.4byte	.LASF21
+ 219 00f7 06       		.uleb128 0x6
+ 220 00f8 B8       		.byte	0xb8
+ 221 00f9 06       		.byte	0x6
+ 222 00fa 34       		.byte	0x34
+ 223 00fb 08050000 		.4byte	0x508
+ 224 00ff 07       		.uleb128 0x7
+ 225 0100 B8000000 		.4byte	.LASF22
+ 226 0104 06       		.byte	0x6
+ 227 0105 37       		.byte	0x37
+ 228 0106 CE000000 		.4byte	0xce
+ 229 010a 00       		.byte	0
+ 230 010b 07       		.uleb128 0x7
+ 231 010c 81020000 		.4byte	.LASF23
+ 232 0110 06       		.byte	0x6
+ 233 0111 38       		.byte	0x38
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 8
 
 
- 240 0137 CE000000 		.4byte	0xce
- 241 013b 14       		.byte	0x14
- 242 013c 07       		.uleb128 0x7
- 243 013d 75030000 		.4byte	.LASF27
- 244 0141 05       		.byte	0x5
- 245 0142 3D       		.byte	0x3d
- 246 0143 CE000000 		.4byte	0xce
- 247 0147 18       		.byte	0x18
- 248 0148 07       		.uleb128 0x7
- 249 0149 7D000000 		.4byte	.LASF28
- 250 014d 05       		.byte	0x5
- 251 014e 3E       		.byte	0x3e
- 252 014f CE000000 		.4byte	0xce
- 253 0153 1C       		.byte	0x1c
- 254 0154 07       		.uleb128 0x7
- 255 0155 77080000 		.4byte	.LASF29
- 256 0159 05       		.byte	0x5
- 257 015a 3F       		.byte	0x3f
- 258 015b CE000000 		.4byte	0xce
- 259 015f 20       		.byte	0x20
- 260 0160 07       		.uleb128 0x7
- 261 0161 3B050000 		.4byte	.LASF30
- 262 0165 05       		.byte	0x5
- 263 0166 40       		.byte	0x40
- 264 0167 CE000000 		.4byte	0xce
- 265 016b 24       		.byte	0x24
- 266 016c 07       		.uleb128 0x7
- 267 016d 2E040000 		.4byte	.LASF31
- 268 0171 05       		.byte	0x5
- 269 0172 43       		.byte	0x43
- 270 0173 A2000000 		.4byte	0xa2
- 271 0177 28       		.byte	0x28
- 272 0178 07       		.uleb128 0x7
- 273 0179 63000000 		.4byte	.LASF32
- 274 017d 05       		.byte	0x5
- 275 017e 44       		.byte	0x44
- 276 017f A2000000 		.4byte	0xa2
- 277 0183 29       		.byte	0x29
- 278 0184 07       		.uleb128 0x7
- 279 0185 6D080000 		.4byte	.LASF33
- 280 0189 05       		.byte	0x5
- 281 018a 45       		.byte	0x45
- 282 018b A2000000 		.4byte	0xa2
- 283 018f 2A       		.byte	0x2a
- 284 0190 07       		.uleb128 0x7
- 285 0191 2D050000 		.4byte	.LASF34
- 286 0195 05       		.byte	0x5
- 287 0196 46       		.byte	0x46
- 288 0197 A2000000 		.4byte	0xa2
- 289 019b 2B       		.byte	0x2b
- 290 019c 07       		.uleb128 0x7
- 291 019d C5030000 		.4byte	.LASF35
- 292 01a1 05       		.byte	0x5
- 293 01a2 47       		.byte	0x47
- 294 01a3 A2000000 		.4byte	0xa2
- 295 01a7 2C       		.byte	0x2c
- 296 01a8 07       		.uleb128 0x7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 9
+ 234 0112 CE000000 		.4byte	0xce
+ 235 0116 04       		.byte	0x4
+ 236 0117 07       		.uleb128 0x7
+ 237 0118 F2010000 		.4byte	.LASF24
+ 238 011c 06       		.byte	0x6
+ 239 011d 39       		.byte	0x39
+ 240 011e CE000000 		.4byte	0xce
+ 241 0122 08       		.byte	0x8
+ 242 0123 07       		.uleb128 0x7
+ 243 0124 9E060000 		.4byte	.LASF25
+ 244 0128 06       		.byte	0x6
+ 245 0129 3A       		.byte	0x3a
+ 246 012a CE000000 		.4byte	0xce
+ 247 012e 0C       		.byte	0xc
+ 248 012f 07       		.uleb128 0x7
+ 249 0130 82010000 		.4byte	.LASF26
+ 250 0134 06       		.byte	0x6
+ 251 0135 3B       		.byte	0x3b
+ 252 0136 CE000000 		.4byte	0xce
+ 253 013a 10       		.byte	0x10
+ 254 013b 07       		.uleb128 0x7
+ 255 013c BA010000 		.4byte	.LASF27
+ 256 0140 06       		.byte	0x6
+ 257 0141 3C       		.byte	0x3c
+ 258 0142 CE000000 		.4byte	0xce
+ 259 0146 14       		.byte	0x14
+ 260 0147 07       		.uleb128 0x7
+ 261 0148 92030000 		.4byte	.LASF28
+ 262 014c 06       		.byte	0x6
+ 263 014d 3D       		.byte	0x3d
+ 264 014e CE000000 		.4byte	0xce
+ 265 0152 18       		.byte	0x18
+ 266 0153 07       		.uleb128 0x7
+ 267 0154 70000000 		.4byte	.LASF29
+ 268 0158 06       		.byte	0x6
+ 269 0159 3E       		.byte	0x3e
+ 270 015a CE000000 		.4byte	0xce
+ 271 015e 1C       		.byte	0x1c
+ 272 015f 07       		.uleb128 0x7
+ 273 0160 0D090000 		.4byte	.LASF30
+ 274 0164 06       		.byte	0x6
+ 275 0165 3F       		.byte	0x3f
+ 276 0166 CE000000 		.4byte	0xce
+ 277 016a 20       		.byte	0x20
+ 278 016b 07       		.uleb128 0x7
+ 279 016c 72050000 		.4byte	.LASF31
+ 280 0170 06       		.byte	0x6
+ 281 0171 40       		.byte	0x40
+ 282 0172 CE000000 		.4byte	0xce
+ 283 0176 24       		.byte	0x24
+ 284 0177 07       		.uleb128 0x7
+ 285 0178 4B040000 		.4byte	.LASF32
+ 286 017c 06       		.byte	0x6
+ 287 017d 43       		.byte	0x43
+ 288 017e A2000000 		.4byte	0xa2
+ 289 0182 28       		.byte	0x28
+ 290 0183 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 9
 
 
- 297 01a9 4C070000 		.4byte	.LASF36
- 298 01ad 05       		.byte	0x5
- 299 01ae 48       		.byte	0x48
- 300 01af A2000000 		.4byte	0xa2
- 301 01b3 2D       		.byte	0x2d
- 302 01b4 07       		.uleb128 0x7
- 303 01b5 9D010000 		.4byte	.LASF37
- 304 01b9 05       		.byte	0x5
- 305 01ba 49       		.byte	0x49
- 306 01bb A2000000 		.4byte	0xa2
- 307 01bf 2E       		.byte	0x2e
- 308 01c0 07       		.uleb128 0x7
- 309 01c1 3B040000 		.4byte	.LASF38
- 310 01c5 05       		.byte	0x5
- 311 01c6 4A       		.byte	0x4a
- 312 01c7 A2000000 		.4byte	0xa2
- 313 01cb 2F       		.byte	0x2f
- 314 01cc 07       		.uleb128 0x7
- 315 01cd 0A070000 		.4byte	.LASF39
- 316 01d1 05       		.byte	0x5
- 317 01d2 4B       		.byte	0x4b
- 318 01d3 A2000000 		.4byte	0xa2
- 319 01d7 30       		.byte	0x30
- 320 01d8 07       		.uleb128 0x7
- 321 01d9 6A030000 		.4byte	.LASF40
- 322 01dd 05       		.byte	0x5
- 323 01de 4E       		.byte	0x4e
- 324 01df A2000000 		.4byte	0xa2
- 325 01e3 31       		.byte	0x31
- 326 01e4 07       		.uleb128 0x7
- 327 01e5 86000000 		.4byte	.LASF41
- 328 01e9 05       		.byte	0x5
- 329 01ea 4F       		.byte	0x4f
- 330 01eb A2000000 		.4byte	0xa2
- 331 01ef 32       		.byte	0x32
- 332 01f0 07       		.uleb128 0x7
- 333 01f1 E4020000 		.4byte	.LASF42
- 334 01f5 05       		.byte	0x5
- 335 01f6 50       		.byte	0x50
- 336 01f7 A2000000 		.4byte	0xa2
- 337 01fb 33       		.byte	0x33
- 338 01fc 07       		.uleb128 0x7
- 339 01fd D2040000 		.4byte	.LASF43
- 340 0201 05       		.byte	0x5
- 341 0202 51       		.byte	0x51
- 342 0203 A2000000 		.4byte	0xa2
- 343 0207 34       		.byte	0x34
- 344 0208 07       		.uleb128 0x7
- 345 0209 A3070000 		.4byte	.LASF44
- 346 020d 05       		.byte	0x5
- 347 020e 52       		.byte	0x52
- 348 020f AD000000 		.4byte	0xad
- 349 0213 36       		.byte	0x36
- 350 0214 07       		.uleb128 0x7
- 351 0215 07020000 		.4byte	.LASF45
- 352 0219 05       		.byte	0x5
- 353 021a 53       		.byte	0x53
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 10
+ 291 0184 56000000 		.4byte	.LASF33
+ 292 0188 06       		.byte	0x6
+ 293 0189 44       		.byte	0x44
+ 294 018a A2000000 		.4byte	0xa2
+ 295 018e 29       		.byte	0x29
+ 296 018f 07       		.uleb128 0x7
+ 297 0190 03090000 		.4byte	.LASF34
+ 298 0194 06       		.byte	0x6
+ 299 0195 45       		.byte	0x45
+ 300 0196 A2000000 		.4byte	0xa2
+ 301 019a 2A       		.byte	0x2a
+ 302 019b 07       		.uleb128 0x7
+ 303 019c 64050000 		.4byte	.LASF35
+ 304 01a0 06       		.byte	0x6
+ 305 01a1 46       		.byte	0x46
+ 306 01a2 A2000000 		.4byte	0xa2
+ 307 01a6 2B       		.byte	0x2b
+ 308 01a7 07       		.uleb128 0x7
+ 309 01a8 E2030000 		.4byte	.LASF36
+ 310 01ac 06       		.byte	0x6
+ 311 01ad 47       		.byte	0x47
+ 312 01ae A2000000 		.4byte	0xa2
+ 313 01b2 2C       		.byte	0x2c
+ 314 01b3 07       		.uleb128 0x7
+ 315 01b4 AB070000 		.4byte	.LASF37
+ 316 01b8 06       		.byte	0x6
+ 317 01b9 48       		.byte	0x48
+ 318 01ba A2000000 		.4byte	0xa2
+ 319 01be 2D       		.byte	0x2d
+ 320 01bf 07       		.uleb128 0x7
+ 321 01c0 8B010000 		.4byte	.LASF38
+ 322 01c4 06       		.byte	0x6
+ 323 01c5 49       		.byte	0x49
+ 324 01c6 A2000000 		.4byte	0xa2
+ 325 01ca 2E       		.byte	0x2e
+ 326 01cb 07       		.uleb128 0x7
+ 327 01cc 58040000 		.4byte	.LASF39
+ 328 01d0 06       		.byte	0x6
+ 329 01d1 4A       		.byte	0x4a
+ 330 01d2 A2000000 		.4byte	0xa2
+ 331 01d6 2F       		.byte	0x2f
+ 332 01d7 07       		.uleb128 0x7
+ 333 01d8 69070000 		.4byte	.LASF40
+ 334 01dc 06       		.byte	0x6
+ 335 01dd 4B       		.byte	0x4b
+ 336 01de A2000000 		.4byte	0xa2
+ 337 01e2 30       		.byte	0x30
+ 338 01e3 07       		.uleb128 0x7
+ 339 01e4 87030000 		.4byte	.LASF41
+ 340 01e8 06       		.byte	0x6
+ 341 01e9 4E       		.byte	0x4e
+ 342 01ea A2000000 		.4byte	0xa2
+ 343 01ee 31       		.byte	0x31
+ 344 01ef 07       		.uleb128 0x7
+ 345 01f0 79000000 		.4byte	.LASF42
+ 346 01f4 06       		.byte	0x6
+ 347 01f5 4F       		.byte	0x4f
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 10
 
 
- 354 021b AD000000 		.4byte	0xad
- 355 021f 38       		.byte	0x38
- 356 0220 07       		.uleb128 0x7
- 357 0221 E9070000 		.4byte	.LASF46
- 358 0225 05       		.byte	0x5
- 359 0226 54       		.byte	0x54
- 360 0227 AD000000 		.4byte	0xad
- 361 022b 3A       		.byte	0x3a
- 362 022c 07       		.uleb128 0x7
- 363 022d BD010000 		.4byte	.LASF47
- 364 0231 05       		.byte	0x5
- 365 0232 55       		.byte	0x55
- 366 0233 A2000000 		.4byte	0xa2
- 367 0237 3C       		.byte	0x3c
- 368 0238 07       		.uleb128 0x7
- 369 0239 2E020000 		.4byte	.LASF48
- 370 023d 05       		.byte	0x5
- 371 023e 56       		.byte	0x56
- 372 023f A2000000 		.4byte	0xa2
- 373 0243 3D       		.byte	0x3d
- 374 0244 07       		.uleb128 0x7
- 375 0245 BD060000 		.4byte	.LASF49
- 376 0249 05       		.byte	0x5
- 377 024a 57       		.byte	0x57
- 378 024b A2000000 		.4byte	0xa2
- 379 024f 3E       		.byte	0x3e
- 380 0250 07       		.uleb128 0x7
- 381 0251 71000000 		.4byte	.LASF50
- 382 0255 05       		.byte	0x5
- 383 0256 58       		.byte	0x58
- 384 0257 A2000000 		.4byte	0xa2
- 385 025b 3F       		.byte	0x3f
- 386 025c 07       		.uleb128 0x7
- 387 025d 46050000 		.4byte	.LASF51
- 388 0261 05       		.byte	0x5
- 389 0262 59       		.byte	0x59
- 390 0263 A2000000 		.4byte	0xa2
- 391 0267 40       		.byte	0x40
- 392 0268 07       		.uleb128 0x7
- 393 0269 7A020000 		.4byte	.LASF52
- 394 026d 05       		.byte	0x5
- 395 026e 5A       		.byte	0x5a
- 396 026f A2000000 		.4byte	0xa2
- 397 0273 41       		.byte	0x41
- 398 0274 07       		.uleb128 0x7
- 399 0275 E7030000 		.4byte	.LASF53
- 400 0279 05       		.byte	0x5
- 401 027a 5B       		.byte	0x5b
- 402 027b A2000000 		.4byte	0xa2
- 403 027f 42       		.byte	0x42
- 404 0280 07       		.uleb128 0x7
- 405 0281 19050000 		.4byte	.LASF54
- 406 0285 05       		.byte	0x5
- 407 0286 5C       		.byte	0x5c
- 408 0287 A2000000 		.4byte	0xa2
- 409 028b 43       		.byte	0x43
- 410 028c 07       		.uleb128 0x7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 11
+ 348 01f6 A2000000 		.4byte	0xa2
+ 349 01fa 32       		.byte	0x32
+ 350 01fb 07       		.uleb128 0x7
+ 351 01fc 01030000 		.4byte	.LASF43
+ 352 0200 06       		.byte	0x6
+ 353 0201 50       		.byte	0x50
+ 354 0202 A2000000 		.4byte	0xa2
+ 355 0206 33       		.byte	0x33
+ 356 0207 07       		.uleb128 0x7
+ 357 0208 EF040000 		.4byte	.LASF44
+ 358 020c 06       		.byte	0x6
+ 359 020d 51       		.byte	0x51
+ 360 020e A2000000 		.4byte	0xa2
+ 361 0212 34       		.byte	0x34
+ 362 0213 07       		.uleb128 0x7
+ 363 0214 02080000 		.4byte	.LASF45
+ 364 0218 06       		.byte	0x6
+ 365 0219 52       		.byte	0x52
+ 366 021a AD000000 		.4byte	0xad
+ 367 021e 36       		.byte	0x36
+ 368 021f 07       		.uleb128 0x7
+ 369 0220 2F070000 		.4byte	.LASF46
+ 370 0224 06       		.byte	0x6
+ 371 0225 53       		.byte	0x53
+ 372 0226 AD000000 		.4byte	0xad
+ 373 022a 38       		.byte	0x38
+ 374 022b 07       		.uleb128 0x7
+ 375 022c 48080000 		.4byte	.LASF47
+ 376 0230 06       		.byte	0x6
+ 377 0231 54       		.byte	0x54
+ 378 0232 AD000000 		.4byte	0xad
+ 379 0236 3A       		.byte	0x3a
+ 380 0237 07       		.uleb128 0x7
+ 381 0238 AB010000 		.4byte	.LASF48
+ 382 023c 06       		.byte	0x6
+ 383 023d 55       		.byte	0x55
+ 384 023e A2000000 		.4byte	0xa2
+ 385 0242 3C       		.byte	0x3c
+ 386 0243 07       		.uleb128 0x7
+ 387 0244 31020000 		.4byte	.LASF49
+ 388 0248 06       		.byte	0x6
+ 389 0249 56       		.byte	0x56
+ 390 024a A2000000 		.4byte	0xa2
+ 391 024e 3D       		.byte	0x3d
+ 392 024f 07       		.uleb128 0x7
+ 393 0250 11070000 		.4byte	.LASF50
+ 394 0254 06       		.byte	0x6
+ 395 0255 57       		.byte	0x57
+ 396 0256 A2000000 		.4byte	0xa2
+ 397 025a 3E       		.byte	0x3e
+ 398 025b 07       		.uleb128 0x7
+ 399 025c 64000000 		.4byte	.LASF51
+ 400 0260 06       		.byte	0x6
+ 401 0261 58       		.byte	0x58
+ 402 0262 A2000000 		.4byte	0xa2
+ 403 0266 3F       		.byte	0x3f
+ 404 0267 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 11
 
 
- 411 028d F6010000 		.4byte	.LASF55
- 412 0291 05       		.byte	0x5
- 413 0292 5D       		.byte	0x5d
- 414 0293 A2000000 		.4byte	0xa2
- 415 0297 44       		.byte	0x44
- 416 0298 07       		.uleb128 0x7
- 417 0299 00000000 		.4byte	.LASF56
- 418 029d 05       		.byte	0x5
- 419 029e 5E       		.byte	0x5e
- 420 029f CE000000 		.4byte	0xce
- 421 02a3 48       		.byte	0x48
- 422 02a4 07       		.uleb128 0x7
- 423 02a5 DF010000 		.4byte	.LASF57
- 424 02a9 05       		.byte	0x5
- 425 02aa 5F       		.byte	0x5f
- 426 02ab CE000000 		.4byte	0xce
- 427 02af 4C       		.byte	0x4c
- 428 02b0 07       		.uleb128 0x7
- 429 02b1 B8080000 		.4byte	.LASF58
- 430 02b5 05       		.byte	0x5
- 431 02b6 60       		.byte	0x60
- 432 02b7 A2000000 		.4byte	0xa2
- 433 02bb 50       		.byte	0x50
- 434 02bc 07       		.uleb128 0x7
- 435 02bd 37010000 		.4byte	.LASF59
- 436 02c1 05       		.byte	0x5
- 437 02c2 61       		.byte	0x61
- 438 02c3 A2000000 		.4byte	0xa2
- 439 02c7 51       		.byte	0x51
- 440 02c8 07       		.uleb128 0x7
- 441 02c9 FE070000 		.4byte	.LASF60
- 442 02cd 05       		.byte	0x5
- 443 02ce 62       		.byte	0x62
- 444 02cf A2000000 		.4byte	0xa2
- 445 02d3 52       		.byte	0x52
- 446 02d4 07       		.uleb128 0x7
- 447 02d5 59070000 		.4byte	.LASF61
- 448 02d9 05       		.byte	0x5
- 449 02da 63       		.byte	0x63
- 450 02db A2000000 		.4byte	0xa2
- 451 02df 53       		.byte	0x53
- 452 02e0 07       		.uleb128 0x7
- 453 02e1 CB060000 		.4byte	.LASF62
- 454 02e5 05       		.byte	0x5
- 455 02e6 64       		.byte	0x64
- 456 02e7 A2000000 		.4byte	0xa2
- 457 02eb 54       		.byte	0x54
- 458 02ec 07       		.uleb128 0x7
- 459 02ed 49010000 		.4byte	.LASF63
- 460 02f1 05       		.byte	0x5
- 461 02f2 65       		.byte	0x65
- 462 02f3 A2000000 		.4byte	0xa2
- 463 02f7 55       		.byte	0x55
- 464 02f8 07       		.uleb128 0x7
- 465 02f9 18030000 		.4byte	.LASF64
- 466 02fd 05       		.byte	0x5
- 467 02fe 66       		.byte	0x66
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 12
+ 405 0268 7D050000 		.4byte	.LASF52
+ 406 026c 06       		.byte	0x6
+ 407 026d 59       		.byte	0x59
+ 408 026e A2000000 		.4byte	0xa2
+ 409 0272 40       		.byte	0x40
+ 410 0273 07       		.uleb128 0x7
+ 411 0274 97020000 		.4byte	.LASF53
+ 412 0278 06       		.byte	0x6
+ 413 0279 5A       		.byte	0x5a
+ 414 027a A2000000 		.4byte	0xa2
+ 415 027e 41       		.byte	0x41
+ 416 027f 07       		.uleb128 0x7
+ 417 0280 04040000 		.4byte	.LASF54
+ 418 0284 06       		.byte	0x6
+ 419 0285 5B       		.byte	0x5b
+ 420 0286 A2000000 		.4byte	0xa2
+ 421 028a 42       		.byte	0x42
+ 422 028b 07       		.uleb128 0x7
+ 423 028c 36050000 		.4byte	.LASF55
+ 424 0290 06       		.byte	0x6
+ 425 0291 5C       		.byte	0x5c
+ 426 0292 A2000000 		.4byte	0xa2
+ 427 0296 43       		.byte	0x43
+ 428 0297 07       		.uleb128 0x7
+ 429 0298 FB010000 		.4byte	.LASF56
+ 430 029c 06       		.byte	0x6
+ 431 029d 5D       		.byte	0x5d
+ 432 029e A2000000 		.4byte	0xa2
+ 433 02a2 44       		.byte	0x44
+ 434 02a3 07       		.uleb128 0x7
+ 435 02a4 00000000 		.4byte	.LASF57
+ 436 02a8 06       		.byte	0x6
+ 437 02a9 5E       		.byte	0x5e
+ 438 02aa CE000000 		.4byte	0xce
+ 439 02ae 48       		.byte	0x48
+ 440 02af 07       		.uleb128 0x7
+ 441 02b0 E4010000 		.4byte	.LASF58
+ 442 02b4 06       		.byte	0x6
+ 443 02b5 5F       		.byte	0x5f
+ 444 02b6 CE000000 		.4byte	0xce
+ 445 02ba 4C       		.byte	0x4c
+ 446 02bb 07       		.uleb128 0x7
+ 447 02bc 4E090000 		.4byte	.LASF59
+ 448 02c0 06       		.byte	0x6
+ 449 02c1 60       		.byte	0x60
+ 450 02c2 A2000000 		.4byte	0xa2
+ 451 02c6 50       		.byte	0x50
+ 452 02c7 07       		.uleb128 0x7
+ 453 02c8 25010000 		.4byte	.LASF60
+ 454 02cc 06       		.byte	0x6
+ 455 02cd 61       		.byte	0x61
+ 456 02ce A2000000 		.4byte	0xa2
+ 457 02d2 51       		.byte	0x51
+ 458 02d3 07       		.uleb128 0x7
+ 459 02d4 5D080000 		.4byte	.LASF61
+ 460 02d8 06       		.byte	0x6
+ 461 02d9 62       		.byte	0x62
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 12
 
 
- 468 02ff A2000000 		.4byte	0xa2
- 469 0303 56       		.byte	0x56
- 470 0304 07       		.uleb128 0x7
- 471 0305 7E030000 		.4byte	.LASF65
- 472 0309 05       		.byte	0x5
- 473 030a 67       		.byte	0x67
- 474 030b A2000000 		.4byte	0xa2
- 475 030f 57       		.byte	0x57
- 476 0310 07       		.uleb128 0x7
- 477 0311 1C000000 		.4byte	.LASF66
- 478 0315 05       		.byte	0x5
- 479 0316 68       		.byte	0x68
- 480 0317 A2000000 		.4byte	0xa2
- 481 031b 58       		.byte	0x58
- 482 031c 07       		.uleb128 0x7
- 483 031d 8B060000 		.4byte	.LASF67
- 484 0321 05       		.byte	0x5
- 485 0322 69       		.byte	0x69
- 486 0323 A2000000 		.4byte	0xa2
- 487 0327 59       		.byte	0x59
- 488 0328 07       		.uleb128 0x7
- 489 0329 C7040000 		.4byte	.LASF68
- 490 032d 05       		.byte	0x5
- 491 032e 6E       		.byte	0x6e
- 492 032f B8000000 		.4byte	0xb8
- 493 0333 5A       		.byte	0x5a
- 494 0334 07       		.uleb128 0x7
- 495 0335 8C070000 		.4byte	.LASF69
- 496 0339 05       		.byte	0x5
- 497 033a 6F       		.byte	0x6f
- 498 033b B8000000 		.4byte	0xb8
- 499 033f 5C       		.byte	0x5c
- 500 0340 07       		.uleb128 0x7
- 501 0341 D4000000 		.4byte	.LASF70
- 502 0345 05       		.byte	0x5
- 503 0346 70       		.byte	0x70
- 504 0347 A2000000 		.4byte	0xa2
- 505 034b 5E       		.byte	0x5e
- 506 034c 07       		.uleb128 0x7
- 507 034d 40060000 		.4byte	.LASF71
- 508 0351 05       		.byte	0x5
- 509 0352 71       		.byte	0x71
- 510 0353 A2000000 		.4byte	0xa2
- 511 0357 5F       		.byte	0x5f
- 512 0358 07       		.uleb128 0x7
- 513 0359 08050000 		.4byte	.LASF72
- 514 035d 05       		.byte	0x5
- 515 035e 72       		.byte	0x72
- 516 035f A2000000 		.4byte	0xa2
- 517 0363 60       		.byte	0x60
- 518 0364 07       		.uleb128 0x7
- 519 0365 19060000 		.4byte	.LASF73
- 520 0369 05       		.byte	0x5
- 521 036a 73       		.byte	0x73
- 522 036b CE000000 		.4byte	0xce
- 523 036f 64       		.byte	0x64
- 524 0370 07       		.uleb128 0x7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 13
+ 462 02da A2000000 		.4byte	0xa2
+ 463 02de 52       		.byte	0x52
+ 464 02df 07       		.uleb128 0x7
+ 465 02e0 B8070000 		.4byte	.LASF62
+ 466 02e4 06       		.byte	0x6
+ 467 02e5 63       		.byte	0x63
+ 468 02e6 A2000000 		.4byte	0xa2
+ 469 02ea 53       		.byte	0x53
+ 470 02eb 07       		.uleb128 0x7
+ 471 02ec 1F070000 		.4byte	.LASF63
+ 472 02f0 06       		.byte	0x6
+ 473 02f1 64       		.byte	0x64
+ 474 02f2 A2000000 		.4byte	0xa2
+ 475 02f6 54       		.byte	0x54
+ 476 02f7 07       		.uleb128 0x7
+ 477 02f8 37010000 		.4byte	.LASF64
+ 478 02fc 06       		.byte	0x6
+ 479 02fd 65       		.byte	0x65
+ 480 02fe A2000000 		.4byte	0xa2
+ 481 0302 55       		.byte	0x55
+ 482 0303 07       		.uleb128 0x7
+ 483 0304 35030000 		.4byte	.LASF65
+ 484 0308 06       		.byte	0x6
+ 485 0309 66       		.byte	0x66
+ 486 030a A2000000 		.4byte	0xa2
+ 487 030e 56       		.byte	0x56
+ 488 030f 07       		.uleb128 0x7
+ 489 0310 9B030000 		.4byte	.LASF66
+ 490 0314 06       		.byte	0x6
+ 491 0315 67       		.byte	0x67
+ 492 0316 A2000000 		.4byte	0xa2
+ 493 031a 57       		.byte	0x57
+ 494 031b 07       		.uleb128 0x7
+ 495 031c 1C000000 		.4byte	.LASF67
+ 496 0320 06       		.byte	0x6
+ 497 0321 68       		.byte	0x68
+ 498 0322 A2000000 		.4byte	0xa2
+ 499 0326 58       		.byte	0x58
+ 500 0327 07       		.uleb128 0x7
+ 501 0328 C2060000 		.4byte	.LASF68
+ 502 032c 06       		.byte	0x6
+ 503 032d 69       		.byte	0x69
+ 504 032e A2000000 		.4byte	0xa2
+ 505 0332 59       		.byte	0x59
+ 506 0333 07       		.uleb128 0x7
+ 507 0334 E4040000 		.4byte	.LASF69
+ 508 0338 06       		.byte	0x6
+ 509 0339 6E       		.byte	0x6e
+ 510 033a B8000000 		.4byte	0xb8
+ 511 033e 5A       		.byte	0x5a
+ 512 033f 07       		.uleb128 0x7
+ 513 0340 EB070000 		.4byte	.LASF70
+ 514 0344 06       		.byte	0x6
+ 515 0345 6F       		.byte	0x6f
+ 516 0346 B8000000 		.4byte	0xb8
+ 517 034a 5C       		.byte	0x5c
+ 518 034b 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 13
 
 
- 525 0371 FA000000 		.4byte	.LASF74
- 526 0375 05       		.byte	0x5
- 527 0376 76       		.byte	0x76
- 528 0377 B8000000 		.4byte	0xb8
- 529 037b 68       		.byte	0x68
- 530 037c 07       		.uleb128 0x7
- 531 037d 06030000 		.4byte	.LASF75
- 532 0381 05       		.byte	0x5
- 533 0382 77       		.byte	0x77
- 534 0383 B8000000 		.4byte	0xb8
- 535 0387 6A       		.byte	0x6a
- 536 0388 07       		.uleb128 0x7
- 537 0389 92030000 		.4byte	.LASF76
- 538 038d 05       		.byte	0x5
- 539 038e 78       		.byte	0x78
- 540 038f B8000000 		.4byte	0xb8
- 541 0393 6C       		.byte	0x6c
- 542 0394 07       		.uleb128 0x7
- 543 0395 B8030000 		.4byte	.LASF77
- 544 0399 05       		.byte	0x5
- 545 039a 79       		.byte	0x79
- 546 039b B8000000 		.4byte	0xb8
- 547 039f 6E       		.byte	0x6e
- 548 03a0 07       		.uleb128 0x7
- 549 03a1 A9060000 		.4byte	.LASF78
- 550 03a5 05       		.byte	0x5
- 551 03a6 7B       		.byte	0x7b
- 552 03a7 A2000000 		.4byte	0xa2
- 553 03ab 70       		.byte	0x70
- 554 03ac 07       		.uleb128 0x7
- 555 03ad 7F010000 		.4byte	.LASF79
- 556 03b1 05       		.byte	0x5
- 557 03b2 7C       		.byte	0x7c
- 558 03b3 A2000000 		.4byte	0xa2
- 559 03b7 71       		.byte	0x71
- 560 03b8 07       		.uleb128 0x7
- 561 03b9 7F080000 		.4byte	.LASF80
- 562 03bd 05       		.byte	0x5
- 563 03be 7D       		.byte	0x7d
- 564 03bf A2000000 		.4byte	0xa2
- 565 03c3 72       		.byte	0x72
- 566 03c4 07       		.uleb128 0x7
- 567 03c5 E3040000 		.4byte	.LASF81
- 568 03c9 05       		.byte	0x5
- 569 03ca 7E       		.byte	0x7e
- 570 03cb A2000000 		.4byte	0xa2
- 571 03cf 73       		.byte	0x73
- 572 03d0 07       		.uleb128 0x7
- 573 03d1 3E020000 		.4byte	.LASF82
- 574 03d5 05       		.byte	0x5
- 575 03d6 80       		.byte	0x80
- 576 03d7 B8000000 		.4byte	0xb8
- 577 03db 74       		.byte	0x74
- 578 03dc 07       		.uleb128 0x7
- 579 03dd 2F070000 		.4byte	.LASF83
- 580 03e1 05       		.byte	0x5
- 581 03e2 81       		.byte	0x81
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 14
+ 519 034c C2000000 		.4byte	.LASF71
+ 520 0350 06       		.byte	0x6
+ 521 0351 70       		.byte	0x70
+ 522 0352 A2000000 		.4byte	0xa2
+ 523 0356 5E       		.byte	0x5e
+ 524 0357 07       		.uleb128 0x7
+ 525 0358 77060000 		.4byte	.LASF72
+ 526 035c 06       		.byte	0x6
+ 527 035d 71       		.byte	0x71
+ 528 035e A2000000 		.4byte	0xa2
+ 529 0362 5F       		.byte	0x5f
+ 530 0363 07       		.uleb128 0x7
+ 531 0364 25050000 		.4byte	.LASF73
+ 532 0368 06       		.byte	0x6
+ 533 0369 72       		.byte	0x72
+ 534 036a A2000000 		.4byte	0xa2
+ 535 036e 60       		.byte	0x60
+ 536 036f 07       		.uleb128 0x7
+ 537 0370 50060000 		.4byte	.LASF74
+ 538 0374 06       		.byte	0x6
+ 539 0375 73       		.byte	0x73
+ 540 0376 CE000000 		.4byte	0xce
+ 541 037a 64       		.byte	0x64
+ 542 037b 07       		.uleb128 0x7
+ 543 037c E8000000 		.4byte	.LASF75
+ 544 0380 06       		.byte	0x6
+ 545 0381 76       		.byte	0x76
+ 546 0382 B8000000 		.4byte	0xb8
+ 547 0386 68       		.byte	0x68
+ 548 0387 07       		.uleb128 0x7
+ 549 0388 23030000 		.4byte	.LASF76
+ 550 038c 06       		.byte	0x6
+ 551 038d 77       		.byte	0x77
+ 552 038e B8000000 		.4byte	0xb8
+ 553 0392 6A       		.byte	0x6a
+ 554 0393 07       		.uleb128 0x7
+ 555 0394 AF030000 		.4byte	.LASF77
+ 556 0398 06       		.byte	0x6
+ 557 0399 78       		.byte	0x78
+ 558 039a B8000000 		.4byte	0xb8
+ 559 039e 6C       		.byte	0x6c
+ 560 039f 07       		.uleb128 0x7
+ 561 03a0 D5030000 		.4byte	.LASF78
+ 562 03a4 06       		.byte	0x6
+ 563 03a5 79       		.byte	0x79
+ 564 03a6 B8000000 		.4byte	0xb8
+ 565 03aa 6E       		.byte	0x6e
+ 566 03ab 07       		.uleb128 0x7
+ 567 03ac FD060000 		.4byte	.LASF79
+ 568 03b0 06       		.byte	0x6
+ 569 03b1 7B       		.byte	0x7b
+ 570 03b2 A2000000 		.4byte	0xa2
+ 571 03b6 70       		.byte	0x70
+ 572 03b7 07       		.uleb128 0x7
+ 573 03b8 6D010000 		.4byte	.LASF80
+ 574 03bc 06       		.byte	0x6
+ 575 03bd 7C       		.byte	0x7c
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 14
 
 
- 582 03e3 B8000000 		.4byte	0xb8
- 583 03e7 76       		.byte	0x76
- 584 03e8 07       		.uleb128 0x7
- 585 03e9 19020000 		.4byte	.LASF84
- 586 03ed 05       		.byte	0x5
- 587 03ee 82       		.byte	0x82
- 588 03ef B8000000 		.4byte	0xb8
- 589 03f3 78       		.byte	0x78
- 590 03f4 07       		.uleb128 0x7
- 591 03f5 9E000000 		.4byte	.LASF85
- 592 03f9 05       		.byte	0x5
- 593 03fa 83       		.byte	0x83
- 594 03fb B8000000 		.4byte	0xb8
- 595 03ff 7A       		.byte	0x7a
- 596 0400 07       		.uleb128 0x7
- 597 0401 2B080000 		.4byte	.LASF86
- 598 0405 05       		.byte	0x5
- 599 0406 86       		.byte	0x86
- 600 0407 A2000000 		.4byte	0xa2
- 601 040b 7C       		.byte	0x7c
- 602 040c 07       		.uleb128 0x7
- 603 040d B0070000 		.4byte	.LASF87
- 604 0411 05       		.byte	0x5
- 605 0412 87       		.byte	0x87
- 606 0413 A2000000 		.4byte	0xa2
- 607 0417 7D       		.byte	0x7d
- 608 0418 07       		.uleb128 0x7
- 609 0419 30000000 		.4byte	.LASF88
- 610 041d 05       		.byte	0x5
- 611 041e 88       		.byte	0x88
- 612 041f A2000000 		.4byte	0xa2
- 613 0423 7E       		.byte	0x7e
- 614 0424 07       		.uleb128 0x7
- 615 0425 50020000 		.4byte	.LASF89
- 616 0429 05       		.byte	0x5
- 617 042a 89       		.byte	0x89
- 618 042b A2000000 		.4byte	0xa2
- 619 042f 7F       		.byte	0x7f
- 620 0430 07       		.uleb128 0x7
- 621 0431 D0020000 		.4byte	.LASF90
- 622 0435 05       		.byte	0x5
- 623 0436 8A       		.byte	0x8a
- 624 0437 A2000000 		.4byte	0xa2
- 625 043b 80       		.byte	0x80
- 626 043c 07       		.uleb128 0x7
- 627 043d 17040000 		.4byte	.LASF91
- 628 0441 05       		.byte	0x5
- 629 0442 8D       		.byte	0x8d
- 630 0443 CE000000 		.4byte	0xce
- 631 0447 84       		.byte	0x84
- 632 0448 07       		.uleb128 0x7
- 633 0449 B3000000 		.4byte	.LASF92
- 634 044d 05       		.byte	0x5
- 635 044e 8E       		.byte	0x8e
- 636 044f CE000000 		.4byte	0xce
- 637 0453 88       		.byte	0x88
- 638 0454 07       		.uleb128 0x7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 15
+ 576 03be A2000000 		.4byte	0xa2
+ 577 03c2 71       		.byte	0x71
+ 578 03c3 07       		.uleb128 0x7
+ 579 03c4 15090000 		.4byte	.LASF81
+ 580 03c8 06       		.byte	0x6
+ 581 03c9 7D       		.byte	0x7d
+ 582 03ca A2000000 		.4byte	0xa2
+ 583 03ce 72       		.byte	0x72
+ 584 03cf 07       		.uleb128 0x7
+ 585 03d0 00050000 		.4byte	.LASF82
+ 586 03d4 06       		.byte	0x6
+ 587 03d5 7E       		.byte	0x7e
+ 588 03d6 A2000000 		.4byte	0xa2
+ 589 03da 73       		.byte	0x73
+ 590 03db 07       		.uleb128 0x7
+ 591 03dc 5B020000 		.4byte	.LASF83
+ 592 03e0 06       		.byte	0x6
+ 593 03e1 80       		.byte	0x80
+ 594 03e2 B8000000 		.4byte	0xb8
+ 595 03e6 74       		.byte	0x74
+ 596 03e7 07       		.uleb128 0x7
+ 597 03e8 8E070000 		.4byte	.LASF84
+ 598 03ec 06       		.byte	0x6
+ 599 03ed 81       		.byte	0x81
+ 600 03ee B8000000 		.4byte	0xb8
+ 601 03f2 76       		.byte	0x76
+ 602 03f3 07       		.uleb128 0x7
+ 603 03f4 1C020000 		.4byte	.LASF85
+ 604 03f8 06       		.byte	0x6
+ 605 03f9 82       		.byte	0x82
+ 606 03fa B8000000 		.4byte	0xb8
+ 607 03fe 78       		.byte	0x78
+ 608 03ff 07       		.uleb128 0x7
+ 609 0400 91000000 		.4byte	.LASF86
+ 610 0404 06       		.byte	0x6
+ 611 0405 83       		.byte	0x83
+ 612 0406 B8000000 		.4byte	0xb8
+ 613 040a 7A       		.byte	0x7a
+ 614 040b 07       		.uleb128 0x7
+ 615 040c A4080000 		.4byte	.LASF87
+ 616 0410 06       		.byte	0x6
+ 617 0411 86       		.byte	0x86
+ 618 0412 A2000000 		.4byte	0xa2
+ 619 0416 7C       		.byte	0x7c
+ 620 0417 07       		.uleb128 0x7
+ 621 0418 0F080000 		.4byte	.LASF88
+ 622 041c 06       		.byte	0x6
+ 623 041d 87       		.byte	0x87
+ 624 041e A2000000 		.4byte	0xa2
+ 625 0422 7D       		.byte	0x7d
+ 626 0423 07       		.uleb128 0x7
+ 627 0424 30000000 		.4byte	.LASF89
+ 628 0428 06       		.byte	0x6
+ 629 0429 88       		.byte	0x88
+ 630 042a A2000000 		.4byte	0xa2
+ 631 042e 7E       		.byte	0x7e
+ 632 042f 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 15
 
 
- 639 0455 16080000 		.4byte	.LASF93
- 640 0459 05       		.byte	0x5
- 641 045a 8F       		.byte	0x8f
- 642 045b CE000000 		.4byte	0xce
- 643 045f 8C       		.byte	0x8c
- 644 0460 07       		.uleb128 0x7
- 645 0461 47040000 		.4byte	.LASF94
- 646 0465 05       		.byte	0x5
- 647 0466 90       		.byte	0x90
- 648 0467 CE000000 		.4byte	0xce
- 649 046b 90       		.byte	0x90
- 650 046c 07       		.uleb128 0x7
- 651 046d B1020000 		.4byte	.LASF95
- 652 0471 05       		.byte	0x5
- 653 0472 91       		.byte	0x91
- 654 0473 CE000000 		.4byte	0xce
- 655 0477 94       		.byte	0x94
- 656 0478 07       		.uleb128 0x7
- 657 0479 01040000 		.4byte	.LASF96
- 658 047d 05       		.byte	0x5
- 659 047e 92       		.byte	0x92
- 660 047f CE000000 		.4byte	0xce
- 661 0483 98       		.byte	0x98
- 662 0484 07       		.uleb128 0x7
- 663 0485 4E080000 		.4byte	.LASF97
- 664 0489 05       		.byte	0x5
- 665 048a 93       		.byte	0x93
- 666 048b CE000000 		.4byte	0xce
- 667 048f 9C       		.byte	0x9c
- 668 0490 07       		.uleb128 0x7
- 669 0491 14010000 		.4byte	.LASF98
- 670 0495 05       		.byte	0x5
- 671 0496 94       		.byte	0x94
- 672 0497 CE000000 		.4byte	0xce
- 673 049b A0       		.byte	0xa0
- 674 049c 07       		.uleb128 0x7
- 675 049d A8010000 		.4byte	.LASF99
- 676 04a1 05       		.byte	0x5
- 677 04a2 95       		.byte	0x95
- 678 04a3 B8000000 		.4byte	0xb8
- 679 04a7 A4       		.byte	0xa4
- 680 04a8 07       		.uleb128 0x7
- 681 04a9 E4060000 		.4byte	.LASF100
- 682 04ad 05       		.byte	0x5
- 683 04ae 96       		.byte	0x96
- 684 04af B8000000 		.4byte	0xb8
- 685 04b3 A6       		.byte	0xa6
- 686 04b4 07       		.uleb128 0x7
- 687 04b5 34060000 		.4byte	.LASF101
- 688 04b9 05       		.byte	0x5
- 689 04ba 97       		.byte	0x97
- 690 04bb B8000000 		.4byte	0xb8
- 691 04bf A8       		.byte	0xa8
- 692 04c0 07       		.uleb128 0x7
- 693 04c1 16070000 		.4byte	.LASF102
- 694 04c5 05       		.byte	0x5
- 695 04c6 98       		.byte	0x98
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 16
+ 633 0430 6D020000 		.4byte	.LASF90
+ 634 0434 06       		.byte	0x6
+ 635 0435 89       		.byte	0x89
+ 636 0436 A2000000 		.4byte	0xa2
+ 637 043a 7F       		.byte	0x7f
+ 638 043b 07       		.uleb128 0x7
+ 639 043c ED020000 		.4byte	.LASF91
+ 640 0440 06       		.byte	0x6
+ 641 0441 8A       		.byte	0x8a
+ 642 0442 A2000000 		.4byte	0xa2
+ 643 0446 80       		.byte	0x80
+ 644 0447 07       		.uleb128 0x7
+ 645 0448 34040000 		.4byte	.LASF92
+ 646 044c 06       		.byte	0x6
+ 647 044d 8D       		.byte	0x8d
+ 648 044e CE000000 		.4byte	0xce
+ 649 0452 84       		.byte	0x84
+ 650 0453 07       		.uleb128 0x7
+ 651 0454 CD010000 		.4byte	.LASF93
+ 652 0458 06       		.byte	0x6
+ 653 0459 8E       		.byte	0x8e
+ 654 045a CE000000 		.4byte	0xce
+ 655 045e 88       		.byte	0x88
+ 656 045f 07       		.uleb128 0x7
+ 657 0460 8F080000 		.4byte	.LASF94
+ 658 0464 06       		.byte	0x6
+ 659 0465 8F       		.byte	0x8f
+ 660 0466 CE000000 		.4byte	0xce
+ 661 046a 8C       		.byte	0x8c
+ 662 046b 07       		.uleb128 0x7
+ 663 046c 64040000 		.4byte	.LASF95
+ 664 0470 06       		.byte	0x6
+ 665 0471 90       		.byte	0x90
+ 666 0472 CE000000 		.4byte	0xce
+ 667 0476 90       		.byte	0x90
+ 668 0477 07       		.uleb128 0x7
+ 669 0478 CE020000 		.4byte	.LASF96
+ 670 047c 06       		.byte	0x6
+ 671 047d 91       		.byte	0x91
+ 672 047e CE000000 		.4byte	0xce
+ 673 0482 94       		.byte	0x94
+ 674 0483 07       		.uleb128 0x7
+ 675 0484 1E040000 		.4byte	.LASF97
+ 676 0488 06       		.byte	0x6
+ 677 0489 92       		.byte	0x92
+ 678 048a CE000000 		.4byte	0xce
+ 679 048e 98       		.byte	0x98
+ 680 048f 07       		.uleb128 0x7
+ 681 0490 C7080000 		.4byte	.LASF98
+ 682 0494 06       		.byte	0x6
+ 683 0495 93       		.byte	0x93
+ 684 0496 CE000000 		.4byte	0xce
+ 685 049a 9C       		.byte	0x9c
+ 686 049b 07       		.uleb128 0x7
+ 687 049c 02010000 		.4byte	.LASF99
+ 688 04a0 06       		.byte	0x6
+ 689 04a1 94       		.byte	0x94
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 16
 
 
- 696 04c7 B8000000 		.4byte	0xb8
- 697 04cb AA       		.byte	0xaa
- 698 04cc 07       		.uleb128 0x7
- 699 04cd A1030000 		.4byte	.LASF103
- 700 04d1 05       		.byte	0x5
- 701 04d2 99       		.byte	0x99
- 702 04d3 B8000000 		.4byte	0xb8
- 703 04d7 AC       		.byte	0xac
- 704 04d8 07       		.uleb128 0x7
- 705 04d9 FA040000 		.4byte	.LASF104
- 706 04dd 05       		.byte	0x5
- 707 04de 9A       		.byte	0x9a
- 708 04df B8000000 		.4byte	0xb8
- 709 04e3 AE       		.byte	0xae
- 710 04e4 07       		.uleb128 0x7
- 711 04e5 95070000 		.4byte	.LASF105
- 712 04e9 05       		.byte	0x5
- 713 04ea 9D       		.byte	0x9d
- 714 04eb B8000000 		.4byte	0xb8
- 715 04ef B0       		.byte	0xb0
- 716 04f0 07       		.uleb128 0x7
- 717 04f1 4F000000 		.4byte	.LASF106
- 718 04f5 05       		.byte	0x5
- 719 04f6 9E       		.byte	0x9e
- 720 04f7 CE000000 		.4byte	0xce
- 721 04fb B4       		.byte	0xb4
- 722 04fc 00       		.byte	0
- 723 04fd 03       		.uleb128 0x3
- 724 04fe D7030000 		.4byte	.LASF107
- 725 0502 05       		.byte	0x5
- 726 0503 9F       		.byte	0x9f
- 727 0504 EC000000 		.4byte	0xec
- 728 0508 02       		.uleb128 0x2
- 729 0509 01       		.byte	0x1
- 730 050a 08       		.byte	0x8
- 731 050b 05070000 		.4byte	.LASF108
- 732 050f 02       		.uleb128 0x2
- 733 0510 04       		.byte	0x4
- 734 0511 04       		.byte	0x4
- 735 0512 13060000 		.4byte	.LASF109
- 736 0516 02       		.uleb128 0x2
- 737 0517 08       		.byte	0x8
- 738 0518 04       		.byte	0x4
- 739 0519 12020000 		.4byte	.LASF110
- 740 051d 02       		.uleb128 0x2
- 741 051e 01       		.byte	0x1
- 742 051f 02       		.byte	0x2
- 743 0520 6F060000 		.4byte	.LASF111
- 744 0524 08       		.uleb128 0x8
- 745 0525 04       		.byte	0x4
- 746 0526 09       		.uleb128 0x9
- 747 0527 04       		.byte	0x4
- 748 0528 2C050000 		.4byte	0x52c
- 749 052c 0A       		.uleb128 0xa
- 750 052d 37050000 		.4byte	0x537
- 751 0531 0B       		.uleb128 0xb
- 752 0532 CE000000 		.4byte	0xce
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 17
+ 690 04a2 CE000000 		.4byte	0xce
+ 691 04a6 A0       		.byte	0xa0
+ 692 04a7 07       		.uleb128 0x7
+ 693 04a8 96010000 		.4byte	.LASF100
+ 694 04ac 06       		.byte	0x6
+ 695 04ad 95       		.byte	0x95
+ 696 04ae B8000000 		.4byte	0xb8
+ 697 04b2 A4       		.byte	0xa4
+ 698 04b3 07       		.uleb128 0x7
+ 699 04b4 43070000 		.4byte	.LASF101
+ 700 04b8 06       		.byte	0x6
+ 701 04b9 96       		.byte	0x96
+ 702 04ba B8000000 		.4byte	0xb8
+ 703 04be A6       		.byte	0xa6
+ 704 04bf 07       		.uleb128 0x7
+ 705 04c0 6B060000 		.4byte	.LASF102
+ 706 04c4 06       		.byte	0x6
+ 707 04c5 97       		.byte	0x97
+ 708 04c6 B8000000 		.4byte	0xb8
+ 709 04ca A8       		.byte	0xa8
+ 710 04cb 07       		.uleb128 0x7
+ 711 04cc 75070000 		.4byte	.LASF103
+ 712 04d0 06       		.byte	0x6
+ 713 04d1 98       		.byte	0x98
+ 714 04d2 B8000000 		.4byte	0xb8
+ 715 04d6 AA       		.byte	0xaa
+ 716 04d7 07       		.uleb128 0x7
+ 717 04d8 BE030000 		.4byte	.LASF104
+ 718 04dc 06       		.byte	0x6
+ 719 04dd 99       		.byte	0x99
+ 720 04de B8000000 		.4byte	0xb8
+ 721 04e2 AC       		.byte	0xac
+ 722 04e3 07       		.uleb128 0x7
+ 723 04e4 17050000 		.4byte	.LASF105
+ 724 04e8 06       		.byte	0x6
+ 725 04e9 9A       		.byte	0x9a
+ 726 04ea B8000000 		.4byte	0xb8
+ 727 04ee AE       		.byte	0xae
+ 728 04ef 07       		.uleb128 0x7
+ 729 04f0 F4070000 		.4byte	.LASF106
+ 730 04f4 06       		.byte	0x6
+ 731 04f5 9D       		.byte	0x9d
+ 732 04f6 B8000000 		.4byte	0xb8
+ 733 04fa B0       		.byte	0xb0
+ 734 04fb 07       		.uleb128 0x7
+ 735 04fc D6060000 		.4byte	.LASF107
+ 736 0500 06       		.byte	0x6
+ 737 0501 9E       		.byte	0x9e
+ 738 0502 CE000000 		.4byte	0xce
+ 739 0506 B4       		.byte	0xb4
+ 740 0507 00       		.byte	0
+ 741 0508 03       		.uleb128 0x3
+ 742 0509 F4030000 		.4byte	.LASF108
+ 743 050d 06       		.byte	0x6
+ 744 050e 9F       		.byte	0x9f
+ 745 050f F7000000 		.4byte	0xf7
+ 746 0513 02       		.uleb128 0x2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 17
 
 
- 753 0536 00       		.byte	0
- 754 0537 0C       		.uleb128 0xc
- 755 0538 3E030000 		.4byte	.LASF112
- 756 053c 06       		.byte	0x6
- 757 053d D901     		.2byte	0x1d9
- 758 053f 26050000 		.4byte	0x526
- 759 0543 0D       		.uleb128 0xd
- 760 0544 95080000 		.4byte	.LASF136
- 761 0548 38       		.byte	0x38
- 762 0549 06       		.byte	0x6
- 763 054a 7502     		.2byte	0x275
- 764 054c 07060000 		.4byte	0x607
- 765 0550 0E       		.uleb128 0xe
- 766 0551 64080000 		.4byte	.LASF113
- 767 0555 06       		.byte	0x6
- 768 0556 7802     		.2byte	0x278
- 769 0558 E0000000 		.4byte	0xe0
- 770 055c 00       		.byte	0
- 771 055d 0E       		.uleb128 0xe
- 772 055e 24050000 		.4byte	.LASF114
- 773 0562 06       		.byte	0x6
- 774 0563 7902     		.2byte	0x279
- 775 0565 E0000000 		.4byte	0xe0
- 776 0569 04       		.byte	0x4
- 777 056a 0E       		.uleb128 0xe
- 778 056b 0A010000 		.4byte	.LASF115
- 779 056f 06       		.byte	0x6
- 780 0570 7B02     		.2byte	0x27b
- 781 0572 24050000 		.4byte	0x524
- 782 0576 08       		.byte	0x8
- 783 0577 0E       		.uleb128 0xe
- 784 0578 6B070000 		.4byte	.LASF116
- 785 057c 06       		.byte	0x6
- 786 057d 7C02     		.2byte	0x27c
- 787 057f CE000000 		.4byte	0xce
- 788 0583 0C       		.byte	0xc
- 789 0584 0E       		.uleb128 0xe
- 790 0585 F3030000 		.4byte	.LASF117
- 791 0589 06       		.byte	0x6
- 792 058a 7D02     		.2byte	0x27d
- 793 058c E0000000 		.4byte	0xe0
- 794 0590 10       		.byte	0x10
- 795 0591 0E       		.uleb128 0xe
- 796 0592 40080000 		.4byte	.LASF118
- 797 0596 06       		.byte	0x6
- 798 0597 7E02     		.2byte	0x27e
- 799 0599 E0000000 		.4byte	0xe0
- 800 059d 14       		.byte	0x14
- 801 059e 0E       		.uleb128 0xe
- 802 059f C9070000 		.4byte	.LASF119
- 803 05a3 06       		.byte	0x6
- 804 05a4 8002     		.2byte	0x280
- 805 05a6 24050000 		.4byte	0x524
- 806 05aa 18       		.byte	0x18
- 807 05ab 0E       		.uleb128 0xe
- 808 05ac 12000000 		.4byte	.LASF120
- 809 05b0 06       		.byte	0x6
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 18
+ 747 0514 01       		.byte	0x1
+ 748 0515 08       		.byte	0x8
+ 749 0516 64070000 		.4byte	.LASF109
+ 750 051a 02       		.uleb128 0x2
+ 751 051b 04       		.byte	0x4
+ 752 051c 04       		.byte	0x4
+ 753 051d 4A060000 		.4byte	.LASF110
+ 754 0521 02       		.uleb128 0x2
+ 755 0522 08       		.byte	0x8
+ 756 0523 04       		.byte	0x4
+ 757 0524 15020000 		.4byte	.LASF111
+ 758 0528 02       		.uleb128 0x2
+ 759 0529 01       		.byte	0x1
+ 760 052a 02       		.byte	0x2
+ 761 052b A6060000 		.4byte	.LASF112
+ 762 052f 08       		.uleb128 0x8
+ 763 0530 04       		.byte	0x4
+ 764 0531 09       		.uleb128 0x9
+ 765 0532 04       		.byte	0x4
+ 766 0533 37050000 		.4byte	0x537
+ 767 0537 0A       		.uleb128 0xa
+ 768 0538 42050000 		.4byte	0x542
+ 769 053c 0B       		.uleb128 0xb
+ 770 053d CE000000 		.4byte	0xce
+ 771 0541 00       		.byte	0
+ 772 0542 0C       		.uleb128 0xc
+ 773 0543 5B030000 		.4byte	.LASF113
+ 774 0547 07       		.byte	0x7
+ 775 0548 D901     		.2byte	0x1d9
+ 776 054a 31050000 		.4byte	0x531
+ 777 054e 0D       		.uleb128 0xd
+ 778 054f 2B090000 		.4byte	.LASF145
+ 779 0553 38       		.byte	0x38
+ 780 0554 07       		.byte	0x7
+ 781 0555 7502     		.2byte	0x275
+ 782 0557 12060000 		.4byte	0x612
+ 783 055b 0E       		.uleb128 0xe
+ 784 055c DD080000 		.4byte	.LASF114
+ 785 0560 07       		.byte	0x7
+ 786 0561 7802     		.2byte	0x278
+ 787 0563 E0000000 		.4byte	0xe0
+ 788 0567 00       		.byte	0
+ 789 0568 0E       		.uleb128 0xe
+ 790 0569 41050000 		.4byte	.LASF115
+ 791 056d 07       		.byte	0x7
+ 792 056e 7902     		.2byte	0x279
+ 793 0570 E0000000 		.4byte	0xe0
+ 794 0574 04       		.byte	0x4
+ 795 0575 0E       		.uleb128 0xe
+ 796 0576 F8000000 		.4byte	.LASF116
+ 797 057a 07       		.byte	0x7
+ 798 057b 7B02     		.2byte	0x27b
+ 799 057d 2F050000 		.4byte	0x52f
+ 800 0581 08       		.byte	0x8
+ 801 0582 0E       		.uleb128 0xe
+ 802 0583 CA070000 		.4byte	.LASF117
+ 803 0587 07       		.byte	0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 18
 
 
- 810 05b1 8102     		.2byte	0x281
- 811 05b3 CE000000 		.4byte	0xce
- 812 05b7 1C       		.byte	0x1c
- 813 05b8 0E       		.uleb128 0xe
- 814 05b9 A8020000 		.4byte	.LASF121
- 815 05bd 06       		.byte	0x6
- 816 05be 8202     		.2byte	0x282
- 817 05c0 E0000000 		.4byte	0xe0
- 818 05c4 20       		.byte	0x20
- 819 05c5 0E       		.uleb128 0xe
- 820 05c6 D1030000 		.4byte	.LASF122
- 821 05ca 06       		.byte	0x6
- 822 05cb 8402     		.2byte	0x284
- 823 05cd 24050000 		.4byte	0x524
- 824 05d1 24       		.byte	0x24
- 825 05d2 0E       		.uleb128 0xe
- 826 05d3 C6020000 		.4byte	.LASF123
- 827 05d7 06       		.byte	0x6
- 828 05d8 8502     		.2byte	0x285
- 829 05da CE000000 		.4byte	0xce
- 830 05de 28       		.byte	0x28
- 831 05df 0E       		.uleb128 0xe
- 832 05e0 56060000 		.4byte	.LASF124
- 833 05e4 06       		.byte	0x6
- 834 05e5 8602     		.2byte	0x286
- 835 05e7 E0000000 		.4byte	0xe0
- 836 05eb 2C       		.byte	0x2c
- 837 05ec 0E       		.uleb128 0xe
- 838 05ed AF030000 		.4byte	.LASF125
- 839 05f1 06       		.byte	0x6
- 840 05f2 8B02     		.2byte	0x28b
- 841 05f4 37050000 		.4byte	0x537
- 842 05f8 30       		.byte	0x30
- 843 05f9 0E       		.uleb128 0xe
- 844 05fa C1070000 		.4byte	.LASF126
- 845 05fe 06       		.byte	0x6
- 846 05ff 8E02     		.2byte	0x28e
- 847 0601 CE000000 		.4byte	0xce
- 848 0605 34       		.byte	0x34
- 849 0606 00       		.byte	0
- 850 0607 0C       		.uleb128 0xc
- 851 0608 CF070000 		.4byte	.LASF127
- 852 060c 06       		.byte	0x6
- 853 060d 9102     		.2byte	0x291
- 854 060f 43050000 		.4byte	0x543
- 855 0613 0F       		.uleb128 0xf
- 856 0614 53050000 		.4byte	.LASF137
- 857 0618 02       		.byte	0x2
- 858 0619 81       		.byte	0x81
- 859 061a 03       		.byte	0x3
- 860 061b 10       		.uleb128 0x10
- 861 061c 39020000 		.4byte	.LASF138
- 862 0620 01       		.byte	0x1
- 863 0621 15       		.byte	0x15
- 864 0622 94000000 		.4byte	0x94
- 865 0626 00000000 		.4byte	.LFB485
- 866 062a 28000000 		.4byte	.LFE485-.LFB485
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 19
+ 804 0588 7C02     		.2byte	0x27c
+ 805 058a CE000000 		.4byte	0xce
+ 806 058e 0C       		.byte	0xc
+ 807 058f 0E       		.uleb128 0xe
+ 808 0590 10040000 		.4byte	.LASF118
+ 809 0594 07       		.byte	0x7
+ 810 0595 7D02     		.2byte	0x27d
+ 811 0597 E0000000 		.4byte	0xe0
+ 812 059b 10       		.byte	0x10
+ 813 059c 0E       		.uleb128 0xe
+ 814 059d B9080000 		.4byte	.LASF119
+ 815 05a1 07       		.byte	0x7
+ 816 05a2 7E02     		.2byte	0x27e
+ 817 05a4 E0000000 		.4byte	0xe0
+ 818 05a8 14       		.byte	0x14
+ 819 05a9 0E       		.uleb128 0xe
+ 820 05aa 28080000 		.4byte	.LASF120
+ 821 05ae 07       		.byte	0x7
+ 822 05af 8002     		.2byte	0x280
+ 823 05b1 2F050000 		.4byte	0x52f
+ 824 05b5 18       		.byte	0x18
+ 825 05b6 0E       		.uleb128 0xe
+ 826 05b7 12000000 		.4byte	.LASF121
+ 827 05bb 07       		.byte	0x7
+ 828 05bc 8102     		.2byte	0x281
+ 829 05be CE000000 		.4byte	0xce
+ 830 05c2 1C       		.byte	0x1c
+ 831 05c3 0E       		.uleb128 0xe
+ 832 05c4 C5020000 		.4byte	.LASF122
+ 833 05c8 07       		.byte	0x7
+ 834 05c9 8202     		.2byte	0x282
+ 835 05cb E0000000 		.4byte	0xe0
+ 836 05cf 20       		.byte	0x20
+ 837 05d0 0E       		.uleb128 0xe
+ 838 05d1 EE030000 		.4byte	.LASF123
+ 839 05d5 07       		.byte	0x7
+ 840 05d6 8402     		.2byte	0x284
+ 841 05d8 2F050000 		.4byte	0x52f
+ 842 05dc 24       		.byte	0x24
+ 843 05dd 0E       		.uleb128 0xe
+ 844 05de E3020000 		.4byte	.LASF124
+ 845 05e2 07       		.byte	0x7
+ 846 05e3 8502     		.2byte	0x285
+ 847 05e5 CE000000 		.4byte	0xce
+ 848 05e9 28       		.byte	0x28
+ 849 05ea 0E       		.uleb128 0xe
+ 850 05eb 8D060000 		.4byte	.LASF125
+ 851 05ef 07       		.byte	0x7
+ 852 05f0 8602     		.2byte	0x286
+ 853 05f2 E0000000 		.4byte	0xe0
+ 854 05f6 2C       		.byte	0x2c
+ 855 05f7 0E       		.uleb128 0xe
+ 856 05f8 CC030000 		.4byte	.LASF126
+ 857 05fc 07       		.byte	0x7
+ 858 05fd 8B02     		.2byte	0x28b
+ 859 05ff 42050000 		.4byte	0x542
+ 860 0603 30       		.byte	0x30
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 19
 
 
- 867 062e 01       		.uleb128 0x1
- 868 062f 9C       		.byte	0x9c
- 869 0630 7C060000 		.4byte	0x67c
- 870 0634 11       		.uleb128 0x11
- 871 0635 13060000 		.4byte	0x613
- 872 0639 04000000 		.4byte	.LBB4
- 873 063d 02000000 		.4byte	.LBE4-.LBB4
- 874 0641 01       		.byte	0x1
- 875 0642 17       		.byte	0x17
- 876 0643 12       		.uleb128 0x12
- 877 0644 1A000000 		.4byte	.LVL0
- 878 0648 AE060000 		.4byte	0x6ae
- 879 064c 72060000 		.4byte	0x672
- 880 0650 13       		.uleb128 0x13
- 881 0651 01       		.uleb128 0x1
- 882 0652 51       		.byte	0x51
- 883 0653 05       		.uleb128 0x5
- 884 0654 03       		.byte	0x3
- 885 0655 00000000 		.4byte	.LC0
- 886 0659 13       		.uleb128 0x13
- 887 065a 01       		.uleb128 0x1
- 888 065b 52       		.byte	0x52
- 889 065c 03       		.uleb128 0x3
- 890 065d 0A       		.byte	0xa
- 891 065e 9001     		.2byte	0x190
- 892 0660 13       		.uleb128 0x13
- 893 0661 01       		.uleb128 0x1
- 894 0662 53       		.byte	0x53
- 895 0663 01       		.uleb128 0x1
- 896 0664 30       		.byte	0x30
- 897 0665 13       		.uleb128 0x13
- 898 0666 02       		.uleb128 0x2
- 899 0667 7D       		.byte	0x7d
- 900 0668 00       		.sleb128 0
- 901 0669 01       		.uleb128 0x1
- 902 066a 32       		.byte	0x32
- 903 066b 13       		.uleb128 0x13
- 904 066c 02       		.uleb128 0x2
- 905 066d 7D       		.byte	0x7d
- 906 066e 04       		.sleb128 4
- 907 066f 01       		.uleb128 0x1
- 908 0670 30       		.byte	0x30
- 909 0671 00       		.byte	0
- 910 0672 14       		.uleb128 0x14
- 911 0673 1E000000 		.4byte	.LVL1
- 912 0677 BA060000 		.4byte	0x6ba
- 913 067b 00       		.byte	0
- 914 067c 15       		.uleb128 0x15
- 915 067d 2A010000 		.4byte	.LASF128
- 916 0681 07       		.byte	0x7
- 917 0682 F907     		.2byte	0x7f9
- 918 0684 88060000 		.4byte	0x688
- 919 0688 05       		.uleb128 0x5
- 920 0689 C3000000 		.4byte	0xc3
- 921 068d 16       		.uleb128 0x16
- 922 068e 2A060000 		.4byte	.LASF129
- 923 0692 05       		.byte	0x5
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 20
+ 861 0604 0E       		.uleb128 0xe
+ 862 0605 20080000 		.4byte	.LASF127
+ 863 0609 07       		.byte	0x7
+ 864 060a 8E02     		.2byte	0x28e
+ 865 060c CE000000 		.4byte	0xce
+ 866 0610 34       		.byte	0x34
+ 867 0611 00       		.byte	0
+ 868 0612 0C       		.uleb128 0xc
+ 869 0613 2E080000 		.4byte	.LASF128
+ 870 0617 07       		.byte	0x7
+ 871 0618 9102     		.2byte	0x291
+ 872 061a 4E050000 		.4byte	0x54e
+ 873 061e 09       		.uleb128 0x9
+ 874 061f 04       		.byte	0x4
+ 875 0620 3E000000 		.4byte	0x3e
+ 876 0624 0F       		.uleb128 0xf
+ 877 0625 8A050000 		.4byte	.LASF146
+ 878 0629 02       		.byte	0x2
+ 879 062a 81       		.byte	0x81
+ 880 062b 03       		.byte	0x3
+ 881 062c 10       		.uleb128 0x10
+ 882 062d 3C020000 		.4byte	.LASF147
+ 883 0631 01       		.byte	0x1
+ 884 0632 16       		.byte	0x16
+ 885 0633 94000000 		.4byte	0x94
+ 886 0637 00000000 		.4byte	.LFB485
+ 887 063b 38000000 		.4byte	.LFE485-.LFB485
+ 888 063f 01       		.uleb128 0x1
+ 889 0640 9C       		.byte	0x9c
+ 890 0641 05070000 		.4byte	0x705
+ 891 0645 11       		.uleb128 0x11
+ 892 0646 A6000000 		.4byte	.LASF129
+ 893 064a 01       		.byte	0x1
+ 894 064b 1E       		.byte	0x1e
+ 895 064c 05070000 		.4byte	0x705
+ 896 0650 11       		.uleb128 0x11
+ 897 0651 EA060000 		.4byte	.LASF130
+ 898 0655 01       		.byte	0x1
+ 899 0656 1F       		.byte	0x1f
+ 900 0657 05070000 		.4byte	0x705
+ 901 065b 11       		.uleb128 0x11
+ 902 065c AF000000 		.4byte	.LASF131
+ 903 0660 01       		.byte	0x1
+ 904 0661 20       		.byte	0x20
+ 905 0662 05070000 		.4byte	0x705
+ 906 0666 11       		.uleb128 0x11
+ 907 0667 0C020000 		.4byte	.LASF132
+ 908 066b 01       		.byte	0x1
+ 909 066c 21       		.byte	0x21
+ 910 066d 05070000 		.4byte	0x705
+ 911 0671 12       		.uleb128 0x12
+ 912 0672 736B00   		.ascii	"sk\000"
+ 913 0675 01       		.byte	0x1
+ 914 0676 23       		.byte	0x23
+ 915 0677 1E060000 		.4byte	0x61e
+ 916 067b 12       		.uleb128 0x12
+ 917 067c 706B00   		.ascii	"pk\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 20
 
 
- 924 0693 A7       		.byte	0xa7
- 925 0694 98060000 		.4byte	0x698
- 926 0698 09       		.uleb128 0x9
- 927 0699 04       		.byte	0x4
- 928 069a 9E060000 		.4byte	0x69e
- 929 069e 17       		.uleb128 0x17
- 930 069f FD040000 		.4byte	0x4fd
- 931 06a3 16       		.uleb128 0x16
- 932 06a4 5D030000 		.4byte	.LASF130
- 933 06a8 08       		.byte	0x8
- 934 06a9 87       		.byte	0x87
- 935 06aa 07060000 		.4byte	0x607
- 936 06ae 18       		.uleb128 0x18
- 937 06af 43000000 		.4byte	.LASF131
- 938 06b3 43000000 		.4byte	.LASF131
- 939 06b7 09       		.byte	0x9
- 940 06b8 4101     		.2byte	0x141
- 941 06ba 18       		.uleb128 0x18
- 942 06bb 8A020000 		.4byte	.LASF132
- 943 06bf 8A020000 		.4byte	.LASF132
- 944 06c3 09       		.byte	0x9
- 945 06c4 8E04     		.2byte	0x48e
- 946 06c6 00       		.byte	0
- 947              		.section	.debug_abbrev,"",%progbits
- 948              	.Ldebug_abbrev0:
- 949 0000 01       		.uleb128 0x1
- 950 0001 11       		.uleb128 0x11
- 951 0002 01       		.byte	0x1
- 952 0003 25       		.uleb128 0x25
- 953 0004 0E       		.uleb128 0xe
- 954 0005 13       		.uleb128 0x13
- 955 0006 0B       		.uleb128 0xb
- 956 0007 03       		.uleb128 0x3
- 957 0008 0E       		.uleb128 0xe
- 958 0009 1B       		.uleb128 0x1b
- 959 000a 0E       		.uleb128 0xe
- 960 000b 55       		.uleb128 0x55
- 961 000c 17       		.uleb128 0x17
- 962 000d 11       		.uleb128 0x11
- 963 000e 01       		.uleb128 0x1
- 964 000f 10       		.uleb128 0x10
- 965 0010 17       		.uleb128 0x17
- 966 0011 00       		.byte	0
- 967 0012 00       		.byte	0
- 968 0013 02       		.uleb128 0x2
- 969 0014 24       		.uleb128 0x24
- 970 0015 00       		.byte	0
- 971 0016 0B       		.uleb128 0xb
- 972 0017 0B       		.uleb128 0xb
- 973 0018 3E       		.uleb128 0x3e
- 974 0019 0B       		.uleb128 0xb
- 975 001a 03       		.uleb128 0x3
- 976 001b 0E       		.uleb128 0xe
- 977 001c 00       		.byte	0
- 978 001d 00       		.byte	0
- 979 001e 03       		.uleb128 0x3
- 980 001f 16       		.uleb128 0x16
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 21
+ 918 067f 01       		.byte	0x1
+ 919 0680 24       		.byte	0x24
+ 920 0681 1E060000 		.4byte	0x61e
+ 921 0685 12       		.uleb128 0x12
+ 922 0686 637400   		.ascii	"ct\000"
+ 923 0689 01       		.byte	0x1
+ 924 068a 25       		.byte	0x25
+ 925 068b 1E060000 		.4byte	0x61e
+ 926 068f 12       		.uleb128 0x12
+ 927 0690 737300   		.ascii	"ss\000"
+ 928 0693 01       		.byte	0x1
+ 929 0694 26       		.byte	0x26
+ 930 0695 1E060000 		.4byte	0x61e
+ 931 0699 13       		.uleb128 0x13
+ 932 069a 24060000 		.4byte	0x624
+ 933 069e 04000000 		.4byte	.LBB4
+ 934 06a2 02000000 		.4byte	.LBE4-.LBB4
+ 935 06a6 01       		.byte	0x1
+ 936 06a7 18       		.byte	0x18
+ 937 06a8 14       		.uleb128 0x14
+ 938 06a9 1A000000 		.4byte	.LVL0
+ 939 06ad 3C070000 		.4byte	0x73c
+ 940 06b1 D7060000 		.4byte	0x6d7
+ 941 06b5 15       		.uleb128 0x15
+ 942 06b6 01       		.uleb128 0x1
+ 943 06b7 51       		.byte	0x51
+ 944 06b8 05       		.uleb128 0x5
+ 945 06b9 03       		.byte	0x3
+ 946 06ba 00000000 		.4byte	.LC0
+ 947 06be 15       		.uleb128 0x15
+ 948 06bf 01       		.uleb128 0x1
+ 949 06c0 52       		.byte	0x52
+ 950 06c1 03       		.uleb128 0x3
+ 951 06c2 0A       		.byte	0xa
+ 952 06c3 9001     		.2byte	0x190
+ 953 06c5 15       		.uleb128 0x15
+ 954 06c6 01       		.uleb128 0x1
+ 955 06c7 53       		.byte	0x53
+ 956 06c8 01       		.uleb128 0x1
+ 957 06c9 30       		.byte	0x30
+ 958 06ca 15       		.uleb128 0x15
+ 959 06cb 02       		.uleb128 0x2
+ 960 06cc 7D       		.byte	0x7d
+ 961 06cd 00       		.sleb128 0
+ 962 06ce 01       		.uleb128 0x1
+ 963 06cf 32       		.byte	0x32
+ 964 06d0 15       		.uleb128 0x15
+ 965 06d1 02       		.uleb128 0x2
+ 966 06d2 7D       		.byte	0x7d
+ 967 06d3 04       		.sleb128 4
+ 968 06d4 01       		.uleb128 0x1
+ 969 06d5 30       		.byte	0x30
+ 970 06d6 00       		.byte	0
+ 971 06d7 16       		.uleb128 0x16
+ 972 06d8 1E000000 		.4byte	.LVL1
+ 973 06dc 48070000 		.4byte	0x748
+ 974 06e0 16       		.uleb128 0x16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 21
 
 
- 981 0020 00       		.byte	0
- 982 0021 03       		.uleb128 0x3
- 983 0022 0E       		.uleb128 0xe
- 984 0023 3A       		.uleb128 0x3a
- 985 0024 0B       		.uleb128 0xb
- 986 0025 3B       		.uleb128 0x3b
- 987 0026 0B       		.uleb128 0xb
- 988 0027 49       		.uleb128 0x49
- 989 0028 13       		.uleb128 0x13
- 990 0029 00       		.byte	0
- 991 002a 00       		.byte	0
- 992 002b 04       		.uleb128 0x4
- 993 002c 24       		.uleb128 0x24
- 994 002d 00       		.byte	0
- 995 002e 0B       		.uleb128 0xb
- 996 002f 0B       		.uleb128 0xb
- 997 0030 3E       		.uleb128 0x3e
- 998 0031 0B       		.uleb128 0xb
- 999 0032 03       		.uleb128 0x3
- 1000 0033 08       		.uleb128 0x8
- 1001 0034 00       		.byte	0
- 1002 0035 00       		.byte	0
- 1003 0036 05       		.uleb128 0x5
- 1004 0037 35       		.uleb128 0x35
- 1005 0038 00       		.byte	0
- 1006 0039 49       		.uleb128 0x49
- 1007 003a 13       		.uleb128 0x13
- 1008 003b 00       		.byte	0
- 1009 003c 00       		.byte	0
- 1010 003d 06       		.uleb128 0x6
- 1011 003e 13       		.uleb128 0x13
- 1012 003f 01       		.byte	0x1
- 1013 0040 0B       		.uleb128 0xb
- 1014 0041 0B       		.uleb128 0xb
- 1015 0042 3A       		.uleb128 0x3a
- 1016 0043 0B       		.uleb128 0xb
- 1017 0044 3B       		.uleb128 0x3b
- 1018 0045 0B       		.uleb128 0xb
- 1019 0046 01       		.uleb128 0x1
- 1020 0047 13       		.uleb128 0x13
- 1021 0048 00       		.byte	0
- 1022 0049 00       		.byte	0
- 1023 004a 07       		.uleb128 0x7
- 1024 004b 0D       		.uleb128 0xd
- 1025 004c 00       		.byte	0
- 1026 004d 03       		.uleb128 0x3
- 1027 004e 0E       		.uleb128 0xe
- 1028 004f 3A       		.uleb128 0x3a
- 1029 0050 0B       		.uleb128 0xb
- 1030 0051 3B       		.uleb128 0x3b
- 1031 0052 0B       		.uleb128 0xb
- 1032 0053 49       		.uleb128 0x49
- 1033 0054 13       		.uleb128 0x13
- 1034 0055 38       		.uleb128 0x38
- 1035 0056 0B       		.uleb128 0xb
- 1036 0057 00       		.byte	0
- 1037 0058 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 22
+ 975 06e1 22000000 		.4byte	.LVL2
+ 976 06e5 54070000 		.4byte	0x754
+ 977 06e9 16       		.uleb128 0x16
+ 978 06ea 26000000 		.4byte	.LVL3
+ 979 06ee 5F070000 		.4byte	0x75f
+ 980 06f2 16       		.uleb128 0x16
+ 981 06f3 2A000000 		.4byte	.LVL4
+ 982 06f7 6A070000 		.4byte	0x76a
+ 983 06fb 16       		.uleb128 0x16
+ 984 06fc 2E000000 		.4byte	.LVL5
+ 985 0700 75070000 		.4byte	0x775
+ 986 0704 00       		.byte	0
+ 987 0705 17       		.uleb128 0x17
+ 988 0706 E5000000 		.4byte	0xe5
+ 989 070a 18       		.uleb128 0x18
+ 990 070b 18010000 		.4byte	.LASF133
+ 991 070f 08       		.byte	0x8
+ 992 0710 F907     		.2byte	0x7f9
+ 993 0712 16070000 		.4byte	0x716
+ 994 0716 05       		.uleb128 0x5
+ 995 0717 C3000000 		.4byte	0xc3
+ 996 071b 19       		.uleb128 0x19
+ 997 071c 61060000 		.4byte	.LASF134
+ 998 0720 06       		.byte	0x6
+ 999 0721 A7       		.byte	0xa7
+ 1000 0722 26070000 		.4byte	0x726
+ 1001 0726 09       		.uleb128 0x9
+ 1002 0727 04       		.byte	0x4
+ 1003 0728 2C070000 		.4byte	0x72c
+ 1004 072c 17       		.uleb128 0x17
+ 1005 072d 08050000 		.4byte	0x508
+ 1006 0731 19       		.uleb128 0x19
+ 1007 0732 7A030000 		.4byte	.LASF135
+ 1008 0736 09       		.byte	0x9
+ 1009 0737 87       		.byte	0x87
+ 1010 0738 12060000 		.4byte	0x612
+ 1011 073c 1A       		.uleb128 0x1a
+ 1012 073d 43000000 		.4byte	.LASF136
+ 1013 0741 43000000 		.4byte	.LASF136
+ 1014 0745 0A       		.byte	0xa
+ 1015 0746 4101     		.2byte	0x141
+ 1016 0748 1A       		.uleb128 0x1a
+ 1017 0749 A7020000 		.4byte	.LASF137
+ 1018 074d A7020000 		.4byte	.LASF137
+ 1019 0751 0A       		.byte	0xa
+ 1020 0752 8E04     		.2byte	0x48e
+ 1021 0754 1B       		.uleb128 0x1b
+ 1022 0755 41020000 		.4byte	.LASF138
+ 1023 0759 41020000 		.4byte	.LASF138
+ 1024 075d 0B       		.byte	0xb
+ 1025 075e 17       		.byte	0x17
+ 1026 075f 1B       		.uleb128 0x1b
+ 1027 0760 6D080000 		.4byte	.LASF139
+ 1028 0764 6D080000 		.4byte	.LASF139
+ 1029 0768 0B       		.byte	0xb
+ 1030 0769 16       		.byte	0x16
+ 1031 076a 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 22
 
 
- 1038 0059 08       		.uleb128 0x8
- 1039 005a 0F       		.uleb128 0xf
- 1040 005b 00       		.byte	0
- 1041 005c 0B       		.uleb128 0xb
- 1042 005d 0B       		.uleb128 0xb
- 1043 005e 00       		.byte	0
- 1044 005f 00       		.byte	0
- 1045 0060 09       		.uleb128 0x9
- 1046 0061 0F       		.uleb128 0xf
- 1047 0062 00       		.byte	0
- 1048 0063 0B       		.uleb128 0xb
- 1049 0064 0B       		.uleb128 0xb
- 1050 0065 49       		.uleb128 0x49
- 1051 0066 13       		.uleb128 0x13
- 1052 0067 00       		.byte	0
- 1053 0068 00       		.byte	0
- 1054 0069 0A       		.uleb128 0xa
- 1055 006a 15       		.uleb128 0x15
- 1056 006b 01       		.byte	0x1
- 1057 006c 27       		.uleb128 0x27
- 1058 006d 19       		.uleb128 0x19
- 1059 006e 01       		.uleb128 0x1
- 1060 006f 13       		.uleb128 0x13
- 1061 0070 00       		.byte	0
- 1062 0071 00       		.byte	0
- 1063 0072 0B       		.uleb128 0xb
- 1064 0073 05       		.uleb128 0x5
- 1065 0074 00       		.byte	0
- 1066 0075 49       		.uleb128 0x49
- 1067 0076 13       		.uleb128 0x13
- 1068 0077 00       		.byte	0
- 1069 0078 00       		.byte	0
- 1070 0079 0C       		.uleb128 0xc
- 1071 007a 16       		.uleb128 0x16
- 1072 007b 00       		.byte	0
- 1073 007c 03       		.uleb128 0x3
- 1074 007d 0E       		.uleb128 0xe
- 1075 007e 3A       		.uleb128 0x3a
- 1076 007f 0B       		.uleb128 0xb
- 1077 0080 3B       		.uleb128 0x3b
- 1078 0081 05       		.uleb128 0x5
- 1079 0082 49       		.uleb128 0x49
- 1080 0083 13       		.uleb128 0x13
- 1081 0084 00       		.byte	0
- 1082 0085 00       		.byte	0
- 1083 0086 0D       		.uleb128 0xd
- 1084 0087 13       		.uleb128 0x13
- 1085 0088 01       		.byte	0x1
- 1086 0089 03       		.uleb128 0x3
- 1087 008a 0E       		.uleb128 0xe
- 1088 008b 0B       		.uleb128 0xb
- 1089 008c 0B       		.uleb128 0xb
- 1090 008d 3A       		.uleb128 0x3a
- 1091 008e 0B       		.uleb128 0xb
- 1092 008f 3B       		.uleb128 0x3b
- 1093 0090 05       		.uleb128 0x5
- 1094 0091 01       		.uleb128 0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 23
+ 1032 076b 4A050000 		.4byte	.LASF140
+ 1033 076f 4A050000 		.4byte	.LASF140
+ 1034 0773 0B       		.byte	0xb
+ 1035 0774 18       		.byte	0x18
+ 1036 0775 1B       		.uleb128 0x1b
+ 1037 0776 E6080000 		.4byte	.LASF141
+ 1038 077a E6080000 		.4byte	.LASF141
+ 1039 077e 0B       		.byte	0xb
+ 1040 077f 19       		.byte	0x19
+ 1041 0780 00       		.byte	0
+ 1042              		.section	.debug_abbrev,"",%progbits
+ 1043              	.Ldebug_abbrev0:
+ 1044 0000 01       		.uleb128 0x1
+ 1045 0001 11       		.uleb128 0x11
+ 1046 0002 01       		.byte	0x1
+ 1047 0003 25       		.uleb128 0x25
+ 1048 0004 0E       		.uleb128 0xe
+ 1049 0005 13       		.uleb128 0x13
+ 1050 0006 0B       		.uleb128 0xb
+ 1051 0007 03       		.uleb128 0x3
+ 1052 0008 0E       		.uleb128 0xe
+ 1053 0009 1B       		.uleb128 0x1b
+ 1054 000a 0E       		.uleb128 0xe
+ 1055 000b 55       		.uleb128 0x55
+ 1056 000c 17       		.uleb128 0x17
+ 1057 000d 11       		.uleb128 0x11
+ 1058 000e 01       		.uleb128 0x1
+ 1059 000f 10       		.uleb128 0x10
+ 1060 0010 17       		.uleb128 0x17
+ 1061 0011 00       		.byte	0
+ 1062 0012 00       		.byte	0
+ 1063 0013 02       		.uleb128 0x2
+ 1064 0014 24       		.uleb128 0x24
+ 1065 0015 00       		.byte	0
+ 1066 0016 0B       		.uleb128 0xb
+ 1067 0017 0B       		.uleb128 0xb
+ 1068 0018 3E       		.uleb128 0x3e
+ 1069 0019 0B       		.uleb128 0xb
+ 1070 001a 03       		.uleb128 0x3
+ 1071 001b 0E       		.uleb128 0xe
+ 1072 001c 00       		.byte	0
+ 1073 001d 00       		.byte	0
+ 1074 001e 03       		.uleb128 0x3
+ 1075 001f 16       		.uleb128 0x16
+ 1076 0020 00       		.byte	0
+ 1077 0021 03       		.uleb128 0x3
+ 1078 0022 0E       		.uleb128 0xe
+ 1079 0023 3A       		.uleb128 0x3a
+ 1080 0024 0B       		.uleb128 0xb
+ 1081 0025 3B       		.uleb128 0x3b
+ 1082 0026 0B       		.uleb128 0xb
+ 1083 0027 49       		.uleb128 0x49
+ 1084 0028 13       		.uleb128 0x13
+ 1085 0029 00       		.byte	0
+ 1086 002a 00       		.byte	0
+ 1087 002b 04       		.uleb128 0x4
+ 1088 002c 24       		.uleb128 0x24
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 23
 
 
- 1095 0092 13       		.uleb128 0x13
- 1096 0093 00       		.byte	0
- 1097 0094 00       		.byte	0
- 1098 0095 0E       		.uleb128 0xe
- 1099 0096 0D       		.uleb128 0xd
- 1100 0097 00       		.byte	0
- 1101 0098 03       		.uleb128 0x3
- 1102 0099 0E       		.uleb128 0xe
- 1103 009a 3A       		.uleb128 0x3a
- 1104 009b 0B       		.uleb128 0xb
- 1105 009c 3B       		.uleb128 0x3b
- 1106 009d 05       		.uleb128 0x5
- 1107 009e 49       		.uleb128 0x49
- 1108 009f 13       		.uleb128 0x13
- 1109 00a0 38       		.uleb128 0x38
- 1110 00a1 0B       		.uleb128 0xb
- 1111 00a2 00       		.byte	0
- 1112 00a3 00       		.byte	0
- 1113 00a4 0F       		.uleb128 0xf
- 1114 00a5 2E       		.uleb128 0x2e
- 1115 00a6 00       		.byte	0
- 1116 00a7 03       		.uleb128 0x3
- 1117 00a8 0E       		.uleb128 0xe
- 1118 00a9 3A       		.uleb128 0x3a
- 1119 00aa 0B       		.uleb128 0xb
- 1120 00ab 3B       		.uleb128 0x3b
- 1121 00ac 0B       		.uleb128 0xb
- 1122 00ad 27       		.uleb128 0x27
- 1123 00ae 19       		.uleb128 0x19
- 1124 00af 20       		.uleb128 0x20
- 1125 00b0 0B       		.uleb128 0xb
- 1126 00b1 00       		.byte	0
- 1127 00b2 00       		.byte	0
- 1128 00b3 10       		.uleb128 0x10
- 1129 00b4 2E       		.uleb128 0x2e
- 1130 00b5 01       		.byte	0x1
- 1131 00b6 3F       		.uleb128 0x3f
- 1132 00b7 19       		.uleb128 0x19
- 1133 00b8 03       		.uleb128 0x3
- 1134 00b9 0E       		.uleb128 0xe
- 1135 00ba 3A       		.uleb128 0x3a
- 1136 00bb 0B       		.uleb128 0xb
- 1137 00bc 3B       		.uleb128 0x3b
- 1138 00bd 0B       		.uleb128 0xb
- 1139 00be 27       		.uleb128 0x27
- 1140 00bf 19       		.uleb128 0x19
- 1141 00c0 49       		.uleb128 0x49
- 1142 00c1 13       		.uleb128 0x13
- 1143 00c2 8701     		.uleb128 0x87
- 1144 00c4 19       		.uleb128 0x19
- 1145 00c5 11       		.uleb128 0x11
- 1146 00c6 01       		.uleb128 0x1
- 1147 00c7 12       		.uleb128 0x12
- 1148 00c8 06       		.uleb128 0x6
- 1149 00c9 40       		.uleb128 0x40
- 1150 00ca 18       		.uleb128 0x18
- 1151 00cb 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 24
+ 1089 002d 00       		.byte	0
+ 1090 002e 0B       		.uleb128 0xb
+ 1091 002f 0B       		.uleb128 0xb
+ 1092 0030 3E       		.uleb128 0x3e
+ 1093 0031 0B       		.uleb128 0xb
+ 1094 0032 03       		.uleb128 0x3
+ 1095 0033 08       		.uleb128 0x8
+ 1096 0034 00       		.byte	0
+ 1097 0035 00       		.byte	0
+ 1098 0036 05       		.uleb128 0x5
+ 1099 0037 35       		.uleb128 0x35
+ 1100 0038 00       		.byte	0
+ 1101 0039 49       		.uleb128 0x49
+ 1102 003a 13       		.uleb128 0x13
+ 1103 003b 00       		.byte	0
+ 1104 003c 00       		.byte	0
+ 1105 003d 06       		.uleb128 0x6
+ 1106 003e 13       		.uleb128 0x13
+ 1107 003f 01       		.byte	0x1
+ 1108 0040 0B       		.uleb128 0xb
+ 1109 0041 0B       		.uleb128 0xb
+ 1110 0042 3A       		.uleb128 0x3a
+ 1111 0043 0B       		.uleb128 0xb
+ 1112 0044 3B       		.uleb128 0x3b
+ 1113 0045 0B       		.uleb128 0xb
+ 1114 0046 01       		.uleb128 0x1
+ 1115 0047 13       		.uleb128 0x13
+ 1116 0048 00       		.byte	0
+ 1117 0049 00       		.byte	0
+ 1118 004a 07       		.uleb128 0x7
+ 1119 004b 0D       		.uleb128 0xd
+ 1120 004c 00       		.byte	0
+ 1121 004d 03       		.uleb128 0x3
+ 1122 004e 0E       		.uleb128 0xe
+ 1123 004f 3A       		.uleb128 0x3a
+ 1124 0050 0B       		.uleb128 0xb
+ 1125 0051 3B       		.uleb128 0x3b
+ 1126 0052 0B       		.uleb128 0xb
+ 1127 0053 49       		.uleb128 0x49
+ 1128 0054 13       		.uleb128 0x13
+ 1129 0055 38       		.uleb128 0x38
+ 1130 0056 0B       		.uleb128 0xb
+ 1131 0057 00       		.byte	0
+ 1132 0058 00       		.byte	0
+ 1133 0059 08       		.uleb128 0x8
+ 1134 005a 0F       		.uleb128 0xf
+ 1135 005b 00       		.byte	0
+ 1136 005c 0B       		.uleb128 0xb
+ 1137 005d 0B       		.uleb128 0xb
+ 1138 005e 00       		.byte	0
+ 1139 005f 00       		.byte	0
+ 1140 0060 09       		.uleb128 0x9
+ 1141 0061 0F       		.uleb128 0xf
+ 1142 0062 00       		.byte	0
+ 1143 0063 0B       		.uleb128 0xb
+ 1144 0064 0B       		.uleb128 0xb
+ 1145 0065 49       		.uleb128 0x49
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 24
 
 
- 1152 00cd 19       		.uleb128 0x19
- 1153 00ce 01       		.uleb128 0x1
- 1154 00cf 13       		.uleb128 0x13
- 1155 00d0 00       		.byte	0
- 1156 00d1 00       		.byte	0
- 1157 00d2 11       		.uleb128 0x11
- 1158 00d3 1D       		.uleb128 0x1d
- 1159 00d4 00       		.byte	0
- 1160 00d5 31       		.uleb128 0x31
- 1161 00d6 13       		.uleb128 0x13
- 1162 00d7 11       		.uleb128 0x11
- 1163 00d8 01       		.uleb128 0x1
- 1164 00d9 12       		.uleb128 0x12
- 1165 00da 06       		.uleb128 0x6
- 1166 00db 58       		.uleb128 0x58
- 1167 00dc 0B       		.uleb128 0xb
- 1168 00dd 59       		.uleb128 0x59
- 1169 00de 0B       		.uleb128 0xb
- 1170 00df 00       		.byte	0
- 1171 00e0 00       		.byte	0
- 1172 00e1 12       		.uleb128 0x12
- 1173 00e2 898201   		.uleb128 0x4109
- 1174 00e5 01       		.byte	0x1
- 1175 00e6 11       		.uleb128 0x11
- 1176 00e7 01       		.uleb128 0x1
- 1177 00e8 31       		.uleb128 0x31
- 1178 00e9 13       		.uleb128 0x13
- 1179 00ea 01       		.uleb128 0x1
- 1180 00eb 13       		.uleb128 0x13
- 1181 00ec 00       		.byte	0
- 1182 00ed 00       		.byte	0
- 1183 00ee 13       		.uleb128 0x13
- 1184 00ef 8A8201   		.uleb128 0x410a
- 1185 00f2 00       		.byte	0
- 1186 00f3 02       		.uleb128 0x2
- 1187 00f4 18       		.uleb128 0x18
- 1188 00f5 9142     		.uleb128 0x2111
- 1189 00f7 18       		.uleb128 0x18
- 1190 00f8 00       		.byte	0
- 1191 00f9 00       		.byte	0
- 1192 00fa 14       		.uleb128 0x14
- 1193 00fb 898201   		.uleb128 0x4109
- 1194 00fe 00       		.byte	0
- 1195 00ff 11       		.uleb128 0x11
- 1196 0100 01       		.uleb128 0x1
- 1197 0101 31       		.uleb128 0x31
- 1198 0102 13       		.uleb128 0x13
- 1199 0103 00       		.byte	0
- 1200 0104 00       		.byte	0
- 1201 0105 15       		.uleb128 0x15
- 1202 0106 34       		.uleb128 0x34
- 1203 0107 00       		.byte	0
- 1204 0108 03       		.uleb128 0x3
- 1205 0109 0E       		.uleb128 0xe
- 1206 010a 3A       		.uleb128 0x3a
- 1207 010b 0B       		.uleb128 0xb
- 1208 010c 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 25
+ 1146 0066 13       		.uleb128 0x13
+ 1147 0067 00       		.byte	0
+ 1148 0068 00       		.byte	0
+ 1149 0069 0A       		.uleb128 0xa
+ 1150 006a 15       		.uleb128 0x15
+ 1151 006b 01       		.byte	0x1
+ 1152 006c 27       		.uleb128 0x27
+ 1153 006d 19       		.uleb128 0x19
+ 1154 006e 01       		.uleb128 0x1
+ 1155 006f 13       		.uleb128 0x13
+ 1156 0070 00       		.byte	0
+ 1157 0071 00       		.byte	0
+ 1158 0072 0B       		.uleb128 0xb
+ 1159 0073 05       		.uleb128 0x5
+ 1160 0074 00       		.byte	0
+ 1161 0075 49       		.uleb128 0x49
+ 1162 0076 13       		.uleb128 0x13
+ 1163 0077 00       		.byte	0
+ 1164 0078 00       		.byte	0
+ 1165 0079 0C       		.uleb128 0xc
+ 1166 007a 16       		.uleb128 0x16
+ 1167 007b 00       		.byte	0
+ 1168 007c 03       		.uleb128 0x3
+ 1169 007d 0E       		.uleb128 0xe
+ 1170 007e 3A       		.uleb128 0x3a
+ 1171 007f 0B       		.uleb128 0xb
+ 1172 0080 3B       		.uleb128 0x3b
+ 1173 0081 05       		.uleb128 0x5
+ 1174 0082 49       		.uleb128 0x49
+ 1175 0083 13       		.uleb128 0x13
+ 1176 0084 00       		.byte	0
+ 1177 0085 00       		.byte	0
+ 1178 0086 0D       		.uleb128 0xd
+ 1179 0087 13       		.uleb128 0x13
+ 1180 0088 01       		.byte	0x1
+ 1181 0089 03       		.uleb128 0x3
+ 1182 008a 0E       		.uleb128 0xe
+ 1183 008b 0B       		.uleb128 0xb
+ 1184 008c 0B       		.uleb128 0xb
+ 1185 008d 3A       		.uleb128 0x3a
+ 1186 008e 0B       		.uleb128 0xb
+ 1187 008f 3B       		.uleb128 0x3b
+ 1188 0090 05       		.uleb128 0x5
+ 1189 0091 01       		.uleb128 0x1
+ 1190 0092 13       		.uleb128 0x13
+ 1191 0093 00       		.byte	0
+ 1192 0094 00       		.byte	0
+ 1193 0095 0E       		.uleb128 0xe
+ 1194 0096 0D       		.uleb128 0xd
+ 1195 0097 00       		.byte	0
+ 1196 0098 03       		.uleb128 0x3
+ 1197 0099 0E       		.uleb128 0xe
+ 1198 009a 3A       		.uleb128 0x3a
+ 1199 009b 0B       		.uleb128 0xb
+ 1200 009c 3B       		.uleb128 0x3b
+ 1201 009d 05       		.uleb128 0x5
+ 1202 009e 49       		.uleb128 0x49
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 25
 
 
- 1209 010d 05       		.uleb128 0x5
- 1210 010e 49       		.uleb128 0x49
- 1211 010f 13       		.uleb128 0x13
- 1212 0110 3F       		.uleb128 0x3f
- 1213 0111 19       		.uleb128 0x19
- 1214 0112 3C       		.uleb128 0x3c
- 1215 0113 19       		.uleb128 0x19
- 1216 0114 00       		.byte	0
- 1217 0115 00       		.byte	0
- 1218 0116 16       		.uleb128 0x16
- 1219 0117 34       		.uleb128 0x34
- 1220 0118 00       		.byte	0
- 1221 0119 03       		.uleb128 0x3
- 1222 011a 0E       		.uleb128 0xe
- 1223 011b 3A       		.uleb128 0x3a
- 1224 011c 0B       		.uleb128 0xb
- 1225 011d 3B       		.uleb128 0x3b
- 1226 011e 0B       		.uleb128 0xb
- 1227 011f 49       		.uleb128 0x49
- 1228 0120 13       		.uleb128 0x13
- 1229 0121 3F       		.uleb128 0x3f
- 1230 0122 19       		.uleb128 0x19
- 1231 0123 3C       		.uleb128 0x3c
- 1232 0124 19       		.uleb128 0x19
- 1233 0125 00       		.byte	0
- 1234 0126 00       		.byte	0
- 1235 0127 17       		.uleb128 0x17
- 1236 0128 26       		.uleb128 0x26
- 1237 0129 00       		.byte	0
- 1238 012a 49       		.uleb128 0x49
- 1239 012b 13       		.uleb128 0x13
- 1240 012c 00       		.byte	0
- 1241 012d 00       		.byte	0
- 1242 012e 18       		.uleb128 0x18
- 1243 012f 2E       		.uleb128 0x2e
- 1244 0130 00       		.byte	0
- 1245 0131 3F       		.uleb128 0x3f
- 1246 0132 19       		.uleb128 0x19
- 1247 0133 3C       		.uleb128 0x3c
- 1248 0134 19       		.uleb128 0x19
- 1249 0135 6E       		.uleb128 0x6e
- 1250 0136 0E       		.uleb128 0xe
- 1251 0137 03       		.uleb128 0x3
- 1252 0138 0E       		.uleb128 0xe
- 1253 0139 3A       		.uleb128 0x3a
- 1254 013a 0B       		.uleb128 0xb
- 1255 013b 3B       		.uleb128 0x3b
- 1256 013c 05       		.uleb128 0x5
- 1257 013d 00       		.byte	0
- 1258 013e 00       		.byte	0
- 1259 013f 00       		.byte	0
- 1260              		.section	.debug_aranges,"",%progbits
- 1261 0000 1C000000 		.4byte	0x1c
- 1262 0004 0200     		.2byte	0x2
- 1263 0006 00000000 		.4byte	.Ldebug_info0
- 1264 000a 04       		.byte	0x4
- 1265 000b 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 26
+ 1203 009f 13       		.uleb128 0x13
+ 1204 00a0 38       		.uleb128 0x38
+ 1205 00a1 0B       		.uleb128 0xb
+ 1206 00a2 00       		.byte	0
+ 1207 00a3 00       		.byte	0
+ 1208 00a4 0F       		.uleb128 0xf
+ 1209 00a5 2E       		.uleb128 0x2e
+ 1210 00a6 00       		.byte	0
+ 1211 00a7 03       		.uleb128 0x3
+ 1212 00a8 0E       		.uleb128 0xe
+ 1213 00a9 3A       		.uleb128 0x3a
+ 1214 00aa 0B       		.uleb128 0xb
+ 1215 00ab 3B       		.uleb128 0x3b
+ 1216 00ac 0B       		.uleb128 0xb
+ 1217 00ad 27       		.uleb128 0x27
+ 1218 00ae 19       		.uleb128 0x19
+ 1219 00af 20       		.uleb128 0x20
+ 1220 00b0 0B       		.uleb128 0xb
+ 1221 00b1 00       		.byte	0
+ 1222 00b2 00       		.byte	0
+ 1223 00b3 10       		.uleb128 0x10
+ 1224 00b4 2E       		.uleb128 0x2e
+ 1225 00b5 01       		.byte	0x1
+ 1226 00b6 3F       		.uleb128 0x3f
+ 1227 00b7 19       		.uleb128 0x19
+ 1228 00b8 03       		.uleb128 0x3
+ 1229 00b9 0E       		.uleb128 0xe
+ 1230 00ba 3A       		.uleb128 0x3a
+ 1231 00bb 0B       		.uleb128 0xb
+ 1232 00bc 3B       		.uleb128 0x3b
+ 1233 00bd 0B       		.uleb128 0xb
+ 1234 00be 27       		.uleb128 0x27
+ 1235 00bf 19       		.uleb128 0x19
+ 1236 00c0 49       		.uleb128 0x49
+ 1237 00c1 13       		.uleb128 0x13
+ 1238 00c2 8701     		.uleb128 0x87
+ 1239 00c4 19       		.uleb128 0x19
+ 1240 00c5 11       		.uleb128 0x11
+ 1241 00c6 01       		.uleb128 0x1
+ 1242 00c7 12       		.uleb128 0x12
+ 1243 00c8 06       		.uleb128 0x6
+ 1244 00c9 40       		.uleb128 0x40
+ 1245 00ca 18       		.uleb128 0x18
+ 1246 00cb 9742     		.uleb128 0x2117
+ 1247 00cd 19       		.uleb128 0x19
+ 1248 00ce 01       		.uleb128 0x1
+ 1249 00cf 13       		.uleb128 0x13
+ 1250 00d0 00       		.byte	0
+ 1251 00d1 00       		.byte	0
+ 1252 00d2 11       		.uleb128 0x11
+ 1253 00d3 34       		.uleb128 0x34
+ 1254 00d4 00       		.byte	0
+ 1255 00d5 03       		.uleb128 0x3
+ 1256 00d6 0E       		.uleb128 0xe
+ 1257 00d7 3A       		.uleb128 0x3a
+ 1258 00d8 0B       		.uleb128 0xb
+ 1259 00d9 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 26
 
 
- 1266 000c 0000     		.2byte	0
- 1267 000e 0000     		.2byte	0
- 1268 0010 00000000 		.4byte	.LFB485
- 1269 0014 28000000 		.4byte	.LFE485-.LFB485
- 1270 0018 00000000 		.4byte	0
- 1271 001c 00000000 		.4byte	0
- 1272              		.section	.debug_ranges,"",%progbits
- 1273              	.Ldebug_ranges0:
- 1274 0000 00000000 		.4byte	.LFB485
- 1275 0004 28000000 		.4byte	.LFE485
- 1276 0008 00000000 		.4byte	0
- 1277 000c 00000000 		.4byte	0
- 1278              		.section	.debug_line,"",%progbits
- 1279              	.Ldebug_line0:
- 1280 0000 77020000 		.section	.debug_str,"MS",%progbits,1
- 1280      02005502 
- 1280      00000201 
- 1280      FB0E0D00 
- 1280      01010101 
- 1281              	.LASF56:
- 1282 0000 70726F74 		.ascii	"protBusMasterMask\000"
- 1282      4275734D 
- 1282      61737465 
- 1282      724D6173 
- 1282      6B00
- 1283              	.LASF120:
- 1284 0012 72784275 		.ascii	"rxBufSize\000"
- 1284      6653697A 
- 1284      6500
- 1285              	.LASF66:
- 1286 001c 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
- 1286      6843746C 
- 1286      4D61696E 
- 1286      57733346 
- 1286      72657100 
- 1287              	.LASF88:
- 1288 0030 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
- 1288      50727443 
- 1288      6667496E 
- 1288      4F666673 
- 1288      657400
- 1289              	.LASF131:
- 1290 0043 78546173 		.ascii	"xTaskCreate\000"
- 1290      6B437265 
- 1290      61746500 
- 1291              	.LASF106:
- 1292 004f 6970634C 		.ascii	"ipcLockStatusOffset\000"
- 1292      6F636B53 
- 1292      74617475 
- 1292      734F6666 
- 1292      73657400 
- 1293              	.LASF32:
- 1294 0063 63727970 		.ascii	"cryptoVersion\000"
- 1294      746F5665 
- 1294      7273696F 
- 1294      6E00
- 1295              	.LASF50:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 27
+ 1260 00da 0B       		.uleb128 0xb
+ 1261 00db 49       		.uleb128 0x49
+ 1262 00dc 13       		.uleb128 0x13
+ 1263 00dd 00       		.byte	0
+ 1264 00de 00       		.byte	0
+ 1265 00df 12       		.uleb128 0x12
+ 1266 00e0 34       		.uleb128 0x34
+ 1267 00e1 00       		.byte	0
+ 1268 00e2 03       		.uleb128 0x3
+ 1269 00e3 08       		.uleb128 0x8
+ 1270 00e4 3A       		.uleb128 0x3a
+ 1271 00e5 0B       		.uleb128 0xb
+ 1272 00e6 3B       		.uleb128 0x3b
+ 1273 00e7 0B       		.uleb128 0xb
+ 1274 00e8 49       		.uleb128 0x49
+ 1275 00e9 13       		.uleb128 0x13
+ 1276 00ea 00       		.byte	0
+ 1277 00eb 00       		.byte	0
+ 1278 00ec 13       		.uleb128 0x13
+ 1279 00ed 1D       		.uleb128 0x1d
+ 1280 00ee 00       		.byte	0
+ 1281 00ef 31       		.uleb128 0x31
+ 1282 00f0 13       		.uleb128 0x13
+ 1283 00f1 11       		.uleb128 0x11
+ 1284 00f2 01       		.uleb128 0x1
+ 1285 00f3 12       		.uleb128 0x12
+ 1286 00f4 06       		.uleb128 0x6
+ 1287 00f5 58       		.uleb128 0x58
+ 1288 00f6 0B       		.uleb128 0xb
+ 1289 00f7 59       		.uleb128 0x59
+ 1290 00f8 0B       		.uleb128 0xb
+ 1291 00f9 00       		.byte	0
+ 1292 00fa 00       		.byte	0
+ 1293 00fb 14       		.uleb128 0x14
+ 1294 00fc 898201   		.uleb128 0x4109
+ 1295 00ff 01       		.byte	0x1
+ 1296 0100 11       		.uleb128 0x11
+ 1297 0101 01       		.uleb128 0x1
+ 1298 0102 31       		.uleb128 0x31
+ 1299 0103 13       		.uleb128 0x13
+ 1300 0104 01       		.uleb128 0x1
+ 1301 0105 13       		.uleb128 0x13
+ 1302 0106 00       		.byte	0
+ 1303 0107 00       		.byte	0
+ 1304 0108 15       		.uleb128 0x15
+ 1305 0109 8A8201   		.uleb128 0x410a
+ 1306 010c 00       		.byte	0
+ 1307 010d 02       		.uleb128 0x2
+ 1308 010e 18       		.uleb128 0x18
+ 1309 010f 9142     		.uleb128 0x2111
+ 1310 0111 18       		.uleb128 0x18
+ 1311 0112 00       		.byte	0
+ 1312 0113 00       		.byte	0
+ 1313 0114 16       		.uleb128 0x16
+ 1314 0115 898201   		.uleb128 0x4109
+ 1315 0118 00       		.byte	0
+ 1316 0119 11       		.uleb128 0x11
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 27
 
 
- 1296 0071 70657269 		.ascii	"periClockNr\000"
- 1296      436C6F63 
- 1296      6B4E7200 
- 1297              	.LASF28:
- 1298 007d 70617373 		.ascii	"passBase\000"
- 1298      42617365 
- 1298      00
- 1299              	.LASF41:
- 1300 0086 63707573 		.ascii	"cpussIpcIrqNr\000"
- 1300      73497063 
- 1300      4972714E 
- 1300      7200
- 1301              	.LASF3:
- 1302 0094 5F5F7569 		.ascii	"__uint8_t\000"
- 1302      6E74385F 
- 1302      7400
- 1303              	.LASF85:
- 1304 009e 70657269 		.ascii	"periDiv24_5CtlOffset\000"
- 1304      44697632 
- 1304      345F3543 
- 1304      746C4F66 
- 1304      66736574 
- 1305              	.LASF92:
- 1306 00b3 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
- 1306      73436D34 
- 1306      436C6F63 
- 1306      6B43746C 
- 1306      4F666673 
- 1307              	.LASF21:
- 1308 00ca 63707573 		.ascii	"cpussBase\000"
- 1308      73426173 
- 1308      6500
- 1309              	.LASF70:
- 1310 00d4 64774368 		.ascii	"dwChCtlPrioPos\000"
- 1310      43746C50 
- 1310      72696F50 
- 1310      6F7300
- 1311              	.LASF12:
- 1312 00e3 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1312      206C6F6E 
- 1312      6720756E 
- 1312      7369676E 
- 1312      65642069 
- 1313              	.LASF74:
- 1314 00fa 70657269 		.ascii	"periTrCmdOffset\000"
- 1314      5472436D 
- 1314      644F6666 
- 1314      73657400 
- 1315              	.LASF115:
- 1316 010a 72785269 		.ascii	"rxRingBuf\000"
- 1316      6E674275 
- 1316      6600
- 1317              	.LASF98:
- 1318 0114 63707573 		.ascii	"cpussSysTickCtlOffset\000"
- 1318      73537973 
- 1318      5469636B 
- 1318      43746C4F 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 28
+ 1317 011a 01       		.uleb128 0x1
+ 1318 011b 31       		.uleb128 0x31
+ 1319 011c 13       		.uleb128 0x13
+ 1320 011d 00       		.byte	0
+ 1321 011e 00       		.byte	0
+ 1322 011f 17       		.uleb128 0x17
+ 1323 0120 26       		.uleb128 0x26
+ 1324 0121 00       		.byte	0
+ 1325 0122 49       		.uleb128 0x49
+ 1326 0123 13       		.uleb128 0x13
+ 1327 0124 00       		.byte	0
+ 1328 0125 00       		.byte	0
+ 1329 0126 18       		.uleb128 0x18
+ 1330 0127 34       		.uleb128 0x34
+ 1331 0128 00       		.byte	0
+ 1332 0129 03       		.uleb128 0x3
+ 1333 012a 0E       		.uleb128 0xe
+ 1334 012b 3A       		.uleb128 0x3a
+ 1335 012c 0B       		.uleb128 0xb
+ 1336 012d 3B       		.uleb128 0x3b
+ 1337 012e 05       		.uleb128 0x5
+ 1338 012f 49       		.uleb128 0x49
+ 1339 0130 13       		.uleb128 0x13
+ 1340 0131 3F       		.uleb128 0x3f
+ 1341 0132 19       		.uleb128 0x19
+ 1342 0133 3C       		.uleb128 0x3c
+ 1343 0134 19       		.uleb128 0x19
+ 1344 0135 00       		.byte	0
+ 1345 0136 00       		.byte	0
+ 1346 0137 19       		.uleb128 0x19
+ 1347 0138 34       		.uleb128 0x34
+ 1348 0139 00       		.byte	0
+ 1349 013a 03       		.uleb128 0x3
+ 1350 013b 0E       		.uleb128 0xe
+ 1351 013c 3A       		.uleb128 0x3a
+ 1352 013d 0B       		.uleb128 0xb
+ 1353 013e 3B       		.uleb128 0x3b
+ 1354 013f 0B       		.uleb128 0xb
+ 1355 0140 49       		.uleb128 0x49
+ 1356 0141 13       		.uleb128 0x13
+ 1357 0142 3F       		.uleb128 0x3f
+ 1358 0143 19       		.uleb128 0x19
+ 1359 0144 3C       		.uleb128 0x3c
+ 1360 0145 19       		.uleb128 0x19
+ 1361 0146 00       		.byte	0
+ 1362 0147 00       		.byte	0
+ 1363 0148 1A       		.uleb128 0x1a
+ 1364 0149 2E       		.uleb128 0x2e
+ 1365 014a 00       		.byte	0
+ 1366 014b 3F       		.uleb128 0x3f
+ 1367 014c 19       		.uleb128 0x19
+ 1368 014d 3C       		.uleb128 0x3c
+ 1369 014e 19       		.uleb128 0x19
+ 1370 014f 6E       		.uleb128 0x6e
+ 1371 0150 0E       		.uleb128 0xe
+ 1372 0151 03       		.uleb128 0x3
+ 1373 0152 0E       		.uleb128 0xe
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 28
 
 
- 1318      66667365 
- 1319              	.LASF128:
- 1320 012a 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1320      52784275 
- 1320      66666572 
- 1320      00
- 1321              	.LASF59:
- 1322 0137 666C6173 		.ascii	"flashPipeRequired\000"
- 1322      68506970 
- 1322      65526571 
- 1322      75697265 
- 1322      6400
- 1323              	.LASF63:
- 1324 0149 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
- 1324      6843746C 
- 1324      4D61696E 
- 1324      57733046 
- 1324      72657100 
- 1325              	.LASF15:
- 1326 015d 696E7431 		.ascii	"int16_t\000"
- 1326      365F7400 
- 1327              	.LASF11:
- 1328 0165 6C6F6E67 		.ascii	"long long int\000"
- 1328      206C6F6E 
- 1328      6720696E 
- 1328      7400
- 1329              	.LASF1:
- 1330 0173 7369676E 		.ascii	"signed char\000"
- 1330      65642063 
- 1330      68617200 
- 1331              	.LASF79:
- 1332 017f 70657269 		.ascii	"periDivCmdTypeSelPos\000"
- 1332      44697643 
- 1332      6D645479 
- 1332      70655365 
- 1332      6C506F73 
- 1333              	.LASF25:
- 1334 0194 70726F74 		.ascii	"protBase\000"
- 1334      42617365 
- 1334      00
- 1335              	.LASF37:
- 1336 019d 69706356 		.ascii	"ipcVersion\000"
- 1336      65727369 
- 1336      6F6E00
- 1337              	.LASF99:
- 1338 01a8 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
- 1338      73436D30 
- 1338      4E6D6943 
- 1338      746C4F66 
- 1338      66736574 
- 1339              	.LASF47:
- 1340 01bd 73727373 		.ascii	"srssNumClkpath\000"
- 1340      4E756D43 
- 1340      6C6B7061 
- 1340      746800
- 1341              	.LASF26:
- 1342 01cc 6873696F 		.ascii	"hsiomBase\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 29
+ 1374 0153 3A       		.uleb128 0x3a
+ 1375 0154 0B       		.uleb128 0xb
+ 1376 0155 3B       		.uleb128 0x3b
+ 1377 0156 05       		.uleb128 0x5
+ 1378 0157 00       		.byte	0
+ 1379 0158 00       		.byte	0
+ 1380 0159 1B       		.uleb128 0x1b
+ 1381 015a 2E       		.uleb128 0x2e
+ 1382 015b 00       		.byte	0
+ 1383 015c 3F       		.uleb128 0x3f
+ 1384 015d 19       		.uleb128 0x19
+ 1385 015e 3C       		.uleb128 0x3c
+ 1386 015f 19       		.uleb128 0x19
+ 1387 0160 6E       		.uleb128 0x6e
+ 1388 0161 0E       		.uleb128 0xe
+ 1389 0162 03       		.uleb128 0x3
+ 1390 0163 0E       		.uleb128 0xe
+ 1391 0164 3A       		.uleb128 0x3a
+ 1392 0165 0B       		.uleb128 0xb
+ 1393 0166 3B       		.uleb128 0x3b
+ 1394 0167 0B       		.uleb128 0xb
+ 1395 0168 00       		.byte	0
+ 1396 0169 00       		.byte	0
+ 1397 016a 00       		.byte	0
+ 1398              		.section	.debug_aranges,"",%progbits
+ 1399 0000 1C000000 		.4byte	0x1c
+ 1400 0004 0200     		.2byte	0x2
+ 1401 0006 00000000 		.4byte	.Ldebug_info0
+ 1402 000a 04       		.byte	0x4
+ 1403 000b 00       		.byte	0
+ 1404 000c 0000     		.2byte	0
+ 1405 000e 0000     		.2byte	0
+ 1406 0010 00000000 		.4byte	.LFB485
+ 1407 0014 38000000 		.4byte	.LFE485-.LFB485
+ 1408 0018 00000000 		.4byte	0
+ 1409 001c 00000000 		.4byte	0
+ 1410              		.section	.debug_ranges,"",%progbits
+ 1411              	.Ldebug_ranges0:
+ 1412 0000 00000000 		.4byte	.LFB485
+ 1413 0004 38000000 		.4byte	.LFE485
+ 1414 0008 00000000 		.4byte	0
+ 1415 000c 00000000 		.4byte	0
+ 1416              		.section	.debug_line,"",%progbits
+ 1417              	.Ldebug_line0:
+ 1418 0000 13030000 		.section	.debug_str,"MS",%progbits,1
+ 1418      0200ED02 
+ 1418      00000201 
+ 1418      FB0E0D00 
+ 1418      01010101 
+ 1419              	.LASF57:
+ 1420 0000 70726F74 		.ascii	"protBusMasterMask\000"
+ 1420      4275734D 
+ 1420      61737465 
+ 1420      724D6173 
+ 1420      6B00
+ 1421              	.LASF121:
+ 1422 0012 72784275 		.ascii	"rxBufSize\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 29
 
 
- 1342      6D426173 
- 1342      6500
- 1343              	.LASF8:
- 1344 01d6 6C6F6E67 		.ascii	"long int\000"
- 1344      20696E74 
- 1344      00
- 1345              	.LASF57:
- 1346 01df 63727970 		.ascii	"cryptoMemSize\000"
- 1346      746F4D65 
- 1346      6D53697A 
- 1346      6500
- 1347              	.LASF23:
- 1348 01ed 70657269 		.ascii	"periBase\000"
- 1348      42617365 
- 1348      00
- 1349              	.LASF55:
- 1350 01f6 73797350 		.ascii	"sysPmSimoPresent\000"
- 1350      6D53696D 
- 1350      6F507265 
- 1350      73656E74 
- 1350      00
- 1351              	.LASF45:
- 1352 0207 63707573 		.ascii	"cpussFmIrq\000"
- 1352      73466D49 
- 1352      727100
- 1353              	.LASF110:
- 1354 0212 646F7562 		.ascii	"double\000"
- 1354      6C6500
- 1355              	.LASF84:
- 1356 0219 70657269 		.ascii	"periDiv16_5CtlOffset\000"
- 1356      44697631 
- 1356      365F3543 
- 1356      746C4F66 
- 1356      66736574 
- 1357              	.LASF48:
- 1358 022e 73727373 		.ascii	"srssNumPll\000"
- 1358      4E756D50 
- 1358      6C6C00
- 1359              	.LASF138:
- 1360 0239 6D61696E 		.ascii	"main\000"
- 1360      00
- 1361              	.LASF82:
- 1362 023e 70657269 		.ascii	"periDiv8CtlOffset\000"
- 1362      44697638 
- 1362      43746C4F 
- 1362      66667365 
- 1362      7400
- 1363              	.LASF89:
- 1364 0250 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
- 1364      50727443 
- 1364      66674F75 
- 1364      744F6666 
- 1364      73657400 
- 1365              	.LASF22:
- 1366 0264 666C6173 		.ascii	"flashcBase\000"
- 1366      68634261 
- 1366      736500
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 30
-
-
- 1367              	.LASF9:
- 1368 026f 5F5F7569 		.ascii	"__uint32_t\000"
- 1368      6E743332 
- 1368      5F7400
- 1369              	.LASF52:
- 1370 027a 70617373 		.ascii	"passSarChannels\000"
- 1370      53617243 
- 1370      68616E6E 
- 1370      656C7300 
- 1371              	.LASF132:
- 1372 028a 76546173 		.ascii	"vTaskStartScheduler\000"
- 1372      6B537461 
- 1372      72745363 
- 1372      68656475 
- 1372      6C657200 
- 1373              	.LASF4:
- 1374 029e 5F5F696E 		.ascii	"__int16_t\000"
- 1374      7431365F 
- 1374      7400
- 1375              	.LASF121:
- 1376 02a8 72784275 		.ascii	"rxBufIdx\000"
- 1376      66496478 
- 1376      00
- 1377              	.LASF95:
- 1378 02b1 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
- 1378      73436D34 
- 1378      50777243 
- 1378      746C4F66 
- 1378      66736574 
- 1379              	.LASF123:
- 1380 02c6 74784275 		.ascii	"txBufSize\000"
- 1380      6653697A 
- 1380      6500
- 1381              	.LASF90:
- 1382 02d0 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
- 1382      50727443 
- 1382      66675369 
- 1382      6F4F6666 
- 1382      73657400 
- 1383              	.LASF42:
- 1384 02e4 63707573 		.ascii	"cpussDwChNr\000"
- 1384      73447743 
- 1384      684E7200 
- 1385              	.LASF13:
- 1386 02f0 756E7369 		.ascii	"unsigned int\000"
- 1386      676E6564 
- 1386      20696E74 
- 1386      00
- 1387              	.LASF16:
- 1388 02fd 75696E74 		.ascii	"uint16_t\000"
- 1388      31365F74 
- 1388      00
- 1389              	.LASF75:
- 1390 0306 70657269 		.ascii	"periTrCmdGrSelMsk\000"
- 1390      5472436D 
- 1390      64477253 
- 1390      656C4D73 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 31
-
-
- 1390      6B00
- 1391              	.LASF64:
- 1392 0318 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
- 1392      6843746C 
- 1392      4D61696E 
- 1392      57733146 
- 1392      72657100 
- 1393              	.LASF10:
- 1394 032c 6C6F6E67 		.ascii	"long unsigned int\000"
- 1394      20756E73 
- 1394      69676E65 
- 1394      6420696E 
- 1394      7400
- 1395              	.LASF112:
- 1396 033e 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
- 1396      625F7363 
- 1396      625F7561 
- 1396      72745F68 
- 1396      616E646C 
- 1397              	.LASF130:
- 1398 035d 55415254 		.ascii	"UART_context\000"
- 1398      5F636F6E 
- 1398      74657874 
- 1398      00
- 1399              	.LASF40:
- 1400 036a 63707573 		.ascii	"cpussIpcNr\000"
- 1400      73497063 
- 1400      4E7200
- 1401              	.LASF27:
- 1402 0375 6770696F 		.ascii	"gpioBase\000"
- 1402      42617365 
- 1402      00
- 1403              	.LASF65:
- 1404 037e 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
- 1404      6843746C 
- 1404      4D61696E 
- 1404      57733246 
- 1404      72657100 
- 1405              	.LASF76:
- 1406 0392 70657269 		.ascii	"periTrGrOffset\000"
- 1406      54724772 
- 1406      4F666673 
- 1406      657400
- 1407              	.LASF103:
- 1408 03a1 63707573 		.ascii	"cpussRam1Ctl0\000"
- 1408      7352616D 
- 1408      3143746C 
- 1408      3000
- 1409              	.LASF125:
- 1410 03af 63624576 		.ascii	"cbEvents\000"
- 1410      656E7473 
- 1410      00
- 1411              	.LASF77:
- 1412 03b8 70657269 		.ascii	"periTrGrSize\000"
- 1412      54724772 
- 1412      53697A65 
- 1412      00
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 32
-
-
- 1413              	.LASF35:
- 1414 03c5 6770696F 		.ascii	"gpioVersion\000"
- 1414      56657273 
- 1414      696F6E00 
- 1415              	.LASF122:
- 1416 03d1 74784275 		.ascii	"txBuf\000"
- 1416      6600
- 1417              	.LASF107:
- 1418 03d7 63795F73 		.ascii	"cy_stc_device_t\000"
- 1418      74635F64 
- 1418      65766963 
- 1418      655F7400 
- 1419              	.LASF53:
- 1420 03e7 65704D6F 		.ascii	"epMonitorNr\000"
- 1420      6E69746F 
- 1420      724E7200 
- 1421              	.LASF117:
- 1422 03f3 72785269 		.ascii	"rxRingBufHead\000"
- 1422      6E674275 
- 1422      66486561 
- 1422      6400
- 1423              	.LASF96:
- 1424 0401 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
- 1424      73547269 
- 1424      6D52616D 
- 1424      43746C4F 
- 1424      66667365 
- 1425              	.LASF91:
- 1426 0417 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
- 1426      73436D30 
- 1426      436C6F63 
- 1426      6B43746C 
+ 1422      6653697A 
+ 1422      6500
+ 1423              	.LASF67:
+ 1424 001c 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 1424      6843746C 
+ 1424      4D61696E 
+ 1424      57733346 
+ 1424      72657100 
+ 1425              	.LASF89:
+ 1426 0030 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 1426      50727443 
+ 1426      6667496E 
  1426      4F666673 
- 1427              	.LASF31:
- 1428 042e 63707573 		.ascii	"cpussVersion\000"
- 1428      73566572 
- 1428      73696F6E 
- 1428      00
- 1429              	.LASF38:
- 1430 043b 70657269 		.ascii	"periVersion\000"
- 1430      56657273 
- 1430      696F6E00 
- 1431              	.LASF94:
- 1432 0447 63707573 		.ascii	"cpussCm0StatusOffset\000"
- 1432      73436D30 
- 1432      53746174 
- 1432      75734F66 
- 1432      66736574 
- 1433              	.LASF135:
- 1434 045c 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
- 1434      73657273 
- 1434      5C626F67 
- 1434      75725C44 
- 1434      6F63756D 
- 1435 0488 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\SABER\\Saber\\Saber"
- 1435      7269746D 
- 1435      6F732070 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 33
+ 1426      657400
+ 1427              	.LASF136:
+ 1428 0043 78546173 		.ascii	"xTaskCreate\000"
+ 1428      6B437265 
+ 1428      61746500 
+ 1429              	.LASF20:
+ 1430 004f 73697A65 		.ascii	"size_t\000"
+ 1430      5F7400
+ 1431              	.LASF33:
+ 1432 0056 63727970 		.ascii	"cryptoVersion\000"
+ 1432      746F5665 
+ 1432      7273696F 
+ 1432      6E00
+ 1433              	.LASF51:
+ 1434 0064 70657269 		.ascii	"periClockNr\000"
+ 1434      436C6F63 
+ 1434      6B4E7200 
+ 1435              	.LASF29:
+ 1436 0070 70617373 		.ascii	"passBase\000"
+ 1436      42617365 
+ 1436      00
+ 1437              	.LASF42:
+ 1438 0079 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 1438      73497063 
+ 1438      4972714E 
+ 1438      7200
+ 1439              	.LASF3:
+ 1440 0087 5F5F7569 		.ascii	"__uint8_t\000"
+ 1440      6E74385F 
+ 1440      7400
+ 1441              	.LASF86:
+ 1442 0091 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 1442      44697632 
+ 1442      345F3543 
+ 1442      746C4F66 
+ 1442      66736574 
+ 1443              	.LASF129:
+ 1444 00a6 42595445 		.ascii	"BYTES_SK\000"
+ 1444      535F534B 
+ 1444      00
+ 1445              	.LASF131:
+ 1446 00af 42595445 		.ascii	"BYTES_CT\000"
+ 1446      535F4354 
+ 1446      00
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 30
 
 
- 1435      6F737463 
- 1435      75616E74 
- 1436 04b7 2E637964 		.ascii	".cydsn\000"
- 1436      736E00
- 1437              	.LASF19:
- 1438 04be 73697A65 		.ascii	"sizetype\000"
- 1438      74797065 
- 1438      00
- 1439              	.LASF68:
- 1440 04c7 64774368 		.ascii	"dwChOffset\000"
- 1440      4F666673 
- 1440      657400
- 1441              	.LASF43:
- 1442 04d2 63707573 		.ascii	"cpussFlashPaSize\000"
- 1442      73466C61 
- 1442      73685061 
- 1442      53697A65 
- 1442      00
- 1443              	.LASF81:
- 1444 04e3 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
- 1444      44697643 
- 1444      6D645061 
- 1444      54797065 
- 1444      53656C50 
- 1445              	.LASF104:
- 1446 04fa 63707573 		.ascii	"cpussRam2Ctl0\000"
- 1446      7352616D 
- 1446      3243746C 
- 1446      3000
- 1447              	.LASF72:
- 1448 0508 64775374 		.ascii	"dwStatusChIdxPos\000"
- 1448      61747573 
- 1448      43684964 
- 1448      78506F73 
- 1448      00
- 1449              	.LASF54:
- 1450 0519 75646250 		.ascii	"udbPresent\000"
- 1450      72657365 
- 1450      6E7400
- 1451              	.LASF114:
- 1452 0524 72785374 		.ascii	"rxStatus\000"
- 1452      61747573 
- 1452      00
- 1453              	.LASF34:
- 1454 052d 666C6173 		.ascii	"flashcVersion\000"
- 1454      68635665 
- 1454      7273696F 
- 1454      6E00
- 1455              	.LASF30:
- 1456 053b 63727970 		.ascii	"cryptoBase\000"
- 1456      746F4261 
- 1456      736500
- 1457              	.LASF51:
- 1458 0546 736D6966 		.ascii	"smifDeviceNr\000"
- 1458      44657669 
- 1458      63654E72 
- 1458      00
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 34
-
-
- 1459              	.LASF137:
- 1460 0553 5F5F656E 		.ascii	"__enable_irq\000"
- 1460      61626C65 
- 1460      5F697271 
+ 1447              	.LASF22:
+ 1448 00b8 63707573 		.ascii	"cpussBase\000"
+ 1448      73426173 
+ 1448      6500
+ 1449              	.LASF71:
+ 1450 00c2 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 1450      43746C50 
+ 1450      72696F50 
+ 1450      6F7300
+ 1451              	.LASF12:
+ 1452 00d1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1452      206C6F6E 
+ 1452      6720756E 
+ 1452      7369676E 
+ 1452      65642069 
+ 1453              	.LASF75:
+ 1454 00e8 70657269 		.ascii	"periTrCmdOffset\000"
+ 1454      5472436D 
+ 1454      644F6666 
+ 1454      73657400 
+ 1455              	.LASF116:
+ 1456 00f8 72785269 		.ascii	"rxRingBuf\000"
+ 1456      6E674275 
+ 1456      6600
+ 1457              	.LASF99:
+ 1458 0102 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 1458      73537973 
+ 1458      5469636B 
+ 1458      43746C4F 
+ 1458      66667365 
+ 1459              	.LASF133:
+ 1460 0118 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1460      52784275 
+ 1460      66666572 
  1460      00
- 1461              	.LASF133:
- 1462 0560 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1462      43313120 
- 1462      352E342E 
- 1462      31203230 
- 1462      31363036 
- 1463 0593 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
- 1463      20726576 
- 1463      6973696F 
- 1463      6E203233 
- 1463      37373135 
- 1464 05c6 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
- 1464      70202D6D 
- 1464      6670753D 
- 1464      66707634 
- 1464      2D73702D 
- 1465 05f9 65637469 		.ascii	"ections -ffat-lto-objects\000"
- 1465      6F6E7320 
- 1465      2D666661 
- 1465      742D6C74 
- 1465      6F2D6F62 
- 1466              	.LASF109:
- 1467 0613 666C6F61 		.ascii	"float\000"
- 1467      7400
- 1468              	.LASF73:
- 1469 0619 64775374 		.ascii	"dwStatusChIdxMsk\000"
- 1469      61747573 
- 1469      43684964 
- 1469      784D736B 
- 1469      00
- 1470              	.LASF129:
- 1471 062a 63795F64 		.ascii	"cy_device\000"
- 1471      65766963 
- 1471      6500
- 1472              	.LASF101:
- 1473 0634 63707573 		.ascii	"cpussRomCtl\000"
- 1473      73526F6D 
- 1473      43746C00 
- 1474              	.LASF71:
- 1475 0640 64774368 		.ascii	"dwChCtlPreemptablePos\000"
- 1475      43746C50 
- 1475      7265656D 
- 1475      70746162 
- 1475      6C65506F 
- 1476              	.LASF124:
- 1477 0656 74784C65 		.ascii	"txLeftToTransmit\000"
- 1477      6674546F 
- 1477      5472616E 
- 1477      736D6974 
- 1477      00
- 1478              	.LASF24:
- 1479 0667 75646242 		.ascii	"udbBase\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 35
+ 1461              	.LASF60:
+ 1462 0125 666C6173 		.ascii	"flashPipeRequired\000"
+ 1462      68506970 
+ 1462      65526571 
+ 1462      75697265 
+ 1462      6400
+ 1463              	.LASF64:
+ 1464 0137 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 1464      6843746C 
+ 1464      4D61696E 
+ 1464      57733046 
+ 1464      72657100 
+ 1465              	.LASF15:
+ 1466 014b 696E7431 		.ascii	"int16_t\000"
+ 1466      365F7400 
+ 1467              	.LASF11:
+ 1468 0153 6C6F6E67 		.ascii	"long long int\000"
+ 1468      206C6F6E 
+ 1468      6720696E 
+ 1468      7400
+ 1469              	.LASF1:
+ 1470 0161 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 31
 
 
- 1479      61736500 
- 1480              	.LASF111:
- 1481 066f 5F426F6F 		.ascii	"_Bool\000"
- 1481      6C00
- 1482              	.LASF17:
- 1483 0675 696E7433 		.ascii	"int32_t\000"
- 1483      325F7400 
- 1484              	.LASF2:
- 1485 067d 756E7369 		.ascii	"unsigned char\000"
- 1485      676E6564 
- 1485      20636861 
- 1485      7200
- 1486              	.LASF67:
- 1487 068b 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
- 1487      6843746C 
- 1487      4D61696E 
- 1487      57733446 
- 1487      72657100 
- 1488              	.LASF0:
- 1489 069f 73686F72 		.ascii	"short int\000"
- 1489      7420696E 
- 1489      7400
- 1490              	.LASF78:
- 1491 06a9 70657269 		.ascii	"periDivCmdDivSelMsk\000"
- 1491      44697643 
- 1491      6D644469 
- 1491      7653656C 
- 1491      4D736B00 
- 1492              	.LASF49:
- 1493 06bd 73727373 		.ascii	"srssNumHfroot\000"
- 1493      4E756D48 
- 1493      66726F6F 
- 1493      7400
- 1494              	.LASF62:
- 1495 06cb 666C6173 		.ascii	"flashEraseDelay\000"
- 1495      68457261 
- 1495      73654465 
- 1495      6C617900 
- 1496              	.LASF18:
- 1497 06db 75696E74 		.ascii	"uint32_t\000"
- 1497      33325F74 
- 1497      00
- 1498              	.LASF100:
- 1499 06e4 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
- 1499      73436D34 
- 1499      4E6D6943 
- 1499      746C4F66 
- 1499      66736574 
- 1500              	.LASF20:
- 1501 06f9 6C6F6E67 		.ascii	"long double\000"
- 1501      20646F75 
- 1501      626C6500 
- 1502              	.LASF108:
- 1503 0705 63686172 		.ascii	"char\000"
- 1503      00
- 1504              	.LASF39:
- 1505 070a 70726F74 		.ascii	"protVersion\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 36
+ 1470      65642063 
+ 1470      68617200 
+ 1471              	.LASF80:
+ 1472 016d 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 1472      44697643 
+ 1472      6D645479 
+ 1472      70655365 
+ 1472      6C506F73 
+ 1473              	.LASF26:
+ 1474 0182 70726F74 		.ascii	"protBase\000"
+ 1474      42617365 
+ 1474      00
+ 1475              	.LASF38:
+ 1476 018b 69706356 		.ascii	"ipcVersion\000"
+ 1476      65727369 
+ 1476      6F6E00
+ 1477              	.LASF100:
+ 1478 0196 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 1478      73436D30 
+ 1478      4E6D6943 
+ 1478      746C4F66 
+ 1478      66736574 
+ 1479              	.LASF48:
+ 1480 01ab 73727373 		.ascii	"srssNumClkpath\000"
+ 1480      4E756D43 
+ 1480      6C6B7061 
+ 1480      746800
+ 1481              	.LASF27:
+ 1482 01ba 6873696F 		.ascii	"hsiomBase\000"
+ 1482      6D426173 
+ 1482      6500
+ 1483              	.LASF8:
+ 1484 01c4 6C6F6E67 		.ascii	"long int\000"
+ 1484      20696E74 
+ 1484      00
+ 1485              	.LASF93:
+ 1486 01cd 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 1486      73436D34 
+ 1486      436C6F63 
+ 1486      6B43746C 
+ 1486      4F666673 
+ 1487              	.LASF58:
+ 1488 01e4 63727970 		.ascii	"cryptoMemSize\000"
+ 1488      746F4D65 
+ 1488      6D53697A 
+ 1488      6500
+ 1489              	.LASF24:
+ 1490 01f2 70657269 		.ascii	"periBase\000"
+ 1490      42617365 
+ 1490      00
+ 1491              	.LASF56:
+ 1492 01fb 73797350 		.ascii	"sysPmSimoPresent\000"
+ 1492      6D53696D 
+ 1492      6F507265 
+ 1492      73656E74 
+ 1492      00
+ 1493              	.LASF132:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 32
 
 
- 1505      56657273 
- 1505      696F6E00 
- 1506              	.LASF102:
- 1507 0716 63707573 		.ascii	"cpussRam0Ctl0\000"
- 1507      7352616D 
- 1507      3043746C 
- 1507      3000
- 1508              	.LASF5:
- 1509 0724 5F5F7569 		.ascii	"__uint16_t\000"
- 1509      6E743136 
- 1509      5F7400
- 1510              	.LASF83:
- 1511 072f 70657269 		.ascii	"periDiv16CtlOffset\000"
- 1511      44697631 
- 1511      3643746C 
- 1511      4F666673 
- 1511      657400
- 1512              	.LASF7:
- 1513 0742 5F5F696E 		.ascii	"__int32_t\000"
- 1513      7433325F 
- 1513      7400
- 1514              	.LASF36:
- 1515 074c 6873696F 		.ascii	"hsiomVersion\000"
- 1515      6D566572 
- 1515      73696F6E 
- 1515      00
- 1516              	.LASF61:
- 1517 0759 666C6173 		.ascii	"flashProgramDelay\000"
- 1517      6850726F 
- 1517      6772616D 
- 1517      44656C61 
- 1517      7900
- 1518              	.LASF116:
- 1519 076b 72785269 		.ascii	"rxRingBufSize\000"
- 1519      6E674275 
- 1519      6653697A 
- 1519      6500
- 1520              	.LASF6:
- 1521 0779 73686F72 		.ascii	"short unsigned int\000"
- 1521      7420756E 
- 1521      7369676E 
- 1521      65642069 
- 1521      6E7400
- 1522              	.LASF69:
- 1523 078c 64774368 		.ascii	"dwChSize\000"
- 1523      53697A65 
- 1523      00
- 1524              	.LASF105:
- 1525 0795 69706353 		.ascii	"ipcStructSize\000"
- 1525      74727563 
- 1525      7453697A 
- 1525      6500
- 1526              	.LASF44:
- 1527 07a3 63707573 		.ascii	"cpussIpc0Irq\000"
- 1527      73497063 
- 1527      30497271 
- 1527      00
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 37
+ 1494 020c 42595445 		.ascii	"BYTES_SS\000"
+ 1494      535F5353 
+ 1494      00
+ 1495              	.LASF111:
+ 1496 0215 646F7562 		.ascii	"double\000"
+ 1496      6C6500
+ 1497              	.LASF85:
+ 1498 021c 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 1498      44697631 
+ 1498      365F3543 
+ 1498      746C4F66 
+ 1498      66736574 
+ 1499              	.LASF49:
+ 1500 0231 73727373 		.ascii	"srssNumPll\000"
+ 1500      4E756D50 
+ 1500      6C6C00
+ 1501              	.LASF147:
+ 1502 023c 6D61696E 		.ascii	"main\000"
+ 1502      00
+ 1503              	.LASF138:
+ 1504 0241 73616265 		.ascii	"saber_get_secret_key_size\000"
+ 1504      725F6765 
+ 1504      745F7365 
+ 1504      63726574 
+ 1504      5F6B6579 
+ 1505              	.LASF83:
+ 1506 025b 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 1506      44697638 
+ 1506      43746C4F 
+ 1506      66667365 
+ 1506      7400
+ 1507              	.LASF90:
+ 1508 026d 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 1508      50727443 
+ 1508      66674F75 
+ 1508      744F6666 
+ 1508      73657400 
+ 1509              	.LASF23:
+ 1510 0281 666C6173 		.ascii	"flashcBase\000"
+ 1510      68634261 
+ 1510      736500
+ 1511              	.LASF9:
+ 1512 028c 5F5F7569 		.ascii	"__uint32_t\000"
+ 1512      6E743332 
+ 1512      5F7400
+ 1513              	.LASF53:
+ 1514 0297 70617373 		.ascii	"passSarChannels\000"
+ 1514      53617243 
+ 1514      68616E6E 
+ 1514      656C7300 
+ 1515              	.LASF137:
+ 1516 02a7 76546173 		.ascii	"vTaskStartScheduler\000"
+ 1516      6B537461 
+ 1516      72745363 
+ 1516      68656475 
+ 1516      6C657200 
+ 1517              	.LASF4:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 33
 
 
- 1528              	.LASF87:
- 1529 07b0 6770696F 		.ascii	"gpioPrtCfgOffset\000"
- 1529      50727443 
- 1529      66674F66 
- 1529      66736574 
- 1529      00
- 1530              	.LASF126:
- 1531 07c1 696E6974 		.ascii	"initKey\000"
- 1531      4B657900 
- 1532              	.LASF119:
- 1533 07c9 72784275 		.ascii	"rxBuf\000"
- 1533      6600
- 1534              	.LASF127:
- 1535 07cf 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
- 1535      74635F73 
- 1535      63625F75 
- 1535      6172745F 
- 1535      636F6E74 
- 1536              	.LASF46:
- 1537 07e9 63707573 		.ascii	"cpussNotConnectedIrq\000"
- 1537      734E6F74 
- 1537      436F6E6E 
- 1537      65637465 
- 1537      64497271 
- 1538              	.LASF60:
- 1539 07fe 666C6173 		.ascii	"flashWriteDelay\000"
- 1539      68577269 
- 1539      74654465 
- 1539      6C617900 
- 1540              	.LASF14:
- 1541 080e 75696E74 		.ascii	"uint8_t\000"
- 1541      385F7400 
- 1542              	.LASF93:
- 1543 0816 63707573 		.ascii	"cpussCm4StatusOffset\000"
- 1543      73436D34 
- 1543      53746174 
- 1543      75734F66 
- 1543      66736574 
- 1544              	.LASF86:
- 1545 082b 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
- 1545      50727449 
- 1545      6E747243 
- 1545      66674F66 
- 1545      66736574 
- 1546              	.LASF118:
- 1547 0840 72785269 		.ascii	"rxRingBufTail\000"
- 1547      6E674275 
- 1547      66546169 
- 1547      6C00
- 1548              	.LASF97:
- 1549 084e 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
- 1549      73547269 
- 1549      6D526F6D 
- 1549      43746C4F 
- 1549      66667365 
- 1550              	.LASF113:
- 1551 0864 74785374 		.ascii	"txStatus\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccldzhsq.s 			page 38
+ 1518 02bb 5F5F696E 		.ascii	"__int16_t\000"
+ 1518      7431365F 
+ 1518      7400
+ 1519              	.LASF122:
+ 1520 02c5 72784275 		.ascii	"rxBufIdx\000"
+ 1520      66496478 
+ 1520      00
+ 1521              	.LASF96:
+ 1522 02ce 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 1522      73436D34 
+ 1522      50777243 
+ 1522      746C4F66 
+ 1522      66736574 
+ 1523              	.LASF124:
+ 1524 02e3 74784275 		.ascii	"txBufSize\000"
+ 1524      6653697A 
+ 1524      6500
+ 1525              	.LASF91:
+ 1526 02ed 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 1526      50727443 
+ 1526      66675369 
+ 1526      6F4F6666 
+ 1526      73657400 
+ 1527              	.LASF43:
+ 1528 0301 63707573 		.ascii	"cpussDwChNr\000"
+ 1528      73447743 
+ 1528      684E7200 
+ 1529              	.LASF13:
+ 1530 030d 756E7369 		.ascii	"unsigned int\000"
+ 1530      676E6564 
+ 1530      20696E74 
+ 1530      00
+ 1531              	.LASF16:
+ 1532 031a 75696E74 		.ascii	"uint16_t\000"
+ 1532      31365F74 
+ 1532      00
+ 1533              	.LASF76:
+ 1534 0323 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 1534      5472436D 
+ 1534      64477253 
+ 1534      656C4D73 
+ 1534      6B00
+ 1535              	.LASF65:
+ 1536 0335 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 1536      6843746C 
+ 1536      4D61696E 
+ 1536      57733146 
+ 1536      72657100 
+ 1537              	.LASF10:
+ 1538 0349 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1538      20756E73 
+ 1538      69676E65 
+ 1538      6420696E 
+ 1538      7400
+ 1539              	.LASF113:
+ 1540 035b 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
+ 1540      625F7363 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 34
 
 
- 1551      61747573 
- 1551      00
- 1552              	.LASF33:
- 1553 086d 64775665 		.ascii	"dwVersion\000"
- 1553      7273696F 
- 1553      6E00
- 1554              	.LASF29:
- 1555 0877 69706342 		.ascii	"ipcBase\000"
- 1555      61736500 
- 1556              	.LASF80:
- 1557 087f 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
- 1557      44697643 
- 1557      6D645061 
- 1557      44697653 
- 1557      656C506F 
- 1558              	.LASF136:
- 1559 0895 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
- 1559      74635F73 
- 1559      63625F75 
- 1559      6172745F 
- 1559      636F6E74 
- 1560              	.LASF134:
- 1561 08ad 6D61696E 		.ascii	"main_cm4.c\000"
- 1561      5F636D34 
- 1561      2E6300
- 1562              	.LASF58:
- 1563 08b8 666C6173 		.ascii	"flashRwwRequired\000"
- 1563      68527777 
- 1563      52657175 
- 1563      69726564 
- 1563      00
- 1564              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1540      625F7561 
+ 1540      72745F68 
+ 1540      616E646C 
+ 1541              	.LASF135:
+ 1542 037a 55415254 		.ascii	"UART_context\000"
+ 1542      5F636F6E 
+ 1542      74657874 
+ 1542      00
+ 1543              	.LASF41:
+ 1544 0387 63707573 		.ascii	"cpussIpcNr\000"
+ 1544      73497063 
+ 1544      4E7200
+ 1545              	.LASF28:
+ 1546 0392 6770696F 		.ascii	"gpioBase\000"
+ 1546      42617365 
+ 1546      00
+ 1547              	.LASF66:
+ 1548 039b 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 1548      6843746C 
+ 1548      4D61696E 
+ 1548      57733246 
+ 1548      72657100 
+ 1549              	.LASF77:
+ 1550 03af 70657269 		.ascii	"periTrGrOffset\000"
+ 1550      54724772 
+ 1550      4F666673 
+ 1550      657400
+ 1551              	.LASF104:
+ 1552 03be 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 1552      7352616D 
+ 1552      3143746C 
+ 1552      3000
+ 1553              	.LASF126:
+ 1554 03cc 63624576 		.ascii	"cbEvents\000"
+ 1554      656E7473 
+ 1554      00
+ 1555              	.LASF78:
+ 1556 03d5 70657269 		.ascii	"periTrGrSize\000"
+ 1556      54724772 
+ 1556      53697A65 
+ 1556      00
+ 1557              	.LASF36:
+ 1558 03e2 6770696F 		.ascii	"gpioVersion\000"
+ 1558      56657273 
+ 1558      696F6E00 
+ 1559              	.LASF123:
+ 1560 03ee 74784275 		.ascii	"txBuf\000"
+ 1560      6600
+ 1561              	.LASF108:
+ 1562 03f4 63795F73 		.ascii	"cy_stc_device_t\000"
+ 1562      74635F64 
+ 1562      65766963 
+ 1562      655F7400 
+ 1563              	.LASF54:
+ 1564 0404 65704D6F 		.ascii	"epMonitorNr\000"
+ 1564      6E69746F 
+ 1564      724E7200 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 35
+
+
+ 1565              	.LASF118:
+ 1566 0410 72785269 		.ascii	"rxRingBufHead\000"
+ 1566      6E674275 
+ 1566      66486561 
+ 1566      6400
+ 1567              	.LASF97:
+ 1568 041e 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 1568      73547269 
+ 1568      6D52616D 
+ 1568      43746C4F 
+ 1568      66667365 
+ 1569              	.LASF92:
+ 1570 0434 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 1570      73436D30 
+ 1570      436C6F63 
+ 1570      6B43746C 
+ 1570      4F666673 
+ 1571              	.LASF32:
+ 1572 044b 63707573 		.ascii	"cpussVersion\000"
+ 1572      73566572 
+ 1572      73696F6E 
+ 1572      00
+ 1573              	.LASF39:
+ 1574 0458 70657269 		.ascii	"periVersion\000"
+ 1574      56657273 
+ 1574      696F6E00 
+ 1575              	.LASF95:
+ 1576 0464 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 1576      73436D30 
+ 1576      53746174 
+ 1576      75734F66 
+ 1576      66736574 
+ 1577              	.LASF144:
+ 1578 0479 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1578      73657273 
+ 1578      5C626F67 
+ 1578      75725C44 
+ 1578      6F63756D 
+ 1579 04a5 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\SABER\\Saber\\Saber"
+ 1579      7269746D 
+ 1579      6F732070 
+ 1579      6F737463 
+ 1579      75616E74 
+ 1580 04d4 2E637964 		.ascii	".cydsn\000"
+ 1580      736E00
+ 1581              	.LASF19:
+ 1582 04db 73697A65 		.ascii	"sizetype\000"
+ 1582      74797065 
+ 1582      00
+ 1583              	.LASF69:
+ 1584 04e4 64774368 		.ascii	"dwChOffset\000"
+ 1584      4F666673 
+ 1584      657400
+ 1585              	.LASF44:
+ 1586 04ef 63707573 		.ascii	"cpussFlashPaSize\000"
+ 1586      73466C61 
+ 1586      73685061 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 36
+
+
+ 1586      53697A65 
+ 1586      00
+ 1587              	.LASF82:
+ 1588 0500 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 1588      44697643 
+ 1588      6D645061 
+ 1588      54797065 
+ 1588      53656C50 
+ 1589              	.LASF105:
+ 1590 0517 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 1590      7352616D 
+ 1590      3243746C 
+ 1590      3000
+ 1591              	.LASF73:
+ 1592 0525 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 1592      61747573 
+ 1592      43684964 
+ 1592      78506F73 
+ 1592      00
+ 1593              	.LASF55:
+ 1594 0536 75646250 		.ascii	"udbPresent\000"
+ 1594      72657365 
+ 1594      6E7400
+ 1595              	.LASF115:
+ 1596 0541 72785374 		.ascii	"rxStatus\000"
+ 1596      61747573 
+ 1596      00
+ 1597              	.LASF140:
+ 1598 054a 73616265 		.ascii	"saber_get_ciphertext_size\000"
+ 1598      725F6765 
+ 1598      745F6369 
+ 1598      70686572 
+ 1598      74657874 
+ 1599              	.LASF35:
+ 1600 0564 666C6173 		.ascii	"flashcVersion\000"
+ 1600      68635665 
+ 1600      7273696F 
+ 1600      6E00
+ 1601              	.LASF31:
+ 1602 0572 63727970 		.ascii	"cryptoBase\000"
+ 1602      746F4261 
+ 1602      736500
+ 1603              	.LASF52:
+ 1604 057d 736D6966 		.ascii	"smifDeviceNr\000"
+ 1604      44657669 
+ 1604      63654E72 
+ 1604      00
+ 1605              	.LASF146:
+ 1606 058a 5F5F656E 		.ascii	"__enable_irq\000"
+ 1606      61626C65 
+ 1606      5F697271 
+ 1606      00
+ 1607              	.LASF142:
+ 1608 0597 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1608      43313120 
+ 1608      352E342E 
+ 1608      31203230 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 37
+
+
+ 1608      31363036 
+ 1609 05ca 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1609      20726576 
+ 1609      6973696F 
+ 1609      6E203233 
+ 1609      37373135 
+ 1610 05fd 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1610      70202D6D 
+ 1610      6670753D 
+ 1610      66707634 
+ 1610      2D73702D 
+ 1611 0630 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1611      6F6E7320 
+ 1611      2D666661 
+ 1611      742D6C74 
+ 1611      6F2D6F62 
+ 1612              	.LASF110:
+ 1613 064a 666C6F61 		.ascii	"float\000"
+ 1613      7400
+ 1614              	.LASF74:
+ 1615 0650 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 1615      61747573 
+ 1615      43684964 
+ 1615      784D736B 
+ 1615      00
+ 1616              	.LASF134:
+ 1617 0661 63795F64 		.ascii	"cy_device\000"
+ 1617      65766963 
+ 1617      6500
+ 1618              	.LASF102:
+ 1619 066b 63707573 		.ascii	"cpussRomCtl\000"
+ 1619      73526F6D 
+ 1619      43746C00 
+ 1620              	.LASF72:
+ 1621 0677 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 1621      43746C50 
+ 1621      7265656D 
+ 1621      70746162 
+ 1621      6C65506F 
+ 1622              	.LASF125:
+ 1623 068d 74784C65 		.ascii	"txLeftToTransmit\000"
+ 1623      6674546F 
+ 1623      5472616E 
+ 1623      736D6974 
+ 1623      00
+ 1624              	.LASF25:
+ 1625 069e 75646242 		.ascii	"udbBase\000"
+ 1625      61736500 
+ 1626              	.LASF112:
+ 1627 06a6 5F426F6F 		.ascii	"_Bool\000"
+ 1627      6C00
+ 1628              	.LASF17:
+ 1629 06ac 696E7433 		.ascii	"int32_t\000"
+ 1629      325F7400 
+ 1630              	.LASF2:
+ 1631 06b4 756E7369 		.ascii	"unsigned char\000"
+ 1631      676E6564 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 38
+
+
+ 1631      20636861 
+ 1631      7200
+ 1632              	.LASF68:
+ 1633 06c2 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 1633      6843746C 
+ 1633      4D61696E 
+ 1633      57733446 
+ 1633      72657100 
+ 1634              	.LASF107:
+ 1635 06d6 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 1635      6F636B53 
+ 1635      74617475 
+ 1635      734F6666 
+ 1635      73657400 
+ 1636              	.LASF130:
+ 1637 06ea 42595445 		.ascii	"BYTES_PK\000"
+ 1637      535F504B 
+ 1637      00
+ 1638              	.LASF0:
+ 1639 06f3 73686F72 		.ascii	"short int\000"
+ 1639      7420696E 
+ 1639      7400
+ 1640              	.LASF79:
+ 1641 06fd 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 1641      44697643 
+ 1641      6D644469 
+ 1641      7653656C 
+ 1641      4D736B00 
+ 1642              	.LASF50:
+ 1643 0711 73727373 		.ascii	"srssNumHfroot\000"
+ 1643      4E756D48 
+ 1643      66726F6F 
+ 1643      7400
+ 1644              	.LASF63:
+ 1645 071f 666C6173 		.ascii	"flashEraseDelay\000"
+ 1645      68457261 
+ 1645      73654465 
+ 1645      6C617900 
+ 1646              	.LASF46:
+ 1647 072f 63707573 		.ascii	"cpussFmIrq\000"
+ 1647      73466D49 
+ 1647      727100
+ 1648              	.LASF18:
+ 1649 073a 75696E74 		.ascii	"uint32_t\000"
+ 1649      33325F74 
+ 1649      00
+ 1650              	.LASF101:
+ 1651 0743 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 1651      73436D34 
+ 1651      4E6D6943 
+ 1651      746C4F66 
+ 1651      66736574 
+ 1652              	.LASF21:
+ 1653 0758 6C6F6E67 		.ascii	"long double\000"
+ 1653      20646F75 
+ 1653      626C6500 
+ 1654              	.LASF109:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 39
+
+
+ 1655 0764 63686172 		.ascii	"char\000"
+ 1655      00
+ 1656              	.LASF40:
+ 1657 0769 70726F74 		.ascii	"protVersion\000"
+ 1657      56657273 
+ 1657      696F6E00 
+ 1658              	.LASF103:
+ 1659 0775 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 1659      7352616D 
+ 1659      3043746C 
+ 1659      3000
+ 1660              	.LASF5:
+ 1661 0783 5F5F7569 		.ascii	"__uint16_t\000"
+ 1661      6E743136 
+ 1661      5F7400
+ 1662              	.LASF84:
+ 1663 078e 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 1663      44697631 
+ 1663      3643746C 
+ 1663      4F666673 
+ 1663      657400
+ 1664              	.LASF7:
+ 1665 07a1 5F5F696E 		.ascii	"__int32_t\000"
+ 1665      7433325F 
+ 1665      7400
+ 1666              	.LASF37:
+ 1667 07ab 6873696F 		.ascii	"hsiomVersion\000"
+ 1667      6D566572 
+ 1667      73696F6E 
+ 1667      00
+ 1668              	.LASF62:
+ 1669 07b8 666C6173 		.ascii	"flashProgramDelay\000"
+ 1669      6850726F 
+ 1669      6772616D 
+ 1669      44656C61 
+ 1669      7900
+ 1670              	.LASF117:
+ 1671 07ca 72785269 		.ascii	"rxRingBufSize\000"
+ 1671      6E674275 
+ 1671      6653697A 
+ 1671      6500
+ 1672              	.LASF6:
+ 1673 07d8 73686F72 		.ascii	"short unsigned int\000"
+ 1673      7420756E 
+ 1673      7369676E 
+ 1673      65642069 
+ 1673      6E7400
+ 1674              	.LASF70:
+ 1675 07eb 64774368 		.ascii	"dwChSize\000"
+ 1675      53697A65 
+ 1675      00
+ 1676              	.LASF106:
+ 1677 07f4 69706353 		.ascii	"ipcStructSize\000"
+ 1677      74727563 
+ 1677      7453697A 
+ 1677      6500
+ 1678              	.LASF45:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 40
+
+
+ 1679 0802 63707573 		.ascii	"cpussIpc0Irq\000"
+ 1679      73497063 
+ 1679      30497271 
+ 1679      00
+ 1680              	.LASF88:
+ 1681 080f 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 1681      50727443 
+ 1681      66674F66 
+ 1681      66736574 
+ 1681      00
+ 1682              	.LASF127:
+ 1683 0820 696E6974 		.ascii	"initKey\000"
+ 1683      4B657900 
+ 1684              	.LASF120:
+ 1685 0828 72784275 		.ascii	"rxBuf\000"
+ 1685      6600
+ 1686              	.LASF128:
+ 1687 082e 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ 1687      74635F73 
+ 1687      63625F75 
+ 1687      6172745F 
+ 1687      636F6E74 
+ 1688              	.LASF47:
+ 1689 0848 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 1689      734E6F74 
+ 1689      436F6E6E 
+ 1689      65637465 
+ 1689      64497271 
+ 1690              	.LASF61:
+ 1691 085d 666C6173 		.ascii	"flashWriteDelay\000"
+ 1691      68577269 
+ 1691      74654465 
+ 1691      6C617900 
+ 1692              	.LASF139:
+ 1693 086d 73616265 		.ascii	"saber_get_public_key_size\000"
+ 1693      725F6765 
+ 1693      745F7075 
+ 1693      626C6963 
+ 1693      5F6B6579 
+ 1694              	.LASF14:
+ 1695 0887 75696E74 		.ascii	"uint8_t\000"
+ 1695      385F7400 
+ 1696              	.LASF94:
+ 1697 088f 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 1697      73436D34 
+ 1697      53746174 
+ 1697      75734F66 
+ 1697      66736574 
+ 1698              	.LASF87:
+ 1699 08a4 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 1699      50727449 
+ 1699      6E747243 
+ 1699      66674F66 
+ 1699      66736574 
+ 1700              	.LASF119:
+ 1701 08b9 72785269 		.ascii	"rxRingBufTail\000"
+ 1701      6E674275 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccGGmxkG.s 			page 41
+
+
+ 1701      66546169 
+ 1701      6C00
+ 1702              	.LASF98:
+ 1703 08c7 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 1703      73547269 
+ 1703      6D526F6D 
+ 1703      43746C4F 
+ 1703      66667365 
+ 1704              	.LASF114:
+ 1705 08dd 74785374 		.ascii	"txStatus\000"
+ 1705      61747573 
+ 1705      00
+ 1706              	.LASF141:
+ 1707 08e6 73616265 		.ascii	"saber_get_shared_secret_size\000"
+ 1707      725F6765 
+ 1707      745F7368 
+ 1707      61726564 
+ 1707      5F736563 
+ 1708              	.LASF34:
+ 1709 0903 64775665 		.ascii	"dwVersion\000"
+ 1709      7273696F 
+ 1709      6E00
+ 1710              	.LASF30:
+ 1711 090d 69706342 		.ascii	"ipcBase\000"
+ 1711      61736500 
+ 1712              	.LASF81:
+ 1713 0915 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 1713      44697643 
+ 1713      6D645061 
+ 1713      44697653 
+ 1713      656C506F 
+ 1714              	.LASF145:
+ 1715 092b 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
+ 1715      74635F73 
+ 1715      63625F75 
+ 1715      6172745F 
+ 1715      636F6E74 
+ 1716              	.LASF143:
+ 1717 0943 6D61696E 		.ascii	"main_cm4.c\000"
+ 1717      5F636D34 
+ 1717      2E6300
+ 1718              	.LASF59:
+ 1719 094e 666C6173 		.ascii	"flashRwwRequired\000"
+ 1719      68527777 
+ 1719      52657175 
+ 1719      69726564 
+ 1719      00
+ 1720              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

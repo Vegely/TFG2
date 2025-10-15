@@ -229,7 +229,7 @@
                   </folder>
                 </folder>
                 <folder folderName="MemMang">
-                  <file fileName="heap_1.c" physicalFilePath="C:\Program Files (x86)\Cypress\PDL\3.1.7\rtos\FreeRTOS\10.0.1\Source\portable\MemMang\heap_1.c" buildType="SOURCE_C;CortexM4;;;" copyLocal="True" isTemplate="False" />
+                  <file fileName="heap_4.c" physicalFilePath="C:\Program Files (x86)\Cypress\PDL\3.1.7\rtos\FreeRTOS\10.0.1\Source\portable\MemMang\heap_4.c" buildType="SOURCE_C;CortexM4;;;" copyLocal="True" isTemplate="False" />
                 </folder>
               </folder>
             </folder>
