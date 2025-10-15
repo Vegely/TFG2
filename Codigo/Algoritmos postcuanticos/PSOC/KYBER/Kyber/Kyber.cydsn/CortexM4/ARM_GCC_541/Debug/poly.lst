@@ -1,0 +1,3996 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"poly.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.pqcrystals_kyber1024_ref_poly_decompress,"ax",%progbits
+  21              		.align	2
+  22              		.global	pqcrystals_kyber1024_ref_poly_decompress
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	pqcrystals_kyber1024_ref_poly_decompress, %function
+  26              	pqcrystals_kyber1024_ref_poly_decompress:
+  27              	.LFB1:
+  28              		.file 1 "..\\poly.c"
+   1:..\poly.c     **** #include <stdint.h>
+   2:..\poly.c     **** #include "params.h"
+   3:..\poly.c     **** #include "poly.h"
+   4:..\poly.c     **** #include "ntt.h"
+   5:..\poly.c     **** #include "reduce.h"
+   6:..\poly.c     **** #include "cbd.h"
+   7:..\poly.c     **** #include "symmetric.h"
+   8:..\poly.c     **** 
+   9:..\poly.c     **** /*************************************************
+  10:..\poly.c     **** * Name:        poly_compress
+  11:..\poly.c     **** *
+  12:..\poly.c     **** * Description: Compression and subsequent serialization of a polynomial
+  13:..\poly.c     **** *
+  14:..\poly.c     **** * Arguments:   - uint8_t *r: pointer to output byte array
+  15:..\poly.c     **** *                            (of length KYBER_POLYCOMPRESSEDBYTES)
+  16:..\poly.c     **** *              - poly *a:    pointer to input polynomial
+  17:..\poly.c     **** **************************************************/
+  18:..\poly.c     **** void poly_compress(uint8_t r[KYBER_POLYCOMPRESSEDBYTES], poly *a)
+  19:..\poly.c     **** {
+  20:..\poly.c     ****   unsigned int i,j;
+  21:..\poly.c     ****   uint8_t t[8];
+  22:..\poly.c     **** 
+  23:..\poly.c     ****   poly_csubq(a);
+  24:..\poly.c     **** 
+  25:..\poly.c     **** #if (KYBER_POLYCOMPRESSEDBYTES == 128)
+  26:..\poly.c     ****   for(i=0;i<KYBER_N/8;i++) {
+  27:..\poly.c     ****     for(j=0;j<8;j++)
+  28:..\poly.c     ****       t[j] = ((((uint16_t)a->coeffs[8*i+j] << 4) + KYBER_Q/2)/KYBER_Q) & 15;
+  29:..\poly.c     **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 2
+
+
+  30:..\poly.c     ****     r[0] = t[0] | (t[1] << 4);
+  31:..\poly.c     ****     r[1] = t[2] | (t[3] << 4);
+  32:..\poly.c     ****     r[2] = t[4] | (t[5] << 4);
+  33:..\poly.c     ****     r[3] = t[6] | (t[7] << 4);
+  34:..\poly.c     ****     r += 4;
+  35:..\poly.c     ****   }
+  36:..\poly.c     **** #elif (KYBER_POLYCOMPRESSEDBYTES == 160)
+  37:..\poly.c     ****   for(i=0;i<KYBER_N/8;i++) {
+  38:..\poly.c     ****     for(j=0;j<8;j++)
+  39:..\poly.c     ****       t[j] = ((((uint32_t)a->coeffs[8*i+j] << 5) + KYBER_Q/2)/KYBER_Q) & 31;
+  40:..\poly.c     **** 
+  41:..\poly.c     ****     r[0] = (t[0] >> 0) | (t[1] << 5);
+  42:..\poly.c     ****     r[1] = (t[1] >> 3) | (t[2] << 2) | (t[3] << 7);
+  43:..\poly.c     ****     r[2] = (t[3] >> 1) | (t[4] << 4);
+  44:..\poly.c     ****     r[3] = (t[4] >> 4) | (t[5] << 1) | (t[6] << 6);
+  45:..\poly.c     ****     r[4] = (t[6] >> 2) | (t[7] << 3);
+  46:..\poly.c     ****     r += 5;
+  47:..\poly.c     ****   }
+  48:..\poly.c     **** #else
+  49:..\poly.c     **** #error "KYBER_POLYCOMPRESSEDBYTES needs to be in {128, 160}"
+  50:..\poly.c     **** #endif
+  51:..\poly.c     **** }
+  52:..\poly.c     **** 
+  53:..\poly.c     **** /*************************************************
+  54:..\poly.c     **** * Name:        poly_decompress
+  55:..\poly.c     **** *
+  56:..\poly.c     **** * Description: De-serialization and subsequent decompression of a polynomial;
+  57:..\poly.c     **** *              approximate inverse of poly_compress
+  58:..\poly.c     **** *
+  59:..\poly.c     **** * Arguments:   - poly *r:          pointer to output polynomial
+  60:..\poly.c     **** *              - const uint8_t *a: pointer to input byte array
+  61:..\poly.c     **** *                                  (of length KYBER_POLYCOMPRESSEDBYTES bytes)
+  62:..\poly.c     **** **************************************************/
+  63:..\poly.c     **** void poly_decompress(poly *r, const uint8_t a[KYBER_POLYCOMPRESSEDBYTES])
+  64:..\poly.c     **** {
+  29              		.loc 1 64 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  35 0000 70B4     		push	{r4, r5, r6}
+  36              		.cfi_def_cfa_offset 12
+  37              		.cfi_offset 4, -12
+  38              		.cfi_offset 5, -8
+  39              		.cfi_offset 6, -4
+  40 0002 83B0     		sub	sp, sp, #12
+  41              		.cfi_def_cfa_offset 24
+  42              	.LVL1:
+  65:..\poly.c     ****   unsigned int i;
+  66:..\poly.c     **** 
+  67:..\poly.c     **** #if (KYBER_POLYCOMPRESSEDBYTES == 128)
+  68:..\poly.c     ****   for(i=0;i<KYBER_N/2;i++) {
+  69:..\poly.c     ****     r->coeffs[2*i+0] = (((uint16_t)(a[0] & 15)*KYBER_Q) + 8) >> 4;
+  70:..\poly.c     ****     r->coeffs[2*i+1] = (((uint16_t)(a[0] >> 4)*KYBER_Q) + 8) >> 4;
+  71:..\poly.c     ****     a += 1;
+  72:..\poly.c     ****   }
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 3
+
+
+  73:..\poly.c     **** #elif (KYBER_POLYCOMPRESSEDBYTES == 160)
+  74:..\poly.c     ****   unsigned int j;
+  75:..\poly.c     ****   uint8_t t[8];
+  76:..\poly.c     ****   for(i=0;i<KYBER_N/8;i++) {
+  43              		.loc 1 76 0
+  44 0004 0026     		movs	r6, #0
+  45 0006 3AE0     		b	.L2
+  46              	.LVL2:
+  47              	.L5:
+  77:..\poly.c     ****     t[0] = (a[0] >> 0);
+  48              		.loc 1 77 0
+  49 0008 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+  50 000a 8DF80020 		strb	r2, [sp]
+  78:..\poly.c     ****     t[1] = (a[0] >> 5) | (a[1] << 3);
+  51              		.loc 1 78 0
+  52 000e 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+  53 0010 5209     		lsrs	r2, r2, #5
+  54 0012 42EAC302 		orr	r2, r2, r3, lsl #3
+  55 0016 8DF80120 		strb	r2, [sp, #1]
+  79:..\poly.c     ****     t[2] = (a[1] >> 2);
+  56              		.loc 1 79 0
+  57 001a 9A08     		lsrs	r2, r3, #2
+  58 001c 8DF80220 		strb	r2, [sp, #2]
+  80:..\poly.c     ****     t[3] = (a[1] >> 7) | (a[2] << 1);
+  59              		.loc 1 80 0
+  60 0020 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+  61 0022 DB09     		lsrs	r3, r3, #7
+  62 0024 43EA4203 		orr	r3, r3, r2, lsl #1
+  63 0028 8DF80330 		strb	r3, [sp, #3]
+  81:..\poly.c     ****     t[4] = (a[2] >> 4) | (a[3] << 4);
+  64              		.loc 1 81 0
+  65 002c CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+  66 002e 1209     		lsrs	r2, r2, #4
+  67 0030 42EA0312 		orr	r2, r2, r3, lsl #4
+  68 0034 8DF80420 		strb	r2, [sp, #4]
+  82:..\poly.c     ****     t[5] = (a[3] >> 1);
+  69              		.loc 1 82 0
+  70 0038 5A08     		lsrs	r2, r3, #1
+  71 003a 8DF80520 		strb	r2, [sp, #5]
+  83:..\poly.c     ****     t[6] = (a[3] >> 6) | (a[4] << 2);
+  72              		.loc 1 83 0
+  73 003e 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
+  74 0040 9B09     		lsrs	r3, r3, #6
+  75 0042 43EA8203 		orr	r3, r3, r2, lsl #2
+  76 0046 8DF80630 		strb	r3, [sp, #6]
+  84:..\poly.c     ****     t[7] = (a[4] >> 3);
+  77              		.loc 1 84 0
+  78 004a D208     		lsrs	r2, r2, #3
+  79 004c 8DF80720 		strb	r2, [sp, #7]
+  85:..\poly.c     ****     a += 5;
+  80              		.loc 1 85 0
+  81 0050 0531     		adds	r1, r1, #5
+  82              	.LVL3:
+  86:..\poly.c     **** 
+  87:..\poly.c     ****     for(j=0;j<8;j++)
+  83              		.loc 1 87 0
+  84 0052 0024     		movs	r4, #0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 4
+
+
+  85 0054 10E0     		b	.L3
+  86              	.LVL4:
+  87              	.L4:
+  88:..\poly.c     ****       r->coeffs[8*i+j] = ((uint32_t)(t[j] & 31)*KYBER_Q + 16) >> 5;
+  88              		.loc 1 88 0 discriminator 3
+  89 0056 04EBC605 		add	r5, r4, r6, lsl #3
+  90 005a 02AB     		add	r3, sp, #8
+  91 005c 2344     		add	r3, r3, r4
+  92 005e 13F8083C 		ldrb	r3, [r3, #-8]	@ zero_extendqisi2
+  93 0062 03F01F03 		and	r3, r3, #31
+  94 0066 40F60152 		movw	r2, #3329
+  95 006a 02FB03F3 		mul	r3, r2, r3
+  96 006e 1033     		adds	r3, r3, #16
+  97 0070 5B09     		lsrs	r3, r3, #5
+  98 0072 20F81530 		strh	r3, [r0, r5, lsl #1]	@ movhi
+  87:..\poly.c     ****       r->coeffs[8*i+j] = ((uint32_t)(t[j] & 31)*KYBER_Q + 16) >> 5;
+  99              		.loc 1 87 0 discriminator 3
+ 100 0076 0134     		adds	r4, r4, #1
+ 101              	.LVL5:
+ 102              	.L3:
+  87:..\poly.c     ****       r->coeffs[8*i+j] = ((uint32_t)(t[j] & 31)*KYBER_Q + 16) >> 5;
+ 103              		.loc 1 87 0 is_stmt 0 discriminator 1
+ 104 0078 072C     		cmp	r4, #7
+ 105 007a ECD9     		bls	.L4
+  76:..\poly.c     ****     t[0] = (a[0] >> 0);
+ 106              		.loc 1 76 0 is_stmt 1 discriminator 2
+ 107 007c 0136     		adds	r6, r6, #1
+ 108              	.LVL6:
+ 109              	.L2:
+  76:..\poly.c     ****     t[0] = (a[0] >> 0);
+ 110              		.loc 1 76 0 is_stmt 0 discriminator 1
+ 111 007e 1F2E     		cmp	r6, #31
+ 112 0080 C2D9     		bls	.L5
+  89:..\poly.c     ****   }
+  90:..\poly.c     **** #else
+  91:..\poly.c     **** #error "KYBER_POLYCOMPRESSEDBYTES needs to be in {128, 160}"
+  92:..\poly.c     **** #endif
+  93:..\poly.c     **** }
+ 113              		.loc 1 93 0 is_stmt 1
+ 114 0082 03B0     		add	sp, sp, #12
+ 115              		.cfi_def_cfa_offset 12
+ 116              		@ sp needed
+ 117 0084 70BC     		pop	{r4, r5, r6}
+ 118              		.cfi_restore 6
+ 119              		.cfi_restore 5
+ 120              		.cfi_restore 4
+ 121              		.cfi_def_cfa_offset 0
+ 122              	.LVL7:
+ 123 0086 7047     		bx	lr
+ 124              		.cfi_endproc
+ 125              	.LFE1:
+ 126              		.size	pqcrystals_kyber1024_ref_poly_decompress, .-pqcrystals_kyber1024_ref_poly_decompress
+ 127              		.section	.text.pqcrystals_kyber1024_ref_poly_frombytes,"ax",%progbits
+ 128              		.align	2
+ 129              		.global	pqcrystals_kyber1024_ref_poly_frombytes
+ 130              		.thumb
+ 131              		.thumb_func
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 5
+
+
+ 132              		.type	pqcrystals_kyber1024_ref_poly_frombytes, %function
+ 133              	pqcrystals_kyber1024_ref_poly_frombytes:
+ 134              	.LFB3:
+  94:..\poly.c     **** 
+  95:..\poly.c     **** /*************************************************
+  96:..\poly.c     **** * Name:        poly_tobytes
+  97:..\poly.c     **** *
+  98:..\poly.c     **** * Description: Serialization of a polynomial
+  99:..\poly.c     **** *
+ 100:..\poly.c     **** * Arguments:   - uint8_t *r: pointer to output byte array
+ 101:..\poly.c     **** *                            (needs space for KYBER_POLYBYTES bytes)
+ 102:..\poly.c     **** *              - poly *a:    pointer to input polynomial
+ 103:..\poly.c     **** **************************************************/
+ 104:..\poly.c     **** void poly_tobytes(uint8_t r[KYBER_POLYBYTES], poly *a)
+ 105:..\poly.c     **** {
+ 106:..\poly.c     ****   unsigned int i;
+ 107:..\poly.c     ****   uint16_t t0, t1;
+ 108:..\poly.c     **** 
+ 109:..\poly.c     ****   poly_csubq(a);
+ 110:..\poly.c     **** 
+ 111:..\poly.c     ****   for(i=0;i<KYBER_N/2;i++) {
+ 112:..\poly.c     ****     t0 = a->coeffs[2*i];
+ 113:..\poly.c     ****     t1 = a->coeffs[2*i+1];
+ 114:..\poly.c     ****     r[3*i+0] = (t0 >> 0);
+ 115:..\poly.c     ****     r[3*i+1] = (t0 >> 8) | (t1 << 4);
+ 116:..\poly.c     ****     r[3*i+2] = (t1 >> 4);
+ 117:..\poly.c     ****   }
+ 118:..\poly.c     **** }
+ 119:..\poly.c     **** 
+ 120:..\poly.c     **** /*************************************************
+ 121:..\poly.c     **** * Name:        poly_frombytes
+ 122:..\poly.c     **** *
+ 123:..\poly.c     **** * Description: De-serialization of a polynomial;
+ 124:..\poly.c     **** *              inverse of poly_tobytes
+ 125:..\poly.c     **** *
+ 126:..\poly.c     **** * Arguments:   - poly *r:          pointer to output polynomial
+ 127:..\poly.c     **** *              - const uint8_t *a: pointer to input byte array
+ 128:..\poly.c     **** *                                  (of KYBER_POLYBYTES bytes)
+ 129:..\poly.c     **** **************************************************/
+ 130:..\poly.c     **** void poly_frombytes(poly *r, const uint8_t a[KYBER_POLYBYTES])
+ 131:..\poly.c     **** {
+ 135              		.loc 1 131 0
+ 136              		.cfi_startproc
+ 137              		@ args = 0, pretend = 0, frame = 0
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139              		@ link register save eliminated.
+ 140              	.LVL8:
+ 141 0000 F0B4     		push	{r4, r5, r6, r7}
+ 142              		.cfi_def_cfa_offset 16
+ 143              		.cfi_offset 4, -16
+ 144              		.cfi_offset 5, -12
+ 145              		.cfi_offset 6, -8
+ 146              		.cfi_offset 7, -4
+ 147              	.LVL9:
+ 132:..\poly.c     ****   unsigned int i;
+ 133:..\poly.c     ****   for(i=0;i<KYBER_N/2;i++) {
+ 148              		.loc 1 133 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 6
+
+
+ 149 0002 0025     		movs	r5, #0
+ 150 0004 14E0     		b	.L8
+ 151              	.LVL10:
+ 152              	.L9:
+ 134:..\poly.c     ****     r->coeffs[2*i]   = ((a[3*i+0] >> 0) | ((uint16_t)a[3*i+1] << 8)) & 0xFFF;
+ 153              		.loc 1 134 0 discriminator 3
+ 154 0006 6B00     		lsls	r3, r5, #1
+ 155 0008 5C19     		adds	r4, r3, r5
+ 156 000a 0A5D     		ldrb	r2, [r1, r4]	@ zero_extendqisi2
+ 157 000c 661C     		adds	r6, r4, #1
+ 158 000e 8F5D     		ldrb	r7, [r1, r6]	@ zero_extendqisi2
+ 159 0010 42EA0722 		orr	r2, r2, r7, lsl #8
+ 160 0014 C2F30B02 		ubfx	r2, r2, #0, #12
+ 161 0018 20F81320 		strh	r2, [r0, r3, lsl #1]	@ movhi
+ 135:..\poly.c     ****     r->coeffs[2*i+1] = ((a[3*i+1] >> 4) | ((uint16_t)a[3*i+2] << 4)) & 0xFFF;
+ 162              		.loc 1 135 0 discriminator 3
+ 163 001c 0133     		adds	r3, r3, #1
+ 164 001e 8A5D     		ldrb	r2, [r1, r6]	@ zero_extendqisi2
+ 165 0020 0C44     		add	r4, r4, r1
+ 166 0022 A478     		ldrb	r4, [r4, #2]	@ zero_extendqisi2
+ 167 0024 1209     		lsrs	r2, r2, #4
+ 168 0026 42EA0412 		orr	r2, r2, r4, lsl #4
+ 169 002a 20F81320 		strh	r2, [r0, r3, lsl #1]	@ movhi
+ 133:..\poly.c     ****     r->coeffs[2*i]   = ((a[3*i+0] >> 0) | ((uint16_t)a[3*i+1] << 8)) & 0xFFF;
+ 170              		.loc 1 133 0 discriminator 3
+ 171 002e 0135     		adds	r5, r5, #1
+ 172              	.LVL11:
+ 173              	.L8:
+ 133:..\poly.c     ****     r->coeffs[2*i]   = ((a[3*i+0] >> 0) | ((uint16_t)a[3*i+1] << 8)) & 0xFFF;
+ 174              		.loc 1 133 0 is_stmt 0 discriminator 1
+ 175 0030 7F2D     		cmp	r5, #127
+ 176 0032 E8D9     		bls	.L9
+ 136:..\poly.c     ****   }
+ 137:..\poly.c     **** }
+ 177              		.loc 1 137 0 is_stmt 1
+ 178 0034 F0BC     		pop	{r4, r5, r6, r7}
+ 179              		.cfi_restore 7
+ 180              		.cfi_restore 6
+ 181              		.cfi_restore 5
+ 182              		.cfi_restore 4
+ 183              		.cfi_def_cfa_offset 0
+ 184              	.LVL12:
+ 185 0036 7047     		bx	lr
+ 186              		.cfi_endproc
+ 187              	.LFE3:
+ 188              		.size	pqcrystals_kyber1024_ref_poly_frombytes, .-pqcrystals_kyber1024_ref_poly_frombytes
+ 189              		.section	.text.pqcrystals_kyber1024_ref_poly_frommsg,"ax",%progbits
+ 190              		.align	2
+ 191              		.global	pqcrystals_kyber1024_ref_poly_frommsg
+ 192              		.thumb
+ 193              		.thumb_func
+ 194              		.type	pqcrystals_kyber1024_ref_poly_frommsg, %function
+ 195              	pqcrystals_kyber1024_ref_poly_frommsg:
+ 196              	.LFB4:
+ 138:..\poly.c     **** 
+ 139:..\poly.c     **** /*************************************************
+ 140:..\poly.c     **** * Name:        poly_frommsg
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 7
+
+
+ 141:..\poly.c     **** *
+ 142:..\poly.c     **** * Description: Convert 32-byte message to polynomial
+ 143:..\poly.c     **** *
+ 144:..\poly.c     **** * Arguments:   - poly *r:            pointer to output polynomial
+ 145:..\poly.c     **** *              - const uint8_t *msg: pointer to input message
+ 146:..\poly.c     **** **************************************************/
+ 147:..\poly.c     **** void poly_frommsg(poly *r, const uint8_t msg[KYBER_INDCPA_MSGBYTES])
+ 148:..\poly.c     **** {
+ 197              		.loc 1 148 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 0
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              		@ link register save eliminated.
+ 202              	.LVL13:
+ 203 0000 30B4     		push	{r4, r5}
+ 204              		.cfi_def_cfa_offset 8
+ 205              		.cfi_offset 4, -8
+ 206              		.cfi_offset 5, -4
+ 207              	.LVL14:
+ 149:..\poly.c     ****   unsigned int i,j;
+ 150:..\poly.c     ****   int16_t mask;
+ 151:..\poly.c     **** 
+ 152:..\poly.c     **** #if (KYBER_INDCPA_MSGBYTES != KYBER_N/8)
+ 153:..\poly.c     **** #error "KYBER_INDCPA_MSGBYTES must be equal to KYBER_N/8 bytes!"
+ 154:..\poly.c     **** #endif
+ 155:..\poly.c     **** 
+ 156:..\poly.c     ****   for(i=0;i<KYBER_N/8;i++) {
+ 208              		.loc 1 156 0
+ 209 0002 0024     		movs	r4, #0
+ 210 0004 11E0     		b	.L12
+ 211              	.LVL15:
+ 212              	.L13:
+ 157:..\poly.c     ****     for(j=0;j<8;j++) {
+ 158:..\poly.c     ****       mask = -(int16_t)((msg[i] >> j)&1);
+ 213              		.loc 1 158 0 discriminator 3
+ 214 0006 0B5D     		ldrb	r3, [r1, r4]	@ zero_extendqisi2
+ 215 0008 1341     		asrs	r3, r3, r2
+ 216 000a 43F30003 		sbfx	r3, r3, #0, #1
+ 217              	.LVL16:
+ 159:..\poly.c     ****       r->coeffs[8*i+j] = mask & ((KYBER_Q+1)/2);
+ 218              		.loc 1 159 0 discriminator 3
+ 219 000e 02EBC405 		add	r5, r2, r4, lsl #3
+ 220 0012 23F4BF73 		bic	r3, r3, #382
+ 221              	.LVL17:
+ 222 0016 5B05     		lsls	r3, r3, #21
+ 223 0018 5B0D     		lsrs	r3, r3, #21
+ 224 001a 20F81530 		strh	r3, [r0, r5, lsl #1]	@ movhi
+ 225              	.LVL18:
+ 157:..\poly.c     ****     for(j=0;j<8;j++) {
+ 226              		.loc 1 157 0 discriminator 3
+ 227 001e 0132     		adds	r2, r2, #1
+ 228              	.LVL19:
+ 229 0020 00E0     		b	.L14
+ 230              	.LVL20:
+ 231              	.L15:
+ 232 0022 0022     		movs	r2, #0
+ 233              	.L14:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 8
+
+
+ 234              	.LVL21:
+ 157:..\poly.c     ****     for(j=0;j<8;j++) {
+ 235              		.loc 1 157 0 is_stmt 0 discriminator 1
+ 236 0024 072A     		cmp	r2, #7
+ 237 0026 EED9     		bls	.L13
+ 156:..\poly.c     ****     for(j=0;j<8;j++) {
+ 238              		.loc 1 156 0 is_stmt 1 discriminator 2
+ 239 0028 0134     		adds	r4, r4, #1
+ 240              	.LVL22:
+ 241              	.L12:
+ 156:..\poly.c     ****     for(j=0;j<8;j++) {
+ 242              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 243 002a 1F2C     		cmp	r4, #31
+ 244 002c F9D9     		bls	.L15
+ 160:..\poly.c     ****     }
+ 161:..\poly.c     ****   }
+ 162:..\poly.c     **** }
+ 245              		.loc 1 162 0 is_stmt 1
+ 246 002e 30BC     		pop	{r4, r5}
+ 247              		.cfi_restore 5
+ 248              		.cfi_restore 4
+ 249              		.cfi_def_cfa_offset 0
+ 250              	.LVL23:
+ 251 0030 7047     		bx	lr
+ 252              		.cfi_endproc
+ 253              	.LFE4:
+ 254              		.size	pqcrystals_kyber1024_ref_poly_frommsg, .-pqcrystals_kyber1024_ref_poly_frommsg
+ 255 0032 00BF     		.section	.text.pqcrystals_kyber1024_ref_poly_getnoise_eta1,"ax",%progbits
+ 256              		.align	2
+ 257              		.global	pqcrystals_kyber1024_ref_poly_getnoise_eta1
+ 258              		.thumb
+ 259              		.thumb_func
+ 260              		.type	pqcrystals_kyber1024_ref_poly_getnoise_eta1, %function
+ 261              	pqcrystals_kyber1024_ref_poly_getnoise_eta1:
+ 262              	.LFB6:
+ 163:..\poly.c     **** 
+ 164:..\poly.c     **** /*************************************************
+ 165:..\poly.c     **** * Name:        poly_tomsg
+ 166:..\poly.c     **** *
+ 167:..\poly.c     **** * Description: Convert polynomial to 32-byte message
+ 168:..\poly.c     **** *
+ 169:..\poly.c     **** * Arguments:   - uint8_t *msg: pointer to output message
+ 170:..\poly.c     **** *              - poly *a:      pointer to input polynomial
+ 171:..\poly.c     **** **************************************************/
+ 172:..\poly.c     **** void poly_tomsg(uint8_t msg[KYBER_INDCPA_MSGBYTES], poly *a)
+ 173:..\poly.c     **** {
+ 174:..\poly.c     ****   unsigned int i,j;
+ 175:..\poly.c     ****   uint16_t t;
+ 176:..\poly.c     **** 
+ 177:..\poly.c     ****   poly_csubq(a);
+ 178:..\poly.c     **** 
+ 179:..\poly.c     ****   for(i=0;i<KYBER_N/8;i++) {
+ 180:..\poly.c     ****     msg[i] = 0;
+ 181:..\poly.c     ****     for(j=0;j<8;j++) {
+ 182:..\poly.c     ****       t = ((((uint16_t)a->coeffs[8*i+j] << 1) + KYBER_Q/2)/KYBER_Q) & 1;
+ 183:..\poly.c     ****       msg[i] |= t << j;
+ 184:..\poly.c     ****     }
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 9
+
+
+ 185:..\poly.c     ****   }
+ 186:..\poly.c     **** }
+ 187:..\poly.c     **** 
+ 188:..\poly.c     **** /*************************************************
+ 189:..\poly.c     **** * Name:        poly_getnoise_eta1
+ 190:..\poly.c     **** *
+ 191:..\poly.c     **** * Description: Sample a polynomial deterministically from a seed and a nonce,
+ 192:..\poly.c     **** *              with output polynomial close to centered binomial distribution
+ 193:..\poly.c     **** *              with parameter KYBER_ETA1
+ 194:..\poly.c     **** *
+ 195:..\poly.c     **** * Arguments:   - poly *r:             pointer to output polynomial
+ 196:..\poly.c     **** *              - const uint8_t *seed: pointer to input seed
+ 197:..\poly.c     **** *                                     (of length KYBER_SYMBYTES bytes)
+ 198:..\poly.c     **** *              - uint8_t nonce:       one-byte input nonce
+ 199:..\poly.c     **** **************************************************/
+ 200:..\poly.c     **** void poly_getnoise_eta1(poly *r, const uint8_t seed[KYBER_SYMBYTES], uint8_t nonce)
+ 201:..\poly.c     **** {
+ 263              		.loc 1 201 0
+ 264              		.cfi_startproc
+ 265              		@ args = 0, pretend = 0, frame = 128
+ 266              		@ frame_needed = 0, uses_anonymous_args = 0
+ 267              	.LVL24:
+ 268 0000 10B5     		push	{r4, lr}
+ 269              		.cfi_def_cfa_offset 8
+ 270              		.cfi_offset 4, -8
+ 271              		.cfi_offset 14, -4
+ 272 0002 A0B0     		sub	sp, sp, #128
+ 273              		.cfi_def_cfa_offset 136
+ 274 0004 0446     		mov	r4, r0
+ 202:..\poly.c     ****   uint8_t buf[KYBER_ETA1*KYBER_N/4];
+ 203:..\poly.c     ****   prf(buf, sizeof(buf), seed, nonce);
+ 275              		.loc 1 203 0
+ 276 0006 1346     		mov	r3, r2
+ 277 0008 0A46     		mov	r2, r1
+ 278              	.LVL25:
+ 279 000a 8021     		movs	r1, #128
+ 280              	.LVL26:
+ 281 000c 6846     		mov	r0, sp
+ 282              	.LVL27:
+ 283 000e FFF7FEFF 		bl	pqcrystals_kyber1024_ref_kyber_shake256_prf
+ 284              	.LVL28:
+ 204:..\poly.c     ****   cbd_eta1(r, buf);
+ 285              		.loc 1 204 0
+ 286 0012 6946     		mov	r1, sp
+ 287 0014 2046     		mov	r0, r4
+ 288 0016 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_cbd_eta1
+ 289              	.LVL29:
+ 205:..\poly.c     **** }
+ 290              		.loc 1 205 0
+ 291 001a 20B0     		add	sp, sp, #128
+ 292              		.cfi_def_cfa_offset 8
+ 293              		@ sp needed
+ 294 001c 10BD     		pop	{r4, pc}
+ 295              		.cfi_endproc
+ 296              	.LFE6:
+ 297              		.size	pqcrystals_kyber1024_ref_poly_getnoise_eta1, .-pqcrystals_kyber1024_ref_poly_getnoise_eta1
+ 298 001e 00BF     		.section	.text.pqcrystals_kyber1024_ref_poly_getnoise_eta2,"ax",%progbits
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 10
+
+
+ 299              		.align	2
+ 300              		.global	pqcrystals_kyber1024_ref_poly_getnoise_eta2
+ 301              		.thumb
+ 302              		.thumb_func
+ 303              		.type	pqcrystals_kyber1024_ref_poly_getnoise_eta2, %function
+ 304              	pqcrystals_kyber1024_ref_poly_getnoise_eta2:
+ 305              	.LFB7:
+ 206:..\poly.c     **** 
+ 207:..\poly.c     **** /*************************************************
+ 208:..\poly.c     **** * Name:        poly_getnoise_eta2
+ 209:..\poly.c     **** *
+ 210:..\poly.c     **** * Description: Sample a polynomial deterministically from a seed and a nonce,
+ 211:..\poly.c     **** *              with output polynomial close to centered binomial distribution
+ 212:..\poly.c     **** *              with parameter KYBER_ETA2
+ 213:..\poly.c     **** *
+ 214:..\poly.c     **** * Arguments:   - poly *r:             pointer to output polynomial
+ 215:..\poly.c     **** *              - const uint8_t *seed: pointer to input seed
+ 216:..\poly.c     **** *                                     (of length KYBER_SYMBYTES bytes)
+ 217:..\poly.c     **** *              - uint8_t nonce:       one-byte input nonce
+ 218:..\poly.c     **** **************************************************/
+ 219:..\poly.c     **** void poly_getnoise_eta2(poly *r, const uint8_t seed[KYBER_SYMBYTES], uint8_t nonce)
+ 220:..\poly.c     **** {
+ 306              		.loc 1 220 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 128
+ 309              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310              	.LVL30:
+ 311 0000 10B5     		push	{r4, lr}
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315 0002 A0B0     		sub	sp, sp, #128
+ 316              		.cfi_def_cfa_offset 136
+ 317 0004 0446     		mov	r4, r0
+ 221:..\poly.c     ****   uint8_t buf[KYBER_ETA2*KYBER_N/4];
+ 222:..\poly.c     ****   prf(buf, sizeof(buf), seed, nonce);
+ 318              		.loc 1 222 0
+ 319 0006 1346     		mov	r3, r2
+ 320 0008 0A46     		mov	r2, r1
+ 321              	.LVL31:
+ 322 000a 8021     		movs	r1, #128
+ 323              	.LVL32:
+ 324 000c 6846     		mov	r0, sp
+ 325              	.LVL33:
+ 326 000e FFF7FEFF 		bl	pqcrystals_kyber1024_ref_kyber_shake256_prf
+ 327              	.LVL34:
+ 223:..\poly.c     ****   cbd_eta2(r, buf);
+ 328              		.loc 1 223 0
+ 329 0012 6946     		mov	r1, sp
+ 330 0014 2046     		mov	r0, r4
+ 331 0016 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_cbd_eta2
+ 332              	.LVL35:
+ 224:..\poly.c     **** }
+ 333              		.loc 1 224 0
+ 334 001a 20B0     		add	sp, sp, #128
+ 335              		.cfi_def_cfa_offset 8
+ 336              		@ sp needed
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 11
+
+
+ 337 001c 10BD     		pop	{r4, pc}
+ 338              		.cfi_endproc
+ 339              	.LFE7:
+ 340              		.size	pqcrystals_kyber1024_ref_poly_getnoise_eta2, .-pqcrystals_kyber1024_ref_poly_getnoise_eta2
+ 341 001e 00BF     		.section	.text.pqcrystals_kyber1024_ref_poly_invntt_tomont,"ax",%progbits
+ 342              		.align	2
+ 343              		.global	pqcrystals_kyber1024_ref_poly_invntt_tomont
+ 344              		.thumb
+ 345              		.thumb_func
+ 346              		.type	pqcrystals_kyber1024_ref_poly_invntt_tomont, %function
+ 347              	pqcrystals_kyber1024_ref_poly_invntt_tomont:
+ 348              	.LFB9:
+ 225:..\poly.c     **** 
+ 226:..\poly.c     **** 
+ 227:..\poly.c     **** /*************************************************
+ 228:..\poly.c     **** * Name:        poly_ntt
+ 229:..\poly.c     **** *
+ 230:..\poly.c     **** * Description: Computes negacyclic number-theoretic transform (NTT) of
+ 231:..\poly.c     **** *              a polynomial in place;
+ 232:..\poly.c     **** *              inputs assumed to be in normal order, output in bitreversed order
+ 233:..\poly.c     **** *
+ 234:..\poly.c     **** * Arguments:   - uint16_t *r: pointer to in/output polynomial
+ 235:..\poly.c     **** **************************************************/
+ 236:..\poly.c     **** void poly_ntt(poly *r)
+ 237:..\poly.c     **** {
+ 238:..\poly.c     ****   ntt(r->coeffs);
+ 239:..\poly.c     ****   poly_reduce(r);
+ 240:..\poly.c     **** }
+ 241:..\poly.c     **** 
+ 242:..\poly.c     **** /*************************************************
+ 243:..\poly.c     **** * Name:        poly_invntt_tomont
+ 244:..\poly.c     **** *
+ 245:..\poly.c     **** * Description: Computes inverse of negacyclic number-theoretic transform (NTT)
+ 246:..\poly.c     **** *              of a polynomial in place;
+ 247:..\poly.c     **** *              inputs assumed to be in bitreversed order, output in normal order
+ 248:..\poly.c     **** *
+ 249:..\poly.c     **** * Arguments:   - uint16_t *a: pointer to in/output polynomial
+ 250:..\poly.c     **** **************************************************/
+ 251:..\poly.c     **** void poly_invntt_tomont(poly *r)
+ 252:..\poly.c     **** {
+ 349              		.loc 1 252 0
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              	.LVL36:
+ 354 0000 08B5     		push	{r3, lr}
+ 355              		.cfi_def_cfa_offset 8
+ 356              		.cfi_offset 3, -8
+ 357              		.cfi_offset 14, -4
+ 253:..\poly.c     ****   invntt(r->coeffs);
+ 358              		.loc 1 253 0
+ 359 0002 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_invntt
+ 360              	.LVL37:
+ 361 0006 08BD     		pop	{r3, pc}
+ 362              		.cfi_endproc
+ 363              	.LFE9:
+ 364              		.size	pqcrystals_kyber1024_ref_poly_invntt_tomont, .-pqcrystals_kyber1024_ref_poly_invntt_tomont
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 12
+
+
+ 365              		.section	.text.pqcrystals_kyber1024_ref_poly_basemul_montgomery,"ax",%progbits
+ 366              		.align	2
+ 367              		.global	pqcrystals_kyber1024_ref_poly_basemul_montgomery
+ 368              		.thumb
+ 369              		.thumb_func
+ 370              		.type	pqcrystals_kyber1024_ref_poly_basemul_montgomery, %function
+ 371              	pqcrystals_kyber1024_ref_poly_basemul_montgomery:
+ 372              	.LFB10:
+ 254:..\poly.c     **** }
+ 255:..\poly.c     **** 
+ 256:..\poly.c     **** /*************************************************
+ 257:..\poly.c     **** * Name:        poly_basemul_montgomery
+ 258:..\poly.c     **** *
+ 259:..\poly.c     **** * Description: Multiplication of two polynomials in NTT domain
+ 260:..\poly.c     **** *
+ 261:..\poly.c     **** * Arguments:   - poly *r:       pointer to output polynomial
+ 262:..\poly.c     **** *              - const poly *a: pointer to first input polynomial
+ 263:..\poly.c     **** *              - const poly *b: pointer to second input polynomial
+ 264:..\poly.c     **** **************************************************/
+ 265:..\poly.c     **** void poly_basemul_montgomery(poly *r, const poly *a, const poly *b)
+ 266:..\poly.c     **** {
+ 373              		.loc 1 266 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377              	.LVL38:
+ 378 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 379              		.cfi_def_cfa_offset 32
+ 380              		.cfi_offset 3, -32
+ 381              		.cfi_offset 4, -28
+ 382              		.cfi_offset 5, -24
+ 383              		.cfi_offset 6, -20
+ 384              		.cfi_offset 7, -16
+ 385              		.cfi_offset 8, -12
+ 386              		.cfi_offset 9, -8
+ 387              		.cfi_offset 14, -4
+ 388 0004 8146     		mov	r9, r0
+ 389 0006 8846     		mov	r8, r1
+ 390 0008 1746     		mov	r7, r2
+ 391              	.LVL39:
+ 267:..\poly.c     ****   unsigned int i;
+ 268:..\poly.c     ****   for(i=0;i<KYBER_N/4;i++) {
+ 392              		.loc 1 268 0
+ 393 000a 0025     		movs	r5, #0
+ 394 000c 18E0     		b	.L24
+ 395              	.LVL40:
+ 396              	.L25:
+ 269:..\poly.c     ****     basemul(&r->coeffs[4*i], &a->coeffs[4*i], &b->coeffs[4*i], zetas[64+i]);
+ 397              		.loc 1 269 0 discriminator 3
+ 398 000e AC00     		lsls	r4, r5, #2
+ 399 0010 05F14002 		add	r2, r5, #64
+ 400 0014 0C4B     		ldr	r3, .L27
+ 401 0016 33F91260 		ldrsh	r6, [r3, r2, lsl #1]
+ 402 001a E800     		lsls	r0, r5, #3
+ 403 001c 3346     		mov	r3, r6
+ 404 001e 3A18     		adds	r2, r7, r0
+ 405 0020 08EB0001 		add	r1, r8, r0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 13
+
+
+ 406 0024 4844     		add	r0, r0, r9
+ 407 0026 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_basemul
+ 408              	.LVL41:
+ 270:..\poly.c     ****     basemul(&r->coeffs[4*i+2], &a->coeffs[4*i+2], &b->coeffs[4*i+2],
+ 409              		.loc 1 270 0 discriminator 3
+ 410 002a A01C     		adds	r0, r4, #2
+ 411 002c 7342     		negs	r3, r6
+ 412 002e 4000     		lsls	r0, r0, #1
+ 413 0030 1BB2     		sxth	r3, r3
+ 414 0032 3A18     		adds	r2, r7, r0
+ 415 0034 08EB0001 		add	r1, r8, r0
+ 416 0038 4844     		add	r0, r0, r9
+ 417 003a FFF7FEFF 		bl	pqcrystals_kyber1024_ref_basemul
+ 418              	.LVL42:
+ 268:..\poly.c     ****     basemul(&r->coeffs[4*i], &a->coeffs[4*i], &b->coeffs[4*i], zetas[64+i]);
+ 419              		.loc 1 268 0 discriminator 3
+ 420 003e 0135     		adds	r5, r5, #1
+ 421              	.LVL43:
+ 422              	.L24:
+ 268:..\poly.c     ****     basemul(&r->coeffs[4*i], &a->coeffs[4*i], &b->coeffs[4*i], zetas[64+i]);
+ 423              		.loc 1 268 0 is_stmt 0 discriminator 1
+ 424 0040 3F2D     		cmp	r5, #63
+ 425 0042 E4D9     		bls	.L25
+ 271:..\poly.c     ****             -zetas[64+i]);
+ 272:..\poly.c     ****   }
+ 273:..\poly.c     **** }
+ 426              		.loc 1 273 0 is_stmt 1
+ 427 0044 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 428              	.LVL44:
+ 429              	.L28:
+ 430              		.align	2
+ 431              	.L27:
+ 432 0048 00000000 		.word	pqcrystals_kyber1024_ref_zetas
+ 433              		.cfi_endproc
+ 434              	.LFE10:
+ 435              		.size	pqcrystals_kyber1024_ref_poly_basemul_montgomery, .-pqcrystals_kyber1024_ref_poly_basemul_mo
+ 436              		.section	.text.pqcrystals_kyber1024_ref_poly_tomont,"ax",%progbits
+ 437              		.align	2
+ 438              		.global	pqcrystals_kyber1024_ref_poly_tomont
+ 439              		.thumb
+ 440              		.thumb_func
+ 441              		.type	pqcrystals_kyber1024_ref_poly_tomont, %function
+ 442              	pqcrystals_kyber1024_ref_poly_tomont:
+ 443              	.LFB11:
+ 274:..\poly.c     **** 
+ 275:..\poly.c     **** /*************************************************
+ 276:..\poly.c     **** * Name:        poly_tomont
+ 277:..\poly.c     **** *
+ 278:..\poly.c     **** * Description: Inplace conversion of all coefficients of a polynomial
+ 279:..\poly.c     **** *              from normal domain to Montgomery domain
+ 280:..\poly.c     **** *
+ 281:..\poly.c     **** * Arguments:   - poly *r: pointer to input/output polynomial
+ 282:..\poly.c     **** **************************************************/
+ 283:..\poly.c     **** void poly_tomont(poly *r)
+ 284:..\poly.c     **** {
+ 444              		.loc 1 284 0
+ 445              		.cfi_startproc
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 14
+
+
+ 446              		@ args = 0, pretend = 0, frame = 0
+ 447              		@ frame_needed = 0, uses_anonymous_args = 0
+ 448              	.LVL45:
+ 449 0000 38B5     		push	{r3, r4, r5, lr}
+ 450              		.cfi_def_cfa_offset 16
+ 451              		.cfi_offset 3, -16
+ 452              		.cfi_offset 4, -12
+ 453              		.cfi_offset 5, -8
+ 454              		.cfi_offset 14, -4
+ 455 0002 0546     		mov	r5, r0
+ 456              	.LVL46:
+ 285:..\poly.c     ****   unsigned int i;
+ 286:..\poly.c     ****   const int16_t f = (1ULL << 32) % KYBER_Q;
+ 287:..\poly.c     ****   for(i=0;i<KYBER_N;i++)
+ 457              		.loc 1 287 0
+ 458 0004 0024     		movs	r4, #0
+ 459 0006 0AE0     		b	.L30
+ 460              	.LVL47:
+ 461              	.L31:
+ 288:..\poly.c     ****     r->coeffs[i] = montgomery_reduce((int32_t)r->coeffs[i]*f);
+ 462              		.loc 1 288 0 discriminator 3
+ 463 0008 35F91430 		ldrsh	r3, [r5, r4, lsl #1]
+ 464 000c 40F24950 		movw	r0, #1353
+ 465 0010 00FB03F0 		mul	r0, r0, r3
+ 466 0014 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_montgomery_reduce
+ 467              	.LVL48:
+ 468 0018 25F81400 		strh	r0, [r5, r4, lsl #1]	@ movhi
+ 287:..\poly.c     ****     r->coeffs[i] = montgomery_reduce((int32_t)r->coeffs[i]*f);
+ 469              		.loc 1 287 0 discriminator 3
+ 470 001c 0134     		adds	r4, r4, #1
+ 471              	.LVL49:
+ 472              	.L30:
+ 287:..\poly.c     ****     r->coeffs[i] = montgomery_reduce((int32_t)r->coeffs[i]*f);
+ 473              		.loc 1 287 0 is_stmt 0 discriminator 1
+ 474 001e FF2C     		cmp	r4, #255
+ 475 0020 F2D9     		bls	.L31
+ 289:..\poly.c     **** }
+ 476              		.loc 1 289 0 is_stmt 1
+ 477 0022 38BD     		pop	{r3, r4, r5, pc}
+ 478              		.cfi_endproc
+ 479              	.LFE11:
+ 480              		.size	pqcrystals_kyber1024_ref_poly_tomont, .-pqcrystals_kyber1024_ref_poly_tomont
+ 481              		.section	.text.pqcrystals_kyber1024_ref_poly_reduce,"ax",%progbits
+ 482              		.align	2
+ 483              		.global	pqcrystals_kyber1024_ref_poly_reduce
+ 484              		.thumb
+ 485              		.thumb_func
+ 486              		.type	pqcrystals_kyber1024_ref_poly_reduce, %function
+ 487              	pqcrystals_kyber1024_ref_poly_reduce:
+ 488              	.LFB12:
+ 290:..\poly.c     **** 
+ 291:..\poly.c     **** /*************************************************
+ 292:..\poly.c     **** * Name:        poly_reduce
+ 293:..\poly.c     **** *
+ 294:..\poly.c     **** * Description: Applies Barrett reduction to all coefficients of a polynomial
+ 295:..\poly.c     **** *              for details of the Barrett reduction see comments in reduce.c
+ 296:..\poly.c     **** *
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 15
+
+
+ 297:..\poly.c     **** * Arguments:   - poly *r: pointer to input/output polynomial
+ 298:..\poly.c     **** **************************************************/
+ 299:..\poly.c     **** void poly_reduce(poly *r)
+ 300:..\poly.c     **** {
+ 489              		.loc 1 300 0
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 0
+ 492              		@ frame_needed = 0, uses_anonymous_args = 0
+ 493              	.LVL50:
+ 494 0000 38B5     		push	{r3, r4, r5, lr}
+ 495              		.cfi_def_cfa_offset 16
+ 496              		.cfi_offset 3, -16
+ 497              		.cfi_offset 4, -12
+ 498              		.cfi_offset 5, -8
+ 499              		.cfi_offset 14, -4
+ 500 0002 0546     		mov	r5, r0
+ 501              	.LVL51:
+ 301:..\poly.c     ****   unsigned int i;
+ 302:..\poly.c     ****   for(i=0;i<KYBER_N;i++)
+ 502              		.loc 1 302 0
+ 503 0004 0024     		movs	r4, #0
+ 504 0006 06E0     		b	.L34
+ 505              	.LVL52:
+ 506              	.L35:
+ 303:..\poly.c     ****     r->coeffs[i] = barrett_reduce(r->coeffs[i]);
+ 507              		.loc 1 303 0 discriminator 3
+ 508 0008 35F91400 		ldrsh	r0, [r5, r4, lsl #1]
+ 509 000c FFF7FEFF 		bl	pqcrystals_kyber1024_ref_barrett_reduce
+ 510              	.LVL53:
+ 511 0010 25F81400 		strh	r0, [r5, r4, lsl #1]	@ movhi
+ 302:..\poly.c     ****     r->coeffs[i] = barrett_reduce(r->coeffs[i]);
+ 512              		.loc 1 302 0 discriminator 3
+ 513 0014 0134     		adds	r4, r4, #1
+ 514              	.LVL54:
+ 515              	.L34:
+ 302:..\poly.c     ****     r->coeffs[i] = barrett_reduce(r->coeffs[i]);
+ 516              		.loc 1 302 0 is_stmt 0 discriminator 1
+ 517 0016 FF2C     		cmp	r4, #255
+ 518 0018 F6D9     		bls	.L35
+ 304:..\poly.c     **** }
+ 519              		.loc 1 304 0 is_stmt 1
+ 520 001a 38BD     		pop	{r3, r4, r5, pc}
+ 521              		.cfi_endproc
+ 522              	.LFE12:
+ 523              		.size	pqcrystals_kyber1024_ref_poly_reduce, .-pqcrystals_kyber1024_ref_poly_reduce
+ 524              		.section	.text.pqcrystals_kyber1024_ref_poly_ntt,"ax",%progbits
+ 525              		.align	2
+ 526              		.global	pqcrystals_kyber1024_ref_poly_ntt
+ 527              		.thumb
+ 528              		.thumb_func
+ 529              		.type	pqcrystals_kyber1024_ref_poly_ntt, %function
+ 530              	pqcrystals_kyber1024_ref_poly_ntt:
+ 531              	.LFB8:
+ 237:..\poly.c     ****   ntt(r->coeffs);
+ 532              		.loc 1 237 0
+ 533              		.cfi_startproc
+ 534              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 16
+
+
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536              	.LVL55:
+ 537 0000 10B5     		push	{r4, lr}
+ 538              		.cfi_def_cfa_offset 8
+ 539              		.cfi_offset 4, -8
+ 540              		.cfi_offset 14, -4
+ 541 0002 0446     		mov	r4, r0
+ 238:..\poly.c     ****   poly_reduce(r);
+ 542              		.loc 1 238 0
+ 543 0004 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_ntt
+ 544              	.LVL56:
+ 239:..\poly.c     **** }
+ 545              		.loc 1 239 0
+ 546 0008 2046     		mov	r0, r4
+ 547 000a FFF7FEFF 		bl	pqcrystals_kyber1024_ref_poly_reduce
+ 548              	.LVL57:
+ 549 000e 10BD     		pop	{r4, pc}
+ 550              		.cfi_endproc
+ 551              	.LFE8:
+ 552              		.size	pqcrystals_kyber1024_ref_poly_ntt, .-pqcrystals_kyber1024_ref_poly_ntt
+ 553              		.section	.text.pqcrystals_kyber1024_ref_poly_csubq,"ax",%progbits
+ 554              		.align	2
+ 555              		.global	pqcrystals_kyber1024_ref_poly_csubq
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.type	pqcrystals_kyber1024_ref_poly_csubq, %function
+ 559              	pqcrystals_kyber1024_ref_poly_csubq:
+ 560              	.LFB13:
+ 305:..\poly.c     **** 
+ 306:..\poly.c     **** /*************************************************
+ 307:..\poly.c     **** * Name:        poly_csubq
+ 308:..\poly.c     **** *
+ 309:..\poly.c     **** * Description: Applies conditional subtraction of q to each coefficient
+ 310:..\poly.c     **** *              of a polynomial. For details of conditional subtraction
+ 311:..\poly.c     **** *              of q see comments in reduce.c
+ 312:..\poly.c     **** *
+ 313:..\poly.c     **** * Arguments:   - poly *r: pointer to input/output polynomial
+ 314:..\poly.c     **** **************************************************/
+ 315:..\poly.c     **** void poly_csubq(poly *r)
+ 316:..\poly.c     **** {
+ 561              		.loc 1 316 0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565              	.LVL58:
+ 566 0000 38B5     		push	{r3, r4, r5, lr}
+ 567              		.cfi_def_cfa_offset 16
+ 568              		.cfi_offset 3, -16
+ 569              		.cfi_offset 4, -12
+ 570              		.cfi_offset 5, -8
+ 571              		.cfi_offset 14, -4
+ 572 0002 0546     		mov	r5, r0
+ 573              	.LVL59:
+ 317:..\poly.c     ****   unsigned int i;
+ 318:..\poly.c     ****   for(i=0;i<KYBER_N;i++)
+ 574              		.loc 1 318 0
+ 575 0004 0024     		movs	r4, #0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 17
+
+
+ 576 0006 06E0     		b	.L40
+ 577              	.LVL60:
+ 578              	.L41:
+ 319:..\poly.c     ****     r->coeffs[i] = csubq(r->coeffs[i]);
+ 579              		.loc 1 319 0 discriminator 3
+ 580 0008 35F91400 		ldrsh	r0, [r5, r4, lsl #1]
+ 581 000c FFF7FEFF 		bl	pqcrystals_kyber1024_ref_csubq
+ 582              	.LVL61:
+ 583 0010 25F81400 		strh	r0, [r5, r4, lsl #1]	@ movhi
+ 318:..\poly.c     ****     r->coeffs[i] = csubq(r->coeffs[i]);
+ 584              		.loc 1 318 0 discriminator 3
+ 585 0014 0134     		adds	r4, r4, #1
+ 586              	.LVL62:
+ 587              	.L40:
+ 318:..\poly.c     ****     r->coeffs[i] = csubq(r->coeffs[i]);
+ 588              		.loc 1 318 0 is_stmt 0 discriminator 1
+ 589 0016 FF2C     		cmp	r4, #255
+ 590 0018 F6D9     		bls	.L41
+ 320:..\poly.c     **** }
+ 591              		.loc 1 320 0 is_stmt 1
+ 592 001a 38BD     		pop	{r3, r4, r5, pc}
+ 593              		.cfi_endproc
+ 594              	.LFE13:
+ 595              		.size	pqcrystals_kyber1024_ref_poly_csubq, .-pqcrystals_kyber1024_ref_poly_csubq
+ 596              		.section	.text.pqcrystals_kyber1024_ref_poly_compress,"ax",%progbits
+ 597              		.align	2
+ 598              		.global	pqcrystals_kyber1024_ref_poly_compress
+ 599              		.thumb
+ 600              		.thumb_func
+ 601              		.type	pqcrystals_kyber1024_ref_poly_compress, %function
+ 602              	pqcrystals_kyber1024_ref_poly_compress:
+ 603              	.LFB0:
+  19:..\poly.c     ****   unsigned int i,j;
+ 604              		.loc 1 19 0
+ 605              		.cfi_startproc
+ 606              		@ args = 0, pretend = 0, frame = 8
+ 607              		@ frame_needed = 0, uses_anonymous_args = 0
+ 608              	.LVL63:
+ 609 0000 30B5     		push	{r4, r5, lr}
+ 610              		.cfi_def_cfa_offset 12
+ 611              		.cfi_offset 4, -12
+ 612              		.cfi_offset 5, -8
+ 613              		.cfi_offset 14, -4
+ 614 0002 83B0     		sub	sp, sp, #12
+ 615              		.cfi_def_cfa_offset 24
+ 616 0004 0546     		mov	r5, r0
+ 617 0006 0C46     		mov	r4, r1
+  23:..\poly.c     **** 
+ 618              		.loc 1 23 0
+ 619 0008 0846     		mov	r0, r1
+ 620              	.LVL64:
+ 621 000a FFF7FEFF 		bl	pqcrystals_kyber1024_ref_poly_csubq
+ 622              	.LVL65:
+  37:..\poly.c     ****     for(j=0;j<8;j++)
+ 623              		.loc 1 37 0
+ 624 000e 0020     		movs	r0, #0
+ 625 0010 40E0     		b	.L44
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 18
+
+
+ 626              	.LVL66:
+ 627              	.L45:
+  39:..\poly.c     **** 
+ 628              		.loc 1 39 0 discriminator 3
+ 629 0012 01EBC003 		add	r3, r1, r0, lsl #3
+ 630 0016 34F91320 		ldrsh	r2, [r4, r3, lsl #1]
+ 631 001a 5201     		lsls	r2, r2, #5
+ 632 001c 02F5D062 		add	r2, r2, #1664
+ 633 0020 1E4B     		ldr	r3, .L49
+ 634 0022 A3FB02E3 		umull	lr, r3, r3, r2
+ 635 0026 D21A     		subs	r2, r2, r3
+ 636 0028 03EB5203 		add	r3, r3, r2, lsr #1
+ 637 002c 02AA     		add	r2, sp, #8
+ 638 002e 0A44     		add	r2, r2, r1
+ 639 0030 C3F3C423 		ubfx	r3, r3, #11, #5
+ 640 0034 02F8083C 		strb	r3, [r2, #-8]
+  38:..\poly.c     ****       t[j] = ((((uint32_t)a->coeffs[8*i+j] << 5) + KYBER_Q/2)/KYBER_Q) & 31;
+ 641              		.loc 1 38 0 discriminator 3
+ 642 0038 0131     		adds	r1, r1, #1
+ 643              	.LVL67:
+ 644 003a 00E0     		b	.L46
+ 645              	.LVL68:
+ 646              	.L47:
+ 647 003c 0021     		movs	r1, #0
+ 648              	.L46:
+ 649              	.LVL69:
+  38:..\poly.c     ****       t[j] = ((((uint32_t)a->coeffs[8*i+j] << 5) + KYBER_Q/2)/KYBER_Q) & 31;
+ 650              		.loc 1 38 0 is_stmt 0 discriminator 1
+ 651 003e 0729     		cmp	r1, #7
+ 652 0040 E7D9     		bls	.L45
+  41:..\poly.c     ****     r[1] = (t[1] >> 3) | (t[2] << 2) | (t[3] << 7);
+ 653              		.loc 1 41 0 is_stmt 1 discriminator 2
+ 654 0042 9DF80020 		ldrb	r2, [sp]	@ zero_extendqisi2
+ 655 0046 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+ 656 004a 42EA4312 		orr	r2, r2, r3, lsl #5
+ 657 004e 2A70     		strb	r2, [r5]
+  42:..\poly.c     ****     r[2] = (t[3] >> 1) | (t[4] << 4);
+ 658              		.loc 1 42 0 discriminator 2
+ 659 0050 9DF80210 		ldrb	r1, [sp, #2]	@ zero_extendqisi2
+ 660              	.LVL70:
+ 661 0054 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 662 0058 DB08     		lsrs	r3, r3, #3
+ 663 005a 43EA8103 		orr	r3, r3, r1, lsl #2
+ 664 005e 43EAC213 		orr	r3, r3, r2, lsl #7
+ 665 0062 6B70     		strb	r3, [r5, #1]
+  43:..\poly.c     ****     r[3] = (t[4] >> 4) | (t[5] << 1) | (t[6] << 6);
+ 666              		.loc 1 43 0 discriminator 2
+ 667 0064 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 668 0068 5208     		lsrs	r2, r2, #1
+ 669 006a 42EA0312 		orr	r2, r2, r3, lsl #4
+ 670 006e AA70     		strb	r2, [r5, #2]
+  44:..\poly.c     ****     r[4] = (t[6] >> 2) | (t[7] << 3);
+ 671              		.loc 1 44 0 discriminator 2
+ 672 0070 9DF80510 		ldrb	r1, [sp, #5]	@ zero_extendqisi2
+ 673 0074 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 674 0078 1B09     		lsrs	r3, r3, #4
+ 675 007a 43EA4103 		orr	r3, r3, r1, lsl #1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 19
+
+
+ 676 007e 43EA8213 		orr	r3, r3, r2, lsl #6
+ 677 0082 EB70     		strb	r3, [r5, #3]
+  45:..\poly.c     ****     r += 5;
+ 678              		.loc 1 45 0 discriminator 2
+ 679 0084 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 680 0088 9208     		lsrs	r2, r2, #2
+ 681 008a 42EAC302 		orr	r2, r2, r3, lsl #3
+ 682 008e 2A71     		strb	r2, [r5, #4]
+  46:..\poly.c     ****   }
+ 683              		.loc 1 46 0 discriminator 2
+ 684 0090 0535     		adds	r5, r5, #5
+ 685              	.LVL71:
+  37:..\poly.c     ****     for(j=0;j<8;j++)
+ 686              		.loc 1 37 0 discriminator 2
+ 687 0092 0130     		adds	r0, r0, #1
+ 688              	.LVL72:
+ 689              	.L44:
+  37:..\poly.c     ****     for(j=0;j<8;j++)
+ 690              		.loc 1 37 0 is_stmt 0 discriminator 1
+ 691 0094 1F28     		cmp	r0, #31
+ 692 0096 D1D9     		bls	.L47
+  51:..\poly.c     **** 
+ 693              		.loc 1 51 0 is_stmt 1
+ 694 0098 03B0     		add	sp, sp, #12
+ 695              		.cfi_def_cfa_offset 12
+ 696              		@ sp needed
+ 697 009a 30BD     		pop	{r4, r5, pc}
+ 698              	.LVL73:
+ 699              	.L50:
+ 700              		.align	2
+ 701              	.L49:
+ 702 009c 8176FB3A 		.word	989558401
+ 703              		.cfi_endproc
+ 704              	.LFE0:
+ 705              		.size	pqcrystals_kyber1024_ref_poly_compress, .-pqcrystals_kyber1024_ref_poly_compress
+ 706              		.section	.text.pqcrystals_kyber1024_ref_poly_tobytes,"ax",%progbits
+ 707              		.align	2
+ 708              		.global	pqcrystals_kyber1024_ref_poly_tobytes
+ 709              		.thumb
+ 710              		.thumb_func
+ 711              		.type	pqcrystals_kyber1024_ref_poly_tobytes, %function
+ 712              	pqcrystals_kyber1024_ref_poly_tobytes:
+ 713              	.LFB2:
+ 105:..\poly.c     ****   unsigned int i;
+ 714              		.loc 1 105 0
+ 715              		.cfi_startproc
+ 716              		@ args = 0, pretend = 0, frame = 0
+ 717              		@ frame_needed = 0, uses_anonymous_args = 0
+ 718              	.LVL74:
+ 719 0000 70B5     		push	{r4, r5, r6, lr}
+ 720              		.cfi_def_cfa_offset 16
+ 721              		.cfi_offset 4, -16
+ 722              		.cfi_offset 5, -12
+ 723              		.cfi_offset 6, -8
+ 724              		.cfi_offset 14, -4
+ 725 0002 0446     		mov	r4, r0
+ 726 0004 0D46     		mov	r5, r1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 20
+
+
+ 109:..\poly.c     **** 
+ 727              		.loc 1 109 0
+ 728 0006 0846     		mov	r0, r1
+ 729              	.LVL75:
+ 730 0008 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_poly_csubq
+ 731              	.LVL76:
+ 111:..\poly.c     ****     t0 = a->coeffs[2*i];
+ 732              		.loc 1 111 0
+ 733 000c 0021     		movs	r1, #0
+ 734 000e 11E0     		b	.L52
+ 735              	.LVL77:
+ 736              	.L53:
+ 112:..\poly.c     ****     t1 = a->coeffs[2*i+1];
+ 737              		.loc 1 112 0 discriminator 3
+ 738 0010 4B00     		lsls	r3, r1, #1
+ 739 0012 35F91320 		ldrsh	r2, [r5, r3, lsl #1]
+ 740              	.LVL78:
+ 113:..\poly.c     ****     r[3*i+0] = (t0 >> 0);
+ 741              		.loc 1 113 0 discriminator 3
+ 742 0016 581C     		adds	r0, r3, #1
+ 743 0018 35F81000 		ldrh	r0, [r5, r0, lsl #1]
+ 744              	.LVL79:
+ 114:..\poly.c     ****     r[3*i+1] = (t0 >> 8) | (t1 << 4);
+ 745              		.loc 1 114 0 discriminator 3
+ 746 001c 0B44     		add	r3, r3, r1
+ 747 001e E254     		strb	r2, [r4, r3]
+ 115:..\poly.c     ****     r[3*i+2] = (t1 >> 4);
+ 748              		.loc 1 115 0 discriminator 3
+ 749 0020 5E1C     		adds	r6, r3, #1
+ 750 0022 C2F30722 		ubfx	r2, r2, #8, #8
+ 751              	.LVL80:
+ 752 0026 42EA0012 		orr	r2, r2, r0, lsl #4
+ 753 002a A255     		strb	r2, [r4, r6]
+ 116:..\poly.c     ****   }
+ 754              		.loc 1 116 0 discriminator 3
+ 755 002c 0233     		adds	r3, r3, #2
+ 756 002e 0009     		lsrs	r0, r0, #4
+ 757              	.LVL81:
+ 758 0030 E054     		strb	r0, [r4, r3]
+ 111:..\poly.c     ****     t0 = a->coeffs[2*i];
+ 759              		.loc 1 111 0 discriminator 3
+ 760 0032 0131     		adds	r1, r1, #1
+ 761              	.LVL82:
+ 762              	.L52:
+ 111:..\poly.c     ****     t0 = a->coeffs[2*i];
+ 763              		.loc 1 111 0 is_stmt 0 discriminator 1
+ 764 0034 7F29     		cmp	r1, #127
+ 765 0036 EBD9     		bls	.L53
+ 118:..\poly.c     **** 
+ 766              		.loc 1 118 0 is_stmt 1
+ 767 0038 70BD     		pop	{r4, r5, r6, pc}
+ 768              		.cfi_endproc
+ 769              	.LFE2:
+ 770              		.size	pqcrystals_kyber1024_ref_poly_tobytes, .-pqcrystals_kyber1024_ref_poly_tobytes
+ 771 003a 00BF     		.section	.text.pqcrystals_kyber1024_ref_poly_tomsg,"ax",%progbits
+ 772              		.align	2
+ 773              		.global	pqcrystals_kyber1024_ref_poly_tomsg
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 21
+
+
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.type	pqcrystals_kyber1024_ref_poly_tomsg, %function
+ 777              	pqcrystals_kyber1024_ref_poly_tomsg:
+ 778              	.LFB5:
+ 173:..\poly.c     ****   unsigned int i,j;
+ 779              		.loc 1 173 0
+ 780              		.cfi_startproc
+ 781              		@ args = 0, pretend = 0, frame = 0
+ 782              		@ frame_needed = 0, uses_anonymous_args = 0
+ 783              	.LVL83:
+ 784 0000 70B5     		push	{r4, r5, r6, lr}
+ 785              		.cfi_def_cfa_offset 16
+ 786              		.cfi_offset 4, -16
+ 787              		.cfi_offset 5, -12
+ 788              		.cfi_offset 6, -8
+ 789              		.cfi_offset 14, -4
+ 790 0002 0546     		mov	r5, r0
+ 791 0004 0C46     		mov	r4, r1
+ 177:..\poly.c     **** 
+ 792              		.loc 1 177 0
+ 793 0006 0846     		mov	r0, r1
+ 794              	.LVL84:
+ 795 0008 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_poly_csubq
+ 796              	.LVL85:
+ 179:..\poly.c     ****     msg[i] = 0;
+ 797              		.loc 1 179 0
+ 798 000c 0026     		movs	r6, #0
+ 799 000e 1BE0     		b	.L56
+ 800              	.LVL86:
+ 801              	.L59:
+ 180:..\poly.c     ****     for(j=0;j<8;j++) {
+ 802              		.loc 1 180 0
+ 803 0010 A819     		adds	r0, r5, r6
+ 804 0012 0021     		movs	r1, #0
+ 805 0014 A955     		strb	r1, [r5, r6]
+ 806              	.LVL87:
+ 181:..\poly.c     ****       t = ((((uint16_t)a->coeffs[8*i+j] << 1) + KYBER_Q/2)/KYBER_Q) & 1;
+ 807              		.loc 1 181 0
+ 808 0016 14E0     		b	.L57
+ 809              	.LVL88:
+ 810              	.L58:
+ 182:..\poly.c     ****       msg[i] |= t << j;
+ 811              		.loc 1 182 0 discriminator 3
+ 812 0018 01EBC603 		add	r3, r1, r6, lsl #3
+ 813 001c 34F81330 		ldrh	r3, [r4, r3, lsl #1]
+ 814 0020 5B00     		lsls	r3, r3, #1
+ 815 0022 03F5D063 		add	r3, r3, #1664
+ 816 0026 0A4A     		ldr	r2, .L61
+ 817 0028 82FB03E2 		smull	lr, r2, r2, r3
+ 818 002c 1A44     		add	r2, r2, r3
+ 819 002e DB17     		asrs	r3, r3, #31
+ 820 0030 C3EBE223 		rsb	r3, r3, r2, asr #11
+ 821 0034 03F00103 		and	r3, r3, #1
+ 822              	.LVL89:
+ 183:..\poly.c     ****     }
+ 823              		.loc 1 183 0 discriminator 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 22
+
+
+ 824 0038 8B40     		lsls	r3, r3, r1
+ 825              	.LVL90:
+ 826 003a 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 827              	.LVL91:
+ 828 003c 1343     		orrs	r3, r3, r2
+ 829 003e 0370     		strb	r3, [r0]
+ 830              	.LVL92:
+ 181:..\poly.c     ****       t = ((((uint16_t)a->coeffs[8*i+j] << 1) + KYBER_Q/2)/KYBER_Q) & 1;
+ 831              		.loc 1 181 0 discriminator 3
+ 832 0040 0131     		adds	r1, r1, #1
+ 833              	.LVL93:
+ 834              	.L57:
+ 181:..\poly.c     ****       t = ((((uint16_t)a->coeffs[8*i+j] << 1) + KYBER_Q/2)/KYBER_Q) & 1;
+ 835              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 836 0042 0729     		cmp	r1, #7
+ 837 0044 E8D9     		bls	.L58
+ 179:..\poly.c     ****     msg[i] = 0;
+ 838              		.loc 1 179 0 is_stmt 1 discriminator 2
+ 839 0046 0136     		adds	r6, r6, #1
+ 840              	.LVL94:
+ 841              	.L56:
+ 179:..\poly.c     ****     msg[i] = 0;
+ 842              		.loc 1 179 0 is_stmt 0 discriminator 1
+ 843 0048 1F2E     		cmp	r6, #31
+ 844 004a E1D9     		bls	.L59
+ 186:..\poly.c     **** 
+ 845              		.loc 1 186 0 is_stmt 1
+ 846 004c 70BD     		pop	{r4, r5, r6, pc}
+ 847              	.LVL95:
+ 848              	.L62:
+ 849 004e 00BF     		.align	2
+ 850              	.L61:
+ 851 0050 41BB7D9D 		.word	-1652704447
+ 852              		.cfi_endproc
+ 853              	.LFE5:
+ 854              		.size	pqcrystals_kyber1024_ref_poly_tomsg, .-pqcrystals_kyber1024_ref_poly_tomsg
+ 855              		.section	.text.pqcrystals_kyber1024_ref_poly_add,"ax",%progbits
+ 856              		.align	2
+ 857              		.global	pqcrystals_kyber1024_ref_poly_add
+ 858              		.thumb
+ 859              		.thumb_func
+ 860              		.type	pqcrystals_kyber1024_ref_poly_add, %function
+ 861              	pqcrystals_kyber1024_ref_poly_add:
+ 862              	.LFB14:
+ 321:..\poly.c     **** 
+ 322:..\poly.c     **** /*************************************************
+ 323:..\poly.c     **** * Name:        poly_add
+ 324:..\poly.c     **** *
+ 325:..\poly.c     **** * Description: Add two polynomials
+ 326:..\poly.c     **** *
+ 327:..\poly.c     **** * Arguments: - poly *r:       pointer to output polynomial
+ 328:..\poly.c     **** *            - const poly *a: pointer to first input polynomial
+ 329:..\poly.c     **** *            - const poly *b: pointer to second input polynomial
+ 330:..\poly.c     **** **************************************************/
+ 331:..\poly.c     **** void poly_add(poly *r, const poly *a, const poly *b)
+ 332:..\poly.c     **** {
+ 863              		.loc 1 332 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 23
+
+
+ 864              		.cfi_startproc
+ 865              		@ args = 0, pretend = 0, frame = 0
+ 866              		@ frame_needed = 0, uses_anonymous_args = 0
+ 867              		@ link register save eliminated.
+ 868              	.LVL96:
+ 869 0000 30B4     		push	{r4, r5}
+ 870              		.cfi_def_cfa_offset 8
+ 871              		.cfi_offset 4, -8
+ 872              		.cfi_offset 5, -4
+ 873              	.LVL97:
+ 333:..\poly.c     ****   unsigned int i;
+ 334:..\poly.c     ****   for(i=0;i<KYBER_N;i++)
+ 874              		.loc 1 334 0
+ 875 0002 0023     		movs	r3, #0
+ 876 0004 07E0     		b	.L64
+ 877              	.LVL98:
+ 878              	.L65:
+ 335:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] + b->coeffs[i];
+ 879              		.loc 1 335 0 discriminator 3
+ 880 0006 31F91350 		ldrsh	r5, [r1, r3, lsl #1]
+ 881 000a 32F91340 		ldrsh	r4, [r2, r3, lsl #1]
+ 882 000e 2C44     		add	r4, r4, r5
+ 883 0010 20F81340 		strh	r4, [r0, r3, lsl #1]	@ movhi
+ 334:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] + b->coeffs[i];
+ 884              		.loc 1 334 0 discriminator 3
+ 885 0014 0133     		adds	r3, r3, #1
+ 886              	.LVL99:
+ 887              	.L64:
+ 334:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] + b->coeffs[i];
+ 888              		.loc 1 334 0 is_stmt 0 discriminator 1
+ 889 0016 FF2B     		cmp	r3, #255
+ 890 0018 F5D9     		bls	.L65
+ 336:..\poly.c     **** }
+ 891              		.loc 1 336 0 is_stmt 1
+ 892 001a 30BC     		pop	{r4, r5}
+ 893              		.cfi_restore 5
+ 894              		.cfi_restore 4
+ 895              		.cfi_def_cfa_offset 0
+ 896 001c 7047     		bx	lr
+ 897              		.cfi_endproc
+ 898              	.LFE14:
+ 899              		.size	pqcrystals_kyber1024_ref_poly_add, .-pqcrystals_kyber1024_ref_poly_add
+ 900 001e 00BF     		.section	.text.pqcrystals_kyber1024_ref_poly_sub,"ax",%progbits
+ 901              		.align	2
+ 902              		.global	pqcrystals_kyber1024_ref_poly_sub
+ 903              		.thumb
+ 904              		.thumb_func
+ 905              		.type	pqcrystals_kyber1024_ref_poly_sub, %function
+ 906              	pqcrystals_kyber1024_ref_poly_sub:
+ 907              	.LFB15:
+ 337:..\poly.c     **** 
+ 338:..\poly.c     **** /*************************************************
+ 339:..\poly.c     **** * Name:        poly_sub
+ 340:..\poly.c     **** *
+ 341:..\poly.c     **** * Description: Subtract two polynomials
+ 342:..\poly.c     **** *
+ 343:..\poly.c     **** * Arguments: - poly *r:       pointer to output polynomial
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 24
+
+
+ 344:..\poly.c     **** *            - const poly *a: pointer to first input polynomial
+ 345:..\poly.c     **** *            - const poly *b: pointer to second input polynomial
+ 346:..\poly.c     **** **************************************************/
+ 347:..\poly.c     **** void poly_sub(poly *r, const poly *a, const poly *b)
+ 348:..\poly.c     **** {
+ 908              		.loc 1 348 0
+ 909              		.cfi_startproc
+ 910              		@ args = 0, pretend = 0, frame = 0
+ 911              		@ frame_needed = 0, uses_anonymous_args = 0
+ 912              		@ link register save eliminated.
+ 913              	.LVL100:
+ 914 0000 30B4     		push	{r4, r5}
+ 915              		.cfi_def_cfa_offset 8
+ 916              		.cfi_offset 4, -8
+ 917              		.cfi_offset 5, -4
+ 918              	.LVL101:
+ 349:..\poly.c     ****   unsigned int i;
+ 350:..\poly.c     ****   for(i=0;i<KYBER_N;i++)
+ 919              		.loc 1 350 0
+ 920 0002 0023     		movs	r3, #0
+ 921 0004 07E0     		b	.L68
+ 922              	.LVL102:
+ 923              	.L69:
+ 351:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] - b->coeffs[i];
+ 924              		.loc 1 351 0 discriminator 3
+ 925 0006 31F91340 		ldrsh	r4, [r1, r3, lsl #1]
+ 926 000a 32F91350 		ldrsh	r5, [r2, r3, lsl #1]
+ 927 000e 641B     		subs	r4, r4, r5
+ 928 0010 20F81340 		strh	r4, [r0, r3, lsl #1]	@ movhi
+ 350:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] - b->coeffs[i];
+ 929              		.loc 1 350 0 discriminator 3
+ 930 0014 0133     		adds	r3, r3, #1
+ 931              	.LVL103:
+ 932              	.L68:
+ 350:..\poly.c     ****     r->coeffs[i] = a->coeffs[i] - b->coeffs[i];
+ 933              		.loc 1 350 0 is_stmt 0 discriminator 1
+ 934 0016 FF2B     		cmp	r3, #255
+ 935 0018 F5D9     		bls	.L69
+ 352:..\poly.c     **** }
+ 936              		.loc 1 352 0 is_stmt 1
+ 937 001a 30BC     		pop	{r4, r5}
+ 938              		.cfi_restore 5
+ 939              		.cfi_restore 4
+ 940              		.cfi_def_cfa_offset 0
+ 941 001c 7047     		bx	lr
+ 942              		.cfi_endproc
+ 943              	.LFE15:
+ 944              		.size	pqcrystals_kyber1024_ref_poly_sub, .-pqcrystals_kyber1024_ref_poly_sub
+ 945 001e 00BF     		.text
+ 946              	.Letext0:
+ 947              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 948              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 949              		.file 4 "..\\poly.h"
+ 950              		.file 5 "..\\symmetric.h"
+ 951              		.file 6 "..\\cbd.h"
+ 952              		.file 7 "..\\ntt.h"
+ 953              		.file 8 "..\\reduce.h"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 25
+
+
+ 954              		.section	.debug_info,"",%progbits
+ 955              	.Ldebug_info0:
+ 956 0000 8C070000 		.4byte	0x78c
+ 957 0004 0400     		.2byte	0x4
+ 958 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 959 000a 04       		.byte	0x4
+ 960 000b 01       		.uleb128 0x1
+ 961 000c 89000000 		.4byte	.LASF50
+ 962 0010 0C       		.byte	0xc
+ 963 0011 4E050000 		.4byte	.LASF51
+ 964 0015 F8010000 		.4byte	.LASF52
+ 965 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 966 001d 00000000 		.4byte	0
+ 967 0021 00000000 		.4byte	.Ldebug_line0
+ 968 0025 02       		.uleb128 0x2
+ 969 0026 08       		.byte	0x8
+ 970 0027 07       		.byte	0x7
+ 971 0028 1B030000 		.4byte	.LASF0
+ 972 002c 02       		.uleb128 0x2
+ 973 002d 04       		.byte	0x4
+ 974 002e 07       		.byte	0x7
+ 975 002f 62030000 		.4byte	.LASF1
+ 976 0033 03       		.uleb128 0x3
+ 977 0034 04       		.byte	0x4
+ 978 0035 05       		.byte	0x5
+ 979 0036 696E7400 		.ascii	"int\000"
+ 980 003a 02       		.uleb128 0x2
+ 981 003b 01       		.byte	0x1
+ 982 003c 06       		.byte	0x6
+ 983 003d 0F030000 		.4byte	.LASF2
+ 984 0041 04       		.uleb128 0x4
+ 985 0042 9D020000 		.4byte	.LASF4
+ 986 0046 02       		.byte	0x2
+ 987 0047 1D       		.byte	0x1d
+ 988 0048 4C000000 		.4byte	0x4c
+ 989 004c 02       		.uleb128 0x2
+ 990 004d 01       		.byte	0x1
+ 991 004e 08       		.byte	0x8
+ 992 004f 01030000 		.4byte	.LASF3
+ 993 0053 04       		.uleb128 0x4
+ 994 0054 62050000 		.4byte	.LASF5
+ 995 0058 02       		.byte	0x2
+ 996 0059 29       		.byte	0x29
+ 997 005a 5E000000 		.4byte	0x5e
+ 998 005e 02       		.uleb128 0x2
+ 999 005f 02       		.byte	0x2
+ 1000 0060 05       		.byte	0x5
+ 1001 0061 43000000 		.4byte	.LASF6
+ 1002 0065 04       		.uleb128 0x4
+ 1003 0066 69010000 		.4byte	.LASF7
+ 1004 006a 02       		.byte	0x2
+ 1005 006b 2B       		.byte	0x2b
+ 1006 006c 70000000 		.4byte	0x70
+ 1007 0070 02       		.uleb128 0x2
+ 1008 0071 02       		.byte	0x2
+ 1009 0072 07       		.byte	0x7
+ 1010 0073 94040000 		.4byte	.LASF8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 26
+
+
+ 1011 0077 04       		.uleb128 0x4
+ 1012 0078 58050000 		.4byte	.LASF9
+ 1013 007c 02       		.byte	0x2
+ 1014 007d 3F       		.byte	0x3f
+ 1015 007e 82000000 		.4byte	0x82
+ 1016 0082 02       		.uleb128 0x2
+ 1017 0083 04       		.byte	0x4
+ 1018 0084 05       		.byte	0x5
+ 1019 0085 A7040000 		.4byte	.LASF10
+ 1020 0089 04       		.uleb128 0x4
+ 1021 008a 5E010000 		.4byte	.LASF11
+ 1022 008e 02       		.byte	0x2
+ 1023 008f 41       		.byte	0x41
+ 1024 0090 94000000 		.4byte	0x94
+ 1025 0094 02       		.uleb128 0x2
+ 1026 0095 04       		.byte	0x4
+ 1027 0096 07       		.byte	0x7
+ 1028 0097 3C050000 		.4byte	.LASF12
+ 1029 009b 02       		.uleb128 0x2
+ 1030 009c 08       		.byte	0x8
+ 1031 009d 05       		.byte	0x5
+ 1032 009e C9010000 		.4byte	.LASF13
+ 1033 00a2 04       		.uleb128 0x4
+ 1034 00a3 96010000 		.4byte	.LASF14
+ 1035 00a7 03       		.byte	0x3
+ 1036 00a8 18       		.byte	0x18
+ 1037 00a9 41000000 		.4byte	0x41
+ 1038 00ad 04       		.uleb128 0x4
+ 1039 00ae DF040000 		.4byte	.LASF15
+ 1040 00b2 03       		.byte	0x3
+ 1041 00b3 20       		.byte	0x20
+ 1042 00b4 53000000 		.4byte	0x53
+ 1043 00b8 04       		.uleb128 0x4
+ 1044 00b9 97030000 		.4byte	.LASF16
+ 1045 00bd 03       		.byte	0x3
+ 1046 00be 24       		.byte	0x24
+ 1047 00bf 65000000 		.4byte	0x65
+ 1048 00c3 04       		.uleb128 0x4
+ 1049 00c4 B5040000 		.4byte	.LASF17
+ 1050 00c8 03       		.byte	0x3
+ 1051 00c9 2C       		.byte	0x2c
+ 1052 00ca 77000000 		.4byte	0x77
+ 1053 00ce 04       		.uleb128 0x4
+ 1054 00cf 32030000 		.4byte	.LASF18
+ 1055 00d3 03       		.byte	0x3
+ 1056 00d4 30       		.byte	0x30
+ 1057 00d5 89000000 		.4byte	0x89
+ 1058 00d9 05       		.uleb128 0x5
+ 1059 00da 0002     		.2byte	0x200
+ 1060 00dc 04       		.byte	0x4
+ 1061 00dd 0B       		.byte	0xb
+ 1062 00de EF000000 		.4byte	0xef
+ 1063 00e2 06       		.uleb128 0x6
+ 1064 00e3 82000000 		.4byte	.LASF53
+ 1065 00e7 04       		.byte	0x4
+ 1066 00e8 0C       		.byte	0xc
+ 1067 00e9 EF000000 		.4byte	0xef
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 27
+
+
+ 1068 00ed 00       		.byte	0
+ 1069 00ee 00       		.byte	0
+ 1070 00ef 07       		.uleb128 0x7
+ 1071 00f0 AD000000 		.4byte	0xad
+ 1072 00f4 FF000000 		.4byte	0xff
+ 1073 00f8 08       		.uleb128 0x8
+ 1074 00f9 FF000000 		.4byte	0xff
+ 1075 00fd FF       		.byte	0xff
+ 1076 00fe 00       		.byte	0
+ 1077 00ff 02       		.uleb128 0x2
+ 1078 0100 04       		.byte	0x4
+ 1079 0101 07       		.byte	0x7
+ 1080 0102 4D000000 		.4byte	.LASF19
+ 1081 0106 04       		.uleb128 0x4
+ 1082 0107 B6050000 		.4byte	.LASF20
+ 1083 010b 04       		.byte	0x4
+ 1084 010c 0D       		.byte	0xd
+ 1085 010d D9000000 		.4byte	0xd9
+ 1086 0111 02       		.uleb128 0x2
+ 1087 0112 08       		.byte	0x8
+ 1088 0113 04       		.byte	0x4
+ 1089 0114 EF020000 		.4byte	.LASF21
+ 1090 0118 09       		.uleb128 0x9
+ 1091 0119 E7040000 		.4byte	.LASF22
+ 1092 011d 01       		.byte	0x1
+ 1093 011e 3F       		.byte	0x3f
+ 1094 011f 00000000 		.4byte	.LFB1
+ 1095 0123 88000000 		.4byte	.LFE1-.LFB1
+ 1096 0127 01       		.uleb128 0x1
+ 1097 0128 9C       		.byte	0x9c
+ 1098 0129 6C010000 		.4byte	0x16c
+ 1099 012d 0A       		.uleb128 0xa
+ 1100 012e 7200     		.ascii	"r\000"
+ 1101 0130 01       		.byte	0x1
+ 1102 0131 3F       		.byte	0x3f
+ 1103 0132 6C010000 		.4byte	0x16c
+ 1104 0136 01       		.uleb128 0x1
+ 1105 0137 50       		.byte	0x50
+ 1106 0138 0B       		.uleb128 0xb
+ 1107 0139 6100     		.ascii	"a\000"
+ 1108 013b 01       		.byte	0x1
+ 1109 013c 3F       		.byte	0x3f
+ 1110 013d 72010000 		.4byte	0x172
+ 1111 0141 00000000 		.4byte	.LLST0
+ 1112 0145 0C       		.uleb128 0xc
+ 1113 0146 6900     		.ascii	"i\000"
+ 1114 0148 01       		.byte	0x1
+ 1115 0149 41       		.byte	0x41
+ 1116 014a 2C000000 		.4byte	0x2c
+ 1117 014e 1E000000 		.4byte	.LLST1
+ 1118 0152 0C       		.uleb128 0xc
+ 1119 0153 6A00     		.ascii	"j\000"
+ 1120 0155 01       		.byte	0x1
+ 1121 0156 4A       		.byte	0x4a
+ 1122 0157 2C000000 		.4byte	0x2c
+ 1123 015b 3D000000 		.4byte	.LLST2
+ 1124 015f 0D       		.uleb128 0xd
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 28
+
+
+ 1125 0160 7400     		.ascii	"t\000"
+ 1126 0162 01       		.byte	0x1
+ 1127 0163 4B       		.byte	0x4b
+ 1128 0164 7D010000 		.4byte	0x17d
+ 1129 0168 02       		.uleb128 0x2
+ 1130 0169 91       		.byte	0x91
+ 1131 016a 68       		.sleb128 -24
+ 1132 016b 00       		.byte	0
+ 1133 016c 0E       		.uleb128 0xe
+ 1134 016d 04       		.byte	0x4
+ 1135 016e 06010000 		.4byte	0x106
+ 1136 0172 0E       		.uleb128 0xe
+ 1137 0173 04       		.byte	0x4
+ 1138 0174 78010000 		.4byte	0x178
+ 1139 0178 0F       		.uleb128 0xf
+ 1140 0179 A2000000 		.4byte	0xa2
+ 1141 017d 07       		.uleb128 0x7
+ 1142 017e A2000000 		.4byte	0xa2
+ 1143 0182 8D010000 		.4byte	0x18d
+ 1144 0186 08       		.uleb128 0x8
+ 1145 0187 FF000000 		.4byte	0xff
+ 1146 018b 07       		.byte	0x7
+ 1147 018c 00       		.byte	0
+ 1148 018d 09       		.uleb128 0x9
+ 1149 018e A0030000 		.4byte	.LASF23
+ 1150 0192 01       		.byte	0x1
+ 1151 0193 82       		.byte	0x82
+ 1152 0194 00000000 		.4byte	.LFB3
+ 1153 0198 38000000 		.4byte	.LFE3-.LFB3
+ 1154 019c 01       		.uleb128 0x1
+ 1155 019d 9C       		.byte	0x9c
+ 1156 019e C6010000 		.4byte	0x1c6
+ 1157 01a2 0A       		.uleb128 0xa
+ 1158 01a3 7200     		.ascii	"r\000"
+ 1159 01a5 01       		.byte	0x1
+ 1160 01a6 82       		.byte	0x82
+ 1161 01a7 6C010000 		.4byte	0x16c
+ 1162 01ab 01       		.uleb128 0x1
+ 1163 01ac 50       		.byte	0x50
+ 1164 01ad 0A       		.uleb128 0xa
+ 1165 01ae 6100     		.ascii	"a\000"
+ 1166 01b0 01       		.byte	0x1
+ 1167 01b1 82       		.byte	0x82
+ 1168 01b2 72010000 		.4byte	0x172
+ 1169 01b6 01       		.uleb128 0x1
+ 1170 01b7 51       		.byte	0x51
+ 1171 01b8 0C       		.uleb128 0xc
+ 1172 01b9 6900     		.ascii	"i\000"
+ 1173 01bb 01       		.byte	0x1
+ 1174 01bc 84       		.byte	0x84
+ 1175 01bd 2C000000 		.4byte	0x2c
+ 1176 01c1 5C000000 		.4byte	.LLST3
+ 1177 01c5 00       		.byte	0
+ 1178 01c6 09       		.uleb128 0x9
+ 1179 01c7 C9020000 		.4byte	.LASF24
+ 1180 01cb 01       		.byte	0x1
+ 1181 01cc 93       		.byte	0x93
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 29
+
+
+ 1182 01cd 00000000 		.4byte	.LFB4
+ 1183 01d1 32000000 		.4byte	.LFE4-.LFB4
+ 1184 01d5 01       		.uleb128 0x1
+ 1185 01d6 9C       		.byte	0x9c
+ 1186 01d7 1D020000 		.4byte	0x21d
+ 1187 01db 0A       		.uleb128 0xa
+ 1188 01dc 7200     		.ascii	"r\000"
+ 1189 01de 01       		.byte	0x1
+ 1190 01df 93       		.byte	0x93
+ 1191 01e0 6C010000 		.4byte	0x16c
+ 1192 01e4 01       		.uleb128 0x1
+ 1193 01e5 50       		.byte	0x50
+ 1194 01e6 0A       		.uleb128 0xa
+ 1195 01e7 6D736700 		.ascii	"msg\000"
+ 1196 01eb 01       		.byte	0x1
+ 1197 01ec 93       		.byte	0x93
+ 1198 01ed 72010000 		.4byte	0x172
+ 1199 01f1 01       		.uleb128 0x1
+ 1200 01f2 51       		.byte	0x51
+ 1201 01f3 0C       		.uleb128 0xc
+ 1202 01f4 6900     		.ascii	"i\000"
+ 1203 01f6 01       		.byte	0x1
+ 1204 01f7 95       		.byte	0x95
+ 1205 01f8 2C000000 		.4byte	0x2c
+ 1206 01fc 7B000000 		.4byte	.LLST4
+ 1207 0200 0C       		.uleb128 0xc
+ 1208 0201 6A00     		.ascii	"j\000"
+ 1209 0203 01       		.byte	0x1
+ 1210 0204 95       		.byte	0x95
+ 1211 0205 2C000000 		.4byte	0x2c
+ 1212 0209 9A000000 		.4byte	.LLST5
+ 1213 020d 10       		.uleb128 0x10
+ 1214 020e FD050000 		.4byte	.LASF25
+ 1215 0212 01       		.byte	0x1
+ 1216 0213 96       		.byte	0x96
+ 1217 0214 AD000000 		.4byte	0xad
+ 1218 0218 B8000000 		.4byte	.LLST6
+ 1219 021c 00       		.byte	0
+ 1220 021d 09       		.uleb128 0x9
+ 1221 021e C8030000 		.4byte	.LASF26
+ 1222 0222 01       		.byte	0x1
+ 1223 0223 C8       		.byte	0xc8
+ 1224 0224 00000000 		.4byte	.LFB6
+ 1225 0228 1E000000 		.4byte	.LFE6-.LFB6
+ 1226 022c 01       		.uleb128 0x1
+ 1227 022d 9C       		.byte	0x9c
+ 1228 022e A4020000 		.4byte	0x2a4
+ 1229 0232 0B       		.uleb128 0xb
+ 1230 0233 7200     		.ascii	"r\000"
+ 1231 0235 01       		.byte	0x1
+ 1232 0236 C8       		.byte	0xc8
+ 1233 0237 6C010000 		.4byte	0x16c
+ 1234 023b E7000000 		.4byte	.LLST7
+ 1235 023f 11       		.uleb128 0x11
+ 1236 0240 B0040000 		.4byte	.LASF27
+ 1237 0244 01       		.byte	0x1
+ 1238 0245 C8       		.byte	0xc8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 30
+
+
+ 1239 0246 72010000 		.4byte	0x172
+ 1240 024a 05010000 		.4byte	.LLST8
+ 1241 024e 11       		.uleb128 0x11
+ 1242 024f FB020000 		.4byte	.LASF28
+ 1243 0253 01       		.byte	0x1
+ 1244 0254 C8       		.byte	0xc8
+ 1245 0255 A2000000 		.4byte	0xa2
+ 1246 0259 31010000 		.4byte	.LLST9
+ 1247 025d 0D       		.uleb128 0xd
+ 1248 025e 62756600 		.ascii	"buf\000"
+ 1249 0262 01       		.byte	0x1
+ 1250 0263 CA       		.byte	0xca
+ 1251 0264 A4020000 		.4byte	0x2a4
+ 1252 0268 03       		.uleb128 0x3
+ 1253 0269 91       		.byte	0x91
+ 1254 026a F87E     		.sleb128 -136
+ 1255 026c 12       		.uleb128 0x12
+ 1256 026d 12000000 		.4byte	.LVL28
+ 1257 0271 2C070000 		.4byte	0x72c
+ 1258 0275 8D020000 		.4byte	0x28d
+ 1259 0279 13       		.uleb128 0x13
+ 1260 027a 01       		.uleb128 0x1
+ 1261 027b 50       		.byte	0x50
+ 1262 027c 02       		.uleb128 0x2
+ 1263 027d 7D       		.byte	0x7d
+ 1264 027e 00       		.sleb128 0
+ 1265 027f 13       		.uleb128 0x13
+ 1266 0280 01       		.uleb128 0x1
+ 1267 0281 51       		.byte	0x51
+ 1268 0282 02       		.uleb128 0x2
+ 1269 0283 08       		.byte	0x8
+ 1270 0284 80       		.byte	0x80
+ 1271 0285 13       		.uleb128 0x13
+ 1272 0286 01       		.uleb128 0x1
+ 1273 0287 52       		.byte	0x52
+ 1274 0288 03       		.uleb128 0x3
+ 1275 0289 F3       		.byte	0xf3
+ 1276 028a 01       		.uleb128 0x1
+ 1277 028b 51       		.byte	0x51
+ 1278 028c 00       		.byte	0
+ 1279 028d 14       		.uleb128 0x14
+ 1280 028e 1A000000 		.4byte	.LVL29
+ 1281 0292 37070000 		.4byte	0x737
+ 1282 0296 13       		.uleb128 0x13
+ 1283 0297 01       		.uleb128 0x1
+ 1284 0298 50       		.byte	0x50
+ 1285 0299 02       		.uleb128 0x2
+ 1286 029a 74       		.byte	0x74
+ 1287 029b 00       		.sleb128 0
+ 1288 029c 13       		.uleb128 0x13
+ 1289 029d 01       		.uleb128 0x1
+ 1290 029e 51       		.byte	0x51
+ 1291 029f 02       		.uleb128 0x2
+ 1292 02a0 7D       		.byte	0x7d
+ 1293 02a1 00       		.sleb128 0
+ 1294 02a2 00       		.byte	0
+ 1295 02a3 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 31
+
+
+ 1296 02a4 07       		.uleb128 0x7
+ 1297 02a5 A2000000 		.4byte	0xa2
+ 1298 02a9 B4020000 		.4byte	0x2b4
+ 1299 02ad 08       		.uleb128 0x8
+ 1300 02ae FF000000 		.4byte	0xff
+ 1301 02b2 7F       		.byte	0x7f
+ 1302 02b3 00       		.byte	0
+ 1303 02b4 09       		.uleb128 0x9
+ 1304 02b5 F4030000 		.4byte	.LASF29
+ 1305 02b9 01       		.byte	0x1
+ 1306 02ba DB       		.byte	0xdb
+ 1307 02bb 00000000 		.4byte	.LFB7
+ 1308 02bf 1E000000 		.4byte	.LFE7-.LFB7
+ 1309 02c3 01       		.uleb128 0x1
+ 1310 02c4 9C       		.byte	0x9c
+ 1311 02c5 3B030000 		.4byte	0x33b
+ 1312 02c9 0B       		.uleb128 0xb
+ 1313 02ca 7200     		.ascii	"r\000"
+ 1314 02cc 01       		.byte	0x1
+ 1315 02cd DB       		.byte	0xdb
+ 1316 02ce 6C010000 		.4byte	0x16c
+ 1317 02d2 52010000 		.4byte	.LLST10
+ 1318 02d6 11       		.uleb128 0x11
+ 1319 02d7 B0040000 		.4byte	.LASF27
+ 1320 02db 01       		.byte	0x1
+ 1321 02dc DB       		.byte	0xdb
+ 1322 02dd 72010000 		.4byte	0x172
+ 1323 02e1 70010000 		.4byte	.LLST11
+ 1324 02e5 11       		.uleb128 0x11
+ 1325 02e6 FB020000 		.4byte	.LASF28
+ 1326 02ea 01       		.byte	0x1
+ 1327 02eb DB       		.byte	0xdb
+ 1328 02ec A2000000 		.4byte	0xa2
+ 1329 02f0 9C010000 		.4byte	.LLST12
+ 1330 02f4 0D       		.uleb128 0xd
+ 1331 02f5 62756600 		.ascii	"buf\000"
+ 1332 02f9 01       		.byte	0x1
+ 1333 02fa DD       		.byte	0xdd
+ 1334 02fb A4020000 		.4byte	0x2a4
+ 1335 02ff 03       		.uleb128 0x3
+ 1336 0300 91       		.byte	0x91
+ 1337 0301 F87E     		.sleb128 -136
+ 1338 0303 12       		.uleb128 0x12
+ 1339 0304 12000000 		.4byte	.LVL34
+ 1340 0308 2C070000 		.4byte	0x72c
+ 1341 030c 24030000 		.4byte	0x324
+ 1342 0310 13       		.uleb128 0x13
+ 1343 0311 01       		.uleb128 0x1
+ 1344 0312 50       		.byte	0x50
+ 1345 0313 02       		.uleb128 0x2
+ 1346 0314 7D       		.byte	0x7d
+ 1347 0315 00       		.sleb128 0
+ 1348 0316 13       		.uleb128 0x13
+ 1349 0317 01       		.uleb128 0x1
+ 1350 0318 51       		.byte	0x51
+ 1351 0319 02       		.uleb128 0x2
+ 1352 031a 08       		.byte	0x8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 32
+
+
+ 1353 031b 80       		.byte	0x80
+ 1354 031c 13       		.uleb128 0x13
+ 1355 031d 01       		.uleb128 0x1
+ 1356 031e 52       		.byte	0x52
+ 1357 031f 03       		.uleb128 0x3
+ 1358 0320 F3       		.byte	0xf3
+ 1359 0321 01       		.uleb128 0x1
+ 1360 0322 51       		.byte	0x51
+ 1361 0323 00       		.byte	0
+ 1362 0324 14       		.uleb128 0x14
+ 1363 0325 1A000000 		.4byte	.LVL35
+ 1364 0329 42070000 		.4byte	0x742
+ 1365 032d 13       		.uleb128 0x13
+ 1366 032e 01       		.uleb128 0x1
+ 1367 032f 50       		.byte	0x50
+ 1368 0330 02       		.uleb128 0x2
+ 1369 0331 74       		.byte	0x74
+ 1370 0332 00       		.sleb128 0
+ 1371 0333 13       		.uleb128 0x13
+ 1372 0334 01       		.uleb128 0x1
+ 1373 0335 51       		.byte	0x51
+ 1374 0336 02       		.uleb128 0x2
+ 1375 0337 7D       		.byte	0x7d
+ 1376 0338 00       		.sleb128 0
+ 1377 0339 00       		.byte	0
+ 1378 033a 00       		.byte	0
+ 1379 033b 09       		.uleb128 0x9
+ 1380 033c 10050000 		.4byte	.LASF30
+ 1381 0340 01       		.byte	0x1
+ 1382 0341 FB       		.byte	0xfb
+ 1383 0342 00000000 		.4byte	.LFB9
+ 1384 0346 08000000 		.4byte	.LFE9-.LFB9
+ 1385 034a 01       		.uleb128 0x1
+ 1386 034b 9C       		.byte	0x9c
+ 1387 034c 6F030000 		.4byte	0x36f
+ 1388 0350 0B       		.uleb128 0xb
+ 1389 0351 7200     		.ascii	"r\000"
+ 1390 0353 01       		.byte	0x1
+ 1391 0354 FB       		.byte	0xfb
+ 1392 0355 6C010000 		.4byte	0x16c
+ 1393 0359 BD010000 		.4byte	.LLST13
+ 1394 035d 14       		.uleb128 0x14
+ 1395 035e 06000000 		.4byte	.LVL37
+ 1396 0362 4D070000 		.4byte	0x74d
+ 1397 0366 13       		.uleb128 0x13
+ 1398 0367 01       		.uleb128 0x1
+ 1399 0368 50       		.byte	0x50
+ 1400 0369 03       		.uleb128 0x3
+ 1401 036a F3       		.byte	0xf3
+ 1402 036b 01       		.uleb128 0x1
+ 1403 036c 50       		.byte	0x50
+ 1404 036d 00       		.byte	0
+ 1405 036e 00       		.byte	0
+ 1406 036f 15       		.uleb128 0x15
+ 1407 0370 20040000 		.4byte	.LASF31
+ 1408 0374 01       		.byte	0x1
+ 1409 0375 0901     		.2byte	0x109
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 33
+
+
+ 1410 0377 00000000 		.4byte	.LFB10
+ 1411 037b 4C000000 		.4byte	.LFE10-.LFB10
+ 1412 037f 01       		.uleb128 0x1
+ 1413 0380 9C       		.byte	0x9c
+ 1414 0381 25040000 		.4byte	0x425
+ 1415 0385 16       		.uleb128 0x16
+ 1416 0386 7200     		.ascii	"r\000"
+ 1417 0388 01       		.byte	0x1
+ 1418 0389 0901     		.2byte	0x109
+ 1419 038b 6C010000 		.4byte	0x16c
+ 1420 038f DE010000 		.4byte	.LLST14
+ 1421 0393 16       		.uleb128 0x16
+ 1422 0394 6100     		.ascii	"a\000"
+ 1423 0396 01       		.byte	0x1
+ 1424 0397 0901     		.2byte	0x109
+ 1425 0399 25040000 		.4byte	0x425
+ 1426 039d 0A020000 		.4byte	.LLST15
+ 1427 03a1 16       		.uleb128 0x16
+ 1428 03a2 6200     		.ascii	"b\000"
+ 1429 03a4 01       		.byte	0x1
+ 1430 03a5 0901     		.2byte	0x109
+ 1431 03a7 25040000 		.4byte	0x425
+ 1432 03ab 36020000 		.4byte	.LLST16
+ 1433 03af 17       		.uleb128 0x17
+ 1434 03b0 6900     		.ascii	"i\000"
+ 1435 03b2 01       		.byte	0x1
+ 1436 03b3 0B01     		.2byte	0x10b
+ 1437 03b5 2C000000 		.4byte	0x2c
+ 1438 03b9 62020000 		.4byte	.LLST17
+ 1439 03bd 12       		.uleb128 0x12
+ 1440 03be 2A000000 		.4byte	.LVL41
+ 1441 03c2 58070000 		.4byte	0x758
+ 1442 03c6 F2030000 		.4byte	0x3f2
+ 1443 03ca 13       		.uleb128 0x13
+ 1444 03cb 01       		.uleb128 0x1
+ 1445 03cc 50       		.byte	0x50
+ 1446 03cd 07       		.uleb128 0x7
+ 1447 03ce 75       		.byte	0x75
+ 1448 03cf 00       		.sleb128 0
+ 1449 03d0 33       		.byte	0x33
+ 1450 03d1 24       		.byte	0x24
+ 1451 03d2 79       		.byte	0x79
+ 1452 03d3 00       		.sleb128 0
+ 1453 03d4 22       		.byte	0x22
+ 1454 03d5 13       		.uleb128 0x13
+ 1455 03d6 01       		.uleb128 0x1
+ 1456 03d7 51       		.byte	0x51
+ 1457 03d8 07       		.uleb128 0x7
+ 1458 03d9 75       		.byte	0x75
+ 1459 03da 00       		.sleb128 0
+ 1460 03db 33       		.byte	0x33
+ 1461 03dc 24       		.byte	0x24
+ 1462 03dd 78       		.byte	0x78
+ 1463 03de 00       		.sleb128 0
+ 1464 03df 22       		.byte	0x22
+ 1465 03e0 13       		.uleb128 0x13
+ 1466 03e1 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 34
+
+
+ 1467 03e2 52       		.byte	0x52
+ 1468 03e3 07       		.uleb128 0x7
+ 1469 03e4 75       		.byte	0x75
+ 1470 03e5 00       		.sleb128 0
+ 1471 03e6 33       		.byte	0x33
+ 1472 03e7 24       		.byte	0x24
+ 1473 03e8 77       		.byte	0x77
+ 1474 03e9 00       		.sleb128 0
+ 1475 03ea 22       		.byte	0x22
+ 1476 03eb 13       		.uleb128 0x13
+ 1477 03ec 01       		.uleb128 0x1
+ 1478 03ed 53       		.byte	0x53
+ 1479 03ee 02       		.uleb128 0x2
+ 1480 03ef 76       		.byte	0x76
+ 1481 03f0 00       		.sleb128 0
+ 1482 03f1 00       		.byte	0
+ 1483 03f2 14       		.uleb128 0x14
+ 1484 03f3 3E000000 		.4byte	.LVL42
+ 1485 03f7 58070000 		.4byte	0x758
+ 1486 03fb 13       		.uleb128 0x13
+ 1487 03fc 01       		.uleb128 0x1
+ 1488 03fd 50       		.byte	0x50
+ 1489 03fe 07       		.uleb128 0x7
+ 1490 03ff 74       		.byte	0x74
+ 1491 0400 02       		.sleb128 2
+ 1492 0401 31       		.byte	0x31
+ 1493 0402 24       		.byte	0x24
+ 1494 0403 79       		.byte	0x79
+ 1495 0404 00       		.sleb128 0
+ 1496 0405 22       		.byte	0x22
+ 1497 0406 13       		.uleb128 0x13
+ 1498 0407 01       		.uleb128 0x1
+ 1499 0408 51       		.byte	0x51
+ 1500 0409 07       		.uleb128 0x7
+ 1501 040a 74       		.byte	0x74
+ 1502 040b 02       		.sleb128 2
+ 1503 040c 31       		.byte	0x31
+ 1504 040d 24       		.byte	0x24
+ 1505 040e 78       		.byte	0x78
+ 1506 040f 00       		.sleb128 0
+ 1507 0410 22       		.byte	0x22
+ 1508 0411 13       		.uleb128 0x13
+ 1509 0412 01       		.uleb128 0x1
+ 1510 0413 52       		.byte	0x52
+ 1511 0414 07       		.uleb128 0x7
+ 1512 0415 74       		.byte	0x74
+ 1513 0416 02       		.sleb128 2
+ 1514 0417 31       		.byte	0x31
+ 1515 0418 24       		.byte	0x24
+ 1516 0419 77       		.byte	0x77
+ 1517 041a 00       		.sleb128 0
+ 1518 041b 22       		.byte	0x22
+ 1519 041c 13       		.uleb128 0x13
+ 1520 041d 01       		.uleb128 0x1
+ 1521 041e 53       		.byte	0x53
+ 1522 041f 03       		.uleb128 0x3
+ 1523 0420 76       		.byte	0x76
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 35
+
+
+ 1524 0421 00       		.sleb128 0
+ 1525 0422 1F       		.byte	0x1f
+ 1526 0423 00       		.byte	0
+ 1527 0424 00       		.byte	0
+ 1528 0425 0E       		.uleb128 0xe
+ 1529 0426 04       		.byte	0x4
+ 1530 0427 2B040000 		.4byte	0x42b
+ 1531 042b 0F       		.uleb128 0xf
+ 1532 042c 06010000 		.4byte	0x106
+ 1533 0430 15       		.uleb128 0x15
+ 1534 0431 91050000 		.4byte	.LASF32
+ 1535 0435 01       		.byte	0x1
+ 1536 0436 1B01     		.2byte	0x11b
+ 1537 0438 00000000 		.4byte	.LFB11
+ 1538 043c 24000000 		.4byte	.LFE11-.LFB11
+ 1539 0440 01       		.uleb128 0x1
+ 1540 0441 9C       		.byte	0x9c
+ 1541 0442 78040000 		.4byte	0x478
+ 1542 0446 16       		.uleb128 0x16
+ 1543 0447 7200     		.ascii	"r\000"
+ 1544 0449 01       		.byte	0x1
+ 1545 044a 1B01     		.2byte	0x11b
+ 1546 044c 6C010000 		.4byte	0x16c
+ 1547 0450 81020000 		.4byte	.LLST18
+ 1548 0454 17       		.uleb128 0x17
+ 1549 0455 6900     		.ascii	"i\000"
+ 1550 0457 01       		.byte	0x1
+ 1551 0458 1D01     		.2byte	0x11d
+ 1552 045a 2C000000 		.4byte	0x2c
+ 1553 045e 9F020000 		.4byte	.LLST19
+ 1554 0462 18       		.uleb128 0x18
+ 1555 0463 6600     		.ascii	"f\000"
+ 1556 0465 01       		.byte	0x1
+ 1557 0466 1E01     		.2byte	0x11e
+ 1558 0468 78040000 		.4byte	0x478
+ 1559 046c 4905     		.2byte	0x549
+ 1560 046e 19       		.uleb128 0x19
+ 1561 046f 18000000 		.4byte	.LVL48
+ 1562 0473 63070000 		.4byte	0x763
+ 1563 0477 00       		.byte	0
+ 1564 0478 0F       		.uleb128 0xf
+ 1565 0479 AD000000 		.4byte	0xad
+ 1566 047d 15       		.uleb128 0x15
+ 1567 047e 6C050000 		.4byte	.LASF33
+ 1568 0482 01       		.byte	0x1
+ 1569 0483 2B01     		.2byte	0x12b
+ 1570 0485 00000000 		.4byte	.LFB12
+ 1571 0489 1C000000 		.4byte	.LFE12-.LFB12
+ 1572 048d 01       		.uleb128 0x1
+ 1573 048e 9C       		.byte	0x9c
+ 1574 048f B9040000 		.4byte	0x4b9
+ 1575 0493 16       		.uleb128 0x16
+ 1576 0494 7200     		.ascii	"r\000"
+ 1577 0496 01       		.byte	0x1
+ 1578 0497 2B01     		.2byte	0x12b
+ 1579 0499 6C010000 		.4byte	0x16c
+ 1580 049d BE020000 		.4byte	.LLST20
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 36
+
+
+ 1581 04a1 17       		.uleb128 0x17
+ 1582 04a2 6900     		.ascii	"i\000"
+ 1583 04a4 01       		.byte	0x1
+ 1584 04a5 2D01     		.2byte	0x12d
+ 1585 04a7 2C000000 		.4byte	0x2c
+ 1586 04ab DC020000 		.4byte	.LLST21
+ 1587 04af 19       		.uleb128 0x19
+ 1588 04b0 10000000 		.4byte	.LVL53
+ 1589 04b4 6E070000 		.4byte	0x76e
+ 1590 04b8 00       		.byte	0
+ 1591 04b9 09       		.uleb128 0x9
+ 1592 04ba DB050000 		.4byte	.LASF34
+ 1593 04be 01       		.byte	0x1
+ 1594 04bf EC       		.byte	0xec
+ 1595 04c0 00000000 		.4byte	.LFB8
+ 1596 04c4 10000000 		.4byte	.LFE8-.LFB8
+ 1597 04c8 01       		.uleb128 0x1
+ 1598 04c9 9C       		.byte	0x9c
+ 1599 04ca 00050000 		.4byte	0x500
+ 1600 04ce 0B       		.uleb128 0xb
+ 1601 04cf 7200     		.ascii	"r\000"
+ 1602 04d1 01       		.byte	0x1
+ 1603 04d2 EC       		.byte	0xec
+ 1604 04d3 6C010000 		.4byte	0x16c
+ 1605 04d7 FB020000 		.4byte	.LLST22
+ 1606 04db 12       		.uleb128 0x12
+ 1607 04dc 08000000 		.4byte	.LVL56
+ 1608 04e0 79070000 		.4byte	0x779
+ 1609 04e4 EF040000 		.4byte	0x4ef
+ 1610 04e8 13       		.uleb128 0x13
+ 1611 04e9 01       		.uleb128 0x1
+ 1612 04ea 50       		.byte	0x50
+ 1613 04eb 02       		.uleb128 0x2
+ 1614 04ec 74       		.byte	0x74
+ 1615 04ed 00       		.sleb128 0
+ 1616 04ee 00       		.byte	0
+ 1617 04ef 14       		.uleb128 0x14
+ 1618 04f0 0E000000 		.4byte	.LVL57
+ 1619 04f4 7D040000 		.4byte	0x47d
+ 1620 04f8 13       		.uleb128 0x13
+ 1621 04f9 01       		.uleb128 0x1
+ 1622 04fa 50       		.byte	0x50
+ 1623 04fb 02       		.uleb128 0x2
+ 1624 04fc 74       		.byte	0x74
+ 1625 04fd 00       		.sleb128 0
+ 1626 04fe 00       		.byte	0
+ 1627 04ff 00       		.byte	0
+ 1628 0500 15       		.uleb128 0x15
+ 1629 0501 00000000 		.4byte	.LASF35
+ 1630 0505 01       		.byte	0x1
+ 1631 0506 3B01     		.2byte	0x13b
+ 1632 0508 00000000 		.4byte	.LFB13
+ 1633 050c 1C000000 		.4byte	.LFE13-.LFB13
+ 1634 0510 01       		.uleb128 0x1
+ 1635 0511 9C       		.byte	0x9c
+ 1636 0512 3C050000 		.4byte	0x53c
+ 1637 0516 16       		.uleb128 0x16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 37
+
+
+ 1638 0517 7200     		.ascii	"r\000"
+ 1639 0519 01       		.byte	0x1
+ 1640 051a 3B01     		.2byte	0x13b
+ 1641 051c 6C010000 		.4byte	0x16c
+ 1642 0520 19030000 		.4byte	.LLST23
+ 1643 0524 17       		.uleb128 0x17
+ 1644 0525 6900     		.ascii	"i\000"
+ 1645 0527 01       		.byte	0x1
+ 1646 0528 3D01     		.2byte	0x13d
+ 1647 052a 2C000000 		.4byte	0x2c
+ 1648 052e 37030000 		.4byte	.LLST24
+ 1649 0532 19       		.uleb128 0x19
+ 1650 0533 10000000 		.4byte	.LVL61
+ 1651 0537 84070000 		.4byte	0x784
+ 1652 053b 00       		.byte	0
+ 1653 053c 09       		.uleb128 0x9
+ 1654 053d 3B030000 		.4byte	.LASF36
+ 1655 0541 01       		.byte	0x1
+ 1656 0542 12       		.byte	0x12
+ 1657 0543 00000000 		.4byte	.LFB0
+ 1658 0547 A0000000 		.4byte	.LFE0-.LFB0
+ 1659 054b 01       		.uleb128 0x1
+ 1660 054c 9C       		.byte	0x9c
+ 1661 054d A2050000 		.4byte	0x5a2
+ 1662 0551 0B       		.uleb128 0xb
+ 1663 0552 7200     		.ascii	"r\000"
+ 1664 0554 01       		.byte	0x1
+ 1665 0555 12       		.byte	0x12
+ 1666 0556 A2050000 		.4byte	0x5a2
+ 1667 055a 56030000 		.4byte	.LLST25
+ 1668 055e 0B       		.uleb128 0xb
+ 1669 055f 6100     		.ascii	"a\000"
+ 1670 0561 01       		.byte	0x1
+ 1671 0562 12       		.byte	0x12
+ 1672 0563 6C010000 		.4byte	0x16c
+ 1673 0567 74030000 		.4byte	.LLST26
+ 1674 056b 0C       		.uleb128 0xc
+ 1675 056c 6900     		.ascii	"i\000"
+ 1676 056e 01       		.byte	0x1
+ 1677 056f 14       		.byte	0x14
+ 1678 0570 2C000000 		.4byte	0x2c
+ 1679 0574 A0030000 		.4byte	.LLST27
+ 1680 0578 0C       		.uleb128 0xc
+ 1681 0579 6A00     		.ascii	"j\000"
+ 1682 057b 01       		.byte	0x1
+ 1683 057c 14       		.byte	0x14
+ 1684 057d 2C000000 		.4byte	0x2c
+ 1685 0581 BF030000 		.4byte	.LLST28
+ 1686 0585 0D       		.uleb128 0xd
+ 1687 0586 7400     		.ascii	"t\000"
+ 1688 0588 01       		.byte	0x1
+ 1689 0589 15       		.byte	0x15
+ 1690 058a 7D010000 		.4byte	0x17d
+ 1691 058e 02       		.uleb128 0x2
+ 1692 058f 91       		.byte	0x91
+ 1693 0590 68       		.sleb128 -24
+ 1694 0591 14       		.uleb128 0x14
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 38
+
+
+ 1695 0592 0E000000 		.4byte	.LVL65
+ 1696 0596 00050000 		.4byte	0x500
+ 1697 059a 13       		.uleb128 0x13
+ 1698 059b 01       		.uleb128 0x1
+ 1699 059c 50       		.byte	0x50
+ 1700 059d 02       		.uleb128 0x2
+ 1701 059e 74       		.byte	0x74
+ 1702 059f 00       		.sleb128 0
+ 1703 05a0 00       		.byte	0
+ 1704 05a1 00       		.byte	0
+ 1705 05a2 0E       		.uleb128 0xe
+ 1706 05a3 04       		.byte	0x4
+ 1707 05a4 A2000000 		.4byte	0xa2
+ 1708 05a8 09       		.uleb128 0x9
+ 1709 05a9 6E040000 		.4byte	.LASF37
+ 1710 05ad 01       		.byte	0x1
+ 1711 05ae 68       		.byte	0x68
+ 1712 05af 00000000 		.4byte	.LFB2
+ 1713 05b3 3A000000 		.4byte	.LFE2-.LFB2
+ 1714 05b7 01       		.uleb128 0x1
+ 1715 05b8 9C       		.byte	0x9c
+ 1716 05b9 11060000 		.4byte	0x611
+ 1717 05bd 0B       		.uleb128 0xb
+ 1718 05be 7200     		.ascii	"r\000"
+ 1719 05c0 01       		.byte	0x1
+ 1720 05c1 68       		.byte	0x68
+ 1721 05c2 A2050000 		.4byte	0x5a2
+ 1722 05c6 DD030000 		.4byte	.LLST29
+ 1723 05ca 0B       		.uleb128 0xb
+ 1724 05cb 6100     		.ascii	"a\000"
+ 1725 05cd 01       		.byte	0x1
+ 1726 05ce 68       		.byte	0x68
+ 1727 05cf 6C010000 		.4byte	0x16c
+ 1728 05d3 FB030000 		.4byte	.LLST30
+ 1729 05d7 0C       		.uleb128 0xc
+ 1730 05d8 6900     		.ascii	"i\000"
+ 1731 05da 01       		.byte	0x1
+ 1732 05db 6A       		.byte	0x6a
+ 1733 05dc 2C000000 		.4byte	0x2c
+ 1734 05e0 19040000 		.4byte	.LLST31
+ 1735 05e4 0C       		.uleb128 0xc
+ 1736 05e5 743000   		.ascii	"t0\000"
+ 1737 05e8 01       		.byte	0x1
+ 1738 05e9 6B       		.byte	0x6b
+ 1739 05ea B8000000 		.4byte	0xb8
+ 1740 05ee 38040000 		.4byte	.LLST32
+ 1741 05f2 0C       		.uleb128 0xc
+ 1742 05f3 743100   		.ascii	"t1\000"
+ 1743 05f6 01       		.byte	0x1
+ 1744 05f7 6B       		.byte	0x6b
+ 1745 05f8 B8000000 		.4byte	0xb8
+ 1746 05fc 4B040000 		.4byte	.LLST33
+ 1747 0600 14       		.uleb128 0x14
+ 1748 0601 0C000000 		.4byte	.LVL76
+ 1749 0605 00050000 		.4byte	0x500
+ 1750 0609 13       		.uleb128 0x13
+ 1751 060a 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 39
+
+
+ 1752 060b 50       		.byte	0x50
+ 1753 060c 02       		.uleb128 0x2
+ 1754 060d 75       		.byte	0x75
+ 1755 060e 00       		.sleb128 0
+ 1756 060f 00       		.byte	0
+ 1757 0610 00       		.byte	0
+ 1758 0611 09       		.uleb128 0x9
+ 1759 0612 79020000 		.4byte	.LASF38
+ 1760 0616 01       		.byte	0x1
+ 1761 0617 AC       		.byte	0xac
+ 1762 0618 00000000 		.4byte	.LFB5
+ 1763 061c 54000000 		.4byte	.LFE5-.LFB5
+ 1764 0620 01       		.uleb128 0x1
+ 1765 0621 9C       		.byte	0x9c
+ 1766 0622 7A060000 		.4byte	0x67a
+ 1767 0626 0B       		.uleb128 0xb
+ 1768 0627 6D736700 		.ascii	"msg\000"
+ 1769 062b 01       		.byte	0x1
+ 1770 062c AC       		.byte	0xac
+ 1771 062d A2050000 		.4byte	0x5a2
+ 1772 0631 5E040000 		.4byte	.LLST34
+ 1773 0635 0B       		.uleb128 0xb
+ 1774 0636 6100     		.ascii	"a\000"
+ 1775 0638 01       		.byte	0x1
+ 1776 0639 AC       		.byte	0xac
+ 1777 063a 6C010000 		.4byte	0x16c
+ 1778 063e 8A040000 		.4byte	.LLST35
+ 1779 0642 0C       		.uleb128 0xc
+ 1780 0643 6900     		.ascii	"i\000"
+ 1781 0645 01       		.byte	0x1
+ 1782 0646 AE       		.byte	0xae
+ 1783 0647 2C000000 		.4byte	0x2c
+ 1784 064b B6040000 		.4byte	.LLST36
+ 1785 064f 0C       		.uleb128 0xc
+ 1786 0650 6A00     		.ascii	"j\000"
+ 1787 0652 01       		.byte	0x1
+ 1788 0653 AE       		.byte	0xae
+ 1789 0654 2C000000 		.4byte	0x2c
+ 1790 0658 D5040000 		.4byte	.LLST37
+ 1791 065c 0C       		.uleb128 0xc
+ 1792 065d 7400     		.ascii	"t\000"
+ 1793 065f 01       		.byte	0x1
+ 1794 0660 AF       		.byte	0xaf
+ 1795 0661 B8000000 		.4byte	0xb8
+ 1796 0665 F4040000 		.4byte	.LLST38
+ 1797 0669 14       		.uleb128 0x14
+ 1798 066a 0C000000 		.4byte	.LVL85
+ 1799 066e 00050000 		.4byte	0x500
+ 1800 0672 13       		.uleb128 0x13
+ 1801 0673 01       		.uleb128 0x1
+ 1802 0674 50       		.byte	0x50
+ 1803 0675 02       		.uleb128 0x2
+ 1804 0676 74       		.byte	0x74
+ 1805 0677 00       		.sleb128 0
+ 1806 0678 00       		.byte	0
+ 1807 0679 00       		.byte	0
+ 1808 067a 15       		.uleb128 0x15
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 40
+
+
+ 1809 067b 3C010000 		.4byte	.LASF39
+ 1810 067f 01       		.byte	0x1
+ 1811 0680 4B01     		.2byte	0x14b
+ 1812 0682 00000000 		.4byte	.LFB14
+ 1813 0686 1E000000 		.4byte	.LFE14-.LFB14
+ 1814 068a 01       		.uleb128 0x1
+ 1815 068b 9C       		.byte	0x9c
+ 1816 068c C3060000 		.4byte	0x6c3
+ 1817 0690 1A       		.uleb128 0x1a
+ 1818 0691 7200     		.ascii	"r\000"
+ 1819 0693 01       		.byte	0x1
+ 1820 0694 4B01     		.2byte	0x14b
+ 1821 0696 6C010000 		.4byte	0x16c
+ 1822 069a 01       		.uleb128 0x1
+ 1823 069b 50       		.byte	0x50
+ 1824 069c 1A       		.uleb128 0x1a
+ 1825 069d 6100     		.ascii	"a\000"
+ 1826 069f 01       		.byte	0x1
+ 1827 06a0 4B01     		.2byte	0x14b
+ 1828 06a2 25040000 		.4byte	0x425
+ 1829 06a6 01       		.uleb128 0x1
+ 1830 06a7 51       		.byte	0x51
+ 1831 06a8 1A       		.uleb128 0x1a
+ 1832 06a9 6200     		.ascii	"b\000"
+ 1833 06ab 01       		.byte	0x1
+ 1834 06ac 4B01     		.2byte	0x14b
+ 1835 06ae 25040000 		.4byte	0x425
+ 1836 06b2 01       		.uleb128 0x1
+ 1837 06b3 52       		.byte	0x52
+ 1838 06b4 17       		.uleb128 0x17
+ 1839 06b5 6900     		.ascii	"i\000"
+ 1840 06b7 01       		.byte	0x1
+ 1841 06b8 4D01     		.2byte	0x14d
+ 1842 06ba 2C000000 		.4byte	0x2c
+ 1843 06be A1050000 		.4byte	.LLST39
+ 1844 06c2 00       		.byte	0
+ 1845 06c3 15       		.uleb128 0x15
+ 1846 06c4 BD040000 		.4byte	.LASF40
+ 1847 06c8 01       		.byte	0x1
+ 1848 06c9 5B01     		.2byte	0x15b
+ 1849 06cb 00000000 		.4byte	.LFB15
+ 1850 06cf 1E000000 		.4byte	.LFE15-.LFB15
+ 1851 06d3 01       		.uleb128 0x1
+ 1852 06d4 9C       		.byte	0x9c
+ 1853 06d5 0C070000 		.4byte	0x70c
+ 1854 06d9 1A       		.uleb128 0x1a
+ 1855 06da 7200     		.ascii	"r\000"
+ 1856 06dc 01       		.byte	0x1
+ 1857 06dd 5B01     		.2byte	0x15b
+ 1858 06df 6C010000 		.4byte	0x16c
+ 1859 06e3 01       		.uleb128 0x1
+ 1860 06e4 50       		.byte	0x50
+ 1861 06e5 1A       		.uleb128 0x1a
+ 1862 06e6 6100     		.ascii	"a\000"
+ 1863 06e8 01       		.byte	0x1
+ 1864 06e9 5B01     		.2byte	0x15b
+ 1865 06eb 25040000 		.4byte	0x425
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 41
+
+
+ 1866 06ef 01       		.uleb128 0x1
+ 1867 06f0 51       		.byte	0x51
+ 1868 06f1 1A       		.uleb128 0x1a
+ 1869 06f2 6200     		.ascii	"b\000"
+ 1870 06f4 01       		.byte	0x1
+ 1871 06f5 5B01     		.2byte	0x15b
+ 1872 06f7 25040000 		.4byte	0x425
+ 1873 06fb 01       		.uleb128 0x1
+ 1874 06fc 52       		.byte	0x52
+ 1875 06fd 17       		.uleb128 0x17
+ 1876 06fe 6900     		.ascii	"i\000"
+ 1877 0700 01       		.byte	0x1
+ 1878 0701 5D01     		.2byte	0x15d
+ 1879 0703 2C000000 		.4byte	0x2c
+ 1880 0707 C0050000 		.4byte	.LLST40
+ 1881 070b 00       		.byte	0
+ 1882 070c 07       		.uleb128 0x7
+ 1883 070d 78040000 		.4byte	0x478
+ 1884 0711 1C070000 		.4byte	0x71c
+ 1885 0715 08       		.uleb128 0x8
+ 1886 0716 FF000000 		.4byte	0xff
+ 1887 071a 7F       		.byte	0x7f
+ 1888 071b 00       		.byte	0
+ 1889 071c 1B       		.uleb128 0x1b
+ 1890 071d 5A020000 		.4byte	.LASF54
+ 1891 0721 07       		.byte	0x7
+ 1892 0722 08       		.byte	0x8
+ 1893 0723 27070000 		.4byte	0x727
+ 1894 0727 0F       		.uleb128 0xf
+ 1895 0728 0C070000 		.4byte	0x70c
+ 1896 072c 1C       		.uleb128 0x1c
+ 1897 072d 56000000 		.4byte	.LASF41
+ 1898 0731 56000000 		.4byte	.LASF41
+ 1899 0735 05       		.byte	0x5
+ 1900 0736 38       		.byte	0x38
+ 1901 0737 1C       		.uleb128 0x1c
+ 1902 0738 A7020000 		.4byte	.LASF42
+ 1903 073c A7020000 		.4byte	.LASF42
+ 1904 0740 06       		.byte	0x6
+ 1905 0741 09       		.byte	0x9
+ 1906 0742 1C       		.uleb128 0x1c
+ 1907 0743 74010000 		.4byte	.LASF43
+ 1908 0747 74010000 		.4byte	.LASF43
+ 1909 074b 06       		.byte	0x6
+ 1910 074c 0C       		.byte	0xc
+ 1911 074d 1C       		.uleb128 0x1c
+ 1912 074e BB050000 		.4byte	.LASF44
+ 1913 0752 BB050000 		.4byte	.LASF44
+ 1914 0756 07       		.byte	0x7
+ 1915 0757 11       		.byte	0x11
+ 1916 0758 1C       		.uleb128 0x1c
+ 1917 0759 D7010000 		.4byte	.LASF45
+ 1918 075d D7010000 		.4byte	.LASF45
+ 1919 0761 07       		.byte	0x7
+ 1920 0762 14       		.byte	0x14
+ 1921 0763 1C       		.uleb128 0x1c
+ 1922 0764 9E010000 		.4byte	.LASF46
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 42
+
+
+ 1923 0768 9E010000 		.4byte	.LASF46
+ 1924 076c 08       		.byte	0x8
+ 1925 076d 0B       		.byte	0xb
+ 1926 076e 1C       		.uleb128 0x1c
+ 1927 076f 6F030000 		.4byte	.LASF47
+ 1928 0773 6F030000 		.4byte	.LASF47
+ 1929 0777 08       		.byte	0x8
+ 1930 0778 0E       		.byte	0xe
+ 1931 0779 1C       		.uleb128 0x1c
+ 1932 077a 51040000 		.4byte	.LASF48
+ 1933 077e 51040000 		.4byte	.LASF48
+ 1934 0782 07       		.byte	0x7
+ 1935 0783 0E       		.byte	0xe
+ 1936 0784 1C       		.uleb128 0x1c
+ 1937 0785 24000000 		.4byte	.LASF49
+ 1938 0789 24000000 		.4byte	.LASF49
+ 1939 078d 08       		.byte	0x8
+ 1940 078e 11       		.byte	0x11
+ 1941 078f 00       		.byte	0
+ 1942              		.section	.debug_abbrev,"",%progbits
+ 1943              	.Ldebug_abbrev0:
+ 1944 0000 01       		.uleb128 0x1
+ 1945 0001 11       		.uleb128 0x11
+ 1946 0002 01       		.byte	0x1
+ 1947 0003 25       		.uleb128 0x25
+ 1948 0004 0E       		.uleb128 0xe
+ 1949 0005 13       		.uleb128 0x13
+ 1950 0006 0B       		.uleb128 0xb
+ 1951 0007 03       		.uleb128 0x3
+ 1952 0008 0E       		.uleb128 0xe
+ 1953 0009 1B       		.uleb128 0x1b
+ 1954 000a 0E       		.uleb128 0xe
+ 1955 000b 55       		.uleb128 0x55
+ 1956 000c 17       		.uleb128 0x17
+ 1957 000d 11       		.uleb128 0x11
+ 1958 000e 01       		.uleb128 0x1
+ 1959 000f 10       		.uleb128 0x10
+ 1960 0010 17       		.uleb128 0x17
+ 1961 0011 00       		.byte	0
+ 1962 0012 00       		.byte	0
+ 1963 0013 02       		.uleb128 0x2
+ 1964 0014 24       		.uleb128 0x24
+ 1965 0015 00       		.byte	0
+ 1966 0016 0B       		.uleb128 0xb
+ 1967 0017 0B       		.uleb128 0xb
+ 1968 0018 3E       		.uleb128 0x3e
+ 1969 0019 0B       		.uleb128 0xb
+ 1970 001a 03       		.uleb128 0x3
+ 1971 001b 0E       		.uleb128 0xe
+ 1972 001c 00       		.byte	0
+ 1973 001d 00       		.byte	0
+ 1974 001e 03       		.uleb128 0x3
+ 1975 001f 24       		.uleb128 0x24
+ 1976 0020 00       		.byte	0
+ 1977 0021 0B       		.uleb128 0xb
+ 1978 0022 0B       		.uleb128 0xb
+ 1979 0023 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 43
+
+
+ 1980 0024 0B       		.uleb128 0xb
+ 1981 0025 03       		.uleb128 0x3
+ 1982 0026 08       		.uleb128 0x8
+ 1983 0027 00       		.byte	0
+ 1984 0028 00       		.byte	0
+ 1985 0029 04       		.uleb128 0x4
+ 1986 002a 16       		.uleb128 0x16
+ 1987 002b 00       		.byte	0
+ 1988 002c 03       		.uleb128 0x3
+ 1989 002d 0E       		.uleb128 0xe
+ 1990 002e 3A       		.uleb128 0x3a
+ 1991 002f 0B       		.uleb128 0xb
+ 1992 0030 3B       		.uleb128 0x3b
+ 1993 0031 0B       		.uleb128 0xb
+ 1994 0032 49       		.uleb128 0x49
+ 1995 0033 13       		.uleb128 0x13
+ 1996 0034 00       		.byte	0
+ 1997 0035 00       		.byte	0
+ 1998 0036 05       		.uleb128 0x5
+ 1999 0037 13       		.uleb128 0x13
+ 2000 0038 01       		.byte	0x1
+ 2001 0039 0B       		.uleb128 0xb
+ 2002 003a 05       		.uleb128 0x5
+ 2003 003b 3A       		.uleb128 0x3a
+ 2004 003c 0B       		.uleb128 0xb
+ 2005 003d 3B       		.uleb128 0x3b
+ 2006 003e 0B       		.uleb128 0xb
+ 2007 003f 01       		.uleb128 0x1
+ 2008 0040 13       		.uleb128 0x13
+ 2009 0041 00       		.byte	0
+ 2010 0042 00       		.byte	0
+ 2011 0043 06       		.uleb128 0x6
+ 2012 0044 0D       		.uleb128 0xd
+ 2013 0045 00       		.byte	0
+ 2014 0046 03       		.uleb128 0x3
+ 2015 0047 0E       		.uleb128 0xe
+ 2016 0048 3A       		.uleb128 0x3a
+ 2017 0049 0B       		.uleb128 0xb
+ 2018 004a 3B       		.uleb128 0x3b
+ 2019 004b 0B       		.uleb128 0xb
+ 2020 004c 49       		.uleb128 0x49
+ 2021 004d 13       		.uleb128 0x13
+ 2022 004e 38       		.uleb128 0x38
+ 2023 004f 0B       		.uleb128 0xb
+ 2024 0050 00       		.byte	0
+ 2025 0051 00       		.byte	0
+ 2026 0052 07       		.uleb128 0x7
+ 2027 0053 01       		.uleb128 0x1
+ 2028 0054 01       		.byte	0x1
+ 2029 0055 49       		.uleb128 0x49
+ 2030 0056 13       		.uleb128 0x13
+ 2031 0057 01       		.uleb128 0x1
+ 2032 0058 13       		.uleb128 0x13
+ 2033 0059 00       		.byte	0
+ 2034 005a 00       		.byte	0
+ 2035 005b 08       		.uleb128 0x8
+ 2036 005c 21       		.uleb128 0x21
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 44
+
+
+ 2037 005d 00       		.byte	0
+ 2038 005e 49       		.uleb128 0x49
+ 2039 005f 13       		.uleb128 0x13
+ 2040 0060 2F       		.uleb128 0x2f
+ 2041 0061 0B       		.uleb128 0xb
+ 2042 0062 00       		.byte	0
+ 2043 0063 00       		.byte	0
+ 2044 0064 09       		.uleb128 0x9
+ 2045 0065 2E       		.uleb128 0x2e
+ 2046 0066 01       		.byte	0x1
+ 2047 0067 3F       		.uleb128 0x3f
+ 2048 0068 19       		.uleb128 0x19
+ 2049 0069 03       		.uleb128 0x3
+ 2050 006a 0E       		.uleb128 0xe
+ 2051 006b 3A       		.uleb128 0x3a
+ 2052 006c 0B       		.uleb128 0xb
+ 2053 006d 3B       		.uleb128 0x3b
+ 2054 006e 0B       		.uleb128 0xb
+ 2055 006f 27       		.uleb128 0x27
+ 2056 0070 19       		.uleb128 0x19
+ 2057 0071 11       		.uleb128 0x11
+ 2058 0072 01       		.uleb128 0x1
+ 2059 0073 12       		.uleb128 0x12
+ 2060 0074 06       		.uleb128 0x6
+ 2061 0075 40       		.uleb128 0x40
+ 2062 0076 18       		.uleb128 0x18
+ 2063 0077 9742     		.uleb128 0x2117
+ 2064 0079 19       		.uleb128 0x19
+ 2065 007a 01       		.uleb128 0x1
+ 2066 007b 13       		.uleb128 0x13
+ 2067 007c 00       		.byte	0
+ 2068 007d 00       		.byte	0
+ 2069 007e 0A       		.uleb128 0xa
+ 2070 007f 05       		.uleb128 0x5
+ 2071 0080 00       		.byte	0
+ 2072 0081 03       		.uleb128 0x3
+ 2073 0082 08       		.uleb128 0x8
+ 2074 0083 3A       		.uleb128 0x3a
+ 2075 0084 0B       		.uleb128 0xb
+ 2076 0085 3B       		.uleb128 0x3b
+ 2077 0086 0B       		.uleb128 0xb
+ 2078 0087 49       		.uleb128 0x49
+ 2079 0088 13       		.uleb128 0x13
+ 2080 0089 02       		.uleb128 0x2
+ 2081 008a 18       		.uleb128 0x18
+ 2082 008b 00       		.byte	0
+ 2083 008c 00       		.byte	0
+ 2084 008d 0B       		.uleb128 0xb
+ 2085 008e 05       		.uleb128 0x5
+ 2086 008f 00       		.byte	0
+ 2087 0090 03       		.uleb128 0x3
+ 2088 0091 08       		.uleb128 0x8
+ 2089 0092 3A       		.uleb128 0x3a
+ 2090 0093 0B       		.uleb128 0xb
+ 2091 0094 3B       		.uleb128 0x3b
+ 2092 0095 0B       		.uleb128 0xb
+ 2093 0096 49       		.uleb128 0x49
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 45
+
+
+ 2094 0097 13       		.uleb128 0x13
+ 2095 0098 02       		.uleb128 0x2
+ 2096 0099 17       		.uleb128 0x17
+ 2097 009a 00       		.byte	0
+ 2098 009b 00       		.byte	0
+ 2099 009c 0C       		.uleb128 0xc
+ 2100 009d 34       		.uleb128 0x34
+ 2101 009e 00       		.byte	0
+ 2102 009f 03       		.uleb128 0x3
+ 2103 00a0 08       		.uleb128 0x8
+ 2104 00a1 3A       		.uleb128 0x3a
+ 2105 00a2 0B       		.uleb128 0xb
+ 2106 00a3 3B       		.uleb128 0x3b
+ 2107 00a4 0B       		.uleb128 0xb
+ 2108 00a5 49       		.uleb128 0x49
+ 2109 00a6 13       		.uleb128 0x13
+ 2110 00a7 02       		.uleb128 0x2
+ 2111 00a8 17       		.uleb128 0x17
+ 2112 00a9 00       		.byte	0
+ 2113 00aa 00       		.byte	0
+ 2114 00ab 0D       		.uleb128 0xd
+ 2115 00ac 34       		.uleb128 0x34
+ 2116 00ad 00       		.byte	0
+ 2117 00ae 03       		.uleb128 0x3
+ 2118 00af 08       		.uleb128 0x8
+ 2119 00b0 3A       		.uleb128 0x3a
+ 2120 00b1 0B       		.uleb128 0xb
+ 2121 00b2 3B       		.uleb128 0x3b
+ 2122 00b3 0B       		.uleb128 0xb
+ 2123 00b4 49       		.uleb128 0x49
+ 2124 00b5 13       		.uleb128 0x13
+ 2125 00b6 02       		.uleb128 0x2
+ 2126 00b7 18       		.uleb128 0x18
+ 2127 00b8 00       		.byte	0
+ 2128 00b9 00       		.byte	0
+ 2129 00ba 0E       		.uleb128 0xe
+ 2130 00bb 0F       		.uleb128 0xf
+ 2131 00bc 00       		.byte	0
+ 2132 00bd 0B       		.uleb128 0xb
+ 2133 00be 0B       		.uleb128 0xb
+ 2134 00bf 49       		.uleb128 0x49
+ 2135 00c0 13       		.uleb128 0x13
+ 2136 00c1 00       		.byte	0
+ 2137 00c2 00       		.byte	0
+ 2138 00c3 0F       		.uleb128 0xf
+ 2139 00c4 26       		.uleb128 0x26
+ 2140 00c5 00       		.byte	0
+ 2141 00c6 49       		.uleb128 0x49
+ 2142 00c7 13       		.uleb128 0x13
+ 2143 00c8 00       		.byte	0
+ 2144 00c9 00       		.byte	0
+ 2145 00ca 10       		.uleb128 0x10
+ 2146 00cb 34       		.uleb128 0x34
+ 2147 00cc 00       		.byte	0
+ 2148 00cd 03       		.uleb128 0x3
+ 2149 00ce 0E       		.uleb128 0xe
+ 2150 00cf 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 46
+
+
+ 2151 00d0 0B       		.uleb128 0xb
+ 2152 00d1 3B       		.uleb128 0x3b
+ 2153 00d2 0B       		.uleb128 0xb
+ 2154 00d3 49       		.uleb128 0x49
+ 2155 00d4 13       		.uleb128 0x13
+ 2156 00d5 02       		.uleb128 0x2
+ 2157 00d6 17       		.uleb128 0x17
+ 2158 00d7 00       		.byte	0
+ 2159 00d8 00       		.byte	0
+ 2160 00d9 11       		.uleb128 0x11
+ 2161 00da 05       		.uleb128 0x5
+ 2162 00db 00       		.byte	0
+ 2163 00dc 03       		.uleb128 0x3
+ 2164 00dd 0E       		.uleb128 0xe
+ 2165 00de 3A       		.uleb128 0x3a
+ 2166 00df 0B       		.uleb128 0xb
+ 2167 00e0 3B       		.uleb128 0x3b
+ 2168 00e1 0B       		.uleb128 0xb
+ 2169 00e2 49       		.uleb128 0x49
+ 2170 00e3 13       		.uleb128 0x13
+ 2171 00e4 02       		.uleb128 0x2
+ 2172 00e5 17       		.uleb128 0x17
+ 2173 00e6 00       		.byte	0
+ 2174 00e7 00       		.byte	0
+ 2175 00e8 12       		.uleb128 0x12
+ 2176 00e9 898201   		.uleb128 0x4109
+ 2177 00ec 01       		.byte	0x1
+ 2178 00ed 11       		.uleb128 0x11
+ 2179 00ee 01       		.uleb128 0x1
+ 2180 00ef 31       		.uleb128 0x31
+ 2181 00f0 13       		.uleb128 0x13
+ 2182 00f1 01       		.uleb128 0x1
+ 2183 00f2 13       		.uleb128 0x13
+ 2184 00f3 00       		.byte	0
+ 2185 00f4 00       		.byte	0
+ 2186 00f5 13       		.uleb128 0x13
+ 2187 00f6 8A8201   		.uleb128 0x410a
+ 2188 00f9 00       		.byte	0
+ 2189 00fa 02       		.uleb128 0x2
+ 2190 00fb 18       		.uleb128 0x18
+ 2191 00fc 9142     		.uleb128 0x2111
+ 2192 00fe 18       		.uleb128 0x18
+ 2193 00ff 00       		.byte	0
+ 2194 0100 00       		.byte	0
+ 2195 0101 14       		.uleb128 0x14
+ 2196 0102 898201   		.uleb128 0x4109
+ 2197 0105 01       		.byte	0x1
+ 2198 0106 11       		.uleb128 0x11
+ 2199 0107 01       		.uleb128 0x1
+ 2200 0108 31       		.uleb128 0x31
+ 2201 0109 13       		.uleb128 0x13
+ 2202 010a 00       		.byte	0
+ 2203 010b 00       		.byte	0
+ 2204 010c 15       		.uleb128 0x15
+ 2205 010d 2E       		.uleb128 0x2e
+ 2206 010e 01       		.byte	0x1
+ 2207 010f 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 47
+
+
+ 2208 0110 19       		.uleb128 0x19
+ 2209 0111 03       		.uleb128 0x3
+ 2210 0112 0E       		.uleb128 0xe
+ 2211 0113 3A       		.uleb128 0x3a
+ 2212 0114 0B       		.uleb128 0xb
+ 2213 0115 3B       		.uleb128 0x3b
+ 2214 0116 05       		.uleb128 0x5
+ 2215 0117 27       		.uleb128 0x27
+ 2216 0118 19       		.uleb128 0x19
+ 2217 0119 11       		.uleb128 0x11
+ 2218 011a 01       		.uleb128 0x1
+ 2219 011b 12       		.uleb128 0x12
+ 2220 011c 06       		.uleb128 0x6
+ 2221 011d 40       		.uleb128 0x40
+ 2222 011e 18       		.uleb128 0x18
+ 2223 011f 9742     		.uleb128 0x2117
+ 2224 0121 19       		.uleb128 0x19
+ 2225 0122 01       		.uleb128 0x1
+ 2226 0123 13       		.uleb128 0x13
+ 2227 0124 00       		.byte	0
+ 2228 0125 00       		.byte	0
+ 2229 0126 16       		.uleb128 0x16
+ 2230 0127 05       		.uleb128 0x5
+ 2231 0128 00       		.byte	0
+ 2232 0129 03       		.uleb128 0x3
+ 2233 012a 08       		.uleb128 0x8
+ 2234 012b 3A       		.uleb128 0x3a
+ 2235 012c 0B       		.uleb128 0xb
+ 2236 012d 3B       		.uleb128 0x3b
+ 2237 012e 05       		.uleb128 0x5
+ 2238 012f 49       		.uleb128 0x49
+ 2239 0130 13       		.uleb128 0x13
+ 2240 0131 02       		.uleb128 0x2
+ 2241 0132 17       		.uleb128 0x17
+ 2242 0133 00       		.byte	0
+ 2243 0134 00       		.byte	0
+ 2244 0135 17       		.uleb128 0x17
+ 2245 0136 34       		.uleb128 0x34
+ 2246 0137 00       		.byte	0
+ 2247 0138 03       		.uleb128 0x3
+ 2248 0139 08       		.uleb128 0x8
+ 2249 013a 3A       		.uleb128 0x3a
+ 2250 013b 0B       		.uleb128 0xb
+ 2251 013c 3B       		.uleb128 0x3b
+ 2252 013d 05       		.uleb128 0x5
+ 2253 013e 49       		.uleb128 0x49
+ 2254 013f 13       		.uleb128 0x13
+ 2255 0140 02       		.uleb128 0x2
+ 2256 0141 17       		.uleb128 0x17
+ 2257 0142 00       		.byte	0
+ 2258 0143 00       		.byte	0
+ 2259 0144 18       		.uleb128 0x18
+ 2260 0145 34       		.uleb128 0x34
+ 2261 0146 00       		.byte	0
+ 2262 0147 03       		.uleb128 0x3
+ 2263 0148 08       		.uleb128 0x8
+ 2264 0149 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 48
+
+
+ 2265 014a 0B       		.uleb128 0xb
+ 2266 014b 3B       		.uleb128 0x3b
+ 2267 014c 05       		.uleb128 0x5
+ 2268 014d 49       		.uleb128 0x49
+ 2269 014e 13       		.uleb128 0x13
+ 2270 014f 1C       		.uleb128 0x1c
+ 2271 0150 05       		.uleb128 0x5
+ 2272 0151 00       		.byte	0
+ 2273 0152 00       		.byte	0
+ 2274 0153 19       		.uleb128 0x19
+ 2275 0154 898201   		.uleb128 0x4109
+ 2276 0157 00       		.byte	0
+ 2277 0158 11       		.uleb128 0x11
+ 2278 0159 01       		.uleb128 0x1
+ 2279 015a 31       		.uleb128 0x31
+ 2280 015b 13       		.uleb128 0x13
+ 2281 015c 00       		.byte	0
+ 2282 015d 00       		.byte	0
+ 2283 015e 1A       		.uleb128 0x1a
+ 2284 015f 05       		.uleb128 0x5
+ 2285 0160 00       		.byte	0
+ 2286 0161 03       		.uleb128 0x3
+ 2287 0162 08       		.uleb128 0x8
+ 2288 0163 3A       		.uleb128 0x3a
+ 2289 0164 0B       		.uleb128 0xb
+ 2290 0165 3B       		.uleb128 0x3b
+ 2291 0166 05       		.uleb128 0x5
+ 2292 0167 49       		.uleb128 0x49
+ 2293 0168 13       		.uleb128 0x13
+ 2294 0169 02       		.uleb128 0x2
+ 2295 016a 18       		.uleb128 0x18
+ 2296 016b 00       		.byte	0
+ 2297 016c 00       		.byte	0
+ 2298 016d 1B       		.uleb128 0x1b
+ 2299 016e 34       		.uleb128 0x34
+ 2300 016f 00       		.byte	0
+ 2301 0170 03       		.uleb128 0x3
+ 2302 0171 0E       		.uleb128 0xe
+ 2303 0172 3A       		.uleb128 0x3a
+ 2304 0173 0B       		.uleb128 0xb
+ 2305 0174 3B       		.uleb128 0x3b
+ 2306 0175 0B       		.uleb128 0xb
+ 2307 0176 49       		.uleb128 0x49
+ 2308 0177 13       		.uleb128 0x13
+ 2309 0178 3F       		.uleb128 0x3f
+ 2310 0179 19       		.uleb128 0x19
+ 2311 017a 3C       		.uleb128 0x3c
+ 2312 017b 19       		.uleb128 0x19
+ 2313 017c 00       		.byte	0
+ 2314 017d 00       		.byte	0
+ 2315 017e 1C       		.uleb128 0x1c
+ 2316 017f 2E       		.uleb128 0x2e
+ 2317 0180 00       		.byte	0
+ 2318 0181 3F       		.uleb128 0x3f
+ 2319 0182 19       		.uleb128 0x19
+ 2320 0183 3C       		.uleb128 0x3c
+ 2321 0184 19       		.uleb128 0x19
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 49
+
+
+ 2322 0185 6E       		.uleb128 0x6e
+ 2323 0186 0E       		.uleb128 0xe
+ 2324 0187 03       		.uleb128 0x3
+ 2325 0188 0E       		.uleb128 0xe
+ 2326 0189 3A       		.uleb128 0x3a
+ 2327 018a 0B       		.uleb128 0xb
+ 2328 018b 3B       		.uleb128 0x3b
+ 2329 018c 0B       		.uleb128 0xb
+ 2330 018d 00       		.byte	0
+ 2331 018e 00       		.byte	0
+ 2332 018f 00       		.byte	0
+ 2333              		.section	.debug_loc,"",%progbits
+ 2334              	.Ldebug_loc0:
+ 2335              	.LLST0:
+ 2336 0000 00000000 		.4byte	.LVL0
+ 2337 0004 52000000 		.4byte	.LVL3
+ 2338 0008 0100     		.2byte	0x1
+ 2339 000a 51       		.byte	0x51
+ 2340 000b 52000000 		.4byte	.LVL3
+ 2341 000f 88000000 		.4byte	.LFE1
+ 2342 0013 0100     		.2byte	0x1
+ 2343 0015 51       		.byte	0x51
+ 2344 0016 00000000 		.4byte	0
+ 2345 001a 00000000 		.4byte	0
+ 2346              	.LLST1:
+ 2347 001e 04000000 		.4byte	.LVL1
+ 2348 0022 08000000 		.4byte	.LVL2
+ 2349 0026 0200     		.2byte	0x2
+ 2350 0028 30       		.byte	0x30
+ 2351 0029 9F       		.byte	0x9f
+ 2352 002a 08000000 		.4byte	.LVL2
+ 2353 002e 86000000 		.4byte	.LVL7
+ 2354 0032 0100     		.2byte	0x1
+ 2355 0034 56       		.byte	0x56
+ 2356 0035 00000000 		.4byte	0
+ 2357 0039 00000000 		.4byte	0
+ 2358              	.LLST2:
+ 2359 003d 52000000 		.4byte	.LVL3
+ 2360 0041 56000000 		.4byte	.LVL4
+ 2361 0045 0200     		.2byte	0x2
+ 2362 0047 30       		.byte	0x30
+ 2363 0048 9F       		.byte	0x9f
+ 2364 0049 56000000 		.4byte	.LVL4
+ 2365 004d 7E000000 		.4byte	.LVL6
+ 2366 0051 0100     		.2byte	0x1
+ 2367 0053 54       		.byte	0x54
+ 2368 0054 00000000 		.4byte	0
+ 2369 0058 00000000 		.4byte	0
+ 2370              	.LLST3:
+ 2371 005c 02000000 		.4byte	.LVL9
+ 2372 0060 06000000 		.4byte	.LVL10
+ 2373 0064 0200     		.2byte	0x2
+ 2374 0066 30       		.byte	0x30
+ 2375 0067 9F       		.byte	0x9f
+ 2376 0068 06000000 		.4byte	.LVL10
+ 2377 006c 36000000 		.4byte	.LVL12
+ 2378 0070 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 50
+
+
+ 2379 0072 55       		.byte	0x55
+ 2380 0073 00000000 		.4byte	0
+ 2381 0077 00000000 		.4byte	0
+ 2382              	.LLST4:
+ 2383 007b 02000000 		.4byte	.LVL14
+ 2384 007f 06000000 		.4byte	.LVL15
+ 2385 0083 0200     		.2byte	0x2
+ 2386 0085 30       		.byte	0x30
+ 2387 0086 9F       		.byte	0x9f
+ 2388 0087 06000000 		.4byte	.LVL15
+ 2389 008b 30000000 		.4byte	.LVL23
+ 2390 008f 0100     		.2byte	0x1
+ 2391 0091 54       		.byte	0x54
+ 2392 0092 00000000 		.4byte	0
+ 2393 0096 00000000 		.4byte	0
+ 2394              	.LLST5:
+ 2395 009a 06000000 		.4byte	.LVL15
+ 2396 009e 22000000 		.4byte	.LVL20
+ 2397 00a2 0100     		.2byte	0x1
+ 2398 00a4 52       		.byte	0x52
+ 2399 00a5 24000000 		.4byte	.LVL21
+ 2400 00a9 2A000000 		.4byte	.LVL22
+ 2401 00ad 0100     		.2byte	0x1
+ 2402 00af 52       		.byte	0x52
+ 2403 00b0 00000000 		.4byte	0
+ 2404 00b4 00000000 		.4byte	0
+ 2405              	.LLST6:
+ 2406 00b8 0E000000 		.4byte	.LVL16
+ 2407 00bc 16000000 		.4byte	.LVL17
+ 2408 00c0 0100     		.2byte	0x1
+ 2409 00c2 53       		.byte	0x53
+ 2410 00c3 16000000 		.4byte	.LVL17
+ 2411 00c7 1E000000 		.4byte	.LVL18
+ 2412 00cb 1200     		.2byte	0x12
+ 2413 00cd 71       		.byte	0x71
+ 2414 00ce 00       		.sleb128 0
+ 2415 00cf 74       		.byte	0x74
+ 2416 00d0 00       		.sleb128 0
+ 2417 00d1 22       		.byte	0x22
+ 2418 00d2 94       		.byte	0x94
+ 2419 00d3 01       		.byte	0x1
+ 2420 00d4 08       		.byte	0x8
+ 2421 00d5 FF       		.byte	0xff
+ 2422 00d6 1A       		.byte	0x1a
+ 2423 00d7 72       		.byte	0x72
+ 2424 00d8 00       		.sleb128 0
+ 2425 00d9 26       		.byte	0x26
+ 2426 00da 33       		.byte	0x33
+ 2427 00db 24       		.byte	0x24
+ 2428 00dc 33       		.byte	0x33
+ 2429 00dd 26       		.byte	0x26
+ 2430 00de 9F       		.byte	0x9f
+ 2431 00df 00000000 		.4byte	0
+ 2432 00e3 00000000 		.4byte	0
+ 2433              	.LLST7:
+ 2434 00e7 00000000 		.4byte	.LVL24
+ 2435 00eb 0E000000 		.4byte	.LVL27
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 51
+
+
+ 2436 00ef 0100     		.2byte	0x1
+ 2437 00f1 50       		.byte	0x50
+ 2438 00f2 0E000000 		.4byte	.LVL27
+ 2439 00f6 1E000000 		.4byte	.LFE6
+ 2440 00fa 0100     		.2byte	0x1
+ 2441 00fc 54       		.byte	0x54
+ 2442 00fd 00000000 		.4byte	0
+ 2443 0101 00000000 		.4byte	0
+ 2444              	.LLST8:
+ 2445 0105 00000000 		.4byte	.LVL24
+ 2446 0109 0C000000 		.4byte	.LVL26
+ 2447 010d 0100     		.2byte	0x1
+ 2448 010f 51       		.byte	0x51
+ 2449 0110 0C000000 		.4byte	.LVL26
+ 2450 0114 11000000 		.4byte	.LVL28-1
+ 2451 0118 0100     		.2byte	0x1
+ 2452 011a 52       		.byte	0x52
+ 2453 011b 11000000 		.4byte	.LVL28-1
+ 2454 011f 1E000000 		.4byte	.LFE6
+ 2455 0123 0400     		.2byte	0x4
+ 2456 0125 F3       		.byte	0xf3
+ 2457 0126 01       		.uleb128 0x1
+ 2458 0127 51       		.byte	0x51
+ 2459 0128 9F       		.byte	0x9f
+ 2460 0129 00000000 		.4byte	0
+ 2461 012d 00000000 		.4byte	0
+ 2462              	.LLST9:
+ 2463 0131 00000000 		.4byte	.LVL24
+ 2464 0135 0A000000 		.4byte	.LVL25
+ 2465 0139 0100     		.2byte	0x1
+ 2466 013b 52       		.byte	0x52
+ 2467 013c 0A000000 		.4byte	.LVL25
+ 2468 0140 1E000000 		.4byte	.LFE6
+ 2469 0144 0400     		.2byte	0x4
+ 2470 0146 F3       		.byte	0xf3
+ 2471 0147 01       		.uleb128 0x1
+ 2472 0148 52       		.byte	0x52
+ 2473 0149 9F       		.byte	0x9f
+ 2474 014a 00000000 		.4byte	0
+ 2475 014e 00000000 		.4byte	0
+ 2476              	.LLST10:
+ 2477 0152 00000000 		.4byte	.LVL30
+ 2478 0156 0E000000 		.4byte	.LVL33
+ 2479 015a 0100     		.2byte	0x1
+ 2480 015c 50       		.byte	0x50
+ 2481 015d 0E000000 		.4byte	.LVL33
+ 2482 0161 1E000000 		.4byte	.LFE7
+ 2483 0165 0100     		.2byte	0x1
+ 2484 0167 54       		.byte	0x54
+ 2485 0168 00000000 		.4byte	0
+ 2486 016c 00000000 		.4byte	0
+ 2487              	.LLST11:
+ 2488 0170 00000000 		.4byte	.LVL30
+ 2489 0174 0C000000 		.4byte	.LVL32
+ 2490 0178 0100     		.2byte	0x1
+ 2491 017a 51       		.byte	0x51
+ 2492 017b 0C000000 		.4byte	.LVL32
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 52
+
+
+ 2493 017f 11000000 		.4byte	.LVL34-1
+ 2494 0183 0100     		.2byte	0x1
+ 2495 0185 52       		.byte	0x52
+ 2496 0186 11000000 		.4byte	.LVL34-1
+ 2497 018a 1E000000 		.4byte	.LFE7
+ 2498 018e 0400     		.2byte	0x4
+ 2499 0190 F3       		.byte	0xf3
+ 2500 0191 01       		.uleb128 0x1
+ 2501 0192 51       		.byte	0x51
+ 2502 0193 9F       		.byte	0x9f
+ 2503 0194 00000000 		.4byte	0
+ 2504 0198 00000000 		.4byte	0
+ 2505              	.LLST12:
+ 2506 019c 00000000 		.4byte	.LVL30
+ 2507 01a0 0A000000 		.4byte	.LVL31
+ 2508 01a4 0100     		.2byte	0x1
+ 2509 01a6 52       		.byte	0x52
+ 2510 01a7 0A000000 		.4byte	.LVL31
+ 2511 01ab 1E000000 		.4byte	.LFE7
+ 2512 01af 0400     		.2byte	0x4
+ 2513 01b1 F3       		.byte	0xf3
+ 2514 01b2 01       		.uleb128 0x1
+ 2515 01b3 52       		.byte	0x52
+ 2516 01b4 9F       		.byte	0x9f
+ 2517 01b5 00000000 		.4byte	0
+ 2518 01b9 00000000 		.4byte	0
+ 2519              	.LLST13:
+ 2520 01bd 00000000 		.4byte	.LVL36
+ 2521 01c1 05000000 		.4byte	.LVL37-1
+ 2522 01c5 0100     		.2byte	0x1
+ 2523 01c7 50       		.byte	0x50
+ 2524 01c8 05000000 		.4byte	.LVL37-1
+ 2525 01cc 08000000 		.4byte	.LFE9
+ 2526 01d0 0400     		.2byte	0x4
+ 2527 01d2 F3       		.byte	0xf3
+ 2528 01d3 01       		.uleb128 0x1
+ 2529 01d4 50       		.byte	0x50
+ 2530 01d5 9F       		.byte	0x9f
+ 2531 01d6 00000000 		.4byte	0
+ 2532 01da 00000000 		.4byte	0
+ 2533              	.LLST14:
+ 2534 01de 00000000 		.4byte	.LVL38
+ 2535 01e2 0E000000 		.4byte	.LVL40
+ 2536 01e6 0100     		.2byte	0x1
+ 2537 01e8 50       		.byte	0x50
+ 2538 01e9 0E000000 		.4byte	.LVL40
+ 2539 01ed 48000000 		.4byte	.LVL44
+ 2540 01f1 0100     		.2byte	0x1
+ 2541 01f3 59       		.byte	0x59
+ 2542 01f4 48000000 		.4byte	.LVL44
+ 2543 01f8 4C000000 		.4byte	.LFE10
+ 2544 01fc 0400     		.2byte	0x4
+ 2545 01fe F3       		.byte	0xf3
+ 2546 01ff 01       		.uleb128 0x1
+ 2547 0200 50       		.byte	0x50
+ 2548 0201 9F       		.byte	0x9f
+ 2549 0202 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 53
+
+
+ 2550 0206 00000000 		.4byte	0
+ 2551              	.LLST15:
+ 2552 020a 00000000 		.4byte	.LVL38
+ 2553 020e 0E000000 		.4byte	.LVL40
+ 2554 0212 0100     		.2byte	0x1
+ 2555 0214 51       		.byte	0x51
+ 2556 0215 0E000000 		.4byte	.LVL40
+ 2557 0219 48000000 		.4byte	.LVL44
+ 2558 021d 0100     		.2byte	0x1
+ 2559 021f 58       		.byte	0x58
+ 2560 0220 48000000 		.4byte	.LVL44
+ 2561 0224 4C000000 		.4byte	.LFE10
+ 2562 0228 0400     		.2byte	0x4
+ 2563 022a F3       		.byte	0xf3
+ 2564 022b 01       		.uleb128 0x1
+ 2565 022c 51       		.byte	0x51
+ 2566 022d 9F       		.byte	0x9f
+ 2567 022e 00000000 		.4byte	0
+ 2568 0232 00000000 		.4byte	0
+ 2569              	.LLST16:
+ 2570 0236 00000000 		.4byte	.LVL38
+ 2571 023a 0E000000 		.4byte	.LVL40
+ 2572 023e 0100     		.2byte	0x1
+ 2573 0240 52       		.byte	0x52
+ 2574 0241 0E000000 		.4byte	.LVL40
+ 2575 0245 48000000 		.4byte	.LVL44
+ 2576 0249 0100     		.2byte	0x1
+ 2577 024b 57       		.byte	0x57
+ 2578 024c 48000000 		.4byte	.LVL44
+ 2579 0250 4C000000 		.4byte	.LFE10
+ 2580 0254 0400     		.2byte	0x4
+ 2581 0256 F3       		.byte	0xf3
+ 2582 0257 01       		.uleb128 0x1
+ 2583 0258 52       		.byte	0x52
+ 2584 0259 9F       		.byte	0x9f
+ 2585 025a 00000000 		.4byte	0
+ 2586 025e 00000000 		.4byte	0
+ 2587              	.LLST17:
+ 2588 0262 0A000000 		.4byte	.LVL39
+ 2589 0266 0E000000 		.4byte	.LVL40
+ 2590 026a 0200     		.2byte	0x2
+ 2591 026c 30       		.byte	0x30
+ 2592 026d 9F       		.byte	0x9f
+ 2593 026e 0E000000 		.4byte	.LVL40
+ 2594 0272 48000000 		.4byte	.LVL44
+ 2595 0276 0100     		.2byte	0x1
+ 2596 0278 55       		.byte	0x55
+ 2597 0279 00000000 		.4byte	0
+ 2598 027d 00000000 		.4byte	0
+ 2599              	.LLST18:
+ 2600 0281 00000000 		.4byte	.LVL45
+ 2601 0285 08000000 		.4byte	.LVL47
+ 2602 0289 0100     		.2byte	0x1
+ 2603 028b 50       		.byte	0x50
+ 2604 028c 08000000 		.4byte	.LVL47
+ 2605 0290 24000000 		.4byte	.LFE11
+ 2606 0294 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 54
+
+
+ 2607 0296 55       		.byte	0x55
+ 2608 0297 00000000 		.4byte	0
+ 2609 029b 00000000 		.4byte	0
+ 2610              	.LLST19:
+ 2611 029f 04000000 		.4byte	.LVL46
+ 2612 02a3 08000000 		.4byte	.LVL47
+ 2613 02a7 0200     		.2byte	0x2
+ 2614 02a9 30       		.byte	0x30
+ 2615 02aa 9F       		.byte	0x9f
+ 2616 02ab 08000000 		.4byte	.LVL47
+ 2617 02af 24000000 		.4byte	.LFE11
+ 2618 02b3 0100     		.2byte	0x1
+ 2619 02b5 54       		.byte	0x54
+ 2620 02b6 00000000 		.4byte	0
+ 2621 02ba 00000000 		.4byte	0
+ 2622              	.LLST20:
+ 2623 02be 00000000 		.4byte	.LVL50
+ 2624 02c2 08000000 		.4byte	.LVL52
+ 2625 02c6 0100     		.2byte	0x1
+ 2626 02c8 50       		.byte	0x50
+ 2627 02c9 08000000 		.4byte	.LVL52
+ 2628 02cd 1C000000 		.4byte	.LFE12
+ 2629 02d1 0100     		.2byte	0x1
+ 2630 02d3 55       		.byte	0x55
+ 2631 02d4 00000000 		.4byte	0
+ 2632 02d8 00000000 		.4byte	0
+ 2633              	.LLST21:
+ 2634 02dc 04000000 		.4byte	.LVL51
+ 2635 02e0 08000000 		.4byte	.LVL52
+ 2636 02e4 0200     		.2byte	0x2
+ 2637 02e6 30       		.byte	0x30
+ 2638 02e7 9F       		.byte	0x9f
+ 2639 02e8 08000000 		.4byte	.LVL52
+ 2640 02ec 1C000000 		.4byte	.LFE12
+ 2641 02f0 0100     		.2byte	0x1
+ 2642 02f2 54       		.byte	0x54
+ 2643 02f3 00000000 		.4byte	0
+ 2644 02f7 00000000 		.4byte	0
+ 2645              	.LLST22:
+ 2646 02fb 00000000 		.4byte	.LVL55
+ 2647 02ff 07000000 		.4byte	.LVL56-1
+ 2648 0303 0100     		.2byte	0x1
+ 2649 0305 50       		.byte	0x50
+ 2650 0306 07000000 		.4byte	.LVL56-1
+ 2651 030a 10000000 		.4byte	.LFE8
+ 2652 030e 0100     		.2byte	0x1
+ 2653 0310 54       		.byte	0x54
+ 2654 0311 00000000 		.4byte	0
+ 2655 0315 00000000 		.4byte	0
+ 2656              	.LLST23:
+ 2657 0319 00000000 		.4byte	.LVL58
+ 2658 031d 08000000 		.4byte	.LVL60
+ 2659 0321 0100     		.2byte	0x1
+ 2660 0323 50       		.byte	0x50
+ 2661 0324 08000000 		.4byte	.LVL60
+ 2662 0328 1C000000 		.4byte	.LFE13
+ 2663 032c 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 55
+
+
+ 2664 032e 55       		.byte	0x55
+ 2665 032f 00000000 		.4byte	0
+ 2666 0333 00000000 		.4byte	0
+ 2667              	.LLST24:
+ 2668 0337 04000000 		.4byte	.LVL59
+ 2669 033b 08000000 		.4byte	.LVL60
+ 2670 033f 0200     		.2byte	0x2
+ 2671 0341 30       		.byte	0x30
+ 2672 0342 9F       		.byte	0x9f
+ 2673 0343 08000000 		.4byte	.LVL60
+ 2674 0347 1C000000 		.4byte	.LFE13
+ 2675 034b 0100     		.2byte	0x1
+ 2676 034d 54       		.byte	0x54
+ 2677 034e 00000000 		.4byte	0
+ 2678 0352 00000000 		.4byte	0
+ 2679              	.LLST25:
+ 2680 0356 00000000 		.4byte	.LVL63
+ 2681 035a 0A000000 		.4byte	.LVL64
+ 2682 035e 0100     		.2byte	0x1
+ 2683 0360 50       		.byte	0x50
+ 2684 0361 0A000000 		.4byte	.LVL64
+ 2685 0365 9C000000 		.4byte	.LVL73
+ 2686 0369 0100     		.2byte	0x1
+ 2687 036b 55       		.byte	0x55
+ 2688 036c 00000000 		.4byte	0
+ 2689 0370 00000000 		.4byte	0
+ 2690              	.LLST26:
+ 2691 0374 00000000 		.4byte	.LVL63
+ 2692 0378 0D000000 		.4byte	.LVL65-1
+ 2693 037c 0100     		.2byte	0x1
+ 2694 037e 51       		.byte	0x51
+ 2695 037f 0D000000 		.4byte	.LVL65-1
+ 2696 0383 9C000000 		.4byte	.LVL73
+ 2697 0387 0100     		.2byte	0x1
+ 2698 0389 54       		.byte	0x54
+ 2699 038a 9C000000 		.4byte	.LVL73
+ 2700 038e A0000000 		.4byte	.LFE0
+ 2701 0392 0400     		.2byte	0x4
+ 2702 0394 F3       		.byte	0xf3
+ 2703 0395 01       		.uleb128 0x1
+ 2704 0396 51       		.byte	0x51
+ 2705 0397 9F       		.byte	0x9f
+ 2706 0398 00000000 		.4byte	0
+ 2707 039c 00000000 		.4byte	0
+ 2708              	.LLST27:
+ 2709 03a0 0E000000 		.4byte	.LVL65
+ 2710 03a4 12000000 		.4byte	.LVL66
+ 2711 03a8 0200     		.2byte	0x2
+ 2712 03aa 30       		.byte	0x30
+ 2713 03ab 9F       		.byte	0x9f
+ 2714 03ac 12000000 		.4byte	.LVL66
+ 2715 03b0 A0000000 		.4byte	.LFE0
+ 2716 03b4 0100     		.2byte	0x1
+ 2717 03b6 50       		.byte	0x50
+ 2718 03b7 00000000 		.4byte	0
+ 2719 03bb 00000000 		.4byte	0
+ 2720              	.LLST28:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 56
+
+
+ 2721 03bf 12000000 		.4byte	.LVL66
+ 2722 03c3 3C000000 		.4byte	.LVL68
+ 2723 03c7 0100     		.2byte	0x1
+ 2724 03c9 51       		.byte	0x51
+ 2725 03ca 3E000000 		.4byte	.LVL69
+ 2726 03ce 54000000 		.4byte	.LVL70
+ 2727 03d2 0100     		.2byte	0x1
+ 2728 03d4 51       		.byte	0x51
+ 2729 03d5 00000000 		.4byte	0
+ 2730 03d9 00000000 		.4byte	0
+ 2731              	.LLST29:
+ 2732 03dd 00000000 		.4byte	.LVL74
+ 2733 03e1 08000000 		.4byte	.LVL75
+ 2734 03e5 0100     		.2byte	0x1
+ 2735 03e7 50       		.byte	0x50
+ 2736 03e8 08000000 		.4byte	.LVL75
+ 2737 03ec 3A000000 		.4byte	.LFE2
+ 2738 03f0 0100     		.2byte	0x1
+ 2739 03f2 54       		.byte	0x54
+ 2740 03f3 00000000 		.4byte	0
+ 2741 03f7 00000000 		.4byte	0
+ 2742              	.LLST30:
+ 2743 03fb 00000000 		.4byte	.LVL74
+ 2744 03ff 0B000000 		.4byte	.LVL76-1
+ 2745 0403 0100     		.2byte	0x1
+ 2746 0405 51       		.byte	0x51
+ 2747 0406 0B000000 		.4byte	.LVL76-1
+ 2748 040a 3A000000 		.4byte	.LFE2
+ 2749 040e 0100     		.2byte	0x1
+ 2750 0410 55       		.byte	0x55
+ 2751 0411 00000000 		.4byte	0
+ 2752 0415 00000000 		.4byte	0
+ 2753              	.LLST31:
+ 2754 0419 0C000000 		.4byte	.LVL76
+ 2755 041d 10000000 		.4byte	.LVL77
+ 2756 0421 0200     		.2byte	0x2
+ 2757 0423 30       		.byte	0x30
+ 2758 0424 9F       		.byte	0x9f
+ 2759 0425 10000000 		.4byte	.LVL77
+ 2760 0429 3A000000 		.4byte	.LFE2
+ 2761 042d 0100     		.2byte	0x1
+ 2762 042f 51       		.byte	0x51
+ 2763 0430 00000000 		.4byte	0
+ 2764 0434 00000000 		.4byte	0
+ 2765              	.LLST32:
+ 2766 0438 16000000 		.4byte	.LVL78
+ 2767 043c 26000000 		.4byte	.LVL80
+ 2768 0440 0100     		.2byte	0x1
+ 2769 0442 52       		.byte	0x52
+ 2770 0443 00000000 		.4byte	0
+ 2771 0447 00000000 		.4byte	0
+ 2772              	.LLST33:
+ 2773 044b 1C000000 		.4byte	.LVL79
+ 2774 044f 30000000 		.4byte	.LVL81
+ 2775 0453 0100     		.2byte	0x1
+ 2776 0455 50       		.byte	0x50
+ 2777 0456 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 57
+
+
+ 2778 045a 00000000 		.4byte	0
+ 2779              	.LLST34:
+ 2780 045e 00000000 		.4byte	.LVL83
+ 2781 0462 08000000 		.4byte	.LVL84
+ 2782 0466 0100     		.2byte	0x1
+ 2783 0468 50       		.byte	0x50
+ 2784 0469 08000000 		.4byte	.LVL84
+ 2785 046d 4E000000 		.4byte	.LVL95
+ 2786 0471 0100     		.2byte	0x1
+ 2787 0473 55       		.byte	0x55
+ 2788 0474 4E000000 		.4byte	.LVL95
+ 2789 0478 54000000 		.4byte	.LFE5
+ 2790 047c 0400     		.2byte	0x4
+ 2791 047e F3       		.byte	0xf3
+ 2792 047f 01       		.uleb128 0x1
+ 2793 0480 50       		.byte	0x50
+ 2794 0481 9F       		.byte	0x9f
+ 2795 0482 00000000 		.4byte	0
+ 2796 0486 00000000 		.4byte	0
+ 2797              	.LLST35:
+ 2798 048a 00000000 		.4byte	.LVL83
+ 2799 048e 0B000000 		.4byte	.LVL85-1
+ 2800 0492 0100     		.2byte	0x1
+ 2801 0494 51       		.byte	0x51
+ 2802 0495 0B000000 		.4byte	.LVL85-1
+ 2803 0499 4E000000 		.4byte	.LVL95
+ 2804 049d 0100     		.2byte	0x1
+ 2805 049f 54       		.byte	0x54
+ 2806 04a0 4E000000 		.4byte	.LVL95
+ 2807 04a4 54000000 		.4byte	.LFE5
+ 2808 04a8 0400     		.2byte	0x4
+ 2809 04aa F3       		.byte	0xf3
+ 2810 04ab 01       		.uleb128 0x1
+ 2811 04ac 51       		.byte	0x51
+ 2812 04ad 9F       		.byte	0x9f
+ 2813 04ae 00000000 		.4byte	0
+ 2814 04b2 00000000 		.4byte	0
+ 2815              	.LLST36:
+ 2816 04b6 0C000000 		.4byte	.LVL85
+ 2817 04ba 10000000 		.4byte	.LVL86
+ 2818 04be 0200     		.2byte	0x2
+ 2819 04c0 30       		.byte	0x30
+ 2820 04c1 9F       		.byte	0x9f
+ 2821 04c2 10000000 		.4byte	.LVL86
+ 2822 04c6 4E000000 		.4byte	.LVL95
+ 2823 04ca 0100     		.2byte	0x1
+ 2824 04cc 56       		.byte	0x56
+ 2825 04cd 00000000 		.4byte	0
+ 2826 04d1 00000000 		.4byte	0
+ 2827              	.LLST37:
+ 2828 04d5 16000000 		.4byte	.LVL87
+ 2829 04d9 18000000 		.4byte	.LVL88
+ 2830 04dd 0200     		.2byte	0x2
+ 2831 04df 30       		.byte	0x30
+ 2832 04e0 9F       		.byte	0x9f
+ 2833 04e1 18000000 		.4byte	.LVL88
+ 2834 04e5 48000000 		.4byte	.LVL94
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 58
+
+
+ 2835 04e9 0100     		.2byte	0x1
+ 2836 04eb 51       		.byte	0x51
+ 2837 04ec 00000000 		.4byte	0
+ 2838 04f0 00000000 		.4byte	0
+ 2839              	.LLST38:
+ 2840 04f4 38000000 		.4byte	.LVL89
+ 2841 04f8 3A000000 		.4byte	.LVL90
+ 2842 04fc 0100     		.2byte	0x1
+ 2843 04fe 53       		.byte	0x53
+ 2844 04ff 3A000000 		.4byte	.LVL90
+ 2845 0503 3C000000 		.4byte	.LVL91
+ 2846 0507 2100     		.2byte	0x21
+ 2847 0509 72       		.byte	0x72
+ 2848 050a 00       		.sleb128 0
+ 2849 050b 3B       		.byte	0x3b
+ 2850 050c 26       		.byte	0x26
+ 2851 050d 76       		.byte	0x76
+ 2852 050e 00       		.sleb128 0
+ 2853 050f 33       		.byte	0x33
+ 2854 0510 24       		.byte	0x24
+ 2855 0511 71       		.byte	0x71
+ 2856 0512 00       		.sleb128 0
+ 2857 0513 22       		.byte	0x22
+ 2858 0514 31       		.byte	0x31
+ 2859 0515 24       		.byte	0x24
+ 2860 0516 74       		.byte	0x74
+ 2861 0517 00       		.sleb128 0
+ 2862 0518 22       		.byte	0x22
+ 2863 0519 94       		.byte	0x94
+ 2864 051a 02       		.byte	0x2
+ 2865 051b 0A       		.byte	0xa
+ 2866 051c FFFF     		.2byte	0xffff
+ 2867 051e 1A       		.byte	0x1a
+ 2868 051f 31       		.byte	0x31
+ 2869 0520 24       		.byte	0x24
+ 2870 0521 23       		.byte	0x23
+ 2871 0522 800D     		.uleb128 0x680
+ 2872 0524 4F       		.byte	0x4f
+ 2873 0525 26       		.byte	0x26
+ 2874 0526 1C       		.byte	0x1c
+ 2875 0527 31       		.byte	0x31
+ 2876 0528 1A       		.byte	0x1a
+ 2877 0529 9F       		.byte	0x9f
+ 2878 052a 3C000000 		.4byte	.LVL91
+ 2879 052e 40000000 		.4byte	.LVL92
+ 2880 0532 6500     		.2byte	0x65
+ 2881 0534 76       		.byte	0x76
+ 2882 0535 00       		.sleb128 0
+ 2883 0536 33       		.byte	0x33
+ 2884 0537 24       		.byte	0x24
+ 2885 0538 71       		.byte	0x71
+ 2886 0539 00       		.sleb128 0
+ 2887 053a 22       		.byte	0x22
+ 2888 053b 31       		.byte	0x31
+ 2889 053c 24       		.byte	0x24
+ 2890 053d 74       		.byte	0x74
+ 2891 053e 00       		.sleb128 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 59
+
+
+ 2892 053f 22       		.byte	0x22
+ 2893 0540 94       		.byte	0x94
+ 2894 0541 02       		.byte	0x2
+ 2895 0542 0A       		.byte	0xa
+ 2896 0543 FFFF     		.2byte	0xffff
+ 2897 0545 1A       		.byte	0x1a
+ 2898 0546 31       		.byte	0x31
+ 2899 0547 24       		.byte	0x24
+ 2900 0548 76       		.byte	0x76
+ 2901 0549 00       		.sleb128 0
+ 2902 054a 33       		.byte	0x33
+ 2903 054b 24       		.byte	0x24
+ 2904 054c 71       		.byte	0x71
+ 2905 054d 00       		.sleb128 0
+ 2906 054e 22       		.byte	0x22
+ 2907 054f 31       		.byte	0x31
+ 2908 0550 24       		.byte	0x24
+ 2909 0551 74       		.byte	0x74
+ 2910 0552 00       		.sleb128 0
+ 2911 0553 22       		.byte	0x22
+ 2912 0554 94       		.byte	0x94
+ 2913 0555 02       		.byte	0x2
+ 2914 0556 0A       		.byte	0xa
+ 2915 0557 FFFF     		.2byte	0xffff
+ 2916 0559 1A       		.byte	0x1a
+ 2917 055a 31       		.byte	0x31
+ 2918 055b 24       		.byte	0x24
+ 2919 055c 23       		.byte	0x23
+ 2920 055d 800D     		.uleb128 0x680
+ 2921 055f F7       		.byte	0xf7
+ 2922 0560 33       		.uleb128 0x33
+ 2923 0561 F7       		.byte	0xf7
+ 2924 0562 25       		.uleb128 0x25
+ 2925 0563 F4       		.byte	0xf4
+ 2926 0564 25       		.uleb128 0x25
+ 2927 0565 08       		.byte	0x8
+ 2928 0566 41BB7D9D 		.8byte	0xffffffff9d7dbb41
+ 2928      FFFFFFFF 
+ 2929 056e 1E       		.byte	0x1e
+ 2930 056f 08       		.byte	0x8
+ 2931 0570 20       		.byte	0x20
+ 2932 0571 F7       		.byte	0xf7
+ 2933 0572 25       		.uleb128 0x25
+ 2934 0573 25       		.byte	0x25
+ 2935 0574 F7       		.byte	0xf7
+ 2936 0575 2C       		.uleb128 0x2c
+ 2937 0576 22       		.byte	0x22
+ 2938 0577 23       		.byte	0x23
+ 2939 0578 800D     		.uleb128 0x680
+ 2940 057a 3B       		.byte	0x3b
+ 2941 057b 26       		.byte	0x26
+ 2942 057c 76       		.byte	0x76
+ 2943 057d 00       		.sleb128 0
+ 2944 057e 33       		.byte	0x33
+ 2945 057f 24       		.byte	0x24
+ 2946 0580 71       		.byte	0x71
+ 2947 0581 00       		.sleb128 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 60
+
+
+ 2948 0582 22       		.byte	0x22
+ 2949 0583 31       		.byte	0x31
+ 2950 0584 24       		.byte	0x24
+ 2951 0585 74       		.byte	0x74
+ 2952 0586 00       		.sleb128 0
+ 2953 0587 22       		.byte	0x22
+ 2954 0588 94       		.byte	0x94
+ 2955 0589 02       		.byte	0x2
+ 2956 058a 0A       		.byte	0xa
+ 2957 058b FFFF     		.2byte	0xffff
+ 2958 058d 1A       		.byte	0x1a
+ 2959 058e 31       		.byte	0x31
+ 2960 058f 24       		.byte	0x24
+ 2961 0590 23       		.byte	0x23
+ 2962 0591 800D     		.uleb128 0x680
+ 2963 0593 4F       		.byte	0x4f
+ 2964 0594 26       		.byte	0x26
+ 2965 0595 1C       		.byte	0x1c
+ 2966 0596 31       		.byte	0x31
+ 2967 0597 1A       		.byte	0x1a
+ 2968 0598 9F       		.byte	0x9f
+ 2969 0599 00000000 		.4byte	0
+ 2970 059d 00000000 		.4byte	0
+ 2971              	.LLST39:
+ 2972 05a1 02000000 		.4byte	.LVL97
+ 2973 05a5 06000000 		.4byte	.LVL98
+ 2974 05a9 0200     		.2byte	0x2
+ 2975 05ab 30       		.byte	0x30
+ 2976 05ac 9F       		.byte	0x9f
+ 2977 05ad 06000000 		.4byte	.LVL98
+ 2978 05b1 1E000000 		.4byte	.LFE14
+ 2979 05b5 0100     		.2byte	0x1
+ 2980 05b7 53       		.byte	0x53
+ 2981 05b8 00000000 		.4byte	0
+ 2982 05bc 00000000 		.4byte	0
+ 2983              	.LLST40:
+ 2984 05c0 02000000 		.4byte	.LVL101
+ 2985 05c4 06000000 		.4byte	.LVL102
+ 2986 05c8 0200     		.2byte	0x2
+ 2987 05ca 30       		.byte	0x30
+ 2988 05cb 9F       		.byte	0x9f
+ 2989 05cc 06000000 		.4byte	.LVL102
+ 2990 05d0 1E000000 		.4byte	.LFE15
+ 2991 05d4 0100     		.2byte	0x1
+ 2992 05d6 53       		.byte	0x53
+ 2993 05d7 00000000 		.4byte	0
+ 2994 05db 00000000 		.4byte	0
+ 2995              		.section	.debug_aranges,"",%progbits
+ 2996 0000 94000000 		.4byte	0x94
+ 2997 0004 0200     		.2byte	0x2
+ 2998 0006 00000000 		.4byte	.Ldebug_info0
+ 2999 000a 04       		.byte	0x4
+ 3000 000b 00       		.byte	0
+ 3001 000c 0000     		.2byte	0
+ 3002 000e 0000     		.2byte	0
+ 3003 0010 00000000 		.4byte	.LFB1
+ 3004 0014 88000000 		.4byte	.LFE1-.LFB1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 61
+
+
+ 3005 0018 00000000 		.4byte	.LFB3
+ 3006 001c 38000000 		.4byte	.LFE3-.LFB3
+ 3007 0020 00000000 		.4byte	.LFB4
+ 3008 0024 32000000 		.4byte	.LFE4-.LFB4
+ 3009 0028 00000000 		.4byte	.LFB6
+ 3010 002c 1E000000 		.4byte	.LFE6-.LFB6
+ 3011 0030 00000000 		.4byte	.LFB7
+ 3012 0034 1E000000 		.4byte	.LFE7-.LFB7
+ 3013 0038 00000000 		.4byte	.LFB9
+ 3014 003c 08000000 		.4byte	.LFE9-.LFB9
+ 3015 0040 00000000 		.4byte	.LFB10
+ 3016 0044 4C000000 		.4byte	.LFE10-.LFB10
+ 3017 0048 00000000 		.4byte	.LFB11
+ 3018 004c 24000000 		.4byte	.LFE11-.LFB11
+ 3019 0050 00000000 		.4byte	.LFB12
+ 3020 0054 1C000000 		.4byte	.LFE12-.LFB12
+ 3021 0058 00000000 		.4byte	.LFB8
+ 3022 005c 10000000 		.4byte	.LFE8-.LFB8
+ 3023 0060 00000000 		.4byte	.LFB13
+ 3024 0064 1C000000 		.4byte	.LFE13-.LFB13
+ 3025 0068 00000000 		.4byte	.LFB0
+ 3026 006c A0000000 		.4byte	.LFE0-.LFB0
+ 3027 0070 00000000 		.4byte	.LFB2
+ 3028 0074 3A000000 		.4byte	.LFE2-.LFB2
+ 3029 0078 00000000 		.4byte	.LFB5
+ 3030 007c 54000000 		.4byte	.LFE5-.LFB5
+ 3031 0080 00000000 		.4byte	.LFB14
+ 3032 0084 1E000000 		.4byte	.LFE14-.LFB14
+ 3033 0088 00000000 		.4byte	.LFB15
+ 3034 008c 1E000000 		.4byte	.LFE15-.LFB15
+ 3035 0090 00000000 		.4byte	0
+ 3036 0094 00000000 		.4byte	0
+ 3037              		.section	.debug_ranges,"",%progbits
+ 3038              	.Ldebug_ranges0:
+ 3039 0000 00000000 		.4byte	.LFB1
+ 3040 0004 88000000 		.4byte	.LFE1
+ 3041 0008 00000000 		.4byte	.LFB3
+ 3042 000c 38000000 		.4byte	.LFE3
+ 3043 0010 00000000 		.4byte	.LFB4
+ 3044 0014 32000000 		.4byte	.LFE4
+ 3045 0018 00000000 		.4byte	.LFB6
+ 3046 001c 1E000000 		.4byte	.LFE6
+ 3047 0020 00000000 		.4byte	.LFB7
+ 3048 0024 1E000000 		.4byte	.LFE7
+ 3049 0028 00000000 		.4byte	.LFB9
+ 3050 002c 08000000 		.4byte	.LFE9
+ 3051 0030 00000000 		.4byte	.LFB10
+ 3052 0034 4C000000 		.4byte	.LFE10
+ 3053 0038 00000000 		.4byte	.LFB11
+ 3054 003c 24000000 		.4byte	.LFE11
+ 3055 0040 00000000 		.4byte	.LFB12
+ 3056 0044 1C000000 		.4byte	.LFE12
+ 3057 0048 00000000 		.4byte	.LFB8
+ 3058 004c 10000000 		.4byte	.LFE8
+ 3059 0050 00000000 		.4byte	.LFB13
+ 3060 0054 1C000000 		.4byte	.LFE13
+ 3061 0058 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 62
+
+
+ 3062 005c A0000000 		.4byte	.LFE0
+ 3063 0060 00000000 		.4byte	.LFB2
+ 3064 0064 3A000000 		.4byte	.LFE2
+ 3065 0068 00000000 		.4byte	.LFB5
+ 3066 006c 54000000 		.4byte	.LFE5
+ 3067 0070 00000000 		.4byte	.LFB14
+ 3068 0074 1E000000 		.4byte	.LFE14
+ 3069 0078 00000000 		.4byte	.LFB15
+ 3070 007c 1E000000 		.4byte	.LFE15
+ 3071 0080 00000000 		.4byte	0
+ 3072 0084 00000000 		.4byte	0
+ 3073              		.section	.debug_line,"",%progbits
+ 3074              	.Ldebug_line0:
+ 3075 0000 E6030000 		.section	.debug_str,"MS",%progbits,1
+ 3075      02006301 
+ 3075      00000201 
+ 3075      FB0E0D00 
+ 3075      01010101 
+ 3076              	.LASF35:
+ 3077 0000 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_csubq\000"
+ 3077      79737461 
+ 3077      6C735F6B 
+ 3077      79626572 
+ 3077      31303234 
+ 3078              	.LASF49:
+ 3079 0024 70716372 		.ascii	"pqcrystals_kyber1024_ref_csubq\000"
+ 3079      79737461 
+ 3079      6C735F6B 
+ 3079      79626572 
+ 3079      31303234 
+ 3080              	.LASF6:
+ 3081 0043 73686F72 		.ascii	"short int\000"
+ 3081      7420696E 
+ 3081      7400
+ 3082              	.LASF19:
+ 3083 004d 73697A65 		.ascii	"sizetype\000"
+ 3083      74797065 
+ 3083      00
+ 3084              	.LASF41:
+ 3085 0056 70716372 		.ascii	"pqcrystals_kyber1024_ref_kyber_shake256_prf\000"
+ 3085      79737461 
+ 3085      6C735F6B 
+ 3085      79626572 
+ 3085      31303234 
+ 3086              	.LASF53:
+ 3087 0082 636F6566 		.ascii	"coeffs\000"
+ 3087      667300
+ 3088              	.LASF50:
+ 3089 0089 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3089      43313120 
+ 3089      352E342E 
+ 3089      31203230 
+ 3089      31363036 
+ 3090 00bc 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 3090      20726576 
+ 3090      6973696F 
+ 3090      6E203233 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 63
+
+
+ 3090      37373135 
+ 3091 00ef 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 3091      70202D6D 
+ 3091      6670753D 
+ 3091      66707634 
+ 3091      2D73702D 
+ 3092 0122 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 3092      6F6E7320 
+ 3092      2D666661 
+ 3092      742D6C74 
+ 3092      6F2D6F62 
+ 3093              	.LASF39:
+ 3094 013c 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_add\000"
+ 3094      79737461 
+ 3094      6C735F6B 
+ 3094      79626572 
+ 3094      31303234 
+ 3095              	.LASF11:
+ 3096 015e 5F5F7569 		.ascii	"__uint32_t\000"
+ 3096      6E743332 
+ 3096      5F7400
+ 3097              	.LASF7:
+ 3098 0169 5F5F7569 		.ascii	"__uint16_t\000"
+ 3098      6E743136 
+ 3098      5F7400
+ 3099              	.LASF43:
+ 3100 0174 70716372 		.ascii	"pqcrystals_kyber1024_ref_cbd_eta2\000"
+ 3100      79737461 
+ 3100      6C735F6B 
+ 3100      79626572 
+ 3100      31303234 
+ 3101              	.LASF14:
+ 3102 0196 75696E74 		.ascii	"uint8_t\000"
+ 3102      385F7400 
+ 3103              	.LASF46:
+ 3104 019e 70716372 		.ascii	"pqcrystals_kyber1024_ref_montgomery_reduce\000"
+ 3104      79737461 
+ 3104      6C735F6B 
+ 3104      79626572 
+ 3104      31303234 
+ 3105              	.LASF13:
+ 3106 01c9 6C6F6E67 		.ascii	"long long int\000"
+ 3106      206C6F6E 
+ 3106      6720696E 
+ 3106      7400
+ 3107              	.LASF45:
+ 3108 01d7 70716372 		.ascii	"pqcrystals_kyber1024_ref_basemul\000"
+ 3108      79737461 
+ 3108      6C735F6B 
+ 3108      79626572 
+ 3108      31303234 
+ 3109              	.LASF52:
+ 3110 01f8 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 3110      73657273 
+ 3110      5C626F67 
+ 3110      75725C44 
+ 3110      6F63756D 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 64
+
+
+ 3111 0224 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
+ 3111      7269746D 
+ 3111      6F732070 
+ 3111      6F737463 
+ 3111      75616E74 
+ 3112 0253 2E637964 		.ascii	".cydsn\000"
+ 3112      736E00
+ 3113              	.LASF54:
+ 3114 025a 70716372 		.ascii	"pqcrystals_kyber1024_ref_zetas\000"
+ 3114      79737461 
+ 3114      6C735F6B 
+ 3114      79626572 
+ 3114      31303234 
+ 3115              	.LASF38:
+ 3116 0279 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_tomsg\000"
+ 3116      79737461 
+ 3116      6C735F6B 
+ 3116      79626572 
+ 3116      31303234 
+ 3117              	.LASF4:
+ 3118 029d 5F5F7569 		.ascii	"__uint8_t\000"
+ 3118      6E74385F 
+ 3118      7400
+ 3119              	.LASF42:
+ 3120 02a7 70716372 		.ascii	"pqcrystals_kyber1024_ref_cbd_eta1\000"
+ 3120      79737461 
+ 3120      6C735F6B 
+ 3120      79626572 
+ 3120      31303234 
+ 3121              	.LASF24:
+ 3122 02c9 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_frommsg\000"
+ 3122      79737461 
+ 3122      6C735F6B 
+ 3122      79626572 
+ 3122      31303234 
+ 3123              	.LASF21:
+ 3124 02ef 6C6F6E67 		.ascii	"long double\000"
+ 3124      20646F75 
+ 3124      626C6500 
+ 3125              	.LASF28:
+ 3126 02fb 6E6F6E63 		.ascii	"nonce\000"
+ 3126      6500
+ 3127              	.LASF3:
+ 3128 0301 756E7369 		.ascii	"unsigned char\000"
+ 3128      676E6564 
+ 3128      20636861 
+ 3128      7200
+ 3129              	.LASF2:
+ 3130 030f 7369676E 		.ascii	"signed char\000"
+ 3130      65642063 
+ 3130      68617200 
+ 3131              	.LASF0:
+ 3132 031b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3132      206C6F6E 
+ 3132      6720756E 
+ 3132      7369676E 
+ 3132      65642069 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 65
+
+
+ 3133              	.LASF18:
+ 3134 0332 75696E74 		.ascii	"uint32_t\000"
+ 3134      33325F74 
+ 3134      00
+ 3135              	.LASF36:
+ 3136 033b 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_compress\000"
+ 3136      79737461 
+ 3136      6C735F6B 
+ 3136      79626572 
+ 3136      31303234 
+ 3137              	.LASF1:
+ 3138 0362 756E7369 		.ascii	"unsigned int\000"
+ 3138      676E6564 
+ 3138      20696E74 
+ 3138      00
+ 3139              	.LASF47:
+ 3140 036f 70716372 		.ascii	"pqcrystals_kyber1024_ref_barrett_reduce\000"
+ 3140      79737461 
+ 3140      6C735F6B 
+ 3140      79626572 
+ 3140      31303234 
+ 3141              	.LASF16:
+ 3142 0397 75696E74 		.ascii	"uint16_t\000"
+ 3142      31365F74 
+ 3142      00
+ 3143              	.LASF23:
+ 3144 03a0 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_frombytes\000"
+ 3144      79737461 
+ 3144      6C735F6B 
+ 3144      79626572 
+ 3144      31303234 
+ 3145              	.LASF26:
+ 3146 03c8 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_getnoise_eta1\000"
+ 3146      79737461 
+ 3146      6C735F6B 
+ 3146      79626572 
+ 3146      31303234 
+ 3147              	.LASF29:
+ 3148 03f4 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_getnoise_eta2\000"
+ 3148      79737461 
+ 3148      6C735F6B 
+ 3148      79626572 
+ 3148      31303234 
+ 3149              	.LASF31:
+ 3150 0420 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_basemul_montgomery\000"
+ 3150      79737461 
+ 3150      6C735F6B 
+ 3150      79626572 
+ 3150      31303234 
+ 3151              	.LASF48:
+ 3152 0451 70716372 		.ascii	"pqcrystals_kyber1024_ref_ntt\000"
+ 3152      79737461 
+ 3152      6C735F6B 
+ 3152      79626572 
+ 3152      31303234 
+ 3153              	.LASF37:
+ 3154 046e 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_tobytes\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 66
+
+
+ 3154      79737461 
+ 3154      6C735F6B 
+ 3154      79626572 
+ 3154      31303234 
+ 3155              	.LASF8:
+ 3156 0494 73686F72 		.ascii	"short unsigned int\000"
+ 3156      7420756E 
+ 3156      7369676E 
+ 3156      65642069 
+ 3156      6E7400
+ 3157              	.LASF10:
+ 3158 04a7 6C6F6E67 		.ascii	"long int\000"
+ 3158      20696E74 
+ 3158      00
+ 3159              	.LASF27:
+ 3160 04b0 73656564 		.ascii	"seed\000"
+ 3160      00
+ 3161              	.LASF17:
+ 3162 04b5 696E7433 		.ascii	"int32_t\000"
+ 3162      325F7400 
+ 3163              	.LASF40:
+ 3164 04bd 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_sub\000"
+ 3164      79737461 
+ 3164      6C735F6B 
+ 3164      79626572 
+ 3164      31303234 
+ 3165              	.LASF15:
+ 3166 04df 696E7431 		.ascii	"int16_t\000"
+ 3166      365F7400 
+ 3167              	.LASF22:
+ 3168 04e7 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_decompress\000"
+ 3168      79737461 
+ 3168      6C735F6B 
+ 3168      79626572 
+ 3168      31303234 
+ 3169              	.LASF30:
+ 3170 0510 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_invntt_tomont\000"
+ 3170      79737461 
+ 3170      6C735F6B 
+ 3170      79626572 
+ 3170      31303234 
+ 3171              	.LASF12:
+ 3172 053c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3172      20756E73 
+ 3172      69676E65 
+ 3172      6420696E 
+ 3172      7400
+ 3173              	.LASF51:
+ 3174 054e 2E2E5C70 		.ascii	"..\\poly.c\000"
+ 3174      6F6C792E 
+ 3174      6300
+ 3175              	.LASF9:
+ 3176 0558 5F5F696E 		.ascii	"__int32_t\000"
+ 3176      7433325F 
+ 3176      7400
+ 3177              	.LASF5:
+ 3178 0562 5F5F696E 		.ascii	"__int16_t\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccDgHHYj.s 			page 67
+
+
+ 3178      7431365F 
+ 3178      7400
+ 3179              	.LASF33:
+ 3180 056c 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_reduce\000"
+ 3180      79737461 
+ 3180      6C735F6B 
+ 3180      79626572 
+ 3180      31303234 
+ 3181              	.LASF32:
+ 3182 0591 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_tomont\000"
+ 3182      79737461 
+ 3182      6C735F6B 
+ 3182      79626572 
+ 3182      31303234 
+ 3183              	.LASF20:
+ 3184 05b6 706F6C79 		.ascii	"poly\000"
+ 3184      00
+ 3185              	.LASF44:
+ 3186 05bb 70716372 		.ascii	"pqcrystals_kyber1024_ref_invntt\000"
+ 3186      79737461 
+ 3186      6C735F6B 
+ 3186      79626572 
+ 3186      31303234 
+ 3187              	.LASF34:
+ 3188 05db 70716372 		.ascii	"pqcrystals_kyber1024_ref_poly_ntt\000"
+ 3188      79737461 
+ 3188      6C735F6B 
+ 3188      79626572 
+ 3188      31303234 
+ 3189              	.LASF25:
+ 3190 05fd 6D61736B 		.ascii	"mask\000"
+ 3190      00
+ 3191              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,2920 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"kem.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.PQCLEAN_HQC256_CLEAN_crypto_kem_keypair,"ax",%progbits
+  21              		.align	2
+  22              		.global	PQCLEAN_HQC256_CLEAN_crypto_kem_keypair
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	PQCLEAN_HQC256_CLEAN_crypto_kem_keypair, %function
+  26              	PQCLEAN_HQC256_CLEAN_crypto_kem_keypair:
+  27              	.LFB0:
+  28              		.file 1 "..\\kem.c"
+   1:..\kem.c      **** #include "api.h"
+   2:..\kem.c      **** #include "domains.h"
+   3:..\kem.c      **** #include "fips202.h"
+   4:..\kem.c      **** #include "hqc.h"
+   5:..\kem.c      **** #include "parameters.h"
+   6:..\kem.c      **** #include "parsing.h"
+   7:..\kem.c      **** #include "randombytes.h"
+   8:..\kem.c      **** #include "shake_ds.h"
+   9:..\kem.c      **** #include "vector.h"
+  10:..\kem.c      **** #include <stdint.h>
+  11:..\kem.c      **** #include <string.h>
+  12:..\kem.c      **** /**
+  13:..\kem.c      ****  * @file kem.c
+  14:..\kem.c      ****  * @brief Implementation of api.h
+  15:..\kem.c      ****  */
+  16:..\kem.c      **** 
+  17:..\kem.c      **** 
+  18:..\kem.c      **** 
+  19:..\kem.c      **** /**
+  20:..\kem.c      ****  * @brief Keygen of the HQC_KEM IND_CAA2 scheme
+  21:..\kem.c      ****  *
+  22:..\kem.c      ****  * The public key is composed of the syndrome <b>s</b> as well as the seed used to generate the vec
+  23:..\kem.c      ****  *
+  24:..\kem.c      ****  * The secret key is composed of the seed used to generate vectors <b>x</b> and <b>y</b>.
+  25:..\kem.c      ****  * As a technicality, the public key is appended to the secret key in order to respect NIST API.
+  26:..\kem.c      ****  *
+  27:..\kem.c      ****  * @param[out] pk String containing the public key
+  28:..\kem.c      ****  * @param[out] sk String containing the secret key
+  29:..\kem.c      ****  * @returns 0 if keygen is successful
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 2
+
+
+  30:..\kem.c      ****  */
+  31:..\kem.c      **** int PQCLEAN_HQC256_CLEAN_crypto_kem_keypair(uint8_t *pk, uint8_t *sk) {
+  29              		.loc 1 31 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 08B5     		push	{r3, lr}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  32:..\kem.c      **** 
+  33:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_hqc_pke_keygen(pk, sk);
+  38              		.loc 1 33 0
+  39 0002 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_pke_keygen
+  40              	.LVL1:
+  34:..\kem.c      ****     return 0;
+  35:..\kem.c      **** }
+  41              		.loc 1 35 0
+  42 0006 0020     		movs	r0, #0
+  43 0008 08BD     		pop	{r3, pc}
+  44              		.cfi_endproc
+  45              	.LFE0:
+  46              		.size	PQCLEAN_HQC256_CLEAN_crypto_kem_keypair, .-PQCLEAN_HQC256_CLEAN_crypto_kem_keypair
+  47 000a 00BF     		.section	.text.PQCLEAN_HQC256_CLEAN_crypto_kem_enc,"ax",%progbits
+  48              		.align	2
+  49              		.global	PQCLEAN_HQC256_CLEAN_crypto_kem_enc
+  50              		.thumb
+  51              		.thumb_func
+  52              		.type	PQCLEAN_HQC256_CLEAN_crypto_kem_enc, %function
+  53              	PQCLEAN_HQC256_CLEAN_crypto_kem_enc:
+  54              	.LFB1:
+  36:..\kem.c      **** 
+  37:..\kem.c      **** 
+  38:..\kem.c      **** 
+  39:..\kem.c      **** /**
+  40:..\kem.c      ****  * @brief Encapsulation of the HQC_KEM IND_CAA2 scheme
+  41:..\kem.c      ****  *
+  42:..\kem.c      ****  * @param[out] ct String containing the ciphertext
+  43:..\kem.c      ****  * @param[out] ss String containing the shared secret
+  44:..\kem.c      ****  * @param[in] pk String containing the public key
+  45:..\kem.c      ****  * @returns 0 if encapsulation is successful
+  46:..\kem.c      ****  */
+  47:..\kem.c      **** int PQCLEAN_HQC256_CLEAN_crypto_kem_enc(uint8_t *ct, uint8_t *ss, const uint8_t *pk) {
+  55              		.loc 1 47 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 36224
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              	.LVL2:
+  60 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  61              		.cfi_def_cfa_offset 32
+  62              		.cfi_offset 4, -32
+  63              		.cfi_offset 5, -28
+  64              		.cfi_offset 6, -24
+  65              		.cfi_offset 7, -20
+  66              		.cfi_offset 8, -16
+  67              		.cfi_offset 9, -12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 3
+
+
+  68              		.cfi_offset 10, -8
+  69              		.cfi_offset 14, -4
+  70 0004 ADF50D4D 		sub	sp, sp, #36096
+  71              		.cfi_def_cfa_offset 36128
+  72 0008 A2B0     		sub	sp, sp, #136
+  73              		.cfi_def_cfa_offset 36264
+  74 000a 8146     		mov	r9, r0
+  75 000c 8A46     		mov	r10, r1
+  76 000e 1446     		mov	r4, r2
+  48:..\kem.c      **** 
+  49:..\kem.c      ****     uint8_t theta[SHAKE256_512_BYTES] = {0};
+  77              		.loc 1 49 0
+  78 0010 4022     		movs	r2, #64
+  79              	.LVL3:
+  80 0012 0021     		movs	r1, #0
+  81              	.LVL4:
+  82 0014 0DF50D40 		add	r0, sp, #36096
+  83              	.LVL5:
+  84 0018 4830     		adds	r0, r0, #72
+  85 001a FFF7FEFF 		bl	memset
+  86              	.LVL6:
+  50:..\kem.c      ****     uint64_t u[VEC_N_SIZE_64] = {0};
+  87              		.loc 1 50 0
+  88 001e 41F62842 		movw	r2, #7208
+  89 0022 0021     		movs	r1, #0
+  90 0024 0DF5E240 		add	r0, sp, #28928
+  91 0028 2030     		adds	r0, r0, #32
+  92 002a FFF7FEFF 		bl	memset
+  93              	.LVL7:
+  51:..\kem.c      ****     uint64_t v[VEC_N1N2_SIZE_64] = {0};
+  94              		.loc 1 51 0
+  95 002e 4FF4E158 		mov	r8, #7200
+  96 0032 4246     		mov	r2, r8
+  97 0034 0021     		movs	r1, #0
+  98 0036 0DF5AA40 		add	r0, sp, #21760
+  99 003a FFF7FEFF 		bl	memset
+ 100              	.LVL8:
+  52:..\kem.c      ****     uint8_t mc[VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES] = {0};
+ 101              		.loc 1 52 0
+ 102 003e 43F66507 		movw	r7, #14437
+ 103 0042 3A46     		mov	r2, r7
+ 104 0044 0021     		movs	r1, #0
+ 105 0046 0DF5E450 		add	r0, sp, #7296
+ 106 004a 1830     		adds	r0, r0, #24
+ 107 004c FFF7FEFF 		bl	memset
+ 108              	.LVL9:
+  53:..\kem.c      ****     uint8_t tmp[VEC_K_SIZE_BYTES + PUBLIC_KEY_BYTES + SALT_SIZE_BYTES] = {0};
+ 109              		.loc 1 53 0
+ 110 0050 41F67D45 		movw	r5, #7293
+ 111 0054 2A46     		mov	r2, r5
+ 112 0056 0021     		movs	r1, #0
+ 113 0058 06A8     		add	r0, sp, #24
+ 114 005a FFF7FEFF 		bl	memset
+ 115              	.LVL10:
+  54:..\kem.c      ****     uint8_t *m = tmp;
+  55:..\kem.c      ****     uint8_t *salt = tmp + VEC_K_SIZE_BYTES + PUBLIC_KEY_BYTES;
+  56:..\kem.c      ****     shake256incctx shake256state;
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 4
+
+
+  57:..\kem.c      **** 
+  58:..\kem.c      ****     // Computing m
+  59:..\kem.c      ****     randombytes(m, VEC_K_SIZE_BYTES);
+ 116              		.loc 1 59 0
+ 117 005e 2021     		movs	r1, #32
+ 118 0060 06A8     		add	r0, sp, #24
+ 119              	.LVL11:
+ 120 0062 FFF7FEFF 		bl	randombytes
+ 121              	.LVL12:
+  60:..\kem.c      **** 
+  61:..\kem.c      ****     // Computing theta
+  62:..\kem.c      ****     randombytes(salt, SALT_SIZE_BYTES);
+ 122              		.loc 1 62 0
+ 123 0066 06AB     		add	r3, sp, #24
+ 124              	.LVL13:
+ 125 0068 03F5E356 		add	r6, r3, #7264
+ 126 006c 0D36     		adds	r6, r6, #13
+ 127 006e 1021     		movs	r1, #16
+ 128 0070 3046     		mov	r0, r6
+ 129 0072 FFF7FEFF 		bl	randombytes
+ 130              	.LVL14:
+  63:..\kem.c      ****     memcpy(tmp + VEC_K_SIZE_BYTES, pk, PUBLIC_KEY_BYTES);
+ 131              		.loc 1 63 0
+ 132 0076 41F64D42 		movw	r2, #7245
+ 133 007a 2146     		mov	r1, r4
+ 134 007c 0EA8     		add	r0, sp, #56
+ 135 007e FFF7FEFF 		bl	memcpy
+ 136              	.LVL15:
+  64:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_shake256_512_ds(&shake256state, theta, tmp, VEC_K_SIZE_BYTES + PUBLIC_KEY_
+ 137              		.loc 1 64 0
+ 138 0082 05AB     		add	r3, sp, #20
+ 139 0084 0393     		str	r3, [sp, #12]
+ 140 0086 0323     		movs	r3, #3
+ 141 0088 0093     		str	r3, [sp]
+ 142 008a 2B46     		mov	r3, r5
+ 143 008c 06AA     		add	r2, sp, #24
+ 144              	.LVL16:
+ 145 008e 0DF50D41 		add	r1, sp, #36096
+ 146 0092 4831     		adds	r1, r1, #72
+ 147 0094 0398     		ldr	r0, [sp, #12]
+ 148 0096 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_shake256_512_ds
+ 149              	.LVL17:
+  65:..\kem.c      **** 
+  66:..\kem.c      ****     // Encrypting m
+  67:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt(u, v, m, theta, pk);
+ 150              		.loc 1 67 0
+ 151 009a 0094     		str	r4, [sp]
+ 152 009c 0DF50D43 		add	r3, sp, #36096
+ 153 00a0 4833     		adds	r3, r3, #72
+ 154 00a2 06AA     		add	r2, sp, #24
+ 155              	.LVL18:
+ 156 00a4 0DF5AA41 		add	r1, sp, #21760
+ 157 00a8 0DF5E240 		add	r0, sp, #28928
+ 158 00ac 2030     		adds	r0, r0, #32
+ 159 00ae FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt
+ 160              	.LVL19:
+  68:..\kem.c      **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 5
+
+
+  69:..\kem.c      ****     // Computing shared secret
+  70:..\kem.c      ****     memcpy(mc, m, VEC_K_SIZE_BYTES);
+ 161              		.loc 1 70 0
+ 162 00b2 0DF5E455 		add	r5, sp, #7296
+ 163 00b6 1835     		adds	r5, r5, #24
+ 164 00b8 06AC     		add	r4, sp, #24
+ 165              	.LVL20:
+ 166 00ba 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 167              	.LVL21:
+ 168 00bc 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 169 00be 94E80F00 		ldmia	r4, {r0, r1, r2, r3}
+ 170 00c2 85E80F00 		stmia	r5, {r0, r1, r2, r3}
+  71:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_store8_arr(mc + VEC_K_SIZE_BYTES, VEC_N_SIZE_BYTES, u, VEC_N_SIZE_64);
+ 171              		.loc 1 71 0
+ 172 00c6 40F28533 		movw	r3, #901
+ 173 00ca 0DF5E242 		add	r2, sp, #28928
+ 174 00ce 2032     		adds	r2, r2, #32
+ 175 00d0 41F62541 		movw	r1, #7205
+ 176 00d4 0DF5E850 		add	r0, sp, #7424
+ 177 00d8 0830     		adds	r0, r0, #8
+ 178 00da 5038     		subs	r0, r0, #80
+ 179 00dc FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 180              	.LVL22:
+  72:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_store8_arr(mc + VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTES, VEC_N1N2_SIZE_BYTES, 
+ 181              		.loc 1 72 0
+ 182 00e0 4FF46173 		mov	r3, #900
+ 183 00e4 0DF5AA42 		add	r2, sp, #21760
+ 184 00e8 4146     		mov	r1, r8
+ 185 00ea 0DF5E450 		add	r0, sp, #7296
+ 186 00ee 1830     		adds	r0, r0, #24
+ 187 00f0 00F5E250 		add	r0, r0, #7232
+ 188 00f4 0530     		adds	r0, r0, #5
+ 189 00f6 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 190              	.LVL23:
+  73:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_shake256_512_ds(&shake256state, ss, mc, VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTE
+ 191              		.loc 1 73 0
+ 192 00fa 0423     		movs	r3, #4
+ 193 00fc 0093     		str	r3, [sp]
+ 194 00fe 3B46     		mov	r3, r7
+ 195 0100 0DF5E452 		add	r2, sp, #7296
+ 196 0104 1832     		adds	r2, r2, #24
+ 197 0106 5146     		mov	r1, r10
+ 198 0108 0398     		ldr	r0, [sp, #12]
+ 199 010a FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_shake256_512_ds
+ 200              	.LVL24:
+  74:..\kem.c      **** 
+  75:..\kem.c      ****     // Computing ciphertext
+  76:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string(ct, u, v, salt);
+ 201              		.loc 1 76 0
+ 202 010e 3346     		mov	r3, r6
+ 203 0110 0DF5AA42 		add	r2, sp, #21760
+ 204 0114 0DF5E241 		add	r1, sp, #28928
+ 205 0118 2031     		adds	r1, r1, #32
+ 206 011a 4846     		mov	r0, r9
+ 207 011c FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string
+ 208              	.LVL25:
+  77:..\kem.c      **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 6
+
+
+  78:..\kem.c      **** 
+  79:..\kem.c      ****     return 0;
+  80:..\kem.c      **** }
+ 209              		.loc 1 80 0
+ 210 0120 0020     		movs	r0, #0
+ 211 0122 0DF50D4D 		add	sp, sp, #36096
+ 212 0126 22B0     		add	sp, sp, #136
+ 213              		.cfi_def_cfa_offset 32
+ 214              		@ sp needed
+ 215 0128 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 216              		.cfi_endproc
+ 217              	.LFE1:
+ 218              		.size	PQCLEAN_HQC256_CLEAN_crypto_kem_enc, .-PQCLEAN_HQC256_CLEAN_crypto_kem_enc
+ 219              		.section	.text.PQCLEAN_HQC256_CLEAN_crypto_kem_dec,"ax",%progbits
+ 220              		.align	2
+ 221              		.global	PQCLEAN_HQC256_CLEAN_crypto_kem_dec
+ 222              		.thumb
+ 223              		.thumb_func
+ 224              		.type	PQCLEAN_HQC256_CLEAN_crypto_kem_dec, %function
+ 225              	PQCLEAN_HQC256_CLEAN_crypto_kem_dec:
+ 226              	.LFB2:
+  81:..\kem.c      **** 
+  82:..\kem.c      **** 
+  83:..\kem.c      **** 
+  84:..\kem.c      **** /**
+  85:..\kem.c      ****  * @brief Decapsulation of the HQC_KEM IND_CAA2 scheme
+  86:..\kem.c      ****  *
+  87:..\kem.c      ****  * @param[out] ss String containing the shared secret
+  88:..\kem.c      ****  * @param[in] ct String containing the cipĥertext
+  89:..\kem.c      ****  * @param[in] sk String containing the secret key
+  90:..\kem.c      ****  * @returns 0 if decapsulation is successful, -1 otherwise
+  91:..\kem.c      ****  */
+  92:..\kem.c      **** int PQCLEAN_HQC256_CLEAN_crypto_kem_dec(uint8_t *ss, const uint8_t *ct, const uint8_t *sk) {
+ 227              		.loc 1 92 0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 50664
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              	.LVL26:
+ 232 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 233              		.cfi_def_cfa_offset 28
+ 234              		.cfi_offset 4, -28
+ 235              		.cfi_offset 5, -24
+ 236              		.cfi_offset 6, -20
+ 237              		.cfi_offset 7, -16
+ 238              		.cfi_offset 8, -12
+ 239              		.cfi_offset 9, -8
+ 240              		.cfi_offset 14, -4
+ 241 0004 ADF5454D 		sub	sp, sp, #50432
+ 242              		.cfi_def_cfa_offset 50460
+ 243 0008 BDB0     		sub	sp, sp, #244
+ 244              		.cfi_def_cfa_offset 50704
+ 245 000a 0546     		mov	r5, r0
+ 246 000c 8946     		mov	r9, r1
+ 247 000e 1446     		mov	r4, r2
+  93:..\kem.c      **** 
+  94:..\kem.c      ****     uint8_t result;
+  95:..\kem.c      ****     uint64_t u[VEC_N_SIZE_64] = {0};
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 7
+
+
+ 248              		.loc 1 95 0
+ 249 0010 41F62848 		movw	r8, #7208
+ 250 0014 4246     		mov	r2, r8
+ 251              	.LVL27:
+ 252 0016 0021     		movs	r1, #0
+ 253              	.LVL28:
+ 254 0018 0DF52940 		add	r0, sp, #43264
+ 255              	.LVL29:
+ 256 001c C830     		adds	r0, r0, #200
+ 257 001e FFF7FEFF 		bl	memset
+ 258              	.LVL30:
+  96:..\kem.c      ****     uint64_t v[VEC_N1N2_SIZE_64] = {0};
+ 259              		.loc 1 96 0
+ 260 0022 4FF4E156 		mov	r6, #7200
+ 261 0026 3246     		mov	r2, r6
+ 262 0028 0021     		movs	r1, #0
+ 263 002a 0DF50D40 		add	r0, sp, #36096
+ 264 002e A830     		adds	r0, r0, #168
+ 265 0030 FFF7FEFF 		bl	memset
+ 266              	.LVL31:
+  97:..\kem.c      ****     const uint8_t *pk = sk + SEED_BYTES + VEC_K_SIZE_BYTES;
+ 267              		.loc 1 97 0
+ 268 0034 04F14807 		add	r7, r4, #72
+ 269              	.LVL32:
+  98:..\kem.c      ****     uint8_t sigma[VEC_K_SIZE_BYTES] = {0};
+ 270              		.loc 1 98 0
+ 271 0038 0DF50D43 		add	r3, sp, #36096
+ 272 003c B033     		adds	r3, r3, #176
+ 273 003e 283B     		subs	r3, r3, #40
+ 274 0040 0393     		str	r3, [sp, #12]
+ 275 0042 2022     		movs	r2, #32
+ 276 0044 0021     		movs	r1, #0
+ 277 0046 1846     		mov	r0, r3
+ 278 0048 FFF7FEFF 		bl	memset
+ 279              	.LVL33:
+  99:..\kem.c      ****     uint8_t theta[SHAKE256_512_BYTES] = {0};
+ 280              		.loc 1 99 0
+ 281 004c 4022     		movs	r2, #64
+ 282 004e 0021     		movs	r1, #0
+ 283 0050 0DF50D40 		add	r0, sp, #36096
+ 284 0054 4830     		adds	r0, r0, #72
+ 285 0056 FFF7FEFF 		bl	memset
+ 286              	.LVL34:
+ 100:..\kem.c      ****     uint64_t u2[VEC_N_SIZE_64] = {0};
+ 287              		.loc 1 100 0
+ 288 005a 4246     		mov	r2, r8
+ 289 005c 0021     		movs	r1, #0
+ 290 005e 0DF5E240 		add	r0, sp, #28928
+ 291 0062 2030     		adds	r0, r0, #32
+ 292 0064 FFF7FEFF 		bl	memset
+ 293              	.LVL35:
+ 101:..\kem.c      ****     uint64_t v2[VEC_N1N2_SIZE_64] = {0};
+ 294              		.loc 1 101 0
+ 295 0068 3246     		mov	r2, r6
+ 296 006a 0021     		movs	r1, #0
+ 297 006c 0DF5AA40 		add	r0, sp, #21760
+ 298 0070 FFF7FEFF 		bl	memset
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 8
+
+
+ 299              	.LVL36:
+ 102:..\kem.c      ****     uint8_t mc[VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES] = {0};
+ 300              		.loc 1 102 0
+ 301 0074 43F66502 		movw	r2, #14437
+ 302 0078 0021     		movs	r1, #0
+ 303 007a 0DF5E450 		add	r0, sp, #7296
+ 304 007e 1830     		adds	r0, r0, #24
+ 305 0080 FFF7FEFF 		bl	memset
+ 306              	.LVL37:
+ 103:..\kem.c      ****     uint8_t tmp[VEC_K_SIZE_BYTES + PUBLIC_KEY_BYTES + SALT_SIZE_BYTES] = {0};
+ 307              		.loc 1 103 0
+ 308 0084 41F67D48 		movw	r8, #7293
+ 309 0088 4246     		mov	r2, r8
+ 310 008a 0021     		movs	r1, #0
+ 311 008c 06A8     		add	r0, sp, #24
+ 312 008e FFF7FEFF 		bl	memset
+ 313              	.LVL38:
+ 104:..\kem.c      ****     uint8_t *m = tmp;
+ 105:..\kem.c      ****     uint8_t *salt = tmp + VEC_K_SIZE_BYTES + PUBLIC_KEY_BYTES;
+ 106:..\kem.c      ****     shake256incctx shake256state;
+ 107:..\kem.c      **** 
+ 108:..\kem.c      ****     // Retrieving u, v and d from ciphertext
+ 109:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string(u, v, salt, ct);
+ 314              		.loc 1 109 0
+ 315 0092 4B46     		mov	r3, r9
+ 316 0094 06AA     		add	r2, sp, #24
+ 317              	.LVL39:
+ 318 0096 02F5E352 		add	r2, r2, #7264
+ 319              	.LVL40:
+ 320 009a 0D32     		adds	r2, r2, #13
+ 321              	.LVL41:
+ 322 009c 0DF50D41 		add	r1, sp, #36096
+ 323 00a0 A831     		adds	r1, r1, #168
+ 324 00a2 0DF52940 		add	r0, sp, #43264
+ 325 00a6 C830     		adds	r0, r0, #200
+ 326 00a8 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string
+ 327              	.LVL42:
+ 110:..\kem.c      **** 
+ 111:..\kem.c      ****     // Decrypting
+ 112:..\kem.c      ****     result = PQCLEAN_HQC256_CLEAN_hqc_pke_decrypt(m, sigma, u, v, sk);
+ 328              		.loc 1 112 0
+ 329 00ac 0094     		str	r4, [sp]
+ 330 00ae 0DF50D43 		add	r3, sp, #36096
+ 331 00b2 A833     		adds	r3, r3, #168
+ 332 00b4 0DF52942 		add	r2, sp, #43264
+ 333 00b8 C832     		adds	r2, r2, #200
+ 334 00ba 0399     		ldr	r1, [sp, #12]
+ 335 00bc 06A8     		add	r0, sp, #24
+ 336              	.LVL43:
+ 337 00be FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_pke_decrypt
+ 338              	.LVL44:
+ 339 00c2 0446     		mov	r4, r0
+ 340              	.LVL45:
+ 113:..\kem.c      **** 
+ 114:..\kem.c      ****     // Computing theta
+ 115:..\kem.c      ****     memcpy(tmp + VEC_K_SIZE_BYTES, pk, PUBLIC_KEY_BYTES);
+ 341              		.loc 1 115 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 9
+
+
+ 342 00c4 41F64D42 		movw	r2, #7245
+ 343 00c8 3946     		mov	r1, r7
+ 344 00ca 0EA8     		add	r0, sp, #56
+ 345 00cc FFF7FEFF 		bl	memcpy
+ 346              	.LVL46:
+ 116:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_shake256_512_ds(&shake256state, theta, tmp, VEC_K_SIZE_BYTES + PUBLIC_KEY_
+ 347              		.loc 1 116 0
+ 348 00d0 0323     		movs	r3, #3
+ 349 00d2 0093     		str	r3, [sp]
+ 350 00d4 4346     		mov	r3, r8
+ 351 00d6 06AA     		add	r2, sp, #24
+ 352              	.LVL47:
+ 353 00d8 0DF50D41 		add	r1, sp, #36096
+ 354 00dc 4831     		adds	r1, r1, #72
+ 355 00de 05A8     		add	r0, sp, #20
+ 356 00e0 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_shake256_512_ds
+ 357              	.LVL48:
+ 117:..\kem.c      **** 
+ 118:..\kem.c      ****     // Encrypting m'
+ 119:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt(u2, v2, m, theta, pk);
+ 358              		.loc 1 119 0
+ 359 00e4 0097     		str	r7, [sp]
+ 360 00e6 0DF50D43 		add	r3, sp, #36096
+ 361 00ea 4833     		adds	r3, r3, #72
+ 362 00ec 06AA     		add	r2, sp, #24
+ 363              	.LVL49:
+ 364 00ee 0DF5AA41 		add	r1, sp, #21760
+ 365 00f2 0DF5E240 		add	r0, sp, #28928
+ 366 00f6 2030     		adds	r0, r0, #32
+ 367 00f8 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt
+ 368              	.LVL50:
+ 120:..\kem.c      **** 
+ 121:..\kem.c      ****     // Check if c != c'
+ 122:..\kem.c      ****     result |= PQCLEAN_HQC256_CLEAN_vect_compare((uint8_t *)u, (uint8_t *)u2, VEC_N_SIZE_BYTES);
+ 369              		.loc 1 122 0
+ 370 00fc 41F62542 		movw	r2, #7205
+ 371 0100 0DF5E241 		add	r1, sp, #28928
+ 372 0104 2031     		adds	r1, r1, #32
+ 373 0106 0DF52940 		add	r0, sp, #43264
+ 374 010a C830     		adds	r0, r0, #200
+ 375 010c FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_vect_compare
+ 376              	.LVL51:
+ 377 0110 2043     		orrs	r0, r0, r4
+ 378 0112 C4B2     		uxtb	r4, r0
+ 379              	.LVL52:
+ 123:..\kem.c      ****     result |= PQCLEAN_HQC256_CLEAN_vect_compare((uint8_t *)v, (uint8_t *)v2, VEC_N1N2_SIZE_BYTES);
+ 380              		.loc 1 123 0
+ 381 0114 3246     		mov	r2, r6
+ 382 0116 0DF5AA41 		add	r1, sp, #21760
+ 383 011a 0DF50D40 		add	r0, sp, #36096
+ 384 011e A830     		adds	r0, r0, #168
+ 385 0120 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_vect_compare
+ 386              	.LVL53:
+ 387 0124 2043     		orrs	r0, r0, r4
+ 388 0126 C4B2     		uxtb	r4, r0
+ 389              	.LVL54:
+ 124:..\kem.c      **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 10
+
+
+ 125:..\kem.c      ****     result -= 1;
+ 390              		.loc 1 125 0
+ 391 0128 013C     		subs	r4, r4, #1
+ 392              	.LVL55:
+ 393 012a E4B2     		uxtb	r4, r4
+ 394              	.LVL56:
+ 395              	.LBB2:
+ 126:..\kem.c      **** 
+ 127:..\kem.c      ****     for (size_t i = 0; i < VEC_K_SIZE_BYTES; ++i) {
+ 396              		.loc 1 127 0
+ 397 012c 0023     		movs	r3, #0
+ 398 012e 0EE0     		b	.L6
+ 399              	.LVL57:
+ 400              	.L7:
+ 128:..\kem.c      ****         mc[i] = (m[i] & result) ^ (sigma[i] & ~result);
+ 401              		.loc 1 128 0 discriminator 3
+ 402 0130 06AA     		add	r2, sp, #24
+ 403              	.LVL58:
+ 404 0132 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+ 405              	.LVL59:
+ 406 0134 0DF50D41 		add	r1, sp, #36096
+ 407 0138 8831     		adds	r1, r1, #136
+ 408 013a C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 409 013c 21EA0401 		bic	r1, r1, r4
+ 410 0140 2240     		ands	r2, r2, r4
+ 411 0142 4A40     		eors	r2, r2, r1
+ 412 0144 0DF5E451 		add	r1, sp, #7296
+ 413 0148 1831     		adds	r1, r1, #24
+ 414 014a CA54     		strb	r2, [r1, r3]
+ 127:..\kem.c      ****         mc[i] = (m[i] & result) ^ (sigma[i] & ~result);
+ 415              		.loc 1 127 0 discriminator 3
+ 416 014c 0133     		adds	r3, r3, #1
+ 417              	.LVL60:
+ 418              	.L6:
+ 127:..\kem.c      ****         mc[i] = (m[i] & result) ^ (sigma[i] & ~result);
+ 419              		.loc 1 127 0 is_stmt 0 discriminator 1
+ 420 014e 1F2B     		cmp	r3, #31
+ 421 0150 EED9     		bls	.L7
+ 422              	.LBE2:
+ 129:..\kem.c      ****     }
+ 130:..\kem.c      **** 
+ 131:..\kem.c      ****     // Computing shared secret
+ 132:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_store8_arr(mc + VEC_K_SIZE_BYTES, VEC_N_SIZE_BYTES, u, VEC_N_SIZE_64);
+ 423              		.loc 1 132 0 is_stmt 1
+ 424 0152 40F28533 		movw	r3, #901
+ 425              	.LVL61:
+ 426 0156 0DF52942 		add	r2, sp, #43264
+ 427 015a C832     		adds	r2, r2, #200
+ 428 015c 41F62541 		movw	r1, #7205
+ 429 0160 0DF5E750 		add	r0, sp, #7392
+ 430 0164 1030     		adds	r0, r0, #16
+ 431 0166 3838     		subs	r0, r0, #56
+ 432 0168 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 433              	.LVL62:
+ 133:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_store8_arr(mc + VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTES, VEC_N1N2_SIZE_BYTES, 
+ 434              		.loc 1 133 0
+ 435 016c 4FF46173 		mov	r3, #900
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 11
+
+
+ 436 0170 0DF50D42 		add	r2, sp, #36096
+ 437 0174 A832     		adds	r2, r2, #168
+ 438 0176 4FF4E151 		mov	r1, #7200
+ 439 017a 0DF5E450 		add	r0, sp, #7296
+ 440 017e 1830     		adds	r0, r0, #24
+ 441 0180 00F5E250 		add	r0, r0, #7232
+ 442 0184 0530     		adds	r0, r0, #5
+ 443 0186 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 444              	.LVL63:
+ 134:..\kem.c      ****     PQCLEAN_HQC256_CLEAN_shake256_512_ds(&shake256state, ss, mc, VEC_K_SIZE_BYTES + VEC_N_SIZE_BYTE
+ 445              		.loc 1 134 0
+ 446 018a 0423     		movs	r3, #4
+ 447 018c 0093     		str	r3, [sp]
+ 448 018e 43F66503 		movw	r3, #14437
+ 449 0192 0DF5E452 		add	r2, sp, #7296
+ 450 0196 1832     		adds	r2, r2, #24
+ 451 0198 2946     		mov	r1, r5
+ 452 019a 05A8     		add	r0, sp, #20
+ 453 019c FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_shake256_512_ds
+ 454              	.LVL64:
+ 135:..\kem.c      **** 
+ 136:..\kem.c      **** 
+ 137:..\kem.c      ****     return (result & 1) - 1;
+ 455              		.loc 1 137 0
+ 456 01a0 04F00100 		and	r0, r4, #1
+ 138:..\kem.c      **** }
+ 457              		.loc 1 138 0
+ 458 01a4 0138     		subs	r0, r0, #1
+ 459 01a6 0DF5454D 		add	sp, sp, #50432
+ 460 01aa 3DB0     		add	sp, sp, #244
+ 461              		.cfi_def_cfa_offset 28
+ 462              		@ sp needed
+ 463 01ac BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 464              		.cfi_endproc
+ 465              	.LFE2:
+ 466              		.size	PQCLEAN_HQC256_CLEAN_crypto_kem_dec, .-PQCLEAN_HQC256_CLEAN_crypto_kem_dec
+ 467              		.text
+ 468              	.Letext0:
+ 469              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 470              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 471              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 472              		.file 5 "..\\fips202.h"
+ 473              		.file 6 "..\\hqc.h"
+ 474              		.file 7 "..\\randombytes.h"
+ 475              		.file 8 "..\\shake_ds.h"
+ 476              		.file 9 "..\\parsing.h"
+ 477              		.file 10 "..\\vector.h"
+ 478              		.section	.debug_info,"",%progbits
+ 479              	.Ldebug_info0:
+ 480 0000 CB080000 		.4byte	0x8cb
+ 481 0004 0400     		.2byte	0x4
+ 482 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 483 000a 04       		.byte	0x4
+ 484 000b 01       		.uleb128 0x1
+ 485 000c 5E020000 		.4byte	.LASF37
+ 486 0010 0C       		.byte	0xc
+ 487 0011 D2000000 		.4byte	.LASF38
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 12
+
+
+ 488 0015 02020000 		.4byte	.LASF39
+ 489 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 490 001d 00000000 		.4byte	0
+ 491 0021 00000000 		.4byte	.Ldebug_line0
+ 492 0025 02       		.uleb128 0x2
+ 493 0026 01       		.byte	0x1
+ 494 0027 06       		.byte	0x6
+ 495 0028 C9030000 		.4byte	.LASF0
+ 496 002c 03       		.uleb128 0x3
+ 497 002d 00000000 		.4byte	.LASF7
+ 498 0031 02       		.byte	0x2
+ 499 0032 1D       		.byte	0x1d
+ 500 0033 37000000 		.4byte	0x37
+ 501 0037 02       		.uleb128 0x2
+ 502 0038 01       		.byte	0x1
+ 503 0039 08       		.byte	0x8
+ 504 003a C4000000 		.4byte	.LASF1
+ 505 003e 02       		.uleb128 0x2
+ 506 003f 02       		.byte	0x2
+ 507 0040 05       		.byte	0x5
+ 508 0041 9A030000 		.4byte	.LASF2
+ 509 0045 02       		.uleb128 0x2
+ 510 0046 02       		.byte	0x2
+ 511 0047 07       		.byte	0x7
+ 512 0048 ED000000 		.4byte	.LASF3
+ 513 004c 02       		.uleb128 0x2
+ 514 004d 04       		.byte	0x4
+ 515 004e 05       		.byte	0x5
+ 516 004f AF030000 		.4byte	.LASF4
+ 517 0053 02       		.uleb128 0x2
+ 518 0054 04       		.byte	0x4
+ 519 0055 07       		.byte	0x7
+ 520 0056 DB000000 		.4byte	.LASF5
+ 521 005a 02       		.uleb128 0x2
+ 522 005b 08       		.byte	0x8
+ 523 005c 05       		.byte	0x5
+ 524 005d 48030000 		.4byte	.LASF6
+ 525 0061 03       		.uleb128 0x3
+ 526 0062 A4030000 		.4byte	.LASF8
+ 527 0066 02       		.byte	0x2
+ 528 0067 5B       		.byte	0x5b
+ 529 0068 6C000000 		.4byte	0x6c
+ 530 006c 02       		.uleb128 0x2
+ 531 006d 08       		.byte	0x8
+ 532 006e 07       		.byte	0x7
+ 533 006f D0010000 		.4byte	.LASF9
+ 534 0073 04       		.uleb128 0x4
+ 535 0074 04       		.byte	0x4
+ 536 0075 05       		.byte	0x5
+ 537 0076 696E7400 		.ascii	"int\000"
+ 538 007a 02       		.uleb128 0x2
+ 539 007b 04       		.byte	0x4
+ 540 007c 07       		.byte	0x7
+ 541 007d A1010000 		.4byte	.LASF10
+ 542 0081 03       		.uleb128 0x3
+ 543 0082 E7010000 		.4byte	.LASF11
+ 544 0086 03       		.byte	0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 13
+
+
+ 545 0087 18       		.byte	0x18
+ 546 0088 2C000000 		.4byte	0x2c
+ 547 008c 03       		.uleb128 0x3
+ 548 008d 62000000 		.4byte	.LASF12
+ 549 0091 03       		.byte	0x3
+ 550 0092 3C       		.byte	0x3c
+ 551 0093 61000000 		.4byte	0x61
+ 552 0097 03       		.uleb128 0x3
+ 553 0098 00010000 		.4byte	.LASF13
+ 554 009c 04       		.byte	0x4
+ 555 009d D8       		.byte	0xd8
+ 556 009e 7A000000 		.4byte	0x7a
+ 557 00a2 02       		.uleb128 0x2
+ 558 00a3 08       		.byte	0x8
+ 559 00a4 04       		.byte	0x4
+ 560 00a5 BD030000 		.4byte	.LASF14
+ 561 00a9 05       		.uleb128 0x5
+ 562 00aa 04       		.byte	0x4
+ 563 00ab 8C000000 		.4byte	0x8c
+ 564 00af 06       		.uleb128 0x6
+ 565 00b0 04       		.byte	0x4
+ 566 00b1 05       		.byte	0x5
+ 567 00b2 1B       		.byte	0x1b
+ 568 00b3 C4000000 		.4byte	0xc4
+ 569 00b7 07       		.uleb128 0x7
+ 570 00b8 63747800 		.ascii	"ctx\000"
+ 571 00bc 05       		.byte	0x5
+ 572 00bd 1C       		.byte	0x1c
+ 573 00be A9000000 		.4byte	0xa9
+ 574 00c2 00       		.byte	0
+ 575 00c3 00       		.byte	0
+ 576 00c4 03       		.uleb128 0x3
+ 577 00c5 5D030000 		.4byte	.LASF15
+ 578 00c9 05       		.byte	0x5
+ 579 00ca 1D       		.byte	0x1d
+ 580 00cb AF000000 		.4byte	0xaf
+ 581 00cf 02       		.uleb128 0x2
+ 582 00d0 04       		.byte	0x4
+ 583 00d1 07       		.byte	0x7
+ 584 00d2 1F030000 		.4byte	.LASF16
+ 585 00d6 02       		.uleb128 0x2
+ 586 00d7 01       		.byte	0x1
+ 587 00d8 08       		.byte	0x8
+ 588 00d9 B8030000 		.4byte	.LASF17
+ 589 00dd 08       		.uleb128 0x8
+ 590 00de 16000000 		.4byte	.LASF18
+ 591 00e2 01       		.byte	0x1
+ 592 00e3 1F       		.byte	0x1f
+ 593 00e4 73000000 		.4byte	0x73
+ 594 00e8 00000000 		.4byte	.LFB0
+ 595 00ec 0A000000 		.4byte	.LFE0-.LFB0
+ 596 00f0 01       		.uleb128 0x1
+ 597 00f1 9C       		.byte	0x9c
+ 598 00f2 2B010000 		.4byte	0x12b
+ 599 00f6 09       		.uleb128 0x9
+ 600 00f7 706B00   		.ascii	"pk\000"
+ 601 00fa 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 14
+
+
+ 602 00fb 1F       		.byte	0x1f
+ 603 00fc 2B010000 		.4byte	0x12b
+ 604 0100 00000000 		.4byte	.LLST0
+ 605 0104 09       		.uleb128 0x9
+ 606 0105 736B00   		.ascii	"sk\000"
+ 607 0108 01       		.byte	0x1
+ 608 0109 1F       		.byte	0x1f
+ 609 010a 2B010000 		.4byte	0x12b
+ 610 010e 21000000 		.4byte	.LLST1
+ 611 0112 0A       		.uleb128 0xa
+ 612 0113 06000000 		.4byte	.LVL1
+ 613 0117 59080000 		.4byte	0x859
+ 614 011b 0B       		.uleb128 0xb
+ 615 011c 01       		.uleb128 0x1
+ 616 011d 50       		.byte	0x50
+ 617 011e 03       		.uleb128 0x3
+ 618 011f F3       		.byte	0xf3
+ 619 0120 01       		.uleb128 0x1
+ 620 0121 50       		.byte	0x50
+ 621 0122 0B       		.uleb128 0xb
+ 622 0123 01       		.uleb128 0x1
+ 623 0124 51       		.byte	0x51
+ 624 0125 03       		.uleb128 0x3
+ 625 0126 F3       		.byte	0xf3
+ 626 0127 01       		.uleb128 0x1
+ 627 0128 51       		.byte	0x51
+ 628 0129 00       		.byte	0
+ 629 012a 00       		.byte	0
+ 630 012b 05       		.uleb128 0x5
+ 631 012c 04       		.byte	0x4
+ 632 012d 81000000 		.4byte	0x81
+ 633 0131 08       		.uleb128 0x8
+ 634 0132 6B000000 		.4byte	.LASF19
+ 635 0136 01       		.byte	0x1
+ 636 0137 2F       		.byte	0x2f
+ 637 0138 73000000 		.4byte	0x73
+ 638 013c 00000000 		.4byte	.LFB1
+ 639 0140 2C010000 		.4byte	.LFE1-.LFB1
+ 640 0144 01       		.uleb128 0x1
+ 641 0145 9C       		.byte	0x9c
+ 642 0146 F4030000 		.4byte	0x3f4
+ 643 014a 09       		.uleb128 0x9
+ 644 014b 637400   		.ascii	"ct\000"
+ 645 014e 01       		.byte	0x1
+ 646 014f 2F       		.byte	0x2f
+ 647 0150 2B010000 		.4byte	0x12b
+ 648 0154 42000000 		.4byte	.LLST2
+ 649 0158 09       		.uleb128 0x9
+ 650 0159 737300   		.ascii	"ss\000"
+ 651 015c 01       		.byte	0x1
+ 652 015d 2F       		.byte	0x2f
+ 653 015e 2B010000 		.4byte	0x12b
+ 654 0162 60000000 		.4byte	.LLST3
+ 655 0166 09       		.uleb128 0x9
+ 656 0167 706B00   		.ascii	"pk\000"
+ 657 016a 01       		.byte	0x1
+ 658 016b 2F       		.byte	0x2f
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 15
+
+
+ 659 016c F4030000 		.4byte	0x3f4
+ 660 0170 7E000000 		.4byte	.LLST4
+ 661 0174 0C       		.uleb128 0xc
+ 662 0175 10000000 		.4byte	.LASF20
+ 663 0179 01       		.byte	0x1
+ 664 017a 31       		.byte	0x31
+ 665 017b FF030000 		.4byte	0x3ff
+ 666 017f 03       		.uleb128 0x3
+ 667 0180 91       		.byte	0x91
+ 668 0181 A07F     		.sleb128 -96
+ 669 0183 0D       		.uleb128 0xd
+ 670 0184 7500     		.ascii	"u\000"
+ 671 0186 01       		.byte	0x1
+ 672 0187 32       		.byte	0x32
+ 673 0188 0F040000 		.4byte	0x40f
+ 674 018c 03       		.uleb128 0x3
+ 675 018d 91       		.byte	0x91
+ 676 018e F846     		.sleb128 -7304
+ 677 0190 0D       		.uleb128 0xd
+ 678 0191 7600     		.ascii	"v\000"
+ 679 0193 01       		.byte	0x1
+ 680 0194 33       		.byte	0x33
+ 681 0195 20040000 		.4byte	0x420
+ 682 0199 04       		.uleb128 0x4
+ 683 019a 91       		.byte	0x91
+ 684 019b D88E7F   		.sleb128 -14504
+ 685 019e 0D       		.uleb128 0xd
+ 686 019f 6D6300   		.ascii	"mc\000"
+ 687 01a2 01       		.byte	0x1
+ 688 01a3 34       		.byte	0x34
+ 689 01a4 31040000 		.4byte	0x431
+ 690 01a8 04       		.uleb128 0x4
+ 691 01a9 91       		.byte	0x91
+ 692 01aa F09D7E   		.sleb128 -28944
+ 693 01ad 0D       		.uleb128 0xd
+ 694 01ae 746D7000 		.ascii	"tmp\000"
+ 695 01b2 01       		.byte	0x1
+ 696 01b3 35       		.byte	0x35
+ 697 01b4 42040000 		.4byte	0x442
+ 698 01b8 04       		.uleb128 0x4
+ 699 01b9 91       		.byte	0x91
+ 700 01ba F0E47D   		.sleb128 -36240
+ 701 01bd 0E       		.uleb128 0xe
+ 702 01be 6D00     		.ascii	"m\000"
+ 703 01c0 01       		.byte	0x1
+ 704 01c1 36       		.byte	0x36
+ 705 01c2 2B010000 		.4byte	0x12b
+ 706 01c6 AA000000 		.4byte	.LLST5
+ 707 01ca 0C       		.uleb128 0xc
+ 708 01cb 8F000000 		.4byte	.LASF21
+ 709 01cf 01       		.byte	0x1
+ 710 01d0 37       		.byte	0x37
+ 711 01d1 2B010000 		.4byte	0x12b
+ 712 01d5 05       		.uleb128 0x5
+ 713 01d6 91       		.byte	0x91
+ 714 01d7 DD9D7E   		.sleb128 -28963
+ 715 01da 9F       		.byte	0x9f
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 16
+
+
+ 716 01db 0C       		.uleb128 0xc
+ 717 01dc 11030000 		.4byte	.LASF22
+ 718 01e0 01       		.byte	0x1
+ 719 01e1 38       		.byte	0x38
+ 720 01e2 C4000000 		.4byte	0xc4
+ 721 01e6 04       		.uleb128 0x4
+ 722 01e7 91       		.byte	0x91
+ 723 01e8 ECE47D   		.sleb128 -36244
+ 724 01eb 0F       		.uleb128 0xf
+ 725 01ec 1E000000 		.4byte	.LVL6
+ 726 01f0 64080000 		.4byte	0x864
+ 727 01f4 0B020000 		.4byte	0x20b
+ 728 01f8 0B       		.uleb128 0xb
+ 729 01f9 01       		.uleb128 0x1
+ 730 01fa 50       		.byte	0x50
+ 731 01fb 03       		.uleb128 0x3
+ 732 01fc 91       		.byte	0x91
+ 733 01fd A07F     		.sleb128 -96
+ 734 01ff 0B       		.uleb128 0xb
+ 735 0200 01       		.uleb128 0x1
+ 736 0201 51       		.byte	0x51
+ 737 0202 01       		.uleb128 0x1
+ 738 0203 30       		.byte	0x30
+ 739 0204 0B       		.uleb128 0xb
+ 740 0205 01       		.uleb128 0x1
+ 741 0206 52       		.byte	0x52
+ 742 0207 02       		.uleb128 0x2
+ 743 0208 08       		.byte	0x8
+ 744 0209 40       		.byte	0x40
+ 745 020a 00       		.byte	0
+ 746 020b 0F       		.uleb128 0xf
+ 747 020c 2E000000 		.4byte	.LVL7
+ 748 0210 64080000 		.4byte	0x864
+ 749 0214 2C020000 		.4byte	0x22c
+ 750 0218 0B       		.uleb128 0xb
+ 751 0219 01       		.uleb128 0x1
+ 752 021a 50       		.byte	0x50
+ 753 021b 03       		.uleb128 0x3
+ 754 021c 91       		.byte	0x91
+ 755 021d F846     		.sleb128 -7304
+ 756 021f 0B       		.uleb128 0xb
+ 757 0220 01       		.uleb128 0x1
+ 758 0221 51       		.byte	0x51
+ 759 0222 01       		.uleb128 0x1
+ 760 0223 30       		.byte	0x30
+ 761 0224 0B       		.uleb128 0xb
+ 762 0225 01       		.uleb128 0x1
+ 763 0226 52       		.byte	0x52
+ 764 0227 03       		.uleb128 0x3
+ 765 0228 0A       		.byte	0xa
+ 766 0229 281C     		.2byte	0x1c28
+ 767 022b 00       		.byte	0
+ 768 022c 0F       		.uleb128 0xf
+ 769 022d 3E000000 		.4byte	.LVL8
+ 770 0231 64080000 		.4byte	0x864
+ 771 0235 4D020000 		.4byte	0x24d
+ 772 0239 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 17
+
+
+ 773 023a 01       		.uleb128 0x1
+ 774 023b 50       		.byte	0x50
+ 775 023c 04       		.uleb128 0x4
+ 776 023d 91       		.byte	0x91
+ 777 023e D88E7F   		.sleb128 -14504
+ 778 0241 0B       		.uleb128 0xb
+ 779 0242 01       		.uleb128 0x1
+ 780 0243 51       		.byte	0x51
+ 781 0244 01       		.uleb128 0x1
+ 782 0245 30       		.byte	0x30
+ 783 0246 0B       		.uleb128 0xb
+ 784 0247 01       		.uleb128 0x1
+ 785 0248 52       		.byte	0x52
+ 786 0249 02       		.uleb128 0x2
+ 787 024a 78       		.byte	0x78
+ 788 024b 00       		.sleb128 0
+ 789 024c 00       		.byte	0
+ 790 024d 0F       		.uleb128 0xf
+ 791 024e 50000000 		.4byte	.LVL9
+ 792 0252 64080000 		.4byte	0x864
+ 793 0256 6E020000 		.4byte	0x26e
+ 794 025a 0B       		.uleb128 0xb
+ 795 025b 01       		.uleb128 0x1
+ 796 025c 50       		.byte	0x50
+ 797 025d 04       		.uleb128 0x4
+ 798 025e 91       		.byte	0x91
+ 799 025f F09D7E   		.sleb128 -28944
+ 800 0262 0B       		.uleb128 0xb
+ 801 0263 01       		.uleb128 0x1
+ 802 0264 51       		.byte	0x51
+ 803 0265 01       		.uleb128 0x1
+ 804 0266 30       		.byte	0x30
+ 805 0267 0B       		.uleb128 0xb
+ 806 0268 01       		.uleb128 0x1
+ 807 0269 52       		.byte	0x52
+ 808 026a 02       		.uleb128 0x2
+ 809 026b 77       		.byte	0x77
+ 810 026c 00       		.sleb128 0
+ 811 026d 00       		.byte	0
+ 812 026e 0F       		.uleb128 0xf
+ 813 026f 5E000000 		.4byte	.LVL10
+ 814 0273 64080000 		.4byte	0x864
+ 815 0277 8F020000 		.4byte	0x28f
+ 816 027b 0B       		.uleb128 0xb
+ 817 027c 01       		.uleb128 0x1
+ 818 027d 50       		.byte	0x50
+ 819 027e 04       		.uleb128 0x4
+ 820 027f 91       		.byte	0x91
+ 821 0280 F0E47D   		.sleb128 -36240
+ 822 0283 0B       		.uleb128 0xb
+ 823 0284 01       		.uleb128 0x1
+ 824 0285 51       		.byte	0x51
+ 825 0286 01       		.uleb128 0x1
+ 826 0287 30       		.byte	0x30
+ 827 0288 0B       		.uleb128 0xb
+ 828 0289 01       		.uleb128 0x1
+ 829 028a 52       		.byte	0x52
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 18
+
+
+ 830 028b 02       		.uleb128 0x2
+ 831 028c 75       		.byte	0x75
+ 832 028d 00       		.sleb128 0
+ 833 028e 00       		.byte	0
+ 834 028f 0F       		.uleb128 0xf
+ 835 0290 66000000 		.4byte	.LVL12
+ 836 0294 6D080000 		.4byte	0x86d
+ 837 0298 AB020000 		.4byte	0x2ab
+ 838 029c 0B       		.uleb128 0xb
+ 839 029d 01       		.uleb128 0x1
+ 840 029e 50       		.byte	0x50
+ 841 029f 04       		.uleb128 0x4
+ 842 02a0 91       		.byte	0x91
+ 843 02a1 F0E47D   		.sleb128 -36240
+ 844 02a4 0B       		.uleb128 0xb
+ 845 02a5 01       		.uleb128 0x1
+ 846 02a6 51       		.byte	0x51
+ 847 02a7 02       		.uleb128 0x2
+ 848 02a8 08       		.byte	0x8
+ 849 02a9 20       		.byte	0x20
+ 850 02aa 00       		.byte	0
+ 851 02ab 0F       		.uleb128 0xf
+ 852 02ac 76000000 		.4byte	.LVL14
+ 853 02b0 6D080000 		.4byte	0x86d
+ 854 02b4 C4020000 		.4byte	0x2c4
+ 855 02b8 0B       		.uleb128 0xb
+ 856 02b9 01       		.uleb128 0x1
+ 857 02ba 50       		.byte	0x50
+ 858 02bb 02       		.uleb128 0x2
+ 859 02bc 76       		.byte	0x76
+ 860 02bd 00       		.sleb128 0
+ 861 02be 0B       		.uleb128 0xb
+ 862 02bf 01       		.uleb128 0x1
+ 863 02c0 51       		.byte	0x51
+ 864 02c1 01       		.uleb128 0x1
+ 865 02c2 40       		.byte	0x40
+ 866 02c3 00       		.byte	0
+ 867 02c4 0F       		.uleb128 0xf
+ 868 02c5 82000000 		.4byte	.LVL15
+ 869 02c9 78080000 		.4byte	0x878
+ 870 02cd E7020000 		.4byte	0x2e7
+ 871 02d1 0B       		.uleb128 0xb
+ 872 02d2 01       		.uleb128 0x1
+ 873 02d3 50       		.byte	0x50
+ 874 02d4 04       		.uleb128 0x4
+ 875 02d5 91       		.byte	0x91
+ 876 02d6 90E57D   		.sleb128 -36208
+ 877 02d9 0B       		.uleb128 0xb
+ 878 02da 01       		.uleb128 0x1
+ 879 02db 51       		.byte	0x51
+ 880 02dc 02       		.uleb128 0x2
+ 881 02dd 74       		.byte	0x74
+ 882 02de 00       		.sleb128 0
+ 883 02df 0B       		.uleb128 0xb
+ 884 02e0 01       		.uleb128 0x1
+ 885 02e1 52       		.byte	0x52
+ 886 02e2 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 19
+
+
+ 887 02e3 0A       		.byte	0xa
+ 888 02e4 4D1C     		.2byte	0x1c4d
+ 889 02e6 00       		.byte	0
+ 890 02e7 0F       		.uleb128 0xf
+ 891 02e8 9A000000 		.4byte	.LVL17
+ 892 02ec 81080000 		.4byte	0x881
+ 893 02f0 18030000 		.4byte	0x318
+ 894 02f4 0B       		.uleb128 0xb
+ 895 02f5 01       		.uleb128 0x1
+ 896 02f6 50       		.byte	0x50
+ 897 02f7 05       		.uleb128 0x5
+ 898 02f8 91       		.byte	0x91
+ 899 02f9 E4E47D   		.sleb128 -36252
+ 900 02fc 06       		.byte	0x6
+ 901 02fd 0B       		.uleb128 0xb
+ 902 02fe 01       		.uleb128 0x1
+ 903 02ff 51       		.byte	0x51
+ 904 0300 03       		.uleb128 0x3
+ 905 0301 91       		.byte	0x91
+ 906 0302 A07F     		.sleb128 -96
+ 907 0304 0B       		.uleb128 0xb
+ 908 0305 01       		.uleb128 0x1
+ 909 0306 52       		.byte	0x52
+ 910 0307 03       		.uleb128 0x3
+ 911 0308 76       		.byte	0x76
+ 912 0309 9347     		.sleb128 -7277
+ 913 030b 0B       		.uleb128 0xb
+ 914 030c 01       		.uleb128 0x1
+ 915 030d 53       		.byte	0x53
+ 916 030e 02       		.uleb128 0x2
+ 917 030f 75       		.byte	0x75
+ 918 0310 00       		.sleb128 0
+ 919 0311 0B       		.uleb128 0xb
+ 920 0312 02       		.uleb128 0x2
+ 921 0313 7D       		.byte	0x7d
+ 922 0314 00       		.sleb128 0
+ 923 0315 01       		.uleb128 0x1
+ 924 0316 33       		.byte	0x33
+ 925 0317 00       		.byte	0
+ 926 0318 0F       		.uleb128 0xf
+ 927 0319 B2000000 		.4byte	.LVL19
+ 928 031d 8C080000 		.4byte	0x88c
+ 929 0321 4A030000 		.4byte	0x34a
+ 930 0325 0B       		.uleb128 0xb
+ 931 0326 01       		.uleb128 0x1
+ 932 0327 50       		.byte	0x50
+ 933 0328 03       		.uleb128 0x3
+ 934 0329 91       		.byte	0x91
+ 935 032a F846     		.sleb128 -7304
+ 936 032c 0B       		.uleb128 0xb
+ 937 032d 01       		.uleb128 0x1
+ 938 032e 51       		.byte	0x51
+ 939 032f 04       		.uleb128 0x4
+ 940 0330 91       		.byte	0x91
+ 941 0331 D88E7F   		.sleb128 -14504
+ 942 0334 0B       		.uleb128 0xb
+ 943 0335 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 20
+
+
+ 944 0336 52       		.byte	0x52
+ 945 0337 03       		.uleb128 0x3
+ 946 0338 76       		.byte	0x76
+ 947 0339 9347     		.sleb128 -7277
+ 948 033b 0B       		.uleb128 0xb
+ 949 033c 01       		.uleb128 0x1
+ 950 033d 53       		.byte	0x53
+ 951 033e 03       		.uleb128 0x3
+ 952 033f 91       		.byte	0x91
+ 953 0340 A07F     		.sleb128 -96
+ 954 0342 0B       		.uleb128 0xb
+ 955 0343 02       		.uleb128 0x2
+ 956 0344 7D       		.byte	0x7d
+ 957 0345 00       		.sleb128 0
+ 958 0346 02       		.uleb128 0x2
+ 959 0347 74       		.byte	0x74
+ 960 0348 00       		.sleb128 0
+ 961 0349 00       		.byte	0
+ 962 034a 0F       		.uleb128 0xf
+ 963 034b E0000000 		.4byte	.LVL22
+ 964 034f 97080000 		.4byte	0x897
+ 965 0353 75030000 		.4byte	0x375
+ 966 0357 0B       		.uleb128 0xb
+ 967 0358 01       		.uleb128 0x1
+ 968 0359 50       		.byte	0x50
+ 969 035a 04       		.uleb128 0x4
+ 970 035b 91       		.byte	0x91
+ 971 035c 909E7E   		.sleb128 -28912
+ 972 035f 0B       		.uleb128 0xb
+ 973 0360 01       		.uleb128 0x1
+ 974 0361 51       		.byte	0x51
+ 975 0362 03       		.uleb128 0x3
+ 976 0363 0A       		.byte	0xa
+ 977 0364 251C     		.2byte	0x1c25
+ 978 0366 0B       		.uleb128 0xb
+ 979 0367 01       		.uleb128 0x1
+ 980 0368 52       		.byte	0x52
+ 981 0369 03       		.uleb128 0x3
+ 982 036a 91       		.byte	0x91
+ 983 036b F846     		.sleb128 -7304
+ 984 036d 0B       		.uleb128 0xb
+ 985 036e 01       		.uleb128 0x1
+ 986 036f 53       		.byte	0x53
+ 987 0370 03       		.uleb128 0x3
+ 988 0371 0A       		.byte	0xa
+ 989 0372 8503     		.2byte	0x385
+ 990 0374 00       		.byte	0
+ 991 0375 0F       		.uleb128 0xf
+ 992 0376 FA000000 		.4byte	.LVL23
+ 993 037a 97080000 		.4byte	0x897
+ 994 037e 9F030000 		.4byte	0x39f
+ 995 0382 0B       		.uleb128 0xb
+ 996 0383 01       		.uleb128 0x1
+ 997 0384 50       		.byte	0x50
+ 998 0385 03       		.uleb128 0x3
+ 999 0386 75       		.byte	0x75
+ 1000 0387 B538     		.sleb128 7221
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 21
+
+
+ 1001 0389 0B       		.uleb128 0xb
+ 1002 038a 01       		.uleb128 0x1
+ 1003 038b 51       		.byte	0x51
+ 1004 038c 02       		.uleb128 0x2
+ 1005 038d 78       		.byte	0x78
+ 1006 038e 00       		.sleb128 0
+ 1007 038f 0B       		.uleb128 0xb
+ 1008 0390 01       		.uleb128 0x1
+ 1009 0391 52       		.byte	0x52
+ 1010 0392 04       		.uleb128 0x4
+ 1011 0393 91       		.byte	0x91
+ 1012 0394 D88E7F   		.sleb128 -14504
+ 1013 0397 0B       		.uleb128 0xb
+ 1014 0398 01       		.uleb128 0x1
+ 1015 0399 53       		.byte	0x53
+ 1016 039a 03       		.uleb128 0x3
+ 1017 039b 0A       		.byte	0xa
+ 1018 039c 8403     		.2byte	0x384
+ 1019 039e 00       		.byte	0
+ 1020 039f 0F       		.uleb128 0xf
+ 1021 03a0 0E010000 		.4byte	.LVL24
+ 1022 03a4 81080000 		.4byte	0x881
+ 1023 03a8 CE030000 		.4byte	0x3ce
+ 1024 03ac 0B       		.uleb128 0xb
+ 1025 03ad 01       		.uleb128 0x1
+ 1026 03ae 50       		.byte	0x50
+ 1027 03af 05       		.uleb128 0x5
+ 1028 03b0 91       		.byte	0x91
+ 1029 03b1 E4E47D   		.sleb128 -36252
+ 1030 03b4 06       		.byte	0x6
+ 1031 03b5 0B       		.uleb128 0xb
+ 1032 03b6 01       		.uleb128 0x1
+ 1033 03b7 51       		.byte	0x51
+ 1034 03b8 02       		.uleb128 0x2
+ 1035 03b9 7A       		.byte	0x7a
+ 1036 03ba 00       		.sleb128 0
+ 1037 03bb 0B       		.uleb128 0xb
+ 1038 03bc 01       		.uleb128 0x1
+ 1039 03bd 52       		.byte	0x52
+ 1040 03be 02       		.uleb128 0x2
+ 1041 03bf 75       		.byte	0x75
+ 1042 03c0 70       		.sleb128 -16
+ 1043 03c1 0B       		.uleb128 0xb
+ 1044 03c2 01       		.uleb128 0x1
+ 1045 03c3 53       		.byte	0x53
+ 1046 03c4 02       		.uleb128 0x2
+ 1047 03c5 77       		.byte	0x77
+ 1048 03c6 00       		.sleb128 0
+ 1049 03c7 0B       		.uleb128 0xb
+ 1050 03c8 02       		.uleb128 0x2
+ 1051 03c9 7D       		.byte	0x7d
+ 1052 03ca 00       		.sleb128 0
+ 1053 03cb 01       		.uleb128 0x1
+ 1054 03cc 34       		.byte	0x34
+ 1055 03cd 00       		.byte	0
+ 1056 03ce 0A       		.uleb128 0xa
+ 1057 03cf 20010000 		.4byte	.LVL25
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 22
+
+
+ 1058 03d3 A2080000 		.4byte	0x8a2
+ 1059 03d7 0B       		.uleb128 0xb
+ 1060 03d8 01       		.uleb128 0x1
+ 1061 03d9 50       		.byte	0x50
+ 1062 03da 02       		.uleb128 0x2
+ 1063 03db 79       		.byte	0x79
+ 1064 03dc 00       		.sleb128 0
+ 1065 03dd 0B       		.uleb128 0xb
+ 1066 03de 01       		.uleb128 0x1
+ 1067 03df 51       		.byte	0x51
+ 1068 03e0 03       		.uleb128 0x3
+ 1069 03e1 91       		.byte	0x91
+ 1070 03e2 F846     		.sleb128 -7304
+ 1071 03e4 0B       		.uleb128 0xb
+ 1072 03e5 01       		.uleb128 0x1
+ 1073 03e6 52       		.byte	0x52
+ 1074 03e7 04       		.uleb128 0x4
+ 1075 03e8 91       		.byte	0x91
+ 1076 03e9 D88E7F   		.sleb128 -14504
+ 1077 03ec 0B       		.uleb128 0xb
+ 1078 03ed 01       		.uleb128 0x1
+ 1079 03ee 53       		.byte	0x53
+ 1080 03ef 02       		.uleb128 0x2
+ 1081 03f0 76       		.byte	0x76
+ 1082 03f1 00       		.sleb128 0
+ 1083 03f2 00       		.byte	0
+ 1084 03f3 00       		.byte	0
+ 1085 03f4 05       		.uleb128 0x5
+ 1086 03f5 04       		.byte	0x4
+ 1087 03f6 FA030000 		.4byte	0x3fa
+ 1088 03fa 10       		.uleb128 0x10
+ 1089 03fb 81000000 		.4byte	0x81
+ 1090 03ff 11       		.uleb128 0x11
+ 1091 0400 81000000 		.4byte	0x81
+ 1092 0404 0F040000 		.4byte	0x40f
+ 1093 0408 12       		.uleb128 0x12
+ 1094 0409 CF000000 		.4byte	0xcf
+ 1095 040d 3F       		.byte	0x3f
+ 1096 040e 00       		.byte	0
+ 1097 040f 11       		.uleb128 0x11
+ 1098 0410 8C000000 		.4byte	0x8c
+ 1099 0414 20040000 		.4byte	0x420
+ 1100 0418 13       		.uleb128 0x13
+ 1101 0419 CF000000 		.4byte	0xcf
+ 1102 041d 8403     		.2byte	0x384
+ 1103 041f 00       		.byte	0
+ 1104 0420 11       		.uleb128 0x11
+ 1105 0421 8C000000 		.4byte	0x8c
+ 1106 0425 31040000 		.4byte	0x431
+ 1107 0429 13       		.uleb128 0x13
+ 1108 042a CF000000 		.4byte	0xcf
+ 1109 042e 8303     		.2byte	0x383
+ 1110 0430 00       		.byte	0
+ 1111 0431 11       		.uleb128 0x11
+ 1112 0432 81000000 		.4byte	0x81
+ 1113 0436 42040000 		.4byte	0x442
+ 1114 043a 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 23
+
+
+ 1115 043b CF000000 		.4byte	0xcf
+ 1116 043f 6438     		.2byte	0x3864
+ 1117 0441 00       		.byte	0
+ 1118 0442 11       		.uleb128 0x11
+ 1119 0443 81000000 		.4byte	0x81
+ 1120 0447 53040000 		.4byte	0x453
+ 1121 044b 13       		.uleb128 0x13
+ 1122 044c CF000000 		.4byte	0xcf
+ 1123 0450 7C1C     		.2byte	0x1c7c
+ 1124 0452 00       		.byte	0
+ 1125 0453 08       		.uleb128 0x8
+ 1126 0454 3E000000 		.4byte	.LASF23
+ 1127 0458 01       		.byte	0x1
+ 1128 0459 5C       		.byte	0x5c
+ 1129 045a 73000000 		.4byte	0x73
+ 1130 045e 00000000 		.4byte	.LFB2
+ 1131 0462 B0010000 		.4byte	.LFE2-.LFB2
+ 1132 0466 01       		.uleb128 0x1
+ 1133 0467 9C       		.byte	0x9c
+ 1134 0468 49080000 		.4byte	0x849
+ 1135 046c 09       		.uleb128 0x9
+ 1136 046d 737300   		.ascii	"ss\000"
+ 1137 0470 01       		.byte	0x1
+ 1138 0471 5C       		.byte	0x5c
+ 1139 0472 2B010000 		.4byte	0x12b
+ 1140 0476 3E010000 		.4byte	.LLST6
+ 1141 047a 09       		.uleb128 0x9
+ 1142 047b 637400   		.ascii	"ct\000"
+ 1143 047e 01       		.byte	0x1
+ 1144 047f 5C       		.byte	0x5c
+ 1145 0480 F4030000 		.4byte	0x3f4
+ 1146 0484 5C010000 		.4byte	.LLST7
+ 1147 0488 09       		.uleb128 0x9
+ 1148 0489 736B00   		.ascii	"sk\000"
+ 1149 048c 01       		.byte	0x1
+ 1150 048d 5C       		.byte	0x5c
+ 1151 048e F4030000 		.4byte	0x3f4
+ 1152 0492 7A010000 		.4byte	.LLST8
+ 1153 0496 14       		.uleb128 0x14
+ 1154 0497 EF010000 		.4byte	.LASF24
+ 1155 049b 01       		.byte	0x1
+ 1156 049c 5E       		.byte	0x5e
+ 1157 049d 81000000 		.4byte	0x81
+ 1158 04a1 A6010000 		.4byte	.LLST9
+ 1159 04a5 0D       		.uleb128 0xd
+ 1160 04a6 7500     		.ascii	"u\000"
+ 1161 04a8 01       		.byte	0x1
+ 1162 04a9 5F       		.byte	0x5f
+ 1163 04aa 0F040000 		.4byte	0x40f
+ 1164 04ae 03       		.uleb128 0x3
+ 1165 04af 91       		.byte	0x91
+ 1166 04b0 B847     		.sleb128 -7240
+ 1167 04b2 0D       		.uleb128 0xd
+ 1168 04b3 7600     		.ascii	"v\000"
+ 1169 04b5 01       		.byte	0x1
+ 1170 04b6 60       		.byte	0x60
+ 1171 04b7 20040000 		.4byte	0x420
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 24
+
+
+ 1172 04bb 04       		.uleb128 0x4
+ 1173 04bc 91       		.byte	0x91
+ 1174 04bd 988F7F   		.sleb128 -14440
+ 1175 04c0 0D       		.uleb128 0xd
+ 1176 04c1 706B00   		.ascii	"pk\000"
+ 1177 04c4 01       		.byte	0x1
+ 1178 04c5 61       		.byte	0x61
+ 1179 04c6 F4030000 		.4byte	0x3f4
+ 1180 04ca 01       		.uleb128 0x1
+ 1181 04cb 57       		.byte	0x57
+ 1182 04cc 0C       		.uleb128 0xc
+ 1183 04cd 0A000000 		.4byte	.LASF25
+ 1184 04d1 01       		.byte	0x1
+ 1185 04d2 62       		.byte	0x62
+ 1186 04d3 49080000 		.4byte	0x849
+ 1187 04d7 04       		.uleb128 0x4
+ 1188 04d8 91       		.byte	0x91
+ 1189 04d9 F88E7F   		.sleb128 -14472
+ 1190 04dc 0C       		.uleb128 0xc
+ 1191 04dd 10000000 		.4byte	.LASF20
+ 1192 04e1 01       		.byte	0x1
+ 1193 04e2 63       		.byte	0x63
+ 1194 04e3 FF030000 		.4byte	0x3ff
+ 1195 04e7 04       		.uleb128 0x4
+ 1196 04e8 91       		.byte	0x91
+ 1197 04e9 B88E7F   		.sleb128 -14536
+ 1198 04ec 0D       		.uleb128 0xd
+ 1199 04ed 753200   		.ascii	"u2\000"
+ 1200 04f0 01       		.byte	0x1
+ 1201 04f1 64       		.byte	0x64
+ 1202 04f2 0F040000 		.4byte	0x40f
+ 1203 04f6 04       		.uleb128 0x4
+ 1204 04f7 91       		.byte	0x91
+ 1205 04f8 90D67E   		.sleb128 -21744
+ 1206 04fb 0D       		.uleb128 0xd
+ 1207 04fc 763200   		.ascii	"v2\000"
+ 1208 04ff 01       		.byte	0x1
+ 1209 0500 65       		.byte	0x65
+ 1210 0501 20040000 		.4byte	0x420
+ 1211 0505 04       		.uleb128 0x4
+ 1212 0506 91       		.byte	0x91
+ 1213 0507 F09D7E   		.sleb128 -28944
+ 1214 050a 0D       		.uleb128 0xd
+ 1215 050b 6D6300   		.ascii	"mc\000"
+ 1216 050e 01       		.byte	0x1
+ 1217 050f 66       		.byte	0x66
+ 1218 0510 31040000 		.4byte	0x431
+ 1219 0514 04       		.uleb128 0x4
+ 1220 0515 91       		.byte	0x91
+ 1221 0516 88AD7D   		.sleb128 -43384
+ 1222 0519 0D       		.uleb128 0xd
+ 1223 051a 746D7000 		.ascii	"tmp\000"
+ 1224 051e 01       		.byte	0x1
+ 1225 051f 67       		.byte	0x67
+ 1226 0520 42040000 		.4byte	0x442
+ 1227 0524 04       		.uleb128 0x4
+ 1228 0525 91       		.byte	0x91
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 25
+
+
+ 1229 0526 88F47C   		.sleb128 -50680
+ 1230 0529 0E       		.uleb128 0xe
+ 1231 052a 6D00     		.ascii	"m\000"
+ 1232 052c 01       		.byte	0x1
+ 1233 052d 68       		.byte	0x68
+ 1234 052e 2B010000 		.4byte	0x12b
+ 1235 0532 D1010000 		.4byte	.LLST10
+ 1236 0536 0C       		.uleb128 0xc
+ 1237 0537 8F000000 		.4byte	.LASF21
+ 1238 053b 01       		.byte	0x1
+ 1239 053c 69       		.byte	0x69
+ 1240 053d 2B010000 		.4byte	0x12b
+ 1241 0541 05       		.uleb128 0x5
+ 1242 0542 91       		.byte	0x91
+ 1243 0543 F5AC7D   		.sleb128 -43403
+ 1244 0546 9F       		.byte	0x9f
+ 1245 0547 0C       		.uleb128 0xc
+ 1246 0548 11030000 		.4byte	.LASF22
+ 1247 054c 01       		.byte	0x1
+ 1248 054d 6A       		.byte	0x6a
+ 1249 054e C4000000 		.4byte	0xc4
+ 1250 0552 04       		.uleb128 0x4
+ 1251 0553 91       		.byte	0x91
+ 1252 0554 84F47C   		.sleb128 -50684
+ 1253 0557 15       		.uleb128 0x15
+ 1254 0558 2C010000 		.4byte	.LBB2
+ 1255 055c 26000000 		.4byte	.LBE2-.LBB2
+ 1256 0560 72050000 		.4byte	0x572
+ 1257 0564 0E       		.uleb128 0xe
+ 1258 0565 6900     		.ascii	"i\000"
+ 1259 0567 01       		.byte	0x1
+ 1260 0568 7F       		.byte	0x7f
+ 1261 0569 97000000 		.4byte	0x97
+ 1262 056d 86020000 		.4byte	.LLST11
+ 1263 0571 00       		.byte	0
+ 1264 0572 0F       		.uleb128 0xf
+ 1265 0573 22000000 		.4byte	.LVL30
+ 1266 0577 64080000 		.4byte	0x864
+ 1267 057b 92050000 		.4byte	0x592
+ 1268 057f 0B       		.uleb128 0xb
+ 1269 0580 01       		.uleb128 0x1
+ 1270 0581 50       		.byte	0x50
+ 1271 0582 03       		.uleb128 0x3
+ 1272 0583 91       		.byte	0x91
+ 1273 0584 B847     		.sleb128 -7240
+ 1274 0586 0B       		.uleb128 0xb
+ 1275 0587 01       		.uleb128 0x1
+ 1276 0588 51       		.byte	0x51
+ 1277 0589 01       		.uleb128 0x1
+ 1278 058a 30       		.byte	0x30
+ 1279 058b 0B       		.uleb128 0xb
+ 1280 058c 01       		.uleb128 0x1
+ 1281 058d 52       		.byte	0x52
+ 1282 058e 02       		.uleb128 0x2
+ 1283 058f 78       		.byte	0x78
+ 1284 0590 00       		.sleb128 0
+ 1285 0591 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 26
+
+
+ 1286 0592 0F       		.uleb128 0xf
+ 1287 0593 34000000 		.4byte	.LVL31
+ 1288 0597 64080000 		.4byte	0x864
+ 1289 059b B3050000 		.4byte	0x5b3
+ 1290 059f 0B       		.uleb128 0xb
+ 1291 05a0 01       		.uleb128 0x1
+ 1292 05a1 50       		.byte	0x50
+ 1293 05a2 04       		.uleb128 0x4
+ 1294 05a3 91       		.byte	0x91
+ 1295 05a4 988F7F   		.sleb128 -14440
+ 1296 05a7 0B       		.uleb128 0xb
+ 1297 05a8 01       		.uleb128 0x1
+ 1298 05a9 51       		.byte	0x51
+ 1299 05aa 01       		.uleb128 0x1
+ 1300 05ab 30       		.byte	0x30
+ 1301 05ac 0B       		.uleb128 0xb
+ 1302 05ad 01       		.uleb128 0x1
+ 1303 05ae 52       		.byte	0x52
+ 1304 05af 02       		.uleb128 0x2
+ 1305 05b0 76       		.byte	0x76
+ 1306 05b1 00       		.sleb128 0
+ 1307 05b2 00       		.byte	0
+ 1308 05b3 0F       		.uleb128 0xf
+ 1309 05b4 4C000000 		.4byte	.LVL33
+ 1310 05b8 64080000 		.4byte	0x864
+ 1311 05bc D5050000 		.4byte	0x5d5
+ 1312 05c0 0B       		.uleb128 0xb
+ 1313 05c1 01       		.uleb128 0x1
+ 1314 05c2 50       		.byte	0x50
+ 1315 05c3 05       		.uleb128 0x5
+ 1316 05c4 91       		.byte	0x91
+ 1317 05c5 FCF37C   		.sleb128 -50692
+ 1318 05c8 06       		.byte	0x6
+ 1319 05c9 0B       		.uleb128 0xb
+ 1320 05ca 01       		.uleb128 0x1
+ 1321 05cb 51       		.byte	0x51
+ 1322 05cc 01       		.uleb128 0x1
+ 1323 05cd 30       		.byte	0x30
+ 1324 05ce 0B       		.uleb128 0xb
+ 1325 05cf 01       		.uleb128 0x1
+ 1326 05d0 52       		.byte	0x52
+ 1327 05d1 02       		.uleb128 0x2
+ 1328 05d2 08       		.byte	0x8
+ 1329 05d3 20       		.byte	0x20
+ 1330 05d4 00       		.byte	0
+ 1331 05d5 0F       		.uleb128 0xf
+ 1332 05d6 5A000000 		.4byte	.LVL34
+ 1333 05da 64080000 		.4byte	0x864
+ 1334 05de FA050000 		.4byte	0x5fa
+ 1335 05e2 0B       		.uleb128 0xb
+ 1336 05e3 01       		.uleb128 0x1
+ 1337 05e4 50       		.byte	0x50
+ 1338 05e5 08       		.uleb128 0x8
+ 1339 05e6 91       		.byte	0x91
+ 1340 05e7 FCF37C   		.sleb128 -50692
+ 1341 05ea 06       		.byte	0x6
+ 1342 05eb 08       		.byte	0x8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 27
+
+
+ 1343 05ec 40       		.byte	0x40
+ 1344 05ed 1C       		.byte	0x1c
+ 1345 05ee 0B       		.uleb128 0xb
+ 1346 05ef 01       		.uleb128 0x1
+ 1347 05f0 51       		.byte	0x51
+ 1348 05f1 01       		.uleb128 0x1
+ 1349 05f2 30       		.byte	0x30
+ 1350 05f3 0B       		.uleb128 0xb
+ 1351 05f4 01       		.uleb128 0x1
+ 1352 05f5 52       		.byte	0x52
+ 1353 05f6 02       		.uleb128 0x2
+ 1354 05f7 08       		.byte	0x8
+ 1355 05f8 40       		.byte	0x40
+ 1356 05f9 00       		.byte	0
+ 1357 05fa 0F       		.uleb128 0xf
+ 1358 05fb 68000000 		.4byte	.LVL35
+ 1359 05ff 64080000 		.4byte	0x864
+ 1360 0603 1B060000 		.4byte	0x61b
+ 1361 0607 0B       		.uleb128 0xb
+ 1362 0608 01       		.uleb128 0x1
+ 1363 0609 50       		.byte	0x50
+ 1364 060a 04       		.uleb128 0x4
+ 1365 060b 91       		.byte	0x91
+ 1366 060c 90D67E   		.sleb128 -21744
+ 1367 060f 0B       		.uleb128 0xb
+ 1368 0610 01       		.uleb128 0x1
+ 1369 0611 51       		.byte	0x51
+ 1370 0612 01       		.uleb128 0x1
+ 1371 0613 30       		.byte	0x30
+ 1372 0614 0B       		.uleb128 0xb
+ 1373 0615 01       		.uleb128 0x1
+ 1374 0616 52       		.byte	0x52
+ 1375 0617 02       		.uleb128 0x2
+ 1376 0618 78       		.byte	0x78
+ 1377 0619 00       		.sleb128 0
+ 1378 061a 00       		.byte	0
+ 1379 061b 0F       		.uleb128 0xf
+ 1380 061c 74000000 		.4byte	.LVL36
+ 1381 0620 64080000 		.4byte	0x864
+ 1382 0624 3C060000 		.4byte	0x63c
+ 1383 0628 0B       		.uleb128 0xb
+ 1384 0629 01       		.uleb128 0x1
+ 1385 062a 50       		.byte	0x50
+ 1386 062b 04       		.uleb128 0x4
+ 1387 062c 91       		.byte	0x91
+ 1388 062d F09D7E   		.sleb128 -28944
+ 1389 0630 0B       		.uleb128 0xb
+ 1390 0631 01       		.uleb128 0x1
+ 1391 0632 51       		.byte	0x51
+ 1392 0633 01       		.uleb128 0x1
+ 1393 0634 30       		.byte	0x30
+ 1394 0635 0B       		.uleb128 0xb
+ 1395 0636 01       		.uleb128 0x1
+ 1396 0637 52       		.byte	0x52
+ 1397 0638 02       		.uleb128 0x2
+ 1398 0639 76       		.byte	0x76
+ 1399 063a 00       		.sleb128 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 28
+
+
+ 1400 063b 00       		.byte	0
+ 1401 063c 0F       		.uleb128 0xf
+ 1402 063d 84000000 		.4byte	.LVL37
+ 1403 0641 64080000 		.4byte	0x864
+ 1404 0645 5E060000 		.4byte	0x65e
+ 1405 0649 0B       		.uleb128 0xb
+ 1406 064a 01       		.uleb128 0x1
+ 1407 064b 50       		.byte	0x50
+ 1408 064c 04       		.uleb128 0x4
+ 1409 064d 91       		.byte	0x91
+ 1410 064e 88AD7D   		.sleb128 -43384
+ 1411 0651 0B       		.uleb128 0xb
+ 1412 0652 01       		.uleb128 0x1
+ 1413 0653 51       		.byte	0x51
+ 1414 0654 01       		.uleb128 0x1
+ 1415 0655 30       		.byte	0x30
+ 1416 0656 0B       		.uleb128 0xb
+ 1417 0657 01       		.uleb128 0x1
+ 1418 0658 52       		.byte	0x52
+ 1419 0659 03       		.uleb128 0x3
+ 1420 065a 0A       		.byte	0xa
+ 1421 065b 6538     		.2byte	0x3865
+ 1422 065d 00       		.byte	0
+ 1423 065e 0F       		.uleb128 0xf
+ 1424 065f 92000000 		.4byte	.LVL38
+ 1425 0663 64080000 		.4byte	0x864
+ 1426 0667 7F060000 		.4byte	0x67f
+ 1427 066b 0B       		.uleb128 0xb
+ 1428 066c 01       		.uleb128 0x1
+ 1429 066d 50       		.byte	0x50
+ 1430 066e 04       		.uleb128 0x4
+ 1431 066f 91       		.byte	0x91
+ 1432 0670 88F47C   		.sleb128 -50680
+ 1433 0673 0B       		.uleb128 0xb
+ 1434 0674 01       		.uleb128 0x1
+ 1435 0675 51       		.byte	0x51
+ 1436 0676 01       		.uleb128 0x1
+ 1437 0677 30       		.byte	0x30
+ 1438 0678 0B       		.uleb128 0xb
+ 1439 0679 01       		.uleb128 0x1
+ 1440 067a 52       		.byte	0x52
+ 1441 067b 02       		.uleb128 0x2
+ 1442 067c 78       		.byte	0x78
+ 1443 067d 00       		.sleb128 0
+ 1444 067e 00       		.byte	0
+ 1445 067f 0F       		.uleb128 0xf
+ 1446 0680 AC000000 		.4byte	.LVL42
+ 1447 0684 AD080000 		.4byte	0x8ad
+ 1448 0688 AD060000 		.4byte	0x6ad
+ 1449 068c 0B       		.uleb128 0xb
+ 1450 068d 01       		.uleb128 0x1
+ 1451 068e 50       		.byte	0x50
+ 1452 068f 03       		.uleb128 0x3
+ 1453 0690 91       		.byte	0x91
+ 1454 0691 B847     		.sleb128 -7240
+ 1455 0693 0B       		.uleb128 0xb
+ 1456 0694 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 29
+
+
+ 1457 0695 51       		.byte	0x51
+ 1458 0696 07       		.uleb128 0x7
+ 1459 0697 91       		.byte	0x91
+ 1460 0698 FCF37C   		.sleb128 -50692
+ 1461 069b 06       		.byte	0x6
+ 1462 069c 23       		.byte	0x23
+ 1463 069d 20       		.uleb128 0x20
+ 1464 069e 0B       		.uleb128 0xb
+ 1465 069f 01       		.uleb128 0x1
+ 1466 06a0 52       		.byte	0x52
+ 1467 06a1 04       		.uleb128 0x4
+ 1468 06a2 91       		.byte	0x91
+ 1469 06a3 F5AC7D   		.sleb128 -43403
+ 1470 06a6 0B       		.uleb128 0xb
+ 1471 06a7 01       		.uleb128 0x1
+ 1472 06a8 53       		.byte	0x53
+ 1473 06a9 02       		.uleb128 0x2
+ 1474 06aa 79       		.byte	0x79
+ 1475 06ab 00       		.sleb128 0
+ 1476 06ac 00       		.byte	0
+ 1477 06ad 0F       		.uleb128 0xf
+ 1478 06ae C2000000 		.4byte	.LVL44
+ 1479 06b2 B8080000 		.4byte	0x8b8
+ 1480 06b6 E5060000 		.4byte	0x6e5
+ 1481 06ba 0B       		.uleb128 0xb
+ 1482 06bb 01       		.uleb128 0x1
+ 1483 06bc 50       		.byte	0x50
+ 1484 06bd 04       		.uleb128 0x4
+ 1485 06be 91       		.byte	0x91
+ 1486 06bf 88F47C   		.sleb128 -50680
+ 1487 06c2 0B       		.uleb128 0xb
+ 1488 06c3 01       		.uleb128 0x1
+ 1489 06c4 51       		.byte	0x51
+ 1490 06c5 05       		.uleb128 0x5
+ 1491 06c6 91       		.byte	0x91
+ 1492 06c7 FCF37C   		.sleb128 -50692
+ 1493 06ca 06       		.byte	0x6
+ 1494 06cb 0B       		.uleb128 0xb
+ 1495 06cc 01       		.uleb128 0x1
+ 1496 06cd 52       		.byte	0x52
+ 1497 06ce 03       		.uleb128 0x3
+ 1498 06cf 91       		.byte	0x91
+ 1499 06d0 B847     		.sleb128 -7240
+ 1500 06d2 0B       		.uleb128 0xb
+ 1501 06d3 01       		.uleb128 0x1
+ 1502 06d4 53       		.byte	0x53
+ 1503 06d5 07       		.uleb128 0x7
+ 1504 06d6 91       		.byte	0x91
+ 1505 06d7 FCF37C   		.sleb128 -50692
+ 1506 06da 06       		.byte	0x6
+ 1507 06db 23       		.byte	0x23
+ 1508 06dc 20       		.uleb128 0x20
+ 1509 06dd 0B       		.uleb128 0xb
+ 1510 06de 02       		.uleb128 0x2
+ 1511 06df 7D       		.byte	0x7d
+ 1512 06e0 00       		.sleb128 0
+ 1513 06e1 02       		.uleb128 0x2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 30
+
+
+ 1514 06e2 74       		.byte	0x74
+ 1515 06e3 00       		.sleb128 0
+ 1516 06e4 00       		.byte	0
+ 1517 06e5 0F       		.uleb128 0xf
+ 1518 06e6 D0000000 		.4byte	.LVL46
+ 1519 06ea 78080000 		.4byte	0x878
+ 1520 06ee 08070000 		.4byte	0x708
+ 1521 06f2 0B       		.uleb128 0xb
+ 1522 06f3 01       		.uleb128 0x1
+ 1523 06f4 50       		.byte	0x50
+ 1524 06f5 04       		.uleb128 0x4
+ 1525 06f6 91       		.byte	0x91
+ 1526 06f7 A8F47C   		.sleb128 -50648
+ 1527 06fa 0B       		.uleb128 0xb
+ 1528 06fb 01       		.uleb128 0x1
+ 1529 06fc 51       		.byte	0x51
+ 1530 06fd 02       		.uleb128 0x2
+ 1531 06fe 77       		.byte	0x77
+ 1532 06ff 00       		.sleb128 0
+ 1533 0700 0B       		.uleb128 0xb
+ 1534 0701 01       		.uleb128 0x1
+ 1535 0702 52       		.byte	0x52
+ 1536 0703 03       		.uleb128 0x3
+ 1537 0704 0A       		.byte	0xa
+ 1538 0705 4D1C     		.2byte	0x1c4d
+ 1539 0707 00       		.byte	0
+ 1540 0708 0F       		.uleb128 0xf
+ 1541 0709 E4000000 		.4byte	.LVL48
+ 1542 070d 81080000 		.4byte	0x881
+ 1543 0711 3E070000 		.4byte	0x73e
+ 1544 0715 0B       		.uleb128 0xb
+ 1545 0716 01       		.uleb128 0x1
+ 1546 0717 50       		.byte	0x50
+ 1547 0718 04       		.uleb128 0x4
+ 1548 0719 91       		.byte	0x91
+ 1549 071a 84F47C   		.sleb128 -50684
+ 1550 071d 0B       		.uleb128 0xb
+ 1551 071e 01       		.uleb128 0x1
+ 1552 071f 51       		.byte	0x51
+ 1553 0720 08       		.uleb128 0x8
+ 1554 0721 91       		.byte	0x91
+ 1555 0722 FCF37C   		.sleb128 -50692
+ 1556 0725 06       		.byte	0x6
+ 1557 0726 08       		.byte	0x8
+ 1558 0727 40       		.byte	0x40
+ 1559 0728 1C       		.byte	0x1c
+ 1560 0729 0B       		.uleb128 0xb
+ 1561 072a 01       		.uleb128 0x1
+ 1562 072b 52       		.byte	0x52
+ 1563 072c 04       		.uleb128 0x4
+ 1564 072d 91       		.byte	0x91
+ 1565 072e 88F47C   		.sleb128 -50680
+ 1566 0731 0B       		.uleb128 0xb
+ 1567 0732 01       		.uleb128 0x1
+ 1568 0733 53       		.byte	0x53
+ 1569 0734 02       		.uleb128 0x2
+ 1570 0735 78       		.byte	0x78
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 31
+
+
+ 1571 0736 00       		.sleb128 0
+ 1572 0737 0B       		.uleb128 0xb
+ 1573 0738 02       		.uleb128 0x2
+ 1574 0739 7D       		.byte	0x7d
+ 1575 073a 00       		.sleb128 0
+ 1576 073b 01       		.uleb128 0x1
+ 1577 073c 33       		.byte	0x33
+ 1578 073d 00       		.byte	0
+ 1579 073e 0F       		.uleb128 0xf
+ 1580 073f FC000000 		.4byte	.LVL50
+ 1581 0743 8C080000 		.4byte	0x88c
+ 1582 0747 77070000 		.4byte	0x777
+ 1583 074b 0B       		.uleb128 0xb
+ 1584 074c 01       		.uleb128 0x1
+ 1585 074d 50       		.byte	0x50
+ 1586 074e 04       		.uleb128 0x4
+ 1587 074f 91       		.byte	0x91
+ 1588 0750 90D67E   		.sleb128 -21744
+ 1589 0753 0B       		.uleb128 0xb
+ 1590 0754 01       		.uleb128 0x1
+ 1591 0755 51       		.byte	0x51
+ 1592 0756 04       		.uleb128 0x4
+ 1593 0757 91       		.byte	0x91
+ 1594 0758 F09D7E   		.sleb128 -28944
+ 1595 075b 0B       		.uleb128 0xb
+ 1596 075c 01       		.uleb128 0x1
+ 1597 075d 52       		.byte	0x52
+ 1598 075e 04       		.uleb128 0x4
+ 1599 075f 91       		.byte	0x91
+ 1600 0760 88F47C   		.sleb128 -50680
+ 1601 0763 0B       		.uleb128 0xb
+ 1602 0764 01       		.uleb128 0x1
+ 1603 0765 53       		.byte	0x53
+ 1604 0766 08       		.uleb128 0x8
+ 1605 0767 91       		.byte	0x91
+ 1606 0768 FCF37C   		.sleb128 -50692
+ 1607 076b 06       		.byte	0x6
+ 1608 076c 08       		.byte	0x8
+ 1609 076d 40       		.byte	0x40
+ 1610 076e 1C       		.byte	0x1c
+ 1611 076f 0B       		.uleb128 0xb
+ 1612 0770 02       		.uleb128 0x2
+ 1613 0771 7D       		.byte	0x7d
+ 1614 0772 00       		.sleb128 0
+ 1615 0773 02       		.uleb128 0x2
+ 1616 0774 77       		.byte	0x77
+ 1617 0775 00       		.sleb128 0
+ 1618 0776 00       		.byte	0
+ 1619 0777 0F       		.uleb128 0xf
+ 1620 0778 10010000 		.4byte	.LVL51
+ 1621 077c C3080000 		.4byte	0x8c3
+ 1622 0780 9B070000 		.4byte	0x79b
+ 1623 0784 0B       		.uleb128 0xb
+ 1624 0785 01       		.uleb128 0x1
+ 1625 0786 50       		.byte	0x50
+ 1626 0787 03       		.uleb128 0x3
+ 1627 0788 91       		.byte	0x91
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 32
+
+
+ 1628 0789 B847     		.sleb128 -7240
+ 1629 078b 0B       		.uleb128 0xb
+ 1630 078c 01       		.uleb128 0x1
+ 1631 078d 51       		.byte	0x51
+ 1632 078e 04       		.uleb128 0x4
+ 1633 078f 91       		.byte	0x91
+ 1634 0790 90D67E   		.sleb128 -21744
+ 1635 0793 0B       		.uleb128 0xb
+ 1636 0794 01       		.uleb128 0x1
+ 1637 0795 52       		.byte	0x52
+ 1638 0796 03       		.uleb128 0x3
+ 1639 0797 0A       		.byte	0xa
+ 1640 0798 251C     		.2byte	0x1c25
+ 1641 079a 00       		.byte	0
+ 1642 079b 0F       		.uleb128 0xf
+ 1643 079c 24010000 		.4byte	.LVL53
+ 1644 07a0 C3080000 		.4byte	0x8c3
+ 1645 07a4 C2070000 		.4byte	0x7c2
+ 1646 07a8 0B       		.uleb128 0xb
+ 1647 07a9 01       		.uleb128 0x1
+ 1648 07aa 50       		.byte	0x50
+ 1649 07ab 07       		.uleb128 0x7
+ 1650 07ac 91       		.byte	0x91
+ 1651 07ad FCF37C   		.sleb128 -50692
+ 1652 07b0 06       		.byte	0x6
+ 1653 07b1 23       		.byte	0x23
+ 1654 07b2 20       		.uleb128 0x20
+ 1655 07b3 0B       		.uleb128 0xb
+ 1656 07b4 01       		.uleb128 0x1
+ 1657 07b5 51       		.byte	0x51
+ 1658 07b6 04       		.uleb128 0x4
+ 1659 07b7 91       		.byte	0x91
+ 1660 07b8 F09D7E   		.sleb128 -28944
+ 1661 07bb 0B       		.uleb128 0xb
+ 1662 07bc 01       		.uleb128 0x1
+ 1663 07bd 52       		.byte	0x52
+ 1664 07be 02       		.uleb128 0x2
+ 1665 07bf 76       		.byte	0x76
+ 1666 07c0 00       		.sleb128 0
+ 1667 07c1 00       		.byte	0
+ 1668 07c2 0F       		.uleb128 0xf
+ 1669 07c3 6C010000 		.4byte	.LVL62
+ 1670 07c7 97080000 		.4byte	0x897
+ 1671 07cb ED070000 		.4byte	0x7ed
+ 1672 07cf 0B       		.uleb128 0xb
+ 1673 07d0 01       		.uleb128 0x1
+ 1674 07d1 50       		.byte	0x50
+ 1675 07d2 04       		.uleb128 0x4
+ 1676 07d3 91       		.byte	0x91
+ 1677 07d4 A8AD7D   		.sleb128 -43352
+ 1678 07d7 0B       		.uleb128 0xb
+ 1679 07d8 01       		.uleb128 0x1
+ 1680 07d9 51       		.byte	0x51
+ 1681 07da 03       		.uleb128 0x3
+ 1682 07db 0A       		.byte	0xa
+ 1683 07dc 251C     		.2byte	0x1c25
+ 1684 07de 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 33
+
+
+ 1685 07df 01       		.uleb128 0x1
+ 1686 07e0 52       		.byte	0x52
+ 1687 07e1 03       		.uleb128 0x3
+ 1688 07e2 91       		.byte	0x91
+ 1689 07e3 B847     		.sleb128 -7240
+ 1690 07e5 0B       		.uleb128 0xb
+ 1691 07e6 01       		.uleb128 0x1
+ 1692 07e7 53       		.byte	0x53
+ 1693 07e8 03       		.uleb128 0x3
+ 1694 07e9 0A       		.byte	0xa
+ 1695 07ea 8503     		.2byte	0x385
+ 1696 07ec 00       		.byte	0
+ 1697 07ed 0F       		.uleb128 0xf
+ 1698 07ee 8A010000 		.4byte	.LVL63
+ 1699 07f2 97080000 		.4byte	0x897
+ 1700 07f6 1B080000 		.4byte	0x81b
+ 1701 07fa 0B       		.uleb128 0xb
+ 1702 07fb 01       		.uleb128 0x1
+ 1703 07fc 50       		.byte	0x50
+ 1704 07fd 04       		.uleb128 0x4
+ 1705 07fe 91       		.byte	0x91
+ 1706 07ff CDE57D   		.sleb128 -36147
+ 1707 0802 0B       		.uleb128 0xb
+ 1708 0803 01       		.uleb128 0x1
+ 1709 0804 51       		.byte	0x51
+ 1710 0805 02       		.uleb128 0x2
+ 1711 0806 76       		.byte	0x76
+ 1712 0807 00       		.sleb128 0
+ 1713 0808 0B       		.uleb128 0xb
+ 1714 0809 01       		.uleb128 0x1
+ 1715 080a 52       		.byte	0x52
+ 1716 080b 07       		.uleb128 0x7
+ 1717 080c 91       		.byte	0x91
+ 1718 080d FCF37C   		.sleb128 -50692
+ 1719 0810 06       		.byte	0x6
+ 1720 0811 23       		.byte	0x23
+ 1721 0812 20       		.uleb128 0x20
+ 1722 0813 0B       		.uleb128 0xb
+ 1723 0814 01       		.uleb128 0x1
+ 1724 0815 53       		.byte	0x53
+ 1725 0816 03       		.uleb128 0x3
+ 1726 0817 0A       		.byte	0xa
+ 1727 0818 8403     		.2byte	0x384
+ 1728 081a 00       		.byte	0
+ 1729 081b 0A       		.uleb128 0xa
+ 1730 081c A0010000 		.4byte	.LVL64
+ 1731 0820 81080000 		.4byte	0x881
+ 1732 0824 0B       		.uleb128 0xb
+ 1733 0825 01       		.uleb128 0x1
+ 1734 0826 50       		.byte	0x50
+ 1735 0827 04       		.uleb128 0x4
+ 1736 0828 91       		.byte	0x91
+ 1737 0829 84F47C   		.sleb128 -50684
+ 1738 082c 0B       		.uleb128 0xb
+ 1739 082d 01       		.uleb128 0x1
+ 1740 082e 51       		.byte	0x51
+ 1741 082f 02       		.uleb128 0x2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 34
+
+
+ 1742 0830 75       		.byte	0x75
+ 1743 0831 00       		.sleb128 0
+ 1744 0832 0B       		.uleb128 0xb
+ 1745 0833 01       		.uleb128 0x1
+ 1746 0834 52       		.byte	0x52
+ 1747 0835 04       		.uleb128 0x4
+ 1748 0836 91       		.byte	0x91
+ 1749 0837 88AD7D   		.sleb128 -43384
+ 1750 083a 0B       		.uleb128 0xb
+ 1751 083b 01       		.uleb128 0x1
+ 1752 083c 53       		.byte	0x53
+ 1753 083d 03       		.uleb128 0x3
+ 1754 083e 0A       		.byte	0xa
+ 1755 083f 6538     		.2byte	0x3865
+ 1756 0841 0B       		.uleb128 0xb
+ 1757 0842 02       		.uleb128 0x2
+ 1758 0843 7D       		.byte	0x7d
+ 1759 0844 00       		.sleb128 0
+ 1760 0845 01       		.uleb128 0x1
+ 1761 0846 34       		.byte	0x34
+ 1762 0847 00       		.byte	0
+ 1763 0848 00       		.byte	0
+ 1764 0849 11       		.uleb128 0x11
+ 1765 084a 81000000 		.4byte	0x81
+ 1766 084e 59080000 		.4byte	0x859
+ 1767 0852 12       		.uleb128 0x12
+ 1768 0853 CF000000 		.4byte	0xcf
+ 1769 0857 1F       		.byte	0x1f
+ 1770 0858 00       		.byte	0
+ 1771 0859 16       		.uleb128 0x16
+ 1772 085a 07010000 		.4byte	.LASF26
+ 1773 085e 07010000 		.4byte	.LASF26
+ 1774 0862 06       		.byte	0x6
+ 1775 0863 0C       		.byte	0xc
+ 1776 0864 17       		.uleb128 0x17
+ 1777 0865 50010000 		.4byte	.LASF28
+ 1778 0869 50010000 		.4byte	.LASF28
+ 1779 086d 16       		.uleb128 0x16
+ 1780 086e F6010000 		.4byte	.LASF27
+ 1781 0872 F6010000 		.4byte	.LASF27
+ 1782 0876 07       		.byte	0x7
+ 1783 0877 07       		.byte	0x7
+ 1784 0878 17       		.uleb128 0x17
+ 1785 0879 56030000 		.4byte	.LASF29
+ 1786 087d 56030000 		.4byte	.LASF29
+ 1787 0881 16       		.uleb128 0x16
+ 1788 0882 57010000 		.4byte	.LASF30
+ 1789 0886 57010000 		.4byte	.LASF30
+ 1790 088a 08       		.byte	0x8
+ 1791 088b 0D       		.byte	0xd
+ 1792 088c 16       		.uleb128 0x16
+ 1793 088d 2B010000 		.4byte	.LASF31
+ 1794 0891 2B010000 		.4byte	.LASF31
+ 1795 0895 06       		.byte	0x6
+ 1796 0896 0E       		.byte	0xe
+ 1797 0897 16       		.uleb128 0x16
+ 1798 0898 28030000 		.4byte	.LASF32
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 35
+
+
+ 1799 089c 28030000 		.4byte	.LASF32
+ 1800 08a0 09       		.byte	0x9
+ 1801 08a1 0F       		.byte	0xf
+ 1802 08a2 16       		.uleb128 0x16
+ 1803 08a3 6C030000 		.4byte	.LASF33
+ 1804 08a7 6C030000 		.4byte	.LASF33
+ 1805 08ab 09       		.byte	0x9
+ 1806 08ac 1C       		.byte	0x1c
+ 1807 08ad 16       		.uleb128 0x16
+ 1808 08ae 94000000 		.4byte	.LASF34
+ 1809 08b2 94000000 		.4byte	.LASF34
+ 1810 08b6 09       		.byte	0x9
+ 1811 08b7 1E       		.byte	0x1e
+ 1812 08b8 16       		.uleb128 0x16
+ 1813 08b9 7C010000 		.4byte	.LASF35
+ 1814 08bd 7C010000 		.4byte	.LASF35
+ 1815 08c1 06       		.byte	0x6
+ 1816 08c2 10       		.byte	0x10
+ 1817 08c3 16       		.uleb128 0x16
+ 1818 08c4 AE010000 		.4byte	.LASF36
+ 1819 08c8 AE010000 		.4byte	.LASF36
+ 1820 08cc 0A       		.byte	0xa
+ 1821 08cd 13       		.byte	0x13
+ 1822 08ce 00       		.byte	0
+ 1823              		.section	.debug_abbrev,"",%progbits
+ 1824              	.Ldebug_abbrev0:
+ 1825 0000 01       		.uleb128 0x1
+ 1826 0001 11       		.uleb128 0x11
+ 1827 0002 01       		.byte	0x1
+ 1828 0003 25       		.uleb128 0x25
+ 1829 0004 0E       		.uleb128 0xe
+ 1830 0005 13       		.uleb128 0x13
+ 1831 0006 0B       		.uleb128 0xb
+ 1832 0007 03       		.uleb128 0x3
+ 1833 0008 0E       		.uleb128 0xe
+ 1834 0009 1B       		.uleb128 0x1b
+ 1835 000a 0E       		.uleb128 0xe
+ 1836 000b 55       		.uleb128 0x55
+ 1837 000c 17       		.uleb128 0x17
+ 1838 000d 11       		.uleb128 0x11
+ 1839 000e 01       		.uleb128 0x1
+ 1840 000f 10       		.uleb128 0x10
+ 1841 0010 17       		.uleb128 0x17
+ 1842 0011 00       		.byte	0
+ 1843 0012 00       		.byte	0
+ 1844 0013 02       		.uleb128 0x2
+ 1845 0014 24       		.uleb128 0x24
+ 1846 0015 00       		.byte	0
+ 1847 0016 0B       		.uleb128 0xb
+ 1848 0017 0B       		.uleb128 0xb
+ 1849 0018 3E       		.uleb128 0x3e
+ 1850 0019 0B       		.uleb128 0xb
+ 1851 001a 03       		.uleb128 0x3
+ 1852 001b 0E       		.uleb128 0xe
+ 1853 001c 00       		.byte	0
+ 1854 001d 00       		.byte	0
+ 1855 001e 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 36
+
+
+ 1856 001f 16       		.uleb128 0x16
+ 1857 0020 00       		.byte	0
+ 1858 0021 03       		.uleb128 0x3
+ 1859 0022 0E       		.uleb128 0xe
+ 1860 0023 3A       		.uleb128 0x3a
+ 1861 0024 0B       		.uleb128 0xb
+ 1862 0025 3B       		.uleb128 0x3b
+ 1863 0026 0B       		.uleb128 0xb
+ 1864 0027 49       		.uleb128 0x49
+ 1865 0028 13       		.uleb128 0x13
+ 1866 0029 00       		.byte	0
+ 1867 002a 00       		.byte	0
+ 1868 002b 04       		.uleb128 0x4
+ 1869 002c 24       		.uleb128 0x24
+ 1870 002d 00       		.byte	0
+ 1871 002e 0B       		.uleb128 0xb
+ 1872 002f 0B       		.uleb128 0xb
+ 1873 0030 3E       		.uleb128 0x3e
+ 1874 0031 0B       		.uleb128 0xb
+ 1875 0032 03       		.uleb128 0x3
+ 1876 0033 08       		.uleb128 0x8
+ 1877 0034 00       		.byte	0
+ 1878 0035 00       		.byte	0
+ 1879 0036 05       		.uleb128 0x5
+ 1880 0037 0F       		.uleb128 0xf
+ 1881 0038 00       		.byte	0
+ 1882 0039 0B       		.uleb128 0xb
+ 1883 003a 0B       		.uleb128 0xb
+ 1884 003b 49       		.uleb128 0x49
+ 1885 003c 13       		.uleb128 0x13
+ 1886 003d 00       		.byte	0
+ 1887 003e 00       		.byte	0
+ 1888 003f 06       		.uleb128 0x6
+ 1889 0040 13       		.uleb128 0x13
+ 1890 0041 01       		.byte	0x1
+ 1891 0042 0B       		.uleb128 0xb
+ 1892 0043 0B       		.uleb128 0xb
+ 1893 0044 3A       		.uleb128 0x3a
+ 1894 0045 0B       		.uleb128 0xb
+ 1895 0046 3B       		.uleb128 0x3b
+ 1896 0047 0B       		.uleb128 0xb
+ 1897 0048 01       		.uleb128 0x1
+ 1898 0049 13       		.uleb128 0x13
+ 1899 004a 00       		.byte	0
+ 1900 004b 00       		.byte	0
+ 1901 004c 07       		.uleb128 0x7
+ 1902 004d 0D       		.uleb128 0xd
+ 1903 004e 00       		.byte	0
+ 1904 004f 03       		.uleb128 0x3
+ 1905 0050 08       		.uleb128 0x8
+ 1906 0051 3A       		.uleb128 0x3a
+ 1907 0052 0B       		.uleb128 0xb
+ 1908 0053 3B       		.uleb128 0x3b
+ 1909 0054 0B       		.uleb128 0xb
+ 1910 0055 49       		.uleb128 0x49
+ 1911 0056 13       		.uleb128 0x13
+ 1912 0057 38       		.uleb128 0x38
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 37
+
+
+ 1913 0058 0B       		.uleb128 0xb
+ 1914 0059 00       		.byte	0
+ 1915 005a 00       		.byte	0
+ 1916 005b 08       		.uleb128 0x8
+ 1917 005c 2E       		.uleb128 0x2e
+ 1918 005d 01       		.byte	0x1
+ 1919 005e 3F       		.uleb128 0x3f
+ 1920 005f 19       		.uleb128 0x19
+ 1921 0060 03       		.uleb128 0x3
+ 1922 0061 0E       		.uleb128 0xe
+ 1923 0062 3A       		.uleb128 0x3a
+ 1924 0063 0B       		.uleb128 0xb
+ 1925 0064 3B       		.uleb128 0x3b
+ 1926 0065 0B       		.uleb128 0xb
+ 1927 0066 27       		.uleb128 0x27
+ 1928 0067 19       		.uleb128 0x19
+ 1929 0068 49       		.uleb128 0x49
+ 1930 0069 13       		.uleb128 0x13
+ 1931 006a 11       		.uleb128 0x11
+ 1932 006b 01       		.uleb128 0x1
+ 1933 006c 12       		.uleb128 0x12
+ 1934 006d 06       		.uleb128 0x6
+ 1935 006e 40       		.uleb128 0x40
+ 1936 006f 18       		.uleb128 0x18
+ 1937 0070 9742     		.uleb128 0x2117
+ 1938 0072 19       		.uleb128 0x19
+ 1939 0073 01       		.uleb128 0x1
+ 1940 0074 13       		.uleb128 0x13
+ 1941 0075 00       		.byte	0
+ 1942 0076 00       		.byte	0
+ 1943 0077 09       		.uleb128 0x9
+ 1944 0078 05       		.uleb128 0x5
+ 1945 0079 00       		.byte	0
+ 1946 007a 03       		.uleb128 0x3
+ 1947 007b 08       		.uleb128 0x8
+ 1948 007c 3A       		.uleb128 0x3a
+ 1949 007d 0B       		.uleb128 0xb
+ 1950 007e 3B       		.uleb128 0x3b
+ 1951 007f 0B       		.uleb128 0xb
+ 1952 0080 49       		.uleb128 0x49
+ 1953 0081 13       		.uleb128 0x13
+ 1954 0082 02       		.uleb128 0x2
+ 1955 0083 17       		.uleb128 0x17
+ 1956 0084 00       		.byte	0
+ 1957 0085 00       		.byte	0
+ 1958 0086 0A       		.uleb128 0xa
+ 1959 0087 898201   		.uleb128 0x4109
+ 1960 008a 01       		.byte	0x1
+ 1961 008b 11       		.uleb128 0x11
+ 1962 008c 01       		.uleb128 0x1
+ 1963 008d 31       		.uleb128 0x31
+ 1964 008e 13       		.uleb128 0x13
+ 1965 008f 00       		.byte	0
+ 1966 0090 00       		.byte	0
+ 1967 0091 0B       		.uleb128 0xb
+ 1968 0092 8A8201   		.uleb128 0x410a
+ 1969 0095 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 38
+
+
+ 1970 0096 02       		.uleb128 0x2
+ 1971 0097 18       		.uleb128 0x18
+ 1972 0098 9142     		.uleb128 0x2111
+ 1973 009a 18       		.uleb128 0x18
+ 1974 009b 00       		.byte	0
+ 1975 009c 00       		.byte	0
+ 1976 009d 0C       		.uleb128 0xc
+ 1977 009e 34       		.uleb128 0x34
+ 1978 009f 00       		.byte	0
+ 1979 00a0 03       		.uleb128 0x3
+ 1980 00a1 0E       		.uleb128 0xe
+ 1981 00a2 3A       		.uleb128 0x3a
+ 1982 00a3 0B       		.uleb128 0xb
+ 1983 00a4 3B       		.uleb128 0x3b
+ 1984 00a5 0B       		.uleb128 0xb
+ 1985 00a6 49       		.uleb128 0x49
+ 1986 00a7 13       		.uleb128 0x13
+ 1987 00a8 02       		.uleb128 0x2
+ 1988 00a9 18       		.uleb128 0x18
+ 1989 00aa 00       		.byte	0
+ 1990 00ab 00       		.byte	0
+ 1991 00ac 0D       		.uleb128 0xd
+ 1992 00ad 34       		.uleb128 0x34
+ 1993 00ae 00       		.byte	0
+ 1994 00af 03       		.uleb128 0x3
+ 1995 00b0 08       		.uleb128 0x8
+ 1996 00b1 3A       		.uleb128 0x3a
+ 1997 00b2 0B       		.uleb128 0xb
+ 1998 00b3 3B       		.uleb128 0x3b
+ 1999 00b4 0B       		.uleb128 0xb
+ 2000 00b5 49       		.uleb128 0x49
+ 2001 00b6 13       		.uleb128 0x13
+ 2002 00b7 02       		.uleb128 0x2
+ 2003 00b8 18       		.uleb128 0x18
+ 2004 00b9 00       		.byte	0
+ 2005 00ba 00       		.byte	0
+ 2006 00bb 0E       		.uleb128 0xe
+ 2007 00bc 34       		.uleb128 0x34
+ 2008 00bd 00       		.byte	0
+ 2009 00be 03       		.uleb128 0x3
+ 2010 00bf 08       		.uleb128 0x8
+ 2011 00c0 3A       		.uleb128 0x3a
+ 2012 00c1 0B       		.uleb128 0xb
+ 2013 00c2 3B       		.uleb128 0x3b
+ 2014 00c3 0B       		.uleb128 0xb
+ 2015 00c4 49       		.uleb128 0x49
+ 2016 00c5 13       		.uleb128 0x13
+ 2017 00c6 02       		.uleb128 0x2
+ 2018 00c7 17       		.uleb128 0x17
+ 2019 00c8 00       		.byte	0
+ 2020 00c9 00       		.byte	0
+ 2021 00ca 0F       		.uleb128 0xf
+ 2022 00cb 898201   		.uleb128 0x4109
+ 2023 00ce 01       		.byte	0x1
+ 2024 00cf 11       		.uleb128 0x11
+ 2025 00d0 01       		.uleb128 0x1
+ 2026 00d1 31       		.uleb128 0x31
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 39
+
+
+ 2027 00d2 13       		.uleb128 0x13
+ 2028 00d3 01       		.uleb128 0x1
+ 2029 00d4 13       		.uleb128 0x13
+ 2030 00d5 00       		.byte	0
+ 2031 00d6 00       		.byte	0
+ 2032 00d7 10       		.uleb128 0x10
+ 2033 00d8 26       		.uleb128 0x26
+ 2034 00d9 00       		.byte	0
+ 2035 00da 49       		.uleb128 0x49
+ 2036 00db 13       		.uleb128 0x13
+ 2037 00dc 00       		.byte	0
+ 2038 00dd 00       		.byte	0
+ 2039 00de 11       		.uleb128 0x11
+ 2040 00df 01       		.uleb128 0x1
+ 2041 00e0 01       		.byte	0x1
+ 2042 00e1 49       		.uleb128 0x49
+ 2043 00e2 13       		.uleb128 0x13
+ 2044 00e3 01       		.uleb128 0x1
+ 2045 00e4 13       		.uleb128 0x13
+ 2046 00e5 00       		.byte	0
+ 2047 00e6 00       		.byte	0
+ 2048 00e7 12       		.uleb128 0x12
+ 2049 00e8 21       		.uleb128 0x21
+ 2050 00e9 00       		.byte	0
+ 2051 00ea 49       		.uleb128 0x49
+ 2052 00eb 13       		.uleb128 0x13
+ 2053 00ec 2F       		.uleb128 0x2f
+ 2054 00ed 0B       		.uleb128 0xb
+ 2055 00ee 00       		.byte	0
+ 2056 00ef 00       		.byte	0
+ 2057 00f0 13       		.uleb128 0x13
+ 2058 00f1 21       		.uleb128 0x21
+ 2059 00f2 00       		.byte	0
+ 2060 00f3 49       		.uleb128 0x49
+ 2061 00f4 13       		.uleb128 0x13
+ 2062 00f5 2F       		.uleb128 0x2f
+ 2063 00f6 05       		.uleb128 0x5
+ 2064 00f7 00       		.byte	0
+ 2065 00f8 00       		.byte	0
+ 2066 00f9 14       		.uleb128 0x14
+ 2067 00fa 34       		.uleb128 0x34
+ 2068 00fb 00       		.byte	0
+ 2069 00fc 03       		.uleb128 0x3
+ 2070 00fd 0E       		.uleb128 0xe
+ 2071 00fe 3A       		.uleb128 0x3a
+ 2072 00ff 0B       		.uleb128 0xb
+ 2073 0100 3B       		.uleb128 0x3b
+ 2074 0101 0B       		.uleb128 0xb
+ 2075 0102 49       		.uleb128 0x49
+ 2076 0103 13       		.uleb128 0x13
+ 2077 0104 02       		.uleb128 0x2
+ 2078 0105 17       		.uleb128 0x17
+ 2079 0106 00       		.byte	0
+ 2080 0107 00       		.byte	0
+ 2081 0108 15       		.uleb128 0x15
+ 2082 0109 0B       		.uleb128 0xb
+ 2083 010a 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 40
+
+
+ 2084 010b 11       		.uleb128 0x11
+ 2085 010c 01       		.uleb128 0x1
+ 2086 010d 12       		.uleb128 0x12
+ 2087 010e 06       		.uleb128 0x6
+ 2088 010f 01       		.uleb128 0x1
+ 2089 0110 13       		.uleb128 0x13
+ 2090 0111 00       		.byte	0
+ 2091 0112 00       		.byte	0
+ 2092 0113 16       		.uleb128 0x16
+ 2093 0114 2E       		.uleb128 0x2e
+ 2094 0115 00       		.byte	0
+ 2095 0116 3F       		.uleb128 0x3f
+ 2096 0117 19       		.uleb128 0x19
+ 2097 0118 3C       		.uleb128 0x3c
+ 2098 0119 19       		.uleb128 0x19
+ 2099 011a 6E       		.uleb128 0x6e
+ 2100 011b 0E       		.uleb128 0xe
+ 2101 011c 03       		.uleb128 0x3
+ 2102 011d 0E       		.uleb128 0xe
+ 2103 011e 3A       		.uleb128 0x3a
+ 2104 011f 0B       		.uleb128 0xb
+ 2105 0120 3B       		.uleb128 0x3b
+ 2106 0121 0B       		.uleb128 0xb
+ 2107 0122 00       		.byte	0
+ 2108 0123 00       		.byte	0
+ 2109 0124 17       		.uleb128 0x17
+ 2110 0125 2E       		.uleb128 0x2e
+ 2111 0126 00       		.byte	0
+ 2112 0127 3F       		.uleb128 0x3f
+ 2113 0128 19       		.uleb128 0x19
+ 2114 0129 3C       		.uleb128 0x3c
+ 2115 012a 19       		.uleb128 0x19
+ 2116 012b 6E       		.uleb128 0x6e
+ 2117 012c 0E       		.uleb128 0xe
+ 2118 012d 03       		.uleb128 0x3
+ 2119 012e 0E       		.uleb128 0xe
+ 2120 012f 00       		.byte	0
+ 2121 0130 00       		.byte	0
+ 2122 0131 00       		.byte	0
+ 2123              		.section	.debug_loc,"",%progbits
+ 2124              	.Ldebug_loc0:
+ 2125              	.LLST0:
+ 2126 0000 00000000 		.4byte	.LVL0
+ 2127 0004 05000000 		.4byte	.LVL1-1
+ 2128 0008 0100     		.2byte	0x1
+ 2129 000a 50       		.byte	0x50
+ 2130 000b 05000000 		.4byte	.LVL1-1
+ 2131 000f 0A000000 		.4byte	.LFE0
+ 2132 0013 0400     		.2byte	0x4
+ 2133 0015 F3       		.byte	0xf3
+ 2134 0016 01       		.uleb128 0x1
+ 2135 0017 50       		.byte	0x50
+ 2136 0018 9F       		.byte	0x9f
+ 2137 0019 00000000 		.4byte	0
+ 2138 001d 00000000 		.4byte	0
+ 2139              	.LLST1:
+ 2140 0021 00000000 		.4byte	.LVL0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 41
+
+
+ 2141 0025 05000000 		.4byte	.LVL1-1
+ 2142 0029 0100     		.2byte	0x1
+ 2143 002b 51       		.byte	0x51
+ 2144 002c 05000000 		.4byte	.LVL1-1
+ 2145 0030 0A000000 		.4byte	.LFE0
+ 2146 0034 0400     		.2byte	0x4
+ 2147 0036 F3       		.byte	0xf3
+ 2148 0037 01       		.uleb128 0x1
+ 2149 0038 51       		.byte	0x51
+ 2150 0039 9F       		.byte	0x9f
+ 2151 003a 00000000 		.4byte	0
+ 2152 003e 00000000 		.4byte	0
+ 2153              	.LLST2:
+ 2154 0042 00000000 		.4byte	.LVL2
+ 2155 0046 18000000 		.4byte	.LVL5
+ 2156 004a 0100     		.2byte	0x1
+ 2157 004c 50       		.byte	0x50
+ 2158 004d 18000000 		.4byte	.LVL5
+ 2159 0051 2C010000 		.4byte	.LFE1
+ 2160 0055 0100     		.2byte	0x1
+ 2161 0057 59       		.byte	0x59
+ 2162 0058 00000000 		.4byte	0
+ 2163 005c 00000000 		.4byte	0
+ 2164              	.LLST3:
+ 2165 0060 00000000 		.4byte	.LVL2
+ 2166 0064 14000000 		.4byte	.LVL4
+ 2167 0068 0100     		.2byte	0x1
+ 2168 006a 51       		.byte	0x51
+ 2169 006b 14000000 		.4byte	.LVL4
+ 2170 006f 2C010000 		.4byte	.LFE1
+ 2171 0073 0100     		.2byte	0x1
+ 2172 0075 5A       		.byte	0x5a
+ 2173 0076 00000000 		.4byte	0
+ 2174 007a 00000000 		.4byte	0
+ 2175              	.LLST4:
+ 2176 007e 00000000 		.4byte	.LVL2
+ 2177 0082 12000000 		.4byte	.LVL3
+ 2178 0086 0100     		.2byte	0x1
+ 2179 0088 52       		.byte	0x52
+ 2180 0089 12000000 		.4byte	.LVL3
+ 2181 008d BA000000 		.4byte	.LVL20
+ 2182 0091 0100     		.2byte	0x1
+ 2183 0093 54       		.byte	0x54
+ 2184 0094 BA000000 		.4byte	.LVL20
+ 2185 0098 2C010000 		.4byte	.LFE1
+ 2186 009c 0400     		.2byte	0x4
+ 2187 009e F3       		.byte	0xf3
+ 2188 009f 01       		.uleb128 0x1
+ 2189 00a0 52       		.byte	0x52
+ 2190 00a1 9F       		.byte	0x9f
+ 2191 00a2 00000000 		.4byte	0
+ 2192 00a6 00000000 		.4byte	0
+ 2193              	.LLST5:
+ 2194 00aa 5E000000 		.4byte	.LVL10
+ 2195 00ae 62000000 		.4byte	.LVL11
+ 2196 00b2 0500     		.2byte	0x5
+ 2197 00b4 91       		.byte	0x91
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 42
+
+
+ 2198 00b5 F0E47D   		.sleb128 -36240
+ 2199 00b8 9F       		.byte	0x9f
+ 2200 00b9 62000000 		.4byte	.LVL11
+ 2201 00bd 65000000 		.4byte	.LVL12-1
+ 2202 00c1 0100     		.2byte	0x1
+ 2203 00c3 50       		.byte	0x50
+ 2204 00c4 65000000 		.4byte	.LVL12-1
+ 2205 00c8 68000000 		.4byte	.LVL13
+ 2206 00cc 0500     		.2byte	0x5
+ 2207 00ce 91       		.byte	0x91
+ 2208 00cf F0E47D   		.sleb128 -36240
+ 2209 00d2 9F       		.byte	0x9f
+ 2210 00d3 68000000 		.4byte	.LVL13
+ 2211 00d7 75000000 		.4byte	.LVL14-1
+ 2212 00db 0100     		.2byte	0x1
+ 2213 00dd 53       		.byte	0x53
+ 2214 00de 75000000 		.4byte	.LVL14-1
+ 2215 00e2 8E000000 		.4byte	.LVL16
+ 2216 00e6 0400     		.2byte	0x4
+ 2217 00e8 76       		.byte	0x76
+ 2218 00e9 9347     		.sleb128 -7277
+ 2219 00eb 9F       		.byte	0x9f
+ 2220 00ec 8E000000 		.4byte	.LVL16
+ 2221 00f0 99000000 		.4byte	.LVL17-1
+ 2222 00f4 0100     		.2byte	0x1
+ 2223 00f6 52       		.byte	0x52
+ 2224 00f7 99000000 		.4byte	.LVL17-1
+ 2225 00fb A4000000 		.4byte	.LVL18
+ 2226 00ff 0400     		.2byte	0x4
+ 2227 0101 76       		.byte	0x76
+ 2228 0102 9347     		.sleb128 -7277
+ 2229 0104 9F       		.byte	0x9f
+ 2230 0105 A4000000 		.4byte	.LVL18
+ 2231 0109 B1000000 		.4byte	.LVL19-1
+ 2232 010d 0100     		.2byte	0x1
+ 2233 010f 52       		.byte	0x52
+ 2234 0110 B1000000 		.4byte	.LVL19-1
+ 2235 0114 BA000000 		.4byte	.LVL20
+ 2236 0118 0400     		.2byte	0x4
+ 2237 011a 76       		.byte	0x76
+ 2238 011b 9347     		.sleb128 -7277
+ 2239 011d 9F       		.byte	0x9f
+ 2240 011e BA000000 		.4byte	.LVL20
+ 2241 0122 BC000000 		.4byte	.LVL21
+ 2242 0126 0100     		.2byte	0x1
+ 2243 0128 54       		.byte	0x54
+ 2244 0129 BC000000 		.4byte	.LVL21
+ 2245 012d 2C010000 		.4byte	.LFE1
+ 2246 0131 0300     		.2byte	0x3
+ 2247 0133 74       		.byte	0x74
+ 2248 0134 70       		.sleb128 -16
+ 2249 0135 9F       		.byte	0x9f
+ 2250 0136 00000000 		.4byte	0
+ 2251 013a 00000000 		.4byte	0
+ 2252              	.LLST6:
+ 2253 013e 00000000 		.4byte	.LVL26
+ 2254 0142 1C000000 		.4byte	.LVL29
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 43
+
+
+ 2255 0146 0100     		.2byte	0x1
+ 2256 0148 50       		.byte	0x50
+ 2257 0149 1C000000 		.4byte	.LVL29
+ 2258 014d B0010000 		.4byte	.LFE2
+ 2259 0151 0100     		.2byte	0x1
+ 2260 0153 55       		.byte	0x55
+ 2261 0154 00000000 		.4byte	0
+ 2262 0158 00000000 		.4byte	0
+ 2263              	.LLST7:
+ 2264 015c 00000000 		.4byte	.LVL26
+ 2265 0160 18000000 		.4byte	.LVL28
+ 2266 0164 0100     		.2byte	0x1
+ 2267 0166 51       		.byte	0x51
+ 2268 0167 18000000 		.4byte	.LVL28
+ 2269 016b B0010000 		.4byte	.LFE2
+ 2270 016f 0100     		.2byte	0x1
+ 2271 0171 59       		.byte	0x59
+ 2272 0172 00000000 		.4byte	0
+ 2273 0176 00000000 		.4byte	0
+ 2274              	.LLST8:
+ 2275 017a 00000000 		.4byte	.LVL26
+ 2276 017e 16000000 		.4byte	.LVL27
+ 2277 0182 0100     		.2byte	0x1
+ 2278 0184 52       		.byte	0x52
+ 2279 0185 16000000 		.4byte	.LVL27
+ 2280 0189 C4000000 		.4byte	.LVL45
+ 2281 018d 0100     		.2byte	0x1
+ 2282 018f 54       		.byte	0x54
+ 2283 0190 C4000000 		.4byte	.LVL45
+ 2284 0194 B0010000 		.4byte	.LFE2
+ 2285 0198 0400     		.2byte	0x4
+ 2286 019a 77       		.byte	0x77
+ 2287 019b B87F     		.sleb128 -72
+ 2288 019d 9F       		.byte	0x9f
+ 2289 019e 00000000 		.4byte	0
+ 2290 01a2 00000000 		.4byte	0
+ 2291              	.LLST9:
+ 2292 01a6 C4000000 		.4byte	.LVL45
+ 2293 01aa 2A010000 		.4byte	.LVL55
+ 2294 01ae 0100     		.2byte	0x1
+ 2295 01b0 54       		.byte	0x54
+ 2296 01b1 2A010000 		.4byte	.LVL55
+ 2297 01b5 2C010000 		.4byte	.LVL56
+ 2298 01b9 0300     		.2byte	0x3
+ 2299 01bb 74       		.byte	0x74
+ 2300 01bc 01       		.sleb128 1
+ 2301 01bd 9F       		.byte	0x9f
+ 2302 01be 2C010000 		.4byte	.LVL56
+ 2303 01c2 B0010000 		.4byte	.LFE2
+ 2304 01c6 0100     		.2byte	0x1
+ 2305 01c8 54       		.byte	0x54
+ 2306 01c9 00000000 		.4byte	0
+ 2307 01cd 00000000 		.4byte	0
+ 2308              	.LLST10:
+ 2309 01d1 92000000 		.4byte	.LVL38
+ 2310 01d5 96000000 		.4byte	.LVL39
+ 2311 01d9 0500     		.2byte	0x5
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 44
+
+
+ 2312 01db 91       		.byte	0x91
+ 2313 01dc 88F47C   		.sleb128 -50680
+ 2314 01df 9F       		.byte	0x9f
+ 2315 01e0 96000000 		.4byte	.LVL39
+ 2316 01e4 9A000000 		.4byte	.LVL40
+ 2317 01e8 0100     		.2byte	0x1
+ 2318 01ea 52       		.byte	0x52
+ 2319 01eb 9A000000 		.4byte	.LVL40
+ 2320 01ef 9C000000 		.4byte	.LVL41
+ 2321 01f3 0400     		.2byte	0x4
+ 2322 01f5 72       		.byte	0x72
+ 2323 01f6 A047     		.sleb128 -7264
+ 2324 01f8 9F       		.byte	0x9f
+ 2325 01f9 9C000000 		.4byte	.LVL41
+ 2326 01fd AB000000 		.4byte	.LVL42-1
+ 2327 0201 0400     		.2byte	0x4
+ 2328 0203 72       		.byte	0x72
+ 2329 0204 9347     		.sleb128 -7277
+ 2330 0206 9F       		.byte	0x9f
+ 2331 0207 AB000000 		.4byte	.LVL42-1
+ 2332 020b BE000000 		.4byte	.LVL43
+ 2333 020f 0500     		.2byte	0x5
+ 2334 0211 91       		.byte	0x91
+ 2335 0212 88F47C   		.sleb128 -50680
+ 2336 0215 9F       		.byte	0x9f
+ 2337 0216 BE000000 		.4byte	.LVL43
+ 2338 021a C1000000 		.4byte	.LVL44-1
+ 2339 021e 0100     		.2byte	0x1
+ 2340 0220 50       		.byte	0x50
+ 2341 0221 C1000000 		.4byte	.LVL44-1
+ 2342 0225 D8000000 		.4byte	.LVL47
+ 2343 0229 0500     		.2byte	0x5
+ 2344 022b 91       		.byte	0x91
+ 2345 022c 88F47C   		.sleb128 -50680
+ 2346 022f 9F       		.byte	0x9f
+ 2347 0230 D8000000 		.4byte	.LVL47
+ 2348 0234 E3000000 		.4byte	.LVL48-1
+ 2349 0238 0100     		.2byte	0x1
+ 2350 023a 52       		.byte	0x52
+ 2351 023b E3000000 		.4byte	.LVL48-1
+ 2352 023f EE000000 		.4byte	.LVL49
+ 2353 0243 0500     		.2byte	0x5
+ 2354 0245 91       		.byte	0x91
+ 2355 0246 88F47C   		.sleb128 -50680
+ 2356 0249 9F       		.byte	0x9f
+ 2357 024a EE000000 		.4byte	.LVL49
+ 2358 024e FB000000 		.4byte	.LVL50-1
+ 2359 0252 0100     		.2byte	0x1
+ 2360 0254 52       		.byte	0x52
+ 2361 0255 FB000000 		.4byte	.LVL50-1
+ 2362 0259 32010000 		.4byte	.LVL58
+ 2363 025d 0500     		.2byte	0x5
+ 2364 025f 91       		.byte	0x91
+ 2365 0260 88F47C   		.sleb128 -50680
+ 2366 0263 9F       		.byte	0x9f
+ 2367 0264 32010000 		.4byte	.LVL58
+ 2368 0268 34010000 		.4byte	.LVL59
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 45
+
+
+ 2369 026c 0100     		.2byte	0x1
+ 2370 026e 52       		.byte	0x52
+ 2371 026f 34010000 		.4byte	.LVL59
+ 2372 0273 B0010000 		.4byte	.LFE2
+ 2373 0277 0500     		.2byte	0x5
+ 2374 0279 91       		.byte	0x91
+ 2375 027a 88F47C   		.sleb128 -50680
+ 2376 027d 9F       		.byte	0x9f
+ 2377 027e 00000000 		.4byte	0
+ 2378 0282 00000000 		.4byte	0
+ 2379              	.LLST11:
+ 2380 0286 2C010000 		.4byte	.LVL56
+ 2381 028a 30010000 		.4byte	.LVL57
+ 2382 028e 0200     		.2byte	0x2
+ 2383 0290 30       		.byte	0x30
+ 2384 0291 9F       		.byte	0x9f
+ 2385 0292 30010000 		.4byte	.LVL57
+ 2386 0296 56010000 		.4byte	.LVL61
+ 2387 029a 0100     		.2byte	0x1
+ 2388 029c 53       		.byte	0x53
+ 2389 029d 00000000 		.4byte	0
+ 2390 02a1 00000000 		.4byte	0
+ 2391              		.section	.debug_aranges,"",%progbits
+ 2392 0000 2C000000 		.4byte	0x2c
+ 2393 0004 0200     		.2byte	0x2
+ 2394 0006 00000000 		.4byte	.Ldebug_info0
+ 2395 000a 04       		.byte	0x4
+ 2396 000b 00       		.byte	0
+ 2397 000c 0000     		.2byte	0
+ 2398 000e 0000     		.2byte	0
+ 2399 0010 00000000 		.4byte	.LFB0
+ 2400 0014 0A000000 		.4byte	.LFE0-.LFB0
+ 2401 0018 00000000 		.4byte	.LFB1
+ 2402 001c 2C010000 		.4byte	.LFE1-.LFB1
+ 2403 0020 00000000 		.4byte	.LFB2
+ 2404 0024 B0010000 		.4byte	.LFE2-.LFB2
+ 2405 0028 00000000 		.4byte	0
+ 2406 002c 00000000 		.4byte	0
+ 2407              		.section	.debug_ranges,"",%progbits
+ 2408              	.Ldebug_ranges0:
+ 2409 0000 00000000 		.4byte	.LFB0
+ 2410 0004 0A000000 		.4byte	.LFE0
+ 2411 0008 00000000 		.4byte	.LFB1
+ 2412 000c 2C010000 		.4byte	.LFE1
+ 2413 0010 00000000 		.4byte	.LFB2
+ 2414 0014 B0010000 		.4byte	.LFE2
+ 2415 0018 00000000 		.4byte	0
+ 2416 001c 00000000 		.4byte	0
+ 2417              		.section	.debug_line,"",%progbits
+ 2418              	.Ldebug_line0:
+ 2419 0000 6C020000 		.section	.debug_str,"MS",%progbits,1
+ 2419      0200FE01 
+ 2419      00000201 
+ 2419      FB0E0D00 
+ 2419      01010101 
+ 2420              	.LASF7:
+ 2421 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 46
+
+
+ 2421      6E74385F 
+ 2421      7400
+ 2422              	.LASF25:
+ 2423 000a 7369676D 		.ascii	"sigma\000"
+ 2423      6100
+ 2424              	.LASF20:
+ 2425 0010 74686574 		.ascii	"theta\000"
+ 2425      6100
+ 2426              	.LASF18:
+ 2427 0016 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_crypto_kem_keypair\000"
+ 2427      45414E5F 
+ 2427      48514332 
+ 2427      35365F43 
+ 2427      4C45414E 
+ 2428              	.LASF23:
+ 2429 003e 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_crypto_kem_dec\000"
+ 2429      45414E5F 
+ 2429      48514332 
+ 2429      35365F43 
+ 2429      4C45414E 
+ 2430              	.LASF12:
+ 2431 0062 75696E74 		.ascii	"uint64_t\000"
+ 2431      36345F74 
+ 2431      00
+ 2432              	.LASF19:
+ 2433 006b 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_crypto_kem_enc\000"
+ 2433      45414E5F 
+ 2433      48514332 
+ 2433      35365F43 
+ 2433      4C45414E 
+ 2434              	.LASF21:
+ 2435 008f 73616C74 		.ascii	"salt\000"
+ 2435      00
+ 2436              	.LASF34:
+ 2437 0094 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string\000"
+ 2437      45414E5F 
+ 2437      48514332 
+ 2437      35365F43 
+ 2437      4C45414E 
+ 2438              	.LASF1:
+ 2439 00c4 756E7369 		.ascii	"unsigned char\000"
+ 2439      676E6564 
+ 2439      20636861 
+ 2439      7200
+ 2440              	.LASF38:
+ 2441 00d2 2E2E5C6B 		.ascii	"..\\kem.c\000"
+ 2441      656D2E63 
+ 2441      00
+ 2442              	.LASF5:
+ 2443 00db 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2443      20756E73 
+ 2443      69676E65 
+ 2443      6420696E 
+ 2443      7400
+ 2444              	.LASF3:
+ 2445 00ed 73686F72 		.ascii	"short unsigned int\000"
+ 2445      7420756E 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 47
+
+
+ 2445      7369676E 
+ 2445      65642069 
+ 2445      6E7400
+ 2446              	.LASF13:
+ 2447 0100 73697A65 		.ascii	"size_t\000"
+ 2447      5F7400
+ 2448              	.LASF26:
+ 2449 0107 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_pke_keygen\000"
+ 2449      45414E5F 
+ 2449      48514332 
+ 2449      35365F43 
+ 2449      4C45414E 
+ 2450              	.LASF31:
+ 2451 012b 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt\000"
+ 2451      45414E5F 
+ 2451      48514332 
+ 2451      35365F43 
+ 2451      4C45414E 
+ 2452              	.LASF28:
+ 2453 0150 6D656D73 		.ascii	"memset\000"
+ 2453      657400
+ 2454              	.LASF30:
+ 2455 0157 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_shake256_512_ds\000"
+ 2455      45414E5F 
+ 2455      48514332 
+ 2455      35365F43 
+ 2455      4C45414E 
+ 2456              	.LASF35:
+ 2457 017c 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_pke_decrypt\000"
+ 2457      45414E5F 
+ 2457      48514332 
+ 2457      35365F43 
+ 2457      4C45414E 
+ 2458              	.LASF10:
+ 2459 01a1 756E7369 		.ascii	"unsigned int\000"
+ 2459      676E6564 
+ 2459      20696E74 
+ 2459      00
+ 2460              	.LASF36:
+ 2461 01ae 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_vect_compare\000"
+ 2461      45414E5F 
+ 2461      48514332 
+ 2461      35365F43 
+ 2461      4C45414E 
+ 2462              	.LASF9:
+ 2463 01d0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2463      206C6F6E 
+ 2463      6720756E 
+ 2463      7369676E 
+ 2463      65642069 
+ 2464              	.LASF11:
+ 2465 01e7 75696E74 		.ascii	"uint8_t\000"
+ 2465      385F7400 
+ 2466              	.LASF24:
+ 2467 01ef 72657375 		.ascii	"result\000"
+ 2467      6C7400
+ 2468              	.LASF27:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 48
+
+
+ 2469 01f6 72616E64 		.ascii	"randombytes\000"
+ 2469      6F6D6279 
+ 2469      74657300 
+ 2470              	.LASF39:
+ 2471 0202 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 2471      73657273 
+ 2471      5C626F67 
+ 2471      75725C44 
+ 2471      6F63756D 
+ 2472 022e 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\HQC\\HQC\\HQC.cydsn"
+ 2472      7269746D 
+ 2472      6F732070 
+ 2472      6F737463 
+ 2472      75616E74 
+ 2473 025d 00       		.ascii	"\000"
+ 2474              	.LASF37:
+ 2475 025e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2475      43313120 
+ 2475      352E342E 
+ 2475      31203230 
+ 2475      31363036 
+ 2476 0291 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 2476      20726576 
+ 2476      6973696F 
+ 2476      6E203233 
+ 2476      37373135 
+ 2477 02c4 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 2477      70202D6D 
+ 2477      6670753D 
+ 2477      66707634 
+ 2477      2D73702D 
+ 2478 02f7 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 2478      6F6E7320 
+ 2478      2D666661 
+ 2478      742D6C74 
+ 2478      6F2D6F62 
+ 2479              	.LASF22:
+ 2480 0311 7368616B 		.ascii	"shake256state\000"
+ 2480      65323536 
+ 2480      73746174 
+ 2480      6500
+ 2481              	.LASF16:
+ 2482 031f 73697A65 		.ascii	"sizetype\000"
+ 2482      74797065 
+ 2482      00
+ 2483              	.LASF32:
+ 2484 0328 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_store8_arr\000"
+ 2484      45414E5F 
+ 2484      48514332 
+ 2484      35365F43 
+ 2484      4C45414E 
+ 2485              	.LASF6:
+ 2486 0348 6C6F6E67 		.ascii	"long long int\000"
+ 2486      206C6F6E 
+ 2486      6720696E 
+ 2486      7400
+ 2487              	.LASF29:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccCF0Mfc.s 			page 49
+
+
+ 2488 0356 6D656D63 		.ascii	"memcpy\000"
+ 2488      707900
+ 2489              	.LASF15:
+ 2490 035d 7368616B 		.ascii	"shake256incctx\000"
+ 2490      65323536 
+ 2490      696E6363 
+ 2490      747800
+ 2491              	.LASF33:
+ 2492 036c 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string\000"
+ 2492      45414E5F 
+ 2492      48514332 
+ 2492      35365F43 
+ 2492      4C45414E 
+ 2493              	.LASF2:
+ 2494 039a 73686F72 		.ascii	"short int\000"
+ 2494      7420696E 
+ 2494      7400
+ 2495              	.LASF8:
+ 2496 03a4 5F5F7569 		.ascii	"__uint64_t\000"
+ 2496      6E743634 
+ 2496      5F7400
+ 2497              	.LASF4:
+ 2498 03af 6C6F6E67 		.ascii	"long int\000"
+ 2498      20696E74 
+ 2498      00
+ 2499              	.LASF17:
+ 2500 03b8 63686172 		.ascii	"char\000"
+ 2500      00
+ 2501              	.LASF14:
+ 2502 03bd 6C6F6E67 		.ascii	"long double\000"
+ 2502      20646F75 
+ 2502      626C6500 
+ 2503              	.LASF0:
+ 2504 03c9 7369676E 		.ascii	"signed char\000"
+ 2504      65642063 
+ 2504      68617200 
+ 2505              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

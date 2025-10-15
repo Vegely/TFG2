@@ -1,0 +1,798 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"reduce.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.pqcrystals_kyber1024_ref_montgomery_reduce,"ax",%progbits
+  21              		.align	2
+  22              		.global	pqcrystals_kyber1024_ref_montgomery_reduce
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	pqcrystals_kyber1024_ref_montgomery_reduce, %function
+  26              	pqcrystals_kyber1024_ref_montgomery_reduce:
+  27              	.LFB0:
+  28              		.file 1 "..\\reduce.c"
+   1:..\reduce.c   **** #include <stdint.h>
+   2:..\reduce.c   **** #include "params.h"
+   3:..\reduce.c   **** #include "reduce.h"
+   4:..\reduce.c   **** 
+   5:..\reduce.c   **** /*************************************************
+   6:..\reduce.c   **** * Name:        montgomery_reduce
+   7:..\reduce.c   **** *
+   8:..\reduce.c   **** * Description: Montgomery reduction; given a 32-bit integer a, computes
+   9:..\reduce.c   **** *              16-bit integer congruent to a * R^-1 mod q,
+  10:..\reduce.c   **** *              where R=2^16
+  11:..\reduce.c   **** *
+  12:..\reduce.c   **** * Arguments:   - int32_t a: input integer to be reduced;
+  13:..\reduce.c   **** *                           has to be in {-q2^15,...,q2^15-1}
+  14:..\reduce.c   **** *
+  15:..\reduce.c   **** * Returns:     integer in {-q+1,...,q-1} congruent to a * R^-1 modulo q.
+  16:..\reduce.c   **** **************************************************/
+  17:..\reduce.c   **** int16_t montgomery_reduce(int32_t a)
+  18:..\reduce.c   **** {
+  29              		.loc 1 18 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  19:..\reduce.c   ****   int32_t t;
+  20:..\reduce.c   ****   int16_t u;
+  21:..\reduce.c   **** 
+  22:..\reduce.c   ****   u = a*QINV;
+  35              		.loc 1 22 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 2
+
+
+  36 0000 00EB4003 		add	r3, r0, r0, lsl #1
+  37 0004 03EBC303 		add	r3, r3, r3, lsl #3
+  38 0008 03EBC303 		add	r3, r3, r3, lsl #3
+  39 000c 00EB0323 		add	r3, r0, r3, lsl #8
+  40 0010 1BB2     		sxth	r3, r3
+  41              	.LVL1:
+  23:..\reduce.c   ****   t = (int32_t)u*KYBER_Q;
+  24:..\reduce.c   ****   t = a - t;
+  42              		.loc 1 24 0
+  43 0012 40F60152 		movw	r2, #3329
+  44 0016 02FB1300 		mls	r0, r2, r3, r0
+  45              	.LVL2:
+  25:..\reduce.c   ****   t >>= 16;
+  26:..\reduce.c   ****   return t;
+  27:..\reduce.c   **** }
+  46              		.loc 1 27 0
+  47 001a 0014     		asrs	r0, r0, #16
+  48              	.LVL3:
+  49 001c 7047     		bx	lr
+  50              		.cfi_endproc
+  51              	.LFE0:
+  52              		.size	pqcrystals_kyber1024_ref_montgomery_reduce, .-pqcrystals_kyber1024_ref_montgomery_reduce
+  53 001e 00BF     		.section	.text.pqcrystals_kyber1024_ref_barrett_reduce,"ax",%progbits
+  54              		.align	2
+  55              		.global	pqcrystals_kyber1024_ref_barrett_reduce
+  56              		.thumb
+  57              		.thumb_func
+  58              		.type	pqcrystals_kyber1024_ref_barrett_reduce, %function
+  59              	pqcrystals_kyber1024_ref_barrett_reduce:
+  60              	.LFB1:
+  28:..\reduce.c   **** 
+  29:..\reduce.c   **** /*************************************************
+  30:..\reduce.c   **** * Name:        barrett_reduce
+  31:..\reduce.c   **** *
+  32:..\reduce.c   **** * Description: Barrett reduction; given a 16-bit integer a, computes
+  33:..\reduce.c   **** *              16-bit integer congruent to a mod q in {0,...,q}
+  34:..\reduce.c   **** *
+  35:..\reduce.c   **** * Arguments:   - int16_t a: input integer to be reduced
+  36:..\reduce.c   **** *
+  37:..\reduce.c   **** * Returns:     integer in {0,...,q} congruent to a modulo q.
+  38:..\reduce.c   **** **************************************************/
+  39:..\reduce.c   **** int16_t barrett_reduce(int16_t a) {
+  61              		.loc 1 39 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66              	.LVL4:
+  40:..\reduce.c   ****   int16_t t;
+  41:..\reduce.c   ****   const int16_t v = ((1U << 26) + KYBER_Q/2)/KYBER_Q;
+  42:..\reduce.c   **** 
+  43:..\reduce.c   ****   t  = (int32_t)v*a >> 26;
+  67              		.loc 1 43 0
+  68 0000 44F6BF63 		movw	r3, #20159
+  69 0004 03FB00F3 		mul	r3, r3, r0
+  70 0008 9B16     		asrs	r3, r3, #26
+  71              	.LVL5:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 3
+
+
+  44:..\reduce.c   ****   t *= KYBER_Q;
+  72              		.loc 1 44 0
+  73 000a 03EB4302 		add	r2, r3, r3, lsl #1
+  74 000e 03EB8202 		add	r2, r3, r2, lsl #2
+  75 0012 03EB0223 		add	r3, r3, r2, lsl #8
+  76              	.LVL6:
+  77 0016 9BB2     		uxth	r3, r3
+  78              	.LVL7:
+  45:..\reduce.c   ****   return a - t;
+  79              		.loc 1 45 0
+  80 0018 C01A     		subs	r0, r0, r3
+  81              	.LVL8:
+  46:..\reduce.c   **** }
+  82              		.loc 1 46 0
+  83 001a 00B2     		sxth	r0, r0
+  84 001c 7047     		bx	lr
+  85              		.cfi_endproc
+  86              	.LFE1:
+  87              		.size	pqcrystals_kyber1024_ref_barrett_reduce, .-pqcrystals_kyber1024_ref_barrett_reduce
+  88 001e 00BF     		.section	.text.pqcrystals_kyber1024_ref_csubq,"ax",%progbits
+  89              		.align	2
+  90              		.global	pqcrystals_kyber1024_ref_csubq
+  91              		.thumb
+  92              		.thumb_func
+  93              		.type	pqcrystals_kyber1024_ref_csubq, %function
+  94              	pqcrystals_kyber1024_ref_csubq:
+  95              	.LFB2:
+  47:..\reduce.c   **** 
+  48:..\reduce.c   **** /*************************************************
+  49:..\reduce.c   **** * Name:        csubq
+  50:..\reduce.c   **** *
+  51:..\reduce.c   **** * Description: Conditionallly subtract q
+  52:..\reduce.c   **** *
+  53:..\reduce.c   **** * Arguments:   - int16_t x: input integer
+  54:..\reduce.c   **** *
+  55:..\reduce.c   **** * Returns:     a - q if a >= q, else a
+  56:..\reduce.c   **** **************************************************/
+  57:..\reduce.c   **** int16_t csubq(int16_t a) {
+  96              		.loc 1 57 0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101              	.LVL9:
+  58:..\reduce.c   ****   a -= KYBER_Q;
+ 102              		.loc 1 58 0
+ 103 0000 A0F60150 		subw	r0, r0, #3329
+ 104              	.LVL10:
+ 105 0004 80B2     		uxth	r0, r0
+ 106              	.LVL11:
+  59:..\reduce.c   ****   a += (a >> 15) & KYBER_Q;
+ 107              		.loc 1 59 0
+ 108 0006 40F3C033 		sbfx	r3, r0, #15, #1
+ 109 000a 23F43F73 		bic	r3, r3, #764
+ 110 000e 23F00203 		bic	r3, r3, #2
+ 111 0012 1B05     		lsls	r3, r3, #20
+ 112 0014 1B0D     		lsrs	r3, r3, #20
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 4
+
+
+ 113 0016 1844     		add	r0, r0, r3
+ 114              	.LVL12:
+  60:..\reduce.c   ****   return a;
+  61:..\reduce.c   **** }
+ 115              		.loc 1 61 0
+ 116 0018 00B2     		sxth	r0, r0
+ 117 001a 7047     		bx	lr
+ 118              		.cfi_endproc
+ 119              	.LFE2:
+ 120              		.size	pqcrystals_kyber1024_ref_csubq, .-pqcrystals_kyber1024_ref_csubq
+ 121              		.text
+ 122              	.Letext0:
+ 123              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 124              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 125              		.section	.debug_info,"",%progbits
+ 126              	.Ldebug_info0:
+ 127 0000 3A010000 		.4byte	0x13a
+ 128 0004 0400     		.2byte	0x4
+ 129 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 130 000a 04       		.byte	0x4
+ 131 000b 01       		.uleb128 0x1
+ 132 000c C4000000 		.4byte	.LASF15
+ 133 0010 0C       		.byte	0xc
+ 134 0011 EF010000 		.4byte	.LASF16
+ 135 0015 8D010000 		.4byte	.LASF17
+ 136 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 137 001d 00000000 		.4byte	0
+ 138 0021 00000000 		.4byte	.Ldebug_line0
+ 139 0025 02       		.uleb128 0x2
+ 140 0026 01       		.byte	0x1
+ 141 0027 06       		.byte	0x6
+ 142 0028 04020000 		.4byte	.LASF0
+ 143 002c 02       		.uleb128 0x2
+ 144 002d 01       		.byte	0x1
+ 145 002e 08       		.byte	0x8
+ 146 002f 14000000 		.4byte	.LASF1
+ 147 0033 03       		.uleb128 0x3
+ 148 0034 00000000 		.4byte	.LASF4
+ 149 0038 02       		.byte	0x2
+ 150 0039 29       		.byte	0x29
+ 151 003a 3E000000 		.4byte	0x3e
+ 152 003e 02       		.uleb128 0x2
+ 153 003f 02       		.byte	0x2
+ 154 0040 05       		.byte	0x5
+ 155 0041 8E000000 		.4byte	.LASF2
+ 156 0045 02       		.uleb128 0x2
+ 157 0046 02       		.byte	0x2
+ 158 0047 07       		.byte	0x7
+ 159 0048 5C000000 		.4byte	.LASF3
+ 160 004c 03       		.uleb128 0x3
+ 161 004d 0A000000 		.4byte	.LASF5
+ 162 0051 02       		.byte	0x2
+ 163 0052 3F       		.byte	0x3f
+ 164 0053 57000000 		.4byte	0x57
+ 165 0057 02       		.uleb128 0x2
+ 166 0058 04       		.byte	0x4
+ 167 0059 05       		.byte	0x5
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 5
+
+
+ 168 005a FB010000 		.4byte	.LASF6
+ 169 005e 02       		.uleb128 0x2
+ 170 005f 04       		.byte	0x4
+ 171 0060 07       		.byte	0x7
+ 172 0061 4A000000 		.4byte	.LASF7
+ 173 0065 02       		.uleb128 0x2
+ 174 0066 08       		.byte	0x8
+ 175 0067 05       		.byte	0x5
+ 176 0068 7F010000 		.4byte	.LASF8
+ 177 006c 02       		.uleb128 0x2
+ 178 006d 08       		.byte	0x8
+ 179 006e 07       		.byte	0x7
+ 180 006f A5000000 		.4byte	.LASF9
+ 181 0073 04       		.uleb128 0x4
+ 182 0074 04       		.byte	0x4
+ 183 0075 05       		.byte	0x5
+ 184 0076 696E7400 		.ascii	"int\000"
+ 185 007a 02       		.uleb128 0x2
+ 186 007b 04       		.byte	0x4
+ 187 007c 07       		.byte	0x7
+ 188 007d 98000000 		.4byte	.LASF10
+ 189 0081 03       		.uleb128 0x3
+ 190 0082 BC000000 		.4byte	.LASF11
+ 191 0086 03       		.byte	0x3
+ 192 0087 20       		.byte	0x20
+ 193 0088 33000000 		.4byte	0x33
+ 194 008c 03       		.uleb128 0x3
+ 195 008d 77010000 		.4byte	.LASF12
+ 196 0091 03       		.byte	0x3
+ 197 0092 2C       		.byte	0x2c
+ 198 0093 4C000000 		.4byte	0x4c
+ 199 0097 05       		.uleb128 0x5
+ 200 0098 10020000 		.4byte	.LASF13
+ 201 009c 01       		.byte	0x1
+ 202 009d 11       		.byte	0x11
+ 203 009e 81000000 		.4byte	0x81
+ 204 00a2 00000000 		.4byte	.LFB0
+ 205 00a6 1E000000 		.4byte	.LFE0-.LFB0
+ 206 00aa 01       		.uleb128 0x1
+ 207 00ab 9C       		.byte	0x9c
+ 208 00ac D6000000 		.4byte	0xd6
+ 209 00b0 06       		.uleb128 0x6
+ 210 00b1 6100     		.ascii	"a\000"
+ 211 00b3 01       		.byte	0x1
+ 212 00b4 11       		.byte	0x11
+ 213 00b5 8C000000 		.4byte	0x8c
+ 214 00b9 00000000 		.4byte	.LLST0
+ 215 00bd 07       		.uleb128 0x7
+ 216 00be 7400     		.ascii	"t\000"
+ 217 00c0 01       		.byte	0x1
+ 218 00c1 13       		.byte	0x13
+ 219 00c2 8C000000 		.4byte	0x8c
+ 220 00c6 21000000 		.4byte	.LLST1
+ 221 00ca 08       		.uleb128 0x8
+ 222 00cb 7500     		.ascii	"u\000"
+ 223 00cd 01       		.byte	0x1
+ 224 00ce 14       		.byte	0x14
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 6
+
+
+ 225 00cf 81000000 		.4byte	0x81
+ 226 00d3 01       		.uleb128 0x1
+ 227 00d4 53       		.byte	0x53
+ 228 00d5 00       		.byte	0
+ 229 00d6 05       		.uleb128 0x5
+ 230 00d7 22000000 		.4byte	.LASF14
+ 231 00db 01       		.byte	0x1
+ 232 00dc 27       		.byte	0x27
+ 233 00dd 81000000 		.4byte	0x81
+ 234 00e1 00000000 		.4byte	.LFB1
+ 235 00e5 1E000000 		.4byte	.LFE1-.LFB1
+ 236 00e9 01       		.uleb128 0x1
+ 237 00ea 9C       		.byte	0x9c
+ 238 00eb 15010000 		.4byte	0x115
+ 239 00ef 06       		.uleb128 0x6
+ 240 00f0 6100     		.ascii	"a\000"
+ 241 00f2 01       		.byte	0x1
+ 242 00f3 27       		.byte	0x27
+ 243 00f4 81000000 		.4byte	0x81
+ 244 00f8 54000000 		.4byte	.LLST2
+ 245 00fc 07       		.uleb128 0x7
+ 246 00fd 7400     		.ascii	"t\000"
+ 247 00ff 01       		.byte	0x1
+ 248 0100 28       		.byte	0x28
+ 249 0101 81000000 		.4byte	0x81
+ 250 0105 75000000 		.4byte	.LLST3
+ 251 0109 09       		.uleb128 0x9
+ 252 010a 7600     		.ascii	"v\000"
+ 253 010c 01       		.byte	0x1
+ 254 010d 29       		.byte	0x29
+ 255 010e 15010000 		.4byte	0x115
+ 256 0112 BF4E     		.2byte	0x4ebf
+ 257 0114 00       		.byte	0
+ 258 0115 0A       		.uleb128 0xa
+ 259 0116 81000000 		.4byte	0x81
+ 260 011a 0B       		.uleb128 0xb
+ 261 011b 6F000000 		.4byte	.LASF18
+ 262 011f 01       		.byte	0x1
+ 263 0120 39       		.byte	0x39
+ 264 0121 81000000 		.4byte	0x81
+ 265 0125 00000000 		.4byte	.LFB2
+ 266 0129 1C000000 		.4byte	.LFE2-.LFB2
+ 267 012d 01       		.uleb128 0x1
+ 268 012e 9C       		.byte	0x9c
+ 269 012f 06       		.uleb128 0x6
+ 270 0130 6100     		.ascii	"a\000"
+ 271 0132 01       		.byte	0x1
+ 272 0133 39       		.byte	0x39
+ 273 0134 81000000 		.4byte	0x81
+ 274 0138 A6000000 		.4byte	.LLST4
+ 275 013c 00       		.byte	0
+ 276 013d 00       		.byte	0
+ 277              		.section	.debug_abbrev,"",%progbits
+ 278              	.Ldebug_abbrev0:
+ 279 0000 01       		.uleb128 0x1
+ 280 0001 11       		.uleb128 0x11
+ 281 0002 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 7
+
+
+ 282 0003 25       		.uleb128 0x25
+ 283 0004 0E       		.uleb128 0xe
+ 284 0005 13       		.uleb128 0x13
+ 285 0006 0B       		.uleb128 0xb
+ 286 0007 03       		.uleb128 0x3
+ 287 0008 0E       		.uleb128 0xe
+ 288 0009 1B       		.uleb128 0x1b
+ 289 000a 0E       		.uleb128 0xe
+ 290 000b 55       		.uleb128 0x55
+ 291 000c 17       		.uleb128 0x17
+ 292 000d 11       		.uleb128 0x11
+ 293 000e 01       		.uleb128 0x1
+ 294 000f 10       		.uleb128 0x10
+ 295 0010 17       		.uleb128 0x17
+ 296 0011 00       		.byte	0
+ 297 0012 00       		.byte	0
+ 298 0013 02       		.uleb128 0x2
+ 299 0014 24       		.uleb128 0x24
+ 300 0015 00       		.byte	0
+ 301 0016 0B       		.uleb128 0xb
+ 302 0017 0B       		.uleb128 0xb
+ 303 0018 3E       		.uleb128 0x3e
+ 304 0019 0B       		.uleb128 0xb
+ 305 001a 03       		.uleb128 0x3
+ 306 001b 0E       		.uleb128 0xe
+ 307 001c 00       		.byte	0
+ 308 001d 00       		.byte	0
+ 309 001e 03       		.uleb128 0x3
+ 310 001f 16       		.uleb128 0x16
+ 311 0020 00       		.byte	0
+ 312 0021 03       		.uleb128 0x3
+ 313 0022 0E       		.uleb128 0xe
+ 314 0023 3A       		.uleb128 0x3a
+ 315 0024 0B       		.uleb128 0xb
+ 316 0025 3B       		.uleb128 0x3b
+ 317 0026 0B       		.uleb128 0xb
+ 318 0027 49       		.uleb128 0x49
+ 319 0028 13       		.uleb128 0x13
+ 320 0029 00       		.byte	0
+ 321 002a 00       		.byte	0
+ 322 002b 04       		.uleb128 0x4
+ 323 002c 24       		.uleb128 0x24
+ 324 002d 00       		.byte	0
+ 325 002e 0B       		.uleb128 0xb
+ 326 002f 0B       		.uleb128 0xb
+ 327 0030 3E       		.uleb128 0x3e
+ 328 0031 0B       		.uleb128 0xb
+ 329 0032 03       		.uleb128 0x3
+ 330 0033 08       		.uleb128 0x8
+ 331 0034 00       		.byte	0
+ 332 0035 00       		.byte	0
+ 333 0036 05       		.uleb128 0x5
+ 334 0037 2E       		.uleb128 0x2e
+ 335 0038 01       		.byte	0x1
+ 336 0039 3F       		.uleb128 0x3f
+ 337 003a 19       		.uleb128 0x19
+ 338 003b 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 8
+
+
+ 339 003c 0E       		.uleb128 0xe
+ 340 003d 3A       		.uleb128 0x3a
+ 341 003e 0B       		.uleb128 0xb
+ 342 003f 3B       		.uleb128 0x3b
+ 343 0040 0B       		.uleb128 0xb
+ 344 0041 27       		.uleb128 0x27
+ 345 0042 19       		.uleb128 0x19
+ 346 0043 49       		.uleb128 0x49
+ 347 0044 13       		.uleb128 0x13
+ 348 0045 11       		.uleb128 0x11
+ 349 0046 01       		.uleb128 0x1
+ 350 0047 12       		.uleb128 0x12
+ 351 0048 06       		.uleb128 0x6
+ 352 0049 40       		.uleb128 0x40
+ 353 004a 18       		.uleb128 0x18
+ 354 004b 9742     		.uleb128 0x2117
+ 355 004d 19       		.uleb128 0x19
+ 356 004e 01       		.uleb128 0x1
+ 357 004f 13       		.uleb128 0x13
+ 358 0050 00       		.byte	0
+ 359 0051 00       		.byte	0
+ 360 0052 06       		.uleb128 0x6
+ 361 0053 05       		.uleb128 0x5
+ 362 0054 00       		.byte	0
+ 363 0055 03       		.uleb128 0x3
+ 364 0056 08       		.uleb128 0x8
+ 365 0057 3A       		.uleb128 0x3a
+ 366 0058 0B       		.uleb128 0xb
+ 367 0059 3B       		.uleb128 0x3b
+ 368 005a 0B       		.uleb128 0xb
+ 369 005b 49       		.uleb128 0x49
+ 370 005c 13       		.uleb128 0x13
+ 371 005d 02       		.uleb128 0x2
+ 372 005e 17       		.uleb128 0x17
+ 373 005f 00       		.byte	0
+ 374 0060 00       		.byte	0
+ 375 0061 07       		.uleb128 0x7
+ 376 0062 34       		.uleb128 0x34
+ 377 0063 00       		.byte	0
+ 378 0064 03       		.uleb128 0x3
+ 379 0065 08       		.uleb128 0x8
+ 380 0066 3A       		.uleb128 0x3a
+ 381 0067 0B       		.uleb128 0xb
+ 382 0068 3B       		.uleb128 0x3b
+ 383 0069 0B       		.uleb128 0xb
+ 384 006a 49       		.uleb128 0x49
+ 385 006b 13       		.uleb128 0x13
+ 386 006c 02       		.uleb128 0x2
+ 387 006d 17       		.uleb128 0x17
+ 388 006e 00       		.byte	0
+ 389 006f 00       		.byte	0
+ 390 0070 08       		.uleb128 0x8
+ 391 0071 34       		.uleb128 0x34
+ 392 0072 00       		.byte	0
+ 393 0073 03       		.uleb128 0x3
+ 394 0074 08       		.uleb128 0x8
+ 395 0075 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 9
+
+
+ 396 0076 0B       		.uleb128 0xb
+ 397 0077 3B       		.uleb128 0x3b
+ 398 0078 0B       		.uleb128 0xb
+ 399 0079 49       		.uleb128 0x49
+ 400 007a 13       		.uleb128 0x13
+ 401 007b 02       		.uleb128 0x2
+ 402 007c 18       		.uleb128 0x18
+ 403 007d 00       		.byte	0
+ 404 007e 00       		.byte	0
+ 405 007f 09       		.uleb128 0x9
+ 406 0080 34       		.uleb128 0x34
+ 407 0081 00       		.byte	0
+ 408 0082 03       		.uleb128 0x3
+ 409 0083 08       		.uleb128 0x8
+ 410 0084 3A       		.uleb128 0x3a
+ 411 0085 0B       		.uleb128 0xb
+ 412 0086 3B       		.uleb128 0x3b
+ 413 0087 0B       		.uleb128 0xb
+ 414 0088 49       		.uleb128 0x49
+ 415 0089 13       		.uleb128 0x13
+ 416 008a 1C       		.uleb128 0x1c
+ 417 008b 05       		.uleb128 0x5
+ 418 008c 00       		.byte	0
+ 419 008d 00       		.byte	0
+ 420 008e 0A       		.uleb128 0xa
+ 421 008f 26       		.uleb128 0x26
+ 422 0090 00       		.byte	0
+ 423 0091 49       		.uleb128 0x49
+ 424 0092 13       		.uleb128 0x13
+ 425 0093 00       		.byte	0
+ 426 0094 00       		.byte	0
+ 427 0095 0B       		.uleb128 0xb
+ 428 0096 2E       		.uleb128 0x2e
+ 429 0097 01       		.byte	0x1
+ 430 0098 3F       		.uleb128 0x3f
+ 431 0099 19       		.uleb128 0x19
+ 432 009a 03       		.uleb128 0x3
+ 433 009b 0E       		.uleb128 0xe
+ 434 009c 3A       		.uleb128 0x3a
+ 435 009d 0B       		.uleb128 0xb
+ 436 009e 3B       		.uleb128 0x3b
+ 437 009f 0B       		.uleb128 0xb
+ 438 00a0 27       		.uleb128 0x27
+ 439 00a1 19       		.uleb128 0x19
+ 440 00a2 49       		.uleb128 0x49
+ 441 00a3 13       		.uleb128 0x13
+ 442 00a4 11       		.uleb128 0x11
+ 443 00a5 01       		.uleb128 0x1
+ 444 00a6 12       		.uleb128 0x12
+ 445 00a7 06       		.uleb128 0x6
+ 446 00a8 40       		.uleb128 0x40
+ 447 00a9 18       		.uleb128 0x18
+ 448 00aa 9742     		.uleb128 0x2117
+ 449 00ac 19       		.uleb128 0x19
+ 450 00ad 00       		.byte	0
+ 451 00ae 00       		.byte	0
+ 452 00af 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 10
+
+
+ 453              		.section	.debug_loc,"",%progbits
+ 454              	.Ldebug_loc0:
+ 455              	.LLST0:
+ 456 0000 00000000 		.4byte	.LVL0
+ 457 0004 1A000000 		.4byte	.LVL2
+ 458 0008 0100     		.2byte	0x1
+ 459 000a 50       		.byte	0x50
+ 460 000b 1A000000 		.4byte	.LVL2
+ 461 000f 1E000000 		.4byte	.LFE0
+ 462 0013 0400     		.2byte	0x4
+ 463 0015 F3       		.byte	0xf3
+ 464 0016 01       		.uleb128 0x1
+ 465 0017 50       		.byte	0x50
+ 466 0018 9F       		.byte	0x9f
+ 467 0019 00000000 		.4byte	0
+ 468 001d 00000000 		.4byte	0
+ 469              	.LLST1:
+ 470 0021 12000000 		.4byte	.LVL1
+ 471 0025 1A000000 		.4byte	.LVL2
+ 472 0029 0700     		.2byte	0x7
+ 473 002b 73       		.byte	0x73
+ 474 002c 00       		.sleb128 0
+ 475 002d 0A       		.byte	0xa
+ 476 002e 010D     		.2byte	0xd01
+ 477 0030 1E       		.byte	0x1e
+ 478 0031 9F       		.byte	0x9f
+ 479 0032 1A000000 		.4byte	.LVL2
+ 480 0036 1C000000 		.4byte	.LVL3
+ 481 003a 0500     		.2byte	0x5
+ 482 003c 70       		.byte	0x70
+ 483 003d 00       		.sleb128 0
+ 484 003e 40       		.byte	0x40
+ 485 003f 26       		.byte	0x26
+ 486 0040 9F       		.byte	0x9f
+ 487 0041 1C000000 		.4byte	.LVL3
+ 488 0045 1E000000 		.4byte	.LFE0
+ 489 0049 0100     		.2byte	0x1
+ 490 004b 50       		.byte	0x50
+ 491 004c 00000000 		.4byte	0
+ 492 0050 00000000 		.4byte	0
+ 493              	.LLST2:
+ 494 0054 00000000 		.4byte	.LVL4
+ 495 0058 1A000000 		.4byte	.LVL8
+ 496 005c 0100     		.2byte	0x1
+ 497 005e 50       		.byte	0x50
+ 498 005f 1A000000 		.4byte	.LVL8
+ 499 0063 1E000000 		.4byte	.LFE1
+ 500 0067 0400     		.2byte	0x4
+ 501 0069 F3       		.byte	0xf3
+ 502 006a 01       		.uleb128 0x1
+ 503 006b 50       		.byte	0x50
+ 504 006c 9F       		.byte	0x9f
+ 505 006d 00000000 		.4byte	0
+ 506 0071 00000000 		.4byte	0
+ 507              	.LLST3:
+ 508 0075 0A000000 		.4byte	.LVL5
+ 509 0079 16000000 		.4byte	.LVL6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 11
+
+
+ 510 007d 0100     		.2byte	0x1
+ 511 007f 53       		.byte	0x53
+ 512 0080 16000000 		.4byte	.LVL6
+ 513 0084 18000000 		.4byte	.LVL7
+ 514 0088 0900     		.2byte	0x9
+ 515 008a 70       		.byte	0x70
+ 516 008b 00       		.sleb128 0
+ 517 008c 0A       		.byte	0xa
+ 518 008d BF4E     		.2byte	0x4ebf
+ 519 008f 1E       		.byte	0x1e
+ 520 0090 4A       		.byte	0x4a
+ 521 0091 26       		.byte	0x26
+ 522 0092 9F       		.byte	0x9f
+ 523 0093 18000000 		.4byte	.LVL7
+ 524 0097 1E000000 		.4byte	.LFE1
+ 525 009b 0100     		.2byte	0x1
+ 526 009d 53       		.byte	0x53
+ 527 009e 00000000 		.4byte	0
+ 528 00a2 00000000 		.4byte	0
+ 529              	.LLST4:
+ 530 00a6 00000000 		.4byte	.LVL9
+ 531 00aa 04000000 		.4byte	.LVL10
+ 532 00ae 0100     		.2byte	0x1
+ 533 00b0 50       		.byte	0x50
+ 534 00b1 04000000 		.4byte	.LVL10
+ 535 00b5 06000000 		.4byte	.LVL11
+ 536 00b9 0400     		.2byte	0x4
+ 537 00bb F3       		.byte	0xf3
+ 538 00bc 01       		.uleb128 0x1
+ 539 00bd 50       		.byte	0x50
+ 540 00be 9F       		.byte	0x9f
+ 541 00bf 06000000 		.4byte	.LVL11
+ 542 00c3 1C000000 		.4byte	.LFE2
+ 543 00c7 0100     		.2byte	0x1
+ 544 00c9 50       		.byte	0x50
+ 545 00ca 00000000 		.4byte	0
+ 546 00ce 00000000 		.4byte	0
+ 547              		.section	.debug_aranges,"",%progbits
+ 548 0000 2C000000 		.4byte	0x2c
+ 549 0004 0200     		.2byte	0x2
+ 550 0006 00000000 		.4byte	.Ldebug_info0
+ 551 000a 04       		.byte	0x4
+ 552 000b 00       		.byte	0
+ 553 000c 0000     		.2byte	0
+ 554 000e 0000     		.2byte	0
+ 555 0010 00000000 		.4byte	.LFB0
+ 556 0014 1E000000 		.4byte	.LFE0-.LFB0
+ 557 0018 00000000 		.4byte	.LFB1
+ 558 001c 1E000000 		.4byte	.LFE1-.LFB1
+ 559 0020 00000000 		.4byte	.LFB2
+ 560 0024 1C000000 		.4byte	.LFE2-.LFB2
+ 561 0028 00000000 		.4byte	0
+ 562 002c 00000000 		.4byte	0
+ 563              		.section	.debug_ranges,"",%progbits
+ 564              	.Ldebug_ranges0:
+ 565 0000 00000000 		.4byte	.LFB0
+ 566 0004 1E000000 		.4byte	.LFE0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 12
+
+
+ 567 0008 00000000 		.4byte	.LFB1
+ 568 000c 1E000000 		.4byte	.LFE1
+ 569 0010 00000000 		.4byte	.LFB2
+ 570 0014 1C000000 		.4byte	.LFE2
+ 571 0018 00000000 		.4byte	0
+ 572 001c 00000000 		.4byte	0
+ 573              		.section	.debug_line,"",%progbits
+ 574              	.Ldebug_line0:
+ 575 0000 5C010000 		.section	.debug_str,"MS",%progbits,1
+ 575      02001F01 
+ 575      00000201 
+ 575      FB0E0D00 
+ 575      01010101 
+ 576              	.LASF4:
+ 577 0000 5F5F696E 		.ascii	"__int16_t\000"
+ 577      7431365F 
+ 577      7400
+ 578              	.LASF5:
+ 579 000a 5F5F696E 		.ascii	"__int32_t\000"
+ 579      7433325F 
+ 579      7400
+ 580              	.LASF1:
+ 581 0014 756E7369 		.ascii	"unsigned char\000"
+ 581      676E6564 
+ 581      20636861 
+ 581      7200
+ 582              	.LASF14:
+ 583 0022 70716372 		.ascii	"pqcrystals_kyber1024_ref_barrett_reduce\000"
+ 583      79737461 
+ 583      6C735F6B 
+ 583      79626572 
+ 583      31303234 
+ 584              	.LASF7:
+ 585 004a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 585      20756E73 
+ 585      69676E65 
+ 585      6420696E 
+ 585      7400
+ 586              	.LASF3:
+ 587 005c 73686F72 		.ascii	"short unsigned int\000"
+ 587      7420756E 
+ 587      7369676E 
+ 587      65642069 
+ 587      6E7400
+ 588              	.LASF18:
+ 589 006f 70716372 		.ascii	"pqcrystals_kyber1024_ref_csubq\000"
+ 589      79737461 
+ 589      6C735F6B 
+ 589      79626572 
+ 589      31303234 
+ 590              	.LASF2:
+ 591 008e 73686F72 		.ascii	"short int\000"
+ 591      7420696E 
+ 591      7400
+ 592              	.LASF10:
+ 593 0098 756E7369 		.ascii	"unsigned int\000"
+ 593      676E6564 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 13
+
+
+ 593      20696E74 
+ 593      00
+ 594              	.LASF9:
+ 595 00a5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 595      206C6F6E 
+ 595      6720756E 
+ 595      7369676E 
+ 595      65642069 
+ 596              	.LASF11:
+ 597 00bc 696E7431 		.ascii	"int16_t\000"
+ 597      365F7400 
+ 598              	.LASF15:
+ 599 00c4 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 599      43313120 
+ 599      352E342E 
+ 599      31203230 
+ 599      31363036 
+ 600 00f7 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 600      20726576 
+ 600      6973696F 
+ 600      6E203233 
+ 600      37373135 
+ 601 012a 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 601      70202D6D 
+ 601      6670753D 
+ 601      66707634 
+ 601      2D73702D 
+ 602 015d 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 602      6F6E7320 
+ 602      2D666661 
+ 602      742D6C74 
+ 602      6F2D6F62 
+ 603              	.LASF12:
+ 604 0177 696E7433 		.ascii	"int32_t\000"
+ 604      325F7400 
+ 605              	.LASF8:
+ 606 017f 6C6F6E67 		.ascii	"long long int\000"
+ 606      206C6F6E 
+ 606      6720696E 
+ 606      7400
+ 607              	.LASF17:
+ 608 018d 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 608      73657273 
+ 608      5C626F67 
+ 608      75725C44 
+ 608      6F63756D 
+ 609 01b9 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
+ 609      7269746D 
+ 609      6F732070 
+ 609      6F737463 
+ 609      75616E74 
+ 610 01e8 2E637964 		.ascii	".cydsn\000"
+ 610      736E00
+ 611              	.LASF16:
+ 612 01ef 2E2E5C72 		.ascii	"..\\reduce.c\000"
+ 612      65647563 
+ 612      652E6300 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 14
+
+
+ 613              	.LASF6:
+ 614 01fb 6C6F6E67 		.ascii	"long int\000"
+ 614      20696E74 
+ 614      00
+ 615              	.LASF0:
+ 616 0204 7369676E 		.ascii	"signed char\000"
+ 616      65642063 
+ 616      68617200 
+ 617              	.LASF13:
+ 618 0210 70716372 		.ascii	"pqcrystals_kyber1024_ref_montgomery_reduce\000"
+ 618      79737461 
+ 618      6C735F6B 
+ 618      79626572 
+ 618      31303234 
+ 619              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,1303 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"cbd.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.load32_littleendian,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	load32_littleendian, %function
+  25              	load32_littleendian:
+  26              	.LFB0:
+  27              		.file 1 "..\\cbd.c"
+   1:..\cbd.c      **** #include <stdint.h>
+   2:..\cbd.c      **** #include "params.h"
+   3:..\cbd.c      **** #include "cbd.h"
+   4:..\cbd.c      **** 
+   5:..\cbd.c      **** /*************************************************
+   6:..\cbd.c      **** * Name:        load32_littleendian
+   7:..\cbd.c      **** *
+   8:..\cbd.c      **** * Description: load 4 bytes into a 32-bit integer
+   9:..\cbd.c      **** *              in little-endian order
+  10:..\cbd.c      **** *
+  11:..\cbd.c      **** * Arguments:   - const uint8_t *x: pointer to input byte array
+  12:..\cbd.c      **** *
+  13:..\cbd.c      **** * Returns 32-bit unsigned integer loaded from x
+  14:..\cbd.c      **** **************************************************/
+  15:..\cbd.c      **** static uint32_t load32_littleendian(const uint8_t x[4])
+  16:..\cbd.c      **** {
+  28              		.loc 1 16 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  17:..\cbd.c      ****   uint32_t r;
+  18:..\cbd.c      ****   r  = (uint32_t)x[0];
+  34              		.loc 1 18 0
+  35 0000 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  36              	.LVL1:
+  19:..\cbd.c      ****   r |= (uint32_t)x[1] << 8;
+  37              		.loc 1 19 0
+  38 0002 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 2
+
+
+  39 0004 43EA0223 		orr	r3, r3, r2, lsl #8
+  40              	.LVL2:
+  20:..\cbd.c      ****   r |= (uint32_t)x[2] << 16;
+  41              		.loc 1 20 0
+  42 0008 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  43 000a 43EA0243 		orr	r3, r3, r2, lsl #16
+  44              	.LVL3:
+  21:..\cbd.c      ****   r |= (uint32_t)x[3] << 24;
+  45              		.loc 1 21 0
+  46 000e C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
+  47              	.LVL4:
+  22:..\cbd.c      ****   return r;
+  23:..\cbd.c      **** }
+  48              		.loc 1 23 0
+  49 0010 43EA0060 		orr	r0, r3, r0, lsl #24
+  50              	.LVL5:
+  51 0014 7047     		bx	lr
+  52              		.cfi_endproc
+  53              	.LFE0:
+  54              		.size	load32_littleendian, .-load32_littleendian
+  55 0016 00BF     		.section	.text.cbd2,"ax",%progbits
+  56              		.align	2
+  57              		.thumb
+  58              		.thumb_func
+  59              		.type	cbd2, %function
+  60              	cbd2:
+  61              	.LFB1:
+  24:..\cbd.c      **** 
+  25:..\cbd.c      **** /*************************************************
+  26:..\cbd.c      **** * Name:        load24_littleendian
+  27:..\cbd.c      **** *
+  28:..\cbd.c      **** * Description: load 3 bytes into a 32-bit integer
+  29:..\cbd.c      **** *              in little-endian order
+  30:..\cbd.c      **** *              This function is only needed for Kyber-512
+  31:..\cbd.c      **** *
+  32:..\cbd.c      **** * Arguments:   - const uint8_t *x: pointer to input byte array
+  33:..\cbd.c      **** *
+  34:..\cbd.c      **** * Returns 32-bit unsigned integer loaded from x (most significant byte is zero)
+  35:..\cbd.c      **** **************************************************/
+  36:..\cbd.c      **** #if KYBER_ETA1 == 3
+  37:..\cbd.c      **** static uint32_t load24_littleendian(const uint8_t x[3])
+  38:..\cbd.c      **** {
+  39:..\cbd.c      ****   uint32_t r;
+  40:..\cbd.c      ****   r  = (uint32_t)x[0];
+  41:..\cbd.c      ****   r |= (uint32_t)x[1] << 8;
+  42:..\cbd.c      ****   r |= (uint32_t)x[2] << 16;
+  43:..\cbd.c      ****   return r;
+  44:..\cbd.c      **** }
+  45:..\cbd.c      **** #endif
+  46:..\cbd.c      **** 
+  47:..\cbd.c      **** 
+  48:..\cbd.c      **** /*************************************************
+  49:..\cbd.c      **** * Name:        cbd2
+  50:..\cbd.c      **** *
+  51:..\cbd.c      **** * Description: Given an array of uniformly random bytes, compute
+  52:..\cbd.c      **** *              polynomial with coefficients distributed according to
+  53:..\cbd.c      **** *              a centered binomial distribution with parameter eta=2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 3
+
+
+  54:..\cbd.c      **** *
+  55:..\cbd.c      **** * Arguments:   - poly *r:            pointer to output polynomial
+  56:..\cbd.c      **** *              - const uint8_t *buf: pointer to input byte array
+  57:..\cbd.c      **** **************************************************/
+  58:..\cbd.c      **** static void cbd2(poly *r, const uint8_t buf[2*KYBER_N/4])
+  59:..\cbd.c      **** {
+  62              		.loc 1 59 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              	.LVL6:
+  67 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  68              		.cfi_def_cfa_offset 24
+  69              		.cfi_offset 3, -24
+  70              		.cfi_offset 4, -20
+  71              		.cfi_offset 5, -16
+  72              		.cfi_offset 6, -12
+  73              		.cfi_offset 7, -8
+  74              		.cfi_offset 14, -4
+  75 0002 0546     		mov	r5, r0
+  76 0004 0E46     		mov	r6, r1
+  77              	.LVL7:
+  60:..\cbd.c      ****   unsigned int i,j;
+  61:..\cbd.c      ****   uint32_t t,d;
+  62:..\cbd.c      ****   int16_t a,b;
+  63:..\cbd.c      **** 
+  64:..\cbd.c      ****   for(i=0;i<KYBER_N/8;i++) {
+  78              		.loc 1 64 0
+  79 0006 0024     		movs	r4, #0
+  80 0008 1EE0     		b	.L3
+  81              	.LVL8:
+  82              	.L6:
+  65:..\cbd.c      ****     t  = load32_littleendian(buf+4*i);
+  83              		.loc 1 65 0
+  84 000a 06EB8400 		add	r0, r6, r4, lsl #2
+  85 000e FFF7FEFF 		bl	load32_littleendian
+  86              	.LVL9:
+  66:..\cbd.c      ****     d  = t & 0x55555555;
+  87              		.loc 1 66 0
+  88 0012 00F05533 		and	r3, r0, #1431655765
+  89              	.LVL10:
+  67:..\cbd.c      ****     d += (t>>1) & 0x55555555;
+  90              		.loc 1 67 0
+  91 0016 4008     		lsrs	r0, r0, #1
+  92              	.LVL11:
+  93 0018 00F05530 		and	r0, r0, #1431655765
+  94 001c 1844     		add	r0, r0, r3
+  95              	.LVL12:
+  68:..\cbd.c      **** 
+  69:..\cbd.c      ****     for(j=0;j<8;j++) {
+  96              		.loc 1 69 0
+  97 001e 0021     		movs	r1, #0
+  98 0020 0FE0     		b	.L4
+  99              	.LVL13:
+ 100              	.L5:
+  70:..\cbd.c      ****       a = (d >> (4*j+0)) & 0x3;
+ 101              		.loc 1 70 0 discriminator 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 4
+
+
+ 102 0022 8B00     		lsls	r3, r1, #2
+ 103 0024 20FA03F2 		lsr	r2, r0, r3
+ 104 0028 02F00302 		and	r2, r2, #3
+ 105              	.LVL14:
+  71:..\cbd.c      ****       b = (d >> (4*j+2)) & 0x3;
+ 106              		.loc 1 71 0 discriminator 3
+ 107 002c 0233     		adds	r3, r3, #2
+ 108 002e 20FA03F3 		lsr	r3, r0, r3
+ 109 0032 03F00303 		and	r3, r3, #3
+ 110              	.LVL15:
+  72:..\cbd.c      ****       r->coeffs[8*i+j] = a - b;
+ 111              		.loc 1 72 0 discriminator 3
+ 112 0036 01EBC407 		add	r7, r1, r4, lsl #3
+ 113 003a D31A     		subs	r3, r2, r3
+ 114              	.LVL16:
+ 115 003c 25F81730 		strh	r3, [r5, r7, lsl #1]	@ movhi
+  69:..\cbd.c      ****       a = (d >> (4*j+0)) & 0x3;
+ 116              		.loc 1 69 0 discriminator 3
+ 117 0040 0131     		adds	r1, r1, #1
+ 118              	.LVL17:
+ 119              	.L4:
+  69:..\cbd.c      ****       a = (d >> (4*j+0)) & 0x3;
+ 120              		.loc 1 69 0 is_stmt 0 discriminator 1
+ 121 0042 0729     		cmp	r1, #7
+ 122 0044 EDD9     		bls	.L5
+  64:..\cbd.c      ****     t  = load32_littleendian(buf+4*i);
+ 123              		.loc 1 64 0 is_stmt 1 discriminator 2
+ 124 0046 0134     		adds	r4, r4, #1
+ 125              	.LVL18:
+ 126              	.L3:
+  64:..\cbd.c      ****     t  = load32_littleendian(buf+4*i);
+ 127              		.loc 1 64 0 is_stmt 0 discriminator 1
+ 128 0048 1F2C     		cmp	r4, #31
+ 129 004a DED9     		bls	.L6
+  73:..\cbd.c      ****     }
+  74:..\cbd.c      ****   }
+  75:..\cbd.c      **** }
+ 130              		.loc 1 75 0 is_stmt 1
+ 131 004c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 132              		.cfi_endproc
+ 133              	.LFE1:
+ 134              		.size	cbd2, .-cbd2
+ 135 004e 00BF     		.section	.text.pqcrystals_kyber1024_ref_cbd_eta1,"ax",%progbits
+ 136              		.align	2
+ 137              		.global	pqcrystals_kyber1024_ref_cbd_eta1
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.type	pqcrystals_kyber1024_ref_cbd_eta1, %function
+ 141              	pqcrystals_kyber1024_ref_cbd_eta1:
+ 142              	.LFB2:
+  76:..\cbd.c      **** 
+  77:..\cbd.c      **** /*************************************************
+  78:..\cbd.c      **** * Name:        cbd3
+  79:..\cbd.c      **** *
+  80:..\cbd.c      **** * Description: Given an array of uniformly random bytes, compute
+  81:..\cbd.c      **** *              polynomial with coefficients distributed according to
+  82:..\cbd.c      **** *              a centered binomial distribution with parameter eta=3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 5
+
+
+  83:..\cbd.c      **** *              This function is only needed for Kyber-512
+  84:..\cbd.c      **** *
+  85:..\cbd.c      **** * Arguments:   - poly *r:            pointer to output polynomial
+  86:..\cbd.c      **** *              - const uint8_t *buf: pointer to input byte array
+  87:..\cbd.c      **** **************************************************/
+  88:..\cbd.c      **** #if KYBER_ETA1 == 3
+  89:..\cbd.c      **** static void cbd3(poly *r, const uint8_t buf[3*KYBER_N/4])
+  90:..\cbd.c      **** {
+  91:..\cbd.c      ****   unsigned int i,j;
+  92:..\cbd.c      ****   uint32_t t,d;
+  93:..\cbd.c      ****   int16_t a,b;
+  94:..\cbd.c      **** 
+  95:..\cbd.c      ****   for(i=0;i<KYBER_N/4;i++) {
+  96:..\cbd.c      ****     t  = load24_littleendian(buf+3*i);
+  97:..\cbd.c      ****     d  = t & 0x00249249;
+  98:..\cbd.c      ****     d += (t>>1) & 0x00249249;
+  99:..\cbd.c      ****     d += (t>>2) & 0x00249249;
+ 100:..\cbd.c      **** 
+ 101:..\cbd.c      ****     for(j=0;j<4;j++) {
+ 102:..\cbd.c      ****       a = (d >> (6*j+0)) & 0x7;
+ 103:..\cbd.c      ****       b = (d >> (6*j+3)) & 0x7;
+ 104:..\cbd.c      ****       r->coeffs[4*i+j] = a - b;
+ 105:..\cbd.c      ****     }
+ 106:..\cbd.c      ****   }
+ 107:..\cbd.c      **** }
+ 108:..\cbd.c      **** #endif
+ 109:..\cbd.c      **** 
+ 110:..\cbd.c      **** void cbd_eta1(poly *r, const uint8_t buf[KYBER_ETA1*KYBER_N/4])
+ 111:..\cbd.c      **** {
+ 143              		.loc 1 111 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147              	.LVL19:
+ 148 0000 08B5     		push	{r3, lr}
+ 149              		.cfi_def_cfa_offset 8
+ 150              		.cfi_offset 3, -8
+ 151              		.cfi_offset 14, -4
+ 112:..\cbd.c      **** #if KYBER_ETA1 == 2
+ 113:..\cbd.c      ****   cbd2(r, buf);
+ 152              		.loc 1 113 0
+ 153 0002 FFF7FEFF 		bl	cbd2
+ 154              	.LVL20:
+ 155 0006 08BD     		pop	{r3, pc}
+ 156              		.cfi_endproc
+ 157              	.LFE2:
+ 158              		.size	pqcrystals_kyber1024_ref_cbd_eta1, .-pqcrystals_kyber1024_ref_cbd_eta1
+ 159              		.section	.text.pqcrystals_kyber1024_ref_cbd_eta2,"ax",%progbits
+ 160              		.align	2
+ 161              		.global	pqcrystals_kyber1024_ref_cbd_eta2
+ 162              		.thumb
+ 163              		.thumb_func
+ 164              		.type	pqcrystals_kyber1024_ref_cbd_eta2, %function
+ 165              	pqcrystals_kyber1024_ref_cbd_eta2:
+ 166              	.LFB3:
+ 114:..\cbd.c      **** #elif KYBER_ETA1 == 3
+ 115:..\cbd.c      ****   cbd3(r, buf);
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 6
+
+
+ 116:..\cbd.c      **** #else
+ 117:..\cbd.c      **** #error "This implementation requires eta1 in {2,3}"
+ 118:..\cbd.c      **** #endif
+ 119:..\cbd.c      **** }
+ 120:..\cbd.c      **** 
+ 121:..\cbd.c      **** void cbd_eta2(poly *r, const uint8_t buf[KYBER_ETA1*KYBER_N/4])
+ 122:..\cbd.c      **** {
+ 167              		.loc 1 122 0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              	.LVL21:
+ 172 0000 08B5     		push	{r3, lr}
+ 173              		.cfi_def_cfa_offset 8
+ 174              		.cfi_offset 3, -8
+ 175              		.cfi_offset 14, -4
+ 123:..\cbd.c      **** #if KYBER_ETA2 != 2
+ 124:..\cbd.c      **** #error "This implementation requires eta2 = 2"
+ 125:..\cbd.c      **** #else
+ 126:..\cbd.c      ****   cbd2(r, buf);
+ 176              		.loc 1 126 0
+ 177 0002 FFF7FEFF 		bl	cbd2
+ 178              	.LVL22:
+ 179 0006 08BD     		pop	{r3, pc}
+ 180              		.cfi_endproc
+ 181              	.LFE3:
+ 182              		.size	pqcrystals_kyber1024_ref_cbd_eta2, .-pqcrystals_kyber1024_ref_cbd_eta2
+ 183              		.text
+ 184              	.Letext0:
+ 185              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 186              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 187              		.file 4 "..\\poly.h"
+ 188              		.section	.debug_info,"",%progbits
+ 189              	.Ldebug_info0:
+ 190 0000 4C020000 		.4byte	0x24c
+ 191 0004 0400     		.2byte	0x4
+ 192 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 193 000a 04       		.byte	0x4
+ 194 000b 01       		.uleb128 0x1
+ 195 000c B7000000 		.4byte	.LASF17
+ 196 0010 0C       		.byte	0xc
+ 197 0011 4D000000 		.4byte	.LASF18
+ 198 0015 88010000 		.4byte	.LASF19
+ 199 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 200 001d 00000000 		.4byte	0
+ 201 0021 00000000 		.4byte	.Ldebug_line0
+ 202 0025 02       		.uleb128 0x2
+ 203 0026 01       		.byte	0x1
+ 204 0027 06       		.byte	0x6
+ 205 0028 40020000 		.4byte	.LASF0
+ 206 002c 03       		.uleb128 0x3
+ 207 002d 00000000 		.4byte	.LASF2
+ 208 0031 02       		.byte	0x2
+ 209 0032 1D       		.byte	0x1d
+ 210 0033 37000000 		.4byte	0x37
+ 211 0037 02       		.uleb128 0x2
+ 212 0038 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 7
+
+
+ 213 0039 08       		.byte	0x8
+ 214 003a 2D000000 		.4byte	.LASF1
+ 215 003e 03       		.uleb128 0x3
+ 216 003f 0A000000 		.4byte	.LASF3
+ 217 0043 02       		.byte	0x2
+ 218 0044 29       		.byte	0x29
+ 219 0045 49000000 		.4byte	0x49
+ 220 0049 02       		.uleb128 0x2
+ 221 004a 02       		.byte	0x2
+ 222 004b 05       		.byte	0x5
+ 223 004c 79000000 		.4byte	.LASF4
+ 224 0050 02       		.uleb128 0x2
+ 225 0051 02       		.byte	0x2
+ 226 0052 07       		.byte	0x7
+ 227 0053 56000000 		.4byte	.LASF5
+ 228 0057 02       		.uleb128 0x2
+ 229 0058 04       		.byte	0x4
+ 230 0059 05       		.byte	0x5
+ 231 005a F3010000 		.4byte	.LASF6
+ 232 005e 03       		.uleb128 0x3
+ 233 005f 69000000 		.4byte	.LASF7
+ 234 0063 02       		.byte	0x2
+ 235 0064 41       		.byte	0x41
+ 236 0065 69000000 		.4byte	0x69
+ 237 0069 02       		.uleb128 0x2
+ 238 006a 04       		.byte	0x4
+ 239 006b 07       		.byte	0x7
+ 240 006c 3B000000 		.4byte	.LASF8
+ 241 0070 02       		.uleb128 0x2
+ 242 0071 08       		.byte	0x8
+ 243 0072 05       		.byte	0x5
+ 244 0073 73010000 		.4byte	.LASF9
+ 245 0077 02       		.uleb128 0x2
+ 246 0078 08       		.byte	0x8
+ 247 0079 07       		.byte	0x7
+ 248 007a 90000000 		.4byte	.LASF10
+ 249 007e 04       		.uleb128 0x4
+ 250 007f 04       		.byte	0x4
+ 251 0080 05       		.byte	0x5
+ 252 0081 696E7400 		.ascii	"int\000"
+ 253 0085 02       		.uleb128 0x2
+ 254 0086 04       		.byte	0x4
+ 255 0087 07       		.byte	0x7
+ 256 0088 83000000 		.4byte	.LASF11
+ 257 008c 03       		.uleb128 0x3
+ 258 008d A7000000 		.4byte	.LASF12
+ 259 0091 03       		.byte	0x3
+ 260 0092 18       		.byte	0x18
+ 261 0093 2C000000 		.4byte	0x2c
+ 262 0097 03       		.uleb128 0x3
+ 263 0098 AF000000 		.4byte	.LASF13
+ 264 009c 03       		.byte	0x3
+ 265 009d 20       		.byte	0x20
+ 266 009e 3E000000 		.4byte	0x3e
+ 267 00a2 03       		.uleb128 0x3
+ 268 00a3 EA010000 		.4byte	.LASF14
+ 269 00a7 03       		.byte	0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 8
+
+
+ 270 00a8 30       		.byte	0x30
+ 271 00a9 5E000000 		.4byte	0x5e
+ 272 00ad 05       		.uleb128 0x5
+ 273 00ae 0002     		.2byte	0x200
+ 274 00b0 04       		.byte	0x4
+ 275 00b1 0B       		.byte	0xb
+ 276 00b2 C3000000 		.4byte	0xc3
+ 277 00b6 06       		.uleb128 0x6
+ 278 00b7 81010000 		.4byte	.LASF20
+ 279 00bb 04       		.byte	0x4
+ 280 00bc 0C       		.byte	0xc
+ 281 00bd C3000000 		.4byte	0xc3
+ 282 00c1 00       		.byte	0
+ 283 00c2 00       		.byte	0
+ 284 00c3 07       		.uleb128 0x7
+ 285 00c4 97000000 		.4byte	0x97
+ 286 00c8 D3000000 		.4byte	0xd3
+ 287 00cc 08       		.uleb128 0x8
+ 288 00cd D3000000 		.4byte	0xd3
+ 289 00d1 FF       		.byte	0xff
+ 290 00d2 00       		.byte	0
+ 291 00d3 02       		.uleb128 0x2
+ 292 00d4 04       		.byte	0x4
+ 293 00d5 07       		.byte	0x7
+ 294 00d6 6A010000 		.4byte	.LASF15
+ 295 00da 03       		.uleb128 0x3
+ 296 00db 74000000 		.4byte	.LASF16
+ 297 00df 04       		.byte	0x4
+ 298 00e0 0D       		.byte	0xd
+ 299 00e1 AD000000 		.4byte	0xad
+ 300 00e5 09       		.uleb128 0x9
+ 301 00e6 19000000 		.4byte	.LASF21
+ 302 00ea 01       		.byte	0x1
+ 303 00eb 0F       		.byte	0xf
+ 304 00ec A2000000 		.4byte	0xa2
+ 305 00f0 00000000 		.4byte	.LFB0
+ 306 00f4 16000000 		.4byte	.LFE0-.LFB0
+ 307 00f8 01       		.uleb128 0x1
+ 308 00f9 9C       		.byte	0x9c
+ 309 00fa 19010000 		.4byte	0x119
+ 310 00fe 0A       		.uleb128 0xa
+ 311 00ff 7800     		.ascii	"x\000"
+ 312 0101 01       		.byte	0x1
+ 313 0102 0F       		.byte	0xf
+ 314 0103 19010000 		.4byte	0x119
+ 315 0107 00000000 		.4byte	.LLST0
+ 316 010b 0B       		.uleb128 0xb
+ 317 010c 7200     		.ascii	"r\000"
+ 318 010e 01       		.byte	0x1
+ 319 010f 11       		.byte	0x11
+ 320 0110 A2000000 		.4byte	0xa2
+ 321 0114 21000000 		.4byte	.LLST1
+ 322 0118 00       		.byte	0
+ 323 0119 0C       		.uleb128 0xc
+ 324 011a 04       		.byte	0x4
+ 325 011b 1F010000 		.4byte	0x11f
+ 326 011f 0D       		.uleb128 0xd
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 9
+
+
+ 327 0120 8C000000 		.4byte	0x8c
+ 328 0124 0E       		.uleb128 0xe
+ 329 0125 14000000 		.4byte	.LASF22
+ 330 0129 01       		.byte	0x1
+ 331 012a 3A       		.byte	0x3a
+ 332 012b 00000000 		.4byte	.LFB1
+ 333 012f 4E000000 		.4byte	.LFE1-.LFB1
+ 334 0133 01       		.uleb128 0x1
+ 335 0134 9C       		.byte	0x9c
+ 336 0135 B9010000 		.4byte	0x1b9
+ 337 0139 0A       		.uleb128 0xa
+ 338 013a 7200     		.ascii	"r\000"
+ 339 013c 01       		.byte	0x1
+ 340 013d 3A       		.byte	0x3a
+ 341 013e B9010000 		.4byte	0x1b9
+ 342 0142 51000000 		.4byte	.LLST2
+ 343 0146 0A       		.uleb128 0xa
+ 344 0147 62756600 		.ascii	"buf\000"
+ 345 014b 01       		.byte	0x1
+ 346 014c 3A       		.byte	0x3a
+ 347 014d 19010000 		.4byte	0x119
+ 348 0151 6F000000 		.4byte	.LLST3
+ 349 0155 0B       		.uleb128 0xb
+ 350 0156 6900     		.ascii	"i\000"
+ 351 0158 01       		.byte	0x1
+ 352 0159 3C       		.byte	0x3c
+ 353 015a 85000000 		.4byte	0x85
+ 354 015e 8D000000 		.4byte	.LLST4
+ 355 0162 0B       		.uleb128 0xb
+ 356 0163 6A00     		.ascii	"j\000"
+ 357 0165 01       		.byte	0x1
+ 358 0166 3C       		.byte	0x3c
+ 359 0167 85000000 		.4byte	0x85
+ 360 016b AC000000 		.4byte	.LLST5
+ 361 016f 0B       		.uleb128 0xb
+ 362 0170 7400     		.ascii	"t\000"
+ 363 0172 01       		.byte	0x1
+ 364 0173 3D       		.byte	0x3d
+ 365 0174 A2000000 		.4byte	0xa2
+ 366 0178 CB000000 		.4byte	.LLST6
+ 367 017c 0B       		.uleb128 0xb
+ 368 017d 6400     		.ascii	"d\000"
+ 369 017f 01       		.byte	0x1
+ 370 0180 3D       		.byte	0x3d
+ 371 0181 A2000000 		.4byte	0xa2
+ 372 0185 DE000000 		.4byte	.LLST7
+ 373 0189 0B       		.uleb128 0xb
+ 374 018a 6100     		.ascii	"a\000"
+ 375 018c 01       		.byte	0x1
+ 376 018d 3E       		.byte	0x3e
+ 377 018e 97000000 		.4byte	0x97
+ 378 0192 FC000000 		.4byte	.LLST8
+ 379 0196 0B       		.uleb128 0xb
+ 380 0197 6200     		.ascii	"b\000"
+ 381 0199 01       		.byte	0x1
+ 382 019a 3E       		.byte	0x3e
+ 383 019b 97000000 		.4byte	0x97
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 10
+
+
+ 384 019f 0F010000 		.4byte	.LLST9
+ 385 01a3 0F       		.uleb128 0xf
+ 386 01a4 12000000 		.4byte	.LVL9
+ 387 01a8 E5000000 		.4byte	0xe5
+ 388 01ac 10       		.uleb128 0x10
+ 389 01ad 01       		.uleb128 0x1
+ 390 01ae 50       		.byte	0x50
+ 391 01af 07       		.uleb128 0x7
+ 392 01b0 74       		.byte	0x74
+ 393 01b1 00       		.sleb128 0
+ 394 01b2 32       		.byte	0x32
+ 395 01b3 24       		.byte	0x24
+ 396 01b4 76       		.byte	0x76
+ 397 01b5 00       		.sleb128 0
+ 398 01b6 22       		.byte	0x22
+ 399 01b7 00       		.byte	0
+ 400 01b8 00       		.byte	0
+ 401 01b9 0C       		.uleb128 0xc
+ 402 01ba 04       		.byte	0x4
+ 403 01bb DA000000 		.4byte	0xda
+ 404 01bf 11       		.uleb128 0x11
+ 405 01c0 FC010000 		.4byte	.LASF23
+ 406 01c4 01       		.byte	0x1
+ 407 01c5 6E       		.byte	0x6e
+ 408 01c6 00000000 		.4byte	.LFB2
+ 409 01ca 08000000 		.4byte	.LFE2-.LFB2
+ 410 01ce 01       		.uleb128 0x1
+ 411 01cf 9C       		.byte	0x9c
+ 412 01d0 09020000 		.4byte	0x209
+ 413 01d4 0A       		.uleb128 0xa
+ 414 01d5 7200     		.ascii	"r\000"
+ 415 01d7 01       		.byte	0x1
+ 416 01d8 6E       		.byte	0x6e
+ 417 01d9 B9010000 		.4byte	0x1b9
+ 418 01dd 38010000 		.4byte	.LLST10
+ 419 01e1 0A       		.uleb128 0xa
+ 420 01e2 62756600 		.ascii	"buf\000"
+ 421 01e6 01       		.byte	0x1
+ 422 01e7 6E       		.byte	0x6e
+ 423 01e8 19010000 		.4byte	0x119
+ 424 01ec 59010000 		.4byte	.LLST11
+ 425 01f0 0F       		.uleb128 0xf
+ 426 01f1 06000000 		.4byte	.LVL20
+ 427 01f5 24010000 		.4byte	0x124
+ 428 01f9 10       		.uleb128 0x10
+ 429 01fa 01       		.uleb128 0x1
+ 430 01fb 50       		.byte	0x50
+ 431 01fc 03       		.uleb128 0x3
+ 432 01fd F3       		.byte	0xf3
+ 433 01fe 01       		.uleb128 0x1
+ 434 01ff 50       		.byte	0x50
+ 435 0200 10       		.uleb128 0x10
+ 436 0201 01       		.uleb128 0x1
+ 437 0202 51       		.byte	0x51
+ 438 0203 03       		.uleb128 0x3
+ 439 0204 F3       		.byte	0xf3
+ 440 0205 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 11
+
+
+ 441 0206 51       		.byte	0x51
+ 442 0207 00       		.byte	0
+ 443 0208 00       		.byte	0
+ 444 0209 12       		.uleb128 0x12
+ 445 020a 1E020000 		.4byte	.LASF24
+ 446 020e 01       		.byte	0x1
+ 447 020f 79       		.byte	0x79
+ 448 0210 00000000 		.4byte	.LFB3
+ 449 0214 08000000 		.4byte	.LFE3-.LFB3
+ 450 0218 01       		.uleb128 0x1
+ 451 0219 9C       		.byte	0x9c
+ 452 021a 0A       		.uleb128 0xa
+ 453 021b 7200     		.ascii	"r\000"
+ 454 021d 01       		.byte	0x1
+ 455 021e 79       		.byte	0x79
+ 456 021f B9010000 		.4byte	0x1b9
+ 457 0223 7A010000 		.4byte	.LLST12
+ 458 0227 0A       		.uleb128 0xa
+ 459 0228 62756600 		.ascii	"buf\000"
+ 460 022c 01       		.byte	0x1
+ 461 022d 79       		.byte	0x79
+ 462 022e 19010000 		.4byte	0x119
+ 463 0232 9B010000 		.4byte	.LLST13
+ 464 0236 0F       		.uleb128 0xf
+ 465 0237 06000000 		.4byte	.LVL22
+ 466 023b 24010000 		.4byte	0x124
+ 467 023f 10       		.uleb128 0x10
+ 468 0240 01       		.uleb128 0x1
+ 469 0241 50       		.byte	0x50
+ 470 0242 03       		.uleb128 0x3
+ 471 0243 F3       		.byte	0xf3
+ 472 0244 01       		.uleb128 0x1
+ 473 0245 50       		.byte	0x50
+ 474 0246 10       		.uleb128 0x10
+ 475 0247 01       		.uleb128 0x1
+ 476 0248 51       		.byte	0x51
+ 477 0249 03       		.uleb128 0x3
+ 478 024a F3       		.byte	0xf3
+ 479 024b 01       		.uleb128 0x1
+ 480 024c 51       		.byte	0x51
+ 481 024d 00       		.byte	0
+ 482 024e 00       		.byte	0
+ 483 024f 00       		.byte	0
+ 484              		.section	.debug_abbrev,"",%progbits
+ 485              	.Ldebug_abbrev0:
+ 486 0000 01       		.uleb128 0x1
+ 487 0001 11       		.uleb128 0x11
+ 488 0002 01       		.byte	0x1
+ 489 0003 25       		.uleb128 0x25
+ 490 0004 0E       		.uleb128 0xe
+ 491 0005 13       		.uleb128 0x13
+ 492 0006 0B       		.uleb128 0xb
+ 493 0007 03       		.uleb128 0x3
+ 494 0008 0E       		.uleb128 0xe
+ 495 0009 1B       		.uleb128 0x1b
+ 496 000a 0E       		.uleb128 0xe
+ 497 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 12
+
+
+ 498 000c 17       		.uleb128 0x17
+ 499 000d 11       		.uleb128 0x11
+ 500 000e 01       		.uleb128 0x1
+ 501 000f 10       		.uleb128 0x10
+ 502 0010 17       		.uleb128 0x17
+ 503 0011 00       		.byte	0
+ 504 0012 00       		.byte	0
+ 505 0013 02       		.uleb128 0x2
+ 506 0014 24       		.uleb128 0x24
+ 507 0015 00       		.byte	0
+ 508 0016 0B       		.uleb128 0xb
+ 509 0017 0B       		.uleb128 0xb
+ 510 0018 3E       		.uleb128 0x3e
+ 511 0019 0B       		.uleb128 0xb
+ 512 001a 03       		.uleb128 0x3
+ 513 001b 0E       		.uleb128 0xe
+ 514 001c 00       		.byte	0
+ 515 001d 00       		.byte	0
+ 516 001e 03       		.uleb128 0x3
+ 517 001f 16       		.uleb128 0x16
+ 518 0020 00       		.byte	0
+ 519 0021 03       		.uleb128 0x3
+ 520 0022 0E       		.uleb128 0xe
+ 521 0023 3A       		.uleb128 0x3a
+ 522 0024 0B       		.uleb128 0xb
+ 523 0025 3B       		.uleb128 0x3b
+ 524 0026 0B       		.uleb128 0xb
+ 525 0027 49       		.uleb128 0x49
+ 526 0028 13       		.uleb128 0x13
+ 527 0029 00       		.byte	0
+ 528 002a 00       		.byte	0
+ 529 002b 04       		.uleb128 0x4
+ 530 002c 24       		.uleb128 0x24
+ 531 002d 00       		.byte	0
+ 532 002e 0B       		.uleb128 0xb
+ 533 002f 0B       		.uleb128 0xb
+ 534 0030 3E       		.uleb128 0x3e
+ 535 0031 0B       		.uleb128 0xb
+ 536 0032 03       		.uleb128 0x3
+ 537 0033 08       		.uleb128 0x8
+ 538 0034 00       		.byte	0
+ 539 0035 00       		.byte	0
+ 540 0036 05       		.uleb128 0x5
+ 541 0037 13       		.uleb128 0x13
+ 542 0038 01       		.byte	0x1
+ 543 0039 0B       		.uleb128 0xb
+ 544 003a 05       		.uleb128 0x5
+ 545 003b 3A       		.uleb128 0x3a
+ 546 003c 0B       		.uleb128 0xb
+ 547 003d 3B       		.uleb128 0x3b
+ 548 003e 0B       		.uleb128 0xb
+ 549 003f 01       		.uleb128 0x1
+ 550 0040 13       		.uleb128 0x13
+ 551 0041 00       		.byte	0
+ 552 0042 00       		.byte	0
+ 553 0043 06       		.uleb128 0x6
+ 554 0044 0D       		.uleb128 0xd
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 13
+
+
+ 555 0045 00       		.byte	0
+ 556 0046 03       		.uleb128 0x3
+ 557 0047 0E       		.uleb128 0xe
+ 558 0048 3A       		.uleb128 0x3a
+ 559 0049 0B       		.uleb128 0xb
+ 560 004a 3B       		.uleb128 0x3b
+ 561 004b 0B       		.uleb128 0xb
+ 562 004c 49       		.uleb128 0x49
+ 563 004d 13       		.uleb128 0x13
+ 564 004e 38       		.uleb128 0x38
+ 565 004f 0B       		.uleb128 0xb
+ 566 0050 00       		.byte	0
+ 567 0051 00       		.byte	0
+ 568 0052 07       		.uleb128 0x7
+ 569 0053 01       		.uleb128 0x1
+ 570 0054 01       		.byte	0x1
+ 571 0055 49       		.uleb128 0x49
+ 572 0056 13       		.uleb128 0x13
+ 573 0057 01       		.uleb128 0x1
+ 574 0058 13       		.uleb128 0x13
+ 575 0059 00       		.byte	0
+ 576 005a 00       		.byte	0
+ 577 005b 08       		.uleb128 0x8
+ 578 005c 21       		.uleb128 0x21
+ 579 005d 00       		.byte	0
+ 580 005e 49       		.uleb128 0x49
+ 581 005f 13       		.uleb128 0x13
+ 582 0060 2F       		.uleb128 0x2f
+ 583 0061 0B       		.uleb128 0xb
+ 584 0062 00       		.byte	0
+ 585 0063 00       		.byte	0
+ 586 0064 09       		.uleb128 0x9
+ 587 0065 2E       		.uleb128 0x2e
+ 588 0066 01       		.byte	0x1
+ 589 0067 03       		.uleb128 0x3
+ 590 0068 0E       		.uleb128 0xe
+ 591 0069 3A       		.uleb128 0x3a
+ 592 006a 0B       		.uleb128 0xb
+ 593 006b 3B       		.uleb128 0x3b
+ 594 006c 0B       		.uleb128 0xb
+ 595 006d 27       		.uleb128 0x27
+ 596 006e 19       		.uleb128 0x19
+ 597 006f 49       		.uleb128 0x49
+ 598 0070 13       		.uleb128 0x13
+ 599 0071 11       		.uleb128 0x11
+ 600 0072 01       		.uleb128 0x1
+ 601 0073 12       		.uleb128 0x12
+ 602 0074 06       		.uleb128 0x6
+ 603 0075 40       		.uleb128 0x40
+ 604 0076 18       		.uleb128 0x18
+ 605 0077 9742     		.uleb128 0x2117
+ 606 0079 19       		.uleb128 0x19
+ 607 007a 01       		.uleb128 0x1
+ 608 007b 13       		.uleb128 0x13
+ 609 007c 00       		.byte	0
+ 610 007d 00       		.byte	0
+ 611 007e 0A       		.uleb128 0xa
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 14
+
+
+ 612 007f 05       		.uleb128 0x5
+ 613 0080 00       		.byte	0
+ 614 0081 03       		.uleb128 0x3
+ 615 0082 08       		.uleb128 0x8
+ 616 0083 3A       		.uleb128 0x3a
+ 617 0084 0B       		.uleb128 0xb
+ 618 0085 3B       		.uleb128 0x3b
+ 619 0086 0B       		.uleb128 0xb
+ 620 0087 49       		.uleb128 0x49
+ 621 0088 13       		.uleb128 0x13
+ 622 0089 02       		.uleb128 0x2
+ 623 008a 17       		.uleb128 0x17
+ 624 008b 00       		.byte	0
+ 625 008c 00       		.byte	0
+ 626 008d 0B       		.uleb128 0xb
+ 627 008e 34       		.uleb128 0x34
+ 628 008f 00       		.byte	0
+ 629 0090 03       		.uleb128 0x3
+ 630 0091 08       		.uleb128 0x8
+ 631 0092 3A       		.uleb128 0x3a
+ 632 0093 0B       		.uleb128 0xb
+ 633 0094 3B       		.uleb128 0x3b
+ 634 0095 0B       		.uleb128 0xb
+ 635 0096 49       		.uleb128 0x49
+ 636 0097 13       		.uleb128 0x13
+ 637 0098 02       		.uleb128 0x2
+ 638 0099 17       		.uleb128 0x17
+ 639 009a 00       		.byte	0
+ 640 009b 00       		.byte	0
+ 641 009c 0C       		.uleb128 0xc
+ 642 009d 0F       		.uleb128 0xf
+ 643 009e 00       		.byte	0
+ 644 009f 0B       		.uleb128 0xb
+ 645 00a0 0B       		.uleb128 0xb
+ 646 00a1 49       		.uleb128 0x49
+ 647 00a2 13       		.uleb128 0x13
+ 648 00a3 00       		.byte	0
+ 649 00a4 00       		.byte	0
+ 650 00a5 0D       		.uleb128 0xd
+ 651 00a6 26       		.uleb128 0x26
+ 652 00a7 00       		.byte	0
+ 653 00a8 49       		.uleb128 0x49
+ 654 00a9 13       		.uleb128 0x13
+ 655 00aa 00       		.byte	0
+ 656 00ab 00       		.byte	0
+ 657 00ac 0E       		.uleb128 0xe
+ 658 00ad 2E       		.uleb128 0x2e
+ 659 00ae 01       		.byte	0x1
+ 660 00af 03       		.uleb128 0x3
+ 661 00b0 0E       		.uleb128 0xe
+ 662 00b1 3A       		.uleb128 0x3a
+ 663 00b2 0B       		.uleb128 0xb
+ 664 00b3 3B       		.uleb128 0x3b
+ 665 00b4 0B       		.uleb128 0xb
+ 666 00b5 27       		.uleb128 0x27
+ 667 00b6 19       		.uleb128 0x19
+ 668 00b7 11       		.uleb128 0x11
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 15
+
+
+ 669 00b8 01       		.uleb128 0x1
+ 670 00b9 12       		.uleb128 0x12
+ 671 00ba 06       		.uleb128 0x6
+ 672 00bb 40       		.uleb128 0x40
+ 673 00bc 18       		.uleb128 0x18
+ 674 00bd 9742     		.uleb128 0x2117
+ 675 00bf 19       		.uleb128 0x19
+ 676 00c0 01       		.uleb128 0x1
+ 677 00c1 13       		.uleb128 0x13
+ 678 00c2 00       		.byte	0
+ 679 00c3 00       		.byte	0
+ 680 00c4 0F       		.uleb128 0xf
+ 681 00c5 898201   		.uleb128 0x4109
+ 682 00c8 01       		.byte	0x1
+ 683 00c9 11       		.uleb128 0x11
+ 684 00ca 01       		.uleb128 0x1
+ 685 00cb 31       		.uleb128 0x31
+ 686 00cc 13       		.uleb128 0x13
+ 687 00cd 00       		.byte	0
+ 688 00ce 00       		.byte	0
+ 689 00cf 10       		.uleb128 0x10
+ 690 00d0 8A8201   		.uleb128 0x410a
+ 691 00d3 00       		.byte	0
+ 692 00d4 02       		.uleb128 0x2
+ 693 00d5 18       		.uleb128 0x18
+ 694 00d6 9142     		.uleb128 0x2111
+ 695 00d8 18       		.uleb128 0x18
+ 696 00d9 00       		.byte	0
+ 697 00da 00       		.byte	0
+ 698 00db 11       		.uleb128 0x11
+ 699 00dc 2E       		.uleb128 0x2e
+ 700 00dd 01       		.byte	0x1
+ 701 00de 3F       		.uleb128 0x3f
+ 702 00df 19       		.uleb128 0x19
+ 703 00e0 03       		.uleb128 0x3
+ 704 00e1 0E       		.uleb128 0xe
+ 705 00e2 3A       		.uleb128 0x3a
+ 706 00e3 0B       		.uleb128 0xb
+ 707 00e4 3B       		.uleb128 0x3b
+ 708 00e5 0B       		.uleb128 0xb
+ 709 00e6 27       		.uleb128 0x27
+ 710 00e7 19       		.uleb128 0x19
+ 711 00e8 11       		.uleb128 0x11
+ 712 00e9 01       		.uleb128 0x1
+ 713 00ea 12       		.uleb128 0x12
+ 714 00eb 06       		.uleb128 0x6
+ 715 00ec 40       		.uleb128 0x40
+ 716 00ed 18       		.uleb128 0x18
+ 717 00ee 9742     		.uleb128 0x2117
+ 718 00f0 19       		.uleb128 0x19
+ 719 00f1 01       		.uleb128 0x1
+ 720 00f2 13       		.uleb128 0x13
+ 721 00f3 00       		.byte	0
+ 722 00f4 00       		.byte	0
+ 723 00f5 12       		.uleb128 0x12
+ 724 00f6 2E       		.uleb128 0x2e
+ 725 00f7 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 16
+
+
+ 726 00f8 3F       		.uleb128 0x3f
+ 727 00f9 19       		.uleb128 0x19
+ 728 00fa 03       		.uleb128 0x3
+ 729 00fb 0E       		.uleb128 0xe
+ 730 00fc 3A       		.uleb128 0x3a
+ 731 00fd 0B       		.uleb128 0xb
+ 732 00fe 3B       		.uleb128 0x3b
+ 733 00ff 0B       		.uleb128 0xb
+ 734 0100 27       		.uleb128 0x27
+ 735 0101 19       		.uleb128 0x19
+ 736 0102 11       		.uleb128 0x11
+ 737 0103 01       		.uleb128 0x1
+ 738 0104 12       		.uleb128 0x12
+ 739 0105 06       		.uleb128 0x6
+ 740 0106 40       		.uleb128 0x40
+ 741 0107 18       		.uleb128 0x18
+ 742 0108 9742     		.uleb128 0x2117
+ 743 010a 19       		.uleb128 0x19
+ 744 010b 00       		.byte	0
+ 745 010c 00       		.byte	0
+ 746 010d 00       		.byte	0
+ 747              		.section	.debug_loc,"",%progbits
+ 748              	.Ldebug_loc0:
+ 749              	.LLST0:
+ 750 0000 00000000 		.4byte	.LVL0
+ 751 0004 10000000 		.4byte	.LVL4
+ 752 0008 0100     		.2byte	0x1
+ 753 000a 50       		.byte	0x50
+ 754 000b 10000000 		.4byte	.LVL4
+ 755 000f 16000000 		.4byte	.LFE0
+ 756 0013 0400     		.2byte	0x4
+ 757 0015 F3       		.byte	0xf3
+ 758 0016 01       		.uleb128 0x1
+ 759 0017 50       		.byte	0x50
+ 760 0018 9F       		.byte	0x9f
+ 761 0019 00000000 		.4byte	0
+ 762 001d 00000000 		.4byte	0
+ 763              	.LLST1:
+ 764 0021 02000000 		.4byte	.LVL1
+ 765 0025 10000000 		.4byte	.LVL4
+ 766 0029 0100     		.2byte	0x1
+ 767 002b 53       		.byte	0x53
+ 768 002c 10000000 		.4byte	.LVL4
+ 769 0030 14000000 		.4byte	.LVL5
+ 770 0034 0800     		.2byte	0x8
+ 771 0036 70       		.byte	0x70
+ 772 0037 00       		.sleb128 0
+ 773 0038 48       		.byte	0x48
+ 774 0039 24       		.byte	0x24
+ 775 003a 73       		.byte	0x73
+ 776 003b 00       		.sleb128 0
+ 777 003c 21       		.byte	0x21
+ 778 003d 9F       		.byte	0x9f
+ 779 003e 14000000 		.4byte	.LVL5
+ 780 0042 16000000 		.4byte	.LFE0
+ 781 0046 0100     		.2byte	0x1
+ 782 0048 50       		.byte	0x50
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 17
+
+
+ 783 0049 00000000 		.4byte	0
+ 784 004d 00000000 		.4byte	0
+ 785              	.LLST2:
+ 786 0051 00000000 		.4byte	.LVL6
+ 787 0055 0A000000 		.4byte	.LVL8
+ 788 0059 0100     		.2byte	0x1
+ 789 005b 50       		.byte	0x50
+ 790 005c 0A000000 		.4byte	.LVL8
+ 791 0060 4E000000 		.4byte	.LFE1
+ 792 0064 0100     		.2byte	0x1
+ 793 0066 55       		.byte	0x55
+ 794 0067 00000000 		.4byte	0
+ 795 006b 00000000 		.4byte	0
+ 796              	.LLST3:
+ 797 006f 00000000 		.4byte	.LVL6
+ 798 0073 0A000000 		.4byte	.LVL8
+ 799 0077 0100     		.2byte	0x1
+ 800 0079 51       		.byte	0x51
+ 801 007a 0A000000 		.4byte	.LVL8
+ 802 007e 4E000000 		.4byte	.LFE1
+ 803 0082 0100     		.2byte	0x1
+ 804 0084 56       		.byte	0x56
+ 805 0085 00000000 		.4byte	0
+ 806 0089 00000000 		.4byte	0
+ 807              	.LLST4:
+ 808 008d 06000000 		.4byte	.LVL7
+ 809 0091 0A000000 		.4byte	.LVL8
+ 810 0095 0200     		.2byte	0x2
+ 811 0097 30       		.byte	0x30
+ 812 0098 9F       		.byte	0x9f
+ 813 0099 0A000000 		.4byte	.LVL8
+ 814 009d 4E000000 		.4byte	.LFE1
+ 815 00a1 0100     		.2byte	0x1
+ 816 00a3 54       		.byte	0x54
+ 817 00a4 00000000 		.4byte	0
+ 818 00a8 00000000 		.4byte	0
+ 819              	.LLST5:
+ 820 00ac 1E000000 		.4byte	.LVL12
+ 821 00b0 22000000 		.4byte	.LVL13
+ 822 00b4 0200     		.2byte	0x2
+ 823 00b6 30       		.byte	0x30
+ 824 00b7 9F       		.byte	0x9f
+ 825 00b8 22000000 		.4byte	.LVL13
+ 826 00bc 48000000 		.4byte	.LVL18
+ 827 00c0 0100     		.2byte	0x1
+ 828 00c2 51       		.byte	0x51
+ 829 00c3 00000000 		.4byte	0
+ 830 00c7 00000000 		.4byte	0
+ 831              	.LLST6:
+ 832 00cb 12000000 		.4byte	.LVL9
+ 833 00cf 18000000 		.4byte	.LVL11
+ 834 00d3 0100     		.2byte	0x1
+ 835 00d5 50       		.byte	0x50
+ 836 00d6 00000000 		.4byte	0
+ 837 00da 00000000 		.4byte	0
+ 838              	.LLST7:
+ 839 00de 16000000 		.4byte	.LVL10
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 18
+
+
+ 840 00e2 1E000000 		.4byte	.LVL12
+ 841 00e6 0100     		.2byte	0x1
+ 842 00e8 53       		.byte	0x53
+ 843 00e9 1E000000 		.4byte	.LVL12
+ 844 00ed 48000000 		.4byte	.LVL18
+ 845 00f1 0100     		.2byte	0x1
+ 846 00f3 50       		.byte	0x50
+ 847 00f4 00000000 		.4byte	0
+ 848 00f8 00000000 		.4byte	0
+ 849              	.LLST8:
+ 850 00fc 2C000000 		.4byte	.LVL14
+ 851 0100 42000000 		.4byte	.LVL17
+ 852 0104 0100     		.2byte	0x1
+ 853 0106 52       		.byte	0x52
+ 854 0107 00000000 		.4byte	0
+ 855 010b 00000000 		.4byte	0
+ 856              	.LLST9:
+ 857 010f 36000000 		.4byte	.LVL15
+ 858 0113 3C000000 		.4byte	.LVL16
+ 859 0117 0100     		.2byte	0x1
+ 860 0119 53       		.byte	0x53
+ 861 011a 3C000000 		.4byte	.LVL16
+ 862 011e 42000000 		.4byte	.LVL17
+ 863 0122 0C00     		.2byte	0xc
+ 864 0124 70       		.byte	0x70
+ 865 0125 00       		.sleb128 0
+ 866 0126 71       		.byte	0x71
+ 867 0127 00       		.sleb128 0
+ 868 0128 32       		.byte	0x32
+ 869 0129 24       		.byte	0x24
+ 870 012a 23       		.byte	0x23
+ 871 012b 02       		.uleb128 0x2
+ 872 012c 25       		.byte	0x25
+ 873 012d 33       		.byte	0x33
+ 874 012e 1A       		.byte	0x1a
+ 875 012f 9F       		.byte	0x9f
+ 876 0130 00000000 		.4byte	0
+ 877 0134 00000000 		.4byte	0
+ 878              	.LLST10:
+ 879 0138 00000000 		.4byte	.LVL19
+ 880 013c 05000000 		.4byte	.LVL20-1
+ 881 0140 0100     		.2byte	0x1
+ 882 0142 50       		.byte	0x50
+ 883 0143 05000000 		.4byte	.LVL20-1
+ 884 0147 08000000 		.4byte	.LFE2
+ 885 014b 0400     		.2byte	0x4
+ 886 014d F3       		.byte	0xf3
+ 887 014e 01       		.uleb128 0x1
+ 888 014f 50       		.byte	0x50
+ 889 0150 9F       		.byte	0x9f
+ 890 0151 00000000 		.4byte	0
+ 891 0155 00000000 		.4byte	0
+ 892              	.LLST11:
+ 893 0159 00000000 		.4byte	.LVL19
+ 894 015d 05000000 		.4byte	.LVL20-1
+ 895 0161 0100     		.2byte	0x1
+ 896 0163 51       		.byte	0x51
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 19
+
+
+ 897 0164 05000000 		.4byte	.LVL20-1
+ 898 0168 08000000 		.4byte	.LFE2
+ 899 016c 0400     		.2byte	0x4
+ 900 016e F3       		.byte	0xf3
+ 901 016f 01       		.uleb128 0x1
+ 902 0170 51       		.byte	0x51
+ 903 0171 9F       		.byte	0x9f
+ 904 0172 00000000 		.4byte	0
+ 905 0176 00000000 		.4byte	0
+ 906              	.LLST12:
+ 907 017a 00000000 		.4byte	.LVL21
+ 908 017e 05000000 		.4byte	.LVL22-1
+ 909 0182 0100     		.2byte	0x1
+ 910 0184 50       		.byte	0x50
+ 911 0185 05000000 		.4byte	.LVL22-1
+ 912 0189 08000000 		.4byte	.LFE3
+ 913 018d 0400     		.2byte	0x4
+ 914 018f F3       		.byte	0xf3
+ 915 0190 01       		.uleb128 0x1
+ 916 0191 50       		.byte	0x50
+ 917 0192 9F       		.byte	0x9f
+ 918 0193 00000000 		.4byte	0
+ 919 0197 00000000 		.4byte	0
+ 920              	.LLST13:
+ 921 019b 00000000 		.4byte	.LVL21
+ 922 019f 05000000 		.4byte	.LVL22-1
+ 923 01a3 0100     		.2byte	0x1
+ 924 01a5 51       		.byte	0x51
+ 925 01a6 05000000 		.4byte	.LVL22-1
+ 926 01aa 08000000 		.4byte	.LFE3
+ 927 01ae 0400     		.2byte	0x4
+ 928 01b0 F3       		.byte	0xf3
+ 929 01b1 01       		.uleb128 0x1
+ 930 01b2 51       		.byte	0x51
+ 931 01b3 9F       		.byte	0x9f
+ 932 01b4 00000000 		.4byte	0
+ 933 01b8 00000000 		.4byte	0
+ 934              		.section	.debug_aranges,"",%progbits
+ 935 0000 34000000 		.4byte	0x34
+ 936 0004 0200     		.2byte	0x2
+ 937 0006 00000000 		.4byte	.Ldebug_info0
+ 938 000a 04       		.byte	0x4
+ 939 000b 00       		.byte	0
+ 940 000c 0000     		.2byte	0
+ 941 000e 0000     		.2byte	0
+ 942 0010 00000000 		.4byte	.LFB0
+ 943 0014 16000000 		.4byte	.LFE0-.LFB0
+ 944 0018 00000000 		.4byte	.LFB1
+ 945 001c 4E000000 		.4byte	.LFE1-.LFB1
+ 946 0020 00000000 		.4byte	.LFB2
+ 947 0024 08000000 		.4byte	.LFE2-.LFB2
+ 948 0028 00000000 		.4byte	.LFB3
+ 949 002c 08000000 		.4byte	.LFE3-.LFB3
+ 950 0030 00000000 		.4byte	0
+ 951 0034 00000000 		.4byte	0
+ 952              		.section	.debug_ranges,"",%progbits
+ 953              	.Ldebug_ranges0:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 20
+
+
+ 954 0000 00000000 		.4byte	.LFB0
+ 955 0004 16000000 		.4byte	.LFE0
+ 956 0008 00000000 		.4byte	.LFB1
+ 957 000c 4E000000 		.4byte	.LFE1
+ 958 0010 00000000 		.4byte	.LFB2
+ 959 0014 08000000 		.4byte	.LFE2
+ 960 0018 00000000 		.4byte	.LFB3
+ 961 001c 08000000 		.4byte	.LFE3
+ 962 0020 00000000 		.4byte	0
+ 963 0024 00000000 		.4byte	0
+ 964              		.section	.debug_line,"",%progbits
+ 965              	.Ldebug_line0:
+ 966 0000 A3010000 		.section	.debug_str,"MS",%progbits,1
+ 966      02002901 
+ 966      00000201 
+ 966      FB0E0D00 
+ 966      01010101 
+ 967              	.LASF2:
+ 968 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 968      6E74385F 
+ 968      7400
+ 969              	.LASF3:
+ 970 000a 5F5F696E 		.ascii	"__int16_t\000"
+ 970      7431365F 
+ 970      7400
+ 971              	.LASF22:
+ 972 0014 63626432 		.ascii	"cbd2\000"
+ 972      00
+ 973              	.LASF21:
+ 974 0019 6C6F6164 		.ascii	"load32_littleendian\000"
+ 974      33325F6C 
+ 974      6974746C 
+ 974      65656E64 
+ 974      69616E00 
+ 975              	.LASF1:
+ 976 002d 756E7369 		.ascii	"unsigned char\000"
+ 976      676E6564 
+ 976      20636861 
+ 976      7200
+ 977              	.LASF8:
+ 978 003b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 978      20756E73 
+ 978      69676E65 
+ 978      6420696E 
+ 978      7400
+ 979              	.LASF18:
+ 980 004d 2E2E5C63 		.ascii	"..\\cbd.c\000"
+ 980      62642E63 
+ 980      00
+ 981              	.LASF5:
+ 982 0056 73686F72 		.ascii	"short unsigned int\000"
+ 982      7420756E 
+ 982      7369676E 
+ 982      65642069 
+ 982      6E7400
+ 983              	.LASF7:
+ 984 0069 5F5F7569 		.ascii	"__uint32_t\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 21
+
+
+ 984      6E743332 
+ 984      5F7400
+ 985              	.LASF16:
+ 986 0074 706F6C79 		.ascii	"poly\000"
+ 986      00
+ 987              	.LASF4:
+ 988 0079 73686F72 		.ascii	"short int\000"
+ 988      7420696E 
+ 988      7400
+ 989              	.LASF11:
+ 990 0083 756E7369 		.ascii	"unsigned int\000"
+ 990      676E6564 
+ 990      20696E74 
+ 990      00
+ 991              	.LASF10:
+ 992 0090 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 992      206C6F6E 
+ 992      6720756E 
+ 992      7369676E 
+ 992      65642069 
+ 993              	.LASF12:
+ 994 00a7 75696E74 		.ascii	"uint8_t\000"
+ 994      385F7400 
+ 995              	.LASF13:
+ 996 00af 696E7431 		.ascii	"int16_t\000"
+ 996      365F7400 
+ 997              	.LASF17:
+ 998 00b7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 998      43313120 
+ 998      352E342E 
+ 998      31203230 
+ 998      31363036 
+ 999 00ea 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 999      20726576 
+ 999      6973696F 
+ 999      6E203233 
+ 999      37373135 
+ 1000 011d 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1000      70202D6D 
+ 1000      6670753D 
+ 1000      66707634 
+ 1000      2D73702D 
+ 1001 0150 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1001      6F6E7320 
+ 1001      2D666661 
+ 1001      742D6C74 
+ 1001      6F2D6F62 
+ 1002              	.LASF15:
+ 1003 016a 73697A65 		.ascii	"sizetype\000"
+ 1003      74797065 
+ 1003      00
+ 1004              	.LASF9:
+ 1005 0173 6C6F6E67 		.ascii	"long long int\000"
+ 1005      206C6F6E 
+ 1005      6720696E 
+ 1005      7400
+ 1006              	.LASF20:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccnIXZyc.s 			page 22
+
+
+ 1007 0181 636F6566 		.ascii	"coeffs\000"
+ 1007      667300
+ 1008              	.LASF19:
+ 1009 0188 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1009      73657273 
+ 1009      5C626F67 
+ 1009      75725C44 
+ 1009      6F63756D 
+ 1010 01b4 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
+ 1010      7269746D 
+ 1010      6F732070 
+ 1010      6F737463 
+ 1010      75616E74 
+ 1011 01e3 2E637964 		.ascii	".cydsn\000"
+ 1011      736E00
+ 1012              	.LASF14:
+ 1013 01ea 75696E74 		.ascii	"uint32_t\000"
+ 1013      33325F74 
+ 1013      00
+ 1014              	.LASF6:
+ 1015 01f3 6C6F6E67 		.ascii	"long int\000"
+ 1015      20696E74 
+ 1015      00
+ 1016              	.LASF23:
+ 1017 01fc 70716372 		.ascii	"pqcrystals_kyber1024_ref_cbd_eta1\000"
+ 1017      79737461 
+ 1017      6C735F6B 
+ 1017      79626572 
+ 1017      31303234 
+ 1018              	.LASF24:
+ 1019 021e 70716372 		.ascii	"pqcrystals_kyber1024_ref_cbd_eta2\000"
+ 1019      79737461 
+ 1019      6C735F6B 
+ 1019      79626572 
+ 1019      31303234 
+ 1020              	.LASF0:
+ 1021 0240 7369676E 		.ascii	"signed char\000"
+ 1021      65642063 
+ 1021      68617200 
+ 1022              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

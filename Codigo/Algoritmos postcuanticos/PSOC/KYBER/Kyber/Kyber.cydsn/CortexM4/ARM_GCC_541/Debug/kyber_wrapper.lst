@@ -1,0 +1,1336 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"kyber_wrapper.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.kyber_init,"ax",%progbits
+  21              		.align	2
+  22              		.global	kyber_init
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	kyber_init, %function
+  26              	kyber_init:
+  27              	.LFB0:
+  28              		.file 1 "..\\kyber_wrapper.c"
+   1:..\kyber_wrapper.c **** #include "kyber_wrapper.h"
+   2:..\kyber_wrapper.c **** #include "params.h"
+   3:..\kyber_wrapper.c **** #include "kem.h"
+   4:..\kyber_wrapper.c **** #include "api.h"
+   5:..\kyber_wrapper.c **** 
+   6:..\kyber_wrapper.c **** // Current security level
+   7:..\kyber_wrapper.c **** static kyber_security_level_t current_security_level = KYBER_SECURITY_1024;
+   8:..\kyber_wrapper.c **** 
+   9:..\kyber_wrapper.c **** // Static flag to indicate if the library has been initialized
+  10:..\kyber_wrapper.c **** static int is_initialized = 0;
+  11:..\kyber_wrapper.c **** 
+  12:..\kyber_wrapper.c **** int kyber_init(kyber_security_level_t security_level) {
+  29              		.loc 1 12 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  13:..\kyber_wrapper.c ****     // Validate security level
+  14:..\kyber_wrapper.c ****     if (security_level != KYBER_SECURITY_512 && 
+  15:..\kyber_wrapper.c ****         security_level != KYBER_SECURITY_768 && 
+  35              		.loc 1 15 0
+  36 0000 0238     		subs	r0, r0, #2
+  37              	.LVL1:
+  38 0002 C0B2     		uxtb	r0, r0
+  14:..\kyber_wrapper.c ****         security_level != KYBER_SECURITY_768 && 
+  39              		.loc 1 14 0
+  40 0004 0228     		cmp	r0, #2
+  41 0006 04D8     		bhi	.L3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 2
+
+
+  16:..\kyber_wrapper.c ****         security_level != KYBER_SECURITY_1024) {
+  17:..\kyber_wrapper.c ****         return -1;
+  18:..\kyber_wrapper.c ****     }
+  19:..\kyber_wrapper.c ****     
+  20:..\kyber_wrapper.c ****     // Store security level (for runtime checking)
+  21:..\kyber_wrapper.c ****     current_security_level = security_level;
+  22:..\kyber_wrapper.c ****     is_initialized = 1;
+  42              		.loc 1 22 0
+  43 0008 0122     		movs	r2, #1
+  44 000a 034B     		ldr	r3, .L4
+  45 000c 1A60     		str	r2, [r3]
+  23:..\kyber_wrapper.c ****     
+  24:..\kyber_wrapper.c ****     return 0;
+  46              		.loc 1 24 0
+  47 000e 0020     		movs	r0, #0
+  48 0010 7047     		bx	lr
+  49              	.L3:
+  17:..\kyber_wrapper.c ****     }
+  50              		.loc 1 17 0
+  51 0012 4FF0FF30 		mov	r0, #-1
+  25:..\kyber_wrapper.c **** }
+  52              		.loc 1 25 0
+  53 0016 7047     		bx	lr
+  54              	.L5:
+  55              		.align	2
+  56              	.L4:
+  57 0018 00000000 		.word	.LANCHOR0
+  58              		.cfi_endproc
+  59              	.LFE0:
+  60              		.size	kyber_init, .-kyber_init
+  61              		.section	.text.kyber_get_public_key_size,"ax",%progbits
+  62              		.align	2
+  63              		.global	kyber_get_public_key_size
+  64              		.thumb
+  65              		.thumb_func
+  66              		.type	kyber_get_public_key_size, %function
+  67              	kyber_get_public_key_size:
+  68              	.LFB1:
+  26:..\kyber_wrapper.c **** 
+  27:..\kyber_wrapper.c **** size_t kyber_get_public_key_size(void) {
+  69              		.loc 1 27 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  28:..\kyber_wrapper.c ****     return CRYPTO_PUBLICKEYBYTES;
+  29:..\kyber_wrapper.c **** }
+  74              		.loc 1 29 0
+  75 0000 4FF4C460 		mov	r0, #1568
+  76 0004 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE1:
+  79              		.size	kyber_get_public_key_size, .-kyber_get_public_key_size
+  80 0006 00BF     		.section	.text.kyber_get_secret_key_size,"ax",%progbits
+  81              		.align	2
+  82              		.global	kyber_get_secret_key_size
+  83              		.thumb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 3
+
+
+  84              		.thumb_func
+  85              		.type	kyber_get_secret_key_size, %function
+  86              	kyber_get_secret_key_size:
+  87              	.LFB2:
+  30:..\kyber_wrapper.c **** 
+  31:..\kyber_wrapper.c **** size_t kyber_get_secret_key_size(void) {
+  88              		.loc 1 31 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  32:..\kyber_wrapper.c ****     return CRYPTO_SECRETKEYBYTES;
+  33:..\kyber_wrapper.c **** }
+  93              		.loc 1 33 0
+  94 0000 4FF44660 		mov	r0, #3168
+  95 0004 7047     		bx	lr
+  96              		.cfi_endproc
+  97              	.LFE2:
+  98              		.size	kyber_get_secret_key_size, .-kyber_get_secret_key_size
+  99 0006 00BF     		.section	.text.kyber_get_ciphertext_size,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	kyber_get_ciphertext_size
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.type	kyber_get_ciphertext_size, %function
+ 105              	kyber_get_ciphertext_size:
+ 106              	.LFB3:
+  34:..\kyber_wrapper.c **** 
+  35:..\kyber_wrapper.c **** size_t kyber_get_ciphertext_size(void) {
+ 107              		.loc 1 35 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              		@ link register save eliminated.
+  36:..\kyber_wrapper.c ****     return CRYPTO_CIPHERTEXTBYTES;
+  37:..\kyber_wrapper.c **** }
+ 112              		.loc 1 37 0
+ 113 0000 4FF4C460 		mov	r0, #1568
+ 114 0004 7047     		bx	lr
+ 115              		.cfi_endproc
+ 116              	.LFE3:
+ 117              		.size	kyber_get_ciphertext_size, .-kyber_get_ciphertext_size
+ 118 0006 00BF     		.section	.text.kyber_get_shared_secret_size,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	kyber_get_shared_secret_size
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.type	kyber_get_shared_secret_size, %function
+ 124              	kyber_get_shared_secret_size:
+ 125              	.LFB4:
+  38:..\kyber_wrapper.c **** 
+  39:..\kyber_wrapper.c **** size_t kyber_get_shared_secret_size(void) {
+ 126              		.loc 1 39 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              		@ link register save eliminated.
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 4
+
+
+  40:..\kyber_wrapper.c ****     return CRYPTO_BYTES;
+  41:..\kyber_wrapper.c **** }
+ 131              		.loc 1 41 0
+ 132 0000 2020     		movs	r0, #32
+ 133 0002 7047     		bx	lr
+ 134              		.cfi_endproc
+ 135              	.LFE4:
+ 136              		.size	kyber_get_shared_secret_size, .-kyber_get_shared_secret_size
+ 137              		.section	.text.kyber_keypair,"ax",%progbits
+ 138              		.align	2
+ 139              		.global	kyber_keypair
+ 140              		.thumb
+ 141              		.thumb_func
+ 142              		.type	kyber_keypair, %function
+ 143              	kyber_keypair:
+ 144              	.LFB5:
+  42:..\kyber_wrapper.c **** 
+  43:..\kyber_wrapper.c **** int kyber_keypair(unsigned char *pk, unsigned char *sk) {
+ 145              		.loc 1 43 0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149              	.LVL2:
+ 150 0000 08B5     		push	{r3, lr}
+ 151              		.cfi_def_cfa_offset 8
+ 152              		.cfi_offset 3, -8
+ 153              		.cfi_offset 14, -4
+  44:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 154              		.loc 1 44 0
+ 155 0002 044B     		ldr	r3, .L14
+ 156 0004 1B68     		ldr	r3, [r3]
+ 157 0006 13B1     		cbz	r3, .L12
+  45:..\kyber_wrapper.c ****     return crypto_kem_keypair(pk, sk);
+ 158              		.loc 1 45 0
+ 159 0008 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_keypair
+ 160              	.LVL3:
+ 161 000c 08BD     		pop	{r3, pc}
+ 162              	.LVL4:
+ 163              	.L12:
+  44:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 164              		.loc 1 44 0
+ 165 000e 4FF0FF30 		mov	r0, #-1
+ 166              	.LVL5:
+  46:..\kyber_wrapper.c **** }
+ 167              		.loc 1 46 0
+ 168 0012 08BD     		pop	{r3, pc}
+ 169              	.L15:
+ 170              		.align	2
+ 171              	.L14:
+ 172 0014 00000000 		.word	.LANCHOR0
+ 173              		.cfi_endproc
+ 174              	.LFE5:
+ 175              		.size	kyber_keypair, .-kyber_keypair
+ 176              		.section	.text.kyber_encapsulate,"ax",%progbits
+ 177              		.align	2
+ 178              		.global	kyber_encapsulate
+ 179              		.thumb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 5
+
+
+ 180              		.thumb_func
+ 181              		.type	kyber_encapsulate, %function
+ 182              	kyber_encapsulate:
+ 183              	.LFB6:
+  47:..\kyber_wrapper.c **** 
+  48:..\kyber_wrapper.c **** int kyber_encapsulate(unsigned char *ct, unsigned char *ss, const unsigned char *pk) {
+ 184              		.loc 1 48 0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188              	.LVL6:
+ 189 0000 08B5     		push	{r3, lr}
+ 190              		.cfi_def_cfa_offset 8
+ 191              		.cfi_offset 3, -8
+ 192              		.cfi_offset 14, -4
+  49:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 193              		.loc 1 49 0
+ 194 0002 044B     		ldr	r3, .L20
+ 195 0004 1B68     		ldr	r3, [r3]
+ 196 0006 13B1     		cbz	r3, .L18
+  50:..\kyber_wrapper.c ****     return crypto_kem_enc(ct, ss, pk);
+ 197              		.loc 1 50 0
+ 198 0008 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_enc
+ 199              	.LVL7:
+ 200 000c 08BD     		pop	{r3, pc}
+ 201              	.LVL8:
+ 202              	.L18:
+  49:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 203              		.loc 1 49 0
+ 204 000e 4FF0FF30 		mov	r0, #-1
+ 205              	.LVL9:
+  51:..\kyber_wrapper.c **** }
+ 206              		.loc 1 51 0
+ 207 0012 08BD     		pop	{r3, pc}
+ 208              	.L21:
+ 209              		.align	2
+ 210              	.L20:
+ 211 0014 00000000 		.word	.LANCHOR0
+ 212              		.cfi_endproc
+ 213              	.LFE6:
+ 214              		.size	kyber_encapsulate, .-kyber_encapsulate
+ 215              		.section	.text.kyber_decapsulate,"ax",%progbits
+ 216              		.align	2
+ 217              		.global	kyber_decapsulate
+ 218              		.thumb
+ 219              		.thumb_func
+ 220              		.type	kyber_decapsulate, %function
+ 221              	kyber_decapsulate:
+ 222              	.LFB7:
+  52:..\kyber_wrapper.c **** 
+  53:..\kyber_wrapper.c **** int kyber_decapsulate(unsigned char *ss, const unsigned char *ct, const unsigned char *sk) {
+ 223              		.loc 1 53 0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              	.LVL10:
+ 228 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 6
+
+
+ 229              		.cfi_def_cfa_offset 8
+ 230              		.cfi_offset 3, -8
+ 231              		.cfi_offset 14, -4
+  54:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 232              		.loc 1 54 0
+ 233 0002 044B     		ldr	r3, .L26
+ 234 0004 1B68     		ldr	r3, [r3]
+ 235 0006 13B1     		cbz	r3, .L24
+  55:..\kyber_wrapper.c ****     return crypto_kem_dec(ss, ct, sk);
+ 236              		.loc 1 55 0
+ 237 0008 FFF7FEFF 		bl	pqcrystals_kyber1024_ref_dec
+ 238              	.LVL11:
+ 239 000c 08BD     		pop	{r3, pc}
+ 240              	.LVL12:
+ 241              	.L24:
+  54:..\kyber_wrapper.c ****     if (!is_initialized) return -1;
+ 242              		.loc 1 54 0
+ 243 000e 4FF0FF30 		mov	r0, #-1
+ 244              	.LVL13:
+  56:..\kyber_wrapper.c **** }
+ 245              		.loc 1 56 0
+ 246 0012 08BD     		pop	{r3, pc}
+ 247              	.L27:
+ 248              		.align	2
+ 249              	.L26:
+ 250 0014 00000000 		.word	.LANCHOR0
+ 251              		.cfi_endproc
+ 252              	.LFE7:
+ 253              		.size	kyber_decapsulate, .-kyber_decapsulate
+ 254              		.bss
+ 255              		.align	2
+ 256              		.set	.LANCHOR0,. + 0
+ 257              		.type	is_initialized, %object
+ 258              		.size	is_initialized, 4
+ 259              	is_initialized:
+ 260 0000 00000000 		.space	4
+ 261              		.text
+ 262              	.Letext0:
+ 263              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 264              		.file 3 "..\\kyber_wrapper.h"
+ 265              		.file 4 "..\\api.h"
+ 266              		.section	.debug_info,"",%progbits
+ 267              	.Ldebug_info0:
+ 268 0000 59020000 		.4byte	0x259
+ 269 0004 0400     		.2byte	0x4
+ 270 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 271 000a 04       		.byte	0x4
+ 272 000b 01       		.uleb128 0x1
+ 273 000c 79010000 		.4byte	.LASF21
+ 274 0010 0C       		.byte	0xc
+ 275 0011 44010000 		.4byte	.LASF22
+ 276 0015 78020000 		.4byte	.LASF23
+ 277 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 278 001d 00000000 		.4byte	0
+ 279 0021 00000000 		.4byte	.Ldebug_line0
+ 280 0025 02       		.uleb128 0x2
+ 281 0026 04       		.byte	0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 7
+
+
+ 282 0027 05       		.byte	0x5
+ 283 0028 696E7400 		.ascii	"int\000"
+ 284 002c 03       		.uleb128 0x3
+ 285 002d 2B000000 		.4byte	.LASF7
+ 286 0031 02       		.byte	0x2
+ 287 0032 D8       		.byte	0xd8
+ 288 0033 37000000 		.4byte	0x37
+ 289 0037 04       		.uleb128 0x4
+ 290 0038 04       		.byte	0x4
+ 291 0039 07       		.byte	0x7
+ 292 003a 4D020000 		.4byte	.LASF0
+ 293 003e 04       		.uleb128 0x4
+ 294 003f 08       		.byte	0x8
+ 295 0040 05       		.byte	0x5
+ 296 0041 00000000 		.4byte	.LASF1
+ 297 0045 04       		.uleb128 0x4
+ 298 0046 08       		.byte	0x8
+ 299 0047 04       		.byte	0x4
+ 300 0048 6C020000 		.4byte	.LASF2
+ 301 004c 05       		.uleb128 0x5
+ 302 004d 01       		.byte	0x1
+ 303 004e 6B000000 		.4byte	0x6b
+ 304 0052 03       		.byte	0x3
+ 305 0053 0A       		.byte	0xa
+ 306 0054 6B000000 		.4byte	0x6b
+ 307 0058 06       		.uleb128 0x6
+ 308 0059 61000000 		.4byte	.LASF3
+ 309 005d 02       		.byte	0x2
+ 310 005e 06       		.uleb128 0x6
+ 311 005f DA020000 		.4byte	.LASF4
+ 312 0063 03       		.byte	0x3
+ 313 0064 06       		.uleb128 0x6
+ 314 0065 A8000000 		.4byte	.LASF5
+ 315 0069 04       		.byte	0x4
+ 316 006a 00       		.byte	0
+ 317 006b 04       		.uleb128 0x4
+ 318 006c 01       		.byte	0x1
+ 319 006d 08       		.byte	0x8
+ 320 006e 1C010000 		.4byte	.LASF6
+ 321 0072 03       		.uleb128 0x3
+ 322 0073 91000000 		.4byte	.LASF8
+ 323 0077 03       		.byte	0x3
+ 324 0078 0E       		.byte	0xe
+ 325 0079 4C000000 		.4byte	0x4c
+ 326 007d 07       		.uleb128 0x7
+ 327 007e 6E010000 		.4byte	.LASF13
+ 328 0082 01       		.byte	0x1
+ 329 0083 0C       		.byte	0xc
+ 330 0084 25000000 		.4byte	0x25
+ 331 0088 00000000 		.4byte	.LFB0
+ 332 008c 1C000000 		.4byte	.LFE0-.LFB0
+ 333 0090 01       		.uleb128 0x1
+ 334 0091 9C       		.byte	0x9c
+ 335 0092 A6000000 		.4byte	0xa6
+ 336 0096 08       		.uleb128 0x8
+ 337 0097 2C020000 		.4byte	.LASF15
+ 338 009b 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 8
+
+
+ 339 009c 0C       		.byte	0xc
+ 340 009d 72000000 		.4byte	0x72
+ 341 00a1 00000000 		.4byte	.LLST0
+ 342 00a5 00       		.byte	0
+ 343 00a6 09       		.uleb128 0x9
+ 344 00a7 E5000000 		.4byte	.LASF9
+ 345 00ab 01       		.byte	0x1
+ 346 00ac 1B       		.byte	0x1b
+ 347 00ad 2C000000 		.4byte	0x2c
+ 348 00b1 00000000 		.4byte	.LFB1
+ 349 00b5 06000000 		.4byte	.LFE1-.LFB1
+ 350 00b9 01       		.uleb128 0x1
+ 351 00ba 9C       		.byte	0x9c
+ 352 00bb 09       		.uleb128 0x9
+ 353 00bc 2A010000 		.4byte	.LASF10
+ 354 00c0 01       		.byte	0x1
+ 355 00c1 1F       		.byte	0x1f
+ 356 00c2 2C000000 		.4byte	0x2c
+ 357 00c6 00000000 		.4byte	.LFB2
+ 358 00ca 06000000 		.4byte	.LFE2-.LFB2
+ 359 00ce 01       		.uleb128 0x1
+ 360 00cf 9C       		.byte	0x9c
+ 361 00d0 09       		.uleb128 0x9
+ 362 00d1 CB000000 		.4byte	.LASF11
+ 363 00d5 01       		.byte	0x1
+ 364 00d6 23       		.byte	0x23
+ 365 00d7 2C000000 		.4byte	0x2c
+ 366 00db 00000000 		.4byte	.LFB3
+ 367 00df 06000000 		.4byte	.LFE3-.LFB3
+ 368 00e3 01       		.uleb128 0x1
+ 369 00e4 9C       		.byte	0x9c
+ 370 00e5 09       		.uleb128 0x9
+ 371 00e6 74000000 		.4byte	.LASF12
+ 372 00ea 01       		.byte	0x1
+ 373 00eb 27       		.byte	0x27
+ 374 00ec 2C000000 		.4byte	0x2c
+ 375 00f0 00000000 		.4byte	.LFB4
+ 376 00f4 04000000 		.4byte	.LFE4-.LFB4
+ 377 00f8 01       		.uleb128 0x1
+ 378 00f9 9C       		.byte	0x9c
+ 379 00fa 07       		.uleb128 0x7
+ 380 00fb 32000000 		.4byte	.LASF14
+ 381 00ff 01       		.byte	0x1
+ 382 0100 2B       		.byte	0x2b
+ 383 0101 25000000 		.4byte	0x25
+ 384 0105 00000000 		.4byte	.LFB5
+ 385 0109 18000000 		.4byte	.LFE5-.LFB5
+ 386 010d 01       		.uleb128 0x1
+ 387 010e 9C       		.byte	0x9c
+ 388 010f 48010000 		.4byte	0x148
+ 389 0113 0A       		.uleb128 0xa
+ 390 0114 706B00   		.ascii	"pk\000"
+ 391 0117 01       		.byte	0x1
+ 392 0118 2B       		.byte	0x2b
+ 393 0119 48010000 		.4byte	0x148
+ 394 011d 21000000 		.4byte	.LLST1
+ 395 0121 0A       		.uleb128 0xa
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 9
+
+
+ 396 0122 736B00   		.ascii	"sk\000"
+ 397 0125 01       		.byte	0x1
+ 398 0126 2B       		.byte	0x2b
+ 399 0127 48010000 		.4byte	0x148
+ 400 012b 5B000000 		.4byte	.LLST2
+ 401 012f 0B       		.uleb128 0xb
+ 402 0130 0C000000 		.4byte	.LVL3
+ 403 0134 3B020000 		.4byte	0x23b
+ 404 0138 0C       		.uleb128 0xc
+ 405 0139 01       		.uleb128 0x1
+ 406 013a 50       		.byte	0x50
+ 407 013b 03       		.uleb128 0x3
+ 408 013c F3       		.byte	0xf3
+ 409 013d 01       		.uleb128 0x1
+ 410 013e 50       		.byte	0x50
+ 411 013f 0C       		.uleb128 0xc
+ 412 0140 01       		.uleb128 0x1
+ 413 0141 51       		.byte	0x51
+ 414 0142 03       		.uleb128 0x3
+ 415 0143 F3       		.byte	0xf3
+ 416 0144 01       		.uleb128 0x1
+ 417 0145 51       		.byte	0x51
+ 418 0146 00       		.byte	0
+ 419 0147 00       		.byte	0
+ 420 0148 0D       		.uleb128 0xd
+ 421 0149 04       		.byte	0x4
+ 422 014a 6B000000 		.4byte	0x6b
+ 423 014e 07       		.uleb128 0x7
+ 424 014f 5A020000 		.4byte	.LASF16
+ 425 0153 01       		.byte	0x1
+ 426 0154 30       		.byte	0x30
+ 427 0155 25000000 		.4byte	0x25
+ 428 0159 00000000 		.4byte	.LFB6
+ 429 015d 18000000 		.4byte	.LFE6-.LFB6
+ 430 0161 01       		.uleb128 0x1
+ 431 0162 9C       		.byte	0x9c
+ 432 0163 B1010000 		.4byte	0x1b1
+ 433 0167 0A       		.uleb128 0xa
+ 434 0168 637400   		.ascii	"ct\000"
+ 435 016b 01       		.byte	0x1
+ 436 016c 30       		.byte	0x30
+ 437 016d 48010000 		.4byte	0x148
+ 438 0171 87000000 		.4byte	.LLST3
+ 439 0175 0A       		.uleb128 0xa
+ 440 0176 737300   		.ascii	"ss\000"
+ 441 0179 01       		.byte	0x1
+ 442 017a 30       		.byte	0x30
+ 443 017b 48010000 		.4byte	0x148
+ 444 017f C1000000 		.4byte	.LLST4
+ 445 0183 0A       		.uleb128 0xa
+ 446 0184 706B00   		.ascii	"pk\000"
+ 447 0187 01       		.byte	0x1
+ 448 0188 30       		.byte	0x30
+ 449 0189 B1010000 		.4byte	0x1b1
+ 450 018d ED000000 		.4byte	.LLST5
+ 451 0191 0B       		.uleb128 0xb
+ 452 0192 0C000000 		.4byte	.LVL7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 10
+
+
+ 453 0196 46020000 		.4byte	0x246
+ 454 019a 0C       		.uleb128 0xc
+ 455 019b 01       		.uleb128 0x1
+ 456 019c 50       		.byte	0x50
+ 457 019d 03       		.uleb128 0x3
+ 458 019e F3       		.byte	0xf3
+ 459 019f 01       		.uleb128 0x1
+ 460 01a0 50       		.byte	0x50
+ 461 01a1 0C       		.uleb128 0xc
+ 462 01a2 01       		.uleb128 0x1
+ 463 01a3 51       		.byte	0x51
+ 464 01a4 03       		.uleb128 0x3
+ 465 01a5 F3       		.byte	0xf3
+ 466 01a6 01       		.uleb128 0x1
+ 467 01a7 51       		.byte	0x51
+ 468 01a8 0C       		.uleb128 0xc
+ 469 01a9 01       		.uleb128 0x1
+ 470 01aa 52       		.byte	0x52
+ 471 01ab 03       		.uleb128 0x3
+ 472 01ac F3       		.byte	0xf3
+ 473 01ad 01       		.uleb128 0x1
+ 474 01ae 52       		.byte	0x52
+ 475 01af 00       		.byte	0
+ 476 01b0 00       		.byte	0
+ 477 01b1 0D       		.uleb128 0xd
+ 478 01b2 04       		.byte	0x4
+ 479 01b3 B7010000 		.4byte	0x1b7
+ 480 01b7 0E       		.uleb128 0xe
+ 481 01b8 6B000000 		.4byte	0x6b
+ 482 01bc 07       		.uleb128 0x7
+ 483 01bd 3B020000 		.4byte	.LASF17
+ 484 01c1 01       		.byte	0x1
+ 485 01c2 35       		.byte	0x35
+ 486 01c3 25000000 		.4byte	0x25
+ 487 01c7 00000000 		.4byte	.LFB7
+ 488 01cb 18000000 		.4byte	.LFE7-.LFB7
+ 489 01cf 01       		.uleb128 0x1
+ 490 01d0 9C       		.byte	0x9c
+ 491 01d1 1F020000 		.4byte	0x21f
+ 492 01d5 0A       		.uleb128 0xa
+ 493 01d6 737300   		.ascii	"ss\000"
+ 494 01d9 01       		.byte	0x1
+ 495 01da 35       		.byte	0x35
+ 496 01db 48010000 		.4byte	0x148
+ 497 01df 19010000 		.4byte	.LLST6
+ 498 01e3 0A       		.uleb128 0xa
+ 499 01e4 637400   		.ascii	"ct\000"
+ 500 01e7 01       		.byte	0x1
+ 501 01e8 35       		.byte	0x35
+ 502 01e9 B1010000 		.4byte	0x1b1
+ 503 01ed 53010000 		.4byte	.LLST7
+ 504 01f1 0A       		.uleb128 0xa
+ 505 01f2 736B00   		.ascii	"sk\000"
+ 506 01f5 01       		.byte	0x1
+ 507 01f6 35       		.byte	0x35
+ 508 01f7 B1010000 		.4byte	0x1b1
+ 509 01fb 7F010000 		.4byte	.LLST8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 11
+
+
+ 510 01ff 0B       		.uleb128 0xb
+ 511 0200 0C000000 		.4byte	.LVL11
+ 512 0204 51020000 		.4byte	0x251
+ 513 0208 0C       		.uleb128 0xc
+ 514 0209 01       		.uleb128 0x1
+ 515 020a 50       		.byte	0x50
+ 516 020b 03       		.uleb128 0x3
+ 517 020c F3       		.byte	0xf3
+ 518 020d 01       		.uleb128 0x1
+ 519 020e 50       		.byte	0x50
+ 520 020f 0C       		.uleb128 0xc
+ 521 0210 01       		.uleb128 0x1
+ 522 0211 51       		.byte	0x51
+ 523 0212 03       		.uleb128 0x3
+ 524 0213 F3       		.byte	0xf3
+ 525 0214 01       		.uleb128 0x1
+ 526 0215 51       		.byte	0x51
+ 527 0216 0C       		.uleb128 0xc
+ 528 0217 01       		.uleb128 0x1
+ 529 0218 52       		.byte	0x52
+ 530 0219 03       		.uleb128 0x3
+ 531 021a F3       		.byte	0xf3
+ 532 021b 01       		.uleb128 0x1
+ 533 021c 52       		.byte	0x52
+ 534 021d 00       		.byte	0
+ 535 021e 00       		.byte	0
+ 536 021f 0F       		.uleb128 0xf
+ 537 0220 57010000 		.4byte	.LASF24
+ 538 0224 01       		.byte	0x1
+ 539 0225 07       		.byte	0x7
+ 540 0226 72000000 		.4byte	0x72
+ 541 022a 10       		.uleb128 0x10
+ 542 022b BC000000 		.4byte	.LASF25
+ 543 022f 01       		.byte	0x1
+ 544 0230 0A       		.byte	0xa
+ 545 0231 25000000 		.4byte	0x25
+ 546 0235 05       		.uleb128 0x5
+ 547 0236 03       		.byte	0x3
+ 548 0237 00000000 		.4byte	is_initialized
+ 549 023b 11       		.uleb128 0x11
+ 550 023c 40000000 		.4byte	.LASF18
+ 551 0240 40000000 		.4byte	.LASF18
+ 552 0244 04       		.byte	0x4
+ 553 0245 20       		.byte	0x20
+ 554 0246 11       		.uleb128 0x11
+ 555 0247 0E000000 		.4byte	.LASF19
+ 556 024b 0E000000 		.4byte	.LASF19
+ 557 024f 04       		.byte	0x4
+ 558 0250 23       		.byte	0x23
+ 559 0251 11       		.uleb128 0x11
+ 560 0252 FF000000 		.4byte	.LASF20
+ 561 0256 FF000000 		.4byte	.LASF20
+ 562 025a 04       		.byte	0x4
+ 563 025b 28       		.byte	0x28
+ 564 025c 00       		.byte	0
+ 565              		.section	.debug_abbrev,"",%progbits
+ 566              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 12
+
+
+ 567 0000 01       		.uleb128 0x1
+ 568 0001 11       		.uleb128 0x11
+ 569 0002 01       		.byte	0x1
+ 570 0003 25       		.uleb128 0x25
+ 571 0004 0E       		.uleb128 0xe
+ 572 0005 13       		.uleb128 0x13
+ 573 0006 0B       		.uleb128 0xb
+ 574 0007 03       		.uleb128 0x3
+ 575 0008 0E       		.uleb128 0xe
+ 576 0009 1B       		.uleb128 0x1b
+ 577 000a 0E       		.uleb128 0xe
+ 578 000b 55       		.uleb128 0x55
+ 579 000c 17       		.uleb128 0x17
+ 580 000d 11       		.uleb128 0x11
+ 581 000e 01       		.uleb128 0x1
+ 582 000f 10       		.uleb128 0x10
+ 583 0010 17       		.uleb128 0x17
+ 584 0011 00       		.byte	0
+ 585 0012 00       		.byte	0
+ 586 0013 02       		.uleb128 0x2
+ 587 0014 24       		.uleb128 0x24
+ 588 0015 00       		.byte	0
+ 589 0016 0B       		.uleb128 0xb
+ 590 0017 0B       		.uleb128 0xb
+ 591 0018 3E       		.uleb128 0x3e
+ 592 0019 0B       		.uleb128 0xb
+ 593 001a 03       		.uleb128 0x3
+ 594 001b 08       		.uleb128 0x8
+ 595 001c 00       		.byte	0
+ 596 001d 00       		.byte	0
+ 597 001e 03       		.uleb128 0x3
+ 598 001f 16       		.uleb128 0x16
+ 599 0020 00       		.byte	0
+ 600 0021 03       		.uleb128 0x3
+ 601 0022 0E       		.uleb128 0xe
+ 602 0023 3A       		.uleb128 0x3a
+ 603 0024 0B       		.uleb128 0xb
+ 604 0025 3B       		.uleb128 0x3b
+ 605 0026 0B       		.uleb128 0xb
+ 606 0027 49       		.uleb128 0x49
+ 607 0028 13       		.uleb128 0x13
+ 608 0029 00       		.byte	0
+ 609 002a 00       		.byte	0
+ 610 002b 04       		.uleb128 0x4
+ 611 002c 24       		.uleb128 0x24
+ 612 002d 00       		.byte	0
+ 613 002e 0B       		.uleb128 0xb
+ 614 002f 0B       		.uleb128 0xb
+ 615 0030 3E       		.uleb128 0x3e
+ 616 0031 0B       		.uleb128 0xb
+ 617 0032 03       		.uleb128 0x3
+ 618 0033 0E       		.uleb128 0xe
+ 619 0034 00       		.byte	0
+ 620 0035 00       		.byte	0
+ 621 0036 05       		.uleb128 0x5
+ 622 0037 04       		.uleb128 0x4
+ 623 0038 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 13
+
+
+ 624 0039 0B       		.uleb128 0xb
+ 625 003a 0B       		.uleb128 0xb
+ 626 003b 49       		.uleb128 0x49
+ 627 003c 13       		.uleb128 0x13
+ 628 003d 3A       		.uleb128 0x3a
+ 629 003e 0B       		.uleb128 0xb
+ 630 003f 3B       		.uleb128 0x3b
+ 631 0040 0B       		.uleb128 0xb
+ 632 0041 01       		.uleb128 0x1
+ 633 0042 13       		.uleb128 0x13
+ 634 0043 00       		.byte	0
+ 635 0044 00       		.byte	0
+ 636 0045 06       		.uleb128 0x6
+ 637 0046 28       		.uleb128 0x28
+ 638 0047 00       		.byte	0
+ 639 0048 03       		.uleb128 0x3
+ 640 0049 0E       		.uleb128 0xe
+ 641 004a 1C       		.uleb128 0x1c
+ 642 004b 0B       		.uleb128 0xb
+ 643 004c 00       		.byte	0
+ 644 004d 00       		.byte	0
+ 645 004e 07       		.uleb128 0x7
+ 646 004f 2E       		.uleb128 0x2e
+ 647 0050 01       		.byte	0x1
+ 648 0051 3F       		.uleb128 0x3f
+ 649 0052 19       		.uleb128 0x19
+ 650 0053 03       		.uleb128 0x3
+ 651 0054 0E       		.uleb128 0xe
+ 652 0055 3A       		.uleb128 0x3a
+ 653 0056 0B       		.uleb128 0xb
+ 654 0057 3B       		.uleb128 0x3b
+ 655 0058 0B       		.uleb128 0xb
+ 656 0059 27       		.uleb128 0x27
+ 657 005a 19       		.uleb128 0x19
+ 658 005b 49       		.uleb128 0x49
+ 659 005c 13       		.uleb128 0x13
+ 660 005d 11       		.uleb128 0x11
+ 661 005e 01       		.uleb128 0x1
+ 662 005f 12       		.uleb128 0x12
+ 663 0060 06       		.uleb128 0x6
+ 664 0061 40       		.uleb128 0x40
+ 665 0062 18       		.uleb128 0x18
+ 666 0063 9742     		.uleb128 0x2117
+ 667 0065 19       		.uleb128 0x19
+ 668 0066 01       		.uleb128 0x1
+ 669 0067 13       		.uleb128 0x13
+ 670 0068 00       		.byte	0
+ 671 0069 00       		.byte	0
+ 672 006a 08       		.uleb128 0x8
+ 673 006b 05       		.uleb128 0x5
+ 674 006c 00       		.byte	0
+ 675 006d 03       		.uleb128 0x3
+ 676 006e 0E       		.uleb128 0xe
+ 677 006f 3A       		.uleb128 0x3a
+ 678 0070 0B       		.uleb128 0xb
+ 679 0071 3B       		.uleb128 0x3b
+ 680 0072 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 14
+
+
+ 681 0073 49       		.uleb128 0x49
+ 682 0074 13       		.uleb128 0x13
+ 683 0075 02       		.uleb128 0x2
+ 684 0076 17       		.uleb128 0x17
+ 685 0077 00       		.byte	0
+ 686 0078 00       		.byte	0
+ 687 0079 09       		.uleb128 0x9
+ 688 007a 2E       		.uleb128 0x2e
+ 689 007b 00       		.byte	0
+ 690 007c 3F       		.uleb128 0x3f
+ 691 007d 19       		.uleb128 0x19
+ 692 007e 03       		.uleb128 0x3
+ 693 007f 0E       		.uleb128 0xe
+ 694 0080 3A       		.uleb128 0x3a
+ 695 0081 0B       		.uleb128 0xb
+ 696 0082 3B       		.uleb128 0x3b
+ 697 0083 0B       		.uleb128 0xb
+ 698 0084 27       		.uleb128 0x27
+ 699 0085 19       		.uleb128 0x19
+ 700 0086 49       		.uleb128 0x49
+ 701 0087 13       		.uleb128 0x13
+ 702 0088 11       		.uleb128 0x11
+ 703 0089 01       		.uleb128 0x1
+ 704 008a 12       		.uleb128 0x12
+ 705 008b 06       		.uleb128 0x6
+ 706 008c 40       		.uleb128 0x40
+ 707 008d 18       		.uleb128 0x18
+ 708 008e 9742     		.uleb128 0x2117
+ 709 0090 19       		.uleb128 0x19
+ 710 0091 00       		.byte	0
+ 711 0092 00       		.byte	0
+ 712 0093 0A       		.uleb128 0xa
+ 713 0094 05       		.uleb128 0x5
+ 714 0095 00       		.byte	0
+ 715 0096 03       		.uleb128 0x3
+ 716 0097 08       		.uleb128 0x8
+ 717 0098 3A       		.uleb128 0x3a
+ 718 0099 0B       		.uleb128 0xb
+ 719 009a 3B       		.uleb128 0x3b
+ 720 009b 0B       		.uleb128 0xb
+ 721 009c 49       		.uleb128 0x49
+ 722 009d 13       		.uleb128 0x13
+ 723 009e 02       		.uleb128 0x2
+ 724 009f 17       		.uleb128 0x17
+ 725 00a0 00       		.byte	0
+ 726 00a1 00       		.byte	0
+ 727 00a2 0B       		.uleb128 0xb
+ 728 00a3 898201   		.uleb128 0x4109
+ 729 00a6 01       		.byte	0x1
+ 730 00a7 11       		.uleb128 0x11
+ 731 00a8 01       		.uleb128 0x1
+ 732 00a9 31       		.uleb128 0x31
+ 733 00aa 13       		.uleb128 0x13
+ 734 00ab 00       		.byte	0
+ 735 00ac 00       		.byte	0
+ 736 00ad 0C       		.uleb128 0xc
+ 737 00ae 8A8201   		.uleb128 0x410a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 15
+
+
+ 738 00b1 00       		.byte	0
+ 739 00b2 02       		.uleb128 0x2
+ 740 00b3 18       		.uleb128 0x18
+ 741 00b4 9142     		.uleb128 0x2111
+ 742 00b6 18       		.uleb128 0x18
+ 743 00b7 00       		.byte	0
+ 744 00b8 00       		.byte	0
+ 745 00b9 0D       		.uleb128 0xd
+ 746 00ba 0F       		.uleb128 0xf
+ 747 00bb 00       		.byte	0
+ 748 00bc 0B       		.uleb128 0xb
+ 749 00bd 0B       		.uleb128 0xb
+ 750 00be 49       		.uleb128 0x49
+ 751 00bf 13       		.uleb128 0x13
+ 752 00c0 00       		.byte	0
+ 753 00c1 00       		.byte	0
+ 754 00c2 0E       		.uleb128 0xe
+ 755 00c3 26       		.uleb128 0x26
+ 756 00c4 00       		.byte	0
+ 757 00c5 49       		.uleb128 0x49
+ 758 00c6 13       		.uleb128 0x13
+ 759 00c7 00       		.byte	0
+ 760 00c8 00       		.byte	0
+ 761 00c9 0F       		.uleb128 0xf
+ 762 00ca 34       		.uleb128 0x34
+ 763 00cb 00       		.byte	0
+ 764 00cc 03       		.uleb128 0x3
+ 765 00cd 0E       		.uleb128 0xe
+ 766 00ce 3A       		.uleb128 0x3a
+ 767 00cf 0B       		.uleb128 0xb
+ 768 00d0 3B       		.uleb128 0x3b
+ 769 00d1 0B       		.uleb128 0xb
+ 770 00d2 49       		.uleb128 0x49
+ 771 00d3 13       		.uleb128 0x13
+ 772 00d4 00       		.byte	0
+ 773 00d5 00       		.byte	0
+ 774 00d6 10       		.uleb128 0x10
+ 775 00d7 34       		.uleb128 0x34
+ 776 00d8 00       		.byte	0
+ 777 00d9 03       		.uleb128 0x3
+ 778 00da 0E       		.uleb128 0xe
+ 779 00db 3A       		.uleb128 0x3a
+ 780 00dc 0B       		.uleb128 0xb
+ 781 00dd 3B       		.uleb128 0x3b
+ 782 00de 0B       		.uleb128 0xb
+ 783 00df 49       		.uleb128 0x49
+ 784 00e0 13       		.uleb128 0x13
+ 785 00e1 02       		.uleb128 0x2
+ 786 00e2 18       		.uleb128 0x18
+ 787 00e3 00       		.byte	0
+ 788 00e4 00       		.byte	0
+ 789 00e5 11       		.uleb128 0x11
+ 790 00e6 2E       		.uleb128 0x2e
+ 791 00e7 00       		.byte	0
+ 792 00e8 3F       		.uleb128 0x3f
+ 793 00e9 19       		.uleb128 0x19
+ 794 00ea 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 16
+
+
+ 795 00eb 19       		.uleb128 0x19
+ 796 00ec 6E       		.uleb128 0x6e
+ 797 00ed 0E       		.uleb128 0xe
+ 798 00ee 03       		.uleb128 0x3
+ 799 00ef 0E       		.uleb128 0xe
+ 800 00f0 3A       		.uleb128 0x3a
+ 801 00f1 0B       		.uleb128 0xb
+ 802 00f2 3B       		.uleb128 0x3b
+ 803 00f3 0B       		.uleb128 0xb
+ 804 00f4 00       		.byte	0
+ 805 00f5 00       		.byte	0
+ 806 00f6 00       		.byte	0
+ 807              		.section	.debug_loc,"",%progbits
+ 808              	.Ldebug_loc0:
+ 809              	.LLST0:
+ 810 0000 00000000 		.4byte	.LVL0
+ 811 0004 02000000 		.4byte	.LVL1
+ 812 0008 0100     		.2byte	0x1
+ 813 000a 50       		.byte	0x50
+ 814 000b 02000000 		.4byte	.LVL1
+ 815 000f 1C000000 		.4byte	.LFE0
+ 816 0013 0400     		.2byte	0x4
+ 817 0015 F3       		.byte	0xf3
+ 818 0016 01       		.uleb128 0x1
+ 819 0017 50       		.byte	0x50
+ 820 0018 9F       		.byte	0x9f
+ 821 0019 00000000 		.4byte	0
+ 822 001d 00000000 		.4byte	0
+ 823              	.LLST1:
+ 824 0021 00000000 		.4byte	.LVL2
+ 825 0025 0B000000 		.4byte	.LVL3-1
+ 826 0029 0100     		.2byte	0x1
+ 827 002b 50       		.byte	0x50
+ 828 002c 0B000000 		.4byte	.LVL3-1
+ 829 0030 0E000000 		.4byte	.LVL4
+ 830 0034 0400     		.2byte	0x4
+ 831 0036 F3       		.byte	0xf3
+ 832 0037 01       		.uleb128 0x1
+ 833 0038 50       		.byte	0x50
+ 834 0039 9F       		.byte	0x9f
+ 835 003a 0E000000 		.4byte	.LVL4
+ 836 003e 12000000 		.4byte	.LVL5
+ 837 0042 0100     		.2byte	0x1
+ 838 0044 50       		.byte	0x50
+ 839 0045 12000000 		.4byte	.LVL5
+ 840 0049 18000000 		.4byte	.LFE5
+ 841 004d 0400     		.2byte	0x4
+ 842 004f F3       		.byte	0xf3
+ 843 0050 01       		.uleb128 0x1
+ 844 0051 50       		.byte	0x50
+ 845 0052 9F       		.byte	0x9f
+ 846 0053 00000000 		.4byte	0
+ 847 0057 00000000 		.4byte	0
+ 848              	.LLST2:
+ 849 005b 00000000 		.4byte	.LVL2
+ 850 005f 0B000000 		.4byte	.LVL3-1
+ 851 0063 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 17
+
+
+ 852 0065 51       		.byte	0x51
+ 853 0066 0B000000 		.4byte	.LVL3-1
+ 854 006a 0E000000 		.4byte	.LVL4
+ 855 006e 0400     		.2byte	0x4
+ 856 0070 F3       		.byte	0xf3
+ 857 0071 01       		.uleb128 0x1
+ 858 0072 51       		.byte	0x51
+ 859 0073 9F       		.byte	0x9f
+ 860 0074 0E000000 		.4byte	.LVL4
+ 861 0078 18000000 		.4byte	.LFE5
+ 862 007c 0100     		.2byte	0x1
+ 863 007e 51       		.byte	0x51
+ 864 007f 00000000 		.4byte	0
+ 865 0083 00000000 		.4byte	0
+ 866              	.LLST3:
+ 867 0087 00000000 		.4byte	.LVL6
+ 868 008b 0B000000 		.4byte	.LVL7-1
+ 869 008f 0100     		.2byte	0x1
+ 870 0091 50       		.byte	0x50
+ 871 0092 0B000000 		.4byte	.LVL7-1
+ 872 0096 0E000000 		.4byte	.LVL8
+ 873 009a 0400     		.2byte	0x4
+ 874 009c F3       		.byte	0xf3
+ 875 009d 01       		.uleb128 0x1
+ 876 009e 50       		.byte	0x50
+ 877 009f 9F       		.byte	0x9f
+ 878 00a0 0E000000 		.4byte	.LVL8
+ 879 00a4 12000000 		.4byte	.LVL9
+ 880 00a8 0100     		.2byte	0x1
+ 881 00aa 50       		.byte	0x50
+ 882 00ab 12000000 		.4byte	.LVL9
+ 883 00af 18000000 		.4byte	.LFE6
+ 884 00b3 0400     		.2byte	0x4
+ 885 00b5 F3       		.byte	0xf3
+ 886 00b6 01       		.uleb128 0x1
+ 887 00b7 50       		.byte	0x50
+ 888 00b8 9F       		.byte	0x9f
+ 889 00b9 00000000 		.4byte	0
+ 890 00bd 00000000 		.4byte	0
+ 891              	.LLST4:
+ 892 00c1 00000000 		.4byte	.LVL6
+ 893 00c5 0B000000 		.4byte	.LVL7-1
+ 894 00c9 0100     		.2byte	0x1
+ 895 00cb 51       		.byte	0x51
+ 896 00cc 0B000000 		.4byte	.LVL7-1
+ 897 00d0 0E000000 		.4byte	.LVL8
+ 898 00d4 0400     		.2byte	0x4
+ 899 00d6 F3       		.byte	0xf3
+ 900 00d7 01       		.uleb128 0x1
+ 901 00d8 51       		.byte	0x51
+ 902 00d9 9F       		.byte	0x9f
+ 903 00da 0E000000 		.4byte	.LVL8
+ 904 00de 18000000 		.4byte	.LFE6
+ 905 00e2 0100     		.2byte	0x1
+ 906 00e4 51       		.byte	0x51
+ 907 00e5 00000000 		.4byte	0
+ 908 00e9 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 18
+
+
+ 909              	.LLST5:
+ 910 00ed 00000000 		.4byte	.LVL6
+ 911 00f1 0B000000 		.4byte	.LVL7-1
+ 912 00f5 0100     		.2byte	0x1
+ 913 00f7 52       		.byte	0x52
+ 914 00f8 0B000000 		.4byte	.LVL7-1
+ 915 00fc 0E000000 		.4byte	.LVL8
+ 916 0100 0400     		.2byte	0x4
+ 917 0102 F3       		.byte	0xf3
+ 918 0103 01       		.uleb128 0x1
+ 919 0104 52       		.byte	0x52
+ 920 0105 9F       		.byte	0x9f
+ 921 0106 0E000000 		.4byte	.LVL8
+ 922 010a 18000000 		.4byte	.LFE6
+ 923 010e 0100     		.2byte	0x1
+ 924 0110 52       		.byte	0x52
+ 925 0111 00000000 		.4byte	0
+ 926 0115 00000000 		.4byte	0
+ 927              	.LLST6:
+ 928 0119 00000000 		.4byte	.LVL10
+ 929 011d 0B000000 		.4byte	.LVL11-1
+ 930 0121 0100     		.2byte	0x1
+ 931 0123 50       		.byte	0x50
+ 932 0124 0B000000 		.4byte	.LVL11-1
+ 933 0128 0E000000 		.4byte	.LVL12
+ 934 012c 0400     		.2byte	0x4
+ 935 012e F3       		.byte	0xf3
+ 936 012f 01       		.uleb128 0x1
+ 937 0130 50       		.byte	0x50
+ 938 0131 9F       		.byte	0x9f
+ 939 0132 0E000000 		.4byte	.LVL12
+ 940 0136 12000000 		.4byte	.LVL13
+ 941 013a 0100     		.2byte	0x1
+ 942 013c 50       		.byte	0x50
+ 943 013d 12000000 		.4byte	.LVL13
+ 944 0141 18000000 		.4byte	.LFE7
+ 945 0145 0400     		.2byte	0x4
+ 946 0147 F3       		.byte	0xf3
+ 947 0148 01       		.uleb128 0x1
+ 948 0149 50       		.byte	0x50
+ 949 014a 9F       		.byte	0x9f
+ 950 014b 00000000 		.4byte	0
+ 951 014f 00000000 		.4byte	0
+ 952              	.LLST7:
+ 953 0153 00000000 		.4byte	.LVL10
+ 954 0157 0B000000 		.4byte	.LVL11-1
+ 955 015b 0100     		.2byte	0x1
+ 956 015d 51       		.byte	0x51
+ 957 015e 0B000000 		.4byte	.LVL11-1
+ 958 0162 0E000000 		.4byte	.LVL12
+ 959 0166 0400     		.2byte	0x4
+ 960 0168 F3       		.byte	0xf3
+ 961 0169 01       		.uleb128 0x1
+ 962 016a 51       		.byte	0x51
+ 963 016b 9F       		.byte	0x9f
+ 964 016c 0E000000 		.4byte	.LVL12
+ 965 0170 18000000 		.4byte	.LFE7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 19
+
+
+ 966 0174 0100     		.2byte	0x1
+ 967 0176 51       		.byte	0x51
+ 968 0177 00000000 		.4byte	0
+ 969 017b 00000000 		.4byte	0
+ 970              	.LLST8:
+ 971 017f 00000000 		.4byte	.LVL10
+ 972 0183 0B000000 		.4byte	.LVL11-1
+ 973 0187 0100     		.2byte	0x1
+ 974 0189 52       		.byte	0x52
+ 975 018a 0B000000 		.4byte	.LVL11-1
+ 976 018e 0E000000 		.4byte	.LVL12
+ 977 0192 0400     		.2byte	0x4
+ 978 0194 F3       		.byte	0xf3
+ 979 0195 01       		.uleb128 0x1
+ 980 0196 52       		.byte	0x52
+ 981 0197 9F       		.byte	0x9f
+ 982 0198 0E000000 		.4byte	.LVL12
+ 983 019c 18000000 		.4byte	.LFE7
+ 984 01a0 0100     		.2byte	0x1
+ 985 01a2 52       		.byte	0x52
+ 986 01a3 00000000 		.4byte	0
+ 987 01a7 00000000 		.4byte	0
+ 988              		.section	.debug_aranges,"",%progbits
+ 989 0000 54000000 		.4byte	0x54
+ 990 0004 0200     		.2byte	0x2
+ 991 0006 00000000 		.4byte	.Ldebug_info0
+ 992 000a 04       		.byte	0x4
+ 993 000b 00       		.byte	0
+ 994 000c 0000     		.2byte	0
+ 995 000e 0000     		.2byte	0
+ 996 0010 00000000 		.4byte	.LFB0
+ 997 0014 1C000000 		.4byte	.LFE0-.LFB0
+ 998 0018 00000000 		.4byte	.LFB1
+ 999 001c 06000000 		.4byte	.LFE1-.LFB1
+ 1000 0020 00000000 		.4byte	.LFB2
+ 1001 0024 06000000 		.4byte	.LFE2-.LFB2
+ 1002 0028 00000000 		.4byte	.LFB3
+ 1003 002c 06000000 		.4byte	.LFE3-.LFB3
+ 1004 0030 00000000 		.4byte	.LFB4
+ 1005 0034 04000000 		.4byte	.LFE4-.LFB4
+ 1006 0038 00000000 		.4byte	.LFB5
+ 1007 003c 18000000 		.4byte	.LFE5-.LFB5
+ 1008 0040 00000000 		.4byte	.LFB6
+ 1009 0044 18000000 		.4byte	.LFE6-.LFB6
+ 1010 0048 00000000 		.4byte	.LFB7
+ 1011 004c 18000000 		.4byte	.LFE7-.LFB7
+ 1012 0050 00000000 		.4byte	0
+ 1013 0054 00000000 		.4byte	0
+ 1014              		.section	.debug_ranges,"",%progbits
+ 1015              	.Ldebug_ranges0:
+ 1016 0000 00000000 		.4byte	.LFB0
+ 1017 0004 1C000000 		.4byte	.LFE0
+ 1018 0008 00000000 		.4byte	.LFB1
+ 1019 000c 06000000 		.4byte	.LFE1
+ 1020 0010 00000000 		.4byte	.LFB2
+ 1021 0014 06000000 		.4byte	.LFE2
+ 1022 0018 00000000 		.4byte	.LFB3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 20
+
+
+ 1023 001c 06000000 		.4byte	.LFE3
+ 1024 0020 00000000 		.4byte	.LFB4
+ 1025 0024 04000000 		.4byte	.LFE4
+ 1026 0028 00000000 		.4byte	.LFB5
+ 1027 002c 18000000 		.4byte	.LFE5
+ 1028 0030 00000000 		.4byte	.LFB6
+ 1029 0034 18000000 		.4byte	.LFE6
+ 1030 0038 00000000 		.4byte	.LFB7
+ 1031 003c 18000000 		.4byte	.LFE7
+ 1032 0040 00000000 		.4byte	0
+ 1033 0044 00000000 		.4byte	0
+ 1034              		.section	.debug_line,"",%progbits
+ 1035              	.Ldebug_line0:
+ 1036 0000 63010000 		.section	.debug_str,"MS",%progbits,1
+ 1036      0200CD00 
+ 1036      00000201 
+ 1036      FB0E0D00 
+ 1036      01010101 
+ 1037              	.LASF1:
+ 1038 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1038      206C6F6E 
+ 1038      6720696E 
+ 1038      7400
+ 1039              	.LASF19:
+ 1040 000e 70716372 		.ascii	"pqcrystals_kyber1024_ref_enc\000"
+ 1040      79737461 
+ 1040      6C735F6B 
+ 1040      79626572 
+ 1040      31303234 
+ 1041              	.LASF7:
+ 1042 002b 73697A65 		.ascii	"size_t\000"
+ 1042      5F7400
+ 1043              	.LASF14:
+ 1044 0032 6B796265 		.ascii	"kyber_keypair\000"
+ 1044      725F6B65 
+ 1044      79706169 
+ 1044      7200
+ 1045              	.LASF18:
+ 1046 0040 70716372 		.ascii	"pqcrystals_kyber1024_ref_keypair\000"
+ 1046      79737461 
+ 1046      6C735F6B 
+ 1046      79626572 
+ 1046      31303234 
+ 1047              	.LASF3:
+ 1048 0061 4B594245 		.ascii	"KYBER_SECURITY_512\000"
+ 1048      525F5345 
+ 1048      43555249 
+ 1048      54595F35 
+ 1048      313200
+ 1049              	.LASF12:
+ 1050 0074 6B796265 		.ascii	"kyber_get_shared_secret_size\000"
+ 1050      725F6765 
+ 1050      745F7368 
+ 1050      61726564 
+ 1050      5F736563 
+ 1051              	.LASF8:
+ 1052 0091 6B796265 		.ascii	"kyber_security_level_t\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 21
+
+
+ 1052      725F7365 
+ 1052      63757269 
+ 1052      74795F6C 
+ 1052      6576656C 
+ 1053              	.LASF5:
+ 1054 00a8 4B594245 		.ascii	"KYBER_SECURITY_1024\000"
+ 1054      525F5345 
+ 1054      43555249 
+ 1054      54595F31 
+ 1054      30323400 
+ 1055              	.LASF25:
+ 1056 00bc 69735F69 		.ascii	"is_initialized\000"
+ 1056      6E697469 
+ 1056      616C697A 
+ 1056      656400
+ 1057              	.LASF11:
+ 1058 00cb 6B796265 		.ascii	"kyber_get_ciphertext_size\000"
+ 1058      725F6765 
+ 1058      745F6369 
+ 1058      70686572 
+ 1058      74657874 
+ 1059              	.LASF9:
+ 1060 00e5 6B796265 		.ascii	"kyber_get_public_key_size\000"
+ 1060      725F6765 
+ 1060      745F7075 
+ 1060      626C6963 
+ 1060      5F6B6579 
+ 1061              	.LASF20:
+ 1062 00ff 70716372 		.ascii	"pqcrystals_kyber1024_ref_dec\000"
+ 1062      79737461 
+ 1062      6C735F6B 
+ 1062      79626572 
+ 1062      31303234 
+ 1063              	.LASF6:
+ 1064 011c 756E7369 		.ascii	"unsigned char\000"
+ 1064      676E6564 
+ 1064      20636861 
+ 1064      7200
+ 1065              	.LASF10:
+ 1066 012a 6B796265 		.ascii	"kyber_get_secret_key_size\000"
+ 1066      725F6765 
+ 1066      745F7365 
+ 1066      63726574 
+ 1066      5F6B6579 
+ 1067              	.LASF22:
+ 1068 0144 2E2E5C6B 		.ascii	"..\\kyber_wrapper.c\000"
+ 1068      79626572 
+ 1068      5F777261 
+ 1068      70706572 
+ 1068      2E6300
+ 1069              	.LASF24:
+ 1070 0157 63757272 		.ascii	"current_security_level\000"
+ 1070      656E745F 
+ 1070      73656375 
+ 1070      72697479 
+ 1070      5F6C6576 
+ 1071              	.LASF13:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 22
+
+
+ 1072 016e 6B796265 		.ascii	"kyber_init\000"
+ 1072      725F696E 
+ 1072      697400
+ 1073              	.LASF21:
+ 1074 0179 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1074      43313120 
+ 1074      352E342E 
+ 1074      31203230 
+ 1074      31363036 
+ 1075 01ac 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1075      20726576 
+ 1075      6973696F 
+ 1075      6E203233 
+ 1075      37373135 
+ 1076 01df 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1076      70202D6D 
+ 1076      6670753D 
+ 1076      66707634 
+ 1076      2D73702D 
+ 1077 0212 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1077      6F6E7320 
+ 1077      2D666661 
+ 1077      742D6C74 
+ 1077      6F2D6F62 
+ 1078              	.LASF15:
+ 1079 022c 73656375 		.ascii	"security_level\000"
+ 1079      72697479 
+ 1079      5F6C6576 
+ 1079      656C00
+ 1080              	.LASF17:
+ 1081 023b 6B796265 		.ascii	"kyber_decapsulate\000"
+ 1081      725F6465 
+ 1081      63617073 
+ 1081      756C6174 
+ 1081      6500
+ 1082              	.LASF0:
+ 1083 024d 756E7369 		.ascii	"unsigned int\000"
+ 1083      676E6564 
+ 1083      20696E74 
+ 1083      00
+ 1084              	.LASF16:
+ 1085 025a 6B796265 		.ascii	"kyber_encapsulate\000"
+ 1085      725F656E 
+ 1085      63617073 
+ 1085      756C6174 
+ 1085      6500
+ 1086              	.LASF2:
+ 1087 026c 6C6F6E67 		.ascii	"long double\000"
+ 1087      20646F75 
+ 1087      626C6500 
+ 1088              	.LASF23:
+ 1089 0278 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1089      73657273 
+ 1089      5C626F67 
+ 1089      75725C44 
+ 1089      6F63756D 
+ 1090 02a4 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 23
+
+
+ 1090      7269746D 
+ 1090      6F732070 
+ 1090      6F737463 
+ 1090      75616E74 
+ 1091 02d3 2E637964 		.ascii	".cydsn\000"
+ 1091      736E00
+ 1092              	.LASF4:
+ 1093 02da 4B594245 		.ascii	"KYBER_SECURITY_768\000"
+ 1093      525F5345 
+ 1093      43555249 
+ 1093      54595F37 
+ 1093      363800
+ 1094              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

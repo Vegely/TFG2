@@ -1,0 +1,3151 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"parsing.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.load8,"ax",%progbits
+  21              		.align	2
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	load8, %function
+  25              	load8:
+  26              	.LFB0:
+  27              		.file 1 "..\\parsing.c"
+   1:..\parsing.c  **** #include "parameters.h"
+   2:..\parsing.c  **** #include "parsing.h"
+   3:..\parsing.c  **** #include "vector.h"
+   4:..\parsing.c  **** #include <stdint.h>
+   5:..\parsing.c  **** #include <string.h>
+   6:..\parsing.c  **** /**
+   7:..\parsing.c  ****  * @file parsing.c
+   8:..\parsing.c  ****  * @brief Functions to parse secret key, public key and ciphertext of the HQC scheme
+   9:..\parsing.c  ****  */
+  10:..\parsing.c  **** 
+  11:..\parsing.c  **** 
+  12:..\parsing.c  **** static uint64_t load8(const uint8_t *in) {
+  28              		.loc 1 12 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 30B4     		push	{r4, r5}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 5, -4
+  13:..\parsing.c  ****     uint64_t ret = in[7];
+  38              		.loc 1 13 0
+  39 0002 C279     		ldrb	r2, [r0, #7]	@ zero_extendqisi2
+  40 0004 0023     		movs	r3, #0
+  41              	.LVL1:
+  42              	.LBB2:
+  14:..\parsing.c  **** 
+  15:..\parsing.c  ****     for (int8_t i = 6; i >= 0; --i) {
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 2
+
+
+  43              		.loc 1 15 0
+  44 0006 0621     		movs	r1, #6
+  45 0008 09E0     		b	.L2
+  46              	.LVL2:
+  47              	.L3:
+  16:..\parsing.c  ****         ret <<= 8;
+  48              		.loc 1 16 0 discriminator 3
+  49 000a 1D02     		lsls	r5, r3, #8
+  50 000c 45EA1265 		orr	r5, r5, r2, lsr #24
+  51 0010 1402     		lsls	r4, r2, #8
+  52              	.LVL3:
+  17:..\parsing.c  ****         ret |= in[i];
+  53              		.loc 1 17 0 discriminator 3
+  54 0012 425C     		ldrb	r2, [r0, r1]	@ zero_extendqisi2
+  55 0014 0023     		movs	r3, #0
+  56 0016 2243     		orrs	r2, r2, r4
+  57 0018 2B43     		orrs	r3, r3, r5
+  58              	.LVL4:
+  15:..\parsing.c  ****         ret <<= 8;
+  59              		.loc 1 15 0 discriminator 3
+  60 001a 0139     		subs	r1, r1, #1
+  61              	.LVL5:
+  62 001c 49B2     		sxtb	r1, r1
+  63              	.LVL6:
+  64              	.L2:
+  15:..\parsing.c  ****         ret <<= 8;
+  65              		.loc 1 15 0 is_stmt 0 discriminator 1
+  66 001e 0029     		cmp	r1, #0
+  67 0020 F3DA     		bge	.L3
+  68              	.LBE2:
+  18:..\parsing.c  ****     }
+  19:..\parsing.c  **** 
+  20:..\parsing.c  ****     return ret;
+  21:..\parsing.c  **** }
+  69              		.loc 1 21 0 is_stmt 1
+  70 0022 1046     		mov	r0, r2
+  71              	.LVL7:
+  72 0024 1946     		mov	r1, r3
+  73              	.LVL8:
+  74 0026 30BC     		pop	{r4, r5}
+  75              		.cfi_restore 5
+  76              		.cfi_restore 4
+  77              		.cfi_def_cfa_offset 0
+  78 0028 7047     		bx	lr
+  79              		.cfi_endproc
+  80              	.LFE0:
+  81              		.size	load8, .-load8
+  82 002a 00BF     		.section	.text.PQCLEAN_HQC256_CLEAN_load8_arr,"ax",%progbits
+  83              		.align	2
+  84              		.global	PQCLEAN_HQC256_CLEAN_load8_arr
+  85              		.thumb
+  86              		.thumb_func
+  87              		.type	PQCLEAN_HQC256_CLEAN_load8_arr, %function
+  88              	PQCLEAN_HQC256_CLEAN_load8_arr:
+  89              	.LFB1:
+  22:..\parsing.c  **** 
+  23:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_load8_arr(uint64_t *out64, size_t outlen, const uint8_t *in8, size_t inle
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 3
+
+
+  90              		.loc 1 23 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 8
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              	.LVL9:
+  95 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  96              		.cfi_def_cfa_offset 36
+  97              		.cfi_offset 4, -36
+  98              		.cfi_offset 5, -32
+  99              		.cfi_offset 6, -28
+ 100              		.cfi_offset 7, -24
+ 101              		.cfi_offset 8, -20
+ 102              		.cfi_offset 9, -16
+ 103              		.cfi_offset 10, -12
+ 104              		.cfi_offset 11, -8
+ 105              		.cfi_offset 14, -4
+ 106 0004 83B0     		sub	sp, sp, #12
+ 107              		.cfi_def_cfa_offset 48
+ 108 0006 0190     		str	r0, [sp, #4]
+ 109 0008 0E46     		mov	r6, r1
+ 110 000a 9146     		mov	r9, r2
+ 111 000c 9B46     		mov	fp, r3
+ 112              	.LVL10:
+  24:..\parsing.c  ****     size_t index_in = 0;
+  25:..\parsing.c  ****     size_t index_out = 0;
+  26:..\parsing.c  **** 
+  27:..\parsing.c  ****     // first copy by 8 bytes
+  28:..\parsing.c  ****     if (inlen >= 8 && outlen >= 1) {
+ 113              		.loc 1 28 0
+ 114 000e 072B     		cmp	r3, #7
+ 115 0010 17D9     		bls	.L12
+ 116              		.loc 1 28 0 is_stmt 0 discriminator 1
+ 117 0012 69B9     		cbnz	r1, .L13
+  25:..\parsing.c  **** 
+ 118              		.loc 1 25 0 is_stmt 1
+ 119 0014 0027     		movs	r7, #0
+  24:..\parsing.c  ****     size_t index_in = 0;
+ 120              		.loc 1 24 0
+ 121 0016 3846     		mov	r0, r7
+ 122              	.LVL11:
+ 123 0018 15E0     		b	.L6
+ 124              	.LVL12:
+ 125              	.L8:
+  29:..\parsing.c  ****         while (index_out < outlen && index_in + 8 <= inlen) {
+  30:..\parsing.c  ****             out64[index_out] = load8(in8 + index_in);
+ 126              		.loc 1 30 0
+ 127 001a 019B     		ldr	r3, [sp, #4]
+ 128 001c 03EBC70A 		add	r10, r3, r7, lsl #3
+ 129 0020 4844     		add	r0, r0, r9
+ 130              	.LVL13:
+ 131 0022 FFF7FEFF 		bl	load8
+ 132              	.LVL14:
+ 133 0026 CAE90001 		strd	r0, [r10]
+ 134              	.LVL15:
+  31:..\parsing.c  **** 
+  32:..\parsing.c  ****             index_in += 8;
+  33:..\parsing.c  ****             index_out += 1;
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 4
+
+
+ 135              		.loc 1 33 0
+ 136 002a 0137     		adds	r7, r7, #1
+ 137              	.LVL16:
+  32:..\parsing.c  ****             index_out += 1;
+ 138              		.loc 1 32 0
+ 139 002c 4046     		mov	r0, r8
+ 140 002e 01E0     		b	.L7
+ 141              	.LVL17:
+ 142              	.L13:
+ 143 0030 0027     		movs	r7, #0
+ 144 0032 3846     		mov	r0, r7
+ 145              	.LVL18:
+ 146              	.L7:
+  29:..\parsing.c  ****         while (index_out < outlen && index_in + 8 <= inlen) {
+ 147              		.loc 1 29 0
+ 148 0034 B742     		cmp	r7, r6
+ 149 0036 06D2     		bcs	.L6
+  29:..\parsing.c  ****         while (index_out < outlen && index_in + 8 <= inlen) {
+ 150              		.loc 1 29 0 is_stmt 0 discriminator 1
+ 151 0038 00F10808 		add	r8, r0, #8
+ 152 003c C345     		cmp	fp, r8
+ 153 003e ECD2     		bcs	.L8
+ 154 0040 01E0     		b	.L6
+ 155              	.LVL19:
+ 156              	.L12:
+  25:..\parsing.c  **** 
+ 157              		.loc 1 25 0 is_stmt 1
+ 158 0042 0027     		movs	r7, #0
+  24:..\parsing.c  ****     size_t index_out = 0;
+ 159              		.loc 1 24 0
+ 160 0044 3846     		mov	r0, r7
+ 161              	.LVL20:
+ 162              	.L6:
+  34:..\parsing.c  ****         }
+  35:..\parsing.c  ****     }
+  36:..\parsing.c  **** 
+  37:..\parsing.c  ****     // we now need to do the last 7 bytes if necessary
+  38:..\parsing.c  ****     if (index_in >= inlen || index_out >= outlen) {
+ 163              		.loc 1 38 0
+ 164 0046 5845     		cmp	r0, fp
+ 165 0048 28D2     		bcs	.L5
+ 166              		.loc 1 38 0 is_stmt 0 discriminator 1
+ 167 004a B742     		cmp	r7, r6
+ 168 004c 26D2     		bcs	.L5
+  39:..\parsing.c  ****         return;
+  40:..\parsing.c  ****     }
+  41:..\parsing.c  ****     out64[index_out] = in8[inlen - 1];
+ 169              		.loc 1 41 0 is_stmt 1
+ 170 004e 019B     		ldr	r3, [sp, #4]
+ 171 0050 03EBC706 		add	r6, r3, r7, lsl #3
+ 172              	.LVL21:
+ 173 0054 09EB0B03 		add	r3, r9, fp
+ 174 0058 13F8012C 		ldrb	r2, [r3, #-1]	@ zero_extendqisi2
+ 175 005c 0023     		movs	r3, #0
+ 176 005e C6E90023 		strd	r2, [r6]
+ 177              	.LBB3:
+  42:..\parsing.c  ****     for (int8_t i = (int8_t)(inlen - index_in) - 2; i >= 0; --i) {
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 5
+
+
+ 178              		.loc 1 42 0
+ 179 0062 C0EB0B03 		rsb	r3, r0, fp
+ 180 0066 023B     		subs	r3, r3, #2
+ 181 0068 5BB2     		sxtb	r3, r3
+ 182              	.LVL22:
+ 183 006a 15E0     		b	.L10
+ 184              	.LVL23:
+ 185              	.L11:
+  43:..\parsing.c  ****         out64[index_out] <<= 8;
+ 186              		.loc 1 43 0 discriminator 3
+ 187 006c 3268     		ldr	r2, [r6]
+ 188 006e 7168     		ldr	r1, [r6, #4]
+ 189 0070 0D02     		lsls	r5, r1, #8
+ 190 0072 45EA1265 		orr	r5, r5, r2, lsr #24
+ 191 0076 1402     		lsls	r4, r2, #8
+ 192 0078 C6E90045 		strd	r4, [r6]
+  44:..\parsing.c  ****         out64[index_out] |= in8[index_in + i];
+ 193              		.loc 1 44 0 discriminator 3
+ 194 007c 09EB0002 		add	r2, r9, r0
+ 195 0080 12F803A0 		ldrb	r10, [r2, r3]	@ zero_extendqisi2
+ 196 0084 4FF0000B 		mov	fp, #0
+ 197 0088 4AEA040A 		orr	r10, r10, r4
+ 198 008c 4BEA050B 		orr	fp, fp, r5
+ 199 0090 C6E900AB 		strd	r10, [r6]
+  42:..\parsing.c  ****     for (int8_t i = (int8_t)(inlen - index_in) - 2; i >= 0; --i) {
+ 200              		.loc 1 42 0 discriminator 3
+ 201 0094 013B     		subs	r3, r3, #1
+ 202              	.LVL24:
+ 203 0096 5BB2     		sxtb	r3, r3
+ 204              	.LVL25:
+ 205              	.L10:
+  42:..\parsing.c  ****     for (int8_t i = (int8_t)(inlen - index_in) - 2; i >= 0; --i) {
+ 206              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 207 0098 002B     		cmp	r3, #0
+ 208 009a E7DA     		bge	.L11
+ 209              	.LVL26:
+ 210              	.L5:
+ 211              	.LBE3:
+  45:..\parsing.c  ****     }
+  46:..\parsing.c  **** }
+ 212              		.loc 1 46 0 is_stmt 1
+ 213 009c 03B0     		add	sp, sp, #12
+ 214              		.cfi_def_cfa_offset 36
+ 215              		@ sp needed
+ 216 009e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 217              		.cfi_endproc
+ 218              	.LFE1:
+ 219              		.size	PQCLEAN_HQC256_CLEAN_load8_arr, .-PQCLEAN_HQC256_CLEAN_load8_arr
+ 220 00a2 00BF     		.section	.text.PQCLEAN_HQC256_CLEAN_store8_arr,"ax",%progbits
+ 221              		.align	2
+ 222              		.global	PQCLEAN_HQC256_CLEAN_store8_arr
+ 223              		.thumb
+ 224              		.thumb_func
+ 225              		.type	PQCLEAN_HQC256_CLEAN_store8_arr, %function
+ 226              	PQCLEAN_HQC256_CLEAN_store8_arr:
+ 227              	.LFB2:
+  47:..\parsing.c  **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 6
+
+
+  48:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_store8_arr(uint8_t *out8, size_t outlen, const uint64_t *in64, size_t inl
+ 228              		.loc 1 48 0
+ 229              		.cfi_startproc
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232              	.LVL27:
+ 233 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 234              		.cfi_def_cfa_offset 24
+ 235              		.cfi_offset 4, -24
+ 236              		.cfi_offset 5, -20
+ 237              		.cfi_offset 6, -16
+ 238              		.cfi_offset 7, -12
+ 239              		.cfi_offset 8, -8
+ 240              		.cfi_offset 14, -4
+ 241 0004 8046     		mov	r8, r0
+ 242              	.LVL28:
+ 243              	.LBB4:
+  49:..\parsing.c  ****     for (size_t index_out = 0, index_in = 0; index_out < outlen && index_in < inlen;) {
+ 244              		.loc 1 49 0
+ 245 0006 0027     		movs	r7, #0
+ 246 0008 3E46     		mov	r6, r7
+ 247 000a 1CE0     		b	.L16
+ 248              	.LVL29:
+ 249              	.L19:
+  50:..\parsing.c  ****         out8[index_out] = (in64[index_in] >> ((index_out % 8) * 8)) & 0xFF;
+ 250              		.loc 1 50 0
+ 251 000c 02EBC704 		add	r4, r2, r7, lsl #3
+ 252 0010 6568     		ldr	r5, [r4, #4]
+ 253 0012 06F00704 		and	r4, r6, #7
+ 254 0016 E400     		lsls	r4, r4, #3
+ 255 0018 C4F1200C 		rsb	ip, r4, #32
+ 256 001c A4F1200E 		sub	lr, r4, #32
+ 257 0020 52F83700 		ldr	r0, [r2, r7, lsl #3]
+ 258 0024 20FA04F4 		lsr	r4, r0, r4
+ 259 0028 05FA0CFC 		lsl	ip, r5, ip
+ 260 002c 44EA0C04 		orr	r4, r4, ip
+ 261 0030 25FA0EFE 		lsr	lr, r5, lr
+ 262 0034 44EA0E04 		orr	r4, r4, lr
+ 263 0038 08F80640 		strb	r4, [r8, r6]
+  51:..\parsing.c  ****         ++index_out;
+ 264              		.loc 1 51 0
+ 265 003c 0136     		adds	r6, r6, #1
+ 266              	.LVL30:
+  52:..\parsing.c  ****         if (index_out % 8 == 0) {
+ 267              		.loc 1 52 0
+ 268 003e 16F0070F 		tst	r6, #7
+ 269 0042 00D1     		bne	.L16
+  53:..\parsing.c  ****             ++index_in;
+ 270              		.loc 1 53 0
+ 271 0044 0137     		adds	r7, r7, #1
+ 272              	.LVL31:
+ 273              	.L16:
+  49:..\parsing.c  ****         out8[index_out] = (in64[index_in] >> ((index_out % 8) * 8)) & 0xFF;
+ 274              		.loc 1 49 0 discriminator 1
+ 275 0046 8E42     		cmp	r6, r1
+ 276 0048 01D2     		bcs	.L15
+  49:..\parsing.c  ****         out8[index_out] = (in64[index_in] >> ((index_out % 8) * 8)) & 0xFF;
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 7
+
+
+ 277              		.loc 1 49 0 is_stmt 0 discriminator 2
+ 278 004a 9F42     		cmp	r7, r3
+ 279 004c DED3     		bcc	.L19
+ 280              	.L15:
+ 281 004e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 282              	.LBE4:
+ 283              		.cfi_endproc
+ 284              	.LFE2:
+ 285              		.size	PQCLEAN_HQC256_CLEAN_store8_arr, .-PQCLEAN_HQC256_CLEAN_store8_arr
+ 286 0052 00BF     		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string,"ax",%progbits
+ 287              		.align	2
+ 288              		.global	PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string
+ 289              		.thumb
+ 290              		.thumb_func
+ 291              		.type	PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string, %function
+ 292              	PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string:
+ 293              	.LFB3:
+  54:..\parsing.c  ****         }
+  55:..\parsing.c  ****     }
+  56:..\parsing.c  **** }
+  57:..\parsing.c  **** 
+  58:..\parsing.c  **** /**
+  59:..\parsing.c  ****  * @brief Parse a secret key into a string
+  60:..\parsing.c  ****  *
+  61:..\parsing.c  ****  * The secret key is composed of the seed used to generate vectors <b>x</b> and <b>y</b>.
+  62:..\parsing.c  ****  * As technicality, the public key is appended to the secret key in order to respect NIST API.
+  63:..\parsing.c  ****  *
+  64:..\parsing.c  ****  * @param[out] sk String containing the secret key
+  65:..\parsing.c  ****  * @param[in] sk_seed Seed used to generate the secret key
+  66:..\parsing.c  ****  * @param[in] sigma String used in HHK transform
+  67:..\parsing.c  ****  * @param[in] pk String containing the public key
+  68:..\parsing.c  ****  */
+  69:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string(uint8_t *sk, const uint8_t *sk_seed, const uint8
+ 294              		.loc 1 69 0 is_stmt 1
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298              	.LVL32:
+ 299 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 300              		.cfi_def_cfa_offset 24
+ 301              		.cfi_offset 4, -24
+ 302              		.cfi_offset 5, -20
+ 303              		.cfi_offset 6, -16
+ 304              		.cfi_offset 7, -12
+ 305              		.cfi_offset 8, -8
+ 306              		.cfi_offset 14, -4
+  70:..\parsing.c  ****     memcpy(sk, sk_seed, SEED_BYTES);
+ 307              		.loc 1 70 0
+ 308 0004 0C46     		mov	r4, r1
+ 309 0006 0546     		mov	r5, r0
+ 310 0008 01F12006 		add	r6, r1, #32
+ 311              	.L22:
+ 312 000c D4F80080 		ldr	r8, [r4]	@ unaligned
+ 313 0010 D4F804C0 		ldr	ip, [r4, #4]	@ unaligned
+ 314 0014 D4F808E0 		ldr	lr, [r4, #8]	@ unaligned
+ 315 0018 E768     		ldr	r7, [r4, #12]	@ unaligned
+ 316 001a C5F80080 		str	r8, [r5]	@ unaligned
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 8
+
+
+ 317 001e C5F804C0 		str	ip, [r5, #4]	@ unaligned
+ 318 0022 C5F808E0 		str	lr, [r5, #8]	@ unaligned
+ 319 0026 EF60     		str	r7, [r5, #12]	@ unaligned
+ 320 0028 1034     		adds	r4, r4, #16
+ 321 002a 1035     		adds	r5, r5, #16
+ 322 002c B442     		cmp	r4, r6
+ 323 002e EDD1     		bne	.L22
+ 324 0030 2668     		ldr	r6, [r4]	@ unaligned
+ 325 0032 6168     		ldr	r1, [r4, #4]	@ unaligned
+ 326              	.LVL33:
+ 327 0034 2E60     		str	r6, [r5]	@ unaligned
+ 328 0036 6960     		str	r1, [r5, #4]	@ unaligned
+  71:..\parsing.c  ****     memcpy(sk + SEED_BYTES, sigma, VEC_K_SIZE_BYTES);
+ 329              		.loc 1 71 0
+ 330 0038 1768     		ldr	r7, [r2]	@ unaligned
+ 331 003a 5668     		ldr	r6, [r2, #4]	@ unaligned
+ 332 003c 9568     		ldr	r5, [r2, #8]	@ unaligned
+ 333 003e D168     		ldr	r1, [r2, #12]	@ unaligned
+ 334 0040 8762     		str	r7, [r0, #40]	@ unaligned
+ 335 0042 C662     		str	r6, [r0, #44]	@ unaligned
+ 336 0044 0563     		str	r5, [r0, #48]	@ unaligned
+ 337 0046 4163     		str	r1, [r0, #52]	@ unaligned
+ 338 0048 1769     		ldr	r7, [r2, #16]	@ unaligned
+ 339 004a 5669     		ldr	r6, [r2, #20]	@ unaligned
+ 340 004c 9569     		ldr	r5, [r2, #24]	@ unaligned
+ 341 004e D169     		ldr	r1, [r2, #28]	@ unaligned
+ 342 0050 8763     		str	r7, [r0, #56]	@ unaligned
+ 343 0052 C663     		str	r6, [r0, #60]	@ unaligned
+ 344 0054 0564     		str	r5, [r0, #64]	@ unaligned
+ 345 0056 4164     		str	r1, [r0, #68]	@ unaligned
+  72:..\parsing.c  ****     memcpy(sk + SEED_BYTES + VEC_K_SIZE_BYTES, pk, PUBLIC_KEY_BYTES);
+ 346              		.loc 1 72 0
+ 347 0058 41F64D42 		movw	r2, #7245
+ 348              	.LVL34:
+ 349 005c 1946     		mov	r1, r3
+ 350 005e 4830     		adds	r0, r0, #72
+ 351              	.LVL35:
+ 352 0060 FFF7FEFF 		bl	memcpy
+ 353              	.LVL36:
+ 354 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 355              		.cfi_endproc
+ 356              	.LFE3:
+ 357              		.size	PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string, .-PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_stri
+ 358              		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string,"ax",%progbits
+ 359              		.align	2
+ 360              		.global	PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string
+ 361              		.thumb
+ 362              		.thumb_func
+ 363              		.type	PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string, %function
+ 364              	PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string:
+ 365              	.LFB4:
+  73:..\parsing.c  **** }
+  74:..\parsing.c  **** 
+  75:..\parsing.c  **** 
+  76:..\parsing.c  **** 
+  77:..\parsing.c  **** /**
+  78:..\parsing.c  ****  * @brief Parse a secret key from a string
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 9
+
+
+  79:..\parsing.c  ****  *
+  80:..\parsing.c  ****  * The secret key is composed of the seed used to generate vectors <b>x</b> and <b>y</b>.
+  81:..\parsing.c  ****  * As technicality, the public key is appended to the secret key in order to respect NIST API.
+  82:..\parsing.c  ****  *
+  83:..\parsing.c  ****  * @param[out] x uint64_t representation of vector x
+  84:..\parsing.c  ****  * @param[out] y uint64_t representation of vector y
+  85:..\parsing.c  ****  * @param[out] pk String containing the public key
+  86:..\parsing.c  ****  * @param[in] sk String containing the secret key
+  87:..\parsing.c  ****  */
+  88:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string(uint64_t *x, uint64_t *y, uint8_t *sigma, uint
+ 366              		.loc 1 88 0
+ 367              		.cfi_startproc
+ 368              		@ args = 4, pretend = 0, frame = 8
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370              	.LVL37:
+ 371 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 372              		.cfi_def_cfa_offset 20
+ 373              		.cfi_offset 4, -20
+ 374              		.cfi_offset 5, -16
+ 375              		.cfi_offset 6, -12
+ 376              		.cfi_offset 7, -8
+ 377              		.cfi_offset 14, -4
+ 378 0002 83B0     		sub	sp, sp, #12
+ 379              		.cfi_def_cfa_offset 32
+ 380 0004 0746     		mov	r7, r0
+ 381 0006 0E46     		mov	r6, r1
+ 382 0008 1D46     		mov	r5, r3
+ 383 000a 089C     		ldr	r4, [sp, #32]
+  89:..\parsing.c  ****     seedexpander_state sk_seedexpander;
+  90:..\parsing.c  **** 
+  91:..\parsing.c  ****     memcpy(sigma, sk + SEED_BYTES, VEC_K_SIZE_BYTES);
+ 384              		.loc 1 91 0
+ 385 000c 2346     		mov	r3, r4
+ 386              	.LVL38:
+ 387 000e 53F828CF 		ldr	ip, [r3, #40]!	@ unaligned
+ 388 0012 D3F804E0 		ldr	lr, [r3, #4]	@ unaligned
+ 389 0016 9868     		ldr	r0, [r3, #8]	@ unaligned
+ 390              	.LVL39:
+ 391 0018 D968     		ldr	r1, [r3, #12]	@ unaligned
+ 392              	.LVL40:
+ 393 001a C2F800C0 		str	ip, [r2]	@ unaligned
+ 394 001e C2F804E0 		str	lr, [r2, #4]	@ unaligned
+ 395 0022 9060     		str	r0, [r2, #8]	@ unaligned
+ 396 0024 D160     		str	r1, [r2, #12]	@ unaligned
+ 397 0026 D3F810C0 		ldr	ip, [r3, #16]	@ unaligned
+ 398 002a D3F814E0 		ldr	lr, [r3, #20]	@ unaligned
+ 399 002e 9869     		ldr	r0, [r3, #24]	@ unaligned
+ 400 0030 D969     		ldr	r1, [r3, #28]	@ unaligned
+ 401 0032 C2F810C0 		str	ip, [r2, #16]	@ unaligned
+ 402 0036 C2F814E0 		str	lr, [r2, #20]	@ unaligned
+ 403 003a 9061     		str	r0, [r2, #24]	@ unaligned
+ 404 003c D161     		str	r1, [r2, #28]	@ unaligned
+  92:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_seedexpander_init(&sk_seedexpander, sk, SEED_BYTES);
+ 405              		.loc 1 92 0
+ 406 003e 2822     		movs	r2, #40
+ 407              	.LVL41:
+ 408 0040 2146     		mov	r1, r4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 10
+
+
+ 409 0042 01A8     		add	r0, sp, #4
+ 410 0044 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_seedexpander_init
+ 411              	.LVL42:
+  93:..\parsing.c  **** 
+  94:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight(&sk_seedexpander, x, PARAM_OMEGA);
+ 412              		.loc 1 94 0
+ 413 0048 8322     		movs	r2, #131
+ 414 004a 3946     		mov	r1, r7
+ 415 004c 01A8     		add	r0, sp, #4
+ 416 004e FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight
+ 417              	.LVL43:
+  95:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight(&sk_seedexpander, y, PARAM_OMEGA);
+ 418              		.loc 1 95 0
+ 419 0052 8322     		movs	r2, #131
+ 420 0054 3146     		mov	r1, r6
+ 421 0056 01A8     		add	r0, sp, #4
+ 422 0058 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight
+ 423              	.LVL44:
+  96:..\parsing.c  ****     memcpy(pk, sk + SEED_BYTES + VEC_K_SIZE_BYTES, PUBLIC_KEY_BYTES);
+ 424              		.loc 1 96 0
+ 425 005c 41F64D42 		movw	r2, #7245
+ 426 0060 04F14801 		add	r1, r4, #72
+ 427 0064 2846     		mov	r0, r5
+ 428 0066 FFF7FEFF 		bl	memcpy
+ 429              	.LVL45:
+  97:..\parsing.c  **** 
+  98:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_seedexpander_release(&sk_seedexpander);
+ 430              		.loc 1 98 0
+ 431 006a 01A8     		add	r0, sp, #4
+ 432 006c FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_seedexpander_release
+ 433              	.LVL46:
+  99:..\parsing.c  **** }
+ 434              		.loc 1 99 0
+ 435 0070 03B0     		add	sp, sp, #12
+ 436              		.cfi_def_cfa_offset 20
+ 437              		@ sp needed
+ 438 0072 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 439              		.cfi_endproc
+ 440              	.LFE4:
+ 441              		.size	PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string, .-PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_
+ 442              		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string,"ax",%progbits
+ 443              		.align	2
+ 444              		.global	PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string
+ 445              		.thumb
+ 446              		.thumb_func
+ 447              		.type	PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string, %function
+ 448              	PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string:
+ 449              	.LFB5:
+ 100:..\parsing.c  **** 
+ 101:..\parsing.c  **** 
+ 102:..\parsing.c  **** 
+ 103:..\parsing.c  **** /**
+ 104:..\parsing.c  ****  * @brief Parse a public key into a string
+ 105:..\parsing.c  ****  *
+ 106:..\parsing.c  ****  * The public key is composed of the syndrome <b>s</b> as well as the seed used to generate the vec
+ 107:..\parsing.c  ****  *
+ 108:..\parsing.c  ****  * @param[out] pk String containing the public key
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 11
+
+
+ 109:..\parsing.c  ****  * @param[in] pk_seed Seed used to generate the public key
+ 110:..\parsing.c  ****  * @param[in] s uint64_t representation of vector s
+ 111:..\parsing.c  ****  */
+ 112:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string(uint8_t *pk, const uint8_t *pk_seed, const uint6
+ 450              		.loc 1 112 0
+ 451              		.cfi_startproc
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454              	.LVL47:
+ 455 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 456              		.cfi_def_cfa_offset 24
+ 457              		.cfi_offset 3, -24
+ 458              		.cfi_offset 4, -20
+ 459              		.cfi_offset 5, -16
+ 460              		.cfi_offset 6, -12
+ 461              		.cfi_offset 7, -8
+ 462              		.cfi_offset 14, -4
+ 113:..\parsing.c  ****     memcpy(pk, pk_seed, SEED_BYTES);
+ 463              		.loc 1 113 0
+ 464 0002 0B46     		mov	r3, r1
+ 465 0004 0446     		mov	r4, r0
+ 466 0006 2031     		adds	r1, r1, #32
+ 467              	.LVL48:
+ 468              	.L27:
+ 469 0008 D3F800E0 		ldr	lr, [r3]	@ unaligned
+ 470 000c 5F68     		ldr	r7, [r3, #4]	@ unaligned
+ 471 000e 9E68     		ldr	r6, [r3, #8]	@ unaligned
+ 472 0010 DD68     		ldr	r5, [r3, #12]	@ unaligned
+ 473 0012 C4F800E0 		str	lr, [r4]	@ unaligned
+ 474 0016 6760     		str	r7, [r4, #4]	@ unaligned
+ 475 0018 A660     		str	r6, [r4, #8]	@ unaligned
+ 476 001a E560     		str	r5, [r4, #12]	@ unaligned
+ 477 001c 1033     		adds	r3, r3, #16
+ 478 001e 1034     		adds	r4, r4, #16
+ 479 0020 8B42     		cmp	r3, r1
+ 480 0022 F1D1     		bne	.L27
+ 481 0024 1968     		ldr	r1, [r3]	@ unaligned
+ 482              	.LVL49:
+ 483 0026 5B68     		ldr	r3, [r3, #4]	@ unaligned
+ 484 0028 2160     		str	r1, [r4]	@ unaligned
+ 485 002a 6360     		str	r3, [r4, #4]	@ unaligned
+ 114:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_store8_arr(pk + SEED_BYTES, VEC_N_SIZE_BYTES, s, VEC_N_SIZE_64);
+ 486              		.loc 1 114 0
+ 487 002c 40F28533 		movw	r3, #901
+ 488 0030 41F62541 		movw	r1, #7205
+ 489 0034 2830     		adds	r0, r0, #40
+ 490              	.LVL50:
+ 491 0036 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 492              	.LVL51:
+ 493 003a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 494              		.cfi_endproc
+ 495              	.LFE5:
+ 496              		.size	PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string, .-PQCLEAN_HQC256_CLEAN_hqc_public_key_to_stri
+ 497              		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string,"ax",%progbits
+ 498              		.align	2
+ 499              		.global	PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string
+ 500              		.thumb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 12
+
+
+ 501              		.thumb_func
+ 502              		.type	PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string, %function
+ 503              	PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string:
+ 504              	.LFB6:
+ 115:..\parsing.c  **** }
+ 116:..\parsing.c  **** 
+ 117:..\parsing.c  **** 
+ 118:..\parsing.c  **** 
+ 119:..\parsing.c  **** /**
+ 120:..\parsing.c  ****  * @brief Parse a public key from a string
+ 121:..\parsing.c  ****  *
+ 122:..\parsing.c  ****  * The public key is composed of the syndrome <b>s</b> as well as the seed used to generate the vec
+ 123:..\parsing.c  ****  *
+ 124:..\parsing.c  ****  * @param[out] h uint64_t representation of vector h
+ 125:..\parsing.c  ****  * @param[out] s uint64_t representation of vector s
+ 126:..\parsing.c  ****  * @param[in] pk String containing the public key
+ 127:..\parsing.c  ****  */
+ 128:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string(uint64_t *h, uint64_t *s, const uint8_t *pk) {
+ 505              		.loc 1 128 0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 8
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              	.LVL52:
+ 510 0000 70B5     		push	{r4, r5, r6, lr}
+ 511              		.cfi_def_cfa_offset 16
+ 512              		.cfi_offset 4, -16
+ 513              		.cfi_offset 5, -12
+ 514              		.cfi_offset 6, -8
+ 515              		.cfi_offset 14, -4
+ 516 0002 82B0     		sub	sp, sp, #8
+ 517              		.cfi_def_cfa_offset 24
+ 518 0004 0646     		mov	r6, r0
+ 519 0006 0D46     		mov	r5, r1
+ 520 0008 1446     		mov	r4, r2
+ 129:..\parsing.c  ****     seedexpander_state pk_seedexpander;
+ 130:..\parsing.c  **** 
+ 131:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_seedexpander_init(&pk_seedexpander, pk, SEED_BYTES);
+ 521              		.loc 1 131 0
+ 522 000a 2822     		movs	r2, #40
+ 523              	.LVL53:
+ 524 000c 2146     		mov	r1, r4
+ 525              	.LVL54:
+ 526 000e 01A8     		add	r0, sp, #4
+ 527              	.LVL55:
+ 528 0010 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_seedexpander_init
+ 529              	.LVL56:
+ 132:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_vect_set_random(&pk_seedexpander, h);
+ 530              		.loc 1 132 0
+ 531 0014 3146     		mov	r1, r6
+ 532 0016 01A8     		add	r0, sp, #4
+ 533 0018 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_vect_set_random
+ 534              	.LVL57:
+ 133:..\parsing.c  **** 
+ 134:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_load8_arr(s, VEC_N_SIZE_64, pk + SEED_BYTES, VEC_N_SIZE_BYTES);
+ 535              		.loc 1 134 0
+ 536 001c 41F62543 		movw	r3, #7205
+ 537 0020 04F12802 		add	r2, r4, #40
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 13
+
+
+ 538 0024 40F28531 		movw	r1, #901
+ 539 0028 2846     		mov	r0, r5
+ 540 002a FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_load8_arr
+ 541              	.LVL58:
+ 135:..\parsing.c  **** 
+ 136:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_seedexpander_release(&pk_seedexpander);
+ 542              		.loc 1 136 0
+ 543 002e 01A8     		add	r0, sp, #4
+ 544 0030 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_seedexpander_release
+ 545              	.LVL59:
+ 137:..\parsing.c  **** }
+ 546              		.loc 1 137 0
+ 547 0034 02B0     		add	sp, sp, #8
+ 548              		.cfi_def_cfa_offset 16
+ 549              		@ sp needed
+ 550 0036 70BD     		pop	{r4, r5, r6, pc}
+ 551              		.cfi_endproc
+ 552              	.LFE6:
+ 553              		.size	PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string, .-PQCLEAN_HQC256_CLEAN_hqc_public_key_from_
+ 554              		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string
+ 557              		.thumb
+ 558              		.thumb_func
+ 559              		.type	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string, %function
+ 560              	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string:
+ 561              	.LFB7:
+ 138:..\parsing.c  **** 
+ 139:..\parsing.c  **** 
+ 140:..\parsing.c  **** 
+ 141:..\parsing.c  **** /**
+ 142:..\parsing.c  ****  * @brief Parse a ciphertext into a string
+ 143:..\parsing.c  ****  *
+ 144:..\parsing.c  ****  * The ciphertext is composed of vectors <b>u</b>, <b>v</b> and salt.
+ 145:..\parsing.c  ****  *
+ 146:..\parsing.c  ****  * @param[out] ct String containing the ciphertext
+ 147:..\parsing.c  ****  * @param[in] u uint64_t representation of vector u
+ 148:..\parsing.c  ****  * @param[in] v uint64_t representation of vector v
+ 149:..\parsing.c  ****  * @param[in] salt String containing a salt
+ 150:..\parsing.c  ****  */
+ 151:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string(uint8_t *ct, const uint64_t *u, const uint64_t *
+ 562              		.loc 1 151 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566              	.LVL60:
+ 567 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 568              		.cfi_def_cfa_offset 24
+ 569              		.cfi_offset 3, -24
+ 570              		.cfi_offset 4, -20
+ 571              		.cfi_offset 5, -16
+ 572              		.cfi_offset 6, -12
+ 573              		.cfi_offset 7, -8
+ 574              		.cfi_offset 14, -4
+ 575 0002 0546     		mov	r5, r0
+ 576 0004 1646     		mov	r6, r2
+ 577 0006 1C46     		mov	r4, r3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 14
+
+
+ 152:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_store8_arr(ct, VEC_N_SIZE_BYTES, u, VEC_N_SIZE_64);
+ 578              		.loc 1 152 0
+ 579 0008 40F28533 		movw	r3, #901
+ 580              	.LVL61:
+ 581 000c 0A46     		mov	r2, r1
+ 582              	.LVL62:
+ 583 000e 41F62541 		movw	r1, #7205
+ 584              	.LVL63:
+ 585 0012 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 586              	.LVL64:
+ 153:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_store8_arr(ct + VEC_N_SIZE_BYTES, VEC_N1N2_SIZE_BYTES, v, VEC_N1N2_SIZE_64
+ 587              		.loc 1 153 0
+ 588 0016 4FF46173 		mov	r3, #900
+ 589 001a 3246     		mov	r2, r6
+ 590 001c 4FF4E151 		mov	r1, #7200
+ 591 0020 6818     		adds	r0, r5, r1
+ 592 0022 0530     		adds	r0, r0, #5
+ 593 0024 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_store8_arr
+ 594              	.LVL65:
+ 154:..\parsing.c  ****     memcpy(ct + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES, salt, SALT_SIZE_BYTES);
+ 595              		.loc 1 154 0
+ 596 0028 43F64502 		movw	r2, #14405
+ 597 002c AB18     		adds	r3, r5, r2
+ 598 002e 2768     		ldr	r7, [r4]	@ unaligned
+ 599 0030 6668     		ldr	r6, [r4, #4]	@ unaligned
+ 600              	.LVL66:
+ 601 0032 A068     		ldr	r0, [r4, #8]	@ unaligned
+ 602 0034 E168     		ldr	r1, [r4, #12]	@ unaligned
+ 603 0036 AF50     		str	r7, [r5, r2]	@ unaligned
+ 604 0038 5E60     		str	r6, [r3, #4]	@ unaligned
+ 605 003a 9860     		str	r0, [r3, #8]	@ unaligned
+ 606 003c D960     		str	r1, [r3, #12]	@ unaligned
+ 607 003e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 608              		.cfi_endproc
+ 609              	.LFE7:
+ 610              		.size	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string, .-PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_stri
+ 611              		.section	.text.PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string,"ax",%progbits
+ 612              		.align	2
+ 613              		.global	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string
+ 614              		.thumb
+ 615              		.thumb_func
+ 616              		.type	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string, %function
+ 617              	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string:
+ 618              	.LFB8:
+ 155:..\parsing.c  **** }
+ 156:..\parsing.c  **** 
+ 157:..\parsing.c  **** 
+ 158:..\parsing.c  **** 
+ 159:..\parsing.c  **** /**
+ 160:..\parsing.c  ****  * @brief Parse a ciphertext from a string
+ 161:..\parsing.c  ****  *
+ 162:..\parsing.c  ****  * The ciphertext is composed of vectors <b>u</b>, <b>v</b> and salt.
+ 163:..\parsing.c  ****  *
+ 164:..\parsing.c  ****  * @param[out] u uint64_t representation of vector u
+ 165:..\parsing.c  ****  * @param[out] v uint64_t representation of vector v
+ 166:..\parsing.c  ****  * @param[out] d String containing the hash d
+ 167:..\parsing.c  ****  * @param[in] ct String containing the ciphertext
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 15
+
+
+ 168:..\parsing.c  ****  */
+ 169:..\parsing.c  **** void PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string(uint64_t *u, uint64_t *v, uint8_t *salt, const
+ 619              		.loc 1 169 0
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 0
+ 622              		@ frame_needed = 0, uses_anonymous_args = 0
+ 623              	.LVL67:
+ 624 0000 70B5     		push	{r4, r5, r6, lr}
+ 625              		.cfi_def_cfa_offset 16
+ 626              		.cfi_offset 4, -16
+ 627              		.cfi_offset 5, -12
+ 628              		.cfi_offset 6, -8
+ 629              		.cfi_offset 14, -4
+ 630 0002 0E46     		mov	r6, r1
+ 631 0004 1546     		mov	r5, r2
+ 632 0006 1C46     		mov	r4, r3
+ 170:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_load8_arr(u, VEC_N_SIZE_64, ct, VEC_N_SIZE_BYTES);
+ 633              		.loc 1 170 0
+ 634 0008 41F62543 		movw	r3, #7205
+ 635              	.LVL68:
+ 636 000c 2246     		mov	r2, r4
+ 637              	.LVL69:
+ 638 000e 40F28531 		movw	r1, #901
+ 639              	.LVL70:
+ 640 0012 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_load8_arr
+ 641              	.LVL71:
+ 171:..\parsing.c  ****     PQCLEAN_HQC256_CLEAN_load8_arr(v, VEC_N1N2_SIZE_64, ct + VEC_N_SIZE_BYTES, VEC_N1N2_SIZE_BYTES)
+ 642              		.loc 1 171 0
+ 643 0016 4FF4E153 		mov	r3, #7200
+ 644 001a E218     		adds	r2, r4, r3
+ 645 001c 0532     		adds	r2, r2, #5
+ 646 001e 4FF46171 		mov	r1, #900
+ 647 0022 3046     		mov	r0, r6
+ 648 0024 FFF7FEFF 		bl	PQCLEAN_HQC256_CLEAN_load8_arr
+ 649              	.LVL72:
+ 172:..\parsing.c  ****     memcpy(salt, ct + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES, SALT_SIZE_BYTES);
+ 650              		.loc 1 172 0
+ 651 0028 04F56153 		add	r3, r4, #14400
+ 652 002c D3F80500 		ldr	r0, [r3, #5]	@ unaligned
+ 653 0030 D3F80910 		ldr	r1, [r3, #9]	@ unaligned
+ 654 0034 D3F80D20 		ldr	r2, [r3, #13]	@ unaligned
+ 655 0038 0533     		adds	r3, r3, #5
+ 656 003a DB68     		ldr	r3, [r3, #12]	@ unaligned
+ 657 003c 2860     		str	r0, [r5]	@ unaligned
+ 658 003e 6960     		str	r1, [r5, #4]	@ unaligned
+ 659 0040 AA60     		str	r2, [r5, #8]	@ unaligned
+ 660 0042 EB60     		str	r3, [r5, #12]	@ unaligned
+ 661 0044 70BD     		pop	{r4, r5, r6, pc}
+ 662              		.cfi_endproc
+ 663              	.LFE8:
+ 664              		.size	PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string, .-PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_
+ 665 0046 00BF     		.text
+ 666              	.Letext0:
+ 667              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 668              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 669              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 670              		.file 5 "..\\fips202.h"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 16
+
+
+ 671              		.file 6 "..\\shake_prng.h"
+ 672              		.file 7 "..\\vector.h"
+ 673              		.section	.debug_info,"",%progbits
+ 674              	.Ldebug_info0:
+ 675 0000 6E060000 		.4byte	0x66e
+ 676 0004 0400     		.2byte	0x4
+ 677 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 678 000a 04       		.byte	0x4
+ 679 000b 01       		.uleb128 0x1
+ 680 000c A1020000 		.4byte	.LASF46
+ 681 0010 0C       		.byte	0xc
+ 682 0011 00000000 		.4byte	.LASF47
+ 683 0015 77010000 		.4byte	.LASF48
+ 684 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 685 001d 00000000 		.4byte	0
+ 686 0021 00000000 		.4byte	.Ldebug_line0
+ 687 0025 02       		.uleb128 0x2
+ 688 0026 6A000000 		.4byte	.LASF0
+ 689 002a 02       		.byte	0x2
+ 690 002b 1B       		.byte	0x1b
+ 691 002c 30000000 		.4byte	0x30
+ 692 0030 03       		.uleb128 0x3
+ 693 0031 01       		.byte	0x1
+ 694 0032 06       		.byte	0x6
+ 695 0033 81000000 		.4byte	.LASF2
+ 696 0037 02       		.uleb128 0x2
+ 697 0038 22000000 		.4byte	.LASF1
+ 698 003c 02       		.byte	0x2
+ 699 003d 1D       		.byte	0x1d
+ 700 003e 42000000 		.4byte	0x42
+ 701 0042 03       		.uleb128 0x3
+ 702 0043 01       		.byte	0x1
+ 703 0044 08       		.byte	0x8
+ 704 0045 5F030000 		.4byte	.LASF3
+ 705 0049 03       		.uleb128 0x3
+ 706 004a 02       		.byte	0x2
+ 707 004b 05       		.byte	0x5
+ 708 004c 9B030000 		.4byte	.LASF4
+ 709 0050 03       		.uleb128 0x3
+ 710 0051 02       		.byte	0x2
+ 711 0052 07       		.byte	0x7
+ 712 0053 44020000 		.4byte	.LASF5
+ 713 0057 03       		.uleb128 0x3
+ 714 0058 04       		.byte	0x4
+ 715 0059 05       		.byte	0x5
+ 716 005a B0000000 		.4byte	.LASF6
+ 717 005e 03       		.uleb128 0x3
+ 718 005f 04       		.byte	0x4
+ 719 0060 07       		.byte	0x7
+ 720 0061 D3010000 		.4byte	.LASF7
+ 721 0065 03       		.uleb128 0x3
+ 722 0066 08       		.byte	0x8
+ 723 0067 05       		.byte	0x5
+ 724 0068 73000000 		.4byte	.LASF8
+ 725 006c 02       		.uleb128 0x2
+ 726 006d 54030000 		.4byte	.LASF9
+ 727 0071 02       		.byte	0x2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 17
+
+
+ 728 0072 5B       		.byte	0x5b
+ 729 0073 77000000 		.4byte	0x77
+ 730 0077 03       		.uleb128 0x3
+ 731 0078 08       		.byte	0x8
+ 732 0079 07       		.byte	0x7
+ 733 007a 2C000000 		.4byte	.LASF10
+ 734 007e 04       		.uleb128 0x4
+ 735 007f 04       		.byte	0x4
+ 736 0080 05       		.byte	0x5
+ 737 0081 696E7400 		.ascii	"int\000"
+ 738 0085 03       		.uleb128 0x3
+ 739 0086 04       		.byte	0x4
+ 740 0087 07       		.byte	0x7
+ 741 0088 5B010000 		.4byte	.LASF11
+ 742 008c 02       		.uleb128 0x2
+ 743 008d 10040000 		.4byte	.LASF12
+ 744 0091 03       		.byte	0x3
+ 745 0092 14       		.byte	0x14
+ 746 0093 25000000 		.4byte	0x25
+ 747 0097 02       		.uleb128 0x2
+ 748 0098 55040000 		.4byte	.LASF13
+ 749 009c 03       		.byte	0x3
+ 750 009d 18       		.byte	0x18
+ 751 009e 37000000 		.4byte	0x37
+ 752 00a2 02       		.uleb128 0x2
+ 753 00a3 19000000 		.4byte	.LASF14
+ 754 00a7 03       		.byte	0x3
+ 755 00a8 3C       		.byte	0x3c
+ 756 00a9 6C000000 		.4byte	0x6c
+ 757 00ad 02       		.uleb128 0x2
+ 758 00ae 12000000 		.4byte	.LASF15
+ 759 00b2 04       		.byte	0x4
+ 760 00b3 D8       		.byte	0xd8
+ 761 00b4 85000000 		.4byte	0x85
+ 762 00b8 03       		.uleb128 0x3
+ 763 00b9 08       		.byte	0x8
+ 764 00ba 04       		.byte	0x4
+ 765 00bb 8F020000 		.4byte	.LASF16
+ 766 00bf 05       		.uleb128 0x5
+ 767 00c0 04       		.byte	0x4
+ 768 00c1 A2000000 		.4byte	0xa2
+ 769 00c5 06       		.uleb128 0x6
+ 770 00c6 04       		.byte	0x4
+ 771 00c7 05       		.byte	0x5
+ 772 00c8 1B       		.byte	0x1b
+ 773 00c9 DA000000 		.4byte	0xda
+ 774 00cd 07       		.uleb128 0x7
+ 775 00ce 63747800 		.ascii	"ctx\000"
+ 776 00d2 05       		.byte	0x5
+ 777 00d3 1C       		.byte	0x1c
+ 778 00d4 BF000000 		.4byte	0xbf
+ 779 00d8 00       		.byte	0
+ 780 00d9 00       		.byte	0
+ 781 00da 02       		.uleb128 0x2
+ 782 00db 68010000 		.4byte	.LASF17
+ 783 00df 05       		.byte	0x5
+ 784 00e0 1D       		.byte	0x1d
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 18
+
+
+ 785 00e1 C5000000 		.4byte	0xc5
+ 786 00e5 02       		.uleb128 0x2
+ 787 00e6 8D000000 		.4byte	.LASF18
+ 788 00ea 06       		.byte	0x6
+ 789 00eb 0D       		.byte	0xd
+ 790 00ec DA000000 		.4byte	0xda
+ 791 00f0 03       		.uleb128 0x3
+ 792 00f1 04       		.byte	0x4
+ 793 00f2 07       		.byte	0x7
+ 794 00f3 86020000 		.4byte	.LASF19
+ 795 00f7 03       		.uleb128 0x3
+ 796 00f8 01       		.byte	0x1
+ 797 00f9 08       		.byte	0x8
+ 798 00fa DB030000 		.4byte	.LASF20
+ 799 00fe 08       		.uleb128 0x8
+ 800 00ff 17040000 		.4byte	.LASF49
+ 801 0103 01       		.byte	0x1
+ 802 0104 0C       		.byte	0xc
+ 803 0105 A2000000 		.4byte	0xa2
+ 804 0109 00000000 		.4byte	.LFB0
+ 805 010d 2A000000 		.4byte	.LFE0-.LFB0
+ 806 0111 01       		.uleb128 0x1
+ 807 0112 9C       		.byte	0x9c
+ 808 0113 4C010000 		.4byte	0x14c
+ 809 0117 09       		.uleb128 0x9
+ 810 0118 696E00   		.ascii	"in\000"
+ 811 011b 01       		.byte	0x1
+ 812 011c 0C       		.byte	0xc
+ 813 011d 4C010000 		.4byte	0x14c
+ 814 0121 00000000 		.4byte	.LLST0
+ 815 0125 0A       		.uleb128 0xa
+ 816 0126 72657400 		.ascii	"ret\000"
+ 817 012a 01       		.byte	0x1
+ 818 012b 0D       		.byte	0xd
+ 819 012c A2000000 		.4byte	0xa2
+ 820 0130 21000000 		.4byte	.LLST1
+ 821 0134 0B       		.uleb128 0xb
+ 822 0135 06000000 		.4byte	.LBB2
+ 823 0139 1C000000 		.4byte	.LBE2-.LBB2
+ 824 013d 0A       		.uleb128 0xa
+ 825 013e 6900     		.ascii	"i\000"
+ 826 0140 01       		.byte	0x1
+ 827 0141 0F       		.byte	0xf
+ 828 0142 8C000000 		.4byte	0x8c
+ 829 0146 59000000 		.4byte	.LLST2
+ 830 014a 00       		.byte	0
+ 831 014b 00       		.byte	0
+ 832 014c 05       		.uleb128 0x5
+ 833 014d 04       		.byte	0x4
+ 834 014e 52010000 		.4byte	0x152
+ 835 0152 0C       		.uleb128 0xc
+ 836 0153 97000000 		.4byte	0x97
+ 837 0157 0D       		.uleb128 0xd
+ 838 0158 3C010000 		.4byte	.LASF26
+ 839 015c 01       		.byte	0x1
+ 840 015d 17       		.byte	0x17
+ 841 015e 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 19
+
+
+ 842 0162 A2000000 		.4byte	.LFE1-.LFB1
+ 843 0166 01       		.uleb128 0x1
+ 844 0167 9C       		.byte	0x9c
+ 845 0168 F7010000 		.4byte	0x1f7
+ 846 016c 0E       		.uleb128 0xe
+ 847 016d 9B020000 		.4byte	.LASF21
+ 848 0171 01       		.byte	0x1
+ 849 0172 17       		.byte	0x17
+ 850 0173 BF000000 		.4byte	0xbf
+ 851 0177 83000000 		.4byte	.LLST3
+ 852 017b 0E       		.uleb128 0xe
+ 853 017c 8B040000 		.4byte	.LASF22
+ 854 0180 01       		.byte	0x1
+ 855 0181 17       		.byte	0x17
+ 856 0182 AD000000 		.4byte	0xad
+ 857 0186 D0000000 		.4byte	.LLST4
+ 858 018a 09       		.uleb128 0x9
+ 859 018b 696E3800 		.ascii	"in8\000"
+ 860 018f 01       		.byte	0x1
+ 861 0190 17       		.byte	0x17
+ 862 0191 4C010000 		.4byte	0x14c
+ 863 0195 28010000 		.4byte	.LLST5
+ 864 0199 0E       		.uleb128 0xe
+ 865 019a 36010000 		.4byte	.LASF23
+ 866 019e 01       		.byte	0x1
+ 867 019f 17       		.byte	0x17
+ 868 01a0 AD000000 		.4byte	0xad
+ 869 01a4 72010000 		.4byte	.LLST6
+ 870 01a8 0F       		.uleb128 0xf
+ 871 01a9 E5010000 		.4byte	.LASF24
+ 872 01ad 01       		.byte	0x1
+ 873 01ae 18       		.byte	0x18
+ 874 01af AD000000 		.4byte	0xad
+ 875 01b3 CA010000 		.4byte	.LLST7
+ 876 01b7 0F       		.uleb128 0xf
+ 877 01b8 2C010000 		.4byte	.LASF25
+ 878 01bc 01       		.byte	0x1
+ 879 01bd 19       		.byte	0x19
+ 880 01be AD000000 		.4byte	0xad
+ 881 01c2 2F020000 		.4byte	.LLST8
+ 882 01c6 10       		.uleb128 0x10
+ 883 01c7 62000000 		.4byte	.LBB3
+ 884 01cb 3A000000 		.4byte	.LBE3-.LBB3
+ 885 01cf E1010000 		.4byte	0x1e1
+ 886 01d3 0A       		.uleb128 0xa
+ 887 01d4 6900     		.ascii	"i\000"
+ 888 01d6 01       		.byte	0x1
+ 889 01d7 2A       		.byte	0x2a
+ 890 01d8 8C000000 		.4byte	0x8c
+ 891 01dc 7C020000 		.4byte	.LLST9
+ 892 01e0 00       		.byte	0
+ 893 01e1 11       		.uleb128 0x11
+ 894 01e2 26000000 		.4byte	.LVL14
+ 895 01e6 FE000000 		.4byte	0xfe
+ 896 01ea 12       		.uleb128 0x12
+ 897 01eb 01       		.uleb128 0x1
+ 898 01ec 50       		.byte	0x50
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 20
+
+
+ 899 01ed 07       		.uleb128 0x7
+ 900 01ee 79       		.byte	0x79
+ 901 01ef 00       		.sleb128 0
+ 902 01f0 78       		.byte	0x78
+ 903 01f1 00       		.sleb128 0
+ 904 01f2 22       		.byte	0x22
+ 905 01f3 38       		.byte	0x38
+ 906 01f4 1C       		.byte	0x1c
+ 907 01f5 00       		.byte	0
+ 908 01f6 00       		.byte	0
+ 909 01f7 0D       		.uleb128 0xd
+ 910 01f8 EE010000 		.4byte	.LASF27
+ 911 01fc 01       		.byte	0x1
+ 912 01fd 30       		.byte	0x30
+ 913 01fe 00000000 		.4byte	.LFB2
+ 914 0202 52000000 		.4byte	.LFE2-.LFB2
+ 915 0206 01       		.uleb128 0x1
+ 916 0207 9C       		.byte	0x9c
+ 917 0208 6B020000 		.4byte	0x26b
+ 918 020c 0E       		.uleb128 0xe
+ 919 020d 81020000 		.4byte	.LASF28
+ 920 0211 01       		.byte	0x1
+ 921 0212 30       		.byte	0x30
+ 922 0213 6B020000 		.4byte	0x26b
+ 923 0217 9A020000 		.4byte	.LLST10
+ 924 021b 13       		.uleb128 0x13
+ 925 021c 8B040000 		.4byte	.LASF22
+ 926 0220 01       		.byte	0x1
+ 927 0221 30       		.byte	0x30
+ 928 0222 AD000000 		.4byte	0xad
+ 929 0226 01       		.uleb128 0x1
+ 930 0227 51       		.byte	0x51
+ 931 0228 13       		.uleb128 0x13
+ 932 0229 17010000 		.4byte	.LASF29
+ 933 022d 01       		.byte	0x1
+ 934 022e 30       		.byte	0x30
+ 935 022f 71020000 		.4byte	0x271
+ 936 0233 01       		.uleb128 0x1
+ 937 0234 52       		.byte	0x52
+ 938 0235 13       		.uleb128 0x13
+ 939 0236 36010000 		.4byte	.LASF23
+ 940 023a 01       		.byte	0x1
+ 941 023b 30       		.byte	0x30
+ 942 023c AD000000 		.4byte	0xad
+ 943 0240 01       		.uleb128 0x1
+ 944 0241 53       		.byte	0x53
+ 945 0242 0B       		.uleb128 0xb
+ 946 0243 06000000 		.4byte	.LBB4
+ 947 0247 4C000000 		.4byte	.LBE4-.LBB4
+ 948 024b 0F       		.uleb128 0xf
+ 949 024c 2C010000 		.4byte	.LASF25
+ 950 0250 01       		.byte	0x1
+ 951 0251 31       		.byte	0x31
+ 952 0252 AD000000 		.4byte	0xad
+ 953 0256 B8020000 		.4byte	.LLST11
+ 954 025a 0F       		.uleb128 0xf
+ 955 025b E5010000 		.4byte	.LASF24
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 21
+
+
+ 956 025f 01       		.byte	0x1
+ 957 0260 31       		.byte	0x31
+ 958 0261 AD000000 		.4byte	0xad
+ 959 0265 D7020000 		.4byte	.LLST12
+ 960 0269 00       		.byte	0
+ 961 026a 00       		.byte	0
+ 962 026b 05       		.uleb128 0x5
+ 963 026c 04       		.byte	0x4
+ 964 026d 97000000 		.4byte	0x97
+ 965 0271 05       		.uleb128 0x5
+ 966 0272 04       		.byte	0x4
+ 967 0273 77020000 		.4byte	0x277
+ 968 0277 0C       		.uleb128 0xc
+ 969 0278 A2000000 		.4byte	0xa2
+ 970 027c 0D       		.uleb128 0xd
+ 971 027d 6D030000 		.4byte	.LASF30
+ 972 0281 01       		.byte	0x1
+ 973 0282 45       		.byte	0x45
+ 974 0283 00000000 		.4byte	.LFB3
+ 975 0287 68000000 		.4byte	.LFE3-.LFB3
+ 976 028b 01       		.uleb128 0x1
+ 977 028c 9C       		.byte	0x9c
+ 978 028d ED020000 		.4byte	0x2ed
+ 979 0291 09       		.uleb128 0x9
+ 980 0292 736B00   		.ascii	"sk\000"
+ 981 0295 01       		.byte	0x1
+ 982 0296 45       		.byte	0x45
+ 983 0297 6B020000 		.4byte	0x26b
+ 984 029b F6020000 		.4byte	.LLST13
+ 985 029f 0E       		.uleb128 0xe
+ 986 02a0 A5030000 		.4byte	.LASF31
+ 987 02a4 01       		.byte	0x1
+ 988 02a5 45       		.byte	0x45
+ 989 02a6 4C010000 		.4byte	0x14c
+ 990 02aa 25030000 		.4byte	.LLST14
+ 991 02ae 0E       		.uleb128 0xe
+ 992 02af 3E020000 		.4byte	.LASF32
+ 993 02b3 01       		.byte	0x1
+ 994 02b4 45       		.byte	0x45
+ 995 02b5 4C010000 		.4byte	0x14c
+ 996 02b9 46030000 		.4byte	.LLST15
+ 997 02bd 09       		.uleb128 0x9
+ 998 02be 706B00   		.ascii	"pk\000"
+ 999 02c1 01       		.byte	0x1
+ 1000 02c2 45       		.byte	0x45
+ 1001 02c3 4C010000 		.4byte	0x14c
+ 1002 02c7 67030000 		.4byte	.LLST16
+ 1003 02cb 11       		.uleb128 0x11
+ 1004 02cc 64000000 		.4byte	.LVL36
+ 1005 02d0 3C060000 		.4byte	0x63c
+ 1006 02d4 12       		.uleb128 0x12
+ 1007 02d5 01       		.uleb128 0x1
+ 1008 02d6 50       		.byte	0x50
+ 1009 02d7 05       		.uleb128 0x5
+ 1010 02d8 F3       		.byte	0xf3
+ 1011 02d9 01       		.uleb128 0x1
+ 1012 02da 50       		.byte	0x50
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 22
+
+
+ 1013 02db 23       		.byte	0x23
+ 1014 02dc 48       		.uleb128 0x48
+ 1015 02dd 12       		.uleb128 0x12
+ 1016 02de 01       		.uleb128 0x1
+ 1017 02df 51       		.byte	0x51
+ 1018 02e0 03       		.uleb128 0x3
+ 1019 02e1 F3       		.byte	0xf3
+ 1020 02e2 01       		.uleb128 0x1
+ 1021 02e3 53       		.byte	0x53
+ 1022 02e4 12       		.uleb128 0x12
+ 1023 02e5 01       		.uleb128 0x1
+ 1024 02e6 52       		.byte	0x52
+ 1025 02e7 03       		.uleb128 0x3
+ 1026 02e8 0A       		.byte	0xa
+ 1027 02e9 4D1C     		.2byte	0x1c4d
+ 1028 02eb 00       		.byte	0
+ 1029 02ec 00       		.byte	0
+ 1030 02ed 0D       		.uleb128 0xd
+ 1031 02ee 1D040000 		.4byte	.LASF33
+ 1032 02f2 01       		.byte	0x1
+ 1033 02f3 58       		.byte	0x58
+ 1034 02f4 00000000 		.4byte	.LFB4
+ 1035 02f8 74000000 		.4byte	.LFE4-.LFB4
+ 1036 02fc 01       		.uleb128 0x1
+ 1037 02fd 9C       		.byte	0x9c
+ 1038 02fe E7030000 		.4byte	0x3e7
+ 1039 0302 09       		.uleb128 0x9
+ 1040 0303 7800     		.ascii	"x\000"
+ 1041 0305 01       		.byte	0x1
+ 1042 0306 58       		.byte	0x58
+ 1043 0307 BF000000 		.4byte	0xbf
+ 1044 030b 88030000 		.4byte	.LLST17
+ 1045 030f 09       		.uleb128 0x9
+ 1046 0310 7900     		.ascii	"y\000"
+ 1047 0312 01       		.byte	0x1
+ 1048 0313 58       		.byte	0x58
+ 1049 0314 BF000000 		.4byte	0xbf
+ 1050 0318 A6030000 		.4byte	.LLST18
+ 1051 031c 0E       		.uleb128 0xe
+ 1052 031d 3E020000 		.4byte	.LASF32
+ 1053 0321 01       		.byte	0x1
+ 1054 0322 58       		.byte	0x58
+ 1055 0323 6B020000 		.4byte	0x26b
+ 1056 0327 C4030000 		.4byte	.LLST19
+ 1057 032b 09       		.uleb128 0x9
+ 1058 032c 706B00   		.ascii	"pk\000"
+ 1059 032f 01       		.byte	0x1
+ 1060 0330 58       		.byte	0x58
+ 1061 0331 6B020000 		.4byte	0x26b
+ 1062 0335 E5030000 		.4byte	.LLST20
+ 1063 0339 14       		.uleb128 0x14
+ 1064 033a 736B00   		.ascii	"sk\000"
+ 1065 033d 01       		.byte	0x1
+ 1066 033e 58       		.byte	0x58
+ 1067 033f 4C010000 		.4byte	0x14c
+ 1068 0343 02       		.uleb128 0x2
+ 1069 0344 91       		.byte	0x91
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 23
+
+
+ 1070 0345 00       		.sleb128 0
+ 1071 0346 15       		.uleb128 0x15
+ 1072 0347 1C010000 		.4byte	.LASF34
+ 1073 034b 01       		.byte	0x1
+ 1074 034c 59       		.byte	0x59
+ 1075 034d E5000000 		.4byte	0xe5
+ 1076 0351 02       		.uleb128 0x2
+ 1077 0352 91       		.byte	0x91
+ 1078 0353 64       		.sleb128 -28
+ 1079 0354 16       		.uleb128 0x16
+ 1080 0355 48000000 		.4byte	.LVL42
+ 1081 0359 45060000 		.4byte	0x645
+ 1082 035d 74030000 		.4byte	0x374
+ 1083 0361 12       		.uleb128 0x12
+ 1084 0362 01       		.uleb128 0x1
+ 1085 0363 50       		.byte	0x50
+ 1086 0364 02       		.uleb128 0x2
+ 1087 0365 91       		.byte	0x91
+ 1088 0366 64       		.sleb128 -28
+ 1089 0367 12       		.uleb128 0x12
+ 1090 0368 01       		.uleb128 0x1
+ 1091 0369 51       		.byte	0x51
+ 1092 036a 02       		.uleb128 0x2
+ 1093 036b 74       		.byte	0x74
+ 1094 036c 00       		.sleb128 0
+ 1095 036d 12       		.uleb128 0x12
+ 1096 036e 01       		.uleb128 0x1
+ 1097 036f 52       		.byte	0x52
+ 1098 0370 02       		.uleb128 0x2
+ 1099 0371 08       		.byte	0x8
+ 1100 0372 28       		.byte	0x28
+ 1101 0373 00       		.byte	0
+ 1102 0374 16       		.uleb128 0x16
+ 1103 0375 52000000 		.4byte	.LVL43
+ 1104 0379 50060000 		.4byte	0x650
+ 1105 037d 94030000 		.4byte	0x394
+ 1106 0381 12       		.uleb128 0x12
+ 1107 0382 01       		.uleb128 0x1
+ 1108 0383 50       		.byte	0x50
+ 1109 0384 02       		.uleb128 0x2
+ 1110 0385 91       		.byte	0x91
+ 1111 0386 64       		.sleb128 -28
+ 1112 0387 12       		.uleb128 0x12
+ 1113 0388 01       		.uleb128 0x1
+ 1114 0389 51       		.byte	0x51
+ 1115 038a 02       		.uleb128 0x2
+ 1116 038b 77       		.byte	0x77
+ 1117 038c 00       		.sleb128 0
+ 1118 038d 12       		.uleb128 0x12
+ 1119 038e 01       		.uleb128 0x1
+ 1120 038f 52       		.byte	0x52
+ 1121 0390 02       		.uleb128 0x2
+ 1122 0391 08       		.byte	0x8
+ 1123 0392 83       		.byte	0x83
+ 1124 0393 00       		.byte	0
+ 1125 0394 16       		.uleb128 0x16
+ 1126 0395 5C000000 		.4byte	.LVL44
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 24
+
+
+ 1127 0399 50060000 		.4byte	0x650
+ 1128 039d B4030000 		.4byte	0x3b4
+ 1129 03a1 12       		.uleb128 0x12
+ 1130 03a2 01       		.uleb128 0x1
+ 1131 03a3 50       		.byte	0x50
+ 1132 03a4 02       		.uleb128 0x2
+ 1133 03a5 91       		.byte	0x91
+ 1134 03a6 64       		.sleb128 -28
+ 1135 03a7 12       		.uleb128 0x12
+ 1136 03a8 01       		.uleb128 0x1
+ 1137 03a9 51       		.byte	0x51
+ 1138 03aa 02       		.uleb128 0x2
+ 1139 03ab 76       		.byte	0x76
+ 1140 03ac 00       		.sleb128 0
+ 1141 03ad 12       		.uleb128 0x12
+ 1142 03ae 01       		.uleb128 0x1
+ 1143 03af 52       		.byte	0x52
+ 1144 03b0 02       		.uleb128 0x2
+ 1145 03b1 08       		.byte	0x8
+ 1146 03b2 83       		.byte	0x83
+ 1147 03b3 00       		.byte	0
+ 1148 03b4 16       		.uleb128 0x16
+ 1149 03b5 6A000000 		.4byte	.LVL45
+ 1150 03b9 3C060000 		.4byte	0x63c
+ 1151 03bd D6030000 		.4byte	0x3d6
+ 1152 03c1 12       		.uleb128 0x12
+ 1153 03c2 01       		.uleb128 0x1
+ 1154 03c3 50       		.byte	0x50
+ 1155 03c4 02       		.uleb128 0x2
+ 1156 03c5 75       		.byte	0x75
+ 1157 03c6 00       		.sleb128 0
+ 1158 03c7 12       		.uleb128 0x12
+ 1159 03c8 01       		.uleb128 0x1
+ 1160 03c9 51       		.byte	0x51
+ 1161 03ca 03       		.uleb128 0x3
+ 1162 03cb 74       		.byte	0x74
+ 1163 03cc C800     		.sleb128 72
+ 1164 03ce 12       		.uleb128 0x12
+ 1165 03cf 01       		.uleb128 0x1
+ 1166 03d0 52       		.byte	0x52
+ 1167 03d1 03       		.uleb128 0x3
+ 1168 03d2 0A       		.byte	0xa
+ 1169 03d3 4D1C     		.2byte	0x1c4d
+ 1170 03d5 00       		.byte	0
+ 1171 03d6 11       		.uleb128 0x11
+ 1172 03d7 70000000 		.4byte	.LVL46
+ 1173 03db 5B060000 		.4byte	0x65b
+ 1174 03df 12       		.uleb128 0x12
+ 1175 03e0 01       		.uleb128 0x1
+ 1176 03e1 50       		.byte	0x50
+ 1177 03e2 02       		.uleb128 0x2
+ 1178 03e3 91       		.byte	0x91
+ 1179 03e4 64       		.sleb128 -28
+ 1180 03e5 00       		.byte	0
+ 1181 03e6 00       		.byte	0
+ 1182 03e7 0D       		.uleb128 0xd
+ 1183 03e8 5D040000 		.4byte	.LASF35
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 25
+
+
+ 1184 03ec 01       		.byte	0x1
+ 1185 03ed 70       		.byte	0x70
+ 1186 03ee 00000000 		.4byte	.LFB5
+ 1187 03f2 3C000000 		.4byte	.LFE5-.LFB5
+ 1188 03f6 01       		.uleb128 0x1
+ 1189 03f7 9C       		.byte	0x9c
+ 1190 03f8 48040000 		.4byte	0x448
+ 1191 03fc 09       		.uleb128 0x9
+ 1192 03fd 706B00   		.ascii	"pk\000"
+ 1193 0400 01       		.byte	0x1
+ 1194 0401 70       		.byte	0x70
+ 1195 0402 6B020000 		.4byte	0x26b
+ 1196 0406 03040000 		.4byte	.LLST21
+ 1197 040a 0E       		.uleb128 0xe
+ 1198 040b 4D040000 		.4byte	.LASF36
+ 1199 040f 01       		.byte	0x1
+ 1200 0410 70       		.byte	0x70
+ 1201 0411 4C010000 		.4byte	0x14c
+ 1202 0415 31040000 		.4byte	.LLST22
+ 1203 0419 09       		.uleb128 0x9
+ 1204 041a 7300     		.ascii	"s\000"
+ 1205 041c 01       		.byte	0x1
+ 1206 041d 70       		.byte	0x70
+ 1207 041e 71020000 		.4byte	0x271
+ 1208 0422 5F040000 		.4byte	.LLST23
+ 1209 0426 11       		.uleb128 0x11
+ 1210 0427 3A000000 		.4byte	.LVL51
+ 1211 042b F7010000 		.4byte	0x1f7
+ 1212 042f 12       		.uleb128 0x12
+ 1213 0430 01       		.uleb128 0x1
+ 1214 0431 50       		.byte	0x50
+ 1215 0432 05       		.uleb128 0x5
+ 1216 0433 F3       		.byte	0xf3
+ 1217 0434 01       		.uleb128 0x1
+ 1218 0435 50       		.byte	0x50
+ 1219 0436 23       		.byte	0x23
+ 1220 0437 28       		.uleb128 0x28
+ 1221 0438 12       		.uleb128 0x12
+ 1222 0439 01       		.uleb128 0x1
+ 1223 043a 51       		.byte	0x51
+ 1224 043b 03       		.uleb128 0x3
+ 1225 043c 0A       		.byte	0xa
+ 1226 043d 251C     		.2byte	0x1c25
+ 1227 043f 12       		.uleb128 0x12
+ 1228 0440 01       		.uleb128 0x1
+ 1229 0441 53       		.byte	0x53
+ 1230 0442 03       		.uleb128 0x3
+ 1231 0443 0A       		.byte	0xa
+ 1232 0444 8503     		.2byte	0x385
+ 1233 0446 00       		.byte	0
+ 1234 0447 00       		.byte	0
+ 1235 0448 0D       		.uleb128 0xd
+ 1236 0449 0E020000 		.4byte	.LASF37
+ 1237 044d 01       		.byte	0x1
+ 1238 044e 80       		.byte	0x80
+ 1239 044f 00000000 		.4byte	.LFB6
+ 1240 0453 38000000 		.4byte	.LFE6-.LFB6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 26
+
+
+ 1241 0457 01       		.uleb128 0x1
+ 1242 0458 9C       		.byte	0x9c
+ 1243 0459 06050000 		.4byte	0x506
+ 1244 045d 09       		.uleb128 0x9
+ 1245 045e 6800     		.ascii	"h\000"
+ 1246 0460 01       		.byte	0x1
+ 1247 0461 80       		.byte	0x80
+ 1248 0462 BF000000 		.4byte	0xbf
+ 1249 0466 80040000 		.4byte	.LLST24
+ 1250 046a 09       		.uleb128 0x9
+ 1251 046b 7300     		.ascii	"s\000"
+ 1252 046d 01       		.byte	0x1
+ 1253 046e 80       		.byte	0x80
+ 1254 046f BF000000 		.4byte	0xbf
+ 1255 0473 9E040000 		.4byte	.LLST25
+ 1256 0477 09       		.uleb128 0x9
+ 1257 0478 706B00   		.ascii	"pk\000"
+ 1258 047b 01       		.byte	0x1
+ 1259 047c 80       		.byte	0x80
+ 1260 047d 4C010000 		.4byte	0x14c
+ 1261 0481 BC040000 		.4byte	.LLST26
+ 1262 0485 15       		.uleb128 0x15
+ 1263 0486 A0000000 		.4byte	.LASF38
+ 1264 048a 01       		.byte	0x1
+ 1265 048b 81       		.byte	0x81
+ 1266 048c E5000000 		.4byte	0xe5
+ 1267 0490 02       		.uleb128 0x2
+ 1268 0491 91       		.byte	0x91
+ 1269 0492 6C       		.sleb128 -20
+ 1270 0493 16       		.uleb128 0x16
+ 1271 0494 14000000 		.4byte	.LVL56
+ 1272 0498 45060000 		.4byte	0x645
+ 1273 049c B3040000 		.4byte	0x4b3
+ 1274 04a0 12       		.uleb128 0x12
+ 1275 04a1 01       		.uleb128 0x1
+ 1276 04a2 50       		.byte	0x50
+ 1277 04a3 02       		.uleb128 0x2
+ 1278 04a4 91       		.byte	0x91
+ 1279 04a5 6C       		.sleb128 -20
+ 1280 04a6 12       		.uleb128 0x12
+ 1281 04a7 01       		.uleb128 0x1
+ 1282 04a8 51       		.byte	0x51
+ 1283 04a9 02       		.uleb128 0x2
+ 1284 04aa 74       		.byte	0x74
+ 1285 04ab 00       		.sleb128 0
+ 1286 04ac 12       		.uleb128 0x12
+ 1287 04ad 01       		.uleb128 0x1
+ 1288 04ae 52       		.byte	0x52
+ 1289 04af 02       		.uleb128 0x2
+ 1290 04b0 08       		.byte	0x8
+ 1291 04b1 28       		.byte	0x28
+ 1292 04b2 00       		.byte	0
+ 1293 04b3 16       		.uleb128 0x16
+ 1294 04b4 1C000000 		.4byte	.LVL57
+ 1295 04b8 66060000 		.4byte	0x666
+ 1296 04bc CD040000 		.4byte	0x4cd
+ 1297 04c0 12       		.uleb128 0x12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 27
+
+
+ 1298 04c1 01       		.uleb128 0x1
+ 1299 04c2 50       		.byte	0x50
+ 1300 04c3 02       		.uleb128 0x2
+ 1301 04c4 91       		.byte	0x91
+ 1302 04c5 6C       		.sleb128 -20
+ 1303 04c6 12       		.uleb128 0x12
+ 1304 04c7 01       		.uleb128 0x1
+ 1305 04c8 51       		.byte	0x51
+ 1306 04c9 02       		.uleb128 0x2
+ 1307 04ca 76       		.byte	0x76
+ 1308 04cb 00       		.sleb128 0
+ 1309 04cc 00       		.byte	0
+ 1310 04cd 16       		.uleb128 0x16
+ 1311 04ce 2E000000 		.4byte	.LVL58
+ 1312 04d2 57010000 		.4byte	0x157
+ 1313 04d6 F5040000 		.4byte	0x4f5
+ 1314 04da 12       		.uleb128 0x12
+ 1315 04db 01       		.uleb128 0x1
+ 1316 04dc 50       		.byte	0x50
+ 1317 04dd 02       		.uleb128 0x2
+ 1318 04de 75       		.byte	0x75
+ 1319 04df 00       		.sleb128 0
+ 1320 04e0 12       		.uleb128 0x12
+ 1321 04e1 01       		.uleb128 0x1
+ 1322 04e2 51       		.byte	0x51
+ 1323 04e3 03       		.uleb128 0x3
+ 1324 04e4 0A       		.byte	0xa
+ 1325 04e5 8503     		.2byte	0x385
+ 1326 04e7 12       		.uleb128 0x12
+ 1327 04e8 01       		.uleb128 0x1
+ 1328 04e9 52       		.byte	0x52
+ 1329 04ea 02       		.uleb128 0x2
+ 1330 04eb 74       		.byte	0x74
+ 1331 04ec 28       		.sleb128 40
+ 1332 04ed 12       		.uleb128 0x12
+ 1333 04ee 01       		.uleb128 0x1
+ 1334 04ef 53       		.byte	0x53
+ 1335 04f0 03       		.uleb128 0x3
+ 1336 04f1 0A       		.byte	0xa
+ 1337 04f2 251C     		.2byte	0x1c25
+ 1338 04f4 00       		.byte	0
+ 1339 04f5 11       		.uleb128 0x11
+ 1340 04f6 34000000 		.4byte	.LVL59
+ 1341 04fa 5B060000 		.4byte	0x65b
+ 1342 04fe 12       		.uleb128 0x12
+ 1343 04ff 01       		.uleb128 0x1
+ 1344 0500 50       		.byte	0x50
+ 1345 0501 02       		.uleb128 0x2
+ 1346 0502 91       		.byte	0x91
+ 1347 0503 6C       		.sleb128 -20
+ 1348 0504 00       		.byte	0
+ 1349 0505 00       		.byte	0
+ 1350 0506 0D       		.uleb128 0xd
+ 1351 0507 AD030000 		.4byte	.LASF39
+ 1352 050b 01       		.byte	0x1
+ 1353 050c 97       		.byte	0x97
+ 1354 050d 00000000 		.4byte	.LFB7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 28
+
+
+ 1355 0511 40000000 		.4byte	.LFE7-.LFB7
+ 1356 0515 01       		.uleb128 0x1
+ 1357 0516 9C       		.byte	0x9c
+ 1358 0517 A1050000 		.4byte	0x5a1
+ 1359 051b 09       		.uleb128 0x9
+ 1360 051c 637400   		.ascii	"ct\000"
+ 1361 051f 01       		.byte	0x1
+ 1362 0520 97       		.byte	0x97
+ 1363 0521 6B020000 		.4byte	0x26b
+ 1364 0525 DA040000 		.4byte	.LLST27
+ 1365 0529 09       		.uleb128 0x9
+ 1366 052a 7500     		.ascii	"u\000"
+ 1367 052c 01       		.byte	0x1
+ 1368 052d 97       		.byte	0x97
+ 1369 052e 71020000 		.4byte	0x271
+ 1370 0532 F8040000 		.4byte	.LLST28
+ 1371 0536 09       		.uleb128 0x9
+ 1372 0537 7600     		.ascii	"v\000"
+ 1373 0539 01       		.byte	0x1
+ 1374 053a 97       		.byte	0x97
+ 1375 053b 71020000 		.4byte	0x271
+ 1376 053f 24050000 		.4byte	.LLST29
+ 1377 0543 0E       		.uleb128 0xe
+ 1378 0544 0D000000 		.4byte	.LASF40
+ 1379 0548 01       		.byte	0x1
+ 1380 0549 97       		.byte	0x97
+ 1381 054a 4C010000 		.4byte	0x14c
+ 1382 054e 50050000 		.4byte	.LLST30
+ 1383 0552 16       		.uleb128 0x16
+ 1384 0553 16000000 		.4byte	.LVL64
+ 1385 0557 F7010000 		.4byte	0x1f7
+ 1386 055b 7B050000 		.4byte	0x57b
+ 1387 055f 12       		.uleb128 0x12
+ 1388 0560 01       		.uleb128 0x1
+ 1389 0561 50       		.byte	0x50
+ 1390 0562 02       		.uleb128 0x2
+ 1391 0563 75       		.byte	0x75
+ 1392 0564 00       		.sleb128 0
+ 1393 0565 12       		.uleb128 0x12
+ 1394 0566 01       		.uleb128 0x1
+ 1395 0567 51       		.byte	0x51
+ 1396 0568 03       		.uleb128 0x3
+ 1397 0569 0A       		.byte	0xa
+ 1398 056a 251C     		.2byte	0x1c25
+ 1399 056c 12       		.uleb128 0x12
+ 1400 056d 01       		.uleb128 0x1
+ 1401 056e 52       		.byte	0x52
+ 1402 056f 03       		.uleb128 0x3
+ 1403 0570 F3       		.byte	0xf3
+ 1404 0571 01       		.uleb128 0x1
+ 1405 0572 51       		.byte	0x51
+ 1406 0573 12       		.uleb128 0x12
+ 1407 0574 01       		.uleb128 0x1
+ 1408 0575 53       		.byte	0x53
+ 1409 0576 03       		.uleb128 0x3
+ 1410 0577 0A       		.byte	0xa
+ 1411 0578 8503     		.2byte	0x385
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 29
+
+
+ 1412 057a 00       		.byte	0
+ 1413 057b 11       		.uleb128 0x11
+ 1414 057c 28000000 		.4byte	.LVL65
+ 1415 0580 F7010000 		.4byte	0x1f7
+ 1416 0584 12       		.uleb128 0x12
+ 1417 0585 01       		.uleb128 0x1
+ 1418 0586 50       		.byte	0x50
+ 1419 0587 03       		.uleb128 0x3
+ 1420 0588 75       		.byte	0x75
+ 1421 0589 A538     		.sleb128 7205
+ 1422 058b 12       		.uleb128 0x12
+ 1423 058c 01       		.uleb128 0x1
+ 1424 058d 51       		.byte	0x51
+ 1425 058e 03       		.uleb128 0x3
+ 1426 058f 0A       		.byte	0xa
+ 1427 0590 201C     		.2byte	0x1c20
+ 1428 0592 12       		.uleb128 0x12
+ 1429 0593 01       		.uleb128 0x1
+ 1430 0594 52       		.byte	0x52
+ 1431 0595 02       		.uleb128 0x2
+ 1432 0596 76       		.byte	0x76
+ 1433 0597 00       		.sleb128 0
+ 1434 0598 12       		.uleb128 0x12
+ 1435 0599 01       		.uleb128 0x1
+ 1436 059a 53       		.byte	0x53
+ 1437 059b 03       		.uleb128 0x3
+ 1438 059c 0A       		.byte	0xa
+ 1439 059d 8403     		.2byte	0x384
+ 1440 059f 00       		.byte	0
+ 1441 05a0 00       		.byte	0
+ 1442 05a1 0D       		.uleb128 0xd
+ 1443 05a2 E0030000 		.4byte	.LASF41
+ 1444 05a6 01       		.byte	0x1
+ 1445 05a7 A9       		.byte	0xa9
+ 1446 05a8 00000000 		.4byte	.LFB8
+ 1447 05ac 46000000 		.4byte	.LFE8-.LFB8
+ 1448 05b0 01       		.uleb128 0x1
+ 1449 05b1 9C       		.byte	0x9c
+ 1450 05b2 3C060000 		.4byte	0x63c
+ 1451 05b6 09       		.uleb128 0x9
+ 1452 05b7 7500     		.ascii	"u\000"
+ 1453 05b9 01       		.byte	0x1
+ 1454 05ba A9       		.byte	0xa9
+ 1455 05bb BF000000 		.4byte	0xbf
+ 1456 05bf 6E050000 		.4byte	.LLST31
+ 1457 05c3 09       		.uleb128 0x9
+ 1458 05c4 7600     		.ascii	"v\000"
+ 1459 05c6 01       		.byte	0x1
+ 1460 05c7 A9       		.byte	0xa9
+ 1461 05c8 BF000000 		.4byte	0xbf
+ 1462 05cc 8F050000 		.4byte	.LLST32
+ 1463 05d0 0E       		.uleb128 0xe
+ 1464 05d1 0D000000 		.4byte	.LASF40
+ 1465 05d5 01       		.byte	0x1
+ 1466 05d6 A9       		.byte	0xa9
+ 1467 05d7 6B020000 		.4byte	0x26b
+ 1468 05db AD050000 		.4byte	.LLST33
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 30
+
+
+ 1469 05df 09       		.uleb128 0x9
+ 1470 05e0 637400   		.ascii	"ct\000"
+ 1471 05e3 01       		.byte	0x1
+ 1472 05e4 A9       		.byte	0xa9
+ 1473 05e5 4C010000 		.4byte	0x14c
+ 1474 05e9 CB050000 		.4byte	.LLST34
+ 1475 05ed 16       		.uleb128 0x16
+ 1476 05ee 16000000 		.4byte	.LVL71
+ 1477 05f2 57010000 		.4byte	0x157
+ 1478 05f6 16060000 		.4byte	0x616
+ 1479 05fa 12       		.uleb128 0x12
+ 1480 05fb 01       		.uleb128 0x1
+ 1481 05fc 50       		.byte	0x50
+ 1482 05fd 03       		.uleb128 0x3
+ 1483 05fe F3       		.byte	0xf3
+ 1484 05ff 01       		.uleb128 0x1
+ 1485 0600 50       		.byte	0x50
+ 1486 0601 12       		.uleb128 0x12
+ 1487 0602 01       		.uleb128 0x1
+ 1488 0603 51       		.byte	0x51
+ 1489 0604 03       		.uleb128 0x3
+ 1490 0605 0A       		.byte	0xa
+ 1491 0606 8503     		.2byte	0x385
+ 1492 0608 12       		.uleb128 0x12
+ 1493 0609 01       		.uleb128 0x1
+ 1494 060a 52       		.byte	0x52
+ 1495 060b 02       		.uleb128 0x2
+ 1496 060c 74       		.byte	0x74
+ 1497 060d 00       		.sleb128 0
+ 1498 060e 12       		.uleb128 0x12
+ 1499 060f 01       		.uleb128 0x1
+ 1500 0610 53       		.byte	0x53
+ 1501 0611 03       		.uleb128 0x3
+ 1502 0612 0A       		.byte	0xa
+ 1503 0613 251C     		.2byte	0x1c25
+ 1504 0615 00       		.byte	0
+ 1505 0616 11       		.uleb128 0x11
+ 1506 0617 28000000 		.4byte	.LVL72
+ 1507 061b 57010000 		.4byte	0x157
+ 1508 061f 12       		.uleb128 0x12
+ 1509 0620 01       		.uleb128 0x1
+ 1510 0621 50       		.byte	0x50
+ 1511 0622 02       		.uleb128 0x2
+ 1512 0623 76       		.byte	0x76
+ 1513 0624 00       		.sleb128 0
+ 1514 0625 12       		.uleb128 0x12
+ 1515 0626 01       		.uleb128 0x1
+ 1516 0627 51       		.byte	0x51
+ 1517 0628 03       		.uleb128 0x3
+ 1518 0629 0A       		.byte	0xa
+ 1519 062a 8403     		.2byte	0x384
+ 1520 062c 12       		.uleb128 0x12
+ 1521 062d 01       		.uleb128 0x1
+ 1522 062e 52       		.byte	0x52
+ 1523 062f 03       		.uleb128 0x3
+ 1524 0630 74       		.byte	0x74
+ 1525 0631 A538     		.sleb128 7205
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 31
+
+
+ 1526 0633 12       		.uleb128 0x12
+ 1527 0634 01       		.uleb128 0x1
+ 1528 0635 53       		.byte	0x53
+ 1529 0636 03       		.uleb128 0x3
+ 1530 0637 0A       		.byte	0xa
+ 1531 0638 201C     		.2byte	0x1c20
+ 1532 063a 00       		.byte	0
+ 1533 063b 00       		.byte	0
+ 1534 063c 17       		.uleb128 0x17
+ 1535 063d 10010000 		.4byte	.LASF50
+ 1536 0641 10010000 		.4byte	.LASF50
+ 1537 0645 18       		.uleb128 0x18
+ 1538 0646 43000000 		.4byte	.LASF42
+ 1539 064a 43000000 		.4byte	.LASF42
+ 1540 064e 06       		.byte	0x6
+ 1541 064f 0F       		.byte	0xf
+ 1542 0650 18       		.uleb128 0x18
+ 1543 0651 DE000000 		.4byte	.LASF43
+ 1544 0655 DE000000 		.4byte	.LASF43
+ 1545 0659 07       		.byte	0x7
+ 1546 065a 0D       		.byte	0xd
+ 1547 065b 18       		.uleb128 0x18
+ 1548 065c 57020000 		.4byte	.LASF44
+ 1549 0660 57020000 		.4byte	.LASF44
+ 1550 0664 06       		.byte	0x6
+ 1551 0665 13       		.byte	0x13
+ 1552 0666 18       		.uleb128 0x18
+ 1553 0667 B9000000 		.4byte	.LASF45
+ 1554 066b B9000000 		.4byte	.LASF45
+ 1555 066f 07       		.byte	0x7
+ 1556 0670 0F       		.byte	0xf
+ 1557 0671 00       		.byte	0
+ 1558              		.section	.debug_abbrev,"",%progbits
+ 1559              	.Ldebug_abbrev0:
+ 1560 0000 01       		.uleb128 0x1
+ 1561 0001 11       		.uleb128 0x11
+ 1562 0002 01       		.byte	0x1
+ 1563 0003 25       		.uleb128 0x25
+ 1564 0004 0E       		.uleb128 0xe
+ 1565 0005 13       		.uleb128 0x13
+ 1566 0006 0B       		.uleb128 0xb
+ 1567 0007 03       		.uleb128 0x3
+ 1568 0008 0E       		.uleb128 0xe
+ 1569 0009 1B       		.uleb128 0x1b
+ 1570 000a 0E       		.uleb128 0xe
+ 1571 000b 55       		.uleb128 0x55
+ 1572 000c 17       		.uleb128 0x17
+ 1573 000d 11       		.uleb128 0x11
+ 1574 000e 01       		.uleb128 0x1
+ 1575 000f 10       		.uleb128 0x10
+ 1576 0010 17       		.uleb128 0x17
+ 1577 0011 00       		.byte	0
+ 1578 0012 00       		.byte	0
+ 1579 0013 02       		.uleb128 0x2
+ 1580 0014 16       		.uleb128 0x16
+ 1581 0015 00       		.byte	0
+ 1582 0016 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 32
+
+
+ 1583 0017 0E       		.uleb128 0xe
+ 1584 0018 3A       		.uleb128 0x3a
+ 1585 0019 0B       		.uleb128 0xb
+ 1586 001a 3B       		.uleb128 0x3b
+ 1587 001b 0B       		.uleb128 0xb
+ 1588 001c 49       		.uleb128 0x49
+ 1589 001d 13       		.uleb128 0x13
+ 1590 001e 00       		.byte	0
+ 1591 001f 00       		.byte	0
+ 1592 0020 03       		.uleb128 0x3
+ 1593 0021 24       		.uleb128 0x24
+ 1594 0022 00       		.byte	0
+ 1595 0023 0B       		.uleb128 0xb
+ 1596 0024 0B       		.uleb128 0xb
+ 1597 0025 3E       		.uleb128 0x3e
+ 1598 0026 0B       		.uleb128 0xb
+ 1599 0027 03       		.uleb128 0x3
+ 1600 0028 0E       		.uleb128 0xe
+ 1601 0029 00       		.byte	0
+ 1602 002a 00       		.byte	0
+ 1603 002b 04       		.uleb128 0x4
+ 1604 002c 24       		.uleb128 0x24
+ 1605 002d 00       		.byte	0
+ 1606 002e 0B       		.uleb128 0xb
+ 1607 002f 0B       		.uleb128 0xb
+ 1608 0030 3E       		.uleb128 0x3e
+ 1609 0031 0B       		.uleb128 0xb
+ 1610 0032 03       		.uleb128 0x3
+ 1611 0033 08       		.uleb128 0x8
+ 1612 0034 00       		.byte	0
+ 1613 0035 00       		.byte	0
+ 1614 0036 05       		.uleb128 0x5
+ 1615 0037 0F       		.uleb128 0xf
+ 1616 0038 00       		.byte	0
+ 1617 0039 0B       		.uleb128 0xb
+ 1618 003a 0B       		.uleb128 0xb
+ 1619 003b 49       		.uleb128 0x49
+ 1620 003c 13       		.uleb128 0x13
+ 1621 003d 00       		.byte	0
+ 1622 003e 00       		.byte	0
+ 1623 003f 06       		.uleb128 0x6
+ 1624 0040 13       		.uleb128 0x13
+ 1625 0041 01       		.byte	0x1
+ 1626 0042 0B       		.uleb128 0xb
+ 1627 0043 0B       		.uleb128 0xb
+ 1628 0044 3A       		.uleb128 0x3a
+ 1629 0045 0B       		.uleb128 0xb
+ 1630 0046 3B       		.uleb128 0x3b
+ 1631 0047 0B       		.uleb128 0xb
+ 1632 0048 01       		.uleb128 0x1
+ 1633 0049 13       		.uleb128 0x13
+ 1634 004a 00       		.byte	0
+ 1635 004b 00       		.byte	0
+ 1636 004c 07       		.uleb128 0x7
+ 1637 004d 0D       		.uleb128 0xd
+ 1638 004e 00       		.byte	0
+ 1639 004f 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 33
+
+
+ 1640 0050 08       		.uleb128 0x8
+ 1641 0051 3A       		.uleb128 0x3a
+ 1642 0052 0B       		.uleb128 0xb
+ 1643 0053 3B       		.uleb128 0x3b
+ 1644 0054 0B       		.uleb128 0xb
+ 1645 0055 49       		.uleb128 0x49
+ 1646 0056 13       		.uleb128 0x13
+ 1647 0057 38       		.uleb128 0x38
+ 1648 0058 0B       		.uleb128 0xb
+ 1649 0059 00       		.byte	0
+ 1650 005a 00       		.byte	0
+ 1651 005b 08       		.uleb128 0x8
+ 1652 005c 2E       		.uleb128 0x2e
+ 1653 005d 01       		.byte	0x1
+ 1654 005e 03       		.uleb128 0x3
+ 1655 005f 0E       		.uleb128 0xe
+ 1656 0060 3A       		.uleb128 0x3a
+ 1657 0061 0B       		.uleb128 0xb
+ 1658 0062 3B       		.uleb128 0x3b
+ 1659 0063 0B       		.uleb128 0xb
+ 1660 0064 27       		.uleb128 0x27
+ 1661 0065 19       		.uleb128 0x19
+ 1662 0066 49       		.uleb128 0x49
+ 1663 0067 13       		.uleb128 0x13
+ 1664 0068 11       		.uleb128 0x11
+ 1665 0069 01       		.uleb128 0x1
+ 1666 006a 12       		.uleb128 0x12
+ 1667 006b 06       		.uleb128 0x6
+ 1668 006c 40       		.uleb128 0x40
+ 1669 006d 18       		.uleb128 0x18
+ 1670 006e 9742     		.uleb128 0x2117
+ 1671 0070 19       		.uleb128 0x19
+ 1672 0071 01       		.uleb128 0x1
+ 1673 0072 13       		.uleb128 0x13
+ 1674 0073 00       		.byte	0
+ 1675 0074 00       		.byte	0
+ 1676 0075 09       		.uleb128 0x9
+ 1677 0076 05       		.uleb128 0x5
+ 1678 0077 00       		.byte	0
+ 1679 0078 03       		.uleb128 0x3
+ 1680 0079 08       		.uleb128 0x8
+ 1681 007a 3A       		.uleb128 0x3a
+ 1682 007b 0B       		.uleb128 0xb
+ 1683 007c 3B       		.uleb128 0x3b
+ 1684 007d 0B       		.uleb128 0xb
+ 1685 007e 49       		.uleb128 0x49
+ 1686 007f 13       		.uleb128 0x13
+ 1687 0080 02       		.uleb128 0x2
+ 1688 0081 17       		.uleb128 0x17
+ 1689 0082 00       		.byte	0
+ 1690 0083 00       		.byte	0
+ 1691 0084 0A       		.uleb128 0xa
+ 1692 0085 34       		.uleb128 0x34
+ 1693 0086 00       		.byte	0
+ 1694 0087 03       		.uleb128 0x3
+ 1695 0088 08       		.uleb128 0x8
+ 1696 0089 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 34
+
+
+ 1697 008a 0B       		.uleb128 0xb
+ 1698 008b 3B       		.uleb128 0x3b
+ 1699 008c 0B       		.uleb128 0xb
+ 1700 008d 49       		.uleb128 0x49
+ 1701 008e 13       		.uleb128 0x13
+ 1702 008f 02       		.uleb128 0x2
+ 1703 0090 17       		.uleb128 0x17
+ 1704 0091 00       		.byte	0
+ 1705 0092 00       		.byte	0
+ 1706 0093 0B       		.uleb128 0xb
+ 1707 0094 0B       		.uleb128 0xb
+ 1708 0095 01       		.byte	0x1
+ 1709 0096 11       		.uleb128 0x11
+ 1710 0097 01       		.uleb128 0x1
+ 1711 0098 12       		.uleb128 0x12
+ 1712 0099 06       		.uleb128 0x6
+ 1713 009a 00       		.byte	0
+ 1714 009b 00       		.byte	0
+ 1715 009c 0C       		.uleb128 0xc
+ 1716 009d 26       		.uleb128 0x26
+ 1717 009e 00       		.byte	0
+ 1718 009f 49       		.uleb128 0x49
+ 1719 00a0 13       		.uleb128 0x13
+ 1720 00a1 00       		.byte	0
+ 1721 00a2 00       		.byte	0
+ 1722 00a3 0D       		.uleb128 0xd
+ 1723 00a4 2E       		.uleb128 0x2e
+ 1724 00a5 01       		.byte	0x1
+ 1725 00a6 3F       		.uleb128 0x3f
+ 1726 00a7 19       		.uleb128 0x19
+ 1727 00a8 03       		.uleb128 0x3
+ 1728 00a9 0E       		.uleb128 0xe
+ 1729 00aa 3A       		.uleb128 0x3a
+ 1730 00ab 0B       		.uleb128 0xb
+ 1731 00ac 3B       		.uleb128 0x3b
+ 1732 00ad 0B       		.uleb128 0xb
+ 1733 00ae 27       		.uleb128 0x27
+ 1734 00af 19       		.uleb128 0x19
+ 1735 00b0 11       		.uleb128 0x11
+ 1736 00b1 01       		.uleb128 0x1
+ 1737 00b2 12       		.uleb128 0x12
+ 1738 00b3 06       		.uleb128 0x6
+ 1739 00b4 40       		.uleb128 0x40
+ 1740 00b5 18       		.uleb128 0x18
+ 1741 00b6 9742     		.uleb128 0x2117
+ 1742 00b8 19       		.uleb128 0x19
+ 1743 00b9 01       		.uleb128 0x1
+ 1744 00ba 13       		.uleb128 0x13
+ 1745 00bb 00       		.byte	0
+ 1746 00bc 00       		.byte	0
+ 1747 00bd 0E       		.uleb128 0xe
+ 1748 00be 05       		.uleb128 0x5
+ 1749 00bf 00       		.byte	0
+ 1750 00c0 03       		.uleb128 0x3
+ 1751 00c1 0E       		.uleb128 0xe
+ 1752 00c2 3A       		.uleb128 0x3a
+ 1753 00c3 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 35
+
+
+ 1754 00c4 3B       		.uleb128 0x3b
+ 1755 00c5 0B       		.uleb128 0xb
+ 1756 00c6 49       		.uleb128 0x49
+ 1757 00c7 13       		.uleb128 0x13
+ 1758 00c8 02       		.uleb128 0x2
+ 1759 00c9 17       		.uleb128 0x17
+ 1760 00ca 00       		.byte	0
+ 1761 00cb 00       		.byte	0
+ 1762 00cc 0F       		.uleb128 0xf
+ 1763 00cd 34       		.uleb128 0x34
+ 1764 00ce 00       		.byte	0
+ 1765 00cf 03       		.uleb128 0x3
+ 1766 00d0 0E       		.uleb128 0xe
+ 1767 00d1 3A       		.uleb128 0x3a
+ 1768 00d2 0B       		.uleb128 0xb
+ 1769 00d3 3B       		.uleb128 0x3b
+ 1770 00d4 0B       		.uleb128 0xb
+ 1771 00d5 49       		.uleb128 0x49
+ 1772 00d6 13       		.uleb128 0x13
+ 1773 00d7 02       		.uleb128 0x2
+ 1774 00d8 17       		.uleb128 0x17
+ 1775 00d9 00       		.byte	0
+ 1776 00da 00       		.byte	0
+ 1777 00db 10       		.uleb128 0x10
+ 1778 00dc 0B       		.uleb128 0xb
+ 1779 00dd 01       		.byte	0x1
+ 1780 00de 11       		.uleb128 0x11
+ 1781 00df 01       		.uleb128 0x1
+ 1782 00e0 12       		.uleb128 0x12
+ 1783 00e1 06       		.uleb128 0x6
+ 1784 00e2 01       		.uleb128 0x1
+ 1785 00e3 13       		.uleb128 0x13
+ 1786 00e4 00       		.byte	0
+ 1787 00e5 00       		.byte	0
+ 1788 00e6 11       		.uleb128 0x11
+ 1789 00e7 898201   		.uleb128 0x4109
+ 1790 00ea 01       		.byte	0x1
+ 1791 00eb 11       		.uleb128 0x11
+ 1792 00ec 01       		.uleb128 0x1
+ 1793 00ed 31       		.uleb128 0x31
+ 1794 00ee 13       		.uleb128 0x13
+ 1795 00ef 00       		.byte	0
+ 1796 00f0 00       		.byte	0
+ 1797 00f1 12       		.uleb128 0x12
+ 1798 00f2 8A8201   		.uleb128 0x410a
+ 1799 00f5 00       		.byte	0
+ 1800 00f6 02       		.uleb128 0x2
+ 1801 00f7 18       		.uleb128 0x18
+ 1802 00f8 9142     		.uleb128 0x2111
+ 1803 00fa 18       		.uleb128 0x18
+ 1804 00fb 00       		.byte	0
+ 1805 00fc 00       		.byte	0
+ 1806 00fd 13       		.uleb128 0x13
+ 1807 00fe 05       		.uleb128 0x5
+ 1808 00ff 00       		.byte	0
+ 1809 0100 03       		.uleb128 0x3
+ 1810 0101 0E       		.uleb128 0xe
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 36
+
+
+ 1811 0102 3A       		.uleb128 0x3a
+ 1812 0103 0B       		.uleb128 0xb
+ 1813 0104 3B       		.uleb128 0x3b
+ 1814 0105 0B       		.uleb128 0xb
+ 1815 0106 49       		.uleb128 0x49
+ 1816 0107 13       		.uleb128 0x13
+ 1817 0108 02       		.uleb128 0x2
+ 1818 0109 18       		.uleb128 0x18
+ 1819 010a 00       		.byte	0
+ 1820 010b 00       		.byte	0
+ 1821 010c 14       		.uleb128 0x14
+ 1822 010d 05       		.uleb128 0x5
+ 1823 010e 00       		.byte	0
+ 1824 010f 03       		.uleb128 0x3
+ 1825 0110 08       		.uleb128 0x8
+ 1826 0111 3A       		.uleb128 0x3a
+ 1827 0112 0B       		.uleb128 0xb
+ 1828 0113 3B       		.uleb128 0x3b
+ 1829 0114 0B       		.uleb128 0xb
+ 1830 0115 49       		.uleb128 0x49
+ 1831 0116 13       		.uleb128 0x13
+ 1832 0117 02       		.uleb128 0x2
+ 1833 0118 18       		.uleb128 0x18
+ 1834 0119 00       		.byte	0
+ 1835 011a 00       		.byte	0
+ 1836 011b 15       		.uleb128 0x15
+ 1837 011c 34       		.uleb128 0x34
+ 1838 011d 00       		.byte	0
+ 1839 011e 03       		.uleb128 0x3
+ 1840 011f 0E       		.uleb128 0xe
+ 1841 0120 3A       		.uleb128 0x3a
+ 1842 0121 0B       		.uleb128 0xb
+ 1843 0122 3B       		.uleb128 0x3b
+ 1844 0123 0B       		.uleb128 0xb
+ 1845 0124 49       		.uleb128 0x49
+ 1846 0125 13       		.uleb128 0x13
+ 1847 0126 02       		.uleb128 0x2
+ 1848 0127 18       		.uleb128 0x18
+ 1849 0128 00       		.byte	0
+ 1850 0129 00       		.byte	0
+ 1851 012a 16       		.uleb128 0x16
+ 1852 012b 898201   		.uleb128 0x4109
+ 1853 012e 01       		.byte	0x1
+ 1854 012f 11       		.uleb128 0x11
+ 1855 0130 01       		.uleb128 0x1
+ 1856 0131 31       		.uleb128 0x31
+ 1857 0132 13       		.uleb128 0x13
+ 1858 0133 01       		.uleb128 0x1
+ 1859 0134 13       		.uleb128 0x13
+ 1860 0135 00       		.byte	0
+ 1861 0136 00       		.byte	0
+ 1862 0137 17       		.uleb128 0x17
+ 1863 0138 2E       		.uleb128 0x2e
+ 1864 0139 00       		.byte	0
+ 1865 013a 3F       		.uleb128 0x3f
+ 1866 013b 19       		.uleb128 0x19
+ 1867 013c 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 37
+
+
+ 1868 013d 19       		.uleb128 0x19
+ 1869 013e 6E       		.uleb128 0x6e
+ 1870 013f 0E       		.uleb128 0xe
+ 1871 0140 03       		.uleb128 0x3
+ 1872 0141 0E       		.uleb128 0xe
+ 1873 0142 00       		.byte	0
+ 1874 0143 00       		.byte	0
+ 1875 0144 18       		.uleb128 0x18
+ 1876 0145 2E       		.uleb128 0x2e
+ 1877 0146 00       		.byte	0
+ 1878 0147 3F       		.uleb128 0x3f
+ 1879 0148 19       		.uleb128 0x19
+ 1880 0149 3C       		.uleb128 0x3c
+ 1881 014a 19       		.uleb128 0x19
+ 1882 014b 6E       		.uleb128 0x6e
+ 1883 014c 0E       		.uleb128 0xe
+ 1884 014d 03       		.uleb128 0x3
+ 1885 014e 0E       		.uleb128 0xe
+ 1886 014f 3A       		.uleb128 0x3a
+ 1887 0150 0B       		.uleb128 0xb
+ 1888 0151 3B       		.uleb128 0x3b
+ 1889 0152 0B       		.uleb128 0xb
+ 1890 0153 00       		.byte	0
+ 1891 0154 00       		.byte	0
+ 1892 0155 00       		.byte	0
+ 1893              		.section	.debug_loc,"",%progbits
+ 1894              	.Ldebug_loc0:
+ 1895              	.LLST0:
+ 1896 0000 00000000 		.4byte	.LVL0
+ 1897 0004 24000000 		.4byte	.LVL7
+ 1898 0008 0100     		.2byte	0x1
+ 1899 000a 50       		.byte	0x50
+ 1900 000b 24000000 		.4byte	.LVL7
+ 1901 000f 2A000000 		.4byte	.LFE0
+ 1902 0013 0400     		.2byte	0x4
+ 1903 0015 F3       		.byte	0xf3
+ 1904 0016 01       		.uleb128 0x1
+ 1905 0017 50       		.byte	0x50
+ 1906 0018 9F       		.byte	0x9f
+ 1907 0019 00000000 		.4byte	0
+ 1908 001d 00000000 		.4byte	0
+ 1909              	.LLST1:
+ 1910 0021 06000000 		.4byte	.LVL1
+ 1911 0025 12000000 		.4byte	.LVL3
+ 1912 0029 0600     		.2byte	0x6
+ 1913 002b 52       		.byte	0x52
+ 1914 002c 93       		.byte	0x93
+ 1915 002d 04       		.uleb128 0x4
+ 1916 002e 53       		.byte	0x53
+ 1917 002f 93       		.byte	0x93
+ 1918 0030 04       		.uleb128 0x4
+ 1919 0031 12000000 		.4byte	.LVL3
+ 1920 0035 1A000000 		.4byte	.LVL4
+ 1921 0039 0600     		.2byte	0x6
+ 1922 003b 54       		.byte	0x54
+ 1923 003c 93       		.byte	0x93
+ 1924 003d 04       		.uleb128 0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 38
+
+
+ 1925 003e 55       		.byte	0x55
+ 1926 003f 93       		.byte	0x93
+ 1927 0040 04       		.uleb128 0x4
+ 1928 0041 1A000000 		.4byte	.LVL4
+ 1929 0045 2A000000 		.4byte	.LFE0
+ 1930 0049 0600     		.2byte	0x6
+ 1931 004b 52       		.byte	0x52
+ 1932 004c 93       		.byte	0x93
+ 1933 004d 04       		.uleb128 0x4
+ 1934 004e 53       		.byte	0x53
+ 1935 004f 93       		.byte	0x93
+ 1936 0050 04       		.uleb128 0x4
+ 1937 0051 00000000 		.4byte	0
+ 1938 0055 00000000 		.4byte	0
+ 1939              	.LLST2:
+ 1940 0059 06000000 		.4byte	.LVL1
+ 1941 005d 0A000000 		.4byte	.LVL2
+ 1942 0061 0200     		.2byte	0x2
+ 1943 0063 36       		.byte	0x36
+ 1944 0064 9F       		.byte	0x9f
+ 1945 0065 0A000000 		.4byte	.LVL2
+ 1946 0069 1C000000 		.4byte	.LVL5
+ 1947 006d 0100     		.2byte	0x1
+ 1948 006f 51       		.byte	0x51
+ 1949 0070 1E000000 		.4byte	.LVL6
+ 1950 0074 26000000 		.4byte	.LVL8
+ 1951 0078 0100     		.2byte	0x1
+ 1952 007a 51       		.byte	0x51
+ 1953 007b 00000000 		.4byte	0
+ 1954 007f 00000000 		.4byte	0
+ 1955              	.LLST3:
+ 1956 0083 00000000 		.4byte	.LVL9
+ 1957 0087 18000000 		.4byte	.LVL11
+ 1958 008b 0100     		.2byte	0x1
+ 1959 008d 50       		.byte	0x50
+ 1960 008e 18000000 		.4byte	.LVL11
+ 1961 0092 30000000 		.4byte	.LVL17
+ 1962 0096 0200     		.2byte	0x2
+ 1963 0098 91       		.byte	0x91
+ 1964 0099 54       		.sleb128 -44
+ 1965 009a 30000000 		.4byte	.LVL17
+ 1966 009e 34000000 		.4byte	.LVL18
+ 1967 00a2 0100     		.2byte	0x1
+ 1968 00a4 50       		.byte	0x50
+ 1969 00a5 34000000 		.4byte	.LVL18
+ 1970 00a9 42000000 		.4byte	.LVL19
+ 1971 00ad 0200     		.2byte	0x2
+ 1972 00af 91       		.byte	0x91
+ 1973 00b0 54       		.sleb128 -44
+ 1974 00b1 42000000 		.4byte	.LVL19
+ 1975 00b5 46000000 		.4byte	.LVL20
+ 1976 00b9 0100     		.2byte	0x1
+ 1977 00bb 50       		.byte	0x50
+ 1978 00bc 46000000 		.4byte	.LVL20
+ 1979 00c0 A2000000 		.4byte	.LFE1
+ 1980 00c4 0200     		.2byte	0x2
+ 1981 00c6 91       		.byte	0x91
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 39
+
+
+ 1982 00c7 54       		.sleb128 -44
+ 1983 00c8 00000000 		.4byte	0
+ 1984 00cc 00000000 		.4byte	0
+ 1985              	.LLST4:
+ 1986 00d0 00000000 		.4byte	.LVL9
+ 1987 00d4 1A000000 		.4byte	.LVL12
+ 1988 00d8 0100     		.2byte	0x1
+ 1989 00da 51       		.byte	0x51
+ 1990 00db 1A000000 		.4byte	.LVL12
+ 1991 00df 30000000 		.4byte	.LVL17
+ 1992 00e3 0100     		.2byte	0x1
+ 1993 00e5 56       		.byte	0x56
+ 1994 00e6 30000000 		.4byte	.LVL17
+ 1995 00ea 34000000 		.4byte	.LVL18
+ 1996 00ee 0100     		.2byte	0x1
+ 1997 00f0 51       		.byte	0x51
+ 1998 00f1 34000000 		.4byte	.LVL18
+ 1999 00f5 42000000 		.4byte	.LVL19
+ 2000 00f9 0100     		.2byte	0x1
+ 2001 00fb 56       		.byte	0x56
+ 2002 00fc 42000000 		.4byte	.LVL19
+ 2003 0100 46000000 		.4byte	.LVL20
+ 2004 0104 0100     		.2byte	0x1
+ 2005 0106 51       		.byte	0x51
+ 2006 0107 46000000 		.4byte	.LVL20
+ 2007 010b 54000000 		.4byte	.LVL21
+ 2008 010f 0100     		.2byte	0x1
+ 2009 0111 56       		.byte	0x56
+ 2010 0112 54000000 		.4byte	.LVL21
+ 2011 0116 A2000000 		.4byte	.LFE1
+ 2012 011a 0400     		.2byte	0x4
+ 2013 011c F3       		.byte	0xf3
+ 2014 011d 01       		.uleb128 0x1
+ 2015 011e 51       		.byte	0x51
+ 2016 011f 9F       		.byte	0x9f
+ 2017 0120 00000000 		.4byte	0
+ 2018 0124 00000000 		.4byte	0
+ 2019              	.LLST5:
+ 2020 0128 00000000 		.4byte	.LVL9
+ 2021 012c 1A000000 		.4byte	.LVL12
+ 2022 0130 0100     		.2byte	0x1
+ 2023 0132 52       		.byte	0x52
+ 2024 0133 1A000000 		.4byte	.LVL12
+ 2025 0137 30000000 		.4byte	.LVL17
+ 2026 013b 0100     		.2byte	0x1
+ 2027 013d 59       		.byte	0x59
+ 2028 013e 30000000 		.4byte	.LVL17
+ 2029 0142 34000000 		.4byte	.LVL18
+ 2030 0146 0100     		.2byte	0x1
+ 2031 0148 52       		.byte	0x52
+ 2032 0149 34000000 		.4byte	.LVL18
+ 2033 014d 42000000 		.4byte	.LVL19
+ 2034 0151 0100     		.2byte	0x1
+ 2035 0153 59       		.byte	0x59
+ 2036 0154 42000000 		.4byte	.LVL19
+ 2037 0158 46000000 		.4byte	.LVL20
+ 2038 015c 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 40
+
+
+ 2039 015e 52       		.byte	0x52
+ 2040 015f 46000000 		.4byte	.LVL20
+ 2041 0163 A2000000 		.4byte	.LFE1
+ 2042 0167 0100     		.2byte	0x1
+ 2043 0169 59       		.byte	0x59
+ 2044 016a 00000000 		.4byte	0
+ 2045 016e 00000000 		.4byte	0
+ 2046              	.LLST6:
+ 2047 0172 00000000 		.4byte	.LVL9
+ 2048 0176 1A000000 		.4byte	.LVL12
+ 2049 017a 0100     		.2byte	0x1
+ 2050 017c 53       		.byte	0x53
+ 2051 017d 1A000000 		.4byte	.LVL12
+ 2052 0181 30000000 		.4byte	.LVL17
+ 2053 0185 0100     		.2byte	0x1
+ 2054 0187 5B       		.byte	0x5b
+ 2055 0188 30000000 		.4byte	.LVL17
+ 2056 018c 34000000 		.4byte	.LVL18
+ 2057 0190 0100     		.2byte	0x1
+ 2058 0192 53       		.byte	0x53
+ 2059 0193 34000000 		.4byte	.LVL18
+ 2060 0197 42000000 		.4byte	.LVL19
+ 2061 019b 0100     		.2byte	0x1
+ 2062 019d 5B       		.byte	0x5b
+ 2063 019e 42000000 		.4byte	.LVL19
+ 2064 01a2 46000000 		.4byte	.LVL20
+ 2065 01a6 0100     		.2byte	0x1
+ 2066 01a8 53       		.byte	0x53
+ 2067 01a9 46000000 		.4byte	.LVL20
+ 2068 01ad 6C000000 		.4byte	.LVL23
+ 2069 01b1 0100     		.2byte	0x1
+ 2070 01b3 5B       		.byte	0x5b
+ 2071 01b4 6C000000 		.4byte	.LVL23
+ 2072 01b8 A2000000 		.4byte	.LFE1
+ 2073 01bc 0400     		.2byte	0x4
+ 2074 01be F3       		.byte	0xf3
+ 2075 01bf 01       		.uleb128 0x1
+ 2076 01c0 53       		.byte	0x53
+ 2077 01c1 9F       		.byte	0x9f
+ 2078 01c2 00000000 		.4byte	0
+ 2079 01c6 00000000 		.4byte	0
+ 2080              	.LLST7:
+ 2081 01ca 0E000000 		.4byte	.LVL10
+ 2082 01ce 1A000000 		.4byte	.LVL12
+ 2083 01d2 0200     		.2byte	0x2
+ 2084 01d4 30       		.byte	0x30
+ 2085 01d5 9F       		.byte	0x9f
+ 2086 01d6 1A000000 		.4byte	.LVL12
+ 2087 01da 22000000 		.4byte	.LVL13
+ 2088 01de 0100     		.2byte	0x1
+ 2089 01e0 50       		.byte	0x50
+ 2090 01e1 22000000 		.4byte	.LVL13
+ 2091 01e5 2A000000 		.4byte	.LVL15
+ 2092 01e9 0300     		.2byte	0x3
+ 2093 01eb 78       		.byte	0x78
+ 2094 01ec 78       		.sleb128 -8
+ 2095 01ed 9F       		.byte	0x9f
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 41
+
+
+ 2096 01ee 2A000000 		.4byte	.LVL15
+ 2097 01f2 30000000 		.4byte	.LVL17
+ 2098 01f6 0100     		.2byte	0x1
+ 2099 01f8 58       		.byte	0x58
+ 2100 01f9 30000000 		.4byte	.LVL17
+ 2101 01fd 34000000 		.4byte	.LVL18
+ 2102 0201 0200     		.2byte	0x2
+ 2103 0203 30       		.byte	0x30
+ 2104 0204 9F       		.byte	0x9f
+ 2105 0205 34000000 		.4byte	.LVL18
+ 2106 0209 42000000 		.4byte	.LVL19
+ 2107 020d 0100     		.2byte	0x1
+ 2108 020f 50       		.byte	0x50
+ 2109 0210 42000000 		.4byte	.LVL19
+ 2110 0214 46000000 		.4byte	.LVL20
+ 2111 0218 0200     		.2byte	0x2
+ 2112 021a 30       		.byte	0x30
+ 2113 021b 9F       		.byte	0x9f
+ 2114 021c 46000000 		.4byte	.LVL20
+ 2115 0220 A2000000 		.4byte	.LFE1
+ 2116 0224 0100     		.2byte	0x1
+ 2117 0226 50       		.byte	0x50
+ 2118 0227 00000000 		.4byte	0
+ 2119 022b 00000000 		.4byte	0
+ 2120              	.LLST8:
+ 2121 022f 0E000000 		.4byte	.LVL10
+ 2122 0233 1A000000 		.4byte	.LVL12
+ 2123 0237 0200     		.2byte	0x2
+ 2124 0239 30       		.byte	0x30
+ 2125 023a 9F       		.byte	0x9f
+ 2126 023b 1A000000 		.4byte	.LVL12
+ 2127 023f 30000000 		.4byte	.LVL17
+ 2128 0243 0100     		.2byte	0x1
+ 2129 0245 57       		.byte	0x57
+ 2130 0246 30000000 		.4byte	.LVL17
+ 2131 024a 34000000 		.4byte	.LVL18
+ 2132 024e 0200     		.2byte	0x2
+ 2133 0250 30       		.byte	0x30
+ 2134 0251 9F       		.byte	0x9f
+ 2135 0252 34000000 		.4byte	.LVL18
+ 2136 0256 42000000 		.4byte	.LVL19
+ 2137 025a 0100     		.2byte	0x1
+ 2138 025c 57       		.byte	0x57
+ 2139 025d 42000000 		.4byte	.LVL19
+ 2140 0261 46000000 		.4byte	.LVL20
+ 2141 0265 0200     		.2byte	0x2
+ 2142 0267 30       		.byte	0x30
+ 2143 0268 9F       		.byte	0x9f
+ 2144 0269 46000000 		.4byte	.LVL20
+ 2145 026d A2000000 		.4byte	.LFE1
+ 2146 0271 0100     		.2byte	0x1
+ 2147 0273 57       		.byte	0x57
+ 2148 0274 00000000 		.4byte	0
+ 2149 0278 00000000 		.4byte	0
+ 2150              	.LLST9:
+ 2151 027c 6A000000 		.4byte	.LVL22
+ 2152 0280 96000000 		.4byte	.LVL24
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 42
+
+
+ 2153 0284 0100     		.2byte	0x1
+ 2154 0286 53       		.byte	0x53
+ 2155 0287 98000000 		.4byte	.LVL25
+ 2156 028b 9C000000 		.4byte	.LVL26
+ 2157 028f 0100     		.2byte	0x1
+ 2158 0291 53       		.byte	0x53
+ 2159 0292 00000000 		.4byte	0
+ 2160 0296 00000000 		.4byte	0
+ 2161              	.LLST10:
+ 2162 029a 00000000 		.4byte	.LVL27
+ 2163 029e 0C000000 		.4byte	.LVL29
+ 2164 02a2 0100     		.2byte	0x1
+ 2165 02a4 50       		.byte	0x50
+ 2166 02a5 0C000000 		.4byte	.LVL29
+ 2167 02a9 52000000 		.4byte	.LFE2
+ 2168 02ad 0100     		.2byte	0x1
+ 2169 02af 58       		.byte	0x58
+ 2170 02b0 00000000 		.4byte	0
+ 2171 02b4 00000000 		.4byte	0
+ 2172              	.LLST11:
+ 2173 02b8 06000000 		.4byte	.LVL28
+ 2174 02bc 0C000000 		.4byte	.LVL29
+ 2175 02c0 0200     		.2byte	0x2
+ 2176 02c2 30       		.byte	0x30
+ 2177 02c3 9F       		.byte	0x9f
+ 2178 02c4 0C000000 		.4byte	.LVL29
+ 2179 02c8 52000000 		.4byte	.LFE2
+ 2180 02cc 0100     		.2byte	0x1
+ 2181 02ce 56       		.byte	0x56
+ 2182 02cf 00000000 		.4byte	0
+ 2183 02d3 00000000 		.4byte	0
+ 2184              	.LLST12:
+ 2185 02d7 06000000 		.4byte	.LVL28
+ 2186 02db 0C000000 		.4byte	.LVL29
+ 2187 02df 0200     		.2byte	0x2
+ 2188 02e1 30       		.byte	0x30
+ 2189 02e2 9F       		.byte	0x9f
+ 2190 02e3 0C000000 		.4byte	.LVL29
+ 2191 02e7 52000000 		.4byte	.LFE2
+ 2192 02eb 0100     		.2byte	0x1
+ 2193 02ed 57       		.byte	0x57
+ 2194 02ee 00000000 		.4byte	0
+ 2195 02f2 00000000 		.4byte	0
+ 2196              	.LLST13:
+ 2197 02f6 00000000 		.4byte	.LVL32
+ 2198 02fa 60000000 		.4byte	.LVL35
+ 2199 02fe 0100     		.2byte	0x1
+ 2200 0300 50       		.byte	0x50
+ 2201 0301 60000000 		.4byte	.LVL35
+ 2202 0305 63000000 		.4byte	.LVL36-1
+ 2203 0309 0400     		.2byte	0x4
+ 2204 030b 70       		.byte	0x70
+ 2205 030c B87F     		.sleb128 -72
+ 2206 030e 9F       		.byte	0x9f
+ 2207 030f 63000000 		.4byte	.LVL36-1
+ 2208 0313 68000000 		.4byte	.LFE3
+ 2209 0317 0400     		.2byte	0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 43
+
+
+ 2210 0319 F3       		.byte	0xf3
+ 2211 031a 01       		.uleb128 0x1
+ 2212 031b 50       		.byte	0x50
+ 2213 031c 9F       		.byte	0x9f
+ 2214 031d 00000000 		.4byte	0
+ 2215 0321 00000000 		.4byte	0
+ 2216              	.LLST14:
+ 2217 0325 00000000 		.4byte	.LVL32
+ 2218 0329 34000000 		.4byte	.LVL33
+ 2219 032d 0100     		.2byte	0x1
+ 2220 032f 51       		.byte	0x51
+ 2221 0330 34000000 		.4byte	.LVL33
+ 2222 0334 68000000 		.4byte	.LFE3
+ 2223 0338 0400     		.2byte	0x4
+ 2224 033a F3       		.byte	0xf3
+ 2225 033b 01       		.uleb128 0x1
+ 2226 033c 51       		.byte	0x51
+ 2227 033d 9F       		.byte	0x9f
+ 2228 033e 00000000 		.4byte	0
+ 2229 0342 00000000 		.4byte	0
+ 2230              	.LLST15:
+ 2231 0346 00000000 		.4byte	.LVL32
+ 2232 034a 5C000000 		.4byte	.LVL34
+ 2233 034e 0100     		.2byte	0x1
+ 2234 0350 52       		.byte	0x52
+ 2235 0351 5C000000 		.4byte	.LVL34
+ 2236 0355 68000000 		.4byte	.LFE3
+ 2237 0359 0400     		.2byte	0x4
+ 2238 035b F3       		.byte	0xf3
+ 2239 035c 01       		.uleb128 0x1
+ 2240 035d 52       		.byte	0x52
+ 2241 035e 9F       		.byte	0x9f
+ 2242 035f 00000000 		.4byte	0
+ 2243 0363 00000000 		.4byte	0
+ 2244              	.LLST16:
+ 2245 0367 00000000 		.4byte	.LVL32
+ 2246 036b 63000000 		.4byte	.LVL36-1
+ 2247 036f 0100     		.2byte	0x1
+ 2248 0371 53       		.byte	0x53
+ 2249 0372 63000000 		.4byte	.LVL36-1
+ 2250 0376 68000000 		.4byte	.LFE3
+ 2251 037a 0400     		.2byte	0x4
+ 2252 037c F3       		.byte	0xf3
+ 2253 037d 01       		.uleb128 0x1
+ 2254 037e 53       		.byte	0x53
+ 2255 037f 9F       		.byte	0x9f
+ 2256 0380 00000000 		.4byte	0
+ 2257 0384 00000000 		.4byte	0
+ 2258              	.LLST17:
+ 2259 0388 00000000 		.4byte	.LVL37
+ 2260 038c 18000000 		.4byte	.LVL39
+ 2261 0390 0100     		.2byte	0x1
+ 2262 0392 50       		.byte	0x50
+ 2263 0393 18000000 		.4byte	.LVL39
+ 2264 0397 74000000 		.4byte	.LFE4
+ 2265 039b 0100     		.2byte	0x1
+ 2266 039d 57       		.byte	0x57
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 44
+
+
+ 2267 039e 00000000 		.4byte	0
+ 2268 03a2 00000000 		.4byte	0
+ 2269              	.LLST18:
+ 2270 03a6 00000000 		.4byte	.LVL37
+ 2271 03aa 1A000000 		.4byte	.LVL40
+ 2272 03ae 0100     		.2byte	0x1
+ 2273 03b0 51       		.byte	0x51
+ 2274 03b1 1A000000 		.4byte	.LVL40
+ 2275 03b5 74000000 		.4byte	.LFE4
+ 2276 03b9 0100     		.2byte	0x1
+ 2277 03bb 56       		.byte	0x56
+ 2278 03bc 00000000 		.4byte	0
+ 2279 03c0 00000000 		.4byte	0
+ 2280              	.LLST19:
+ 2281 03c4 00000000 		.4byte	.LVL37
+ 2282 03c8 40000000 		.4byte	.LVL41
+ 2283 03cc 0100     		.2byte	0x1
+ 2284 03ce 52       		.byte	0x52
+ 2285 03cf 40000000 		.4byte	.LVL41
+ 2286 03d3 74000000 		.4byte	.LFE4
+ 2287 03d7 0400     		.2byte	0x4
+ 2288 03d9 F3       		.byte	0xf3
+ 2289 03da 01       		.uleb128 0x1
+ 2290 03db 52       		.byte	0x52
+ 2291 03dc 9F       		.byte	0x9f
+ 2292 03dd 00000000 		.4byte	0
+ 2293 03e1 00000000 		.4byte	0
+ 2294              	.LLST20:
+ 2295 03e5 00000000 		.4byte	.LVL37
+ 2296 03e9 0E000000 		.4byte	.LVL38
+ 2297 03ed 0100     		.2byte	0x1
+ 2298 03ef 53       		.byte	0x53
+ 2299 03f0 0E000000 		.4byte	.LVL38
+ 2300 03f4 74000000 		.4byte	.LFE4
+ 2301 03f8 0100     		.2byte	0x1
+ 2302 03fa 55       		.byte	0x55
+ 2303 03fb 00000000 		.4byte	0
+ 2304 03ff 00000000 		.4byte	0
+ 2305              	.LLST21:
+ 2306 0403 00000000 		.4byte	.LVL47
+ 2307 0407 36000000 		.4byte	.LVL50
+ 2308 040b 0100     		.2byte	0x1
+ 2309 040d 50       		.byte	0x50
+ 2310 040e 36000000 		.4byte	.LVL50
+ 2311 0412 39000000 		.4byte	.LVL51-1
+ 2312 0416 0300     		.2byte	0x3
+ 2313 0418 70       		.byte	0x70
+ 2314 0419 58       		.sleb128 -40
+ 2315 041a 9F       		.byte	0x9f
+ 2316 041b 39000000 		.4byte	.LVL51-1
+ 2317 041f 3C000000 		.4byte	.LFE5
+ 2318 0423 0400     		.2byte	0x4
+ 2319 0425 F3       		.byte	0xf3
+ 2320 0426 01       		.uleb128 0x1
+ 2321 0427 50       		.byte	0x50
+ 2322 0428 9F       		.byte	0x9f
+ 2323 0429 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 45
+
+
+ 2324 042d 00000000 		.4byte	0
+ 2325              	.LLST22:
+ 2326 0431 00000000 		.4byte	.LVL47
+ 2327 0435 08000000 		.4byte	.LVL48
+ 2328 0439 0100     		.2byte	0x1
+ 2329 043b 51       		.byte	0x51
+ 2330 043c 08000000 		.4byte	.LVL48
+ 2331 0440 26000000 		.4byte	.LVL49
+ 2332 0444 0300     		.2byte	0x3
+ 2333 0446 71       		.byte	0x71
+ 2334 0447 60       		.sleb128 -32
+ 2335 0448 9F       		.byte	0x9f
+ 2336 0449 26000000 		.4byte	.LVL49
+ 2337 044d 3C000000 		.4byte	.LFE5
+ 2338 0451 0400     		.2byte	0x4
+ 2339 0453 F3       		.byte	0xf3
+ 2340 0454 01       		.uleb128 0x1
+ 2341 0455 51       		.byte	0x51
+ 2342 0456 9F       		.byte	0x9f
+ 2343 0457 00000000 		.4byte	0
+ 2344 045b 00000000 		.4byte	0
+ 2345              	.LLST23:
+ 2346 045f 00000000 		.4byte	.LVL47
+ 2347 0463 39000000 		.4byte	.LVL51-1
+ 2348 0467 0100     		.2byte	0x1
+ 2349 0469 52       		.byte	0x52
+ 2350 046a 39000000 		.4byte	.LVL51-1
+ 2351 046e 3C000000 		.4byte	.LFE5
+ 2352 0472 0400     		.2byte	0x4
+ 2353 0474 F3       		.byte	0xf3
+ 2354 0475 01       		.uleb128 0x1
+ 2355 0476 52       		.byte	0x52
+ 2356 0477 9F       		.byte	0x9f
+ 2357 0478 00000000 		.4byte	0
+ 2358 047c 00000000 		.4byte	0
+ 2359              	.LLST24:
+ 2360 0480 00000000 		.4byte	.LVL52
+ 2361 0484 10000000 		.4byte	.LVL55
+ 2362 0488 0100     		.2byte	0x1
+ 2363 048a 50       		.byte	0x50
+ 2364 048b 10000000 		.4byte	.LVL55
+ 2365 048f 38000000 		.4byte	.LFE6
+ 2366 0493 0100     		.2byte	0x1
+ 2367 0495 56       		.byte	0x56
+ 2368 0496 00000000 		.4byte	0
+ 2369 049a 00000000 		.4byte	0
+ 2370              	.LLST25:
+ 2371 049e 00000000 		.4byte	.LVL52
+ 2372 04a2 0E000000 		.4byte	.LVL54
+ 2373 04a6 0100     		.2byte	0x1
+ 2374 04a8 51       		.byte	0x51
+ 2375 04a9 0E000000 		.4byte	.LVL54
+ 2376 04ad 38000000 		.4byte	.LFE6
+ 2377 04b1 0100     		.2byte	0x1
+ 2378 04b3 55       		.byte	0x55
+ 2379 04b4 00000000 		.4byte	0
+ 2380 04b8 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 46
+
+
+ 2381              	.LLST26:
+ 2382 04bc 00000000 		.4byte	.LVL52
+ 2383 04c0 0C000000 		.4byte	.LVL53
+ 2384 04c4 0100     		.2byte	0x1
+ 2385 04c6 52       		.byte	0x52
+ 2386 04c7 0C000000 		.4byte	.LVL53
+ 2387 04cb 38000000 		.4byte	.LFE6
+ 2388 04cf 0100     		.2byte	0x1
+ 2389 04d1 54       		.byte	0x54
+ 2390 04d2 00000000 		.4byte	0
+ 2391 04d6 00000000 		.4byte	0
+ 2392              	.LLST27:
+ 2393 04da 00000000 		.4byte	.LVL60
+ 2394 04de 15000000 		.4byte	.LVL64-1
+ 2395 04e2 0100     		.2byte	0x1
+ 2396 04e4 50       		.byte	0x50
+ 2397 04e5 15000000 		.4byte	.LVL64-1
+ 2398 04e9 40000000 		.4byte	.LFE7
+ 2399 04ed 0100     		.2byte	0x1
+ 2400 04ef 55       		.byte	0x55
+ 2401 04f0 00000000 		.4byte	0
+ 2402 04f4 00000000 		.4byte	0
+ 2403              	.LLST28:
+ 2404 04f8 00000000 		.4byte	.LVL60
+ 2405 04fc 12000000 		.4byte	.LVL63
+ 2406 0500 0100     		.2byte	0x1
+ 2407 0502 51       		.byte	0x51
+ 2408 0503 12000000 		.4byte	.LVL63
+ 2409 0507 15000000 		.4byte	.LVL64-1
+ 2410 050b 0100     		.2byte	0x1
+ 2411 050d 52       		.byte	0x52
+ 2412 050e 15000000 		.4byte	.LVL64-1
+ 2413 0512 40000000 		.4byte	.LFE7
+ 2414 0516 0400     		.2byte	0x4
+ 2415 0518 F3       		.byte	0xf3
+ 2416 0519 01       		.uleb128 0x1
+ 2417 051a 51       		.byte	0x51
+ 2418 051b 9F       		.byte	0x9f
+ 2419 051c 00000000 		.4byte	0
+ 2420 0520 00000000 		.4byte	0
+ 2421              	.LLST29:
+ 2422 0524 00000000 		.4byte	.LVL60
+ 2423 0528 0E000000 		.4byte	.LVL62
+ 2424 052c 0100     		.2byte	0x1
+ 2425 052e 52       		.byte	0x52
+ 2426 052f 0E000000 		.4byte	.LVL62
+ 2427 0533 32000000 		.4byte	.LVL66
+ 2428 0537 0100     		.2byte	0x1
+ 2429 0539 56       		.byte	0x56
+ 2430 053a 32000000 		.4byte	.LVL66
+ 2431 053e 40000000 		.4byte	.LFE7
+ 2432 0542 0400     		.2byte	0x4
+ 2433 0544 F3       		.byte	0xf3
+ 2434 0545 01       		.uleb128 0x1
+ 2435 0546 52       		.byte	0x52
+ 2436 0547 9F       		.byte	0x9f
+ 2437 0548 00000000 		.4byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 47
+
+
+ 2438 054c 00000000 		.4byte	0
+ 2439              	.LLST30:
+ 2440 0550 00000000 		.4byte	.LVL60
+ 2441 0554 0C000000 		.4byte	.LVL61
+ 2442 0558 0100     		.2byte	0x1
+ 2443 055a 53       		.byte	0x53
+ 2444 055b 0C000000 		.4byte	.LVL61
+ 2445 055f 40000000 		.4byte	.LFE7
+ 2446 0563 0100     		.2byte	0x1
+ 2447 0565 54       		.byte	0x54
+ 2448 0566 00000000 		.4byte	0
+ 2449 056a 00000000 		.4byte	0
+ 2450              	.LLST31:
+ 2451 056e 00000000 		.4byte	.LVL67
+ 2452 0572 15000000 		.4byte	.LVL71-1
+ 2453 0576 0100     		.2byte	0x1
+ 2454 0578 50       		.byte	0x50
+ 2455 0579 15000000 		.4byte	.LVL71-1
+ 2456 057d 46000000 		.4byte	.LFE8
+ 2457 0581 0400     		.2byte	0x4
+ 2458 0583 F3       		.byte	0xf3
+ 2459 0584 01       		.uleb128 0x1
+ 2460 0585 50       		.byte	0x50
+ 2461 0586 9F       		.byte	0x9f
+ 2462 0587 00000000 		.4byte	0
+ 2463 058b 00000000 		.4byte	0
+ 2464              	.LLST32:
+ 2465 058f 00000000 		.4byte	.LVL67
+ 2466 0593 12000000 		.4byte	.LVL70
+ 2467 0597 0100     		.2byte	0x1
+ 2468 0599 51       		.byte	0x51
+ 2469 059a 12000000 		.4byte	.LVL70
+ 2470 059e 46000000 		.4byte	.LFE8
+ 2471 05a2 0100     		.2byte	0x1
+ 2472 05a4 56       		.byte	0x56
+ 2473 05a5 00000000 		.4byte	0
+ 2474 05a9 00000000 		.4byte	0
+ 2475              	.LLST33:
+ 2476 05ad 00000000 		.4byte	.LVL67
+ 2477 05b1 0E000000 		.4byte	.LVL69
+ 2478 05b5 0100     		.2byte	0x1
+ 2479 05b7 52       		.byte	0x52
+ 2480 05b8 0E000000 		.4byte	.LVL69
+ 2481 05bc 46000000 		.4byte	.LFE8
+ 2482 05c0 0100     		.2byte	0x1
+ 2483 05c2 55       		.byte	0x55
+ 2484 05c3 00000000 		.4byte	0
+ 2485 05c7 00000000 		.4byte	0
+ 2486              	.LLST34:
+ 2487 05cb 00000000 		.4byte	.LVL67
+ 2488 05cf 0C000000 		.4byte	.LVL68
+ 2489 05d3 0100     		.2byte	0x1
+ 2490 05d5 53       		.byte	0x53
+ 2491 05d6 0C000000 		.4byte	.LVL68
+ 2492 05da 46000000 		.4byte	.LFE8
+ 2493 05de 0100     		.2byte	0x1
+ 2494 05e0 54       		.byte	0x54
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 48
+
+
+ 2495 05e1 00000000 		.4byte	0
+ 2496 05e5 00000000 		.4byte	0
+ 2497              		.section	.debug_aranges,"",%progbits
+ 2498 0000 5C000000 		.4byte	0x5c
+ 2499 0004 0200     		.2byte	0x2
+ 2500 0006 00000000 		.4byte	.Ldebug_info0
+ 2501 000a 04       		.byte	0x4
+ 2502 000b 00       		.byte	0
+ 2503 000c 0000     		.2byte	0
+ 2504 000e 0000     		.2byte	0
+ 2505 0010 00000000 		.4byte	.LFB0
+ 2506 0014 2A000000 		.4byte	.LFE0-.LFB0
+ 2507 0018 00000000 		.4byte	.LFB1
+ 2508 001c A2000000 		.4byte	.LFE1-.LFB1
+ 2509 0020 00000000 		.4byte	.LFB2
+ 2510 0024 52000000 		.4byte	.LFE2-.LFB2
+ 2511 0028 00000000 		.4byte	.LFB3
+ 2512 002c 68000000 		.4byte	.LFE3-.LFB3
+ 2513 0030 00000000 		.4byte	.LFB4
+ 2514 0034 74000000 		.4byte	.LFE4-.LFB4
+ 2515 0038 00000000 		.4byte	.LFB5
+ 2516 003c 3C000000 		.4byte	.LFE5-.LFB5
+ 2517 0040 00000000 		.4byte	.LFB6
+ 2518 0044 38000000 		.4byte	.LFE6-.LFB6
+ 2519 0048 00000000 		.4byte	.LFB7
+ 2520 004c 40000000 		.4byte	.LFE7-.LFB7
+ 2521 0050 00000000 		.4byte	.LFB8
+ 2522 0054 46000000 		.4byte	.LFE8-.LFB8
+ 2523 0058 00000000 		.4byte	0
+ 2524 005c 00000000 		.4byte	0
+ 2525              		.section	.debug_ranges,"",%progbits
+ 2526              	.Ldebug_ranges0:
+ 2527 0000 00000000 		.4byte	.LFB0
+ 2528 0004 2A000000 		.4byte	.LFE0
+ 2529 0008 00000000 		.4byte	.LFB1
+ 2530 000c A2000000 		.4byte	.LFE1
+ 2531 0010 00000000 		.4byte	.LFB2
+ 2532 0014 52000000 		.4byte	.LFE2
+ 2533 0018 00000000 		.4byte	.LFB3
+ 2534 001c 68000000 		.4byte	.LFE3
+ 2535 0020 00000000 		.4byte	.LFB4
+ 2536 0024 74000000 		.4byte	.LFE4
+ 2537 0028 00000000 		.4byte	.LFB5
+ 2538 002c 3C000000 		.4byte	.LFE5
+ 2539 0030 00000000 		.4byte	.LFB6
+ 2540 0034 38000000 		.4byte	.LFE6
+ 2541 0038 00000000 		.4byte	.LFB7
+ 2542 003c 40000000 		.4byte	.LFE7
+ 2543 0040 00000000 		.4byte	.LFB8
+ 2544 0044 46000000 		.4byte	.LFE8
+ 2545 0048 00000000 		.4byte	0
+ 2546 004c 00000000 		.4byte	0
+ 2547              		.section	.debug_line,"",%progbits
+ 2548              	.Ldebug_line0:
+ 2549 0000 E5020000 		.section	.debug_str,"MS",%progbits,1
+ 2549      0200D401 
+ 2549      00000201 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 49
+
+
+ 2549      FB0E0D00 
+ 2549      01010101 
+ 2550              	.LASF47:
+ 2551 0000 2E2E5C70 		.ascii	"..\\parsing.c\000"
+ 2551      61727369 
+ 2551      6E672E63 
+ 2551      00
+ 2552              	.LASF40:
+ 2553 000d 73616C74 		.ascii	"salt\000"
+ 2553      00
+ 2554              	.LASF15:
+ 2555 0012 73697A65 		.ascii	"size_t\000"
+ 2555      5F7400
+ 2556              	.LASF14:
+ 2557 0019 75696E74 		.ascii	"uint64_t\000"
+ 2557      36345F74 
+ 2557      00
+ 2558              	.LASF1:
+ 2559 0022 5F5F7569 		.ascii	"__uint8_t\000"
+ 2559      6E74385F 
+ 2559      7400
+ 2560              	.LASF10:
+ 2561 002c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2561      206C6F6E 
+ 2561      6720756E 
+ 2561      7369676E 
+ 2561      65642069 
+ 2562              	.LASF42:
+ 2563 0043 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_seedexpander_init\000"
+ 2563      45414E5F 
+ 2563      48514332 
+ 2563      35365F43 
+ 2563      4C45414E 
+ 2564              	.LASF0:
+ 2565 006a 5F5F696E 		.ascii	"__int8_t\000"
+ 2565      74385F74 
+ 2565      00
+ 2566              	.LASF8:
+ 2567 0073 6C6F6E67 		.ascii	"long long int\000"
+ 2567      206C6F6E 
+ 2567      6720696E 
+ 2567      7400
+ 2568              	.LASF2:
+ 2569 0081 7369676E 		.ascii	"signed char\000"
+ 2569      65642063 
+ 2569      68617200 
+ 2570              	.LASF18:
+ 2571 008d 73656564 		.ascii	"seedexpander_state\000"
+ 2571      65787061 
+ 2571      6E646572 
+ 2571      5F737461 
+ 2571      746500
+ 2572              	.LASF38:
+ 2573 00a0 706B5F73 		.ascii	"pk_seedexpander\000"
+ 2573      65656465 
+ 2573      7870616E 
+ 2573      64657200 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 50
+
+
+ 2574              	.LASF6:
+ 2575 00b0 6C6F6E67 		.ascii	"long int\000"
+ 2575      20696E74 
+ 2575      00
+ 2576              	.LASF45:
+ 2577 00b9 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_vect_set_random\000"
+ 2577      45414E5F 
+ 2577      48514332 
+ 2577      35365F43 
+ 2577      4C45414E 
+ 2578              	.LASF43:
+ 2579 00de 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight\000"
+ 2579      45414E5F 
+ 2579      48514332 
+ 2579      35365F43 
+ 2579      4C45414E 
+ 2580              	.LASF50:
+ 2581 0110 6D656D63 		.ascii	"memcpy\000"
+ 2581      707900
+ 2582              	.LASF29:
+ 2583 0117 696E3634 		.ascii	"in64\000"
+ 2583      00
+ 2584              	.LASF34:
+ 2585 011c 736B5F73 		.ascii	"sk_seedexpander\000"
+ 2585      65656465 
+ 2585      7870616E 
+ 2585      64657200 
+ 2586              	.LASF25:
+ 2587 012c 696E6465 		.ascii	"index_out\000"
+ 2587      785F6F75 
+ 2587      7400
+ 2588              	.LASF23:
+ 2589 0136 696E6C65 		.ascii	"inlen\000"
+ 2589      6E00
+ 2590              	.LASF26:
+ 2591 013c 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_load8_arr\000"
+ 2591      45414E5F 
+ 2591      48514332 
+ 2591      35365F43 
+ 2591      4C45414E 
+ 2592              	.LASF11:
+ 2593 015b 756E7369 		.ascii	"unsigned int\000"
+ 2593      676E6564 
+ 2593      20696E74 
+ 2593      00
+ 2594              	.LASF17:
+ 2595 0168 7368616B 		.ascii	"shake256incctx\000"
+ 2595      65323536 
+ 2595      696E6363 
+ 2595      747800
+ 2596              	.LASF48:
+ 2597 0177 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 2597      73657273 
+ 2597      5C626F67 
+ 2597      75725C44 
+ 2597      6F63756D 
+ 2598 01a3 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\HQC\\HQC\\HQC.cydsn"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 51
+
+
+ 2598      7269746D 
+ 2598      6F732070 
+ 2598      6F737463 
+ 2598      75616E74 
+ 2599 01d2 00       		.ascii	"\000"
+ 2600              	.LASF7:
+ 2601 01d3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2601      20756E73 
+ 2601      69676E65 
+ 2601      6420696E 
+ 2601      7400
+ 2602              	.LASF24:
+ 2603 01e5 696E6465 		.ascii	"index_in\000"
+ 2603      785F696E 
+ 2603      00
+ 2604              	.LASF27:
+ 2605 01ee 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_store8_arr\000"
+ 2605      45414E5F 
+ 2605      48514332 
+ 2605      35365F43 
+ 2605      4C45414E 
+ 2606              	.LASF37:
+ 2607 020e 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_public_key_from_string\000"
+ 2607      45414E5F 
+ 2607      48514332 
+ 2607      35365F43 
+ 2607      4C45414E 
+ 2608              	.LASF32:
+ 2609 023e 7369676D 		.ascii	"sigma\000"
+ 2609      6100
+ 2610              	.LASF5:
+ 2611 0244 73686F72 		.ascii	"short unsigned int\000"
+ 2611      7420756E 
+ 2611      7369676E 
+ 2611      65642069 
+ 2611      6E7400
+ 2612              	.LASF44:
+ 2613 0257 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_seedexpander_release\000"
+ 2613      45414E5F 
+ 2613      48514332 
+ 2613      35365F43 
+ 2613      4C45414E 
+ 2614              	.LASF28:
+ 2615 0281 6F757438 		.ascii	"out8\000"
+ 2615      00
+ 2616              	.LASF19:
+ 2617 0286 73697A65 		.ascii	"sizetype\000"
+ 2617      74797065 
+ 2617      00
+ 2618              	.LASF16:
+ 2619 028f 6C6F6E67 		.ascii	"long double\000"
+ 2619      20646F75 
+ 2619      626C6500 
+ 2620              	.LASF21:
+ 2621 029b 6F757436 		.ascii	"out64\000"
+ 2621      3400
+ 2622              	.LASF46:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 52
+
+
+ 2623 02a1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2623      43313120 
+ 2623      352E342E 
+ 2623      31203230 
+ 2623      31363036 
+ 2624 02d4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 2624      20726576 
+ 2624      6973696F 
+ 2624      6E203233 
+ 2624      37373135 
+ 2625 0307 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 2625      70202D6D 
+ 2625      6670753D 
+ 2625      66707634 
+ 2625      2D73702D 
+ 2626 033a 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 2626      6F6E7320 
+ 2626      2D666661 
+ 2626      742D6C74 
+ 2626      6F2D6F62 
+ 2627              	.LASF9:
+ 2628 0354 5F5F7569 		.ascii	"__uint64_t\000"
+ 2628      6E743634 
+ 2628      5F7400
+ 2629              	.LASF3:
+ 2630 035f 756E7369 		.ascii	"unsigned char\000"
+ 2630      676E6564 
+ 2630      20636861 
+ 2630      7200
+ 2631              	.LASF30:
+ 2632 036d 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string\000"
+ 2632      45414E5F 
+ 2632      48514332 
+ 2632      35365F43 
+ 2632      4C45414E 
+ 2633              	.LASF4:
+ 2634 039b 73686F72 		.ascii	"short int\000"
+ 2634      7420696E 
+ 2634      7400
+ 2635              	.LASF31:
+ 2636 03a5 736B5F73 		.ascii	"sk_seed\000"
+ 2636      65656400 
+ 2637              	.LASF39:
+ 2638 03ad 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string\000"
+ 2638      45414E5F 
+ 2638      48514332 
+ 2638      35365F43 
+ 2638      4C45414E 
+ 2639              	.LASF20:
+ 2640 03db 63686172 		.ascii	"char\000"
+ 2640      00
+ 2641              	.LASF41:
+ 2642 03e0 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string\000"
+ 2642      45414E5F 
+ 2642      48514332 
+ 2642      35365F43 
+ 2642      4C45414E 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccrPDz1f.s 			page 53
+
+
+ 2643              	.LASF12:
+ 2644 0410 696E7438 		.ascii	"int8_t\000"
+ 2644      5F7400
+ 2645              	.LASF49:
+ 2646 0417 6C6F6164 		.ascii	"load8\000"
+ 2646      3800
+ 2647              	.LASF33:
+ 2648 041d 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string\000"
+ 2648      45414E5F 
+ 2648      48514332 
+ 2648      35365F43 
+ 2648      4C45414E 
+ 2649              	.LASF36:
+ 2650 044d 706B5F73 		.ascii	"pk_seed\000"
+ 2650      65656400 
+ 2651              	.LASF13:
+ 2652 0455 75696E74 		.ascii	"uint8_t\000"
+ 2652      385F7400 
+ 2653              	.LASF35:
+ 2654 045d 5051434C 		.ascii	"PQCLEAN_HQC256_CLEAN_hqc_public_key_to_string\000"
+ 2654      45414E5F 
+ 2654      48514332 
+ 2654      35365F43 
+ 2654      4C45414E 
+ 2655              	.LASF22:
+ 2656 048b 6F75746C 		.ascii	"outlen\000"
+ 2656      656E00
+ 2657              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

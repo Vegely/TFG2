@@ -1,6 +1,6 @@
-C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\HQC.cyprj|1e116776-43fd-41c0-a633-a7925dc5c437
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|1b42565b-4868-4172-b54b-f8af1f4aa2e8
-C:\Users\bogur\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|6c245343-e6ba-48fa-8a89-739132cabe4e
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|bb456030-ec98-4259-b2bd-f7085b63de66
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|9da7619a-d264-4418-823f-bffc60023364
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|0d56c774-174b-4192-8c40-49ba5595628c
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\HQC\HQC\HQC.cydsn\HQC.cyprj|b1742a0d-dd57-4c8a-85bc-24bfde59dfb8
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|fe501aaa-fa38-4f88-8610-9772ac492d7e
+C:\Users\bogur\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|0e92a2a9-ebea-4065-87ad-fdf7bbd1d889
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|35c5f778-8b9d-4357-9cfd-6b9ba7cab7c4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|2dc8b855-f772-47b1-870c-62df3a940218
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|5b630969-e477-4801-a366-46e20cc1d748

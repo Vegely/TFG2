@@ -1,0 +1,1125 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"symmetric-shake.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.pqcrystals_kyber1024_ref_kyber_shake128_absorb,"ax",%progbits
+  21              		.align	2
+  22              		.global	pqcrystals_kyber1024_ref_kyber_shake128_absorb
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	pqcrystals_kyber1024_ref_kyber_shake128_absorb, %function
+  26              	pqcrystals_kyber1024_ref_kyber_shake128_absorb:
+  27              	.LFB0:
+  28              		.file 1 "..\\symmetric-shake.c"
+   1:..\symmetric-shake.c **** #include <stddef.h>
+   2:..\symmetric-shake.c **** #include <stdint.h>
+   3:..\symmetric-shake.c **** #include "params.h"
+   4:..\symmetric-shake.c **** #include "fips202.h"
+   5:..\symmetric-shake.c **** #include "symmetric.h"
+   6:..\symmetric-shake.c **** 
+   7:..\symmetric-shake.c **** /*************************************************
+   8:..\symmetric-shake.c **** * Name:        kyber_shake128_absorb
+   9:..\symmetric-shake.c **** *
+  10:..\symmetric-shake.c **** * Description: Absorb step of the SHAKE128 specialized for the Kyber context.
+  11:..\symmetric-shake.c **** *
+  12:..\symmetric-shake.c **** * Arguments:   - keccak_state *state: pointer to (uninitialized) output
+  13:..\symmetric-shake.c **** *                                     Keccak state
+  14:..\symmetric-shake.c **** *              - const uint8_t *seed: pointer to KYBER_SYMBYTES input
+  15:..\symmetric-shake.c **** *                                     to be absorbed into state
+  16:..\symmetric-shake.c **** *              - uint8_t i            additional byte of input
+  17:..\symmetric-shake.c **** *              - uint8_t j            additional byte of input
+  18:..\symmetric-shake.c **** **************************************************/
+  19:..\symmetric-shake.c **** void kyber_shake128_absorb(keccak_state *state,
+  20:..\symmetric-shake.c ****                            const uint8_t seed[KYBER_SYMBYTES],
+  21:..\symmetric-shake.c ****                            uint8_t x,
+  22:..\symmetric-shake.c ****                            uint8_t y)
+  23:..\symmetric-shake.c **** {
+  29              		.loc 1 23 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 40
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 2
+
+
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 8AB0     		sub	sp, sp, #40
+  41              		.cfi_def_cfa_offset 56
+  42              	.LVL1:
+  24:..\symmetric-shake.c ****   unsigned int i;
+  25:..\symmetric-shake.c ****   uint8_t extseed[KYBER_SYMBYTES+2];
+  26:..\symmetric-shake.c **** 
+  27:..\symmetric-shake.c ****   for(i=0;i<KYBER_SYMBYTES;i++)
+  43              		.loc 1 27 0
+  44 0004 0024     		movs	r4, #0
+  45 0006 05E0     		b	.L2
+  46              	.LVL2:
+  47              	.L3:
+  28:..\symmetric-shake.c ****     extseed[i] = seed[i];
+  48              		.loc 1 28 0 discriminator 3
+  49 0008 0E5D     		ldrb	r6, [r1, r4]	@ zero_extendqisi2
+  50 000a 0AAD     		add	r5, sp, #40
+  51 000c 2544     		add	r5, r5, r4
+  52 000e 05F8246C 		strb	r6, [r5, #-36]
+  27:..\symmetric-shake.c ****     extseed[i] = seed[i];
+  53              		.loc 1 27 0 discriminator 3
+  54 0012 0134     		adds	r4, r4, #1
+  55              	.LVL3:
+  56              	.L2:
+  27:..\symmetric-shake.c ****     extseed[i] = seed[i];
+  57              		.loc 1 27 0 is_stmt 0 discriminator 1
+  58 0014 1F2C     		cmp	r4, #31
+  59 0016 F7D9     		bls	.L3
+  29:..\symmetric-shake.c ****   extseed[i++] = x;
+  60              		.loc 1 29 0 is_stmt 1
+  61 0018 611C     		adds	r1, r4, #1
+  62              	.LVL4:
+  63 001a 0AAD     		add	r5, sp, #40
+  64 001c 2C44     		add	r4, r4, r5
+  65 001e 04F8242C 		strb	r2, [r4, #-36]
+  30:..\symmetric-shake.c ****   extseed[i]   = y;
+  66              		.loc 1 30 0
+  67 0022 2A46     		mov	r2, r5
+  68              	.LVL5:
+  69 0024 0A44     		add	r2, r2, r1
+  70 0026 02F8243C 		strb	r3, [r2, #-36]
+  71              	.LVL6:
+  31:..\symmetric-shake.c **** 
+  32:..\symmetric-shake.c ****   shake128_absorb(state, extseed, sizeof(extseed));
+  72              		.loc 1 32 0
+  73 002a 2222     		movs	r2, #34
+  74 002c 01A9     		add	r1, sp, #4
+  75              	.LVL7:
+  76 002e FFF7FEFF 		bl	pqcrystals_fips202_ref_shake128_absorb
+  77              	.LVL8:
+  33:..\symmetric-shake.c **** }
+  78              		.loc 1 33 0
+  79 0032 0AB0     		add	sp, sp, #40
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 3
+
+
+  80              		.cfi_def_cfa_offset 16
+  81              		@ sp needed
+  82 0034 70BD     		pop	{r4, r5, r6, pc}
+  83              		.cfi_endproc
+  84              	.LFE0:
+  85              		.size	pqcrystals_kyber1024_ref_kyber_shake128_absorb, .-pqcrystals_kyber1024_ref_kyber_shake128_ab
+  86 0036 00BF     		.section	.text.pqcrystals_kyber1024_ref_kyber_shake256_prf,"ax",%progbits
+  87              		.align	2
+  88              		.global	pqcrystals_kyber1024_ref_kyber_shake256_prf
+  89              		.thumb
+  90              		.thumb_func
+  91              		.type	pqcrystals_kyber1024_ref_kyber_shake256_prf, %function
+  92              	pqcrystals_kyber1024_ref_kyber_shake256_prf:
+  93              	.LFB1:
+  34:..\symmetric-shake.c **** 
+  35:..\symmetric-shake.c **** /*************************************************
+  36:..\symmetric-shake.c **** * Name:        kyber_shake256_prf
+  37:..\symmetric-shake.c **** *
+  38:..\symmetric-shake.c **** * Description: Usage of SHAKE256 as a PRF, concatenates secret and public input
+  39:..\symmetric-shake.c **** *              and then generates outlen bytes of SHAKE256 output
+  40:..\symmetric-shake.c **** *
+  41:..\symmetric-shake.c **** * Arguments:   - uint8_t *out:       pointer to output
+  42:..\symmetric-shake.c **** *              - size_t outlen:      number of requested output bytes
+  43:..\symmetric-shake.c **** *              - const uint8_t *key: pointer to the key
+  44:..\symmetric-shake.c **** *                                    (of length KYBER_SYMBYTES)
+  45:..\symmetric-shake.c **** *              - uint8_t nonce:      single-byte nonce (public PRF input)
+  46:..\symmetric-shake.c **** **************************************************/
+  47:..\symmetric-shake.c **** void kyber_shake256_prf(uint8_t *out,
+  48:..\symmetric-shake.c ****                         size_t outlen,
+  49:..\symmetric-shake.c ****                         const uint8_t key[KYBER_SYMBYTES],
+  50:..\symmetric-shake.c ****                         uint8_t nonce)
+  51:..\symmetric-shake.c **** {
+  94              		.loc 1 51 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 40
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              	.LVL9:
+  99 0000 70B5     		push	{r4, r5, r6, lr}
+ 100              		.cfi_def_cfa_offset 16
+ 101              		.cfi_offset 4, -16
+ 102              		.cfi_offset 5, -12
+ 103              		.cfi_offset 6, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 8AB0     		sub	sp, sp, #40
+ 106              		.cfi_def_cfa_offset 56
+ 107              	.LVL10:
+  52:..\symmetric-shake.c ****   unsigned int i;
+  53:..\symmetric-shake.c ****   uint8_t extkey[KYBER_SYMBYTES+1];
+  54:..\symmetric-shake.c **** 
+  55:..\symmetric-shake.c ****   for(i=0;i<KYBER_SYMBYTES;i++)
+ 108              		.loc 1 55 0
+ 109 0004 0024     		movs	r4, #0
+ 110 0006 05E0     		b	.L6
+ 111              	.LVL11:
+ 112              	.L7:
+  56:..\symmetric-shake.c ****     extkey[i] = key[i];
+ 113              		.loc 1 56 0 discriminator 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 4
+
+
+ 114 0008 165D     		ldrb	r6, [r2, r4]	@ zero_extendqisi2
+ 115 000a 0AAD     		add	r5, sp, #40
+ 116 000c 2544     		add	r5, r5, r4
+ 117 000e 05F8246C 		strb	r6, [r5, #-36]
+  55:..\symmetric-shake.c ****     extkey[i] = key[i];
+ 118              		.loc 1 55 0 discriminator 3
+ 119 0012 0134     		adds	r4, r4, #1
+ 120              	.LVL12:
+ 121              	.L6:
+  55:..\symmetric-shake.c ****     extkey[i] = key[i];
+ 122              		.loc 1 55 0 is_stmt 0 discriminator 1
+ 123 0014 1F2C     		cmp	r4, #31
+ 124 0016 F7D9     		bls	.L7
+  57:..\symmetric-shake.c ****   extkey[i] = nonce;
+ 125              		.loc 1 57 0 is_stmt 1
+ 126 0018 0AAA     		add	r2, sp, #40
+ 127              	.LVL13:
+ 128 001a 1444     		add	r4, r4, r2
+ 129              	.LVL14:
+ 130 001c 04F8243C 		strb	r3, [r4, #-36]
+  58:..\symmetric-shake.c **** 
+  59:..\symmetric-shake.c ****   shake256(out, outlen, extkey, sizeof(extkey));
+ 131              		.loc 1 59 0
+ 132 0020 2123     		movs	r3, #33
+ 133              	.LVL15:
+ 134 0022 01AA     		add	r2, sp, #4
+ 135 0024 FFF7FEFF 		bl	pqcrystals_fips202_ref_shake256
+ 136              	.LVL16:
+  60:..\symmetric-shake.c **** }
+ 137              		.loc 1 60 0
+ 138 0028 0AB0     		add	sp, sp, #40
+ 139              		.cfi_def_cfa_offset 16
+ 140              		@ sp needed
+ 141 002a 70BD     		pop	{r4, r5, r6, pc}
+ 142              		.cfi_endproc
+ 143              	.LFE1:
+ 144              		.size	pqcrystals_kyber1024_ref_kyber_shake256_prf, .-pqcrystals_kyber1024_ref_kyber_shake256_prf
+ 145              		.text
+ 146              	.Letext0:
+ 147              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 148              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 149              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 150              		.file 5 "..\\fips202.h"
+ 151              		.section	.debug_info,"",%progbits
+ 152              	.Ldebug_info0:
+ 153 0000 2A020000 		.4byte	0x22a
+ 154 0004 0400     		.2byte	0x4
+ 155 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 156 000a 04       		.byte	0x4
+ 157 000b 01       		.uleb128 0x1
+ 158 000c 5A010000 		.4byte	.LASF27
+ 159 0010 0C       		.byte	0xc
+ 160 0011 47000000 		.4byte	.LASF28
+ 161 0015 2C020000 		.4byte	.LASF29
+ 162 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 163 001d 00000000 		.4byte	0
+ 164 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 5
+
+
+ 165 0025 02       		.uleb128 0x2
+ 166 0026 04       		.byte	0x4
+ 167 0027 05       		.byte	0x5
+ 168 0028 696E7400 		.ascii	"int\000"
+ 169 002c 03       		.uleb128 0x3
+ 170 002d 0A000000 		.4byte	.LASF4
+ 171 0031 02       		.byte	0x2
+ 172 0032 D8       		.byte	0xd8
+ 173 0033 37000000 		.4byte	0x37
+ 174 0037 04       		.uleb128 0x4
+ 175 0038 04       		.byte	0x4
+ 176 0039 07       		.byte	0x7
+ 177 003a FF000000 		.4byte	.LASF0
+ 178 003e 04       		.uleb128 0x4
+ 179 003f 08       		.byte	0x8
+ 180 0040 05       		.byte	0x5
+ 181 0041 16020000 		.4byte	.LASF1
+ 182 0045 04       		.uleb128 0x4
+ 183 0046 08       		.byte	0x8
+ 184 0047 04       		.byte	0x4
+ 185 0048 A7020000 		.4byte	.LASF2
+ 186 004c 04       		.uleb128 0x4
+ 187 004d 01       		.byte	0x1
+ 188 004e 06       		.byte	0x6
+ 189 004f B3020000 		.4byte	.LASF3
+ 190 0053 03       		.uleb128 0x3
+ 191 0054 00000000 		.4byte	.LASF5
+ 192 0058 03       		.byte	0x3
+ 193 0059 1D       		.byte	0x1d
+ 194 005a 5E000000 		.4byte	0x5e
+ 195 005e 04       		.uleb128 0x4
+ 196 005f 01       		.byte	0x1
+ 197 0060 08       		.byte	0x8
+ 198 0061 5C000000 		.4byte	.LASF6
+ 199 0065 04       		.uleb128 0x4
+ 200 0066 02       		.byte	0x2
+ 201 0067 05       		.byte	0x5
+ 202 0068 BC000000 		.4byte	.LASF7
+ 203 006c 04       		.uleb128 0x4
+ 204 006d 02       		.byte	0x2
+ 205 006e 07       		.byte	0x7
+ 206 006f 7C000000 		.4byte	.LASF8
+ 207 0073 04       		.uleb128 0x4
+ 208 0074 04       		.byte	0x4
+ 209 0075 05       		.byte	0x5
+ 210 0076 9E020000 		.4byte	.LASF9
+ 211 007a 04       		.uleb128 0x4
+ 212 007b 04       		.byte	0x4
+ 213 007c 07       		.byte	0x7
+ 214 007d 6A000000 		.4byte	.LASF10
+ 215 0081 03       		.uleb128 0x3
+ 216 0082 8E020000 		.4byte	.LASF11
+ 217 0086 03       		.byte	0x3
+ 218 0087 5B       		.byte	0x5b
+ 219 0088 8C000000 		.4byte	0x8c
+ 220 008c 04       		.uleb128 0x4
+ 221 008d 08       		.byte	0x8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 6
+
+
+ 222 008e 07       		.byte	0x7
+ 223 008f 3B010000 		.4byte	.LASF12
+ 224 0093 03       		.uleb128 0x3
+ 225 0094 52010000 		.4byte	.LASF13
+ 226 0098 04       		.byte	0x4
+ 227 0099 18       		.byte	0x18
+ 228 009a 53000000 		.4byte	0x53
+ 229 009e 03       		.uleb128 0x3
+ 230 009f 37000000 		.4byte	.LASF14
+ 231 00a3 04       		.byte	0x4
+ 232 00a4 3C       		.byte	0x3c
+ 233 00a5 81000000 		.4byte	0x81
+ 234 00a9 05       		.uleb128 0x5
+ 235 00aa C8       		.byte	0xc8
+ 236 00ab 05       		.byte	0x5
+ 237 00ac 0E       		.byte	0xe
+ 238 00ad BC000000 		.4byte	0xbc
+ 239 00b1 06       		.uleb128 0x6
+ 240 00b2 7300     		.ascii	"s\000"
+ 241 00b4 05       		.byte	0x5
+ 242 00b5 0F       		.byte	0xf
+ 243 00b6 BC000000 		.4byte	0xbc
+ 244 00ba 00       		.byte	0
+ 245 00bb 00       		.byte	0
+ 246 00bc 07       		.uleb128 0x7
+ 247 00bd 9E000000 		.4byte	0x9e
+ 248 00c1 CC000000 		.4byte	0xcc
+ 249 00c5 08       		.uleb128 0x8
+ 250 00c6 CC000000 		.4byte	0xcc
+ 251 00ca 18       		.byte	0x18
+ 252 00cb 00       		.byte	0
+ 253 00cc 04       		.uleb128 0x4
+ 254 00cd 04       		.byte	0x4
+ 255 00ce 07       		.byte	0x7
+ 256 00cf 0D020000 		.4byte	.LASF15
+ 257 00d3 03       		.uleb128 0x3
+ 258 00d4 F2000000 		.4byte	.LASF16
+ 259 00d8 05       		.byte	0x5
+ 260 00d9 10       		.byte	0x10
+ 261 00da A9000000 		.4byte	0xa9
+ 262 00de 09       		.uleb128 0x9
+ 263 00df 0C010000 		.4byte	.LASF20
+ 264 00e3 01       		.byte	0x1
+ 265 00e4 13       		.byte	0x13
+ 266 00e5 00000000 		.4byte	.LFB0
+ 267 00e9 36000000 		.4byte	.LFE0-.LFB0
+ 268 00ed 01       		.uleb128 0x1
+ 269 00ee 9C       		.byte	0x9c
+ 270 00ef 5D010000 		.4byte	0x15d
+ 271 00f3 0A       		.uleb128 0xa
+ 272 00f4 11000000 		.4byte	.LASF17
+ 273 00f8 01       		.byte	0x1
+ 274 00f9 13       		.byte	0x13
+ 275 00fa 5D010000 		.4byte	0x15d
+ 276 00fe 00000000 		.4byte	.LLST0
+ 277 0102 0A       		.uleb128 0xa
+ 278 0103 99020000 		.4byte	.LASF18
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 7
+
+
+ 279 0107 01       		.byte	0x1
+ 280 0108 14       		.byte	0x14
+ 281 0109 63010000 		.4byte	0x163
+ 282 010d 21000000 		.4byte	.LLST1
+ 283 0111 0B       		.uleb128 0xb
+ 284 0112 7800     		.ascii	"x\000"
+ 285 0114 01       		.byte	0x1
+ 286 0115 15       		.byte	0x15
+ 287 0116 93000000 		.4byte	0x93
+ 288 011a 42000000 		.4byte	.LLST2
+ 289 011e 0B       		.uleb128 0xb
+ 290 011f 7900     		.ascii	"y\000"
+ 291 0121 01       		.byte	0x1
+ 292 0122 16       		.byte	0x16
+ 293 0123 93000000 		.4byte	0x93
+ 294 0127 6F000000 		.4byte	.LLST3
+ 295 012b 0C       		.uleb128 0xc
+ 296 012c 6900     		.ascii	"i\000"
+ 297 012e 01       		.byte	0x1
+ 298 012f 18       		.byte	0x18
+ 299 0130 37000000 		.4byte	0x37
+ 300 0134 90000000 		.4byte	.LLST4
+ 301 0138 0D       		.uleb128 0xd
+ 302 0139 24020000 		.4byte	.LASF19
+ 303 013d 01       		.byte	0x1
+ 304 013e 19       		.byte	0x19
+ 305 013f 6E010000 		.4byte	0x16e
+ 306 0143 02       		.uleb128 0x2
+ 307 0144 91       		.byte	0x91
+ 308 0145 4C       		.sleb128 -52
+ 309 0146 0E       		.uleb128 0xe
+ 310 0147 32000000 		.4byte	.LVL8
+ 311 014b 17020000 		.4byte	0x217
+ 312 014f 0F       		.uleb128 0xf
+ 313 0150 01       		.uleb128 0x1
+ 314 0151 51       		.byte	0x51
+ 315 0152 02       		.uleb128 0x2
+ 316 0153 91       		.byte	0x91
+ 317 0154 4C       		.sleb128 -52
+ 318 0155 0F       		.uleb128 0xf
+ 319 0156 01       		.uleb128 0x1
+ 320 0157 52       		.byte	0x52
+ 321 0158 02       		.uleb128 0x2
+ 322 0159 08       		.byte	0x8
+ 323 015a 22       		.byte	0x22
+ 324 015b 00       		.byte	0
+ 325 015c 00       		.byte	0
+ 326 015d 10       		.uleb128 0x10
+ 327 015e 04       		.byte	0x4
+ 328 015f D3000000 		.4byte	0xd3
+ 329 0163 10       		.uleb128 0x10
+ 330 0164 04       		.byte	0x4
+ 331 0165 69010000 		.4byte	0x169
+ 332 0169 11       		.uleb128 0x11
+ 333 016a 93000000 		.4byte	0x93
+ 334 016e 07       		.uleb128 0x7
+ 335 016f 93000000 		.4byte	0x93
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 8
+
+
+ 336 0173 7E010000 		.4byte	0x17e
+ 337 0177 08       		.uleb128 0x8
+ 338 0178 CC000000 		.4byte	0xcc
+ 339 017c 21       		.byte	0x21
+ 340 017d 00       		.byte	0
+ 341 017e 09       		.uleb128 0x9
+ 342 017f C6000000 		.4byte	.LASF21
+ 343 0183 01       		.byte	0x1
+ 344 0184 2F       		.byte	0x2f
+ 345 0185 00000000 		.4byte	.LFB1
+ 346 0189 2C000000 		.4byte	.LFE1-.LFB1
+ 347 018d 01       		.uleb128 0x1
+ 348 018e 9C       		.byte	0x9c
+ 349 018f 01020000 		.4byte	0x201
+ 350 0193 0B       		.uleb128 0xb
+ 351 0194 6F757400 		.ascii	"out\000"
+ 352 0198 01       		.byte	0x1
+ 353 0199 2F       		.byte	0x2f
+ 354 019a 01020000 		.4byte	0x201
+ 355 019e BA000000 		.4byte	.LLST5
+ 356 01a2 0A       		.uleb128 0xa
+ 357 01a3 BF020000 		.4byte	.LASF22
+ 358 01a7 01       		.byte	0x1
+ 359 01a8 30       		.byte	0x30
+ 360 01a9 2C000000 		.4byte	0x2c
+ 361 01ad DB000000 		.4byte	.LLST6
+ 362 01b1 0B       		.uleb128 0xb
+ 363 01b2 6B657900 		.ascii	"key\000"
+ 364 01b6 01       		.byte	0x1
+ 365 01b7 31       		.byte	0x31
+ 366 01b8 63010000 		.4byte	0x163
+ 367 01bc FC000000 		.4byte	.LLST7
+ 368 01c0 0A       		.uleb128 0xa
+ 369 01c1 8F000000 		.4byte	.LASF23
+ 370 01c5 01       		.byte	0x1
+ 371 01c6 32       		.byte	0x32
+ 372 01c7 93000000 		.4byte	0x93
+ 373 01cb 1D010000 		.4byte	.LLST8
+ 374 01cf 0C       		.uleb128 0xc
+ 375 01d0 6900     		.ascii	"i\000"
+ 376 01d2 01       		.byte	0x1
+ 377 01d3 34       		.byte	0x34
+ 378 01d4 37000000 		.4byte	0x37
+ 379 01d8 4A010000 		.4byte	.LLST9
+ 380 01dc 0D       		.uleb128 0xd
+ 381 01dd 40000000 		.4byte	.LASF24
+ 382 01e1 01       		.byte	0x1
+ 383 01e2 35       		.byte	0x35
+ 384 01e3 07020000 		.4byte	0x207
+ 385 01e7 02       		.uleb128 0x2
+ 386 01e8 91       		.byte	0x91
+ 387 01e9 4C       		.sleb128 -52
+ 388 01ea 0E       		.uleb128 0xe
+ 389 01eb 28000000 		.4byte	.LVL16
+ 390 01ef 22020000 		.4byte	0x222
+ 391 01f3 0F       		.uleb128 0xf
+ 392 01f4 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 9
+
+
+ 393 01f5 52       		.byte	0x52
+ 394 01f6 02       		.uleb128 0x2
+ 395 01f7 91       		.byte	0x91
+ 396 01f8 4C       		.sleb128 -52
+ 397 01f9 0F       		.uleb128 0xf
+ 398 01fa 01       		.uleb128 0x1
+ 399 01fb 53       		.byte	0x53
+ 400 01fc 02       		.uleb128 0x2
+ 401 01fd 08       		.byte	0x8
+ 402 01fe 21       		.byte	0x21
+ 403 01ff 00       		.byte	0
+ 404 0200 00       		.byte	0
+ 405 0201 10       		.uleb128 0x10
+ 406 0202 04       		.byte	0x4
+ 407 0203 93000000 		.4byte	0x93
+ 408 0207 07       		.uleb128 0x7
+ 409 0208 93000000 		.4byte	0x93
+ 410 020c 17020000 		.4byte	0x217
+ 411 0210 08       		.uleb128 0x8
+ 412 0211 CC000000 		.4byte	0xcc
+ 413 0215 20       		.byte	0x20
+ 414 0216 00       		.byte	0
+ 415 0217 12       		.uleb128 0x12
+ 416 0218 95000000 		.4byte	.LASF25
+ 417 021c 95000000 		.4byte	.LASF25
+ 418 0220 05       		.byte	0x5
+ 419 0221 13       		.byte	0x13
+ 420 0222 12       		.uleb128 0x12
+ 421 0223 17000000 		.4byte	.LASF26
+ 422 0227 17000000 		.4byte	.LASF26
+ 423 022b 05       		.byte	0x5
+ 424 022c 1E       		.byte	0x1e
+ 425 022d 00       		.byte	0
+ 426              		.section	.debug_abbrev,"",%progbits
+ 427              	.Ldebug_abbrev0:
+ 428 0000 01       		.uleb128 0x1
+ 429 0001 11       		.uleb128 0x11
+ 430 0002 01       		.byte	0x1
+ 431 0003 25       		.uleb128 0x25
+ 432 0004 0E       		.uleb128 0xe
+ 433 0005 13       		.uleb128 0x13
+ 434 0006 0B       		.uleb128 0xb
+ 435 0007 03       		.uleb128 0x3
+ 436 0008 0E       		.uleb128 0xe
+ 437 0009 1B       		.uleb128 0x1b
+ 438 000a 0E       		.uleb128 0xe
+ 439 000b 55       		.uleb128 0x55
+ 440 000c 17       		.uleb128 0x17
+ 441 000d 11       		.uleb128 0x11
+ 442 000e 01       		.uleb128 0x1
+ 443 000f 10       		.uleb128 0x10
+ 444 0010 17       		.uleb128 0x17
+ 445 0011 00       		.byte	0
+ 446 0012 00       		.byte	0
+ 447 0013 02       		.uleb128 0x2
+ 448 0014 24       		.uleb128 0x24
+ 449 0015 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 10
+
+
+ 450 0016 0B       		.uleb128 0xb
+ 451 0017 0B       		.uleb128 0xb
+ 452 0018 3E       		.uleb128 0x3e
+ 453 0019 0B       		.uleb128 0xb
+ 454 001a 03       		.uleb128 0x3
+ 455 001b 08       		.uleb128 0x8
+ 456 001c 00       		.byte	0
+ 457 001d 00       		.byte	0
+ 458 001e 03       		.uleb128 0x3
+ 459 001f 16       		.uleb128 0x16
+ 460 0020 00       		.byte	0
+ 461 0021 03       		.uleb128 0x3
+ 462 0022 0E       		.uleb128 0xe
+ 463 0023 3A       		.uleb128 0x3a
+ 464 0024 0B       		.uleb128 0xb
+ 465 0025 3B       		.uleb128 0x3b
+ 466 0026 0B       		.uleb128 0xb
+ 467 0027 49       		.uleb128 0x49
+ 468 0028 13       		.uleb128 0x13
+ 469 0029 00       		.byte	0
+ 470 002a 00       		.byte	0
+ 471 002b 04       		.uleb128 0x4
+ 472 002c 24       		.uleb128 0x24
+ 473 002d 00       		.byte	0
+ 474 002e 0B       		.uleb128 0xb
+ 475 002f 0B       		.uleb128 0xb
+ 476 0030 3E       		.uleb128 0x3e
+ 477 0031 0B       		.uleb128 0xb
+ 478 0032 03       		.uleb128 0x3
+ 479 0033 0E       		.uleb128 0xe
+ 480 0034 00       		.byte	0
+ 481 0035 00       		.byte	0
+ 482 0036 05       		.uleb128 0x5
+ 483 0037 13       		.uleb128 0x13
+ 484 0038 01       		.byte	0x1
+ 485 0039 0B       		.uleb128 0xb
+ 486 003a 0B       		.uleb128 0xb
+ 487 003b 3A       		.uleb128 0x3a
+ 488 003c 0B       		.uleb128 0xb
+ 489 003d 3B       		.uleb128 0x3b
+ 490 003e 0B       		.uleb128 0xb
+ 491 003f 01       		.uleb128 0x1
+ 492 0040 13       		.uleb128 0x13
+ 493 0041 00       		.byte	0
+ 494 0042 00       		.byte	0
+ 495 0043 06       		.uleb128 0x6
+ 496 0044 0D       		.uleb128 0xd
+ 497 0045 00       		.byte	0
+ 498 0046 03       		.uleb128 0x3
+ 499 0047 08       		.uleb128 0x8
+ 500 0048 3A       		.uleb128 0x3a
+ 501 0049 0B       		.uleb128 0xb
+ 502 004a 3B       		.uleb128 0x3b
+ 503 004b 0B       		.uleb128 0xb
+ 504 004c 49       		.uleb128 0x49
+ 505 004d 13       		.uleb128 0x13
+ 506 004e 38       		.uleb128 0x38
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 11
+
+
+ 507 004f 0B       		.uleb128 0xb
+ 508 0050 00       		.byte	0
+ 509 0051 00       		.byte	0
+ 510 0052 07       		.uleb128 0x7
+ 511 0053 01       		.uleb128 0x1
+ 512 0054 01       		.byte	0x1
+ 513 0055 49       		.uleb128 0x49
+ 514 0056 13       		.uleb128 0x13
+ 515 0057 01       		.uleb128 0x1
+ 516 0058 13       		.uleb128 0x13
+ 517 0059 00       		.byte	0
+ 518 005a 00       		.byte	0
+ 519 005b 08       		.uleb128 0x8
+ 520 005c 21       		.uleb128 0x21
+ 521 005d 00       		.byte	0
+ 522 005e 49       		.uleb128 0x49
+ 523 005f 13       		.uleb128 0x13
+ 524 0060 2F       		.uleb128 0x2f
+ 525 0061 0B       		.uleb128 0xb
+ 526 0062 00       		.byte	0
+ 527 0063 00       		.byte	0
+ 528 0064 09       		.uleb128 0x9
+ 529 0065 2E       		.uleb128 0x2e
+ 530 0066 01       		.byte	0x1
+ 531 0067 3F       		.uleb128 0x3f
+ 532 0068 19       		.uleb128 0x19
+ 533 0069 03       		.uleb128 0x3
+ 534 006a 0E       		.uleb128 0xe
+ 535 006b 3A       		.uleb128 0x3a
+ 536 006c 0B       		.uleb128 0xb
+ 537 006d 3B       		.uleb128 0x3b
+ 538 006e 0B       		.uleb128 0xb
+ 539 006f 27       		.uleb128 0x27
+ 540 0070 19       		.uleb128 0x19
+ 541 0071 11       		.uleb128 0x11
+ 542 0072 01       		.uleb128 0x1
+ 543 0073 12       		.uleb128 0x12
+ 544 0074 06       		.uleb128 0x6
+ 545 0075 40       		.uleb128 0x40
+ 546 0076 18       		.uleb128 0x18
+ 547 0077 9742     		.uleb128 0x2117
+ 548 0079 19       		.uleb128 0x19
+ 549 007a 01       		.uleb128 0x1
+ 550 007b 13       		.uleb128 0x13
+ 551 007c 00       		.byte	0
+ 552 007d 00       		.byte	0
+ 553 007e 0A       		.uleb128 0xa
+ 554 007f 05       		.uleb128 0x5
+ 555 0080 00       		.byte	0
+ 556 0081 03       		.uleb128 0x3
+ 557 0082 0E       		.uleb128 0xe
+ 558 0083 3A       		.uleb128 0x3a
+ 559 0084 0B       		.uleb128 0xb
+ 560 0085 3B       		.uleb128 0x3b
+ 561 0086 0B       		.uleb128 0xb
+ 562 0087 49       		.uleb128 0x49
+ 563 0088 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 12
+
+
+ 564 0089 02       		.uleb128 0x2
+ 565 008a 17       		.uleb128 0x17
+ 566 008b 00       		.byte	0
+ 567 008c 00       		.byte	0
+ 568 008d 0B       		.uleb128 0xb
+ 569 008e 05       		.uleb128 0x5
+ 570 008f 00       		.byte	0
+ 571 0090 03       		.uleb128 0x3
+ 572 0091 08       		.uleb128 0x8
+ 573 0092 3A       		.uleb128 0x3a
+ 574 0093 0B       		.uleb128 0xb
+ 575 0094 3B       		.uleb128 0x3b
+ 576 0095 0B       		.uleb128 0xb
+ 577 0096 49       		.uleb128 0x49
+ 578 0097 13       		.uleb128 0x13
+ 579 0098 02       		.uleb128 0x2
+ 580 0099 17       		.uleb128 0x17
+ 581 009a 00       		.byte	0
+ 582 009b 00       		.byte	0
+ 583 009c 0C       		.uleb128 0xc
+ 584 009d 34       		.uleb128 0x34
+ 585 009e 00       		.byte	0
+ 586 009f 03       		.uleb128 0x3
+ 587 00a0 08       		.uleb128 0x8
+ 588 00a1 3A       		.uleb128 0x3a
+ 589 00a2 0B       		.uleb128 0xb
+ 590 00a3 3B       		.uleb128 0x3b
+ 591 00a4 0B       		.uleb128 0xb
+ 592 00a5 49       		.uleb128 0x49
+ 593 00a6 13       		.uleb128 0x13
+ 594 00a7 02       		.uleb128 0x2
+ 595 00a8 17       		.uleb128 0x17
+ 596 00a9 00       		.byte	0
+ 597 00aa 00       		.byte	0
+ 598 00ab 0D       		.uleb128 0xd
+ 599 00ac 34       		.uleb128 0x34
+ 600 00ad 00       		.byte	0
+ 601 00ae 03       		.uleb128 0x3
+ 602 00af 0E       		.uleb128 0xe
+ 603 00b0 3A       		.uleb128 0x3a
+ 604 00b1 0B       		.uleb128 0xb
+ 605 00b2 3B       		.uleb128 0x3b
+ 606 00b3 0B       		.uleb128 0xb
+ 607 00b4 49       		.uleb128 0x49
+ 608 00b5 13       		.uleb128 0x13
+ 609 00b6 02       		.uleb128 0x2
+ 610 00b7 18       		.uleb128 0x18
+ 611 00b8 00       		.byte	0
+ 612 00b9 00       		.byte	0
+ 613 00ba 0E       		.uleb128 0xe
+ 614 00bb 898201   		.uleb128 0x4109
+ 615 00be 01       		.byte	0x1
+ 616 00bf 11       		.uleb128 0x11
+ 617 00c0 01       		.uleb128 0x1
+ 618 00c1 31       		.uleb128 0x31
+ 619 00c2 13       		.uleb128 0x13
+ 620 00c3 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 13
+
+
+ 621 00c4 00       		.byte	0
+ 622 00c5 0F       		.uleb128 0xf
+ 623 00c6 8A8201   		.uleb128 0x410a
+ 624 00c9 00       		.byte	0
+ 625 00ca 02       		.uleb128 0x2
+ 626 00cb 18       		.uleb128 0x18
+ 627 00cc 9142     		.uleb128 0x2111
+ 628 00ce 18       		.uleb128 0x18
+ 629 00cf 00       		.byte	0
+ 630 00d0 00       		.byte	0
+ 631 00d1 10       		.uleb128 0x10
+ 632 00d2 0F       		.uleb128 0xf
+ 633 00d3 00       		.byte	0
+ 634 00d4 0B       		.uleb128 0xb
+ 635 00d5 0B       		.uleb128 0xb
+ 636 00d6 49       		.uleb128 0x49
+ 637 00d7 13       		.uleb128 0x13
+ 638 00d8 00       		.byte	0
+ 639 00d9 00       		.byte	0
+ 640 00da 11       		.uleb128 0x11
+ 641 00db 26       		.uleb128 0x26
+ 642 00dc 00       		.byte	0
+ 643 00dd 49       		.uleb128 0x49
+ 644 00de 13       		.uleb128 0x13
+ 645 00df 00       		.byte	0
+ 646 00e0 00       		.byte	0
+ 647 00e1 12       		.uleb128 0x12
+ 648 00e2 2E       		.uleb128 0x2e
+ 649 00e3 00       		.byte	0
+ 650 00e4 3F       		.uleb128 0x3f
+ 651 00e5 19       		.uleb128 0x19
+ 652 00e6 3C       		.uleb128 0x3c
+ 653 00e7 19       		.uleb128 0x19
+ 654 00e8 6E       		.uleb128 0x6e
+ 655 00e9 0E       		.uleb128 0xe
+ 656 00ea 03       		.uleb128 0x3
+ 657 00eb 0E       		.uleb128 0xe
+ 658 00ec 3A       		.uleb128 0x3a
+ 659 00ed 0B       		.uleb128 0xb
+ 660 00ee 3B       		.uleb128 0x3b
+ 661 00ef 0B       		.uleb128 0xb
+ 662 00f0 00       		.byte	0
+ 663 00f1 00       		.byte	0
+ 664 00f2 00       		.byte	0
+ 665              		.section	.debug_loc,"",%progbits
+ 666              	.Ldebug_loc0:
+ 667              	.LLST0:
+ 668 0000 00000000 		.4byte	.LVL0
+ 669 0004 31000000 		.4byte	.LVL8-1
+ 670 0008 0100     		.2byte	0x1
+ 671 000a 50       		.byte	0x50
+ 672 000b 31000000 		.4byte	.LVL8-1
+ 673 000f 36000000 		.4byte	.LFE0
+ 674 0013 0400     		.2byte	0x4
+ 675 0015 F3       		.byte	0xf3
+ 676 0016 01       		.uleb128 0x1
+ 677 0017 50       		.byte	0x50
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 14
+
+
+ 678 0018 9F       		.byte	0x9f
+ 679 0019 00000000 		.4byte	0
+ 680 001d 00000000 		.4byte	0
+ 681              	.LLST1:
+ 682 0021 00000000 		.4byte	.LVL0
+ 683 0025 1A000000 		.4byte	.LVL4
+ 684 0029 0100     		.2byte	0x1
+ 685 002b 51       		.byte	0x51
+ 686 002c 1A000000 		.4byte	.LVL4
+ 687 0030 36000000 		.4byte	.LFE0
+ 688 0034 0400     		.2byte	0x4
+ 689 0036 F3       		.byte	0xf3
+ 690 0037 01       		.uleb128 0x1
+ 691 0038 51       		.byte	0x51
+ 692 0039 9F       		.byte	0x9f
+ 693 003a 00000000 		.4byte	0
+ 694 003e 00000000 		.4byte	0
+ 695              	.LLST2:
+ 696 0042 00000000 		.4byte	.LVL0
+ 697 0046 24000000 		.4byte	.LVL5
+ 698 004a 0100     		.2byte	0x1
+ 699 004c 52       		.byte	0x52
+ 700 004d 24000000 		.4byte	.LVL5
+ 701 0051 2A000000 		.4byte	.LVL6
+ 702 0055 0200     		.2byte	0x2
+ 703 0057 74       		.byte	0x74
+ 704 0058 5C       		.sleb128 -36
+ 705 0059 2A000000 		.4byte	.LVL6
+ 706 005d 36000000 		.4byte	.LFE0
+ 707 0061 0400     		.2byte	0x4
+ 708 0063 F3       		.byte	0xf3
+ 709 0064 01       		.uleb128 0x1
+ 710 0065 52       		.byte	0x52
+ 711 0066 9F       		.byte	0x9f
+ 712 0067 00000000 		.4byte	0
+ 713 006b 00000000 		.4byte	0
+ 714              	.LLST3:
+ 715 006f 00000000 		.4byte	.LVL0
+ 716 0073 31000000 		.4byte	.LVL8-1
+ 717 0077 0100     		.2byte	0x1
+ 718 0079 53       		.byte	0x53
+ 719 007a 31000000 		.4byte	.LVL8-1
+ 720 007e 36000000 		.4byte	.LFE0
+ 721 0082 0400     		.2byte	0x4
+ 722 0084 F3       		.byte	0xf3
+ 723 0085 01       		.uleb128 0x1
+ 724 0086 53       		.byte	0x53
+ 725 0087 9F       		.byte	0x9f
+ 726 0088 00000000 		.4byte	0
+ 727 008c 00000000 		.4byte	0
+ 728              	.LLST4:
+ 729 0090 04000000 		.4byte	.LVL1
+ 730 0094 08000000 		.4byte	.LVL2
+ 731 0098 0200     		.2byte	0x2
+ 732 009a 30       		.byte	0x30
+ 733 009b 9F       		.byte	0x9f
+ 734 009c 08000000 		.4byte	.LVL2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 15
+
+
+ 735 00a0 1A000000 		.4byte	.LVL4
+ 736 00a4 0100     		.2byte	0x1
+ 737 00a6 54       		.byte	0x54
+ 738 00a7 1A000000 		.4byte	.LVL4
+ 739 00ab 2E000000 		.4byte	.LVL7
+ 740 00af 0100     		.2byte	0x1
+ 741 00b1 51       		.byte	0x51
+ 742 00b2 00000000 		.4byte	0
+ 743 00b6 00000000 		.4byte	0
+ 744              	.LLST5:
+ 745 00ba 00000000 		.4byte	.LVL9
+ 746 00be 27000000 		.4byte	.LVL16-1
+ 747 00c2 0100     		.2byte	0x1
+ 748 00c4 50       		.byte	0x50
+ 749 00c5 27000000 		.4byte	.LVL16-1
+ 750 00c9 2C000000 		.4byte	.LFE1
+ 751 00cd 0400     		.2byte	0x4
+ 752 00cf F3       		.byte	0xf3
+ 753 00d0 01       		.uleb128 0x1
+ 754 00d1 50       		.byte	0x50
+ 755 00d2 9F       		.byte	0x9f
+ 756 00d3 00000000 		.4byte	0
+ 757 00d7 00000000 		.4byte	0
+ 758              	.LLST6:
+ 759 00db 00000000 		.4byte	.LVL9
+ 760 00df 27000000 		.4byte	.LVL16-1
+ 761 00e3 0100     		.2byte	0x1
+ 762 00e5 51       		.byte	0x51
+ 763 00e6 27000000 		.4byte	.LVL16-1
+ 764 00ea 2C000000 		.4byte	.LFE1
+ 765 00ee 0400     		.2byte	0x4
+ 766 00f0 F3       		.byte	0xf3
+ 767 00f1 01       		.uleb128 0x1
+ 768 00f2 51       		.byte	0x51
+ 769 00f3 9F       		.byte	0x9f
+ 770 00f4 00000000 		.4byte	0
+ 771 00f8 00000000 		.4byte	0
+ 772              	.LLST7:
+ 773 00fc 00000000 		.4byte	.LVL9
+ 774 0100 1A000000 		.4byte	.LVL13
+ 775 0104 0100     		.2byte	0x1
+ 776 0106 52       		.byte	0x52
+ 777 0107 1A000000 		.4byte	.LVL13
+ 778 010b 2C000000 		.4byte	.LFE1
+ 779 010f 0400     		.2byte	0x4
+ 780 0111 F3       		.byte	0xf3
+ 781 0112 01       		.uleb128 0x1
+ 782 0113 52       		.byte	0x52
+ 783 0114 9F       		.byte	0x9f
+ 784 0115 00000000 		.4byte	0
+ 785 0119 00000000 		.4byte	0
+ 786              	.LLST8:
+ 787 011d 00000000 		.4byte	.LVL9
+ 788 0121 22000000 		.4byte	.LVL15
+ 789 0125 0100     		.2byte	0x1
+ 790 0127 53       		.byte	0x53
+ 791 0128 22000000 		.4byte	.LVL15
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 16
+
+
+ 792 012c 27000000 		.4byte	.LVL16-1
+ 793 0130 0200     		.2byte	0x2
+ 794 0132 74       		.byte	0x74
+ 795 0133 5C       		.sleb128 -36
+ 796 0134 27000000 		.4byte	.LVL16-1
+ 797 0138 2C000000 		.4byte	.LFE1
+ 798 013c 0400     		.2byte	0x4
+ 799 013e F3       		.byte	0xf3
+ 800 013f 01       		.uleb128 0x1
+ 801 0140 53       		.byte	0x53
+ 802 0141 9F       		.byte	0x9f
+ 803 0142 00000000 		.4byte	0
+ 804 0146 00000000 		.4byte	0
+ 805              	.LLST9:
+ 806 014a 04000000 		.4byte	.LVL10
+ 807 014e 08000000 		.4byte	.LVL11
+ 808 0152 0200     		.2byte	0x2
+ 809 0154 30       		.byte	0x30
+ 810 0155 9F       		.byte	0x9f
+ 811 0156 08000000 		.4byte	.LVL11
+ 812 015a 1C000000 		.4byte	.LVL14
+ 813 015e 0100     		.2byte	0x1
+ 814 0160 54       		.byte	0x54
+ 815 0161 00000000 		.4byte	0
+ 816 0165 00000000 		.4byte	0
+ 817              		.section	.debug_aranges,"",%progbits
+ 818 0000 24000000 		.4byte	0x24
+ 819 0004 0200     		.2byte	0x2
+ 820 0006 00000000 		.4byte	.Ldebug_info0
+ 821 000a 04       		.byte	0x4
+ 822 000b 00       		.byte	0
+ 823 000c 0000     		.2byte	0
+ 824 000e 0000     		.2byte	0
+ 825 0010 00000000 		.4byte	.LFB0
+ 826 0014 36000000 		.4byte	.LFE0-.LFB0
+ 827 0018 00000000 		.4byte	.LFB1
+ 828 001c 2C000000 		.4byte	.LFE1-.LFB1
+ 829 0020 00000000 		.4byte	0
+ 830 0024 00000000 		.4byte	0
+ 831              		.section	.debug_ranges,"",%progbits
+ 832              	.Ldebug_ranges0:
+ 833 0000 00000000 		.4byte	.LFB0
+ 834 0004 36000000 		.4byte	.LFE0
+ 835 0008 00000000 		.4byte	.LFB1
+ 836 000c 2C000000 		.4byte	.LFE1
+ 837 0010 00000000 		.4byte	0
+ 838 0014 00000000 		.4byte	0
+ 839              		.section	.debug_line,"",%progbits
+ 840              	.Ldebug_line0:
+ 841 0000 09020000 		.section	.debug_str,"MS",%progbits,1
+ 841      0200BA01 
+ 841      00000201 
+ 841      FB0E0D00 
+ 841      01010101 
+ 842              	.LASF5:
+ 843 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 843      6E74385F 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 17
+
+
+ 843      7400
+ 844              	.LASF4:
+ 845 000a 73697A65 		.ascii	"size_t\000"
+ 845      5F7400
+ 846              	.LASF17:
+ 847 0011 73746174 		.ascii	"state\000"
+ 847      6500
+ 848              	.LASF26:
+ 849 0017 70716372 		.ascii	"pqcrystals_fips202_ref_shake256\000"
+ 849      79737461 
+ 849      6C735F66 
+ 849      69707332 
+ 849      30325F72 
+ 850              	.LASF14:
+ 851 0037 75696E74 		.ascii	"uint64_t\000"
+ 851      36345F74 
+ 851      00
+ 852              	.LASF24:
+ 853 0040 6578746B 		.ascii	"extkey\000"
+ 853      657900
+ 854              	.LASF28:
+ 855 0047 2E2E5C73 		.ascii	"..\\symmetric-shake.c\000"
+ 855      796D6D65 
+ 855      74726963 
+ 855      2D736861 
+ 855      6B652E63 
+ 856              	.LASF6:
+ 857 005c 756E7369 		.ascii	"unsigned char\000"
+ 857      676E6564 
+ 857      20636861 
+ 857      7200
+ 858              	.LASF10:
+ 859 006a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 859      20756E73 
+ 859      69676E65 
+ 859      6420696E 
+ 859      7400
+ 860              	.LASF8:
+ 861 007c 73686F72 		.ascii	"short unsigned int\000"
+ 861      7420756E 
+ 861      7369676E 
+ 861      65642069 
+ 861      6E7400
+ 862              	.LASF23:
+ 863 008f 6E6F6E63 		.ascii	"nonce\000"
+ 863      6500
+ 864              	.LASF25:
+ 865 0095 70716372 		.ascii	"pqcrystals_fips202_ref_shake128_absorb\000"
+ 865      79737461 
+ 865      6C735F66 
+ 865      69707332 
+ 865      30325F72 
+ 866              	.LASF7:
+ 867 00bc 73686F72 		.ascii	"short int\000"
+ 867      7420696E 
+ 867      7400
+ 868              	.LASF21:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 18
+
+
+ 869 00c6 70716372 		.ascii	"pqcrystals_kyber1024_ref_kyber_shake256_prf\000"
+ 869      79737461 
+ 869      6C735F6B 
+ 869      79626572 
+ 869      31303234 
+ 870              	.LASF16:
+ 871 00f2 6B656363 		.ascii	"keccak_state\000"
+ 871      616B5F73 
+ 871      74617465 
+ 871      00
+ 872              	.LASF0:
+ 873 00ff 756E7369 		.ascii	"unsigned int\000"
+ 873      676E6564 
+ 873      20696E74 
+ 873      00
+ 874              	.LASF20:
+ 875 010c 70716372 		.ascii	"pqcrystals_kyber1024_ref_kyber_shake128_absorb\000"
+ 875      79737461 
+ 875      6C735F6B 
+ 875      79626572 
+ 875      31303234 
+ 876              	.LASF12:
+ 877 013b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 877      206C6F6E 
+ 877      6720756E 
+ 877      7369676E 
+ 877      65642069 
+ 878              	.LASF13:
+ 879 0152 75696E74 		.ascii	"uint8_t\000"
+ 879      385F7400 
+ 880              	.LASF27:
+ 881 015a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 881      43313120 
+ 881      352E342E 
+ 881      31203230 
+ 881      31363036 
+ 882 018d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 882      20726576 
+ 882      6973696F 
+ 882      6E203233 
+ 882      37373135 
+ 883 01c0 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 883      70202D6D 
+ 883      6670753D 
+ 883      66707634 
+ 883      2D73702D 
+ 884 01f3 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 884      6F6E7320 
+ 884      2D666661 
+ 884      742D6C74 
+ 884      6F2D6F62 
+ 885              	.LASF15:
+ 886 020d 73697A65 		.ascii	"sizetype\000"
+ 886      74797065 
+ 886      00
+ 887              	.LASF1:
+ 888 0216 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccNmrU9o.s 			page 19
+
+
+ 888      206C6F6E 
+ 888      6720696E 
+ 888      7400
+ 889              	.LASF19:
+ 890 0224 65787473 		.ascii	"extseed\000"
+ 890      65656400 
+ 891              	.LASF29:
+ 892 022c 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 892      73657273 
+ 892      5C626F67 
+ 892      75725C44 
+ 892      6F63756D 
+ 893 0258 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
+ 893      7269746D 
+ 893      6F732070 
+ 893      6F737463 
+ 893      75616E74 
+ 894 0287 2E637964 		.ascii	".cydsn\000"
+ 894      736E00
+ 895              	.LASF11:
+ 896 028e 5F5F7569 		.ascii	"__uint64_t\000"
+ 896      6E743634 
+ 896      5F7400
+ 897              	.LASF18:
+ 898 0299 73656564 		.ascii	"seed\000"
+ 898      00
+ 899              	.LASF9:
+ 900 029e 6C6F6E67 		.ascii	"long int\000"
+ 900      20696E74 
+ 900      00
+ 901              	.LASF2:
+ 902 02a7 6C6F6E67 		.ascii	"long double\000"
+ 902      20646F75 
+ 902      626C6500 
+ 903              	.LASF3:
+ 904 02b3 7369676E 		.ascii	"signed char\000"
+ 904      65642063 
+ 904      68617200 
+ 905              	.LASF22:
+ 906 02bf 6F75746C 		.ascii	"outlen\000"
+ 906      656E00
+ 907              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
