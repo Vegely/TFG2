@@ -14,7 +14,8 @@
 #include "semphr.h"
 #include <stdio.h>
 
-static SemaphoreHandle_t uartSemaphore;
+static SemaphoreHandle_t uartSemaphore;  // For UART RX interrupt
+SemaphoreHandle_t uartReadySemaphore; 
 
 /* UART interrupt handler */
 static void UART_Isr()
@@ -36,9 +37,13 @@ static void UART_Isr()
 void uartTask(void *arg)
 {
     (void)arg;
+    
+    /* Create the "UART ready" semaphore before UART initialization */
+    uartReadySemaphore = xSemaphoreCreateBinary();
+    
     UART_Start();
     setvbuf( stdin, NULL, _IONBF, 0 ); // Disable STDIN input buffering
-    printf("Started Task\r\n");
+    printf("Started UART Task\r\n");
 
     /* Create a semaphore. It will be set in the UART ISR when data is available */
     uartSemaphore = xSemaphoreCreateBinary();    
@@ -48,12 +53,15 @@ void uartTask(void *arg)
     NVIC_EnableIRQ((IRQn_Type) UART_SCB_IRQ_cfg.intrSrc);
     Cy_SCB_SetRxInterruptMask(UART_HW,CY_SCB_RX_INTR_NOT_EMPTY);
     
+    /* Signal that UART is ready - unblock mainTask */
+    xSemaphoreGive(uartReadySemaphore);
+    
     while(1)
     {
         /* Wait here until the semaphore is given (i.e. set) by the ISR */
         xSemaphoreTake(uartSemaphore,portMAX_DELAY);
 
-        /* Process all of hte characters in the command buffer */
+        /* Process all of the characters in the command buffer */
         while(Cy_SCB_UART_GetNumInRxFifo(UART_HW))
         {
             char c= getchar();

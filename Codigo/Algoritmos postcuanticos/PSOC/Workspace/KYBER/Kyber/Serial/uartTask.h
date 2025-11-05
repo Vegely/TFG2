@@ -11,5 +11,11 @@
 */
 #pragma once
 
+#include "semphr.h"
+
 void uartTask(void *arg);
+
+// Semaphore that signals when UART is initialized and ready
+extern SemaphoreHandle_t uartReadySemaphore;
 /* [] END OF FILE */
+

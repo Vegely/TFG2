@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
   39              		.loc 1 14 0
   40 0004 0228     		cmp	r0, #2
   41 0006 04D8     		bhi	.L3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 2
 
 
   16:..\kyber_wrapper.c ****         security_level != KYBER_SECURITY_1024) {
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
   81              		.align	2
   82              		.global	kyber_get_secret_key_size
   83              		.thumb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 3
 
 
   84              		.thumb_func
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  128              		@ args = 0, pretend = 0, frame = 0
  129              		@ frame_needed = 0, uses_anonymous_args = 0
  130              		@ link register save eliminated.
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 4
 
 
   40:..\kyber_wrapper.c ****     return CRYPTO_BYTES;
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  177              		.align	2
  178              		.global	kyber_encapsulate
  179              		.thumb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 5
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 5
 
 
  180              		.thumb_func
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  226              		@ frame_needed = 0, uses_anonymous_args = 0
  227              	.LVL10:
  228 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 6
 
 
  229              		.cfi_def_cfa_offset 8
@@ -352,13 +352,13 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  273 000c 79010000 		.4byte	.LASF21
  274 0010 0C       		.byte	0xc
  275 0011 44010000 		.4byte	.LASF22
- 276 0015 78020000 		.4byte	.LASF23
+ 276 0015 5F020000 		.4byte	.LASF23
  277 0019 00000000 		.4byte	.Ldebug_ranges0+0
  278 001d 00000000 		.4byte	0
  279 0021 00000000 		.4byte	.Ldebug_line0
  280 0025 02       		.uleb128 0x2
  281 0026 04       		.byte	0x4
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 7
 
 
  282 0027 05       		.byte	0x5
@@ -371,7 +371,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  289 0037 04       		.uleb128 0x4
  290 0038 04       		.byte	0x4
  291 0039 07       		.byte	0x7
- 292 003a 4D020000 		.4byte	.LASF0
+ 292 003a D7020000 		.4byte	.LASF0
  293 003e 04       		.uleb128 0x4
  294 003f 08       		.byte	0x8
  295 0040 05       		.byte	0x5
@@ -379,7 +379,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  297 0045 04       		.uleb128 0x4
  298 0046 08       		.byte	0x8
  299 0047 04       		.byte	0x4
- 300 0048 6C020000 		.4byte	.LASF2
+ 300 0048 CB020000 		.4byte	.LASF2
  301 004c 05       		.uleb128 0x5
  302 004d 01       		.byte	0x1
  303 004e 6B000000 		.4byte	0x6b
@@ -390,7 +390,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  308 0059 61000000 		.4byte	.LASF3
  309 005d 02       		.byte	0x2
  310 005e 06       		.uleb128 0x6
- 311 005f DA020000 		.4byte	.LASF4
+ 311 005f E4020000 		.4byte	.LASF4
  312 0063 03       		.byte	0x3
  313 0064 06       		.uleb128 0x6
  314 0065 A8000000 		.4byte	.LASF5
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  336 0096 08       		.uleb128 0x8
  337 0097 2C020000 		.4byte	.LASF15
  338 009b 01       		.byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 8
 
 
  339 009c 0C       		.byte	0xc
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  393 0119 48010000 		.4byte	0x148
  394 011d 21000000 		.4byte	.LLST1
  395 0121 0A       		.uleb128 0xa
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 9
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 9
 
 
  396 0122 736B00   		.ascii	"sk\000"
@@ -509,7 +509,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  421 0149 04       		.byte	0x4
  422 014a 6B000000 		.4byte	0x6b
  423 014e 07       		.uleb128 0x7
- 424 014f 5A020000 		.4byte	.LASF16
+ 424 014f 4D020000 		.4byte	.LASF16
  425 0153 01       		.byte	0x1
  426 0154 30       		.byte	0x30
  427 0155 25000000 		.4byte	0x25
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  450 018d ED000000 		.4byte	.LLST5
  451 0191 0B       		.uleb128 0xb
  452 0192 0C000000 		.4byte	.LVL7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 10
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 10
 
 
  453 0196 46020000 		.4byte	0x246
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  507 01f6 35       		.byte	0x35
  508 01f7 B1010000 		.4byte	0x1b1
  509 01fb 7F010000 		.4byte	.LLST8
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 11
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 11
 
 
  510 01ff 0B       		.uleb128 0xb
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  564 025c 00       		.byte	0
  565              		.section	.debug_abbrev,"",%progbits
  566              	.Ldebug_abbrev0:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 12
 
 
  567 0000 01       		.uleb128 0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  621 0036 05       		.uleb128 0x5
  622 0037 04       		.uleb128 0x4
  623 0038 01       		.byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 13
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 13
 
 
  624 0039 0B       		.uleb128 0xb
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  678 0070 0B       		.uleb128 0xb
  679 0071 3B       		.uleb128 0x3b
  680 0072 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 14
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 14
 
 
  681 0073 49       		.uleb128 0x49
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  735 00ac 00       		.byte	0
  736 00ad 0C       		.uleb128 0xc
  737 00ae 8A8201   		.uleb128 0x410a
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 15
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 15
 
 
  738 00b1 00       		.byte	0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  792 00e8 3F       		.uleb128 0x3f
  793 00e9 19       		.uleb128 0x19
  794 00ea 3C       		.uleb128 0x3c
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 16
 
 
  795 00eb 19       		.uleb128 0x19
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  849 005b 00000000 		.4byte	.LVL2
  850 005f 0B000000 		.4byte	.LVL3-1
  851 0063 0100     		.2byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 17
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 17
 
 
  852 0065 51       		.byte	0x51
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  906 00e4 51       		.byte	0x51
  907 00e5 00000000 		.4byte	0
  908 00e9 00000000 		.4byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 18
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 18
 
 
  909              	.LLST5:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  963 016b 9F       		.byte	0x9f
  964 016c 0E000000 		.4byte	.LVL12
  965 0170 18000000 		.4byte	.LFE7
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 19
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 19
 
 
  966 0174 0100     		.2byte	0x1
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  1020 0010 00000000 		.4byte	.LFB2
  1021 0014 06000000 		.4byte	.LFE2
  1022 0018 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 20
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 20
 
 
  1023 001c 06000000 		.4byte	.LFE3
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  1050      5F736563 
  1051              	.LASF8:
  1052 0091 6B796265 		.ascii	"kyber_security_level_t\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 21
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 21
 
 
  1052      725F7365 
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  1070      72697479 
  1070      5F6C6576 
  1071              	.LASF13:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 22
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 22
 
 
  1072 016e 6B796265 		.ascii	"kyber_init\000"
@@ -1296,39 +1296,42 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 1
  1081      63617073 
  1081      756C6174 
  1081      6500
- 1082              	.LASF0:
- 1083 024d 756E7369 		.ascii	"unsigned int\000"
- 1083      676E6564 
- 1083      20696E74 
- 1083      00
- 1084              	.LASF16:
- 1085 025a 6B796265 		.ascii	"kyber_encapsulate\000"
- 1085      725F656E 
- 1085      63617073 
- 1085      756C6174 
- 1085      6500
- 1086              	.LASF2:
- 1087 026c 6C6F6E67 		.ascii	"long double\000"
- 1087      20646F75 
- 1087      626C6500 
- 1088              	.LASF23:
- 1089 0278 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
- 1089      73657273 
- 1089      5C626F67 
- 1089      75725C44 
- 1089      6F63756D 
- 1090 02a4 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccppOTl4.s 			page 23
+ 1082              	.LASF16:
+ 1083 024d 6B796265 		.ascii	"kyber_encapsulate\000"
+ 1083      725F656E 
+ 1083      63617073 
+ 1083      756C6174 
+ 1083      6500
+ 1084              	.LASF23:
+ 1085 025f 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1085      73657273 
+ 1085      5C626F67 
+ 1085      75725C44 
+ 1085      6F63756D 
+ 1086 028b 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\KYBER\\K"
+ 1086      7269746D 
+ 1086      6F732070 
+ 1086      6F737463 
+ 1086      75616E74 
+ 1087 02ba 79626572 		.ascii	"yber\\Kyber.cydsn\000"
+ 1087      5C4B7962 
+ 1087      65722E63 
+ 1087      7964736E 
+ 1087      00
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccYfIFUt.s 			page 23
 
 
- 1090      7269746D 
- 1090      6F732070 
- 1090      6F737463 
- 1090      75616E74 
- 1091 02d3 2E637964 		.ascii	".cydsn\000"
- 1091      736E00
+ 1088              	.LASF2:
+ 1089 02cb 6C6F6E67 		.ascii	"long double\000"
+ 1089      20646F75 
+ 1089      626C6500 
+ 1090              	.LASF0:
+ 1091 02d7 756E7369 		.ascii	"unsigned int\000"
+ 1091      676E6564 
+ 1091      20696E74 
+ 1091      00
  1092              	.LASF4:
- 1093 02da 4B594245 		.ascii	"KYBER_SECURITY_768\000"
+ 1093 02e4 4B594245 		.ascii	"KYBER_SECURITY_768\000"
  1093      525F5345 
  1093      43555249 
  1093      54595F37 

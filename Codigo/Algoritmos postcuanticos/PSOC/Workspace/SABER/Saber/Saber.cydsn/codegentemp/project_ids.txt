@@ -1,6 +1,8 @@
-C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\SABER\Saber\Saber.cydsn\Saber.cyprj|0a7002e7-a50a-431a-b703-3d80a1b61191
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|0190a27d-ba2e-4222-ad7b-f1cd53b770bd
-C:\Users\bogur\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|64c36d02-0b6d-4c74-a9bb-a2ecfe1f5de8
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|18908b5f-7381-4212-8857-b6c79df83036
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|da0ed708-3e2f-4d61-aa51-ad501ff9cba7
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|012d1d51-cab2-45fa-aa03-0f306d82a868
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\HQC.cyprj|8720c660-ff25-4b8c-8797-967f9d521bde
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|c93bb641-aec3-40e2-9b94-15c2b2ad8c1f
+C:\Users\bogur\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|94ad6b9d-23f3-4c4d-8d54-b9abfe37db26
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4115664a-07ca-4a65-8a7a-93dc3f8220f8
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|28db1059-46f8-47cf-ab80-fd2a7a79a832
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|f19150a9-8214-4f12-a3a3-260d36231911
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\Kyber.cyprj|0a711cb0-1062-412e-bf27-040c1bebaadd
+C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn\Saber.cyprj|6d60242d-4e36-4300-9877-749e057fd1b5

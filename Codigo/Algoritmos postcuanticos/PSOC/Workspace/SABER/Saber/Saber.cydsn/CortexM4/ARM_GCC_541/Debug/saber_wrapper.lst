@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
   40 0006 06D8     		bhi	.L3
   15:..\saber_wrapper.c ****         security_level != SABER_SECURITY_FIRE) {
   16:..\saber_wrapper.c ****         return -1;
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 2
 
 
   17:..\saber_wrapper.c ****     }
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
   68 0024 00000000 		.word	.LANCHOR0
   69              		.cfi_endproc
   70              	.LFE0:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 3
 
 
   71              		.size	saber_init, .-saber_init
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  117              	.LFB3:
   50:..\saber_wrapper.c **** 
   51:..\saber_wrapper.c **** size_t saber_get_ciphertext_size(void) {
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 4
 
 
  118              		.loc 1 51 0
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  164              		.cfi_offset 14, -4
   60:..\saber_wrapper.c ****     if (!is_initialized) return -1;
  165              		.loc 1 60 0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 5
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 5
 
 
  166 0002 084B     		ldr	r3, .L17
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  213              		@ frame_needed = 0, uses_anonymous_args = 0
  214              	.LVL14:
  215 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 6
 
 
  216              		.cfi_def_cfa_offset 8
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  264              		.align	2
  265              		.global	saber_decapsulate
  266              		.thumb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 7
 
 
  267              		.thumb_func
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  314              	.LVL33:
   75:..\saber_wrapper.c **** }...
  315              		.loc 1 75 0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 8
 
 
  316 002a 08BD     		pop	{r3, pc}
@@ -448,10 +448,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  340 0006 00000000 		.4byte	.Ldebug_abbrev0
  341 000a 04       		.byte	0x4
  342 000b 01       		.uleb128 0x1
- 343 000c AD010000 		.4byte	.LASF21
+ 343 000c B7010000 		.4byte	.LASF21
  344 0010 0C       		.byte	0xc
- 345 0011 63010000 		.4byte	.LASF22
- 346 0015 01010000 		.4byte	.LASF23
+ 345 0011 6D010000 		.4byte	.LASF22
+ 346 0015 87000000 		.4byte	.LASF23
  347 0019 00000000 		.4byte	.Ldebug_ranges0+0
  348 001d 00000000 		.4byte	0
  349 0021 00000000 		.4byte	.Ldebug_line0
@@ -467,7 +467,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  359 0037 04       		.uleb128 0x4
  360 0038 04       		.byte	0x4
  361 0039 07       		.byte	0x7
- 362 003a 9D020000 		.4byte	.LASF0
+ 362 003a A7020000 		.4byte	.LASF0
  363 003e 04       		.uleb128 0x4
  364 003f 08       		.byte	0x8
  365 0040 05       		.byte	0x5
@@ -475,10 +475,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  367 0045 04       		.uleb128 0x4
  368 0046 08       		.byte	0x8
  369 0047 04       		.byte	0x4
- 370 0048 91020000 		.4byte	.LASF2
+ 370 0048 9B020000 		.4byte	.LASF2
  371 004c 05       		.uleb128 0x5
  372 004d 01       		.byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 9
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 9
 
 
  373 004e 6B000000 		.4byte	0x6b
@@ -498,9 +498,9 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  387 006b 04       		.uleb128 0x4
  388 006c 01       		.byte	0x1
  389 006d 08       		.byte	0x8
- 390 006e 76010000 		.4byte	.LASF6
+ 390 006e 80010000 		.4byte	.LASF6
  391 0072 03       		.uleb128 0x3
- 392 0073 84010000 		.4byte	.LASF8
+ 392 0073 8E010000 		.4byte	.LASF8
  393 0077 03       		.byte	0x3
  394 0078 0E       		.byte	0xe
  395 0079 4C000000 		.4byte	0x4c
@@ -515,14 +515,14 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  404 0091 9C       		.byte	0x9c
  405 0092 A6000000 		.4byte	0xa6
  406 0096 08       		.uleb128 0x8
- 407 0097 60020000 		.4byte	.LASF15
+ 407 0097 6A020000 		.4byte	.LASF15
  408 009b 01       		.byte	0x1
  409 009c 0B       		.byte	0xb
  410 009d 72000000 		.4byte	0x72
  411 00a1 00000000 		.4byte	.LLST0
  412 00a5 00       		.byte	0
  413 00a6 09       		.uleb128 0x9
- 414 00a7 AF000000 		.4byte	.LASF9
+ 414 00a7 01010000 		.4byte	.LASF9
  415 00ab 01       		.byte	0x1
  416 00ac 2B       		.byte	0x2b
  417 00ad 2C000000 		.4byte	0x2c
@@ -531,19 +531,19 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  420 00b9 01       		.uleb128 0x1
  421 00ba 9C       		.byte	0x9c
  422 00bb 09       		.uleb128 0x9
- 423 00bc E7000000 		.4byte	.LASF10
+ 423 00bc 53010000 		.4byte	.LASF10
  424 00c0 01       		.byte	0x1
  425 00c1 2F       		.byte	0x2f
  426 00c2 2C000000 		.4byte	0x2c
  427 00c6 00000000 		.4byte	.LFB2
  428 00ca 06000000 		.4byte	.LFE2-.LFB2
  429 00ce 01       		.uleb128 0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 10
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 10
 
 
  430 00cf 9C       		.byte	0x9c
  431 00d0 09       		.uleb128 0x9
- 432 00d1 87000000 		.4byte	.LASF11
+ 432 00d1 2A010000 		.4byte	.LASF11
  433 00d5 01       		.byte	0x1
  434 00d6 33       		.byte	0x33
  435 00d7 2C000000 		.4byte	0x2c
@@ -552,7 +552,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  438 00e3 01       		.uleb128 0x1
  439 00e4 9C       		.byte	0x9c
  440 00e5 09       		.uleb128 0x9
- 441 00e6 AA020000 		.4byte	.LASF12
+ 441 00e6 B4020000 		.4byte	.LASF12
  442 00ea 01       		.byte	0x1
  443 00eb 37       		.byte	0x37
  444 00ec 2C000000 		.4byte	0x2c
@@ -561,7 +561,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  447 00f8 01       		.uleb128 0x1
  448 00f9 9C       		.byte	0x9c
  449 00fa 07       		.uleb128 0x7
- 450 00fb A1000000 		.4byte	.LASF14
+ 450 00fb F3000000 		.4byte	.LASF14
  451 00ff 01       		.byte	0x1
  452 0100 3B       		.byte	0x3b
  453 0101 25000000 		.4byte	0x25
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  484 0142 03       		.uleb128 0x3
  485 0143 F3       		.byte	0xf3
  486 0144 01       		.uleb128 0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 11
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 11
 
 
  487 0145 51       		.byte	0x51
@@ -608,7 +608,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  491 0149 04       		.byte	0x4
  492 014a 6B000000 		.4byte	0x6b
  493 014e 07       		.uleb128 0x7
- 494 014f 9B010000 		.4byte	.LASF16
+ 494 014f A5010000 		.4byte	.LASF16
  495 0153 01       		.byte	0x1
  496 0154 41       		.byte	0x41
  497 0155 25000000 		.4byte	0x25
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  541 01ab 03       		.uleb128 0x3
  542 01ac F3       		.byte	0xf3
  543 01ad 01       		.uleb128 0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 12
 
 
  544 01ae 52       		.byte	0x52
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  598 0217 01       		.uleb128 0x1
  599 0218 52       		.byte	0x52
  600 0219 03       		.uleb128 0x3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 13
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 13
 
 
  601 021a F3       		.byte	0xf3
@@ -732,7 +732,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  609 0225 06       		.byte	0x6
  610 0226 72000000 		.4byte	0x72
  611 022a 10       		.uleb128 0x10
- 612 022b D8000000 		.4byte	.LASF25
+ 612 022b 44010000 		.4byte	.LASF25
  613 022f 01       		.byte	0x1
  614 0230 09       		.byte	0x9
  615 0231 25000000 		.4byte	0x25
@@ -740,18 +740,18 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  617 0236 03       		.byte	0x3
  618 0237 00000000 		.4byte	is_initialized
  619 023b 11       		.uleb128 0x11
- 620 023c 7E020000 		.4byte	.LASF18
- 621 0240 7E020000 		.4byte	.LASF18
+ 620 023c 88020000 		.4byte	.LASF18
+ 621 0240 88020000 		.4byte	.LASF18
  622 0244 04       		.byte	0x4
  623 0245 15       		.byte	0x15
  624 0246 11       		.uleb128 0x11
- 625 0247 C9000000 		.4byte	.LASF19
- 626 024b C9000000 		.4byte	.LASF19
+ 625 0247 1B010000 		.4byte	.LASF19
+ 626 024b 1B010000 		.4byte	.LASF19
  627 024f 04       		.byte	0x4
  628 0250 16       		.byte	0x16
  629 0251 11       		.uleb128 0x11
- 630 0252 6F020000 		.4byte	.LASF20
- 631 0256 6F020000 		.4byte	.LASF20
+ 630 0252 79020000 		.4byte	.LASF20
+ 631 0256 79020000 		.4byte	.LASF20
  632 025a 04       		.byte	0x4
  633 025b 17       		.byte	0x17
  634 025c 00       		.byte	0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  655 0012 00       		.byte	0
  656 0013 02       		.uleb128 0x2
  657 0014 24       		.uleb128 0x24
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 14
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 14
 
 
  658 0015 00       		.byte	0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  712 004b 0B       		.uleb128 0xb
  713 004c 00       		.byte	0
  714 004d 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 15
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 15
 
 
  715 004e 07       		.uleb128 0x7
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  769 0085 19       		.uleb128 0x19
  770 0086 49       		.uleb128 0x49
  771 0087 13       		.uleb128 0x13
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 16
 
 
  772 0088 11       		.uleb128 0x11
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  826 00c4 00       		.byte	0
  827 00c5 49       		.uleb128 0x49
  828 00c6 13       		.uleb128 0x13
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 17
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 17
 
 
  829 00c7 00       		.byte	0
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  883 000a 50       		.byte	0x50
  884 000b 14000000 		.4byte	.LVL1
  885 000f 16000000 		.4byte	.LVL2
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 18
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 18
 
 
  886 0013 0400     		.2byte	0x4
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  940 008d 0100     		.2byte	0x1
  941 008f 50       		.byte	0x50
  942 0090 1C000000 		.4byte	.LVL11
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 19
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 19
 
 
  943 0094 1E000000 		.4byte	.LVL12
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  997 0113 1A000000 		.4byte	.LVL18
  998 0117 0400     		.2byte	0x4
  999 0119 F3       		.byte	0xf3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 20
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 20
 
 
  1000 011a 01       		.uleb128 0x1
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  1054 0194 00000000 		.4byte	0
  1055 0198 00000000 		.4byte	0
  1056              	.LLST5:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 21
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 21
 
 
  1057 019c 00000000 		.4byte	.LVL14
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  1111 021d 50       		.byte	0x50
  1112 021e 24000000 		.4byte	.LVL31
  1113 0222 26000000 		.4byte	.LVL32
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 22
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 22
 
 
  1114 0226 0400     		.2byte	0x4
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  1168              		.section	.debug_aranges,"",%progbits
  1169 0000 54000000 		.4byte	0x54
  1170 0004 0200     		.2byte	0x2
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 23
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 23
 
 
  1171 0006 00000000 		.4byte	.Ldebug_info0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  1218      7400
  1219              	.LASF7:
  1220 000e 73697A65 		.ascii	"size_t\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 24
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 24
 
 
  1220      5F7400
@@ -1416,129 +1416,132 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 1
  1232      43555249 
  1232      54595F53 
  1232      41424552 
- 1233              	.LASF11:
- 1234 0087 73616265 		.ascii	"saber_get_ciphertext_size\000"
- 1234      725F6765 
- 1234      745F6369 
- 1234      70686572 
- 1234      74657874 
- 1235              	.LASF14:
- 1236 00a1 73616265 		.ascii	"saber_keypair\000"
- 1236      725F6B65 
- 1236      79706169 
- 1236      7200
- 1237              	.LASF9:
- 1238 00af 73616265 		.ascii	"saber_get_public_key_size\000"
- 1238      725F6765 
- 1238      745F7075 
- 1238      626C6963 
- 1238      5F6B6579 
- 1239              	.LASF19:
- 1240 00c9 63727970 		.ascii	"crypto_kem_enc\000"
- 1240      746F5F6B 
- 1240      656D5F65 
- 1240      6E6300
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 25
+ 1233              	.LASF23:
+ 1234 0087 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1234      73657273 
+ 1234      5C626F67 
+ 1234      75725C44 
+ 1234      6F63756D 
+ 1235 00b3 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\SABER\\S"
+ 1235      7269746D 
+ 1235      6F732070 
+ 1235      6F737463 
+ 1235      75616E74 
+ 1236 00e2 61626572 		.ascii	"aber\\Saber.cydsn\000"
+ 1236      5C536162 
+ 1236      65722E63 
+ 1236      7964736E 
+ 1236      00
+ 1237              	.LASF14:
+ 1238 00f3 73616265 		.ascii	"saber_keypair\000"
+ 1238      725F6B65 
+ 1238      79706169 
+ 1238      7200
+ 1239              	.LASF9:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 25
 
 
- 1241              	.LASF25:
- 1242 00d8 69735F69 		.ascii	"is_initialized\000"
- 1242      6E697469 
- 1242      616C697A 
- 1242      656400
- 1243              	.LASF10:
- 1244 00e7 73616265 		.ascii	"saber_get_secret_key_size\000"
+ 1240 0101 73616265 		.ascii	"saber_get_public_key_size\000"
+ 1240      725F6765 
+ 1240      745F7075 
+ 1240      626C6963 
+ 1240      5F6B6579 
+ 1241              	.LASF19:
+ 1242 011b 63727970 		.ascii	"crypto_kem_enc\000"
+ 1242      746F5F6B 
+ 1242      656D5F65 
+ 1242      6E6300
+ 1243              	.LASF11:
+ 1244 012a 73616265 		.ascii	"saber_get_ciphertext_size\000"
  1244      725F6765 
- 1244      745F7365 
- 1244      63726574 
- 1244      5F6B6579 
- 1245              	.LASF23:
- 1246 0101 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
- 1246      73657273 
- 1246      5C626F67 
- 1246      75725C44 
- 1246      6F63756D 
- 1247 012d 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\SABER\\Saber\\Saber"
- 1247      7269746D 
- 1247      6F732070 
- 1247      6F737463 
- 1247      75616E74 
- 1248 015c 2E637964 		.ascii	".cydsn\000"
- 1248      736E00
+ 1244      745F6369 
+ 1244      70686572 
+ 1244      74657874 
+ 1245              	.LASF25:
+ 1246 0144 69735F69 		.ascii	"is_initialized\000"
+ 1246      6E697469 
+ 1246      616C697A 
+ 1246      656400
+ 1247              	.LASF10:
+ 1248 0153 73616265 		.ascii	"saber_get_secret_key_size\000"
+ 1248      725F6765 
+ 1248      745F7365 
+ 1248      63726574 
+ 1248      5F6B6579 
  1249              	.LASF22:
- 1250 0163 2E2E5C73 		.ascii	"..\\saber_wrapper.c\000"
+ 1250 016d 2E2E5C73 		.ascii	"..\\saber_wrapper.c\000"
  1250      61626572 
  1250      5F777261 
  1250      70706572 
  1250      2E6300
  1251              	.LASF6:
- 1252 0176 756E7369 		.ascii	"unsigned char\000"
+ 1252 0180 756E7369 		.ascii	"unsigned char\000"
  1252      676E6564 
  1252      20636861 
  1252      7200
  1253              	.LASF8:
- 1254 0184 73616265 		.ascii	"saber_security_level_t\000"
+ 1254 018e 73616265 		.ascii	"saber_security_level_t\000"
  1254      725F7365 
  1254      63757269 
  1254      74795F6C 
  1254      6576656C 
  1255              	.LASF16:
- 1256 019b 73616265 		.ascii	"saber_encapsulate\000"
+ 1256 01a5 73616265 		.ascii	"saber_encapsulate\000"
  1256      725F656E 
  1256      63617073 
  1256      756C6174 
  1256      6500
  1257              	.LASF21:
- 1258 01ad 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1258 01b7 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1258      43313120 
  1258      352E342E 
  1258      31203230 
  1258      31363036 
- 1259 01e0 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1259 01ea 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cczF6pYQ.s 			page 26
+
+
  1259      20726576 
  1259      6973696F 
  1259      6E203233 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccgV5Xrf.s 			page 26
-
-
  1259      37373135 
- 1260 0213 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1260 021d 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
  1260      70202D6D 
  1260      6670753D 
  1260      66707634 
  1260      2D73702D 
- 1261 0246 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1261 0250 65637469 		.ascii	"ections -ffat-lto-objects\000"
  1261      6F6E7320 
  1261      2D666661 
  1261      742D6C74 
  1261      6F2D6F62 
  1262              	.LASF15:
- 1263 0260 73656375 		.ascii	"security_level\000"
+ 1263 026a 73656375 		.ascii	"security_level\000"
  1263      72697479 
  1263      5F6C6576 
  1263      656C00
  1264              	.LASF20:
- 1265 026f 63727970 		.ascii	"crypto_kem_dec\000"
+ 1265 0279 63727970 		.ascii	"crypto_kem_dec\000"
  1265      746F5F6B 
  1265      656D5F64 
  1265      656300
  1266              	.LASF18:
- 1267 027e 63727970 		.ascii	"crypto_kem_keypair\000"
+ 1267 0288 63727970 		.ascii	"crypto_kem_keypair\000"
  1267      746F5F6B 
  1267      656D5F6B 
  1267      65797061 
  1267      697200
  1268              	.LASF2:
- 1269 0291 6C6F6E67 		.ascii	"long double\000"
+ 1269 029b 6C6F6E67 		.ascii	"long double\000"
  1269      20646F75 
  1269      626C6500 
  1270              	.LASF0:
- 1271 029d 756E7369 		.ascii	"unsigned int\000"
+ 1271 02a7 756E7369 		.ascii	"unsigned int\000"
  1271      676E6564 
  1271      20696E74 
  1271      00
  1272              	.LASF12:
- 1273 02aa 73616265 		.ascii	"saber_get_shared_secret_size\000"
+ 1273 02b4 73616265 		.ascii	"saber_get_shared_secret_size\000"
  1273      725F6765 
  1273      745F7368 
  1273      61726564 

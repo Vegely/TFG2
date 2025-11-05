@@ -10,26 +10,34 @@
  * ========================================
 */
 #include "project.h"
-#include "../Serial/uartTask.h"
-#include "project.h"
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
 #include "task.h"
 #include "timers.h"
-#include "../hqc_wrapper.h"
+#include <stdio.h>
+#include "../Serial/uartTask.h"
+#include "mainTask.h"
+
+
+
+volatile uint8_t UART_READY=0;
+
 
 int main(void)
 {
     __enable_irq(); /* Enable global interrupts. */
-
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-    xTaskCreate ( uartTask, "UART Task", 400, 0, 2, 0);
-    vTaskStartScheduler(); // This function never returns
-
+    
+    /* Create RTOS tasks and start the scheduler */
+    xTaskCreate(uartTask, "UART Task", 400, 0, 2, 0);
+    xTaskCreate(mainTask, "Main Task", 2*8192, 0, 1, 0);
+    vTaskStartScheduler();
+    
+        
     for(;;)
     {
-        /* Place your application code here. */
+
     }
+   
 }
 
 /* [] END OF FILE */

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
   21:..\reduce.c   **** 
   22:..\reduce.c   ****   u = a*QINV;
   35              		.loc 1 22 0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 2
 
 
   36 0000 00EB4003 		add	r3, r0, r0, lsl #1
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
   69 0004 03FB00F3 		mul	r3, r3, r0
   70 0008 9B16     		asrs	r3, r3, #26
   71              	.LVL5:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 3
 
 
   44:..\reduce.c   ****   t *= KYBER_Q;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  110 000e 23F00203 		bic	r3, r3, #2
  111 0012 1B05     		lsls	r3, r3, #20
  112 0014 1B0D     		lsrs	r3, r3, #20
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 4
 
 
  113 0016 1844     		add	r0, r0, r3
@@ -202,17 +202,17 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  129 0006 00000000 		.4byte	.Ldebug_abbrev0
  130 000a 04       		.byte	0x4
  131 000b 01       		.uleb128 0x1
- 132 000c C4000000 		.4byte	.LASF15
+ 132 000c BA000000 		.4byte	.LASF15
  133 0010 0C       		.byte	0xc
- 134 0011 EF010000 		.4byte	.LASF16
- 135 0015 8D010000 		.4byte	.LASF17
+ 134 0011 8D010000 		.4byte	.LASF16
+ 135 0015 99010000 		.4byte	.LASF17
  136 0019 00000000 		.4byte	.Ldebug_ranges0+0
  137 001d 00000000 		.4byte	0
  138 0021 00000000 		.4byte	.Ldebug_line0
  139 0025 02       		.uleb128 0x2
  140 0026 01       		.byte	0x1
  141 0027 06       		.byte	0x6
- 142 0028 04020000 		.4byte	.LASF0
+ 142 0028 0E020000 		.4byte	.LASF0
  143 002c 02       		.uleb128 0x2
  144 002d 01       		.byte	0x1
  145 002e 08       		.byte	0x8
@@ -225,7 +225,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  152 003e 02       		.uleb128 0x2
  153 003f 02       		.byte	0x2
  154 0040 05       		.byte	0x5
- 155 0041 8E000000 		.4byte	.LASF2
+ 155 0041 83010000 		.4byte	.LASF2
  156 0045 02       		.uleb128 0x2
  157 0046 02       		.byte	0x2
  158 0047 07       		.byte	0x7
@@ -238,10 +238,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  165 0057 02       		.uleb128 0x2
  166 0058 04       		.byte	0x4
  167 0059 05       		.byte	0x5
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 5
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 5
 
 
- 168 005a FB010000 		.4byte	.LASF6
+ 168 005a 05020000 		.4byte	.LASF6
  169 005e 02       		.uleb128 0x2
  170 005f 04       		.byte	0x4
  171 0060 07       		.byte	0x7
@@ -249,11 +249,11 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  173 0065 02       		.uleb128 0x2
  174 0066 08       		.byte	0x8
  175 0067 05       		.byte	0x5
- 176 0068 7F010000 		.4byte	.LASF8
+ 176 0068 75010000 		.4byte	.LASF8
  177 006c 02       		.uleb128 0x2
  178 006d 08       		.byte	0x8
  179 006e 07       		.byte	0x7
- 180 006f A5000000 		.4byte	.LASF9
+ 180 006f 9B000000 		.4byte	.LASF9
  181 0073 04       		.uleb128 0x4
  182 0074 04       		.byte	0x4
  183 0075 05       		.byte	0x5
@@ -261,19 +261,19 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  185 007a 02       		.uleb128 0x2
  186 007b 04       		.byte	0x4
  187 007c 07       		.byte	0x7
- 188 007d 98000000 		.4byte	.LASF10
+ 188 007d 8E000000 		.4byte	.LASF10
  189 0081 03       		.uleb128 0x3
- 190 0082 BC000000 		.4byte	.LASF11
+ 190 0082 B2000000 		.4byte	.LASF11
  191 0086 03       		.byte	0x3
  192 0087 20       		.byte	0x20
  193 0088 33000000 		.4byte	0x33
  194 008c 03       		.uleb128 0x3
- 195 008d 77010000 		.4byte	.LASF12
+ 195 008d 6D010000 		.4byte	.LASF12
  196 0091 03       		.byte	0x3
  197 0092 2C       		.byte	0x2c
  198 0093 4C000000 		.4byte	0x4c
  199 0097 05       		.uleb128 0x5
- 200 0098 10020000 		.4byte	.LASF13
+ 200 0098 1A020000 		.4byte	.LASF13
  201 009c 01       		.byte	0x1
  202 009d 11       		.byte	0x11
  203 009e 81000000 		.4byte	0x81
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  222 00cb 7500     		.ascii	"u\000"
  223 00cd 01       		.byte	0x1
  224 00ce 14       		.byte	0x14
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 6
 
 
  225 00cf 81000000 		.4byte	0x81
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  279 0000 01       		.uleb128 0x1
  280 0001 11       		.uleb128 0x11
  281 0002 01       		.byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 7
 
 
  282 0003 25       		.uleb128 0x25
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  336 0039 3F       		.uleb128 0x3f
  337 003a 19       		.uleb128 0x19
  338 003b 03       		.uleb128 0x3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 8
 
 
  339 003c 0E       		.uleb128 0xe
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  393 0073 03       		.uleb128 0x3
  394 0074 08       		.uleb128 0x8
  395 0075 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 9
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 9
 
 
  396 0076 0B       		.uleb128 0xb
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  450 00ad 00       		.byte	0
  451 00ae 00       		.byte	0
  452 00af 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 10
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 10
 
 
  453              		.section	.debug_loc,"",%progbits
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  507              	.LLST3:
  508 0075 0A000000 		.4byte	.LVL5
  509 0079 16000000 		.4byte	.LVL6
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 11
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 11
 
 
  510 007d 0100     		.2byte	0x1
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  564              	.Ldebug_ranges0:
  565 0000 00000000 		.4byte	.LFB0
  566 0004 1E000000 		.4byte	.LFE0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 12
 
 
  567 0008 00000000 		.4byte	.LFB1
@@ -711,86 +711,89 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 1
  589      6C735F6B 
  589      79626572 
  589      31303234 
- 590              	.LASF2:
- 591 008e 73686F72 		.ascii	"short int\000"
- 591      7420696E 
- 591      7400
- 592              	.LASF10:
- 593 0098 756E7369 		.ascii	"unsigned int\000"
- 593      676E6564 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 13
+ 590              	.LASF10:
+ 591 008e 756E7369 		.ascii	"unsigned int\000"
+ 591      676E6564 
+ 591      20696E74 
+ 591      00
+ 592              	.LASF9:
+ 593 009b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 13
 
 
- 593      20696E74 
- 593      00
- 594              	.LASF9:
- 595 00a5 6C6F6E67 		.ascii	"long long unsigned int\000"
- 595      206C6F6E 
- 595      6720756E 
- 595      7369676E 
- 595      65642069 
- 596              	.LASF11:
- 597 00bc 696E7431 		.ascii	"int16_t\000"
- 597      365F7400 
- 598              	.LASF15:
- 599 00c4 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 599      43313120 
- 599      352E342E 
- 599      31203230 
- 599      31363036 
- 600 00f7 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
- 600      20726576 
- 600      6973696F 
- 600      6E203233 
- 600      37373135 
- 601 012a 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
- 601      70202D6D 
- 601      6670753D 
- 601      66707634 
- 601      2D73702D 
- 602 015d 65637469 		.ascii	"ections -ffat-lto-objects\000"
- 602      6F6E7320 
- 602      2D666661 
- 602      742D6C74 
- 602      6F2D6F62 
- 603              	.LASF12:
- 604 0177 696E7433 		.ascii	"int32_t\000"
- 604      325F7400 
- 605              	.LASF8:
- 606 017f 6C6F6E67 		.ascii	"long long int\000"
- 606      206C6F6E 
- 606      6720696E 
+ 593      206C6F6E 
+ 593      6720756E 
+ 593      7369676E 
+ 593      65642069 
+ 594              	.LASF11:
+ 595 00b2 696E7431 		.ascii	"int16_t\000"
+ 595      365F7400 
+ 596              	.LASF15:
+ 597 00ba 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 597      43313120 
+ 597      352E342E 
+ 597      31203230 
+ 597      31363036 
+ 598 00ed 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 598      20726576 
+ 598      6973696F 
+ 598      6E203233 
+ 598      37373135 
+ 599 0120 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 599      70202D6D 
+ 599      6670753D 
+ 599      66707634 
+ 599      2D73702D 
+ 600 0153 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 600      6F6E7320 
+ 600      2D666661 
+ 600      742D6C74 
+ 600      6F2D6F62 
+ 601              	.LASF12:
+ 602 016d 696E7433 		.ascii	"int32_t\000"
+ 602      325F7400 
+ 603              	.LASF8:
+ 604 0175 6C6F6E67 		.ascii	"long long int\000"
+ 604      206C6F6E 
+ 604      6720696E 
+ 604      7400
+ 605              	.LASF2:
+ 606 0183 73686F72 		.ascii	"short int\000"
+ 606      7420696E 
  606      7400
- 607              	.LASF17:
- 608 018d 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
- 608      73657273 
- 608      5C626F67 
- 608      75725C44 
- 608      6F63756D 
- 609 01b9 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\KYBER\\Kyber\\Kyber"
- 609      7269746D 
- 609      6F732070 
- 609      6F737463 
- 609      75616E74 
- 610 01e8 2E637964 		.ascii	".cydsn\000"
- 610      736E00
- 611              	.LASF16:
- 612 01ef 2E2E5C72 		.ascii	"..\\reduce.c\000"
- 612      65647563 
- 612      652E6300 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccQg1hKO.s 			page 14
+ 607              	.LASF16:
+ 608 018d 2E2E5C72 		.ascii	"..\\reduce.c\000"
+ 608      65647563 
+ 608      652E6300 
+ 609              	.LASF17:
+ 610 0199 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 610      73657273 
+ 610      5C626F67 
+ 610      75725C44 
+ 610      6F63756D 
+ 611 01c5 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\KYBER\\K"
+ 611      7269746D 
+ 611      6F732070 
+ 611      6F737463 
+ 611      75616E74 
+ 612 01f4 79626572 		.ascii	"yber\\Kyber.cydsn\000"
+ 612      5C4B7962 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccL49MGm.s 			page 14
 
 
+ 612      65722E63 
+ 612      7964736E 
+ 612      00
  613              	.LASF6:
- 614 01fb 6C6F6E67 		.ascii	"long int\000"
+ 614 0205 6C6F6E67 		.ascii	"long int\000"
  614      20696E74 
  614      00
  615              	.LASF0:
- 616 0204 7369676E 		.ascii	"signed char\000"
+ 616 020e 7369676E 		.ascii	"signed char\000"
  616      65642063 
  616      68617200 
  617              	.LASF13:
- 618 0210 70716372 		.ascii	"pqcrystals_kyber1024_ref_montgomery_reduce\000"
+ 618 021a 70716372 		.ascii	"pqcrystals_kyber1024_ref_montgomery_reduce\000"
  618      79737461 
  618      6C735F6B 
  618      79626572 

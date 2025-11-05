@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   27:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
   28:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
   29:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** /*
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 2
 
 
   30:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c ****  * The simplest possible implementation of pvPortMalloc().  Note that this
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   41              	.LVL1:
   72:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** void *pvReturn = NULL;
   73:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** static uint8_t *pucAlignedHeap = NULL;
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 3
 
 
   74:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
@@ -148,14 +148,14 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   87:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	{
   88:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		if( pucAlignedHeap == NULL )
   53              		.loc 1 88 0
-  54 0014 104B     		ldr	r3, .L8
+  54 0014 0F4B     		ldr	r3, .L8
   55 0016 1B68     		ldr	r3, [r3]
   56 0018 2BB9     		cbnz	r3, .L3
   89:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		{
   90:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			/* Ensure the heap starts on a correctly aligned boundary. */
   91:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			pucAlignedHeap = ( uint8_t * ) ( ( ( portPOINTER_SIZE_TYPE ) &ucHeap[ portBYTE_ALIGNMENT ] ) & (
   57              		.loc 1 91 0
-  58 001a 0F4A     		ldr	r2, .L8
+  58 001a 0E4A     		ldr	r2, .L8
   59 001c 02F10C03 		add	r3, r2, #12
   60 0020 23F00703 		bic	r3, r3, #7
   61 0024 1360     		str	r3, [r2]
@@ -165,42 +165,42 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   94:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		/* Check there is enough room left for the allocation. */
   95:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		if( ( ( xNextFreeByte + xWantedSize ) < configADJUSTED_HEAP_SIZE ) &&
   63              		.loc 1 95 0
-  64 0026 0D4B     		ldr	r3, .L8+4
-  65 0028 D3F85C35 		ldr	r3, [r3, #1372]
+  64 0026 0C4B     		ldr	r3, .L8+4
+  65 0028 D3F8B43A 		ldr	r3, [r3, #2740]
   66 002c 1C44     		add	r4, r4, r3
   67              	.LVL4:
-  68 002e 4BF6F772 		movw	r2, #49143
-  69 0032 9442     		cmp	r4, r2
-  70 0034 08D8     		bhi	.L5
+  68 002e 0B4A     		ldr	r2, .L8+8
+  69 0030 9442     		cmp	r4, r2
+  70 0032 08D8     		bhi	.L5
   71              		.loc 1 95 0 is_stmt 0 discriminator 1
-  72 0036 A342     		cmp	r3, r4
-  73 0038 08D2     		bcs	.L6
+  72 0034 A342     		cmp	r3, r4
+  73 0036 08D2     		bcs	.L6
   96:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
   97:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		{
   98:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			/* Return the next free byte then increment the index past this
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 4
 
 
   99:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			block. */
  100:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			pvReturn = pucAlignedHeap + xNextFreeByte;
   74              		.loc 1 100 0 is_stmt 1
-  75 003a 074A     		ldr	r2, .L8
-  76 003c 1568     		ldr	r5, [r2]
-  77 003e 1D44     		add	r5, r5, r3
+  75 0038 064A     		ldr	r2, .L8
+  76 003a 1568     		ldr	r5, [r2]
+  77 003c 1D44     		add	r5, r5, r3
   78              	.LVL5:
  101:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			xNextFreeByte += xWantedSize;
   79              		.loc 1 101 0
-  80 0040 064B     		ldr	r3, .L8+4
-  81 0042 C3F85C45 		str	r4, [r3, #1372]
-  82 0046 02E0     		b	.L4
+  80 003e 064B     		ldr	r3, .L8+4
+  81 0040 C3F8B44A 		str	r4, [r3, #2740]
+  82 0044 02E0     		b	.L4
   83              	.LVL6:
   84              	.L5:
   72:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** static uint8_t *pucAlignedHeap = NULL;
   85              		.loc 1 72 0
-  86 0048 0025     		movs	r5, #0
-  87 004a 00E0     		b	.L4
+  86 0046 0025     		movs	r5, #0
+  87 0048 00E0     		b	.L4
   88              	.L6:
-  89 004c 0025     		movs	r5, #0
+  89 004a 0025     		movs	r5, #0
   90              	.LVL7:
   91              	.L4:
  102:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		}
@@ -209,7 +209,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
  105:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	}
  106:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	( void ) xTaskResumeAll();
   92              		.loc 1 106 0
-  93 004e FFF7FEFF 		bl	xTaskResumeAll
+  93 004c FFF7FEFF 		bl	xTaskResumeAll
   94              	.LVL8:
  107:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
  108:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	#if( configUSE_MALLOC_FAILED_HOOK == 1 )
@@ -225,38 +225,39 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
  118:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	return pvReturn;
  119:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** }
   95              		.loc 1 119 0
-  96 0052 2846     		mov	r0, r5
-  97 0054 38BD     		pop	{r3, r4, r5, pc}
+  96 0050 2846     		mov	r0, r5
+  97 0052 38BD     		pop	{r3, r4, r5, pc}
   98              	.LVL9:
   99              	.L9:
- 100 0056 00BF     		.align	2
+ 100              		.align	2
  101              	.L8:
- 102 0058 00000000 		.word	.LANCHOR0
- 103 005c A8BA0000 		.word	.LANCHOR1
- 104              		.cfi_endproc
- 105              	.LFE136:
- 106              		.size	pvPortMalloc, .-pvPortMalloc
- 107              		.section	.text.vPortFree,"ax",%progbits
- 108              		.align	2
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 5
+ 102 0054 00000000 		.word	.LANCHOR0
+ 103 0058 50750100 		.word	.LANCHOR1
+ 104 005c F77F0100 		.word	98295
+ 105              		.cfi_endproc
+ 106              	.LFE136:
+ 107              		.size	pvPortMalloc, .-pvPortMalloc
+ 108              		.section	.text.vPortFree,"ax",%progbits
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 5
 
 
- 109              		.global	vPortFree
- 110              		.thumb
- 111              		.thumb_func
- 112              		.type	vPortFree, %function
- 113              	vPortFree:
- 114              	.LFB137:
+ 109              		.align	2
+ 110              		.global	vPortFree
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.type	vPortFree, %function
+ 114              	vPortFree:
+ 115              	.LFB137:
  120:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** /*-----------------------------------------------------------*/
  121:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
  122:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** void vPortFree( void *pv )
  123:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** {
- 115              		.loc 1 123 0
- 116              		.cfi_startproc
- 117              		@ args = 0, pretend = 0, frame = 0
- 118              		@ frame_needed = 0, uses_anonymous_args = 0
- 119              		@ link register save eliminated.
- 120              	.LVL10:
+ 116              		.loc 1 123 0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
+ 121              	.LVL10:
  124:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	/* Memory cannot be freed using this scheme.  See heap_2.c, heap_3.c and
  125:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	heap_4.c for alternative implementations, and the memory management pages of
  126:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	http://www.FreeRTOS.org for more information. */
@@ -264,11 +265,11 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
  128:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
  129:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	/* Force an assert as it is invalid to call this function. */
  130:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	configASSERT( pv == NULL );
- 121              		.loc 1 130 0
- 122 0000 40B1     		cbz	r0, .L10
- 123              	.LBB4:
- 124              	.LBB5:
- 125              		.file 2 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h"
+ 122              		.loc 1 130 0
+ 123 0000 40B1     		cbz	r0, .L10
+ 124              	.LBB4:
+ 125              	.LBB5:
+ 126              		.file 2 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h"
    1:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** /*
    2:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h ****  * FreeRTOS Kernel V10.0.1
    3:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h ****  * Copyright (C) 2017 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -297,10 +298,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   26:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h ****  */
   27:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
   28:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 6
+
+
   29:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** #ifndef PORTMACRO_H
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 6
-
-
   30:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** #define PORTMACRO_H
   31:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
   32:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** #ifdef __cplusplus
@@ -357,10 +358,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
   83:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 																				\
   84:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	/* Barriers are normally not required but do ensure the code is completely	\
   85:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	within the specified behaviour for the architecture. */						\
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 7
+
+
   86:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	__asm volatile( "dsb" ::: "memory" );										\
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 7
-
-
   87:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	__asm volatile( "isb" );													\
   88:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** }
   89:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
@@ -417,10 +418,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
  140:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 		xReturn = pdFALSE;
  141:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	}
  142:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	else
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 8
+
+
  143:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	{
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 8
-
-
  144:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 		xReturn = pdTRUE;
  145:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	}
  146:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
@@ -434,1056 +435,1058 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 1
  154:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** uint32_t ulNewBASEPRI;
  155:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
  156:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	__asm volatile
- 126              		.loc 2 156 0
- 127              		.syntax unified
- 128              	@ 156 "Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h" 1
- 129 0002 4FF03F03 			mov r3, #63												
- 130 0006 83F31188 		msr basepri, r3											
- 131 000a BFF36F8F 		isb														
- 132 000e BFF34F8F 		dsb														
- 133              	
- 134              	@ 0 "" 2
- 135              	.LVL11:
- 136              		.thumb
- 137              		.syntax unified
- 138              	.L12:
- 139 0012 FEE7     		b	.L12
- 140              	.L10:
- 141 0014 7047     		bx	lr
- 142              	.LBE5:
- 143              	.LBE4:
- 144              		.cfi_endproc
- 145              	.LFE137:
- 146              		.size	vPortFree, .-vPortFree
- 147 0016 00BF     		.section	.text.vPortInitialiseBlocks,"ax",%progbits
- 148              		.align	2
- 149              		.global	vPortInitialiseBlocks
- 150              		.thumb
- 151              		.thumb_func
- 152              		.type	vPortInitialiseBlocks, %function
- 153              	vPortInitialiseBlocks:
- 154              	.LFB138:
+ 127              		.loc 2 156 0
+ 128              		.syntax unified
+ 129              	@ 156 "Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h" 1
+ 130 0002 4FF03F03 			mov r3, #63												
+ 131 0006 83F31188 		msr basepri, r3											
+ 132 000a BFF36F8F 		isb														
+ 133 000e BFF34F8F 		dsb														
+ 134              	
+ 135              	@ 0 "" 2
+ 136              	.LVL11:
+ 137              		.thumb
+ 138              		.syntax unified
+ 139              	.L12:
+ 140 0012 FEE7     		b	.L12
+ 141              	.L10:
+ 142 0014 7047     		bx	lr
+ 143              	.LBE5:
+ 144              	.LBE4:
+ 145              		.cfi_endproc
+ 146              	.LFE137:
+ 147              		.size	vPortFree, .-vPortFree
+ 148 0016 00BF     		.section	.text.vPortInitialiseBlocks,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	vPortInitialiseBlocks
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	vPortInitialiseBlocks, %function
+ 154              	vPortInitialiseBlocks:
+ 155              	.LFB138:
  131:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** }
  132:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** /*-----------------------------------------------------------*/
  133:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
  134:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** void vPortInitialiseBlocks( void )
  135:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** {
- 155              		.loc 1 135 0
- 156              		.cfi_startproc
- 157              		@ args = 0, pretend = 0, frame = 0
- 158              		@ frame_needed = 0, uses_anonymous_args = 0
- 159              		@ link register save eliminated.
+ 156              		.loc 1 135 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
  136:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	/* Only required when static memory is not cleared. */
  137:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	xNextFreeByte = ( size_t ) 0;
- 160              		.loc 1 137 0
- 161 0000 0022     		movs	r2, #0
- 162 0002 024B     		ldr	r3, .L14
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 9
+ 161              		.loc 1 137 0
+ 162 0000 0022     		movs	r2, #0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 9
 
 
- 163 0004 C3F85C25 		str	r2, [r3, #1372]
- 164 0008 7047     		bx	lr
- 165              	.L15:
- 166 000a 00BF     		.align	2
- 167              	.L14:
- 168 000c A8BA0000 		.word	.LANCHOR1
- 169              		.cfi_endproc
- 170              	.LFE138:
- 171              		.size	vPortInitialiseBlocks, .-vPortInitialiseBlocks
- 172              		.section	.text.xPortGetFreeHeapSize,"ax",%progbits
- 173              		.align	2
- 174              		.global	xPortGetFreeHeapSize
- 175              		.thumb
- 176              		.thumb_func
- 177              		.type	xPortGetFreeHeapSize, %function
- 178              	xPortGetFreeHeapSize:
- 179              	.LFB139:
+ 163 0002 024B     		ldr	r3, .L14
+ 164 0004 C3F8B42A 		str	r2, [r3, #2740]
+ 165 0008 7047     		bx	lr
+ 166              	.L15:
+ 167 000a 00BF     		.align	2
+ 168              	.L14:
+ 169 000c 50750100 		.word	.LANCHOR1
+ 170              		.cfi_endproc
+ 171              	.LFE138:
+ 172              		.size	vPortInitialiseBlocks, .-vPortInitialiseBlocks
+ 173              		.section	.text.xPortGetFreeHeapSize,"ax",%progbits
+ 174              		.align	2
+ 175              		.global	xPortGetFreeHeapSize
+ 176              		.thumb
+ 177              		.thumb_func
+ 178              		.type	xPortGetFreeHeapSize, %function
+ 179              	xPortGetFreeHeapSize:
+ 180              	.LFB139:
  138:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** }
  139:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** /*-----------------------------------------------------------*/
  140:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
  141:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** size_t xPortGetFreeHeapSize( void )
  142:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** {
- 180              		.loc 1 142 0
- 181              		.cfi_startproc
- 182              		@ args = 0, pretend = 0, frame = 0
- 183              		@ frame_needed = 0, uses_anonymous_args = 0
- 184              		@ link register save eliminated.
+ 181              		.loc 1 142 0
+ 182              		.cfi_startproc
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185              		@ link register save eliminated.
  143:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	return ( configADJUSTED_HEAP_SIZE - xNextFreeByte );
- 185              		.loc 1 143 0
- 186 0000 034B     		ldr	r3, .L17
- 187 0002 D3F85C05 		ldr	r0, [r3, #1372]
+ 186              		.loc 1 143 0
+ 187 0000 034B     		ldr	r3, .L17
+ 188 0002 D3F8B40A 		ldr	r0, [r3, #2740]
  144:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** }
- 188              		.loc 1 144 0
- 189 0006 C0F53F40 		rsb	r0, r0, #48896
- 190 000a F830     		adds	r0, r0, #248
- 191 000c 7047     		bx	lr
- 192              	.L18:
- 193 000e 00BF     		.align	2
- 194              	.L17:
- 195 0010 A8BA0000 		.word	.LANCHOR1
- 196              		.cfi_endproc
- 197              	.LFE139:
- 198              		.size	xPortGetFreeHeapSize, .-xPortGetFreeHeapSize
- 199              		.bss
- 200              		.align	2
- 201              		.set	.LANCHOR0,. + 0
- 202              		.set	.LANCHOR1,. + 47784
- 203              		.type	pucAlignedHeap.11057, %object
- 204              		.size	pucAlignedHeap.11057, 4
- 205              	pucAlignedHeap.11057:
- 206 0000 00000000 		.space	4
- 207              		.type	ucHeap, %object
- 208              		.size	ucHeap, 49152
- 209              	ucHeap:
- 210 0004 00000000 		.space	49152
- 210      00000000 
- 210      00000000 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 10
+ 189              		.loc 1 144 0
+ 190 0006 C0F5BF30 		rsb	r0, r0, #97792
+ 191 000a 00F5FC70 		add	r0, r0, #504
+ 192 000e 7047     		bx	lr
+ 193              	.L18:
+ 194              		.align	2
+ 195              	.L17:
+ 196 0010 50750100 		.word	.LANCHOR1
+ 197              		.cfi_endproc
+ 198              	.LFE139:
+ 199              		.size	xPortGetFreeHeapSize, .-xPortGetFreeHeapSize
+ 200              		.bss
+ 201              		.align	2
+ 202              		.set	.LANCHOR0,. + 0
+ 203              		.set	.LANCHOR1,. + 95568
+ 204              		.type	pucAlignedHeap.11057, %object
+ 205              		.size	pucAlignedHeap.11057, 4
+ 206              	pucAlignedHeap.11057:
+ 207 0000 00000000 		.space	4
+ 208              		.type	ucHeap, %object
+ 209              		.size	ucHeap, 98304
+ 210              	ucHeap:
+ 211 0004 00000000 		.space	98304
+ 211      00000000 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 10
 
 
- 210      00000000 
- 210      00000000 
- 211              		.type	xNextFreeByte, %object
- 212              		.size	xNextFreeByte, 4
- 213              	xNextFreeByte:
- 214 c004 00000000 		.space	4
- 215              		.text
- 216              	.Letext0:
- 217              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 218              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 219              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 220              		.file 6 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/task.h"
- 221              		.file 7 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
- 222              		.section	.debug_info,"",%progbits
- 223              	.Ldebug_info0:
- 224 0000 16020000 		.4byte	0x216
- 225 0004 0400     		.2byte	0x4
- 226 0006 00000000 		.4byte	.Ldebug_abbrev0
- 227 000a 04       		.byte	0x4
- 228 000b 01       		.uleb128 0x1
- 229 000c 25020000 		.4byte	.LASF28
- 230 0010 0C       		.byte	0xc
- 231 0011 A0000000 		.4byte	.LASF29
- 232 0015 5A010000 		.4byte	.LASF30
- 233 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 234 001d 00000000 		.4byte	0
- 235 0021 00000000 		.4byte	.Ldebug_line0
- 236 0025 02       		.uleb128 0x2
- 237 0026 0A000000 		.4byte	.LASF4
- 238 002a 03       		.byte	0x3
- 239 002b D8       		.byte	0xd8
- 240 002c 30000000 		.4byte	0x30
- 241 0030 03       		.uleb128 0x3
- 242 0031 04       		.byte	0x4
- 243 0032 07       		.byte	0x7
- 244 0033 24010000 		.4byte	.LASF0
- 245 0037 04       		.uleb128 0x4
- 246 0038 04       		.byte	0x4
- 247 0039 05       		.byte	0x5
- 248 003a 696E7400 		.ascii	"int\000"
- 249 003e 03       		.uleb128 0x3
- 250 003f 08       		.byte	0x8
- 251 0040 05       		.byte	0x5
- 252 0041 C7010000 		.4byte	.LASF1
- 253 0045 03       		.uleb128 0x3
- 254 0046 08       		.byte	0x8
- 255 0047 04       		.byte	0x4
- 256 0048 EA020000 		.4byte	.LASF2
- 257 004c 03       		.uleb128 0x3
- 258 004d 01       		.byte	0x1
- 259 004e 06       		.byte	0x6
- 260 004f F6020000 		.4byte	.LASF3
- 261 0053 02       		.uleb128 0x2
- 262 0054 00000000 		.4byte	.LASF5
- 263 0058 04       		.byte	0x4
- 264 0059 1D       		.byte	0x1d
- 265 005a 5E000000 		.4byte	0x5e
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 11
+ 211      00000000 
+ 211      00000000 
+ 211      00000000 
+ 212              		.type	xNextFreeByte, %object
+ 213              		.size	xNextFreeByte, 4
+ 214              	xNextFreeByte:
+ 215 18004 00000000 		.space	4
+ 216              		.text
+ 217              	.Letext0:
+ 218              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 219              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 220              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 221              		.file 6 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/task.h"
+ 222              		.file 7 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ 223              		.section	.debug_info,"",%progbits
+ 224              	.Ldebug_info0:
+ 225 0000 18020000 		.4byte	0x218
+ 226 0004 0400     		.2byte	0x4
+ 227 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 228 000a 04       		.byte	0x4
+ 229 000b 01       		.uleb128 0x1
+ 230 000c C0010000 		.4byte	.LASF28
+ 231 0010 0C       		.byte	0xc
+ 232 0011 06010000 		.4byte	.LASF29
+ 233 0015 8C000000 		.4byte	.LASF30
+ 234 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 235 001d 00000000 		.4byte	0
+ 236 0021 00000000 		.4byte	.Ldebug_line0
+ 237 0025 02       		.uleb128 0x2
+ 238 0026 0A000000 		.4byte	.LASF4
+ 239 002a 03       		.byte	0x3
+ 240 002b D8       		.byte	0xd8
+ 241 002c 30000000 		.4byte	0x30
+ 242 0030 03       		.uleb128 0x3
+ 243 0031 04       		.byte	0x4
+ 244 0032 07       		.byte	0x7
+ 245 0033 8A010000 		.4byte	.LASF0
+ 246 0037 04       		.uleb128 0x4
+ 247 0038 04       		.byte	0x4
+ 248 0039 05       		.byte	0x5
+ 249 003a 696E7400 		.ascii	"int\000"
+ 250 003e 03       		.uleb128 0x3
+ 251 003f 08       		.byte	0x8
+ 252 0040 05       		.byte	0x5
+ 253 0041 84020000 		.4byte	.LASF1
+ 254 0045 03       		.uleb128 0x3
+ 255 0046 08       		.byte	0x8
+ 256 0047 04       		.byte	0x4
+ 257 0048 F4020000 		.4byte	.LASF2
+ 258 004c 03       		.uleb128 0x3
+ 259 004d 01       		.byte	0x1
+ 260 004e 06       		.byte	0x6
+ 261 004f 00030000 		.4byte	.LASF3
+ 262 0053 02       		.uleb128 0x2
+ 263 0054 00000000 		.4byte	.LASF5
+ 264 0058 04       		.byte	0x4
+ 265 0059 1D       		.byte	0x1d
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 11
 
 
- 266 005e 03       		.uleb128 0x3
- 267 005f 01       		.byte	0x1
- 268 0060 08       		.byte	0x8
- 269 0061 4E000000 		.4byte	.LASF6
- 270 0065 03       		.uleb128 0x3
- 271 0066 02       		.byte	0x2
- 272 0067 05       		.byte	0x5
- 273 0068 02020000 		.4byte	.LASF7
- 274 006c 03       		.uleb128 0x3
- 275 006d 02       		.byte	0x2
- 276 006e 07       		.byte	0x7
- 277 006f 6E000000 		.4byte	.LASF8
- 278 0073 02       		.uleb128 0x2
- 279 0074 21000000 		.4byte	.LASF9
- 280 0078 04       		.byte	0x4
- 281 0079 3F       		.byte	0x3f
- 282 007a 7E000000 		.4byte	0x7e
- 283 007e 03       		.uleb128 0x3
- 284 007f 04       		.byte	0x4
- 285 0080 05       		.byte	0x5
- 286 0081 E1020000 		.4byte	.LASF10
- 287 0085 02       		.uleb128 0x2
- 288 0086 81000000 		.4byte	.LASF11
- 289 008a 04       		.byte	0x4
- 290 008b 41       		.byte	0x41
- 291 008c 90000000 		.4byte	0x90
- 292 0090 03       		.uleb128 0x3
- 293 0091 04       		.byte	0x4
- 294 0092 07       		.byte	0x7
- 295 0093 5C000000 		.4byte	.LASF12
- 296 0097 03       		.uleb128 0x3
- 297 0098 08       		.byte	0x8
- 298 0099 07       		.byte	0x7
- 299 009a 31010000 		.4byte	.LASF13
- 300 009e 03       		.uleb128 0x3
- 301 009f 04       		.byte	0x4
- 302 00a0 07       		.byte	0x7
- 303 00a1 BE010000 		.4byte	.LASF14
- 304 00a5 05       		.uleb128 0x5
- 305 00a6 04       		.byte	0x4
- 306 00a7 03       		.uleb128 0x3
- 307 00a8 01       		.byte	0x1
- 308 00a9 08       		.byte	0x8
- 309 00aa E1010000 		.4byte	.LASF15
- 310 00ae 02       		.uleb128 0x2
- 311 00af 40000000 		.4byte	.LASF16
- 312 00b3 05       		.byte	0x5
- 313 00b4 18       		.byte	0x18
- 314 00b5 53000000 		.4byte	0x53
- 315 00b9 02       		.uleb128 0x2
- 316 00ba B6010000 		.4byte	.LASF17
- 317 00be 05       		.byte	0x5
- 318 00bf 2C       		.byte	0x2c
- 319 00c0 73000000 		.4byte	0x73
- 320 00c4 02       		.uleb128 0x2
- 321 00c5 D8020000 		.4byte	.LASF18
- 322 00c9 05       		.byte	0x5
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 12
+ 266 005a 5E000000 		.4byte	0x5e
+ 267 005e 03       		.uleb128 0x3
+ 268 005f 01       		.byte	0x1
+ 269 0060 08       		.byte	0x8
+ 270 0061 4E000000 		.4byte	.LASF6
+ 271 0065 03       		.uleb128 0x3
+ 272 0066 02       		.byte	0x2
+ 273 0067 05       		.byte	0x5
+ 274 0068 BF020000 		.4byte	.LASF7
+ 275 006c 03       		.uleb128 0x3
+ 276 006d 02       		.byte	0x2
+ 277 006e 07       		.byte	0x7
+ 278 006f 6E000000 		.4byte	.LASF8
+ 279 0073 02       		.uleb128 0x2
+ 280 0074 21000000 		.4byte	.LASF9
+ 281 0078 04       		.byte	0x4
+ 282 0079 3F       		.byte	0x3f
+ 283 007a 7E000000 		.4byte	0x7e
+ 284 007e 03       		.uleb128 0x3
+ 285 007f 04       		.byte	0x4
+ 286 0080 05       		.byte	0x5
+ 287 0081 EB020000 		.4byte	.LASF10
+ 288 0085 02       		.uleb128 0x2
+ 289 0086 81000000 		.4byte	.LASF11
+ 290 008a 04       		.byte	0x4
+ 291 008b 41       		.byte	0x41
+ 292 008c 90000000 		.4byte	0x90
+ 293 0090 03       		.uleb128 0x3
+ 294 0091 04       		.byte	0x4
+ 295 0092 07       		.byte	0x7
+ 296 0093 5C000000 		.4byte	.LASF12
+ 297 0097 03       		.uleb128 0x3
+ 298 0098 08       		.byte	0x8
+ 299 0099 07       		.byte	0x7
+ 300 009a 97010000 		.4byte	.LASF13
+ 301 009e 03       		.uleb128 0x3
+ 302 009f 04       		.byte	0x4
+ 303 00a0 07       		.byte	0x7
+ 304 00a1 7B020000 		.4byte	.LASF14
+ 305 00a5 05       		.uleb128 0x5
+ 306 00a6 04       		.byte	0x4
+ 307 00a7 03       		.uleb128 0x3
+ 308 00a8 01       		.byte	0x1
+ 309 00a9 08       		.byte	0x8
+ 310 00aa 9E020000 		.4byte	.LASF15
+ 311 00ae 02       		.uleb128 0x2
+ 312 00af 40000000 		.4byte	.LASF16
+ 313 00b3 05       		.byte	0x5
+ 314 00b4 18       		.byte	0x18
+ 315 00b5 53000000 		.4byte	0x53
+ 316 00b9 02       		.uleb128 0x2
+ 317 00ba 73020000 		.4byte	.LASF17
+ 318 00be 05       		.byte	0x5
+ 319 00bf 2C       		.byte	0x2c
+ 320 00c0 73000000 		.4byte	0x73
+ 321 00c4 02       		.uleb128 0x2
+ 322 00c5 E2020000 		.4byte	.LASF18
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 12
 
 
- 323 00ca 30       		.byte	0x30
- 324 00cb 85000000 		.4byte	0x85
- 325 00cf 03       		.uleb128 0x3
- 326 00d0 04       		.byte	0x4
- 327 00d1 04       		.byte	0x4
- 328 00d2 48000000 		.4byte	.LASF19
- 329 00d6 03       		.uleb128 0x3
- 330 00d7 08       		.byte	0x8
- 331 00d8 04       		.byte	0x4
- 332 00d9 8C000000 		.4byte	.LASF20
- 333 00dd 06       		.uleb128 0x6
- 334 00de 04       		.byte	0x4
- 335 00df AE000000 		.4byte	0xae
- 336 00e3 07       		.uleb128 0x7
- 337 00e4 48010000 		.4byte	.LASF31
- 338 00e8 02       		.byte	0x2
- 339 00e9 98       		.byte	0x98
- 340 00ea 03       		.byte	0x3
- 341 00eb FB000000 		.4byte	0xfb
- 342 00ef 08       		.uleb128 0x8
- 343 00f0 93000000 		.4byte	.LASF32
- 344 00f4 02       		.byte	0x2
- 345 00f5 9A       		.byte	0x9a
- 346 00f6 C4000000 		.4byte	0xc4
- 347 00fa 00       		.byte	0
- 348 00fb 09       		.uleb128 0x9
- 349 00fc F5010000 		.4byte	.LASF33
- 350 0100 01       		.byte	0x1
- 351 0101 46       		.byte	0x46
- 352 0102 A5000000 		.4byte	0xa5
- 353 0106 00000000 		.4byte	.LFB136
- 354 010a 60000000 		.4byte	.LFE136-.LFB136
- 355 010e 01       		.uleb128 0x1
- 356 010f 9C       		.byte	0x9c
- 357 0110 56010000 		.4byte	0x156
- 358 0114 0A       		.uleb128 0xa
- 359 0115 D5010000 		.4byte	.LASF23
- 360 0119 01       		.byte	0x1
- 361 011a 46       		.byte	0x46
- 362 011b 25000000 		.4byte	0x25
- 363 011f 00000000 		.4byte	.LLST0
- 364 0123 0B       		.uleb128 0xb
- 365 0124 F1000000 		.4byte	.LASF21
- 366 0128 01       		.byte	0x1
- 367 0129 48       		.byte	0x48
- 368 012a A5000000 		.4byte	0xa5
- 369 012e 1E000000 		.4byte	.LLST1
- 370 0132 0C       		.uleb128 0xc
- 371 0133 E6010000 		.4byte	.LASF22
- 372 0137 01       		.byte	0x1
- 373 0138 49       		.byte	0x49
- 374 0139 DD000000 		.4byte	0xdd
- 375 013d 05       		.uleb128 0x5
- 376 013e 03       		.byte	0x3
- 377 013f 00000000 		.4byte	pucAlignedHeap.11057
- 378 0143 0D       		.uleb128 0xd
- 379 0144 14000000 		.4byte	.LVL3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 13
+ 323 00c9 05       		.byte	0x5
+ 324 00ca 30       		.byte	0x30
+ 325 00cb 85000000 		.4byte	0x85
+ 326 00cf 03       		.uleb128 0x3
+ 327 00d0 04       		.byte	0x4
+ 328 00d1 04       		.byte	0x4
+ 329 00d2 48000000 		.4byte	.LASF19
+ 330 00d6 03       		.uleb128 0x3
+ 331 00d7 08       		.byte	0x8
+ 332 00d8 04       		.byte	0x4
+ 333 00d9 F2000000 		.4byte	.LASF20
+ 334 00dd 06       		.uleb128 0x6
+ 335 00de 04       		.byte	0x4
+ 336 00df AE000000 		.4byte	0xae
+ 337 00e3 07       		.uleb128 0x7
+ 338 00e4 AE010000 		.4byte	.LASF31
+ 339 00e8 02       		.byte	0x2
+ 340 00e9 98       		.byte	0x98
+ 341 00ea 03       		.byte	0x3
+ 342 00eb FB000000 		.4byte	0xfb
+ 343 00ef 08       		.uleb128 0x8
+ 344 00f0 F9000000 		.4byte	.LASF32
+ 345 00f4 02       		.byte	0x2
+ 346 00f5 9A       		.byte	0x9a
+ 347 00f6 C4000000 		.4byte	0xc4
+ 348 00fa 00       		.byte	0
+ 349 00fb 09       		.uleb128 0x9
+ 350 00fc B2020000 		.4byte	.LASF33
+ 351 0100 01       		.byte	0x1
+ 352 0101 46       		.byte	0x46
+ 353 0102 A5000000 		.4byte	0xa5
+ 354 0106 00000000 		.4byte	.LFB136
+ 355 010a 60000000 		.4byte	.LFE136-.LFB136
+ 356 010e 01       		.uleb128 0x1
+ 357 010f 9C       		.byte	0x9c
+ 358 0110 56010000 		.4byte	0x156
+ 359 0114 0A       		.uleb128 0xa
+ 360 0115 92020000 		.4byte	.LASF23
+ 361 0119 01       		.byte	0x1
+ 362 011a 46       		.byte	0x46
+ 363 011b 25000000 		.4byte	0x25
+ 364 011f 00000000 		.4byte	.LLST0
+ 365 0123 0B       		.uleb128 0xb
+ 366 0124 57010000 		.4byte	.LASF21
+ 367 0128 01       		.byte	0x1
+ 368 0129 48       		.byte	0x48
+ 369 012a A5000000 		.4byte	0xa5
+ 370 012e 1E000000 		.4byte	.LLST1
+ 371 0132 0C       		.uleb128 0xc
+ 372 0133 A3020000 		.4byte	.LASF22
+ 373 0137 01       		.byte	0x1
+ 374 0138 49       		.byte	0x49
+ 375 0139 DD000000 		.4byte	0xdd
+ 376 013d 05       		.uleb128 0x5
+ 377 013e 03       		.byte	0x3
+ 378 013f 00000000 		.4byte	pucAlignedHeap.11057
+ 379 0143 0D       		.uleb128 0xd
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 13
 
 
- 380 0148 01020000 		.4byte	0x201
- 381 014c 0D       		.uleb128 0xd
- 382 014d 52000000 		.4byte	.LVL8
- 383 0151 0D020000 		.4byte	0x20d
- 384 0155 00       		.byte	0
- 385 0156 0E       		.uleb128 0xe
- 386 0157 0C020000 		.4byte	.LASF34
- 387 015b 01       		.byte	0x1
- 388 015c 7A       		.byte	0x7a
- 389 015d 00000000 		.4byte	.LFB137
- 390 0161 16000000 		.4byte	.LFE137-.LFB137
- 391 0165 01       		.uleb128 0x1
- 392 0166 9C       		.byte	0x9c
- 393 0167 97010000 		.4byte	0x197
- 394 016b 0F       		.uleb128 0xf
- 395 016c 707600   		.ascii	"pv\000"
- 396 016f 01       		.byte	0x1
- 397 0170 7A       		.byte	0x7a
- 398 0171 A5000000 		.4byte	0xa5
- 399 0175 01       		.uleb128 0x1
- 400 0176 50       		.byte	0x50
- 401 0177 10       		.uleb128 0x10
- 402 0178 E3000000 		.4byte	0xe3
- 403 017c 02000000 		.4byte	.LBB4
- 404 0180 14000000 		.4byte	.LBE4-.LBB4
- 405 0184 01       		.byte	0x1
- 406 0185 82       		.byte	0x82
- 407 0186 11       		.uleb128 0x11
- 408 0187 02000000 		.4byte	.LBB5
- 409 018b 14000000 		.4byte	.LBE5-.LBB5
- 410 018f 12       		.uleb128 0x12
- 411 0190 EF000000 		.4byte	0xef
- 412 0194 00       		.byte	0
- 413 0195 00       		.byte	0
- 414 0196 00       		.byte	0
- 415 0197 13       		.uleb128 0x13
- 416 0198 0E010000 		.4byte	.LASF35
- 417 019c 01       		.byte	0x1
- 418 019d 86       		.byte	0x86
- 419 019e 00000000 		.4byte	.LFB138
- 420 01a2 10000000 		.4byte	.LFE138-.LFB138
- 421 01a6 01       		.uleb128 0x1
- 422 01a7 9C       		.byte	0x9c
- 423 01a8 14       		.uleb128 0x14
- 424 01a9 2B000000 		.4byte	.LASF36
- 425 01ad 01       		.byte	0x1
- 426 01ae 8D       		.byte	0x8d
- 427 01af 25000000 		.4byte	0x25
- 428 01b3 00000000 		.4byte	.LFB139
- 429 01b7 14000000 		.4byte	.LFE139-.LFB139
- 430 01bb 01       		.uleb128 0x1
- 431 01bc 9C       		.byte	0x9c
- 432 01bd 15       		.uleb128 0x15
- 433 01be AE000000 		.4byte	0xae
- 434 01c2 CE010000 		.4byte	0x1ce
- 435 01c6 16       		.uleb128 0x16
- 436 01c7 9E000000 		.4byte	0x9e
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 14
+ 380 0144 14000000 		.4byte	.LVL3
+ 381 0148 03020000 		.4byte	0x203
+ 382 014c 0D       		.uleb128 0xd
+ 383 014d 50000000 		.4byte	.LVL8
+ 384 0151 0F020000 		.4byte	0x20f
+ 385 0155 00       		.byte	0
+ 386 0156 0E       		.uleb128 0xe
+ 387 0157 C9020000 		.4byte	.LASF34
+ 388 015b 01       		.byte	0x1
+ 389 015c 7A       		.byte	0x7a
+ 390 015d 00000000 		.4byte	.LFB137
+ 391 0161 16000000 		.4byte	.LFE137-.LFB137
+ 392 0165 01       		.uleb128 0x1
+ 393 0166 9C       		.byte	0x9c
+ 394 0167 97010000 		.4byte	0x197
+ 395 016b 0F       		.uleb128 0xf
+ 396 016c 707600   		.ascii	"pv\000"
+ 397 016f 01       		.byte	0x1
+ 398 0170 7A       		.byte	0x7a
+ 399 0171 A5000000 		.4byte	0xa5
+ 400 0175 01       		.uleb128 0x1
+ 401 0176 50       		.byte	0x50
+ 402 0177 10       		.uleb128 0x10
+ 403 0178 E3000000 		.4byte	0xe3
+ 404 017c 02000000 		.4byte	.LBB4
+ 405 0180 14000000 		.4byte	.LBE4-.LBB4
+ 406 0184 01       		.byte	0x1
+ 407 0185 82       		.byte	0x82
+ 408 0186 11       		.uleb128 0x11
+ 409 0187 02000000 		.4byte	.LBB5
+ 410 018b 14000000 		.4byte	.LBE5-.LBB5
+ 411 018f 12       		.uleb128 0x12
+ 412 0190 EF000000 		.4byte	0xef
+ 413 0194 00       		.byte	0
+ 414 0195 00       		.byte	0
+ 415 0196 00       		.byte	0
+ 416 0197 13       		.uleb128 0x13
+ 417 0198 74010000 		.4byte	.LASF35
+ 418 019c 01       		.byte	0x1
+ 419 019d 86       		.byte	0x86
+ 420 019e 00000000 		.4byte	.LFB138
+ 421 01a2 10000000 		.4byte	.LFE138-.LFB138
+ 422 01a6 01       		.uleb128 0x1
+ 423 01a7 9C       		.byte	0x9c
+ 424 01a8 14       		.uleb128 0x14
+ 425 01a9 2B000000 		.4byte	.LASF36
+ 426 01ad 01       		.byte	0x1
+ 427 01ae 8D       		.byte	0x8d
+ 428 01af 25000000 		.4byte	0x25
+ 429 01b3 00000000 		.4byte	.LFB139
+ 430 01b7 14000000 		.4byte	.LFE139-.LFB139
+ 431 01bb 01       		.uleb128 0x1
+ 432 01bc 9C       		.byte	0x9c
+ 433 01bd 15       		.uleb128 0x15
+ 434 01be AE000000 		.4byte	0xae
+ 435 01c2 D0010000 		.4byte	0x1d0
+ 436 01c6 16       		.uleb128 0x16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 14
 
 
- 437 01cb FFBF     		.2byte	0xbfff
- 438 01cd 00       		.byte	0
- 439 01ce 0C       		.uleb128 0xc
- 440 01cf 07010000 		.4byte	.LASF24
- 441 01d3 01       		.byte	0x1
- 442 01d4 3E       		.byte	0x3e
- 443 01d5 BD010000 		.4byte	0x1bd
- 444 01d9 05       		.uleb128 0x5
- 445 01da 03       		.byte	0x3
- 446 01db 04000000 		.4byte	ucHeap
- 447 01df 0C       		.uleb128 0xc
- 448 01e0 02030000 		.4byte	.LASF25
- 449 01e4 01       		.byte	0x1
- 450 01e5 42       		.byte	0x42
- 451 01e6 25000000 		.4byte	0x25
- 452 01ea 05       		.uleb128 0x5
- 453 01eb 03       		.byte	0x3
- 454 01ec 04C00000 		.4byte	xNextFreeByte
- 455 01f0 17       		.uleb128 0x17
- 456 01f1 FA000000 		.4byte	.LASF37
- 457 01f5 07       		.byte	0x7
- 458 01f6 F907     		.2byte	0x7f9
- 459 01f8 FC010000 		.4byte	0x1fc
- 460 01fc 18       		.uleb128 0x18
- 461 01fd B9000000 		.4byte	0xb9
- 462 0201 19       		.uleb128 0x19
- 463 0202 11000000 		.4byte	.LASF26
- 464 0206 11000000 		.4byte	.LASF26
- 465 020a 06       		.byte	0x6
- 466 020b F904     		.2byte	0x4f9
- 467 020d 19       		.uleb128 0x19
- 468 020e 16020000 		.4byte	.LASF27
- 469 0212 16020000 		.4byte	.LASF27
- 470 0216 06       		.byte	0x6
- 471 0217 2F05     		.2byte	0x52f
- 472 0219 00       		.byte	0
- 473              		.section	.debug_abbrev,"",%progbits
- 474              	.Ldebug_abbrev0:
- 475 0000 01       		.uleb128 0x1
- 476 0001 11       		.uleb128 0x11
- 477 0002 01       		.byte	0x1
- 478 0003 25       		.uleb128 0x25
- 479 0004 0E       		.uleb128 0xe
- 480 0005 13       		.uleb128 0x13
- 481 0006 0B       		.uleb128 0xb
- 482 0007 03       		.uleb128 0x3
- 483 0008 0E       		.uleb128 0xe
- 484 0009 1B       		.uleb128 0x1b
- 485 000a 0E       		.uleb128 0xe
- 486 000b 55       		.uleb128 0x55
- 487 000c 17       		.uleb128 0x17
- 488 000d 11       		.uleb128 0x11
- 489 000e 01       		.uleb128 0x1
- 490 000f 10       		.uleb128 0x10
- 491 0010 17       		.uleb128 0x17
- 492 0011 00       		.byte	0
- 493 0012 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 15
+ 437 01c7 9E000000 		.4byte	0x9e
+ 438 01cb FF7F0100 		.4byte	0x17fff
+ 439 01cf 00       		.byte	0
+ 440 01d0 0C       		.uleb128 0xc
+ 441 01d1 6D010000 		.4byte	.LASF24
+ 442 01d5 01       		.byte	0x1
+ 443 01d6 3E       		.byte	0x3e
+ 444 01d7 BD010000 		.4byte	0x1bd
+ 445 01db 05       		.uleb128 0x5
+ 446 01dc 03       		.byte	0x3
+ 447 01dd 04000000 		.4byte	ucHeap
+ 448 01e1 0C       		.uleb128 0xc
+ 449 01e2 0C030000 		.4byte	.LASF25
+ 450 01e6 01       		.byte	0x1
+ 451 01e7 42       		.byte	0x42
+ 452 01e8 25000000 		.4byte	0x25
+ 453 01ec 05       		.uleb128 0x5
+ 454 01ed 03       		.byte	0x3
+ 455 01ee 04800100 		.4byte	xNextFreeByte
+ 456 01f2 17       		.uleb128 0x17
+ 457 01f3 60010000 		.4byte	.LASF37
+ 458 01f7 07       		.byte	0x7
+ 459 01f8 F907     		.2byte	0x7f9
+ 460 01fa FE010000 		.4byte	0x1fe
+ 461 01fe 18       		.uleb128 0x18
+ 462 01ff B9000000 		.4byte	0xb9
+ 463 0203 19       		.uleb128 0x19
+ 464 0204 11000000 		.4byte	.LASF26
+ 465 0208 11000000 		.4byte	.LASF26
+ 466 020c 06       		.byte	0x6
+ 467 020d F904     		.2byte	0x4f9
+ 468 020f 19       		.uleb128 0x19
+ 469 0210 D3020000 		.4byte	.LASF27
+ 470 0214 D3020000 		.4byte	.LASF27
+ 471 0218 06       		.byte	0x6
+ 472 0219 2F05     		.2byte	0x52f
+ 473 021b 00       		.byte	0
+ 474              		.section	.debug_abbrev,"",%progbits
+ 475              	.Ldebug_abbrev0:
+ 476 0000 01       		.uleb128 0x1
+ 477 0001 11       		.uleb128 0x11
+ 478 0002 01       		.byte	0x1
+ 479 0003 25       		.uleb128 0x25
+ 480 0004 0E       		.uleb128 0xe
+ 481 0005 13       		.uleb128 0x13
+ 482 0006 0B       		.uleb128 0xb
+ 483 0007 03       		.uleb128 0x3
+ 484 0008 0E       		.uleb128 0xe
+ 485 0009 1B       		.uleb128 0x1b
+ 486 000a 0E       		.uleb128 0xe
+ 487 000b 55       		.uleb128 0x55
+ 488 000c 17       		.uleb128 0x17
+ 489 000d 11       		.uleb128 0x11
+ 490 000e 01       		.uleb128 0x1
+ 491 000f 10       		.uleb128 0x10
+ 492 0010 17       		.uleb128 0x17
+ 493 0011 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 15
 
 
- 494 0013 02       		.uleb128 0x2
- 495 0014 16       		.uleb128 0x16
- 496 0015 00       		.byte	0
- 497 0016 03       		.uleb128 0x3
- 498 0017 0E       		.uleb128 0xe
- 499 0018 3A       		.uleb128 0x3a
- 500 0019 0B       		.uleb128 0xb
- 501 001a 3B       		.uleb128 0x3b
- 502 001b 0B       		.uleb128 0xb
- 503 001c 49       		.uleb128 0x49
- 504 001d 13       		.uleb128 0x13
- 505 001e 00       		.byte	0
- 506 001f 00       		.byte	0
- 507 0020 03       		.uleb128 0x3
- 508 0021 24       		.uleb128 0x24
- 509 0022 00       		.byte	0
- 510 0023 0B       		.uleb128 0xb
- 511 0024 0B       		.uleb128 0xb
- 512 0025 3E       		.uleb128 0x3e
- 513 0026 0B       		.uleb128 0xb
- 514 0027 03       		.uleb128 0x3
- 515 0028 0E       		.uleb128 0xe
- 516 0029 00       		.byte	0
- 517 002a 00       		.byte	0
- 518 002b 04       		.uleb128 0x4
- 519 002c 24       		.uleb128 0x24
- 520 002d 00       		.byte	0
- 521 002e 0B       		.uleb128 0xb
- 522 002f 0B       		.uleb128 0xb
- 523 0030 3E       		.uleb128 0x3e
- 524 0031 0B       		.uleb128 0xb
- 525 0032 03       		.uleb128 0x3
- 526 0033 08       		.uleb128 0x8
- 527 0034 00       		.byte	0
- 528 0035 00       		.byte	0
- 529 0036 05       		.uleb128 0x5
- 530 0037 0F       		.uleb128 0xf
- 531 0038 00       		.byte	0
- 532 0039 0B       		.uleb128 0xb
- 533 003a 0B       		.uleb128 0xb
- 534 003b 00       		.byte	0
- 535 003c 00       		.byte	0
- 536 003d 06       		.uleb128 0x6
- 537 003e 0F       		.uleb128 0xf
- 538 003f 00       		.byte	0
- 539 0040 0B       		.uleb128 0xb
- 540 0041 0B       		.uleb128 0xb
- 541 0042 49       		.uleb128 0x49
- 542 0043 13       		.uleb128 0x13
- 543 0044 00       		.byte	0
- 544 0045 00       		.byte	0
- 545 0046 07       		.uleb128 0x7
- 546 0047 2E       		.uleb128 0x2e
- 547 0048 01       		.byte	0x1
- 548 0049 03       		.uleb128 0x3
- 549 004a 0E       		.uleb128 0xe
- 550 004b 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 16
+ 494 0012 00       		.byte	0
+ 495 0013 02       		.uleb128 0x2
+ 496 0014 16       		.uleb128 0x16
+ 497 0015 00       		.byte	0
+ 498 0016 03       		.uleb128 0x3
+ 499 0017 0E       		.uleb128 0xe
+ 500 0018 3A       		.uleb128 0x3a
+ 501 0019 0B       		.uleb128 0xb
+ 502 001a 3B       		.uleb128 0x3b
+ 503 001b 0B       		.uleb128 0xb
+ 504 001c 49       		.uleb128 0x49
+ 505 001d 13       		.uleb128 0x13
+ 506 001e 00       		.byte	0
+ 507 001f 00       		.byte	0
+ 508 0020 03       		.uleb128 0x3
+ 509 0021 24       		.uleb128 0x24
+ 510 0022 00       		.byte	0
+ 511 0023 0B       		.uleb128 0xb
+ 512 0024 0B       		.uleb128 0xb
+ 513 0025 3E       		.uleb128 0x3e
+ 514 0026 0B       		.uleb128 0xb
+ 515 0027 03       		.uleb128 0x3
+ 516 0028 0E       		.uleb128 0xe
+ 517 0029 00       		.byte	0
+ 518 002a 00       		.byte	0
+ 519 002b 04       		.uleb128 0x4
+ 520 002c 24       		.uleb128 0x24
+ 521 002d 00       		.byte	0
+ 522 002e 0B       		.uleb128 0xb
+ 523 002f 0B       		.uleb128 0xb
+ 524 0030 3E       		.uleb128 0x3e
+ 525 0031 0B       		.uleb128 0xb
+ 526 0032 03       		.uleb128 0x3
+ 527 0033 08       		.uleb128 0x8
+ 528 0034 00       		.byte	0
+ 529 0035 00       		.byte	0
+ 530 0036 05       		.uleb128 0x5
+ 531 0037 0F       		.uleb128 0xf
+ 532 0038 00       		.byte	0
+ 533 0039 0B       		.uleb128 0xb
+ 534 003a 0B       		.uleb128 0xb
+ 535 003b 00       		.byte	0
+ 536 003c 00       		.byte	0
+ 537 003d 06       		.uleb128 0x6
+ 538 003e 0F       		.uleb128 0xf
+ 539 003f 00       		.byte	0
+ 540 0040 0B       		.uleb128 0xb
+ 541 0041 0B       		.uleb128 0xb
+ 542 0042 49       		.uleb128 0x49
+ 543 0043 13       		.uleb128 0x13
+ 544 0044 00       		.byte	0
+ 545 0045 00       		.byte	0
+ 546 0046 07       		.uleb128 0x7
+ 547 0047 2E       		.uleb128 0x2e
+ 548 0048 01       		.byte	0x1
+ 549 0049 03       		.uleb128 0x3
+ 550 004a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 16
 
 
- 551 004c 0B       		.uleb128 0xb
- 552 004d 3B       		.uleb128 0x3b
- 553 004e 0B       		.uleb128 0xb
- 554 004f 27       		.uleb128 0x27
- 555 0050 19       		.uleb128 0x19
- 556 0051 20       		.uleb128 0x20
- 557 0052 0B       		.uleb128 0xb
- 558 0053 01       		.uleb128 0x1
- 559 0054 13       		.uleb128 0x13
- 560 0055 00       		.byte	0
- 561 0056 00       		.byte	0
- 562 0057 08       		.uleb128 0x8
- 563 0058 34       		.uleb128 0x34
- 564 0059 00       		.byte	0
- 565 005a 03       		.uleb128 0x3
- 566 005b 0E       		.uleb128 0xe
- 567 005c 3A       		.uleb128 0x3a
- 568 005d 0B       		.uleb128 0xb
- 569 005e 3B       		.uleb128 0x3b
- 570 005f 0B       		.uleb128 0xb
- 571 0060 49       		.uleb128 0x49
- 572 0061 13       		.uleb128 0x13
- 573 0062 00       		.byte	0
- 574 0063 00       		.byte	0
- 575 0064 09       		.uleb128 0x9
- 576 0065 2E       		.uleb128 0x2e
- 577 0066 01       		.byte	0x1
- 578 0067 3F       		.uleb128 0x3f
- 579 0068 19       		.uleb128 0x19
- 580 0069 03       		.uleb128 0x3
- 581 006a 0E       		.uleb128 0xe
- 582 006b 3A       		.uleb128 0x3a
- 583 006c 0B       		.uleb128 0xb
- 584 006d 3B       		.uleb128 0x3b
- 585 006e 0B       		.uleb128 0xb
- 586 006f 27       		.uleb128 0x27
- 587 0070 19       		.uleb128 0x19
- 588 0071 49       		.uleb128 0x49
- 589 0072 13       		.uleb128 0x13
- 590 0073 11       		.uleb128 0x11
- 591 0074 01       		.uleb128 0x1
- 592 0075 12       		.uleb128 0x12
- 593 0076 06       		.uleb128 0x6
- 594 0077 40       		.uleb128 0x40
- 595 0078 18       		.uleb128 0x18
- 596 0079 9742     		.uleb128 0x2117
- 597 007b 19       		.uleb128 0x19
- 598 007c 01       		.uleb128 0x1
- 599 007d 13       		.uleb128 0x13
- 600 007e 00       		.byte	0
- 601 007f 00       		.byte	0
- 602 0080 0A       		.uleb128 0xa
- 603 0081 05       		.uleb128 0x5
- 604 0082 00       		.byte	0
- 605 0083 03       		.uleb128 0x3
- 606 0084 0E       		.uleb128 0xe
- 607 0085 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 17
+ 551 004b 3A       		.uleb128 0x3a
+ 552 004c 0B       		.uleb128 0xb
+ 553 004d 3B       		.uleb128 0x3b
+ 554 004e 0B       		.uleb128 0xb
+ 555 004f 27       		.uleb128 0x27
+ 556 0050 19       		.uleb128 0x19
+ 557 0051 20       		.uleb128 0x20
+ 558 0052 0B       		.uleb128 0xb
+ 559 0053 01       		.uleb128 0x1
+ 560 0054 13       		.uleb128 0x13
+ 561 0055 00       		.byte	0
+ 562 0056 00       		.byte	0
+ 563 0057 08       		.uleb128 0x8
+ 564 0058 34       		.uleb128 0x34
+ 565 0059 00       		.byte	0
+ 566 005a 03       		.uleb128 0x3
+ 567 005b 0E       		.uleb128 0xe
+ 568 005c 3A       		.uleb128 0x3a
+ 569 005d 0B       		.uleb128 0xb
+ 570 005e 3B       		.uleb128 0x3b
+ 571 005f 0B       		.uleb128 0xb
+ 572 0060 49       		.uleb128 0x49
+ 573 0061 13       		.uleb128 0x13
+ 574 0062 00       		.byte	0
+ 575 0063 00       		.byte	0
+ 576 0064 09       		.uleb128 0x9
+ 577 0065 2E       		.uleb128 0x2e
+ 578 0066 01       		.byte	0x1
+ 579 0067 3F       		.uleb128 0x3f
+ 580 0068 19       		.uleb128 0x19
+ 581 0069 03       		.uleb128 0x3
+ 582 006a 0E       		.uleb128 0xe
+ 583 006b 3A       		.uleb128 0x3a
+ 584 006c 0B       		.uleb128 0xb
+ 585 006d 3B       		.uleb128 0x3b
+ 586 006e 0B       		.uleb128 0xb
+ 587 006f 27       		.uleb128 0x27
+ 588 0070 19       		.uleb128 0x19
+ 589 0071 49       		.uleb128 0x49
+ 590 0072 13       		.uleb128 0x13
+ 591 0073 11       		.uleb128 0x11
+ 592 0074 01       		.uleb128 0x1
+ 593 0075 12       		.uleb128 0x12
+ 594 0076 06       		.uleb128 0x6
+ 595 0077 40       		.uleb128 0x40
+ 596 0078 18       		.uleb128 0x18
+ 597 0079 9742     		.uleb128 0x2117
+ 598 007b 19       		.uleb128 0x19
+ 599 007c 01       		.uleb128 0x1
+ 600 007d 13       		.uleb128 0x13
+ 601 007e 00       		.byte	0
+ 602 007f 00       		.byte	0
+ 603 0080 0A       		.uleb128 0xa
+ 604 0081 05       		.uleb128 0x5
+ 605 0082 00       		.byte	0
+ 606 0083 03       		.uleb128 0x3
+ 607 0084 0E       		.uleb128 0xe
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 17
 
 
- 608 0086 0B       		.uleb128 0xb
- 609 0087 3B       		.uleb128 0x3b
- 610 0088 0B       		.uleb128 0xb
- 611 0089 49       		.uleb128 0x49
- 612 008a 13       		.uleb128 0x13
- 613 008b 02       		.uleb128 0x2
- 614 008c 17       		.uleb128 0x17
- 615 008d 00       		.byte	0
- 616 008e 00       		.byte	0
- 617 008f 0B       		.uleb128 0xb
- 618 0090 34       		.uleb128 0x34
- 619 0091 00       		.byte	0
- 620 0092 03       		.uleb128 0x3
- 621 0093 0E       		.uleb128 0xe
- 622 0094 3A       		.uleb128 0x3a
- 623 0095 0B       		.uleb128 0xb
- 624 0096 3B       		.uleb128 0x3b
- 625 0097 0B       		.uleb128 0xb
- 626 0098 49       		.uleb128 0x49
- 627 0099 13       		.uleb128 0x13
- 628 009a 02       		.uleb128 0x2
- 629 009b 17       		.uleb128 0x17
- 630 009c 00       		.byte	0
- 631 009d 00       		.byte	0
- 632 009e 0C       		.uleb128 0xc
- 633 009f 34       		.uleb128 0x34
- 634 00a0 00       		.byte	0
- 635 00a1 03       		.uleb128 0x3
- 636 00a2 0E       		.uleb128 0xe
- 637 00a3 3A       		.uleb128 0x3a
- 638 00a4 0B       		.uleb128 0xb
- 639 00a5 3B       		.uleb128 0x3b
- 640 00a6 0B       		.uleb128 0xb
- 641 00a7 49       		.uleb128 0x49
- 642 00a8 13       		.uleb128 0x13
- 643 00a9 02       		.uleb128 0x2
- 644 00aa 18       		.uleb128 0x18
- 645 00ab 00       		.byte	0
- 646 00ac 00       		.byte	0
- 647 00ad 0D       		.uleb128 0xd
- 648 00ae 898201   		.uleb128 0x4109
- 649 00b1 00       		.byte	0
- 650 00b2 11       		.uleb128 0x11
- 651 00b3 01       		.uleb128 0x1
- 652 00b4 31       		.uleb128 0x31
- 653 00b5 13       		.uleb128 0x13
- 654 00b6 00       		.byte	0
- 655 00b7 00       		.byte	0
- 656 00b8 0E       		.uleb128 0xe
- 657 00b9 2E       		.uleb128 0x2e
- 658 00ba 01       		.byte	0x1
- 659 00bb 3F       		.uleb128 0x3f
- 660 00bc 19       		.uleb128 0x19
- 661 00bd 03       		.uleb128 0x3
- 662 00be 0E       		.uleb128 0xe
- 663 00bf 3A       		.uleb128 0x3a
- 664 00c0 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 18
+ 608 0085 3A       		.uleb128 0x3a
+ 609 0086 0B       		.uleb128 0xb
+ 610 0087 3B       		.uleb128 0x3b
+ 611 0088 0B       		.uleb128 0xb
+ 612 0089 49       		.uleb128 0x49
+ 613 008a 13       		.uleb128 0x13
+ 614 008b 02       		.uleb128 0x2
+ 615 008c 17       		.uleb128 0x17
+ 616 008d 00       		.byte	0
+ 617 008e 00       		.byte	0
+ 618 008f 0B       		.uleb128 0xb
+ 619 0090 34       		.uleb128 0x34
+ 620 0091 00       		.byte	0
+ 621 0092 03       		.uleb128 0x3
+ 622 0093 0E       		.uleb128 0xe
+ 623 0094 3A       		.uleb128 0x3a
+ 624 0095 0B       		.uleb128 0xb
+ 625 0096 3B       		.uleb128 0x3b
+ 626 0097 0B       		.uleb128 0xb
+ 627 0098 49       		.uleb128 0x49
+ 628 0099 13       		.uleb128 0x13
+ 629 009a 02       		.uleb128 0x2
+ 630 009b 17       		.uleb128 0x17
+ 631 009c 00       		.byte	0
+ 632 009d 00       		.byte	0
+ 633 009e 0C       		.uleb128 0xc
+ 634 009f 34       		.uleb128 0x34
+ 635 00a0 00       		.byte	0
+ 636 00a1 03       		.uleb128 0x3
+ 637 00a2 0E       		.uleb128 0xe
+ 638 00a3 3A       		.uleb128 0x3a
+ 639 00a4 0B       		.uleb128 0xb
+ 640 00a5 3B       		.uleb128 0x3b
+ 641 00a6 0B       		.uleb128 0xb
+ 642 00a7 49       		.uleb128 0x49
+ 643 00a8 13       		.uleb128 0x13
+ 644 00a9 02       		.uleb128 0x2
+ 645 00aa 18       		.uleb128 0x18
+ 646 00ab 00       		.byte	0
+ 647 00ac 00       		.byte	0
+ 648 00ad 0D       		.uleb128 0xd
+ 649 00ae 898201   		.uleb128 0x4109
+ 650 00b1 00       		.byte	0
+ 651 00b2 11       		.uleb128 0x11
+ 652 00b3 01       		.uleb128 0x1
+ 653 00b4 31       		.uleb128 0x31
+ 654 00b5 13       		.uleb128 0x13
+ 655 00b6 00       		.byte	0
+ 656 00b7 00       		.byte	0
+ 657 00b8 0E       		.uleb128 0xe
+ 658 00b9 2E       		.uleb128 0x2e
+ 659 00ba 01       		.byte	0x1
+ 660 00bb 3F       		.uleb128 0x3f
+ 661 00bc 19       		.uleb128 0x19
+ 662 00bd 03       		.uleb128 0x3
+ 663 00be 0E       		.uleb128 0xe
+ 664 00bf 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 18
 
 
- 665 00c1 3B       		.uleb128 0x3b
- 666 00c2 0B       		.uleb128 0xb
- 667 00c3 27       		.uleb128 0x27
- 668 00c4 19       		.uleb128 0x19
- 669 00c5 11       		.uleb128 0x11
- 670 00c6 01       		.uleb128 0x1
- 671 00c7 12       		.uleb128 0x12
- 672 00c8 06       		.uleb128 0x6
- 673 00c9 40       		.uleb128 0x40
- 674 00ca 18       		.uleb128 0x18
- 675 00cb 9742     		.uleb128 0x2117
- 676 00cd 19       		.uleb128 0x19
- 677 00ce 01       		.uleb128 0x1
- 678 00cf 13       		.uleb128 0x13
- 679 00d0 00       		.byte	0
- 680 00d1 00       		.byte	0
- 681 00d2 0F       		.uleb128 0xf
- 682 00d3 05       		.uleb128 0x5
- 683 00d4 00       		.byte	0
- 684 00d5 03       		.uleb128 0x3
- 685 00d6 08       		.uleb128 0x8
- 686 00d7 3A       		.uleb128 0x3a
- 687 00d8 0B       		.uleb128 0xb
- 688 00d9 3B       		.uleb128 0x3b
- 689 00da 0B       		.uleb128 0xb
- 690 00db 49       		.uleb128 0x49
- 691 00dc 13       		.uleb128 0x13
- 692 00dd 02       		.uleb128 0x2
- 693 00de 18       		.uleb128 0x18
- 694 00df 00       		.byte	0
- 695 00e0 00       		.byte	0
- 696 00e1 10       		.uleb128 0x10
- 697 00e2 1D       		.uleb128 0x1d
- 698 00e3 01       		.byte	0x1
- 699 00e4 31       		.uleb128 0x31
- 700 00e5 13       		.uleb128 0x13
- 701 00e6 11       		.uleb128 0x11
- 702 00e7 01       		.uleb128 0x1
- 703 00e8 12       		.uleb128 0x12
- 704 00e9 06       		.uleb128 0x6
- 705 00ea 58       		.uleb128 0x58
- 706 00eb 0B       		.uleb128 0xb
- 707 00ec 59       		.uleb128 0x59
- 708 00ed 0B       		.uleb128 0xb
- 709 00ee 00       		.byte	0
- 710 00ef 00       		.byte	0
- 711 00f0 11       		.uleb128 0x11
- 712 00f1 0B       		.uleb128 0xb
- 713 00f2 01       		.byte	0x1
- 714 00f3 11       		.uleb128 0x11
- 715 00f4 01       		.uleb128 0x1
- 716 00f5 12       		.uleb128 0x12
- 717 00f6 06       		.uleb128 0x6
- 718 00f7 00       		.byte	0
- 719 00f8 00       		.byte	0
- 720 00f9 12       		.uleb128 0x12
- 721 00fa 34       		.uleb128 0x34
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 19
+ 665 00c0 0B       		.uleb128 0xb
+ 666 00c1 3B       		.uleb128 0x3b
+ 667 00c2 0B       		.uleb128 0xb
+ 668 00c3 27       		.uleb128 0x27
+ 669 00c4 19       		.uleb128 0x19
+ 670 00c5 11       		.uleb128 0x11
+ 671 00c6 01       		.uleb128 0x1
+ 672 00c7 12       		.uleb128 0x12
+ 673 00c8 06       		.uleb128 0x6
+ 674 00c9 40       		.uleb128 0x40
+ 675 00ca 18       		.uleb128 0x18
+ 676 00cb 9742     		.uleb128 0x2117
+ 677 00cd 19       		.uleb128 0x19
+ 678 00ce 01       		.uleb128 0x1
+ 679 00cf 13       		.uleb128 0x13
+ 680 00d0 00       		.byte	0
+ 681 00d1 00       		.byte	0
+ 682 00d2 0F       		.uleb128 0xf
+ 683 00d3 05       		.uleb128 0x5
+ 684 00d4 00       		.byte	0
+ 685 00d5 03       		.uleb128 0x3
+ 686 00d6 08       		.uleb128 0x8
+ 687 00d7 3A       		.uleb128 0x3a
+ 688 00d8 0B       		.uleb128 0xb
+ 689 00d9 3B       		.uleb128 0x3b
+ 690 00da 0B       		.uleb128 0xb
+ 691 00db 49       		.uleb128 0x49
+ 692 00dc 13       		.uleb128 0x13
+ 693 00dd 02       		.uleb128 0x2
+ 694 00de 18       		.uleb128 0x18
+ 695 00df 00       		.byte	0
+ 696 00e0 00       		.byte	0
+ 697 00e1 10       		.uleb128 0x10
+ 698 00e2 1D       		.uleb128 0x1d
+ 699 00e3 01       		.byte	0x1
+ 700 00e4 31       		.uleb128 0x31
+ 701 00e5 13       		.uleb128 0x13
+ 702 00e6 11       		.uleb128 0x11
+ 703 00e7 01       		.uleb128 0x1
+ 704 00e8 12       		.uleb128 0x12
+ 705 00e9 06       		.uleb128 0x6
+ 706 00ea 58       		.uleb128 0x58
+ 707 00eb 0B       		.uleb128 0xb
+ 708 00ec 59       		.uleb128 0x59
+ 709 00ed 0B       		.uleb128 0xb
+ 710 00ee 00       		.byte	0
+ 711 00ef 00       		.byte	0
+ 712 00f0 11       		.uleb128 0x11
+ 713 00f1 0B       		.uleb128 0xb
+ 714 00f2 01       		.byte	0x1
+ 715 00f3 11       		.uleb128 0x11
+ 716 00f4 01       		.uleb128 0x1
+ 717 00f5 12       		.uleb128 0x12
+ 718 00f6 06       		.uleb128 0x6
+ 719 00f7 00       		.byte	0
+ 720 00f8 00       		.byte	0
+ 721 00f9 12       		.uleb128 0x12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 19
 
 
- 722 00fb 00       		.byte	0
- 723 00fc 31       		.uleb128 0x31
- 724 00fd 13       		.uleb128 0x13
- 725 00fe 00       		.byte	0
- 726 00ff 00       		.byte	0
- 727 0100 13       		.uleb128 0x13
- 728 0101 2E       		.uleb128 0x2e
- 729 0102 00       		.byte	0
- 730 0103 3F       		.uleb128 0x3f
- 731 0104 19       		.uleb128 0x19
- 732 0105 03       		.uleb128 0x3
- 733 0106 0E       		.uleb128 0xe
- 734 0107 3A       		.uleb128 0x3a
- 735 0108 0B       		.uleb128 0xb
- 736 0109 3B       		.uleb128 0x3b
- 737 010a 0B       		.uleb128 0xb
- 738 010b 27       		.uleb128 0x27
- 739 010c 19       		.uleb128 0x19
- 740 010d 11       		.uleb128 0x11
- 741 010e 01       		.uleb128 0x1
- 742 010f 12       		.uleb128 0x12
- 743 0110 06       		.uleb128 0x6
- 744 0111 40       		.uleb128 0x40
- 745 0112 18       		.uleb128 0x18
- 746 0113 9742     		.uleb128 0x2117
- 747 0115 19       		.uleb128 0x19
- 748 0116 00       		.byte	0
- 749 0117 00       		.byte	0
- 750 0118 14       		.uleb128 0x14
- 751 0119 2E       		.uleb128 0x2e
- 752 011a 00       		.byte	0
- 753 011b 3F       		.uleb128 0x3f
- 754 011c 19       		.uleb128 0x19
- 755 011d 03       		.uleb128 0x3
- 756 011e 0E       		.uleb128 0xe
- 757 011f 3A       		.uleb128 0x3a
- 758 0120 0B       		.uleb128 0xb
- 759 0121 3B       		.uleb128 0x3b
- 760 0122 0B       		.uleb128 0xb
- 761 0123 27       		.uleb128 0x27
- 762 0124 19       		.uleb128 0x19
- 763 0125 49       		.uleb128 0x49
- 764 0126 13       		.uleb128 0x13
- 765 0127 11       		.uleb128 0x11
- 766 0128 01       		.uleb128 0x1
- 767 0129 12       		.uleb128 0x12
- 768 012a 06       		.uleb128 0x6
- 769 012b 40       		.uleb128 0x40
- 770 012c 18       		.uleb128 0x18
- 771 012d 9742     		.uleb128 0x2117
- 772 012f 19       		.uleb128 0x19
- 773 0130 00       		.byte	0
- 774 0131 00       		.byte	0
- 775 0132 15       		.uleb128 0x15
- 776 0133 01       		.uleb128 0x1
- 777 0134 01       		.byte	0x1
- 778 0135 49       		.uleb128 0x49
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 20
+ 722 00fa 34       		.uleb128 0x34
+ 723 00fb 00       		.byte	0
+ 724 00fc 31       		.uleb128 0x31
+ 725 00fd 13       		.uleb128 0x13
+ 726 00fe 00       		.byte	0
+ 727 00ff 00       		.byte	0
+ 728 0100 13       		.uleb128 0x13
+ 729 0101 2E       		.uleb128 0x2e
+ 730 0102 00       		.byte	0
+ 731 0103 3F       		.uleb128 0x3f
+ 732 0104 19       		.uleb128 0x19
+ 733 0105 03       		.uleb128 0x3
+ 734 0106 0E       		.uleb128 0xe
+ 735 0107 3A       		.uleb128 0x3a
+ 736 0108 0B       		.uleb128 0xb
+ 737 0109 3B       		.uleb128 0x3b
+ 738 010a 0B       		.uleb128 0xb
+ 739 010b 27       		.uleb128 0x27
+ 740 010c 19       		.uleb128 0x19
+ 741 010d 11       		.uleb128 0x11
+ 742 010e 01       		.uleb128 0x1
+ 743 010f 12       		.uleb128 0x12
+ 744 0110 06       		.uleb128 0x6
+ 745 0111 40       		.uleb128 0x40
+ 746 0112 18       		.uleb128 0x18
+ 747 0113 9742     		.uleb128 0x2117
+ 748 0115 19       		.uleb128 0x19
+ 749 0116 00       		.byte	0
+ 750 0117 00       		.byte	0
+ 751 0118 14       		.uleb128 0x14
+ 752 0119 2E       		.uleb128 0x2e
+ 753 011a 00       		.byte	0
+ 754 011b 3F       		.uleb128 0x3f
+ 755 011c 19       		.uleb128 0x19
+ 756 011d 03       		.uleb128 0x3
+ 757 011e 0E       		.uleb128 0xe
+ 758 011f 3A       		.uleb128 0x3a
+ 759 0120 0B       		.uleb128 0xb
+ 760 0121 3B       		.uleb128 0x3b
+ 761 0122 0B       		.uleb128 0xb
+ 762 0123 27       		.uleb128 0x27
+ 763 0124 19       		.uleb128 0x19
+ 764 0125 49       		.uleb128 0x49
+ 765 0126 13       		.uleb128 0x13
+ 766 0127 11       		.uleb128 0x11
+ 767 0128 01       		.uleb128 0x1
+ 768 0129 12       		.uleb128 0x12
+ 769 012a 06       		.uleb128 0x6
+ 770 012b 40       		.uleb128 0x40
+ 771 012c 18       		.uleb128 0x18
+ 772 012d 9742     		.uleb128 0x2117
+ 773 012f 19       		.uleb128 0x19
+ 774 0130 00       		.byte	0
+ 775 0131 00       		.byte	0
+ 776 0132 15       		.uleb128 0x15
+ 777 0133 01       		.uleb128 0x1
+ 778 0134 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 20
 
 
- 779 0136 13       		.uleb128 0x13
- 780 0137 01       		.uleb128 0x1
- 781 0138 13       		.uleb128 0x13
- 782 0139 00       		.byte	0
- 783 013a 00       		.byte	0
- 784 013b 16       		.uleb128 0x16
- 785 013c 21       		.uleb128 0x21
- 786 013d 00       		.byte	0
- 787 013e 49       		.uleb128 0x49
- 788 013f 13       		.uleb128 0x13
- 789 0140 2F       		.uleb128 0x2f
- 790 0141 05       		.uleb128 0x5
- 791 0142 00       		.byte	0
- 792 0143 00       		.byte	0
- 793 0144 17       		.uleb128 0x17
- 794 0145 34       		.uleb128 0x34
- 795 0146 00       		.byte	0
- 796 0147 03       		.uleb128 0x3
- 797 0148 0E       		.uleb128 0xe
- 798 0149 3A       		.uleb128 0x3a
- 799 014a 0B       		.uleb128 0xb
- 800 014b 3B       		.uleb128 0x3b
- 801 014c 05       		.uleb128 0x5
- 802 014d 49       		.uleb128 0x49
- 803 014e 13       		.uleb128 0x13
- 804 014f 3F       		.uleb128 0x3f
- 805 0150 19       		.uleb128 0x19
- 806 0151 3C       		.uleb128 0x3c
- 807 0152 19       		.uleb128 0x19
- 808 0153 00       		.byte	0
- 809 0154 00       		.byte	0
- 810 0155 18       		.uleb128 0x18
- 811 0156 35       		.uleb128 0x35
- 812 0157 00       		.byte	0
- 813 0158 49       		.uleb128 0x49
- 814 0159 13       		.uleb128 0x13
- 815 015a 00       		.byte	0
- 816 015b 00       		.byte	0
- 817 015c 19       		.uleb128 0x19
- 818 015d 2E       		.uleb128 0x2e
- 819 015e 00       		.byte	0
- 820 015f 3F       		.uleb128 0x3f
- 821 0160 19       		.uleb128 0x19
- 822 0161 3C       		.uleb128 0x3c
- 823 0162 19       		.uleb128 0x19
- 824 0163 6E       		.uleb128 0x6e
- 825 0164 0E       		.uleb128 0xe
- 826 0165 03       		.uleb128 0x3
- 827 0166 0E       		.uleb128 0xe
- 828 0167 3A       		.uleb128 0x3a
- 829 0168 0B       		.uleb128 0xb
- 830 0169 3B       		.uleb128 0x3b
- 831 016a 05       		.uleb128 0x5
- 832 016b 00       		.byte	0
- 833 016c 00       		.byte	0
- 834 016d 00       		.byte	0
- 835              		.section	.debug_loc,"",%progbits
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 21
+ 779 0135 49       		.uleb128 0x49
+ 780 0136 13       		.uleb128 0x13
+ 781 0137 01       		.uleb128 0x1
+ 782 0138 13       		.uleb128 0x13
+ 783 0139 00       		.byte	0
+ 784 013a 00       		.byte	0
+ 785 013b 16       		.uleb128 0x16
+ 786 013c 21       		.uleb128 0x21
+ 787 013d 00       		.byte	0
+ 788 013e 49       		.uleb128 0x49
+ 789 013f 13       		.uleb128 0x13
+ 790 0140 2F       		.uleb128 0x2f
+ 791 0141 06       		.uleb128 0x6
+ 792 0142 00       		.byte	0
+ 793 0143 00       		.byte	0
+ 794 0144 17       		.uleb128 0x17
+ 795 0145 34       		.uleb128 0x34
+ 796 0146 00       		.byte	0
+ 797 0147 03       		.uleb128 0x3
+ 798 0148 0E       		.uleb128 0xe
+ 799 0149 3A       		.uleb128 0x3a
+ 800 014a 0B       		.uleb128 0xb
+ 801 014b 3B       		.uleb128 0x3b
+ 802 014c 05       		.uleb128 0x5
+ 803 014d 49       		.uleb128 0x49
+ 804 014e 13       		.uleb128 0x13
+ 805 014f 3F       		.uleb128 0x3f
+ 806 0150 19       		.uleb128 0x19
+ 807 0151 3C       		.uleb128 0x3c
+ 808 0152 19       		.uleb128 0x19
+ 809 0153 00       		.byte	0
+ 810 0154 00       		.byte	0
+ 811 0155 18       		.uleb128 0x18
+ 812 0156 35       		.uleb128 0x35
+ 813 0157 00       		.byte	0
+ 814 0158 49       		.uleb128 0x49
+ 815 0159 13       		.uleb128 0x13
+ 816 015a 00       		.byte	0
+ 817 015b 00       		.byte	0
+ 818 015c 19       		.uleb128 0x19
+ 819 015d 2E       		.uleb128 0x2e
+ 820 015e 00       		.byte	0
+ 821 015f 3F       		.uleb128 0x3f
+ 822 0160 19       		.uleb128 0x19
+ 823 0161 3C       		.uleb128 0x3c
+ 824 0162 19       		.uleb128 0x19
+ 825 0163 6E       		.uleb128 0x6e
+ 826 0164 0E       		.uleb128 0xe
+ 827 0165 03       		.uleb128 0x3
+ 828 0166 0E       		.uleb128 0xe
+ 829 0167 3A       		.uleb128 0x3a
+ 830 0168 0B       		.uleb128 0xb
+ 831 0169 3B       		.uleb128 0x3b
+ 832 016a 05       		.uleb128 0x5
+ 833 016b 00       		.byte	0
+ 834 016c 00       		.byte	0
+ 835 016d 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 21
 
 
- 836              	.Ldebug_loc0:
- 837              	.LLST0:
- 838 0000 00000000 		.4byte	.LVL0
- 839 0004 10000000 		.4byte	.LVL2
- 840 0008 0100     		.2byte	0x1
- 841 000a 50       		.byte	0x50
- 842 000b 10000000 		.4byte	.LVL2
- 843 000f 2E000000 		.4byte	.LVL4
- 844 0013 0100     		.2byte	0x1
- 845 0015 54       		.byte	0x54
- 846 0016 00000000 		.4byte	0
- 847 001a 00000000 		.4byte	0
- 848              	.LLST1:
- 849 001e 04000000 		.4byte	.LVL1
- 850 0022 40000000 		.4byte	.LVL5
- 851 0026 0200     		.2byte	0x2
- 852 0028 30       		.byte	0x30
- 853 0029 9F       		.byte	0x9f
- 854 002a 40000000 		.4byte	.LVL5
- 855 002e 48000000 		.4byte	.LVL6
- 856 0032 0100     		.2byte	0x1
- 857 0034 55       		.byte	0x55
- 858 0035 48000000 		.4byte	.LVL6
- 859 0039 4E000000 		.4byte	.LVL7
- 860 003d 0200     		.2byte	0x2
- 861 003f 30       		.byte	0x30
- 862 0040 9F       		.byte	0x9f
- 863 0041 4E000000 		.4byte	.LVL7
- 864 0045 56000000 		.4byte	.LVL9
- 865 0049 0100     		.2byte	0x1
- 866 004b 55       		.byte	0x55
- 867 004c 56000000 		.4byte	.LVL9
- 868 0050 60000000 		.4byte	.LFE136
- 869 0054 0100     		.2byte	0x1
- 870 0056 50       		.byte	0x50
- 871 0057 00000000 		.4byte	0
- 872 005b 00000000 		.4byte	0
- 873              		.section	.debug_aranges,"",%progbits
- 874 0000 34000000 		.4byte	0x34
- 875 0004 0200     		.2byte	0x2
- 876 0006 00000000 		.4byte	.Ldebug_info0
- 877 000a 04       		.byte	0x4
- 878 000b 00       		.byte	0
- 879 000c 0000     		.2byte	0
- 880 000e 0000     		.2byte	0
- 881 0010 00000000 		.4byte	.LFB136
- 882 0014 60000000 		.4byte	.LFE136-.LFB136
- 883 0018 00000000 		.4byte	.LFB137
- 884 001c 16000000 		.4byte	.LFE137-.LFB137
- 885 0020 00000000 		.4byte	.LFB138
- 886 0024 10000000 		.4byte	.LFE138-.LFB138
- 887 0028 00000000 		.4byte	.LFB139
- 888 002c 14000000 		.4byte	.LFE139-.LFB139
- 889 0030 00000000 		.4byte	0
- 890 0034 00000000 		.4byte	0
- 891              		.section	.debug_ranges,"",%progbits
- 892              	.Ldebug_ranges0:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 22
+ 836              		.section	.debug_loc,"",%progbits
+ 837              	.Ldebug_loc0:
+ 838              	.LLST0:
+ 839 0000 00000000 		.4byte	.LVL0
+ 840 0004 10000000 		.4byte	.LVL2
+ 841 0008 0100     		.2byte	0x1
+ 842 000a 50       		.byte	0x50
+ 843 000b 10000000 		.4byte	.LVL2
+ 844 000f 2E000000 		.4byte	.LVL4
+ 845 0013 0100     		.2byte	0x1
+ 846 0015 54       		.byte	0x54
+ 847 0016 00000000 		.4byte	0
+ 848 001a 00000000 		.4byte	0
+ 849              	.LLST1:
+ 850 001e 04000000 		.4byte	.LVL1
+ 851 0022 3E000000 		.4byte	.LVL5
+ 852 0026 0200     		.2byte	0x2
+ 853 0028 30       		.byte	0x30
+ 854 0029 9F       		.byte	0x9f
+ 855 002a 3E000000 		.4byte	.LVL5
+ 856 002e 46000000 		.4byte	.LVL6
+ 857 0032 0100     		.2byte	0x1
+ 858 0034 55       		.byte	0x55
+ 859 0035 46000000 		.4byte	.LVL6
+ 860 0039 4C000000 		.4byte	.LVL7
+ 861 003d 0200     		.2byte	0x2
+ 862 003f 30       		.byte	0x30
+ 863 0040 9F       		.byte	0x9f
+ 864 0041 4C000000 		.4byte	.LVL7
+ 865 0045 54000000 		.4byte	.LVL9
+ 866 0049 0100     		.2byte	0x1
+ 867 004b 55       		.byte	0x55
+ 868 004c 54000000 		.4byte	.LVL9
+ 869 0050 60000000 		.4byte	.LFE136
+ 870 0054 0100     		.2byte	0x1
+ 871 0056 50       		.byte	0x50
+ 872 0057 00000000 		.4byte	0
+ 873 005b 00000000 		.4byte	0
+ 874              		.section	.debug_aranges,"",%progbits
+ 875 0000 34000000 		.4byte	0x34
+ 876 0004 0200     		.2byte	0x2
+ 877 0006 00000000 		.4byte	.Ldebug_info0
+ 878 000a 04       		.byte	0x4
+ 879 000b 00       		.byte	0
+ 880 000c 0000     		.2byte	0
+ 881 000e 0000     		.2byte	0
+ 882 0010 00000000 		.4byte	.LFB136
+ 883 0014 60000000 		.4byte	.LFE136-.LFB136
+ 884 0018 00000000 		.4byte	.LFB137
+ 885 001c 16000000 		.4byte	.LFE137-.LFB137
+ 886 0020 00000000 		.4byte	.LFB138
+ 887 0024 10000000 		.4byte	.LFE138-.LFB138
+ 888 0028 00000000 		.4byte	.LFB139
+ 889 002c 14000000 		.4byte	.LFE139-.LFB139
+ 890 0030 00000000 		.4byte	0
+ 891 0034 00000000 		.4byte	0
+ 892              		.section	.debug_ranges,"",%progbits
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 22
 
 
- 893 0000 00000000 		.4byte	.LFB136
- 894 0004 60000000 		.4byte	.LFE136
- 895 0008 00000000 		.4byte	.LFB137
- 896 000c 16000000 		.4byte	.LFE137
- 897 0010 00000000 		.4byte	.LFB138
- 898 0014 10000000 		.4byte	.LFE138
- 899 0018 00000000 		.4byte	.LFB139
- 900 001c 14000000 		.4byte	.LFE139
- 901 0020 00000000 		.4byte	0
- 902 0024 00000000 		.4byte	0
- 903              		.section	.debug_line,"",%progbits
- 904              	.Ldebug_line0:
- 905 0000 25030000 		.section	.debug_str,"MS",%progbits,1
- 905      0200BE02 
- 905      00000201 
- 905      FB0E0D00 
- 905      01010101 
- 906              	.LASF5:
- 907 0000 5F5F7569 		.ascii	"__uint8_t\000"
- 907      6E74385F 
- 907      7400
- 908              	.LASF4:
- 909 000a 73697A65 		.ascii	"size_t\000"
- 909      5F7400
- 910              	.LASF26:
- 911 0011 76546173 		.ascii	"vTaskSuspendAll\000"
- 911      6B537573 
- 911      70656E64 
- 911      416C6C00 
- 912              	.LASF9:
- 913 0021 5F5F696E 		.ascii	"__int32_t\000"
- 913      7433325F 
- 913      7400
- 914              	.LASF36:
- 915 002b 78506F72 		.ascii	"xPortGetFreeHeapSize\000"
- 915      74476574 
- 915      46726565 
- 915      48656170 
- 915      53697A65 
- 916              	.LASF16:
- 917 0040 75696E74 		.ascii	"uint8_t\000"
- 917      385F7400 
- 918              	.LASF19:
- 919 0048 666C6F61 		.ascii	"float\000"
- 919      7400
- 920              	.LASF6:
- 921 004e 756E7369 		.ascii	"unsigned char\000"
- 921      676E6564 
- 921      20636861 
- 921      7200
- 922              	.LASF12:
- 923 005c 6C6F6E67 		.ascii	"long unsigned int\000"
- 923      20756E73 
- 923      69676E65 
- 923      6420696E 
- 923      7400
- 924              	.LASF8:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 23
+ 893              	.Ldebug_ranges0:
+ 894 0000 00000000 		.4byte	.LFB136
+ 895 0004 60000000 		.4byte	.LFE136
+ 896 0008 00000000 		.4byte	.LFB137
+ 897 000c 16000000 		.4byte	.LFE137
+ 898 0010 00000000 		.4byte	.LFB138
+ 899 0014 10000000 		.4byte	.LFE138
+ 900 0018 00000000 		.4byte	.LFB139
+ 901 001c 14000000 		.4byte	.LFE139
+ 902 0020 00000000 		.4byte	0
+ 903 0024 00000000 		.4byte	0
+ 904              		.section	.debug_line,"",%progbits
+ 905              	.Ldebug_line0:
+ 906 0000 25030000 		.section	.debug_str,"MS",%progbits,1
+ 906      0200BE02 
+ 906      00000201 
+ 906      FB0E0D00 
+ 906      01010101 
+ 907              	.LASF5:
+ 908 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 908      6E74385F 
+ 908      7400
+ 909              	.LASF4:
+ 910 000a 73697A65 		.ascii	"size_t\000"
+ 910      5F7400
+ 911              	.LASF26:
+ 912 0011 76546173 		.ascii	"vTaskSuspendAll\000"
+ 912      6B537573 
+ 912      70656E64 
+ 912      416C6C00 
+ 913              	.LASF9:
+ 914 0021 5F5F696E 		.ascii	"__int32_t\000"
+ 914      7433325F 
+ 914      7400
+ 915              	.LASF36:
+ 916 002b 78506F72 		.ascii	"xPortGetFreeHeapSize\000"
+ 916      74476574 
+ 916      46726565 
+ 916      48656170 
+ 916      53697A65 
+ 917              	.LASF16:
+ 918 0040 75696E74 		.ascii	"uint8_t\000"
+ 918      385F7400 
+ 919              	.LASF19:
+ 920 0048 666C6F61 		.ascii	"float\000"
+ 920      7400
+ 921              	.LASF6:
+ 922 004e 756E7369 		.ascii	"unsigned char\000"
+ 922      676E6564 
+ 922      20636861 
+ 922      7200
+ 923              	.LASF12:
+ 924 005c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 924      20756E73 
+ 924      69676E65 
+ 924      6420696E 
+ 924      7400
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 23
 
 
- 925 006e 73686F72 		.ascii	"short unsigned int\000"
- 925      7420756E 
- 925      7369676E 
- 925      65642069 
- 925      6E7400
- 926              	.LASF11:
- 927 0081 5F5F7569 		.ascii	"__uint32_t\000"
- 927      6E743332 
- 927      5F7400
- 928              	.LASF20:
- 929 008c 646F7562 		.ascii	"double\000"
- 929      6C6500
- 930              	.LASF32:
- 931 0093 756C4E65 		.ascii	"ulNewBASEPRI\000"
- 931      77424153 
- 931      45505249 
- 931      00
- 932              	.LASF29:
- 933 00a0 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\rtos\\FreeRTOS\\10.0."
- 933      72617465 
- 933      645F536F 
- 933      75726365 
- 933      5C50536F 
- 934 00ce 315C536F 		.ascii	"1\\Source\\portable\\MemMang\\heap_1.c\000"
- 934      75726365 
- 934      5C706F72 
- 934      7461626C 
- 934      655C4D65 
- 935              	.LASF21:
- 936 00f1 70765265 		.ascii	"pvReturn\000"
- 936      7475726E 
+ 925              	.LASF8:
+ 926 006e 73686F72 		.ascii	"short unsigned int\000"
+ 926      7420756E 
+ 926      7369676E 
+ 926      65642069 
+ 926      6E7400
+ 927              	.LASF11:
+ 928 0081 5F5F7569 		.ascii	"__uint32_t\000"
+ 928      6E743332 
+ 928      5F7400
+ 929              	.LASF30:
+ 930 008c 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 930      73657273 
+ 930      5C626F67 
+ 930      75725C44 
+ 930      6F63756D 
+ 931 00b8 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\HQC\\HQC"
+ 931      7269746D 
+ 931      6F732070 
+ 931      6F737463 
+ 931      75616E74 
+ 932 00e7 5C485143 		.ascii	"\\HQC.cydsn\000"
+ 932      2E637964 
+ 932      736E00
+ 933              	.LASF20:
+ 934 00f2 646F7562 		.ascii	"double\000"
+ 934      6C6500
+ 935              	.LASF32:
+ 936 00f9 756C4E65 		.ascii	"ulNewBASEPRI\000"
+ 936      77424153 
+ 936      45505249 
  936      00
- 937              	.LASF37:
- 938 00fa 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 938      52784275 
- 938      66666572 
- 938      00
- 939              	.LASF24:
- 940 0107 75634865 		.ascii	"ucHeap\000"
- 940      617000
- 941              	.LASF35:
- 942 010e 76506F72 		.ascii	"vPortInitialiseBlocks\000"
- 942      74496E69 
- 942      7469616C 
- 942      69736542 
- 942      6C6F636B 
- 943              	.LASF0:
- 944 0124 756E7369 		.ascii	"unsigned int\000"
- 944      676E6564 
- 944      20696E74 
- 944      00
- 945              	.LASF13:
- 946 0131 6C6F6E67 		.ascii	"long long unsigned int\000"
- 946      206C6F6E 
- 946      6720756E 
- 946      7369676E 
- 946      65642069 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 24
+ 937              	.LASF29:
+ 938 0106 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\rtos\\FreeRTOS\\10.0."
+ 938      72617465 
+ 938      645F536F 
+ 938      75726365 
+ 938      5C50536F 
+ 939 0134 315C536F 		.ascii	"1\\Source\\portable\\MemMang\\heap_1.c\000"
+ 939      75726365 
+ 939      5C706F72 
+ 939      7461626C 
+ 939      655C4D65 
+ 940              	.LASF21:
+ 941 0157 70765265 		.ascii	"pvReturn\000"
+ 941      7475726E 
+ 941      00
+ 942              	.LASF37:
+ 943 0160 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 943      52784275 
+ 943      66666572 
+ 943      00
+ 944              	.LASF24:
+ 945 016d 75634865 		.ascii	"ucHeap\000"
+ 945      617000
+ 946              	.LASF35:
+ 947 0174 76506F72 		.ascii	"vPortInitialiseBlocks\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 24
 
 
- 947              	.LASF31:
- 948 0148 76506F72 		.ascii	"vPortRaiseBASEPRI\000"
- 948      74526169 
- 948      73654241 
- 948      53455052 
- 948      4900
- 949              	.LASF30:
- 950 015a 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
- 950      73657273 
- 950      5C626F67 
- 950      75725C44 
- 950      6F63756D 
- 951 0186 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\HQC\\HQC\\HQC.cydsn"
- 951      7269746D 
- 951      6F732070 
- 951      6F737463 
- 951      75616E74 
- 952 01b5 00       		.ascii	"\000"
- 953              	.LASF17:
- 954 01b6 696E7433 		.ascii	"int32_t\000"
- 954      325F7400 
- 955              	.LASF14:
- 956 01be 73697A65 		.ascii	"sizetype\000"
- 956      74797065 
- 956      00
- 957              	.LASF1:
- 958 01c7 6C6F6E67 		.ascii	"long long int\000"
- 958      206C6F6E 
- 958      6720696E 
- 958      7400
- 959              	.LASF23:
- 960 01d5 7857616E 		.ascii	"xWantedSize\000"
- 960      74656453 
- 960      697A6500 
- 961              	.LASF15:
- 962 01e1 63686172 		.ascii	"char\000"
+ 947      74496E69 
+ 947      7469616C 
+ 947      69736542 
+ 947      6C6F636B 
+ 948              	.LASF0:
+ 949 018a 756E7369 		.ascii	"unsigned int\000"
+ 949      676E6564 
+ 949      20696E74 
+ 949      00
+ 950              	.LASF13:
+ 951 0197 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 951      206C6F6E 
+ 951      6720756E 
+ 951      7369676E 
+ 951      65642069 
+ 952              	.LASF31:
+ 953 01ae 76506F72 		.ascii	"vPortRaiseBASEPRI\000"
+ 953      74526169 
+ 953      73654241 
+ 953      53455052 
+ 953      4900
+ 954              	.LASF28:
+ 955 01c0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 955      43313120 
+ 955      352E342E 
+ 955      31203230 
+ 955      31363036 
+ 956 01f3 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 956      20726576 
+ 956      6973696F 
+ 956      6E203233 
+ 956      37373135 
+ 957 0226 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 957      70202D6D 
+ 957      6670753D 
+ 957      66707634 
+ 957      2D73702D 
+ 958 0259 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 958      6F6E7320 
+ 958      2D666661 
+ 958      742D6C74 
+ 958      6F2D6F62 
+ 959              	.LASF17:
+ 960 0273 696E7433 		.ascii	"int32_t\000"
+ 960      325F7400 
+ 961              	.LASF14:
+ 962 027b 73697A65 		.ascii	"sizetype\000"
+ 962      74797065 
  962      00
- 963              	.LASF22:
- 964 01e6 70756341 		.ascii	"pucAlignedHeap\000"
- 964      6C69676E 
- 964      65644865 
- 964      617000
- 965              	.LASF33:
- 966 01f5 7076506F 		.ascii	"pvPortMalloc\000"
- 966      72744D61 
- 966      6C6C6F63 
- 966      00
- 967              	.LASF7:
- 968 0202 73686F72 		.ascii	"short int\000"
- 968      7420696E 
- 968      7400
- 969              	.LASF34:
- 970 020c 76506F72 		.ascii	"vPortFree\000"
- 970      74467265 
- 970      6500
- 971              	.LASF27:
- 972 0216 78546173 		.ascii	"xTaskResumeAll\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccZCAo3V.s 			page 25
+ 963              	.LASF1:
+ 964 0284 6C6F6E67 		.ascii	"long long int\000"
+ 964      206C6F6E 
+ 964      6720696E 
+ 964      7400
+ 965              	.LASF23:
+ 966 0292 7857616E 		.ascii	"xWantedSize\000"
+ 966      74656453 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc3BSjUl.s 			page 25
 
 
- 972      6B526573 
- 972      756D6541 
- 972      6C6C00
- 973              	.LASF28:
- 974 0225 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 974      43313120 
- 974      352E342E 
- 974      31203230 
- 974      31363036 
- 975 0258 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
- 975      20726576 
- 975      6973696F 
- 975      6E203233 
- 975      37373135 
- 976 028b 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
- 976      70202D6D 
- 976      6670753D 
- 976      66707634 
- 976      2D73702D 
- 977 02be 65637469 		.ascii	"ections -ffat-lto-objects\000"
- 977      6F6E7320 
- 977      2D666661 
- 977      742D6C74 
- 977      6F2D6F62 
- 978              	.LASF18:
- 979 02d8 75696E74 		.ascii	"uint32_t\000"
- 979      33325F74 
- 979      00
- 980              	.LASF10:
- 981 02e1 6C6F6E67 		.ascii	"long int\000"
- 981      20696E74 
- 981      00
- 982              	.LASF2:
- 983 02ea 6C6F6E67 		.ascii	"long double\000"
- 983      20646F75 
- 983      626C6500 
- 984              	.LASF3:
- 985 02f6 7369676E 		.ascii	"signed char\000"
- 985      65642063 
- 985      68617200 
- 986              	.LASF25:
- 987 0302 784E6578 		.ascii	"xNextFreeByte\000"
- 987      74467265 
- 987      65427974 
- 987      6500
- 988              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 966      697A6500 
+ 967              	.LASF15:
+ 968 029e 63686172 		.ascii	"char\000"
+ 968      00
+ 969              	.LASF22:
+ 970 02a3 70756341 		.ascii	"pucAlignedHeap\000"
+ 970      6C69676E 
+ 970      65644865 
+ 970      617000
+ 971              	.LASF33:
+ 972 02b2 7076506F 		.ascii	"pvPortMalloc\000"
+ 972      72744D61 
+ 972      6C6C6F63 
+ 972      00
+ 973              	.LASF7:
+ 974 02bf 73686F72 		.ascii	"short int\000"
+ 974      7420696E 
+ 974      7400
+ 975              	.LASF34:
+ 976 02c9 76506F72 		.ascii	"vPortFree\000"
+ 976      74467265 
+ 976      6500
+ 977              	.LASF27:
+ 978 02d3 78546173 		.ascii	"xTaskResumeAll\000"
+ 978      6B526573 
+ 978      756D6541 
+ 978      6C6C00
+ 979              	.LASF18:
+ 980 02e2 75696E74 		.ascii	"uint32_t\000"
+ 980      33325F74 
+ 980      00
+ 981              	.LASF10:
+ 982 02eb 6C6F6E67 		.ascii	"long int\000"
+ 982      20696E74 
+ 982      00
+ 983              	.LASF2:
+ 984 02f4 6C6F6E67 		.ascii	"long double\000"
+ 984      20646F75 
+ 984      626C6500 
+ 985              	.LASF3:
+ 986 0300 7369676E 		.ascii	"signed char\000"
+ 986      65642063 
+ 986      68617200 
+ 987              	.LASF25:
+ 988 030c 784E6578 		.ascii	"xNextFreeByte\000"
+ 988      74467265 
+ 988      65427974 
+ 988      6500
+ 989              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
