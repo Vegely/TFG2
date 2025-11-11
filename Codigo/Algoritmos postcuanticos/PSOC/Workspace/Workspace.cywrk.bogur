@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace\Saber\CM4 (Core 1)\Source Files\main_cm4.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace\SharedLib">
 <ExpandedNodeIds>
 <v>Workspace</v>
 <v>Workspace\HQC</v>
@@ -269,14 +269,13 @@
 <v>Workspace\Saber\Shared Files\stdio_user.h</v>
 <v>Workspace\Saber\Shared Files\system_psoc6.h</v>
 <v>Workspace\Saber\Generated_Source\PSoC6</v>
+<v>Workspace\SharedLib</v>
 <v>Workspace\SharedLib\include</v>
+<v>Workspace\SharedLib\include\stringFormater.h</v>
 <v>Workspace\SharedLib\src</v>
+<v>Workspace\SharedLib\src\stringFormater.c</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>Workspace\Saber\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
-<v>Workspace\Saber\CM4 (Core 1)\ARM IAR Generic</v>
-<v>Workspace\Saber\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
-<v>Workspace\Saber\CM4 (Core 1)\ARM MDK Generic</v>
 <v>Workspace\Saber\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
 <v>Workspace\Saber\CM4 (Core 1)\Header Files</v>
 <v>Workspace\Saber\CM4 (Core 1)\Header Files\Saber</v>
@@ -321,6 +320,10 @@
 <v>Workspace\Saber\Shared Files</v>
 <v>Workspace\Saber\Generated_Source</v>
 <v>Workspace\SharedLib</v>
+<v>Workspace\SharedLib\include</v>
+<v>Workspace\SharedLib\include\stringFormater.h</v>
+<v>Workspace\SharedLib\src</v>
+<v>Workspace\SharedLib\src\stringFormater.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -806,11 +809,9 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\HQC\HQC\HQC.cydsn\main_cm4.c" />
-<name v=".\HQC\HQC\HQC.cydsn\FreeRTOSConfig.h" />
-<name v=".\HQC\HQC\HQC.cydsn\cycle_counter.h" />
-<name v=".\HQC\HQC\HQC.cydsn\cycle_counter.c" />
-<name v=".\SABER\Saber\Saber.cydsn\main_cm4.c" />
+<name v=".\HQC\HQC\api.h" />
+<name v=".\stringFormater.h" />
+<name v=".\stringFormater.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -818,7 +819,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1362, 703" SelectedTabbedMdiWindow="b9966cdf-1747-49f7-8283-4ae47a727715"><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\main_cm4.c" Guid="636482f1-c7bf-4a0a-891f-d7db78b526d0" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\FreeRTOSConfig.h" Guid="4d159dd7-efd9-4e52-901a-036c6432efbe" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\cycle_counter.h" Guid="6eed8362-898d-4f19-964f-61318479241d" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\cycle_counter.c" Guid="51e29b95-e5e2-42ea-81ba-156c49556708" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn\main_cm4.c" Guid="b9966cdf-1747-49f7-8283-4ae47a727715" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1362, 703" SelectedTabbedMdiWindow="4e486fca-0a9c-4e5c-8dc5-78a38553df14"><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\api.h" Guid="bd0c55d2-2525-4887-ac42-efbf408a692e" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\stringFormater.h" Guid="4e486fca-0a9c-4e5c-8dc5-78a38553df14" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="8342e15b-a0c8-4974-b49c-d1b1237b9a6d" /><DocumentWindow Key="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\stringFormater.c" Guid="c4a03eba-eaf0-43f5-90c9-38c9848070ae" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
