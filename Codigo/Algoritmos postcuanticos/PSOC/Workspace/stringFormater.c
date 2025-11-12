@@ -9,7 +9,7 @@
  *
  * ========================================
 */
-#include "../include/string_formatter.h"
+#include "stringFormater.h"
 #include <string.h>
 
 uint8_t crc8(const uint8_t *data, uint16_t len)

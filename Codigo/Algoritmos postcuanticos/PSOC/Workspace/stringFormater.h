@@ -24,7 +24,10 @@ extern "C" {
 #endif
 
 /**
- * Compute CRC8 of given data buffer.
+ * Compute CRC-8 (Dallas/Maxim polynomial 0x31, reflected = 0x8C of given data buffer.
+ * Polynomial: x^8 + x^5 + x^4 + 1
+ * Init value: 0x00
+ * Reflected:  yes (LSB first) 
  * IN: data Pointer to input bytes
  * IN: len  Number of bytes
  * OUT: Computed CRC8

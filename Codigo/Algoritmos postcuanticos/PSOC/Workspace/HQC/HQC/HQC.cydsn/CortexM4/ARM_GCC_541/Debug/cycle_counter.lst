@@ -1,0 +1,904 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"cycle_counter.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.CycleCounter_Init,"ax",%progbits
+  21              		.align	2
+  22              		.global	CycleCounter_Init
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	CycleCounter_Init, %function
+  26              	CycleCounter_Init:
+  27              	.LFB130:
+  28              		.file 1 "cycle_counter.c"
+   1:cycle_counter.c **** /* ========================================
+   2:cycle_counter.c ****  *
+   3:cycle_counter.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:cycle_counter.c ****  * All Rights Reserved
+   5:cycle_counter.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:cycle_counter.c ****  *
+   7:cycle_counter.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:cycle_counter.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:cycle_counter.c ****  *
+  10:cycle_counter.c ****  * ========================================
+  11:cycle_counter.c **** */
+  12:cycle_counter.c **** #include "cycle_counter.h"
+  13:cycle_counter.c **** 
+  14:cycle_counter.c **** void CycleCounter_Init(void)
+  15:cycle_counter.c **** {
+  29              		.loc 1 15 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  16:cycle_counter.c ****     /* Enable the trace and debug blocks */
+  17:cycle_counter.c ****     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  34              		.loc 1 17 0
+  35 0000 064A     		ldr	r2, .L2
+  36 0002 D368     		ldr	r3, [r2, #12]
+  37 0004 43F08073 		orr	r3, r3, #16777216
+  38 0008 D360     		str	r3, [r2, #12]
+  18:cycle_counter.c **** 
+  19:cycle_counter.c ****     /* Reset the cycle counter */
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 2
+
+
+  20:cycle_counter.c ****     DWT->CYCCNT = 0;
+  39              		.loc 1 20 0
+  40 000a 054B     		ldr	r3, .L2+4
+  41 000c 0022     		movs	r2, #0
+  42 000e 5A60     		str	r2, [r3, #4]
+  21:cycle_counter.c **** 
+  22:cycle_counter.c ****     /* Enable the cycle counter */
+  23:cycle_counter.c ****     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+  43              		.loc 1 23 0
+  44 0010 1A68     		ldr	r2, [r3]
+  45 0012 42F00102 		orr	r2, r2, #1
+  46 0016 1A60     		str	r2, [r3]
+  47 0018 7047     		bx	lr
+  48              	.L3:
+  49 001a 00BF     		.align	2
+  50              	.L2:
+  51 001c F0ED00E0 		.word	-536810000
+  52 0020 001000E0 		.word	-536866816
+  53              		.cfi_endproc
+  54              	.LFE130:
+  55              		.size	CycleCounter_Init, .-CycleCounter_Init
+  56              		.section	.text.CycleCounter_Get,"ax",%progbits
+  57              		.align	2
+  58              		.global	CycleCounter_Get
+  59              		.thumb
+  60              		.thumb_func
+  61              		.type	CycleCounter_Get, %function
+  62              	CycleCounter_Get:
+  63              	.LFB131:
+  24:cycle_counter.c **** }
+  25:cycle_counter.c **** 
+  26:cycle_counter.c **** uint32_t CycleCounter_Get(void)
+  27:cycle_counter.c **** {
+  64              		.loc 1 27 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  28:cycle_counter.c ****     return DWT->CYCCNT;
+  69              		.loc 1 28 0
+  70 0000 014B     		ldr	r3, .L5
+  71 0002 5868     		ldr	r0, [r3, #4]
+  29:cycle_counter.c **** }
+  72              		.loc 1 29 0
+  73 0004 7047     		bx	lr
+  74              	.L6:
+  75 0006 00BF     		.align	2
+  76              	.L5:
+  77 0008 001000E0 		.word	-536866816
+  78              		.cfi_endproc
+  79              	.LFE131:
+  80              		.size	CycleCounter_Get, .-CycleCounter_Get
+  81              		.text
+  82              	.Letext0:
+  83              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  84              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  85              		.file 4 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 3
+
+
+  86              		.section	.debug_info,"",%progbits
+  87              	.Ldebug_info0:
+  88 0000 77020000 		.4byte	0x277
+  89 0004 0400     		.2byte	0x4
+  90 0006 00000000 		.4byte	.Ldebug_abbrev0
+  91 000a 04       		.byte	0x4
+  92 000b 01       		.uleb128 0x1
+  93 000c E6010000 		.4byte	.LASF43
+  94 0010 0C       		.byte	0xc
+  95 0011 3B000000 		.4byte	.LASF44
+  96 0015 D7000000 		.4byte	.LASF45
+  97 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  98 001d 00000000 		.4byte	0
+  99 0021 00000000 		.4byte	.Ldebug_line0
+ 100 0025 02       		.uleb128 0x2
+ 101 0026 01       		.byte	0x1
+ 102 0027 06       		.byte	0x6
+ 103 0028 AB020000 		.4byte	.LASF0
+ 104 002c 02       		.uleb128 0x2
+ 105 002d 01       		.byte	0x1
+ 106 002e 08       		.byte	0x8
+ 107 002f 74000000 		.4byte	.LASF1
+ 108 0033 02       		.uleb128 0x2
+ 109 0034 02       		.byte	0x2
+ 110 0035 05       		.byte	0x5
+ 111 0036 0F000000 		.4byte	.LASF2
+ 112 003a 02       		.uleb128 0x2
+ 113 003b 02       		.byte	0x2
+ 114 003c 07       		.byte	0x7
+ 115 003d 9B000000 		.4byte	.LASF3
+ 116 0041 03       		.uleb128 0x3
+ 117 0042 05000000 		.4byte	.LASF5
+ 118 0046 02       		.byte	0x2
+ 119 0047 3F       		.byte	0x3f
+ 120 0048 4C000000 		.4byte	0x4c
+ 121 004c 02       		.uleb128 0x2
+ 122 004d 04       		.byte	0x4
+ 123 004e 05       		.byte	0x5
+ 124 004f A2020000 		.4byte	.LASF4
+ 125 0053 03       		.uleb128 0x3
+ 126 0054 47010000 		.4byte	.LASF6
+ 127 0058 02       		.byte	0x2
+ 128 0059 41       		.byte	0x41
+ 129 005a 5E000000 		.4byte	0x5e
+ 130 005e 02       		.uleb128 0x2
+ 131 005f 04       		.byte	0x4
+ 132 0060 07       		.byte	0x7
+ 133 0061 89000000 		.4byte	.LASF7
+ 134 0065 02       		.uleb128 0x2
+ 135 0066 08       		.byte	0x8
+ 136 0067 05       		.byte	0x5
+ 137 0068 C1010000 		.4byte	.LASF8
+ 138 006c 02       		.uleb128 0x2
+ 139 006d 08       		.byte	0x8
+ 140 006e 07       		.byte	0x7
+ 141 006f 6C010000 		.4byte	.LASF9
+ 142 0073 04       		.uleb128 0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 4
+
+
+ 143 0074 04       		.byte	0x4
+ 144 0075 05       		.byte	0x5
+ 145 0076 696E7400 		.ascii	"int\000"
+ 146 007a 02       		.uleb128 0x2
+ 147 007b 04       		.byte	0x4
+ 148 007c 07       		.byte	0x7
+ 149 007d 5F010000 		.4byte	.LASF10
+ 150 0081 03       		.uleb128 0x3
+ 151 0082 4B000000 		.4byte	.LASF11
+ 152 0086 03       		.byte	0x3
+ 153 0087 2C       		.byte	0x2c
+ 154 0088 41000000 		.4byte	0x41
+ 155 008c 03       		.uleb128 0x3
+ 156 008d 99020000 		.4byte	.LASF12
+ 157 0091 03       		.byte	0x3
+ 158 0092 30       		.byte	0x30
+ 159 0093 53000000 		.4byte	0x53
+ 160 0097 02       		.uleb128 0x2
+ 161 0098 04       		.byte	0x4
+ 162 0099 07       		.byte	0x7
+ 163 009a B8010000 		.4byte	.LASF13
+ 164 009e 05       		.uleb128 0x5
+ 165 009f 8C000000 		.4byte	0x8c
+ 166 00a3 06       		.uleb128 0x6
+ 167 00a4 9E000000 		.4byte	0x9e
+ 168 00a8 07       		.uleb128 0x7
+ 169 00a9 8C000000 		.4byte	0x8c
+ 170 00ad B8000000 		.4byte	0xb8
+ 171 00b1 08       		.uleb128 0x8
+ 172 00b2 97000000 		.4byte	0x97
+ 173 00b6 00       		.byte	0
+ 174 00b7 00       		.byte	0
+ 175 00b8 09       		.uleb128 0x9
+ 176 00b9 5C       		.byte	0x5c
+ 177 00ba 04       		.byte	0x4
+ 178 00bb 9203     		.2byte	0x392
+ 179 00bd ED010000 		.4byte	0x1ed
+ 180 00c1 0A       		.uleb128 0xa
+ 181 00c2 89010000 		.4byte	.LASF14
+ 182 00c6 04       		.byte	0x4
+ 183 00c7 9403     		.2byte	0x394
+ 184 00c9 9E000000 		.4byte	0x9e
+ 185 00cd 00       		.byte	0
+ 186 00ce 0A       		.uleb128 0xa
+ 187 00cf 82000000 		.4byte	.LASF15
+ 188 00d3 04       		.byte	0x4
+ 189 00d4 9503     		.2byte	0x395
+ 190 00d6 9E000000 		.4byte	0x9e
+ 191 00da 04       		.byte	0x4
+ 192 00db 0A       		.uleb128 0xa
+ 193 00dc BD000000 		.4byte	.LASF16
+ 194 00e0 04       		.byte	0x4
+ 195 00e1 9603     		.2byte	0x396
+ 196 00e3 9E000000 		.4byte	0x9e
+ 197 00e7 08       		.byte	0x8
+ 198 00e8 0A       		.uleb128 0xa
+ 199 00e9 8E010000 		.4byte	.LASF17
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 5
+
+
+ 200 00ed 04       		.byte	0x4
+ 201 00ee 9703     		.2byte	0x397
+ 202 00f0 9E000000 		.4byte	0x9e
+ 203 00f4 0C       		.byte	0xc
+ 204 00f5 0A       		.uleb128 0xa
+ 205 00f6 53000000 		.4byte	.LASF18
+ 206 00fa 04       		.byte	0x4
+ 207 00fb 9803     		.2byte	0x398
+ 208 00fd 9E000000 		.4byte	0x9e
+ 209 0101 10       		.byte	0x10
+ 210 0102 0A       		.uleb128 0xa
+ 211 0103 52010000 		.4byte	.LASF19
+ 212 0107 04       		.byte	0x4
+ 213 0108 9903     		.2byte	0x399
+ 214 010a 9E000000 		.4byte	0x9e
+ 215 010e 14       		.byte	0x14
+ 216 010f 0A       		.uleb128 0xa
+ 217 0110 CF010000 		.4byte	.LASF20
+ 218 0114 04       		.byte	0x4
+ 219 0115 9A03     		.2byte	0x39a
+ 220 0117 9E000000 		.4byte	0x9e
+ 221 011b 18       		.byte	0x18
+ 222 011c 0A       		.uleb128 0xa
+ 223 011d 00000000 		.4byte	.LASF21
+ 224 0121 04       		.byte	0x4
+ 225 0122 9B03     		.2byte	0x39b
+ 226 0124 A3000000 		.4byte	0xa3
+ 227 0128 1C       		.byte	0x1c
+ 228 0129 0A       		.uleb128 0xa
+ 229 012a 5C000000 		.4byte	.LASF22
+ 230 012e 04       		.byte	0x4
+ 231 012f 9C03     		.2byte	0x39c
+ 232 0131 9E000000 		.4byte	0x9e
+ 233 0135 20       		.byte	0x20
+ 234 0136 0A       		.uleb128 0xa
+ 235 0137 19000000 		.4byte	.LASF23
+ 236 013b 04       		.byte	0x4
+ 237 013c 9D03     		.2byte	0x39d
+ 238 013e 9E000000 		.4byte	0x9e
+ 239 0142 24       		.byte	0x24
+ 240 0143 0A       		.uleb128 0xa
+ 241 0144 C1020000 		.4byte	.LASF24
+ 242 0148 04       		.byte	0x4
+ 243 0149 9E03     		.2byte	0x39e
+ 244 014b 9E000000 		.4byte	0x9e
+ 245 014f 28       		.byte	0x28
+ 246 0150 0A       		.uleb128 0xa
+ 247 0151 B7020000 		.4byte	.LASF25
+ 248 0155 04       		.byte	0x4
+ 249 0156 9F03     		.2byte	0x39f
+ 250 0158 A8000000 		.4byte	0xa8
+ 251 015c 2C       		.byte	0x2c
+ 252 015d 0A       		.uleb128 0xa
+ 253 015e 62000000 		.4byte	.LASF26
+ 254 0162 04       		.byte	0x4
+ 255 0163 A003     		.2byte	0x3a0
+ 256 0165 9E000000 		.4byte	0x9e
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 6
+
+
+ 257 0169 30       		.byte	0x30
+ 258 016a 0A       		.uleb128 0xa
+ 259 016b 1F000000 		.4byte	.LASF27
+ 260 016f 04       		.byte	0x4
+ 261 0170 A103     		.2byte	0x3a1
+ 262 0172 9E000000 		.4byte	0x9e
+ 263 0176 34       		.byte	0x34
+ 264 0177 0A       		.uleb128 0xa
+ 265 0178 CB020000 		.4byte	.LASF28
+ 266 017c 04       		.byte	0x4
+ 267 017d A203     		.2byte	0x3a2
+ 268 017f 9E000000 		.4byte	0x9e
+ 269 0183 38       		.byte	0x38
+ 270 0184 0A       		.uleb128 0xa
+ 271 0185 31000000 		.4byte	.LASF29
+ 272 0189 04       		.byte	0x4
+ 273 018a A303     		.2byte	0x3a3
+ 274 018c A8000000 		.4byte	0xa8
+ 275 0190 3C       		.byte	0x3c
+ 276 0191 0A       		.uleb128 0xa
+ 277 0192 68000000 		.4byte	.LASF30
+ 278 0196 04       		.byte	0x4
+ 279 0197 A403     		.2byte	0x3a4
+ 280 0199 9E000000 		.4byte	0x9e
+ 281 019d 40       		.byte	0x40
+ 282 019e 0A       		.uleb128 0xa
+ 283 019f 25000000 		.4byte	.LASF31
+ 284 01a3 04       		.byte	0x4
+ 285 01a4 A503     		.2byte	0x3a5
+ 286 01a6 9E000000 		.4byte	0x9e
+ 287 01aa 44       		.byte	0x44
+ 288 01ab 0A       		.uleb128 0xa
+ 289 01ac D5020000 		.4byte	.LASF32
+ 290 01b0 04       		.byte	0x4
+ 291 01b1 A603     		.2byte	0x3a6
+ 292 01b3 9E000000 		.4byte	0x9e
+ 293 01b7 48       		.byte	0x48
+ 294 01b8 0A       		.uleb128 0xa
+ 295 01b9 3D010000 		.4byte	.LASF33
+ 296 01bd 04       		.byte	0x4
+ 297 01be A703     		.2byte	0x3a7
+ 298 01c0 A8000000 		.4byte	0xa8
+ 299 01c4 4C       		.byte	0x4c
+ 300 01c5 0A       		.uleb128 0xa
+ 301 01c6 6E000000 		.4byte	.LASF34
+ 302 01ca 04       		.byte	0x4
+ 303 01cb A803     		.2byte	0x3a8
+ 304 01cd 9E000000 		.4byte	0x9e
+ 305 01d1 50       		.byte	0x50
+ 306 01d2 0A       		.uleb128 0xa
+ 307 01d3 2B000000 		.4byte	.LASF35
+ 308 01d7 04       		.byte	0x4
+ 309 01d8 A903     		.2byte	0x3a9
+ 310 01da 9E000000 		.4byte	0x9e
+ 311 01de 54       		.byte	0x54
+ 312 01df 0A       		.uleb128 0xa
+ 313 01e0 DF020000 		.4byte	.LASF36
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 7
+
+
+ 314 01e4 04       		.byte	0x4
+ 315 01e5 AA03     		.2byte	0x3aa
+ 316 01e7 9E000000 		.4byte	0x9e
+ 317 01eb 58       		.byte	0x58
+ 318 01ec 00       		.byte	0
+ 319 01ed 0B       		.uleb128 0xb
+ 320 01ee D7010000 		.4byte	.LASF37
+ 321 01f2 04       		.byte	0x4
+ 322 01f3 AB03     		.2byte	0x3ab
+ 323 01f5 B8000000 		.4byte	0xb8
+ 324 01f9 09       		.uleb128 0x9
+ 325 01fa 10       		.byte	0x10
+ 326 01fb 04       		.byte	0x4
+ 327 01fc 8E05     		.2byte	0x58e
+ 328 01fe 37020000 		.4byte	0x237
+ 329 0202 0A       		.uleb128 0xa
+ 330 0203 D1000000 		.4byte	.LASF38
+ 331 0207 04       		.byte	0x4
+ 332 0208 9005     		.2byte	0x590
+ 333 020a 9E000000 		.4byte	0x9e
+ 334 020e 00       		.byte	0
+ 335 020f 0A       		.uleb128 0xa
+ 336 0210 59010000 		.4byte	.LASF39
+ 337 0214 04       		.byte	0x4
+ 338 0215 9105     		.2byte	0x591
+ 339 0217 9E000000 		.4byte	0x9e
+ 340 021b 04       		.byte	0x4
+ 341 021c 0A       		.uleb128 0xa
+ 342 021d 83010000 		.4byte	.LASF40
+ 343 0221 04       		.byte	0x4
+ 344 0222 9205     		.2byte	0x592
+ 345 0224 9E000000 		.4byte	0x9e
+ 346 0228 08       		.byte	0x8
+ 347 0229 0A       		.uleb128 0xa
+ 348 022a E0010000 		.4byte	.LASF41
+ 349 022e 04       		.byte	0x4
+ 350 022f 9305     		.2byte	0x593
+ 351 0231 9E000000 		.4byte	0x9e
+ 352 0235 0C       		.byte	0xc
+ 353 0236 00       		.byte	0
+ 354 0237 0B       		.uleb128 0xb
+ 355 0238 AE000000 		.4byte	.LASF42
+ 356 023c 04       		.byte	0x4
+ 357 023d 9405     		.2byte	0x594
+ 358 023f F9010000 		.4byte	0x1f9
+ 359 0243 0C       		.uleb128 0xc
+ 360 0244 A6010000 		.4byte	.LASF46
+ 361 0248 01       		.byte	0x1
+ 362 0249 0E       		.byte	0xe
+ 363 024a 00000000 		.4byte	.LFB130
+ 364 024e 24000000 		.4byte	.LFE130-.LFB130
+ 365 0252 01       		.uleb128 0x1
+ 366 0253 9C       		.byte	0x9c
+ 367 0254 0D       		.uleb128 0xd
+ 368 0255 95010000 		.4byte	.LASF47
+ 369 0259 01       		.byte	0x1
+ 370 025a 1A       		.byte	0x1a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 8
+
+
+ 371 025b 8C000000 		.4byte	0x8c
+ 372 025f 00000000 		.4byte	.LFB131
+ 373 0263 0C000000 		.4byte	.LFE131-.LFB131
+ 374 0267 01       		.uleb128 0x1
+ 375 0268 9C       		.byte	0x9c
+ 376 0269 0E       		.uleb128 0xe
+ 377 026a C4000000 		.4byte	.LASF48
+ 378 026e 04       		.byte	0x4
+ 379 026f F907     		.2byte	0x7f9
+ 380 0271 75020000 		.4byte	0x275
+ 381 0275 05       		.uleb128 0x5
+ 382 0276 81000000 		.4byte	0x81
+ 383 027a 00       		.byte	0
+ 384              		.section	.debug_abbrev,"",%progbits
+ 385              	.Ldebug_abbrev0:
+ 386 0000 01       		.uleb128 0x1
+ 387 0001 11       		.uleb128 0x11
+ 388 0002 01       		.byte	0x1
+ 389 0003 25       		.uleb128 0x25
+ 390 0004 0E       		.uleb128 0xe
+ 391 0005 13       		.uleb128 0x13
+ 392 0006 0B       		.uleb128 0xb
+ 393 0007 03       		.uleb128 0x3
+ 394 0008 0E       		.uleb128 0xe
+ 395 0009 1B       		.uleb128 0x1b
+ 396 000a 0E       		.uleb128 0xe
+ 397 000b 55       		.uleb128 0x55
+ 398 000c 17       		.uleb128 0x17
+ 399 000d 11       		.uleb128 0x11
+ 400 000e 01       		.uleb128 0x1
+ 401 000f 10       		.uleb128 0x10
+ 402 0010 17       		.uleb128 0x17
+ 403 0011 00       		.byte	0
+ 404 0012 00       		.byte	0
+ 405 0013 02       		.uleb128 0x2
+ 406 0014 24       		.uleb128 0x24
+ 407 0015 00       		.byte	0
+ 408 0016 0B       		.uleb128 0xb
+ 409 0017 0B       		.uleb128 0xb
+ 410 0018 3E       		.uleb128 0x3e
+ 411 0019 0B       		.uleb128 0xb
+ 412 001a 03       		.uleb128 0x3
+ 413 001b 0E       		.uleb128 0xe
+ 414 001c 00       		.byte	0
+ 415 001d 00       		.byte	0
+ 416 001e 03       		.uleb128 0x3
+ 417 001f 16       		.uleb128 0x16
+ 418 0020 00       		.byte	0
+ 419 0021 03       		.uleb128 0x3
+ 420 0022 0E       		.uleb128 0xe
+ 421 0023 3A       		.uleb128 0x3a
+ 422 0024 0B       		.uleb128 0xb
+ 423 0025 3B       		.uleb128 0x3b
+ 424 0026 0B       		.uleb128 0xb
+ 425 0027 49       		.uleb128 0x49
+ 426 0028 13       		.uleb128 0x13
+ 427 0029 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 9
+
+
+ 428 002a 00       		.byte	0
+ 429 002b 04       		.uleb128 0x4
+ 430 002c 24       		.uleb128 0x24
+ 431 002d 00       		.byte	0
+ 432 002e 0B       		.uleb128 0xb
+ 433 002f 0B       		.uleb128 0xb
+ 434 0030 3E       		.uleb128 0x3e
+ 435 0031 0B       		.uleb128 0xb
+ 436 0032 03       		.uleb128 0x3
+ 437 0033 08       		.uleb128 0x8
+ 438 0034 00       		.byte	0
+ 439 0035 00       		.byte	0
+ 440 0036 05       		.uleb128 0x5
+ 441 0037 35       		.uleb128 0x35
+ 442 0038 00       		.byte	0
+ 443 0039 49       		.uleb128 0x49
+ 444 003a 13       		.uleb128 0x13
+ 445 003b 00       		.byte	0
+ 446 003c 00       		.byte	0
+ 447 003d 06       		.uleb128 0x6
+ 448 003e 26       		.uleb128 0x26
+ 449 003f 00       		.byte	0
+ 450 0040 49       		.uleb128 0x49
+ 451 0041 13       		.uleb128 0x13
+ 452 0042 00       		.byte	0
+ 453 0043 00       		.byte	0
+ 454 0044 07       		.uleb128 0x7
+ 455 0045 01       		.uleb128 0x1
+ 456 0046 01       		.byte	0x1
+ 457 0047 49       		.uleb128 0x49
+ 458 0048 13       		.uleb128 0x13
+ 459 0049 01       		.uleb128 0x1
+ 460 004a 13       		.uleb128 0x13
+ 461 004b 00       		.byte	0
+ 462 004c 00       		.byte	0
+ 463 004d 08       		.uleb128 0x8
+ 464 004e 21       		.uleb128 0x21
+ 465 004f 00       		.byte	0
+ 466 0050 49       		.uleb128 0x49
+ 467 0051 13       		.uleb128 0x13
+ 468 0052 2F       		.uleb128 0x2f
+ 469 0053 0B       		.uleb128 0xb
+ 470 0054 00       		.byte	0
+ 471 0055 00       		.byte	0
+ 472 0056 09       		.uleb128 0x9
+ 473 0057 13       		.uleb128 0x13
+ 474 0058 01       		.byte	0x1
+ 475 0059 0B       		.uleb128 0xb
+ 476 005a 0B       		.uleb128 0xb
+ 477 005b 3A       		.uleb128 0x3a
+ 478 005c 0B       		.uleb128 0xb
+ 479 005d 3B       		.uleb128 0x3b
+ 480 005e 05       		.uleb128 0x5
+ 481 005f 01       		.uleb128 0x1
+ 482 0060 13       		.uleb128 0x13
+ 483 0061 00       		.byte	0
+ 484 0062 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 10
+
+
+ 485 0063 0A       		.uleb128 0xa
+ 486 0064 0D       		.uleb128 0xd
+ 487 0065 00       		.byte	0
+ 488 0066 03       		.uleb128 0x3
+ 489 0067 0E       		.uleb128 0xe
+ 490 0068 3A       		.uleb128 0x3a
+ 491 0069 0B       		.uleb128 0xb
+ 492 006a 3B       		.uleb128 0x3b
+ 493 006b 05       		.uleb128 0x5
+ 494 006c 49       		.uleb128 0x49
+ 495 006d 13       		.uleb128 0x13
+ 496 006e 38       		.uleb128 0x38
+ 497 006f 0B       		.uleb128 0xb
+ 498 0070 00       		.byte	0
+ 499 0071 00       		.byte	0
+ 500 0072 0B       		.uleb128 0xb
+ 501 0073 16       		.uleb128 0x16
+ 502 0074 00       		.byte	0
+ 503 0075 03       		.uleb128 0x3
+ 504 0076 0E       		.uleb128 0xe
+ 505 0077 3A       		.uleb128 0x3a
+ 506 0078 0B       		.uleb128 0xb
+ 507 0079 3B       		.uleb128 0x3b
+ 508 007a 05       		.uleb128 0x5
+ 509 007b 49       		.uleb128 0x49
+ 510 007c 13       		.uleb128 0x13
+ 511 007d 00       		.byte	0
+ 512 007e 00       		.byte	0
+ 513 007f 0C       		.uleb128 0xc
+ 514 0080 2E       		.uleb128 0x2e
+ 515 0081 00       		.byte	0
+ 516 0082 3F       		.uleb128 0x3f
+ 517 0083 19       		.uleb128 0x19
+ 518 0084 03       		.uleb128 0x3
+ 519 0085 0E       		.uleb128 0xe
+ 520 0086 3A       		.uleb128 0x3a
+ 521 0087 0B       		.uleb128 0xb
+ 522 0088 3B       		.uleb128 0x3b
+ 523 0089 0B       		.uleb128 0xb
+ 524 008a 27       		.uleb128 0x27
+ 525 008b 19       		.uleb128 0x19
+ 526 008c 11       		.uleb128 0x11
+ 527 008d 01       		.uleb128 0x1
+ 528 008e 12       		.uleb128 0x12
+ 529 008f 06       		.uleb128 0x6
+ 530 0090 40       		.uleb128 0x40
+ 531 0091 18       		.uleb128 0x18
+ 532 0092 9742     		.uleb128 0x2117
+ 533 0094 19       		.uleb128 0x19
+ 534 0095 00       		.byte	0
+ 535 0096 00       		.byte	0
+ 536 0097 0D       		.uleb128 0xd
+ 537 0098 2E       		.uleb128 0x2e
+ 538 0099 00       		.byte	0
+ 539 009a 3F       		.uleb128 0x3f
+ 540 009b 19       		.uleb128 0x19
+ 541 009c 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 11
+
+
+ 542 009d 0E       		.uleb128 0xe
+ 543 009e 3A       		.uleb128 0x3a
+ 544 009f 0B       		.uleb128 0xb
+ 545 00a0 3B       		.uleb128 0x3b
+ 546 00a1 0B       		.uleb128 0xb
+ 547 00a2 27       		.uleb128 0x27
+ 548 00a3 19       		.uleb128 0x19
+ 549 00a4 49       		.uleb128 0x49
+ 550 00a5 13       		.uleb128 0x13
+ 551 00a6 11       		.uleb128 0x11
+ 552 00a7 01       		.uleb128 0x1
+ 553 00a8 12       		.uleb128 0x12
+ 554 00a9 06       		.uleb128 0x6
+ 555 00aa 40       		.uleb128 0x40
+ 556 00ab 18       		.uleb128 0x18
+ 557 00ac 9742     		.uleb128 0x2117
+ 558 00ae 19       		.uleb128 0x19
+ 559 00af 00       		.byte	0
+ 560 00b0 00       		.byte	0
+ 561 00b1 0E       		.uleb128 0xe
+ 562 00b2 34       		.uleb128 0x34
+ 563 00b3 00       		.byte	0
+ 564 00b4 03       		.uleb128 0x3
+ 565 00b5 0E       		.uleb128 0xe
+ 566 00b6 3A       		.uleb128 0x3a
+ 567 00b7 0B       		.uleb128 0xb
+ 568 00b8 3B       		.uleb128 0x3b
+ 569 00b9 05       		.uleb128 0x5
+ 570 00ba 49       		.uleb128 0x49
+ 571 00bb 13       		.uleb128 0x13
+ 572 00bc 3F       		.uleb128 0x3f
+ 573 00bd 19       		.uleb128 0x19
+ 574 00be 3C       		.uleb128 0x3c
+ 575 00bf 19       		.uleb128 0x19
+ 576 00c0 00       		.byte	0
+ 577 00c1 00       		.byte	0
+ 578 00c2 00       		.byte	0
+ 579              		.section	.debug_aranges,"",%progbits
+ 580 0000 24000000 		.4byte	0x24
+ 581 0004 0200     		.2byte	0x2
+ 582 0006 00000000 		.4byte	.Ldebug_info0
+ 583 000a 04       		.byte	0x4
+ 584 000b 00       		.byte	0
+ 585 000c 0000     		.2byte	0
+ 586 000e 0000     		.2byte	0
+ 587 0010 00000000 		.4byte	.LFB130
+ 588 0014 24000000 		.4byte	.LFE130-.LFB130
+ 589 0018 00000000 		.4byte	.LFB131
+ 590 001c 0C000000 		.4byte	.LFE131-.LFB131
+ 591 0020 00000000 		.4byte	0
+ 592 0024 00000000 		.4byte	0
+ 593              		.section	.debug_ranges,"",%progbits
+ 594              	.Ldebug_ranges0:
+ 595 0000 00000000 		.4byte	.LFB130
+ 596 0004 24000000 		.4byte	.LFE130
+ 597 0008 00000000 		.4byte	.LFB131
+ 598 000c 0C000000 		.4byte	.LFE131
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 12
+
+
+ 599 0010 00000000 		.4byte	0
+ 600 0014 00000000 		.4byte	0
+ 601              		.section	.debug_line,"",%progbits
+ 602              	.Ldebug_line0:
+ 603 0000 83010000 		.section	.debug_str,"MS",%progbits,1
+ 603      02005A01 
+ 603      00000201 
+ 603      FB0E0D00 
+ 603      01010101 
+ 604              	.LASF21:
+ 605 0000 50435352 		.ascii	"PCSR\000"
+ 605      00
+ 606              	.LASF5:
+ 607 0005 5F5F696E 		.ascii	"__int32_t\000"
+ 607      7433325F 
+ 607      7400
+ 608              	.LASF2:
+ 609 000f 73686F72 		.ascii	"short int\000"
+ 609      7420696E 
+ 609      7400
+ 610              	.LASF23:
+ 611 0019 4D41534B 		.ascii	"MASK0\000"
+ 611      3000
+ 612              	.LASF27:
+ 613 001f 4D41534B 		.ascii	"MASK1\000"
+ 613      3100
+ 614              	.LASF31:
+ 615 0025 4D41534B 		.ascii	"MASK2\000"
+ 615      3200
+ 616              	.LASF35:
+ 617 002b 4D41534B 		.ascii	"MASK3\000"
+ 617      3300
+ 618              	.LASF29:
+ 619 0031 52455345 		.ascii	"RESERVED1\000"
+ 619      52564544 
+ 619      3100
+ 620              	.LASF44:
+ 621 003b 6379636C 		.ascii	"cycle_counter.c\000"
+ 621      655F636F 
+ 621      756E7465 
+ 621      722E6300 
+ 622              	.LASF11:
+ 623 004b 696E7433 		.ascii	"int32_t\000"
+ 623      325F7400 
+ 624              	.LASF18:
+ 625 0053 534C4545 		.ascii	"SLEEPCNT\000"
+ 625      50434E54 
+ 625      00
+ 626              	.LASF22:
+ 627 005c 434F4D50 		.ascii	"COMP0\000"
+ 627      3000
+ 628              	.LASF26:
+ 629 0062 434F4D50 		.ascii	"COMP1\000"
+ 629      3100
+ 630              	.LASF30:
+ 631 0068 434F4D50 		.ascii	"COMP2\000"
+ 631      3200
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 13
+
+
+ 632              	.LASF34:
+ 633 006e 434F4D50 		.ascii	"COMP3\000"
+ 633      3300
+ 634              	.LASF1:
+ 635 0074 756E7369 		.ascii	"unsigned char\000"
+ 635      676E6564 
+ 635      20636861 
+ 635      7200
+ 636              	.LASF15:
+ 637 0082 43594343 		.ascii	"CYCCNT\000"
+ 637      4E5400
+ 638              	.LASF7:
+ 639 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 639      20756E73 
+ 639      69676E65 
+ 639      6420696E 
+ 639      7400
+ 640              	.LASF3:
+ 641 009b 73686F72 		.ascii	"short unsigned int\000"
+ 641      7420756E 
+ 641      7369676E 
+ 641      65642069 
+ 641      6E7400
+ 642              	.LASF42:
+ 643 00ae 436F7265 		.ascii	"CoreDebug_Type\000"
+ 643      44656275 
+ 643      675F5479 
+ 643      706500
+ 644              	.LASF16:
+ 645 00bd 43504943 		.ascii	"CPICNT\000"
+ 645      4E5400
+ 646              	.LASF48:
+ 647 00c4 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 647      52784275 
+ 647      66666572 
+ 647      00
+ 648              	.LASF38:
+ 649 00d1 44484353 		.ascii	"DHCSR\000"
+ 649      5200
+ 650              	.LASF45:
+ 651 00d7 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 651      73657273 
+ 651      5C626F67 
+ 651      75725C44 
+ 651      6F63756D 
+ 652 0103 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\HQC\\HQC"
+ 652      7269746D 
+ 652      6F732070 
+ 652      6F737463 
+ 652      75616E74 
+ 653 0132 5C485143 		.ascii	"\\HQC.cydsn\000"
+ 653      2E637964 
+ 653      736E00
+ 654              	.LASF33:
+ 655 013d 52455345 		.ascii	"RESERVED2\000"
+ 655      52564544 
+ 655      3200
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 14
+
+
+ 656              	.LASF6:
+ 657 0147 5F5F7569 		.ascii	"__uint32_t\000"
+ 657      6E743332 
+ 657      5F7400
+ 658              	.LASF19:
+ 659 0152 4C535543 		.ascii	"LSUCNT\000"
+ 659      4E5400
+ 660              	.LASF39:
+ 661 0159 44435253 		.ascii	"DCRSR\000"
+ 661      5200
+ 662              	.LASF10:
+ 663 015f 756E7369 		.ascii	"unsigned int\000"
+ 663      676E6564 
+ 663      20696E74 
+ 663      00
+ 664              	.LASF9:
+ 665 016c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 665      206C6F6E 
+ 665      6720756E 
+ 665      7369676E 
+ 665      65642069 
+ 666              	.LASF40:
+ 667 0183 44435244 		.ascii	"DCRDR\000"
+ 667      5200
+ 668              	.LASF14:
+ 669 0189 4354524C 		.ascii	"CTRL\000"
+ 669      00
+ 670              	.LASF17:
+ 671 018e 45584343 		.ascii	"EXCCNT\000"
+ 671      4E5400
+ 672              	.LASF47:
+ 673 0195 4379636C 		.ascii	"CycleCounter_Get\000"
+ 673      65436F75 
+ 673      6E746572 
+ 673      5F476574 
+ 673      00
+ 674              	.LASF46:
+ 675 01a6 4379636C 		.ascii	"CycleCounter_Init\000"
+ 675      65436F75 
+ 675      6E746572 
+ 675      5F496E69 
+ 675      7400
+ 676              	.LASF13:
+ 677 01b8 73697A65 		.ascii	"sizetype\000"
+ 677      74797065 
+ 677      00
+ 678              	.LASF8:
+ 679 01c1 6C6F6E67 		.ascii	"long long int\000"
+ 679      206C6F6E 
+ 679      6720696E 
+ 679      7400
+ 680              	.LASF20:
+ 681 01cf 464F4C44 		.ascii	"FOLDCNT\000"
+ 681      434E5400 
+ 682              	.LASF37:
+ 683 01d7 4457545F 		.ascii	"DWT_Type\000"
+ 683      54797065 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 15
+
+
+ 683      00
+ 684              	.LASF41:
+ 685 01e0 44454D43 		.ascii	"DEMCR\000"
+ 685      5200
+ 686              	.LASF43:
+ 687 01e6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 687      43313120 
+ 687      352E342E 
+ 687      31203230 
+ 687      31363036 
+ 688 0219 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 688      20726576 
+ 688      6973696F 
+ 688      6E203233 
+ 688      37373135 
+ 689 024c 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 689      70202D6D 
+ 689      6670753D 
+ 689      66707634 
+ 689      2D73702D 
+ 690 027f 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 690      6F6E7320 
+ 690      2D666661 
+ 690      742D6C74 
+ 690      6F2D6F62 
+ 691              	.LASF12:
+ 692 0299 75696E74 		.ascii	"uint32_t\000"
+ 692      33325F74 
+ 692      00
+ 693              	.LASF4:
+ 694 02a2 6C6F6E67 		.ascii	"long int\000"
+ 694      20696E74 
+ 694      00
+ 695              	.LASF0:
+ 696 02ab 7369676E 		.ascii	"signed char\000"
+ 696      65642063 
+ 696      68617200 
+ 697              	.LASF25:
+ 698 02b7 52455345 		.ascii	"RESERVED0\000"
+ 698      52564544 
+ 698      3000
+ 699              	.LASF24:
+ 700 02c1 46554E43 		.ascii	"FUNCTION0\000"
+ 700      54494F4E 
+ 700      3000
+ 701              	.LASF28:
+ 702 02cb 46554E43 		.ascii	"FUNCTION1\000"
+ 702      54494F4E 
+ 702      3100
+ 703              	.LASF32:
+ 704 02d5 46554E43 		.ascii	"FUNCTION2\000"
+ 704      54494F4E 
+ 704      3200
+ 705              	.LASF36:
+ 706 02df 46554E43 		.ascii	"FUNCTION3\000"
+ 706      54494F4E 
+ 706      3300
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\cc1vsgoo.s 			page 16
+
+
+ 707              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

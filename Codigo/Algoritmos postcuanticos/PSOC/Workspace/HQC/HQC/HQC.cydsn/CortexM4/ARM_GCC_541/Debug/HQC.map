@@ -676,6 +676,24 @@ Discarded input sections
  .bss           0x00000000        0x1 .\CortexM4\ARM_GCC_541\Debug\main_cm4.o
  .text          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\mainTask.o
  .data          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\mainTask.o
+ .text          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .data          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .bss           0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .text.CycleCounter_Init
+                0x00000000       0x24 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .text.CycleCounter_Get
+                0x00000000        0xc .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_info    0x00000000      0x27b .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_abbrev  0x00000000       0xc3 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_aranges
+                0x00000000       0x28 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_ranges  0x00000000       0x18 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_line    0x00000000      0x187 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_str     0x00000000      0x2e9 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .comment       0x00000000       0x6f .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .debug_frame   0x00000000       0x30 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
+ .ARM.attributes
+                0x00000000       0x37 .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
  .text          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\stdio_user.o
  .data          0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\stdio_user.o
  .bss           0x00000000        0x0 .\CortexM4\ARM_GCC_541\Debug\stdio_user.o
@@ -2728,6 +2746,7 @@ LOAD .\CortexM4\ARM_GCC_541\Debug\system_psoc6_cm4.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\uartTask.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\main_cm4.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\mainTask.o
+LOAD .\CortexM4\ARM_GCC_541\Debug\cycle_counter.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\stdio_user.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\cyfitter_sysint_cfg.o
 LOAD .\CortexM4\ARM_GCC_541\Debug\cymetadata.o
