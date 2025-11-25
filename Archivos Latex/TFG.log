@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  7 SEP 2025 05:56
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  25 NOV 2025 00:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1507,10 +1507,10 @@ Overfull \hbox (2.36871pt too wide) in paragraph at lines 54--54
 table []IND- 
  []
 
-LaTeX Info: Redefining \. on input line 76.
-LaTeX Info: Redefining \% on input line 76.
+LaTeX Info: Redefining \. on input line 75.
+LaTeX Info: Redefining \% on input line 75.
 [16]
-Overfull \hbox (1.9207pt too wide) in paragraph at lines 96--96
+Overfull \hbox (1.9207pt too wide) in paragraph at lines 93--93
  [][] [][][]\TU/lmr/m/n/12 Comparativa entre los distintos algoritmos post-cuán
 ticos ana- 
  []
@@ -2401,7 +2401,7 @@ LaTeX Info: Redefining \% on input line 106.
  (./capitulos/desarrollo.tex
 Capítulo 4.
 )
-Underfull \vbox (badness 1430) has occurred while \output is active []
+Underfull \vbox (badness 2073) has occurred while \output is active []
 
  [55
 
@@ -2570,13 +2570,13 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: 3645A92B7F4D598C06A8B9231F5688C5;21634.
+(rerunfilecheck)             Checksum: 1D13E902964873DAC25724016F049A6F;21236.
  ) 
 Here is how much of TeX's memory you used:
- 63969 strings out of 474879
- 1585509 string characters out of 5763781
- 2332549 words of memory out of 5000000
- 85057 multiletter control sequences out of 15000+600000
+ 63968 strings out of 474879
+ 1585496 string characters out of 5763781
+ 2332122 words of memory out of 5000000
+ 85056 multiletter control sequences out of 15000+600000
  569551 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,16n,107p,2354b,1142s stack positions out of 10000i,1000n,20000p,200000b,200000s
