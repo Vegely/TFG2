@@ -43,7 +43,40 @@ Por último, es importante señalar que existe un paso adicional denominado conf
 		\label{fig:mainprotocol}
 	\end{figure}
 	
+\section{Notación básica}
+El conjunto de los enteros sin signo de 8 bits se denota por \(\mathcal{B} = \{0, \dots, 255\}\). Para representar vectores de tamaño \(k\), se utiliza la notación \(\mathcal{B}^k\), mientras que para vectores de tamaño arbitrario se emplea \(\mathcal{B}^*\).
+\newline
 
+Para trabajar con estos vectores, se utiliza el símbolo \(||\) para denotar la concatenación de dos cadenas, y la notación \(+k\) para indicar el desplazamiento de \(k\) bytes desde el inicio de una cadena. Por ejemplo, si se tiene una cadena \(a\) de longitud \(l\) y se concatena con una cadena \(b\), se obtiene:
+\begin{equation}
+	c = a || b
+\end{equation}
+
+Entonces:
+\begin{equation}
+	b = c + l
+\end{equation}
+
+Para denotar vectores, se utiliza la notación \(v[i]\), donde \(v\) es un vector columna e \(i\) indica la posición del elemento (empezando desde 0, si no se indica lo contrario). Para las matrices, se emplea la notación \(A[i][j]\), donde \(i\) representa la fila y \(j\) la columna. La transpuesta de una matriz \(A\) se denota como \(A^T\).
+\newline
+
+Se denota mediante \(\lfloor x \rceil\) el redondeo de \(x\) al entero más cercano. Por ejemplo: \(\lfloor 2{,}3 \rceil = 2\), \(\lfloor 2{,}5 \rceil = 3\) y \(\lfloor 2{,}8 \rceil = 3\).
+\newline
+
+Se denota mediante $\left\| x\right\|$ al valor absoluto de x.
+\newline
+
+Para las reducciones modulares se emplean dos tipos: una centrada en cero y otra correspondiente a la reducción modular estándar. Para la reducción modular centrada en cero, sea \(\alpha\) un entero par. Esta operación se define como:
+\begin{equation}
+	r' = r \ \text{mod}^{\pm} \alpha \quad \Longrightarrow \quad -\dfrac{\alpha}{2} < r' \le \dfrac{\alpha}{2}
+\end{equation}
+
+Mientras que la reducción modular estándar se denota como:
+\begin{equation}
+	r' = r \ \text{mod}^{+} \alpha \quad \Longrightarrow \quad 0 \le r' < \alpha
+\end{equation}
+
+Finalmente, se denota mediante \(s \leftarrow S\) la selección de \(s\) de manera uniformemente aleatoria del conjunto \(S\). Si \(S\) representa una distribución de probabilidad, entonces \(s\) se selecciona de acuerdo con dicha distribución.
 \section{Algoritmos de Hashing }
 Las funciones de hashing son funciones utilizadas para obtener una salida determinista a partir de un mensaje de entrada. Se caracterizan porque, dada la salida, no resulta factible reconstruir el mensaje original de manera eficiente.
 \newline
@@ -60,20 +93,16 @@ Cada permuta dentro del algoritmo \texttt{Keccak-p}[b,n] se especifica mediante 
 	\item \textbf{El ancho de la permuta} \(b \in\{25, 50, 100, 200, 400, 800, 1600\}\): tamaño de las cadenas a permutar.
 	\item \textbf{El número de rondas} \(n_r\in \mathbb{Z}\): el número de iteraciones de una transformación interna. 
 \end{enumerate}
-\newpage
-Además del valor de \(b\) se definen dos magnitudes auxiliares \(w=b/25\) y \(l=\log_2(b/25)\).
-\subsubsection{Notación básica}
-En esta sección se adopta la siguiente notación
 
+Además del valor de \(b\) se definen dos magnitudes auxiliares \(w=b/25\) y \(l=\log_2(b/25)\) para trabajar con los datos en formato matricial.
+\newline
+
+En esta sección se utiliza la siguiente notación:
 \begin{itemize}
-	\item El símbolo $||$ denota la concatenación de dos cadenas.
 	\item La expresión \(0^j\) representa una cadena de \(j\) bits de ceros.
 	\item La función \(\texttt{len}(P)\) indica la longitud de la cadena \(P\).
-	\item La notación \(Z(j)\) corresponde al \(j\)-ésimo bit de la cadena \(Z\). 
-	Por ejemplo, si \(Z = 10010\), entonces \(Z(4) = 1\).
 	\item La función \(\texttt{trunc}_d(Z)\) devuelve los \(d\) primeros bits de \(Z\).
 \end{itemize}
-
 \subsubsection{Vectores de estado}
 En \texttt{Keccak-p} se trabaja mediante vectores de estado de tamaño \(b\), los cuales convierten las cadenas \(S\) en una matriz \(A(x,y,z)\), donde \(x, y \in \{0,1,2,3,4\}\) y \(z\) toma valores en un rango de tamaño \(w\). Esta representación al igual que la nomenclatura se representan en las figuras \ref{fig:state} y \ref{fig:partsstate}.
 \begin{figure}[h]
@@ -106,208 +135,10 @@ Para convertir de \(A\) a \(S\), se concatenan primero los bits dentro de cada l
 	\end{array}
 \end{equation}
 
-Una vez definidos los vectores de estado, estos se manipulan mediante cinco transformadas, denotadas \(\theta\), \(\rho\), \(\pi\), \(\chi\) y \(\iota\). Todas las transformadas toman como entrada un vector de estado \(A(x,y,z)\) y lo transforman, devolviendo un nuevo vector de estado como salida \(A'(x,y,z)\). La transformada $\iota$ recibe además como parámetro el índice de ronda \(i_r\).
+Una vez definidos los vectores de estado, estos se manipulan mediante cinco transformadas, denotadas \(\theta\), \(\rho\), \(\pi\), \(\chi\) y \(\iota\). Todas las transformadas toman como entrada un vector de estado \(A(x,y,z)\) y lo transforman, devolviendo un nuevo vector de estado como salida \(A'(x,y,z)\). La transformada $\iota$ recibe además como parámetro el índice de ronda \(i_r\). La descripción detallada de las transformadas se encuentra en el anexo \ref{sec:transFIPS}.
 
-\begin{enumerate}
-	\item \textbf{Transformada \(\theta\)}: esta transformada realiza una XOR, $\oplus$, del bit \(A(x,y,z)\) con la paridad de las columnas \(\text{C}(x-1 \ \text{mod } 5,z)\) y $\text{C}(x+1 \ \text{mod } 5,z-1 \ \text{mod w} )$. Para ello, sigue los siguientes pasos:
-	
-	\begin{algorithm}[H]
-		\caption{Transformada \(\theta\) en Keccak-p}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(A\) \\ 
-			\hline
-			\textbf{Salida: }\(A'\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\State Calcular la paridad de cada columna, \(C\):
-			\begin{equation}
-				C(x,z):=A(x,0,z) \oplus A(x,1,z) \oplus A(x,2,z) \oplus A(x,3,z) \oplus A(x,4,z) 
-			\end{equation}
-			\State Combinar la paridad de ambas columnas, \(D\):
-			\begin{equation}
-				D(x,z):=C(x-1 \bmod 5,z) \oplus C(x+1 \bmod 5,z-1 \bmod w)
-			\end{equation}
-			\State Realizar la XOR con el estado:
-			\begin{equation}
-				A'(x,y,z):=A(x,y,z)\oplus D(x,z)
-			\end{equation}
-			\State \Return \(A'\)
-		\end{algorithmic}
-	\end{algorithm}
-	\item \textbf{Transformada \(\rho\)}: esta transformada rota los bits de cada línea un offset módulo la longitud de la línea. Los offsets antes de efectuar el operador módulo se listan en la tabla \ref{tab:rhooffsets}.
-	
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|c|c|c|}
-			\hline
-			& $x = 3$ & $x = 4$ & $x = 0$ & $x = 1$ & $x = 2$ \\
-			\hline
-			$y = 2$ & 153 & 231 & 3 & 10 & 171 \\
-			\hline
-			$y = 1$ & 55 & 276 & 36 & 300 & 6 \\
-			\hline
-			$y = 0$ & 28 & 91 & 0 & 1 & 190 \\
-			\hline
-			$y = 4$ & 120 & 78 & 210 & 66 & 253 \\
-			\hline
-			$y = 3$ & 21 & 136 & 105 & 45 & 15 \\
-			\hline
-		\end{tabular}
-		\caption{Offsets de la transformada $\rho$.}
-		\label{tab:rhooffsets}
-	\end{table}
-	
-	Para realizar estas rotaciones sigue los siguientes pasos:
-	\begin{algorithm}[H]
-		\caption{Transformada \(\rho\) en Keccak-p}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(A\) \\ 
-			\hline
-			\textbf{Salida: }\(A'\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\State Asignar el caso especial de \((x,y,z):=(0,0,z)\):
-			\begin{equation}
-				A'(0,0,z):=A(0,0,z)
-			\end{equation}
-			\For{\(t=0:23\)} \Comment{Para los \(23\) valores restantes}
-			\State Asignar el valor de la tabla \ref{tab:rhooffsets} modulo \(w\) a cada punto:
-			\begin{equation}
-				A'(x,y,z):=A(x,y,[z-(t+1)(t+2)/2 \ \text{mod w}])
-			\end{equation}
-			\State Asignar \((x,y):=(y,2x+3y \ \text{mod } 5)\)
-			\EndFor
-			\State \Return \(A'\)
-		\end{algorithmic}
-	\end{algorithm}
-	\newpage
-	\item \textbf{Transformada \(\pi\)}: esta transformada rota las coordenadas de cada rebanada \((x,y)\) tal como se ilustra en la tabla \ref{tab:piTransform}.
-	
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|c|c|c|c|c|c|}
-					\hline
-			& $x = 3$ & $x = 4$ & $x = 0$ & $x = 1$ & $x = 2$ \\
-			\hline
-			$y = 2$ & (4,3) & (0,4) & (1,0) & (2,1) & (3,2) \\
-			\hline
-			$y = 1$ & (1,3) & (2,4) & (3,0) & (4,1) & (0,2) \\
-			\hline
-			$y = 0$ & (3,3) & (4,4) & (0,0) & (1,1) & (2,2) \\
-			\hline
-			$y = 4$ & (0,3) & (1,4) & (2,0) & (3,1) & (4,2) \\
-			\hline
-			$y = 3$ & (2,3) & (3,4) & (4,0) & (0,1) & (1,2) \\
-			\hline
-		\end{tabular}
-		\caption{Tabla de transformación $\pi$. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}
-		\label{tab:piTransform}
-	\end{table}
-	
-	Para realizar esta rotación se sigue el siguiente algoritmo:
-	\begin{algorithm}[H]
-		\caption{Transformada \(\pi\) en Keccak-p}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(A\) \\ 
-			\hline
-			\textbf{Salida: }\(A'\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\State Calcular la rotación:
-			\begin{equation}
-				A'(x,y,z):=A(x+3y \ \text{mod } 5,x,z)
-			\end{equation}
-			\State \Return \(A'\)
-		\end{algorithmic}
-	\end{algorithm}
-	
-	
-	\item \textbf{Transformada \(\chi\)}: esta transformada actualiza cada bit como el XOR entre el bit original y una combinación no lineal de sus vecinos en la misma fila mediante una puerta AND como se puede ver en la figura \ref{fig:chitransform}.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.4\linewidth]{figuras/PartsState1}
-		\caption{Representación de la transformada $\chi$ realizada en cada fila \cite{FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}
-		\label{fig:chitransform}
-	\end{figure}
-	\newpage
-	Para realizar esta rotación se sigue el siguiente algoritmo:
-	\begin{algorithm}[H]
-		\caption{Transformada \(\chi\) en Keccak-p}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(A\) \\ 
-			\hline
-			\textbf{Salida: }\(A'\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\State Calcular la rotación:
-			\begin{equation}
-				A'(x,y,z):=A(x,y,z)\oplus\{[A(x+1 \ \text{mod } 5 ,y,z)\oplus 1]\& A(x+2 \ \text{mod } 5 ,y,z)\}
-			\end{equation}
-			\State \Return \(A'\)
-		\end{algorithmic}
-	\end{algorithm}
-	
-	\item \textbf{Transformada \(\iota\)}: esta transformada modifica solo algunos bits de la línea \((0,0)\) de tal manera que que dependa del índice de ronda \(i_r\). Para ello, se sigue el siguiente algoritmo:
-	\begin{algorithm}[H]
-		\caption{Transformada \(\iota\) en Keccak-p}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(A\), \(i_r\) \\ 
-			\hline
-			\textbf{Salida: }\(A'\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\State Asignar:
-			\begin{equation}
-				A'(x,y,z):=A(x,y,z)
-			\end{equation}
-			\State Inicializar el vector de ceros \(RC\) de longitud \(w\):
-			\For{j=0:l} \Comment{\(l=\log_2(b/25)\) }
-			\State Asignar
-			\begin{equation}
-				RC(2^j-1):=\texttt{rc}(j+7i_r)
-			\end{equation}
-			\EndFor
-			\State Asignar:
-			\begin{equation}
-				A'(0,0,z):=A'(0,0,z)\oplus RC(z)
-			\end{equation} 
-			
-			\State \Return \(A'\)
-		\end{algorithmic}
-	\end{algorithm}
-	 
-	Este algoritmo depende de la función \(\texttt{rc}(t)\)la cual, dado un entero, $t$, genera un bit mediante un procedimiento basado en un registro de desplazamiento con retroalimentación lineal como se describe en el siguiente algoritmo:
-	\begin{algorithm}[H]
-		\caption{rc}
-		$\begin{array}{p{\textwidth}}
-			\textbf{Entrada: }\(t\)\\ 
-			\hline
-			\textbf{Salida: }\(rc(t)\) \\ 
-			\hline
-		\end{array}$
-		\begin{algorithmic}[1]
-			\If{\(t \ \text{mod } 255 =0\)}
-			\State \Return 1
-			\EndIf
-			\For{i=1:t mod \(255\)}
-			\State \(R:=R||R\)
-			\State \(R[0]:=R[0]\oplus R[8]\)
-			\State \(R[4]:=R[4]\oplus R[8]\)
-			\State \(R[5]:=R[5]\oplus R[8]\)
-			\State \(R[6]:=R[6]\oplus R[8]\)
-			\State \(R:=\texttt{Trunc}_8[R]\) 
-			\EndFor
-			\State \Return \(R[0]\)
-		\end{algorithmic}
-	\end{algorithm}
-\end{enumerate}
-\newpage
+
+
 
 Una vez descritas estas transformadas la función de cada ronda, \(\texttt{Rnd}(A,i_r)\) se define como:
 \begin{equation}
@@ -347,7 +178,7 @@ La función \texttt{sponge}, ilustrada en la figura \ref{fig:esponja}, aplica la
 \end{equation}
 
 Tras finalizar la fase de absorción, se inicia la fase de extracción, en la que se producen bloques de salida de tamaño \(r\) de manera iterativa hasta obtener los \(d\) bits requeridos.
-\newpage
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/esponja}
@@ -402,6 +233,7 @@ El algoritmo de relleno utilizado en la función \texttt{sponge} es el algoritmo
  \begin{equation}
  	m+\texttt{len}(P)=\lambda x
  \end{equation}
+ \newpage
  
 El algoritmo de \texttt{pad10*1}: 
 \begin{algorithm}[H]
@@ -454,99 +286,25 @@ Mediante la tabla 4 del artículo \cite{FIPS202} se muestra la seguridad en bits
 \section{Funcionamiento básico de los algoritmos postcuánticos}
 En esta sección se describe el funcionamiento de los algoritmos postcuánticos analizados en este trabajo. Dado que no se desarrollaron implementaciones propias, sino que se utilizó el código proporcionado por el \acrshort{nist} en la tercera \cite{nistPQCround3} y cuarta \cite{nistPQCround4} ronda del proceso de estandarización, resulta apropiado presentar su funcionamiento aquí en lugar de en la sección de desarrollo.
 \subsection{Fundamentos matemáticos de CRYSTALS-Kyber }
-Se utilizará la misma notación empleada en el artículo \cite{kyber-spec-2021}. El conjunto de los enteros sin signo de 8 bits se denota por \(\mathcal{B} = \{0, \dots, 255\}\). Para representar vectores de tamaño \(k\), se utiliza la notación \(\mathcal{B}^k\), mientras que para vectores de tamaño arbitrario se emplea \(\mathcal{B}^*\).
-\newline
-
-Para trabajar con estos vectores, se utiliza el símbolo \(||\) para denotar la concatenación de dos cadenas, y la notación \(+k\) para indicar el desplazamiento de \(k\) bytes desde el inicio de una cadena. Por ejemplo, si se tiene una cadena \(a\) de longitud \(l\) y se concatena con una cadena \(b\), se obtiene:
-\begin{equation}
-	c = a || b
-\end{equation}
-
-Entonces:
-\begin{equation}
-	b = c + l
-\end{equation}
-
-Para denotar vectores, se utiliza la notación \(v[i]\), donde \(v\) es un vector columna e \(i\) indica la posición del elemento (empezando desde 0, si no se indica lo contrario). Para las matrices, se emplea la notación \(A[i][j]\), donde \(i\) representa la fila y \(j\) la columna. La transpuesta de una matriz \(A\) se denota como \(A^T\).
-\newline
-
-Se denota mediante \(\lfloor x \rceil\) el redondeo de \(x\) al entero más cercano. Por ejemplo: \(\lfloor 2{,}3 \rceil = 2\), \(\lfloor 2{,}5 \rceil = 3\) y \(\lfloor 2{,}8 \rceil = 3\).
-\newline
-
-Se denota mediante $\left\| x\right\|$ al valor absoluto de x.
-\newline
-
-Para las reducciones modulares se emplean dos tipos: una centrada en cero y otra correspondiente a la reducción modular estándar. Para la reducción modular centrada en cero, sea \(\alpha\) un entero par. Esta operación se define como:
-\begin{equation}
-	r' = r \ \text{mod}^{\pm} \alpha \quad \Longrightarrow \quad -\dfrac{\alpha}{2} < r' \le \dfrac{\alpha}{2}
-\end{equation}
-
-Mientras que la reducción modular estándar se denota como:
-\begin{equation}
-	r' = r \ \text{mod}^{+} \alpha \quad \Longrightarrow \quad 0 \le r' < \alpha
-\end{equation}
-
-Finalmente, se denota mediante \(s \leftarrow S\) la selección de \(s\) de manera uniformemente aleatoria del conjunto \(S\). Si \(S\) representa una distribución de probabilidad, entonces \(s\) se selecciona de acuerdo con dicha distribución.
-\newpage
-
-\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (\acrshort{ntt})}
-Para acelerar las operaciones de multiplicación en el esquema basado en retículas, se utiliza la Transformada Teórica de Números (\acrshort{ntt}, por sus siglas en inglés), la cual permite reducir la complejidad temporal de la multiplicación de polinomios desde \(\mathcal{O}(n^2)\), correspondiente al método tradicional, hasta \(\mathcal{O}(n \log(n))\). Para más detalles, consúltese \cite{cryptoeprint:2024/585}.
-\newline
-
-Antes de pasar a explicar el funcionamiento de este método es relevante aclarar que se trabaja sobre el siguiente anillo de polinomios para realizar las operaciones, denotado mediante \(R_q\):
+Se elabora esta sección siguiendo el artículo \cite{kyber-spec-2021}. CRYSTALS-Kyber es un algoritmo postcuántico basado en anillos algebraicos sobre polinomios, denotados como \(R_q\):
 \begin{equation}
 	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}
 \end{equation}
 
-En la implementación especificada de Kyber, según el artículo \cite{kyber-spec-2021}, se utiliza un valor de \(q=3329\) y \(n=256\). Esta elección es esencial para permitir el uso de la multiplicación mediante la Transformada Teórica de Números (\acrshort{ntt}), la cual requiere que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\). Esta condición garantiza la existencia de \(n\) raíces enésimas de la unidad en \(Z_q\), lo cual es necesario para definir la \acrshort{ntt}. La validez de esta afirmación se fundamenta en el siguiente teorema\protect\footnotemark[\value{footnote}]:
+Según la especificación \cite{kyber-spec-2021}, la implementación de referencia utiliza $q=3329$ y $n=256$. Esta elección de parámetros es crítica, pues habilita el uso de la Transformada Teórica de Números (\acrshort{ntt}) para la multiplicación polinómica. El uso de la \acrshort{ntt} reduce la complejidad temporal de la operación desde $\mathcal{O}(n^2)$, correspondiente al método clásico de multiplicación, a $\mathcal{O}(n \log n)$. Para un análisis detallado del véase \cite{cryptoeprint:2024/585}.
 \newline
 
-\begin{theorem}
-	Para \(n\), \(q>1\), el cuerpo  \(Z_q\) tiene una raíz enésima de la unidad si y solo sí \(n| (q-1)\)
-\end{theorem} 
-\begin{proof}
-	Si \(\omega\) es una raíz enésima de la unidad en el conjunto \( \mathbb{Z}_q \), entonces el conjunto:
-	\begin{equation}
-		\Omega = \left\{1, \omega, \omega^2, \dots, \omega^{n-1} \right\}
-	\end{equation}
-	forma un subgrupo cíclico \( H \) del grupo multiplicativo \( G_{q-1} \). Por el Teorema de Lagrange, se concluye que el orden de \( H \) divide al orden de \( G_{q-1} \), es decir, \( n \mid (q-1) \).
-	\newline
-	
-	Dado que \( G_{q-1} \) es también un grupo cíclico, existe un generador \(\alpha\) tal que, por el pequeño teorema de Fermat, se cumple:
-	\begin{equation}
-		\alpha^{q-1} = 1
-	\end{equation}
-	
-	Por lo tanto, el grupo \( G_{q-1} \) puede escribirse como:
-	\begin{equation}
-		G_{q-1} = \left\{1, \alpha, \alpha^2, \dots, \alpha^{q-2} \right\}
-	\end{equation}
-	
-	Si se define \(\omega\) como:
-	\begin{equation}
-		\omega = \alpha^{\frac{q-1}{n}},
-	\end{equation}
-	
-	entonces:
-	\begin{equation}
-		\omega^n = \alpha^{q-1} = 1,
-	\end{equation}
-	
-	y además, para todo \( 0 < k < n \), se cumple:
-	\begin{equation}
-		k \cdot \frac{q-1}{n} < q-1 \quad \Rightarrow \quad \omega^k \neq 1.
-	\end{equation}
-	
-	Por lo tanto, \(\omega\) es una raíz enésima de la unidad en \(\mathbb{Z}_q\).
-\end{proof}
-\footnotetext{
-	Extraído de la siguiente página web: \url{https://www.csd.uwo.ca/~mmorenom/CS874/Lectures/Newton2Hensel.html/node9.html}
-}
-\newpage
-
-Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos.
+Para la correcta definición de la \acrshort{ntt}, es requisito indispensable que \(n| (q-1)\), es decir, que \(n\) divida a \((q-1)\).  Esta condición asegura la existencia de raíces enésimas de la unidad en el cuerpo finito $\mathbb{Z}_q$ (dado que $q$ es primo), consecuencia directa del teorema 2.8 de \cite{lidl_finite_1997}: 
 \newline
 
+\textbf{Proposición 1}
+	Para \(n\), \(q>1\), el cuerpo  \(\mathbb{Z}_q\) tiene una raíz enésima de la unidad si y solo sí \(n| (q-1)\)
+\newline
+
+
+Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos en lugar de los 256 factores lineales.
+\newline
+\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (\acrshort{ntt})}
 A este polinomio se le aplica la transformada \acrshort{ntt} a sus coeficientes, la cual no es más que una variación de la \acrshort{dft} aplicada a cuerpos finitos \(\mathbb{Z}_q\) y aplicada a polinomios de grado \(n\). Para ello, se definen dos operaciones fundamentales:
 \begin{enumerate}
 	\item La transformada directa:
@@ -589,6 +347,7 @@ A continuación, se presenta un ejemplo extraído de \cite{cryptoeprint:2024/585
 	6478\\
 	6607 \end{bmatrix}
 \end{equation}
+\newpage 
 
 Aplicando la transformada inversa, donde la inversa de $\phi=1925$ en \(\mathbb{Z}_{7681}\) es $\phi^{-1}=1213$ y el inverso del orden del polinomio \(n=4\) es \(n^{-1}=5761\):
 \begin{equation}
@@ -615,7 +374,7 @@ Con estas transformadas definidas se define el producto o convolución negativa 
 \end{equation}
 
 Donde la operación \(\circ\) denota la multiplicación elemento a elemento (o punto a punto) entre los vectores en ${Z}_q[X]$.
-\newpage
+\newline
 
 Ahora, queda demostrar que el tiempo de ejecución de la \acrshort{ntt} es de \(\mathcal{O}(n \log(n))\). Para lograr este cometido, se aprovechan dos propiedades que cumplen estas raíces calculadas:
 \begin{enumerate}
@@ -726,8 +485,7 @@ El Aprendizaje con Errores consiste en la tarea de distinguir entre parejas de l
 \newline
 
 La principal utilidad criptográfica del problema \acrshort{lwe} radica en que, para quien no conoce el secreto, resulta computacionalmente difícil distinguir entre pares estructurados y pares aleatorios. En cambio, quien sí conoce el secreto puede identificar fácilmente qué parejas son consistentes con este, lo que permite construir esquemas seguros de cifrado e intercambio de claves.
-\paragraph{\acrshort{lwe} en anillos}
-\mbox{}\\
+\subsubsection{\acrshort{lwe} en anillos}
 
 En Kyber no se parte del problema LWE “puro”, ya que los esquemas basados directamente en \acrshort{lwe} suelen presentar claves de tamaño y tiempos de cálculo con un orden de magnitud \(\mathcal{O}(n^2)\) \cite{Micciancio2009}. Esto se debe a que, al trabajar con matrices genéricas, se carece de la estructura de anillo necesaria para aprovechar multiplicaciones mediante convolución rápida, es decir, la \acrshort{ntt}. En cambio, Kyber se fundamenta en una variante conocida como Modulus-LWE (\acrshort{mlwe}), donde las operaciones de multiplicación matricial se pueden implementar como multiplicaciones de polinomios en $\dfrac{\mathbb{Z}_q[x]}{X^n + 1}$, lo cual permite usar la \acrshort{ntt}.
 \newline
@@ -736,7 +494,7 @@ En Kyber no se parte del problema LWE “puro”, ya que los esquemas basados di
 Antes de describir en detalle el funcionamiento de la \acrshort{mlwe}, conviene introducir primero el problema Ring-LWE (\acrshort{rlwe}). La \acrshort{mlwe} puede entenderse como una extensión modular (un vector) de \acrshort{rlwe}. Este enfoque permite romper la simetría inherente a un anillo y aporta mayor flexibilidad en la selección de parámetros para lograr una mejor relación entre eficiencia y resistencia criptográfica \cite{cryptoeprint:2019/930}.
 \newline
 
-En cuanto a la eficiencia en la reducción del tamaño de las claves, esta puede observarse claramente a través del siguiente ejemplo ilustrativo:
+En cuanto a la eficiencia en la reducción del tamaño de las claves, esta puede observarse claramente a través del ejemplo de la tabla \ref{tab:LWE-RLWE}.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
@@ -912,7 +670,7 @@ Por tanto, la \acrshort{mlwe} es un punto intermedio entre ambos esquemas que pe
 
 
 \subsubsection{Parámetros empleados en Kyber}
-A continuación, se presenta una tabla con los parámetros del esquema Kyber1024 empleado en este trabajo fin de grado.
+A continuación, se presenta la tabla \ref{tab:KyberParams} con los parámetros del esquema Kyber1024 empleado en este trabajo fin de grado.
 \begin{table}[h]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
@@ -927,196 +685,10 @@ A continuación, se presenta una tabla con los parámetros del esquema Kyber1024
 	\label{tab:KyberParams}
 \end{table}
 
-\subsubsection{Algoritmos principales de Kyber \cite{kyber-spec-2021}}
-\label{sub:kybAlg}
-El algoritmo de generación de llaves genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:KyberParams}.
-
-\begin{itemize}
-	\item La función $\text{Parse}(x)$ se encarga de convertir cadenas de bits a su representación \acrshort{ntt} garantizando que los coefientes \(a_i\) sean del tamaño adecuado \(\log_2(q)\approx 11.7\) y no permitiendo desbordamientos \(a_i<q\).
-	\item La función $\text{CBD}_\eta(x)$ muestrea el ruido a partir mediante una distribución binomial. Convierte un vector de bits \(B\in\mathcal{B}^{64\eta}\) a un polinomio \(f\in R_q\).
-	\item La función $\text{Encode}_k(x)$ convierte de un vector de bits \(B\in\mathcal{B}^{32l}\) a un polinomio \(f\in R_q\).
-\end{itemize}
-   \newpage
-
-\begin{algorithm}[H]
-	\caption{Generación llaves en Kyber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Salida: } \(pk\in \mathcal{B}^{12\cdot k\cdot n/8+32}\), \(sk\in \mathcal{B}^{24\cdot k\cdot n/8+96}\) \\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Obtener \(d, z\in\mathcal{B}^{32}\) de manera aleatoria usando una distribución uniforme.
-		\State Obtener dos nuevos parámetros \(\rho, \sigma\) expandiendo el valor inicial \(d\):
-		\begin{equation}
-			(\rho, \sigma):=\text{SHA3-512}(d)
-		\end{equation}
-		\Statex Se crean las matrices para realizar las operaciones de los algoritmos de la  \acrshort{rlwe}.
-		\For{i=0:k-1}
-			\For{j=0:k-1}
-				\State $\hat{A}[i][j]:=\text{Parse}[\text{SHAKE-128}(\rho,j,i)]$ \Comment{Muestreo matriz en el dominio NTT.}
-			\EndFor
-		\EndFor
-		\State $N:=0$
-		\For{i=0:k-1}
-			\State $s[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\sigma,N)]$ \Comment{Muestreo secreto.}
-			\State $N:= N+1$
-		\EndFor
-		\For{i=0:k-1}
-			\State $e[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\sigma,N)]$ \Comment{Muestreo error.}
-			\State $N:= N+1$
-		\EndFor
-		\State Se convierten las magnitudes mediante la NTT para agilizar los cálculos:
-		\begin{equation}
-				\begin{array}{l}
-					\hat{s}:=\text{NTT}(s)\\
-					\hat{e}:=\text{NTT}(e)\\
-					\hat{t}:=\hat{A}\circ\hat{s}+\hat{e}\\
-				\end{array} 	
-		\end{equation}
-		\State Se calcula la llave pública:
-		\begin{equation}
-			pk:=\text{Encode}_{12}(\hat{t}\ \text{mod}^{+}\text{q} )||\rho 
-		\end{equation}
-		\Statex \Comment{Se envía $\hat{b}$ junto con la semilla $\rho$ para el calculo de $\hat{A}$.}
-		\Statex \Comment{Así se reduce el tamaño de la clave enviada.}
-		\State Se calcula la llave secreta:
-		\begin{equation}
-			sk:=\text{Encode}_{12}(\hat{s}\ \text{mod}^{+}\text{q} )||pk||\text{SHA3-256}(pk)||z
-		\end{equation}
-		\Statex \Comment{Se realiza esta concatenación para cumplir la seguridad \acrshort{cca2} mediante la \acrshort{tfo}.}
-		\State \Return $(pk,sk)$
-	\end{algorithmic}
-\end{algorithm}
-
-
-En el algoritmo de cifrado Kyber se obtiene el texto cifrado \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\) mediante el uso de la \acrshort{ntt}.
-\begin{itemize}
-	\item Las funciones $\text{Compress}_q(x,y)$ y $\text{Decompress}_q(x,y)$ se usan para reducir el tamaño de los textos cifrados basándose en el fundamento descrito para los mecanismos basados en la \acrshort{rlwe}. 
-	\item La función $\text{Decode}_k(x)$  convierte de un polinomio \(f\in R_q\) a un vector de bits \(B\in\mathcal{B}^{32l}\).
-\end{itemize}
-\newpage
-\begin{algorithm}[H]
-	\caption{Cifrado Kyber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{12\cdot k\cdot n/8+32}\), \(m\in \mathcal{B}^{32}\), \(\gamma\in \mathcal{B}^{32}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{d_u\cdot k\cdot n/8+d_v\cdot n/8}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Calcular los parámetros necesarios:
-		\State \(N:=0\)
-		\For{i=0:k-1}
-		\State $r[i]:= \text{CBD}_{\eta_1}[\text{SHAKE-256}(\gamma,N)]$ \Comment{Muestreo elemento \(r\).}
-		\State $N:= N+1$
-		\EndFor
-		\For{i=0:k-1}
-		\State $e_1[i]:= \text{CBD}_{\eta_2}[\text{SHAKE-256}(\gamma,N)]$ \Comment{Muestreo del primer error.}
-		\State $N:= N+1$
-		\EndFor
-		\State \(e_2[i]:= \text{CBD}_{\eta_2}[\text{SHAKE-256}(\gamma,N)]\) \Comment{Muestreo del segundo error.}
-		\State Calcular los valores de los textos cifrados:
-		\begin{equation}
-			\begin{array}{l}
-				\hat{r}:=\text{NTT}(r)\\
-				u:= \text{NTT}^{-1}(\hat{A}^T\circ \hat{r})+e_1\\
-				v:=\text{NTT}^{-1}(\hat{t}^T\circ \hat{r})+e_2+ \text{Decompress}_q[\text{Decode}_1(m),1]\\
-				c_1:=\text{Encode}_{d_u}[\text{Compress}_q(u,d_u)]\\
-				c_2:=\text{Encode}_{d_v}[\text{Compress}_q(v,d_v)]
-			\end{array}
-		\end{equation}
-		\State \Return (\(c:=c1||c2\))
-	\end{algorithmic}
-\end{algorithm}
-
-
- En el algoritmo de encapsulado Kyber a partir de la llave pública \(pk\) se obtiene el texto cifrado \(c\) y el secreto compartido \(k\). 
-\begin{algorithm}[H]
-	\small 
-	\caption{Encapsulado Kyber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{12\cdot k\cdot n/8+32}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{d_u\cdot k\cdot n/8+d_v\cdot n/8}\), \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Obtener los valores necesarios a partir de la llave pública:
-		\begin{equation}
-			\begin{array}{l}
-			\hat{t}:=\text{Decode}_{12}(pk)\\
-			p:=pk+12\cdot k\cdot n/8
-			\end{array} 
-		\end{equation}
-		\State Calcular la matriz \(\hat{A}^T\) a partir de \(\rho\) codificado en la llave pública.
-		\State Obtener \(m'\) de manera aleatoria usando una distribución uniforme.
-		\State Obtener los parámetros \(m, \kappa, \gamma\) a partir de \(m'\) y la llave pública:
-		\begin{equation}
-			\begin{array}{l}
-				m:=\text{SHA3-256}(m')\\
-				(\kappa,\gamma):=\text{SHA3-512}[m||\text{SHA3-256}(pk)]
-			\end{array} 
-		\end{equation}
-		\State Obtener el texto cifrado:
-		\begin{equation}
-			c \gets \text{Cifrado Kyber}(pk,m,\gamma)
-		\end{equation}
-		\State Calcular el secreto compartido:
-		\begin{equation}
-			k:= \text{SHAKE-256}[\kappa||\text{SHA3-256}(c)]
-		\end{equation}
-		\State \Return (\(c,k\))
-	\end{algorithmic}
-\end{algorithm}
-
-En el algoritmo de decapsulado Kyber a partir del texto cifrado \(c\)  y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
-\begin{algorithm}[H]
-	\small
-	\caption{Decapsulado Kyber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(c\in \mathcal{B}^{d_u\cdot k\cdot n/8+d_v\cdot n/8}\), \(sk\in \mathcal{B}^{24\cdot k\cdot n/8+96}\)\\ 
-		\hline
-		\textbf{Salida: } \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Obtener los valores descomprimidos \(u\), \(v\) y el valor de la llave secreta \(s\) en el dominio NTT:
-		\begin{equation}
-			\begin{array}{l}
-				u:=\text{Decompress}_q[\text{Decode}_{d_u}(c,d_u)]\\
-				v:=\text{Decompress}_q[\text{Decode}_{d_v}(c+d_u\cdot k\cdot n/8,d_v)]\\
-				\hat{s}:=\text{Decode}_{12}(sk)
-			\end{array}
-		\end{equation}
-		\State Obtener el mensaje \(m'\) cifrado anteriormente:
-		\begin{equation}
-			m':=\text{Encode}_1[\text{Compress}_q\left(v-\text{NTT}^{-1}(\hat{s}^T\circ \text{NTT}(u)),1\right)]
-		\end{equation}
-		\Statex Para Garantizar la seguridad ante ataques de canal lateral se vuelve a calcular el texto cifrado.
-		\State Cifrar \(m'\) con la llave pública \(pk\) y el parámetro \(\gamma\) para obtener el texto cifrado \(c'\):
-		\begin{equation}
-			\begin{array}{l}
-				pk:=sk+12\cdot k\cdot n/8\\
-				h:=sk+24\cdot k\cdot n/8+32\\
-				(\kappa, \gamma):=\text{SHA3-512}[m'||h]\\
-				c'\gets \text{Cifrado Kyber}(pk,m',\gamma)
-			\end{array}
-		\end{equation}
-		\State Comparar los textos cifrados obtenidos, añadiendo un nuevo parámetro \(z\) para textos cifrados no válidos.
-		\begin{equation}
-			z:=sk+24\cdot k \cdot n/8 +64
-		\end{equation}
-		\If{$c==c'$}
-		\State \Return \(K:=\text{SHAKE-256}[\kappa||\text{SHA3-256}(c)]\) \Comment{Mismo secreto compartido.}
-		\Else
-		\State \Return \(K:=\text{SHAKE-256}[z||\text{SHA3-256}(c)]\) \Comment{No distinguible de llaves válidas.}
-		\EndIf
-	\end{algorithmic}
-\end{algorithm}
 
 
 \subsection{Fundamentos matemáticos de Saber}
-Para elaborar esta sección se parte del artículo de Saber adjuntado con la sumisión al NIST \cite{saber-spec-2020}. En Saber al igual que en Kyber se trabaja en un anillo de la forma:
+Para elaborar esta sección se parte del artículo de Saber adjuntado con la proposición al NIST \cite{saber-spec-2020}. En Saber al igual que en Kyber se trabaja en un anillo de la forma:
 \begin{equation}
 	R_q=\dfrac{\mathbb{Z}_q}{X^n+1}
 \end{equation}
@@ -1129,7 +701,8 @@ Con \(n=256\), pero con la diferencia de que como \(q=2^{13}\), no es posible ut
 
 \subsubsection{Algoritmos de Toom-Cook y Karatsuba}
 Dado que en Saber no se cumple la condición \(n|(q-1)\) para poder utilizar la \acrshort{ntt}, se recurre a los algoritmos de Karatsuba \cite{Karatsuba} y Toom-Cook-4 \cite{ToomCook} para acelerar las multiplicaciones polinómicas. Para ello se sigue la estructura del diagrama de la figura \ref{fig:ToomKara}.
-\newline
+\newpage
+
 \begin{figure}[H]
 	\centering
 	\begin{adjustbox}{width=\linewidth}
@@ -1306,15 +879,15 @@ Una vez hechas estas descomposiciones recursivas se van deshaciendo las particio
  
  \newpage
  
-\subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\acrshort{mlwr})} +
+\subsubsection{Aprendizaje Con Redondeo Modular o Modular Learning With Rounding (\acrshort{mlwr})} 
 \label{sec:lwr}
-Los esquemas basados en la \acrshort{lwr} \cite{modlwr} emplean operadores de redondeo y, a diferencia de los esquemas de \acrshort{lwe}, no requieren muestrear ruido de forma explícita, ya que éste se obtiene a partir de escalar y redondear los coeficientes. Por esta razón, en ocasiones se hace referencia a estos esquemas como una variante \esquote{desaleatorizada} de \acrshort{lwe}. 
+Los esquemas basados en la \acrshort{lwr} \cite{modlwr} emplean operadores de redondeo y, a diferencia de los esquemas de \acrshort{lwe}, no requieren muestrear ruido de forma explícita, ya que éste se obtiene a partir de reescalar y redondear los coeficientes. Por esta razón, en ocasiones se hace referencia a estos esquemas como una variante \esquote{desaleatorizada} de \acrshort{lwe}. 
 \newline
 
 Asimismo, al igual que en el caso de Kyber, con el fin de incrementar la seguridad del esquema y mitigar posibles ataques contra la estructura del anillo, se recurre a la versión modular de la \acrshort{lwr}, la cual consiste en considerar dicho anillo en un mayor número de dimensiones. 
 \newline
 
-Por tanto, el problema de la \acrshort{mlwr}se formula como la dificultad de distinguir entre parejas de muestras uniformes \((a,u)\) y parejas \((a,b)\) generadas de la siguiente manera:
+Por tanto, el problema de la \acrshort{mlwr} se formula como la dificultad de distinguir entre parejas de muestras uniformes \((a,u)\) y parejas \((a,b)\) generadas de la siguiente manera:
 \begin{equation}
 	\begin{array}{l}
 		a \leftarrow \mathcal{U}(R_q^{l\times l}) \\ \\
@@ -1352,6 +925,7 @@ En Saber los protocolos de generación de claves se definen de la siguiente mane
 \end{algorithm}
 
 En este algoritmo los valores $\varepsilon_i$ representan el valor \(\varepsilon_i=\log_2 (i)\) mientras que \(h\in  R_q\) es un polinomio con todos sus coeficientes con iguales a \(2^{\varepsilon_q-\varepsilon_p-1}\) para emular el comportamiento del redondeo.
+\newpage
 
 \begin{algorithm}[H]
 	\caption{Cifrado \acrshort{mlwr}} 
@@ -1520,7 +1094,7 @@ En la \acrshort{mlwr} esta probabilidad se generaliza para que se exprese unicam
 
 
 \subsubsection{Parámetros empleados en Saber}
-A continuación, se presenta una tabla con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
+A continuación, se presenta la tabla \ref{tab:SaberParams} con los parámetros del esquema FireSaber empleado en este trabajo fin de grado.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
@@ -1535,201 +1109,7 @@ A continuación, se presenta una tabla con los parámetros del esquema FireSaber
 	\label{tab:SaberParams}
 \end{table}
 
-\subsubsection{Algoritmos principales de Saber \cite{saber-spec-2020} }
- El algoritmo de generación de llaves en Saber genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:SaberParams}. Teniendo en cuenta que \(\varepsilon_i=\log_2 (i)\).
- \begin{itemize}
- 	\item La función $\texttt{POLVEC}_x\texttt{2BS}$(y) convierte un vector \(y\in R_x^{l\times 1}\) en una cadena de bytes de longitud \(l\cdot k \cdot 256/8\) con \(x=2^k\).
- 	\item El operador \(\circ\) denota la multiplicación estándar de una matriz \(\in R_x^{l\times l}\) por un vector \(\in R_x^{l}\) . Donde uno de los polinomios se multiplica utilizando el algoritmo de la figura \ref{fig:ToomKara}.
- 	\item La función \texttt{HammingWeight}(x) devuelve la distancia de Hamming del vector \(x\), es decir, el número de simbolos distintos de \(0\) en \(x\).
- 	\item Se define el símbolo $\varepsilon_i$ como \(\varepsilon_i=\log_2 (i)\).
- 	\item Los valores de las constantes \(h\), \(h_1\) y \(h_2\) se pueden consultar en la sección \ref{sec:lwr}.
- \end{itemize}
- \newpage
-\begin{algorithm}[H]
-	\small
-	\caption{Generación llaves en Saber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Salida: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\), \(sk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_q/8+n\cdot l \cdot \varepsilon_p/8+96}\) \\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Muestrear las semillas de la matriz \(A\), secreto y un parámetro auxiliar \(z\), \(seed_A\), \(seed_s\) y \(z\in B^{32}\) de manera aleatoria usando una distribución uniforme
-		\State Modificar la semilla \(seed_A\) mediante hashing:
-		\begin{equation}
-			seed_A:=\texttt{SHAKE-128}(seed_A,32)
-		\end{equation}
-		\State Se genera la matriz \(A\) a partir de la semilla:
-		\begin{equation}
-			buf:=\texttt{SHAKE-128}(seed_A,l^2\cdot n \cdot \varepsilon_q/8) 
-		\end{equation}
-		\Statex \Comment{Se genera $buf$ un vector de \(l^2\cdot n\) cadenas de longitud $\varepsilon_q$.}
-		\State \(k:=0\)
-		\For{i=0:l-1}
-			\For{j=0:l-1}
-				\For{k=0:n-1}
-				\State $A[i,j][k]:=buf[k]$
-				\State $k:=k+1$
-				\EndFor
-			\EndFor
-		\EndFor
-		\State Se genera el secreto \(s\) a partir de la distribución binomial:
-		\begin{equation}
-			buf:=\texttt{SHAKE-128}(seed_s,l\cdot n \cdot \mu/8) 
-		\end{equation}
-		\Statex \Comment{Se genera $buf$ un vector de \(2\cdot l\cdot n\) cadenas de $\mu/2$ bits.}
-		\State \(k:=0\)
-		\For{i=0:l-1}
-			\For{j=0:n-1}
-				\State $s[i,j]:=\texttt{HammingWeight}(buf[k])-\texttt{HammingWeight}(buf[k+1]) \ \text{mod}^{+}\text{q}$
-				\State $k:=k+2$
-			\EndFor
-		\EndFor
-		\State Se calcula el parámetro \(b\):
-		\begin{equation}
-			b:=\left(A^T\circ s + h  \ \text{mod}^{+}\text{q}\right) / 2^{\varepsilon_q-\varepsilon_p} 
-		\end{equation}
-		\State se calcula la llave pública
-		\begin{equation}
-			pk:=seed_A|| \texttt{POLVEC}_q\texttt{2BS}(b)
-		\end{equation}
-		\State Se calcula la llave secreta
-		\begin{equation}
-			sk:=z||\texttt{SHA3-256}(pk)||pk||\texttt{POLVEC}_q\texttt{2BS}(s)
-		\end{equation}
-		\State \Return $(pk,sk)$
-	\end{algorithmic}
-\end{algorithm}
 
-\newpage
-
-En el algoritmo de cifrado de Saber se obtiene el texto cifrado \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\).
-\begin{itemize}
-	\item La función $\texttt{BS2POLVEC}_x(y)$ convierte una cadena de bytes \(y\) de longitud \(l\cdot k \cdot 256/8\) en un vector en \(R_x^{l\times 1}\).
-	\item La función $\texttt{POL}_x\texttt{2BS}(y)$ convierte un polinomio \(y\in R_x\) en una cadena de bytes de longitud \(k\cdot 256/8\).
-\end{itemize}
-\begin{algorithm}[H]
-	\small
-	\caption{Cifrado Saber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\), \(m\in \mathcal{B}^{32}\) , \(\gamma\in \mathcal{B}^{32}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Se extrae la matriz \(A\) y la llave pública \(pk'\) a partir de \(pk\).
-		\State Se genera un nuevo secreto \(s'\) de manera similar que en el algoritmo de generación de llaves.
-		\State Se calcula el parámetro \(b'\):
-		\begin{equation}
-			b':=\left(A\circ s' + h  \ \text{mod}^{+}\text{q}\right) / 2^{\varepsilon_q-\varepsilon_p} 
-		\end{equation}
-		\State Se obtiene el parámetro \(b\) de la llave pública:
-		\begin{equation}
-			b:=\texttt{BS2POLVEC}_p(pk')
-		\end{equation}
-		\State se calcula el parámetro auxiliar \(v'\):
-		\begin{equation}
-			v':= b^T \circ (s' \ \text{mod}^{+}\text{p}) \ \text{mod}^{+}\text{p}
-		\end{equation}
-		\State Se calcula el texto cifrado \(c\)
-		\begin{equation}
-			c:=(v'-m\cdot 2^{\varepsilon_p-1}+h_1 \ \text{mod}^{+}\text{p} )/2^{\varepsilon_p-\varepsilon_t}
-		\end{equation}
-		\State \Return \(c:=\texttt{POL}_T\texttt{2BS}(c)||\texttt{POLVEC}_p\texttt{2BS}(b')\)
-	\end{algorithmic}
-\end{algorithm}
- 
-
-En el algoritmo de encapsulado Saber a partir de la llave pública \(pk\) se obtiene el texto cifrado \(c\) y el secreto compartido \(k\). 
-\begin{algorithm}[H]
-	\small 
-	\caption{Encapsulado Saber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_p/8+32}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\), \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Se muestrea el mensaje \(m\in \mathcal{B}^{32}\) de manera aleatoria usando una distribución uniforme.
-		\State Se hashea el mensaje \(m\) y la llave pública \(pk\) para crear una variable \(buf\):
-		\begin{equation}
-			\begin{array}{l}
-				m:=\texttt{SHA3-256}(m)\\
-				hash_{pk}:=\texttt{SHA3-256}(pk)\\
-				buf:=hash_{pk}||m
-			\end{array}
-		\end{equation}
-		\State Se hashea el buffer para obtener dos cadenas del mismo tamaño y así inicializar la semilla aleatoria $\gamma$:
-		\begin{equation}
-			(\gamma||r):=\texttt{SHA3-512}(buf)
-		\end{equation}
-		\State Se ejecuta el cifrado para obtener el texto cifrado \(c\):
-		\begin{equation}
-			c:=\texttt{Cifrado Saber}(pk,m,\gamma)
-		\end{equation}
-		\State Se calcula el secreto compartido \(k\):
-		\begin{equation}
-			k:=\texttt{SHA3-256}(r||\texttt{SHA3-256}(c))
-		\end{equation}
-		\State \Return (\(c,k\))
-	\end{algorithmic}
-\end{algorithm}
-\newpage
-En el algoritmo de decapsulado Saber a partir del texto cifrado \(c\) y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
-\begin{algorithm}[H]
-	\small
-	\caption{Decapsulado Saber}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\), \(sk\in \mathcal{B}^{n\cdot l \cdot \varepsilon_q/8+n\cdot l \cdot \varepsilon_p/8+96}\)\\ 
-		\hline
-		\textbf{Salida: } \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Obtener el valor de la llave secreta \(sk'\) y el valor \(z\) de \(sk\) 
-		\State Se obtiene el polinomio del secreto \(s\)
-		\begin{equation}
-			s:=\texttt{BS2POLVEC}_q(sk')
-		\end{equation}
-		\State se descompone el texto cifrado en sus partes
-		\begin{equation}
-			(c_m||ct):=c
-		\end{equation}
-		\State A partir de estos valores se calcula el mensaje cifrado anteriormente \(m'\):
-		\begin{equation}
-			\begin{array}{l}
-				c_m:=c_m\cdot 2^{\varepsilon_p-\varepsilon_t}\\
-				b':=\texttt{BS2POLVEC}_p(ct)\\
-				m':=(b'^T \circ (s \ \text{mod}^{+}\text{p}) -c_m +h_2 \ \text{mod}^{+}\text{p})/2^{\varepsilon_p-1}
-			\end{array}
-		\end{equation}
-		\State Una vez obtenido el mensaje se transforma en una cadena \(m\) :
-		\begin{equation}
-			m:=\texttt{POL}_2\texttt{2BS}(m')
-		\end{equation}
-		\State Se calculan las variables \(\gamma\) y \(r\):
-		\begin{equation}
-			(\gamma||r):=\texttt{SHA3-512}(buf)
-		\end{equation}
-		\State Se calcula nuevamente el texto cifrado \(c'\) para comprobar que es igual que \(c\) y cumplir la \acrshort{tfo}:
-		\begin{equation}
-			c':=\texttt{Cifrado Saber}(pk,m,\gamma)
-		\end{equation}
-		\If{c==c'}
-		\State Asignar \(k\):
-		\begin{equation}
-			k:=\texttt{SHA3-256}(r||\texttt{SHA3-256}(c'))
-		\end{equation}
-		\Else
-		\State Asignar \(k\):
-		\begin{equation}
-			k:=\texttt{SHA3-256}(z||\texttt{SHA3-256}(c'))
-		\end{equation}
-		\EndIf
-		\State \Return k
-	\end{algorithmic}
-\end{algorithm}
 \newpage
 \subsection{Fundamentos matemáticos de Hamming Quasi-Cyclic (\acrshort{hqc})}
 A diferencia de Kyber y Saber, que se basan en problemas matemáticos relacionados con retículas, el esquema Hamming Quasi-Cyclic (\acrshort{hqc}) \cite{hqc-spec-2022} se fundamenta en la criptografía basada en códigos. 
@@ -1741,7 +1121,7 @@ El proceso de la criptografía basada en código se asemeja a las técnicas de c
 En \acrshort{hqc}, se trabaja en el espacio vectorial \(\nu\) de dimensión \(n\) sobre el cuerpo binario \(\mathbb{F}_2\), es decir, \(\mathbb{F}_2^n\). Un elemento de \(\nu\) también puede considerarse como un vector fila en el anillo de polinomios \(\mathcal{R} = \mathbb{F}_2[x]/(C^n-1)\), al cual es isomórfico. 
 
 \subsubsection{Códigos cuasi-cíclicos y problema de decodificación por síndrome}
-Para elaborar esta sección se ha utilizado el artículo sobre \acrshort{hqc}, así como la sumisión al \acrshort{nist} \cite{hqc-spec-2022}. Los códigos cíclicos y el problema de decodificación por síndrome constituyen el fundamento matemático que sostiene el funcionamiento de \acrshort{hqc}, de manera análoga a cómo la \acrshort{mlwe} y la \acrshort{mlwr} son los fundamentos de Kyber y Saber, respectivamente.
+Para elaborar esta sección se ha utilizado el artículo sobre \acrshort{hqc}, así como la entrega al \acrshort{nist} \cite{hqc-spec-2022}. Los códigos cíclicos y el problema de decodificación por síndrome constituyen el fundamento matemático que sostiene el funcionamiento de \acrshort{hqc}, de manera análoga a cómo la \acrshort{mlwe} y la \acrshort{mlwr} son los fundamentos de Kyber y Saber, respectivamente.
 \newline
 
 No obstante, antes de pasar a definirlos es necesario introducir algunas definiciones preliminares:
@@ -2048,7 +1428,7 @@ En el anexo \ref{chap:ReedSM} se encuentra un ejemplo numérico de codificación
  
 Por último, es importante señalar que, al igual que en \textit{Saber}, en \acrshort{hqc} se emplean los algoritmos de Karatsuba y Toom-Cook para acelerar la multiplicación de polinomios, aunque con ciertas variaciones en el número de divisiones. En particular, se utiliza el algoritmo de Karatsuba tradicional, dividiendo los polinomios en dos mitades, y Toom-Cook-3, dividiéndolos en tres partes.
 \subsubsection{Parámetros empleados en \acrshort{hqc}}
-A continuación, se presenta una tabla con los parámetros del esquema \acrshort{hqc}-5 empleado en este trabajo fin de grado.
+A continuación, se presenta la tabla \ref{tab:HQCParams} con los parámetros del esquema \acrshort{hqc}-5 empleado en este trabajo fin de grado.
 \begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{1.2}
@@ -2062,192 +1442,7 @@ A continuación, se presenta una tabla con los parámetros del esquema \acrshort
 	\caption{Tabla con los parámetros utilizados por \acrshort{hqc}-5. Mediante \(n_1\) se denota la longitud del código de Reed-Solomon, mediante \(n_2\) se denota la longitud del código Reed-Muller y \(n\) es el menor número primitivo que sea mayor que \(n_1\cdot n_2\). El párametro \(k\) es la dimensión de los códigos. Mediante $\omega$, $\omega_r$, y $\omega_e$ se denotan los pesos de hamming de los vectores de la llave privada, de la aleatoriedad \(r1,r2\) y del error respectivamente. $\delta$ denota la probabilidad de fallo para obtener el mismo secreto compartido.}
 	\label{tab:HQCParams}
 \end{table}
-\subsubsection{Algoritmos principales de \acrshort{hqc} \cite{hqc2025}}
-El algoritmo de generación de llaves en \acrshort{hqc} genera las llaves pública \((pk)\) y privada \((sk)\) a partir de los parámetros de la tabla \ref{tab:HQCParams}.
-\begin{itemize}
-	\item La función \texttt{SHAKE256.absorb} implementa el mecanismo de absorción o inicialización de la función como se puede ver en la figura \ref{fig:esponja}. Recibe como argumento el valor inicial de la función.
-	\item La función \texttt{SHAKE256.squeeze} implementa el mecanismo de aplastado o obtención de la salida como se puede ver en la figura \ref{fig:esponja}. Recibe como argumento el valor obtenida de la fase de absorción y la longitud de salida deseada.
-	\item La función $\texttt{SampleFixedWeightVector}_{\$}(x,y)$ genera vectores en base al estado \(x\) y peso fijo \(y\) con distribución uniforme usando rechazo aleatorio, es decir, si un vector no cumple la condición de peso de Hamming se rechaza y se genera uno nuevo.
-	\item La función \texttt{SampleVect} muestrea un vector al azar a partir de \texttt{SHAKE256.squeeze}.
-	\item Los separadores dentro de las funciones de hashing se usan para evitar colisiones entre cadenas.
-\end{itemize}
-\newpage
-\begin{algorithm}[H]
-	\small
-	\caption{Generación llaves en \acrshort{hqc}}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Salida: } \(pk\in \mathcal{B}^{\lceil n/8 \rceil+32}\), \(sk\in \mathcal{B}^{\lceil n/8 \rceil+\lceil k/8 \rceil+96}\) \\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Muestrear la semilla \(seed\in \mathcal{B}^{32}\) a partir de una distribución uniforme.
-		\State Inicializar el mecanismo de absorción
-		\begin{equation}
-			ctx:=\texttt{SHAKE256.absorb}(seed)
-		\end{equation} 
-		\State Absorber los primeros \(32\) bytes generados mediante la función \texttt{keccak} en \(seed\) y los siguientes \(256\) bytes en \(\sigma\).
-		\begin{equation}
-			(seed||\sigma):=\texttt{SHAKE256.absorb}(ctx,(32,256))
-		\end{equation}
-		\State Computar los valores de las semillas de la llave pública y de la llave privada a partir de la semilla:
-		\begin{equation}
-			(seed_{sk}||seed_{pk}):=\texttt{SHA3-512}(seed||{\text{I\_SEPARATOR}})
-		\end{equation}
-		\State Se crea la salida de la absorción para generar las llaves pública y privada:
-		\begin{equation}
-			\begin{array}{l}
-				ctx_{pk}:=\texttt{SHAKE256.absorb}(seed_{pk})\\
-				ctx_{sk}:=\texttt{SHAKE256.absorb}(seed_{sk})
-			\end{array}
-		\end{equation}
-		\State Se muestrean vectores \(x,y\) cada uno de peso de Hamming \(\omega\) en base al estado $ctx_{pk}$:
-		\begin{equation}
-			(x||y):=\texttt{SampleFixedWeightVector}_{\$}(ctx_{sk}, \omega)
-		\end{equation}
-		\State Se muestrea el vector \(h\) para calcular la llave pública:
-		\begin{equation}
-			h:=\texttt{SampleVect}(ctx_{pk})
-		\end{equation}
-		\State Se calcula el valor \(s\):
-		\begin{equation}
-			s:=x+h\cdot y
-		\end{equation}
-		\State Se calcula la llave pública:
-		\begin{equation}
-			pk:=seed_{pk}||s
-		\end{equation}
-		\State Se calcula la llave privada:
-		\begin{equation}
-			sk:=pk||seed_{sk}||\sigma||seed
-		\end{equation}
-		\State \Return $(pk,sk)$
-	\end{algorithmic}
-\end{algorithm}
 
-
-
-En el algoritmo de cifrado de \acrshort{hqc} se obtiene el texto cifrado \(c\) a partir de la llave pública \(pk\), un mensaje \(m\) y una semilla aleatoria \(\gamma\).
-\begin{itemize}
-	\item La función \texttt{SampleFixedWeightVector} genera vectores de peso fijo mediante una función de selección por lo cual se introduce un pequeño sesgo, pero en el artículo de \acrshort{hqc} se describe como esto no supone un problema \cite{hqc2025}.
-	\item La función $\texttt{Truncate}(x,y)$ mantiene los \(y\) bits menos significativos de \(x\).
-	\item La función \texttt{Encode} aplica la codificación mediante Reed-Solomon y Reed-Muller descrita anteriormente.
-\end{itemize}
-\newpage
-\begin{algorithm}[H]
-	\small
-	\caption{Cifrado \acrshort{hqc}}
-	\label{alg:hqc}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{\lceil n/8 \rceil+32}\), \(m\in \mathcal{B}^{256}\) , \(\gamma\in \mathcal{B}^{16}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{n\cdot l\cdot \varepsilon_p/8+n\cdot \varepsilon_t/8}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Se obtiene el valor de la semilla de la llave pública \(seed_{pk}\) y de \(s\) a partir de la llave pública \(pk\).
-		\State Se calcula el estado a partir de la semilla
-		\begin{equation}
-			ctx_{pk}:=\texttt{SHAKE256.absorb}(seed_{pk})
-		\end{equation}
-		\State Se obtiene el parámetro \(h\) para posteriormente calcular el texto cifrado:
-		\begin{equation}
-			h:=\texttt{SampleVect}(ctx)
-		\end{equation}
-		\State Se inicializa el estado a partir de la aleatoriedad:
-		\begin{equation}
-			ctx_{\theta}:=\texttt{SHAKE256.absorb}(\gamma)
-		\end{equation}
-		\State Obtener los valores para el cálculo del texto cifrado:
-		\begin{equation}
-			(r_2||e||r_1):=\texttt{SampleFixedWeightVector}(ctx_{\theta})
-		\end{equation}
-		\State Se calcula el valor de \(u\):
-		\begin{equation}
-			u:=r_1+h\cdot r_2
-		\end{equation}
-		\State Se calcula el valor de \(v\): \Comment{$l$ es el valor de bits con los que se trabaja \(n-n_1\cdot n_2\)}
-		\begin{equation}
-			v:=\texttt{Encode}(m)+\texttt{Truncate}(s\cdot r_2+e,l)
-		\end{equation}
-		\State \Return $c:=u||v$
-	\end{algorithmic}
-\end{algorithm}
-
-
-En el algoritmo de encapsulado \acrshort{hqc} a partir de la llave pública \(pk\) se obtiene el texto cifrado \(c\) y el secreto compartido \(k\). 
-\begin{algorithm}[H]
-	\small 
-	\caption{Encapsulado \acrshort{hqc}}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(pk\in \mathcal{B}^{\lceil n/8 \rceil+32}\)\\ 
-		\hline
-		\textbf{Salida: } \(c\in \mathcal{B}^{\lceil n/8 \rceil+\lceil n_1\cdot n_2 \rceil+16}\), \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Obtener el mensaje \(m\) y la aleatoriedad \(salt\) a partir de sus distribuciones uniformes aleatorias.
-		\State Calcular el secreto compartido y la aleatoriedad $\gamma$:
-		\begin{equation}
-			(k||\gamma):=\texttt{SHA3-512}(\texttt{SHA3-256}(pk||\text{H\_SEPARATOR})||m||salt||{\text{G\_SEPARATOR}})
-		\end{equation}
-		\State Calcular el texto cifrado:
-		\begin{equation}
-			c:=\texttt{Cifrado Saber}(pk,m,\gamma)|| salt
-		\end{equation}
-		\State \Return (\(c,k\))
-	\end{algorithmic}
-\end{algorithm}
-\newpage
-En el algoritmo de decapsulado \acrshort{hqc} a partir del texto cifrado \(c\) y la llave secreta \(sk\) se puede obtener el secreto compartido \(k\).
-\begin{itemize}
-	\item La función \texttt{Decode} aplica la decodificación mediante Reed-Solomon y Reed-Muller descrita anteriormente.
-\end{itemize}
-\begin{algorithm}[H]
-	\small
-	\caption{Decapsulado \acrshort{hqc}}
-	$\begin{array}{p{\textwidth}}
-		\textbf{Entrada: } \(c\in \mathcal{B}^{\lceil n/8 \rceil+\lceil n_1\cdot n_2 \rceil+16}\), \(sk\in \mathcal{B}^{\lceil n/8 \rceil+\lceil k/8 \rceil+96}\)\\ 
-		\hline
-		\textbf{Salida: } \(k\in \mathcal{B}^{*}\)\\ 
-		\hline
-	\end{array}$
-	\begin{algorithmic}[1]
-		\State Desempaquetar la llave privada \(sk\) y el texto cifrado \(c\).
-		\State Se inicializa el vector para decodificar el mensaje:
-		\begin{equation}
-			ctx:=\texttt{SHAKE256.absorb}(seed_{sk})
-		\end{equation}
-		\State Se muestrea el vector \(y\):
-		\begin{equation}
-			y:=\texttt{SampleFixedWeightVector}_{\$}(ctx_{sk}, \omega)
-		\end{equation}
-		\State Se computa el mensaje:
-		\begin{equation}
-			m':=\texttt{Decode}(v-\texttt{Truncate}(u\cdot y,l))
-		\end{equation}
-		\State Se calcula el secreto compartido:
-		\begin{equation}
-			(k'||\gamma'):=\texttt{SHA3-512}(\texttt{SHA3-256}(pk||\text{H\_SEPARATOR})||m||salt||{\text{G\_SEPARATOR}})
-		\end{equation}
-		\State Calcular el texto cifrado:
-		\begin{equation}
-			c':=\texttt{Cifrado Saber}(pk,m',\gamma')|| salt
-		\end{equation}
-		\Statex \Comment{A continuación se describe la implementación correcta para cumplir seguridad \acrshort{cca2} debido a que la implementación actual cuando no consigue el mismo texto cifrado simplemente falla la función.}
-		\If{c==c'}
-		\State Asignar \(k\):
-		\begin{equation}
-			(k||-):=\texttt{SHA3-512}(\texttt{SHA3-256}(pk||\text{H\_SEPARATOR})||m||salt||{\text{G\_SEPARATOR}})
-		\end{equation}
-		\Else
-		\State Asignar \(k\):
-		\begin{equation}
-			k:=\texttt{SHA3-256}(\texttt{SHA3-256}(pk||\text{H\_SEPARATOR})||\sigma||c||{\text{J\_SEPARATOR}})
-		\end{equation}
-		\EndIf
-		\State \Return k
-	\end{algorithmic}
-\end{algorithm}
 \newpage
 \section{Fundamentos de seguridad de los algoritmos asimétricos}
 Al trabajar con algoritmos de cifrado, resulta esencial garantizar su seguridad. Para ello, es necesario establecer con precisión las condiciones que la sustentan. Por ello, a continuación se presentan las definiciones de seguridad relevantes, así como los criterios para la generación de números aleatorios criptográficamente seguros.
@@ -2329,7 +1524,7 @@ Estos objetivos y tipos de ataques se agrupan en conjunto creando un total de 6 
 		\node [font=\normalsize] at (6,13.75) {3.1};
 		\node [font=\normalsize] at (14.5,13.75) {3.3};
 	\end{circuitikz}
-	\caption{Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite{CCA2} que demuestran estas relaciones, unicamente no es necesario demostrar que si un esquema mas restrictivo se cumple su esquema más laxo también.}
+	\caption{Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite{CCA2} que demuestran estas relaciones.}
 	\label{fig:EQUIVALENTSECURITY}
 \end{figure}
 

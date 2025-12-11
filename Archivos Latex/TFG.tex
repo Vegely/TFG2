@@ -18,6 +18,7 @@
 \usepackage[left=3cm,top=3cm,right=3cm,bottom=3cm]{geometry}
 
 %
+\usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
@@ -35,6 +36,7 @@
 \usepackage{adjustbox}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{amsthm}
 \usetikzlibrary{tikzmark,calc}
 \usepackage[acronym, nonumberlist]{glossaries}
 \floatname{algorithm}{Algoritmo}
@@ -50,11 +52,43 @@
     linkcolor=black,
     urlcolor=black,
 }
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codeblue}{rgb}{0.0, 0.2, 0.6}
+
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codeblue}\bfseries,
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize, % Fuente monoespaciada
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    % <--- ESTO PONE EL CAPTION ABAJO
+	keepspaces=true,                 
+	numbers=left,                    % Números de línea a la izquierda
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	frame=single,                    % Un marco alrededor del código
+	rulecolor=\color{black!30},      % Color del marco suave
+}
+
+\lstset{style=mystyle}
 \newcommand{\esquote}[1]{``#1''}
 
 %indice de gloarios 
+\theoremstyle{definition}
 \newtheorem{theorem}{Teorema}
-\newtheorem{proof}{Demostración}
+\renewcommand{\proofname}{Demostración}
 
 % profundidad de numeracion
 \setcounter{secnumdepth}{3}

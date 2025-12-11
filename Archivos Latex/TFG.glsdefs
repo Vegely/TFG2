@@ -698,3 +698,31 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{kat}%
+{%
+name={\acronymfont {\glsentryshort {kat}}},%
+sort={KAT},%
+type={acronym},%
+first={KAT},%
+firstplural={KATs},%
+text={KAT},%
+plural={KATs},%
+description={Known Answer Test o Test de Respuesta Conocida},%
+descriptionplural={Known Answer Test o Test de Respuesta Conocida},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Known Answer Test o Test de Respuesta Conocida},%
+longplural={Known Answer Test o Test de Respuesta Conocidas},%
+short={KAT},%
+shortplural={KATs},%
+counter={page},%
+parent={},%
+%
+}%
+

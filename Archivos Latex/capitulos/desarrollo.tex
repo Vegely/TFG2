@@ -3,15 +3,75 @@
 \subsection{Parámetros generales y formato mensajes}
 \subsection{Implementación en el ordenador}
 \subsection{Implementación en el microprocesador}
+\newpage
+
 \section{Interfaz para los algoritmos de cifrado asimétrico} 
-Para hacer más sencillo el uso de los distintos algoritmos se crea un \esquote{wrapper} o envoltorio a cada uno. De esta manera, las implementaciones descargadas de la página del NIST \cite{nistPQCround3} \cite{nistPQCround4}. La estructura general de todos los ficheros \texttt{AlgorythWrapper.h} es:
+Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algoritmo. De esta manera, las implementaciones de referencia obtenidas del NIST \cite{nistPQCround3, nistPQCround4} quedan encapsuladas bajo una interfaz común. La estructura general de todos los ficheros \texttt{AlgorythWrapper.h} es la del listing \ref{lst:wrapper_core}.
 
+\begin{lstlisting}[language=C, caption={Estructura genérica del wrapper para los algoritmos PQC}, label={lst:wrapper_core}]
+	// Estructura comun para Kyber, HQC y Saber
+	// Se sustituye "ALG" por el nombre del algoritmo especifico
+	
+	#include "alg_wrapper.h"
+	#include "api.h" 
+	
+	// Nivel de seguridad actual (Estado interno)
+	static alg_security_level_t current_security_level;
+	static int is_initialized = 0;
+	
+	// Inicializacion del esquema
+	int alg_init(alg_security_level_t security_level) {
+		// Validacion del nivel de seguridad
+		if (security_level != ALG_SEC_LEVEL_1 && 
+		security_level != ALG_SEC_LEVEL_3 && 
+		security_level != ALG_SEC_LEVEL_5) {
+			return -1;
+		}
+		
+		current_security_level = security_level;
+		is_initialized = 1;
+		return 0;
+	}
+	
+	// Getters de tamaños (Wrappers directos a la API nativa)
+	size_t alg_get_public_key_size(void) { return CRYPTO_PUBLICKEYBYTES; }
+	size_t alg_get_secret_key_size(void) { return CRYPTO_SECRETKEYBYTES; }
+	size_t alg_get_ciphertext_size(void) { return CRYPTO_CIPHERTEXTBYTES; }
+	size_t alg_get_shared_secret_size(void) { return CRYPTO_BYTES; }
+	
+	// Generacion de claves
+	int alg_keypair(unsigned char *pk, unsigned char *sk) {
+		if (!is_initialized) return -1;
+		return crypto_kem_keypair(pk, sk);
+	}
+	
+	// Encapsulamiento
+	int alg_encapsulate(unsigned char *ct, unsigned char *ss, const unsigned char *pk) {
+		if (!is_initialized) return -1;
+		return crypto_kem_enc(ct, ss, pk);
+	}
+	
+	// Desencapsulamiento
+	int alg_decapsulate(unsigned char *ss, const unsigned char *ct, const unsigned char *sk) {
+		if (!is_initialized) return -1;
+		return crypto_kem_dec(ss, ct, sk);
+	}
+\end{lstlisting}
+\newpage
 
+\section{Modificación de los algoritmos descargados del \acrshort{nist}}
+Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3, nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github, SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
 \section{Implementación algoritmos en el PC}
+Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
+\begin{itemize}
+	\item Versión con \texttt{rng.h}:
+	\item Versión con \texttt{randombytes.h}: \cite{sprenkels_randombytes_2017}
+\end{itemize}
 \subsection{Compilación en librerías}
+
+\subsection{Diagrama de clases}
 \subsection{Diagrama de uso}
 \subsection{Diagrama funcional}
-\subsection{Diagrama de clases}
 \section{Implementación de algoritmos en el microcontrolador}
 \subsection{Diagrama de uso}
 \subsection{Diagrama funcional}
@@ -21,4 +81,30 @@ Hablar de los modelos de comunicaciones a implementar .... (msg teams)
 \subsection{Modelo 1}
 \subsection{Modelo 2}
 \subsection{Modelo 3}
-\section{Tests de rendimiento realizados}
+\section{Tests realizados}
+\begin{itemize}
+	\item Rendimiento
+	\begin{itemize}
+		\item Ciclos de CPU (Latency): Es la medida reina en criptografía, más precisa que los milisegundos/segundos porque es independiente de la frecuencia del reloj (si desactivas el Turbo Boost).
+		\item Throughput (Operaciones por segundo): Qué medir: ¿Cuántas encapsulaciones puede hacer tu CPU en 1 segundo a plena carga?. Por qué: Importante para servidores. Un algoritmo puede tener baja latencia (rápido para un usuario) pero bajo throughput (malo para mil usuarios a la vez).
+	\end{itemize}
+	\item Recursos
+	\begin{itemize}
+		\item Uso de Pila (Stack Usage): Crucial para sistemas embebidos.
+		\begin{itemize}
+			\item Qué medir: La cantidad máxima de memoria RAM dinámica (stack) que consume la función.
+			\item Justificación: Si HQC usa 50KB de pila, no cabe en un microcontrolador pequeño, aunque sea rápido.
+		\end{itemize}
+		\item Tamaño del Binario (Code Size / Footprint):
+		\begin{itemize}
+			\item Qué medir: El tamaño de las secciones .text (código compilado) y .data (constantes) tras compilar. Usa el comando size en Linux (size saber_wrapper.o).
+			\item  
+		\end{itemize}
+	\end{itemize}
+	\item  Coste de Comunicación (Overhead): 
+	\begin{itemize}
+		\item Gráfica recomendada: Compara estos tamaños con una clave RSA-4096 o ECC (Curva elíptica) actual. Verás que PQC es mucho más pesado transmitiendo datos. Kyber es equilibrado, pero otros pueden tener claves enormes y cifrados pequeños, o viceversa.
+	\end{itemize}
+	\item  Valgrind / Memory Leaks
+	\item  Suite de aleatoriedad a randombytes
+\end{itemize}

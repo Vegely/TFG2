@@ -4,13 +4,26 @@ En este capítulo se muestran los resultados obtenidos de aplicar las rutinas de
 
 
 \section{Resultados}
-\subsection{(No sé si lo metere) Resultado de ejecución de los algoritmos clásicos}
-\subsubsection{\gls{rsa}}
-\subsubsection{\gls{ecc}}
-\subsection{Resultados de ejecución de los algoritmos post-cuánticos}
+\subsection{Test de respuesta conocida}
+Este test se realiza para comprobar que la compilación e integración de los algoritmos funciona matemáticamente igual que las implementaciones de referencia presentadas al \acrshort{nist}. Para ello, el procedimiento estándar en un \textit{Known Answer Tests} consiste en generar un fichero de respuesta (\texttt{.rsp}) a partir de una semilla inicial fija con la cual mediante el generador \texttt{rng.h} pseudoaleatorio se derivan todas las claves y textos cifrados. Si la implementación es correcta el fichero ha de ser igual al proporcionado por los autores.
 \subsubsection{Kyber}
+La ejecución de los tests para Kyber se completó sin incidencias. Se procesaron los 100 vectores de prueba definidos por el NIST. Al utilizar la misma semilla de entrada, la implementación generó claves y criptogramas idénticos a la referencia.
+
+
+
+%En el Listing \ref{lst:kyber_kat} se muestra el primer vector de prueba generado por nuestra implementación, donde se verificó la coincidencia exacta de la clave pública (\texttt{pk}), la clave secreta (\texttt{sk}) y el secreto compartido (\texttt{ss}) con los valores esperados.
+%\begin{lstlisting}[caption={Extracto del fichero .rsp generado para Kyber (Vector 0)}, label={lst:kyber_kat}, basicstyle=\ttfamily\scriptsize]
+%	# kyber512
+%	count = 0
+%	seed = 632616E53E5C162547070F037A3C4D2644D25C6552272846174A698762514332
+%	pk = 753F88E022567D07...[truncado]...A3273187FDD077
+%	sk = 826F8082692F0197...[truncado]...A3273187FDD077
+%	ct = 7219927A685D26C3...[truncado]...E5D79E182D2D70
+%	ss = A3D3F1E38367A58E29E250A84D5852267667C08CC3B44B36398F81716A8C576D
+%\end{lstlisting}
 \subsubsection{Saber}
 \subsubsection{HQC}
+
 
 \subsection{Resultados de los distintos modelos de comunicación}
 \subsubsection{Modelo 1}

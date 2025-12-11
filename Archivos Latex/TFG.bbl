@@ -141,6 +141,12 @@ G.~Bertoni, J.~Daemen, M.~Peeters, G.~V. Assche, and R.~V. Keer, ``The keccak
 A.~Satriawan, R.~Mareta, and H.~Lee, ``A complete beginner guide to the number
   theoretic transform (ntt),'' {\em Cryptology ePrint Archive}, 2024.
 
+\bibitem{lidl_finite_1997}
+R.~Lidl and H.~Niederreiter, {\em Introduction to Finite Fields and Their
+  Applications}.
+\newblock Cambridge University Press, revised~ed., 1994.
+\newblock Ver Teorema 2.8, pág. 46.
+
 \bibitem{CooleyALG}
 J.~W. Cooley and J.~W. Tukey, ``An algorithm for the machine calculation of
   complex fourier series,'' {\em Mathematics of computation}, vol.~19, no.~90,
@@ -274,5 +280,21 @@ G.~Goy, M.~Spyropoulos, N.~Aragon, P.~Gaborit, R.~Pacalet, F.~Perion,
   L.~Sauvage, and D.~Vigilant, ``Side-channel sensitivity analysis on hqc:
   Towards a fully masked implementation,'' {\em Cryptology ePrint Archive},
   2025.
+
+\bibitem{pqclean_github}
+M.~J. Kannwischer, P.~Schwabe, D.~Stebila, and T.~Wiggers, ``{PQClean}: Clean,
+  portable, tested implementations of post-quantum cryptography,'' 2025.
+
+\bibitem{SSR:KSSW22}
+M.~J. Kannwischer, P.~Schwabe, D.~Stebila, and T.~Wiggers, ``Improving software
+  quality in cryptography standardization projects,'' in {\em {IEEE} European
+  Symposium on Security and Privacy, EuroS{\&}P 2022 - Workshops, Genoa, Italy,
+  June 6-10, 2022}, (Los Alamitos, CA, USA), pp.~19--30, IEEE Computer Society,
+  2022.
+
+\bibitem{sprenkels_randombytes_2017}
+D.~Sprenkels, ``{randombytes}: A portable c library for generating
+  crypto-secure random bytes.''
+  \url{https://github.com/dsprenkels/randombytes}, 2017.
 
 \end{thebibliography}
