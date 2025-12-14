@@ -60,12 +60,12 @@ Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algorit
 \newpage
 
 \section{Modificación de los algoritmos descargados del \acrshort{nist}}
-Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3, nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github, SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
+Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github} \cite{SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
 \section{Implementación algoritmos en el PC}
 Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
 \begin{itemize}
-	\item Versión con \texttt{rng.h}:
-	\item Versión con \texttt{randombytes.h}: \cite{sprenkels_randombytes_2017}
+	\item Versión con \texttt{rng.h}: genera los secretos compartidas a partir de una semilla y sirve para generar los \acrshort{kat} para generar un archivo \texttt{.rsp} a partir de un archivo \texttt{.req}.
+	\item Versión con \texttt{randombytes.h}: usando la librería del siguiente repositorio \cite{sprenkels_randombytes_2017} utilizada en el proyecto PQClean  \cite{SSR:KSSW22} para generar números aleatorios a partir de la entropía del sistema operativo.
 \end{itemize}
 \subsection{Compilación en librerías}
 
