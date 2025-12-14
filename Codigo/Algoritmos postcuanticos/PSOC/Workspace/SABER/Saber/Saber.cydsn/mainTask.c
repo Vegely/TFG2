@@ -46,11 +46,6 @@ void mainTask(void *arg)
     const size_t BYTES_CT = saber_get_ciphertext_size();
     const size_t BYTES_SS = saber_get_shared_secret_size();
 
-    printf("FireSaber Sizes:\r\n");
-    printf("  Public Key Size     : %lu bytes\r\n", (unsigned long)BYTES_PK);
-    printf("  Secret Key Size     : %lu bytes\r\n", (unsigned long)BYTES_SK);
-    printf("  Ciphertext Size     : %lu bytes\r\n", (unsigned long)BYTES_CT);
-    printf("  Shared Secret Size  : %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);
     
     sk = (unsigned char *) calloc(BYTES_SK, sizeof(unsigned char));
     pk = (unsigned char *) calloc(BYTES_PK, sizeof(unsigned char));
@@ -64,7 +59,7 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-     if (saber_keypair(pk, sk) != 0) {
+    if (saber_keypair(pk, sk) != 0) {
         printf("Keypair generation failed\n");
     }
     printf("Keypair generation succesful\n");
@@ -81,9 +76,32 @@ void mainTask(void *arg)
     printf("Correct decapsulation\n");
     
     // Your main application loop
+    
+
+    // Get the minimum amount of free stack space that has existed 
+    // since the task started.
+    UBaseType_t uxHighWaterMark;
     for(;;)
     {
+        
+        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+         if (saber_keypair(pk, sk) != 0) {
+            printf("Keypair generation failed\n");
+        }
+        printf("Keypair generation succesful\n");
 
+        if (saber_encapsulate(ct, ss, pk) != 0) {
+                printf("Encapsulation failed\n");
+        }
+        printf("Correct encapsulation\n");
+        
+        if (saber_decapsulate(ss, ct, sk) != 0) {
+                printf("Encapsulation failed\n");
+        }
+            
+        printf("Correct decapsulation\n");
+        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+        printf("Minimum free stack: %lu words\n", uxHighWaterMark);
     }
     
     // Cleanup (never reached in infinite loop)

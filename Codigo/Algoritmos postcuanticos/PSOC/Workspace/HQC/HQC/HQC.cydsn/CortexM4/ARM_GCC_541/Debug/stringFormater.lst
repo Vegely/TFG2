@@ -1,0 +1,1453 @@
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"stringFormater.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.crc8,"ax",%progbits
+  21              		.align	2
+  22              		.global	crc8
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	crc8, %function
+  26              	crc8:
+  27              	.LFB0:
+  28              		.file 1 "..\\..\\..\\stringFormater.c"
+   1:..\..\../stringFormater.c **** /* ========================================
+   2:..\..\../stringFormater.c ****  *
+   3:..\..\../stringFormater.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:..\..\../stringFormater.c ****  * All Rights Reserved
+   5:..\..\../stringFormater.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:..\..\../stringFormater.c ****  *
+   7:..\..\../stringFormater.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:..\..\../stringFormater.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:..\..\../stringFormater.c ****  *
+  10:..\..\../stringFormater.c ****  * ========================================
+  11:..\..\../stringFormater.c **** */
+  12:..\..\../stringFormater.c **** #include "stringFormater.h"
+  13:..\..\../stringFormater.c **** #include <string.h>
+  14:..\..\../stringFormater.c **** 
+  15:..\..\../stringFormater.c **** uint8_t crc8(const uint8_t *data, uint16_t len)
+  16:..\..\../stringFormater.c **** {
+  29              		.loc 1 16 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  35 0000 30B4     		push	{r4, r5}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 5, -4
+  39 0002 0246     		mov	r2, r0
+  40              	.LVL1:
+  17:..\..\../stringFormater.c ****     uint8_t crc = 0x00;
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 2
+
+
+  41              		.loc 1 17 0
+  42 0004 0020     		movs	r0, #0
+  43              	.LVL2:
+  18:..\..\../stringFormater.c ****     while (len--) {
+  44              		.loc 1 18 0
+  45 0006 14E0     		b	.L2
+  46              	.LVL3:
+  47              	.L6:
+  48              	.LBB2:
+  19:..\..\../stringFormater.c ****         uint8_t extract = *data++;
+  49              		.loc 1 19 0
+  50 0008 551C     		adds	r5, r2, #1
+  51              	.LVL4:
+  52 000a 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+  53              	.LVL5:
+  54              	.LBB3:
+  20:..\..\../stringFormater.c ****         for (uint8_t i = 8; i; i--) {
+  55              		.loc 1 20 0
+  56 000c 0823     		movs	r3, #8
+  57 000e 0CE0     		b	.L3
+  58              	.LVL6:
+  59              	.L5:
+  60              	.LBB4:
+  21:..\..\../stringFormater.c ****             uint8_t sum = (crc ^ extract) & 0x01;
+  61              		.loc 1 21 0
+  62 0010 80EA0102 		eor	r2, r0, r1
+  22:..\..\../stringFormater.c ****             crc >>= 1;
+  23:..\..\../stringFormater.c ****             if (sum)
+  63              		.loc 1 23 0
+  64 0014 12F0010F 		tst	r2, #1
+  65 0018 4FEA5000 		lsr	r0, r0, #1
+  66              	.LVL7:
+  67 001c 02D0     		beq	.L4
+  24:..\..\../stringFormater.c ****                 crc ^= 0x8C;
+  68              		.loc 1 24 0
+  69 001e 80F08C00 		eor	r0, r0, #140
+  70 0022 C0B2     		uxtb	r0, r0
+  71              	.LVL8:
+  72              	.L4:
+  25:..\..\../stringFormater.c ****             extract >>= 1;
+  73              		.loc 1 25 0 discriminator 2
+  74 0024 4908     		lsrs	r1, r1, #1
+  75              	.LVL9:
+  76              	.LBE4:
+  20:..\..\../stringFormater.c ****             uint8_t sum = (crc ^ extract) & 0x01;
+  77              		.loc 1 20 0 discriminator 2
+  78 0026 013B     		subs	r3, r3, #1
+  79              	.LVL10:
+  80 0028 DBB2     		uxtb	r3, r3
+  81              	.LVL11:
+  82              	.L3:
+  20:..\..\../stringFormater.c ****             uint8_t sum = (crc ^ extract) & 0x01;
+  83              		.loc 1 20 0 is_stmt 0 discriminator 1
+  84 002a 002B     		cmp	r3, #0
+  85 002c F0D1     		bne	.L5
+  86              	.LBE3:
+  87              	.LBE2:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 3
+
+
+  18:..\..\../stringFormater.c ****         uint8_t extract = *data++;
+  88              		.loc 1 18 0 is_stmt 1
+  89 002e 2146     		mov	r1, r4
+  90              	.LVL12:
+  91              	.LBB5:
+  19:..\..\../stringFormater.c ****         for (uint8_t i = 8; i; i--) {
+  92              		.loc 1 19 0
+  93 0030 2A46     		mov	r2, r5
+  94              	.LVL13:
+  95              	.L2:
+  96              	.LBE5:
+  18:..\..\../stringFormater.c ****         uint8_t extract = *data++;
+  97              		.loc 1 18 0
+  98 0032 4B1E     		subs	r3, r1, #1
+  99 0034 9CB2     		uxth	r4, r3
+ 100              	.LVL14:
+ 101 0036 0029     		cmp	r1, #0
+ 102 0038 E6D1     		bne	.L6
+  26:..\..\../stringFormater.c ****         }
+  27:..\..\../stringFormater.c ****     }
+  28:..\..\../stringFormater.c ****     return crc;
+  29:..\..\../stringFormater.c **** }
+ 103              		.loc 1 29 0
+ 104 003a 30BC     		pop	{r4, r5}
+ 105              		.cfi_restore 5
+ 106              		.cfi_restore 4
+ 107              		.cfi_def_cfa_offset 0
+ 108              	.LVL15:
+ 109 003c 7047     		bx	lr
+ 110              		.cfi_endproc
+ 111              	.LFE0:
+ 112              		.size	crc8, .-crc8
+ 113 003e 00BF     		.section	.text.build_message,"ax",%progbits
+ 114              		.align	2
+ 115              		.global	build_message
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.type	build_message, %function
+ 119              	build_message:
+ 120              	.LFB1:
+  30:..\..\../stringFormater.c **** 
+  31:..\..\../stringFormater.c **** int build_message(const uint8_t *payload, uint16_t length, uint8_t *frame)
+  32:..\..\../stringFormater.c **** {
+ 121              		.loc 1 32 0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125              	.LVL16:
+  33:..\..\../stringFormater.c ****     if (payload == NULL || frame == NULL)
+ 126              		.loc 1 33 0
+ 127 0000 C8B1     		cbz	r0, .L10
+  32:..\..\../stringFormater.c ****     if (payload == NULL || frame == NULL)
+ 128              		.loc 1 32 0 discriminator 1
+ 129 0002 70B5     		push	{r4, r5, r6, lr}
+ 130              		.cfi_def_cfa_offset 16
+ 131              		.cfi_offset 4, -16
+ 132              		.cfi_offset 5, -12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 4
+
+
+ 133              		.cfi_offset 6, -8
+ 134              		.cfi_offset 14, -4
+ 135 0004 0646     		mov	r6, r0
+ 136              		.loc 1 33 0 discriminator 1
+ 137 0006 CAB1     		cbz	r2, .L11
+  34:..\..\../stringFormater.c ****         return -1;
+  35:..\..\../stringFormater.c **** 
+  36:..\..\../stringFormater.c ****     if (length > MAXIMUM_LENGTH)
+ 138              		.loc 1 36 0
+ 139 0008 B1F5005F 		cmp	r1, #8192
+ 140 000c 19D8     		bhi	.L12
+ 141 000e 1546     		mov	r5, r2
+ 142 0010 0C46     		mov	r4, r1
+  37:..\..\../stringFormater.c ****         return -1; // too long
+  38:..\..\../stringFormater.c **** 
+  39:..\..\../stringFormater.c ****     frame[0] = START_BYTE;
+ 143              		.loc 1 39 0
+ 144 0012 0223     		movs	r3, #2
+ 145 0014 1370     		strb	r3, [r2]
+  40:..\..\../stringFormater.c ****     frame[1] = (length >> 8) & 0xFF;
+ 146              		.loc 1 40 0
+ 147 0016 0B0A     		lsrs	r3, r1, #8
+ 148 0018 5370     		strb	r3, [r2, #1]
+  41:..\..\../stringFormater.c ****     frame[2] = length & 0xFF;
+ 149              		.loc 1 41 0
+ 150 001a A970     		strb	r1, [r5, #2]
+  42:..\..\../stringFormater.c **** 
+  43:..\..\../stringFormater.c ****     memcpy(&frame[3], payload, length);
+ 151              		.loc 1 43 0
+ 152 001c 0A46     		mov	r2, r1
+ 153              	.LVL17:
+ 154 001e 0146     		mov	r1, r0
+ 155              	.LVL18:
+ 156 0020 E81C     		adds	r0, r5, #3
+ 157              	.LVL19:
+ 158 0022 FFF7FEFF 		bl	memcpy
+ 159              	.LVL20:
+  44:..\..\../stringFormater.c **** 
+  45:..\..\../stringFormater.c ****     uint8_t crc = crc8(payload, length);
+ 160              		.loc 1 45 0
+ 161 0026 2146     		mov	r1, r4
+ 162 0028 3046     		mov	r0, r6
+ 163 002a FFF7FEFF 		bl	crc8
+ 164              	.LVL21:
+  46:..\..\../stringFormater.c ****     frame[3 + length] = crc;
+ 165              		.loc 1 46 0
+ 166 002e E31C     		adds	r3, r4, #3
+ 167 0030 E854     		strb	r0, [r5, r3]
+  47:..\..\../stringFormater.c **** 
+  48:..\..\../stringFormater.c ****     return (int)(length + 4); // total frame length
+ 168              		.loc 1 48 0
+ 169 0032 201D     		adds	r0, r4, #4
+ 170              	.LVL22:
+ 171 0034 70BD     		pop	{r4, r5, r6, pc}
+ 172              	.LVL23:
+ 173              	.L10:
+ 174              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 5
+
+
+ 175              		.cfi_restore 4
+ 176              		.cfi_restore 5
+ 177              		.cfi_restore 6
+ 178              		.cfi_restore 14
+  34:..\..\../stringFormater.c **** 
+ 179              		.loc 1 34 0
+ 180 0036 4FF0FF30 		mov	r0, #-1
+ 181              	.LVL24:
+  49:..\..\../stringFormater.c **** }
+ 182              		.loc 1 49 0
+ 183 003a 7047     		bx	lr
+ 184              	.LVL25:
+ 185              	.L11:
+ 186              		.cfi_def_cfa_offset 16
+ 187              		.cfi_offset 4, -16
+ 188              		.cfi_offset 5, -12
+ 189              		.cfi_offset 6, -8
+ 190              		.cfi_offset 14, -4
+  34:..\..\../stringFormater.c **** 
+ 191              		.loc 1 34 0
+ 192 003c 4FF0FF30 		mov	r0, #-1
+ 193              	.LVL26:
+ 194 0040 70BD     		pop	{r4, r5, r6, pc}
+ 195              	.LVL27:
+ 196              	.L12:
+  37:..\..\../stringFormater.c **** 
+ 197              		.loc 1 37 0
+ 198 0042 4FF0FF30 		mov	r0, #-1
+ 199              	.LVL28:
+ 200              		.loc 1 49 0
+ 201 0046 70BD     		pop	{r4, r5, r6, pc}
+ 202              		.cfi_endproc
+ 203              	.LFE1:
+ 204              		.size	build_message, .-build_message
+ 205              		.section	.text.verify_message,"ax",%progbits
+ 206              		.align	2
+ 207              		.global	verify_message
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.type	verify_message, %function
+ 211              	verify_message:
+ 212              	.LFB2:
+  50:..\..\../stringFormater.c **** 
+  51:..\..\../stringFormater.c **** int verify_message(const uint8_t *frame, uint16_t total_len)
+  52:..\..\../stringFormater.c **** {
+ 213              		.loc 1 52 0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217              	.LVL29:
+  53:..\..\../stringFormater.c ****     if (frame == NULL)
+ 218              		.loc 1 53 0
+ 219 0000 C0B1     		cbz	r0, .L16
+  52:..\..\../stringFormater.c ****     if (frame == NULL)
+ 220              		.loc 1 52 0
+ 221 0002 38B5     		push	{r3, r4, r5, lr}
+ 222              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 6
+
+
+ 223              		.cfi_offset 3, -16
+ 224              		.cfi_offset 4, -12
+ 225              		.cfi_offset 5, -8
+ 226              		.cfi_offset 14, -4
+  54:..\..\../stringFormater.c ****         return 0;
+  55:..\..\../stringFormater.c **** 
+  56:..\..\../stringFormater.c ****     if (total_len < 4)
+ 227              		.loc 1 56 0
+ 228 0004 0329     		cmp	r1, #3
+ 229 0006 17D9     		bls	.L17
+  57:..\..\../stringFormater.c ****         return 0;
+  58:..\..\../stringFormater.c **** 
+  59:..\..\../stringFormater.c ****     if (frame[0] != START_BYTE)
+ 230              		.loc 1 59 0
+ 231 0008 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 232 000a 022A     		cmp	r2, #2
+ 233 000c 16D1     		bne	.L18
+  60:..\..\../stringFormater.c ****         return 0;
+  61:..\..\../stringFormater.c **** 
+  62:..\..\../stringFormater.c ****     uint16_t length = ((uint16_t)frame[1] << 8) | frame[2];
+ 234              		.loc 1 62 0
+ 235 000e 4578     		ldrb	r5, [r0, #1]	@ zero_extendqisi2
+ 236 0010 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 237 0012 42EA0525 		orr	r5, r2, r5, lsl #8
+ 238              	.LVL30:
+  63:..\..\../stringFormater.c ****     if ((length + 4) != total_len)
+ 239              		.loc 1 63 0
+ 240 0016 2A1D     		adds	r2, r5, #4
+ 241 0018 8A42     		cmp	r2, r1
+ 242 001a 11D1     		bne	.L19
+ 243 001c 0446     		mov	r4, r0
+  64:..\..\../stringFormater.c ****         return 0;
+  65:..\..\../stringFormater.c **** 
+  66:..\..\../stringFormater.c ****     uint8_t crc_calc = crc8(&frame[3], length);
+ 244              		.loc 1 66 0
+ 245 001e 2946     		mov	r1, r5
+ 246              	.LVL31:
+ 247 0020 0330     		adds	r0, r0, #3
+ 248              	.LVL32:
+ 249 0022 FFF7FEFF 		bl	crc8
+ 250              	.LVL33:
+  67:..\..\../stringFormater.c ****     uint8_t crc_recv = frame[3 + length];
+ 251              		.loc 1 67 0
+ 252 0026 0335     		adds	r5, r5, #3
+ 253              	.LVL34:
+ 254 0028 635D     		ldrb	r3, [r4, r5]	@ zero_extendqisi2
+ 255              	.LVL35:
+  68:..\..\../stringFormater.c **** 
+  69:..\..\../stringFormater.c ****     return (crc_calc == crc_recv);
+ 256              		.loc 1 69 0
+ 257 002a 9842     		cmp	r0, r3
+ 258 002c 14BF     		ite	ne
+ 259 002e 0020     		movne	r0, #0
+ 260              	.LVL36:
+ 261 0030 0120     		moveq	r0, #1
+ 262 0032 38BD     		pop	{r3, r4, r5, pc}
+ 263              	.LVL37:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 7
+
+
+ 264              	.L16:
+ 265              		.cfi_def_cfa_offset 0
+ 266              		.cfi_restore 3
+ 267              		.cfi_restore 4
+ 268              		.cfi_restore 5
+ 269              		.cfi_restore 14
+  54:..\..\../stringFormater.c **** 
+ 270              		.loc 1 54 0
+ 271 0034 0020     		movs	r0, #0
+ 272              	.LVL38:
+  70:..\..\../stringFormater.c **** }
+ 273              		.loc 1 70 0
+ 274 0036 7047     		bx	lr
+ 275              	.LVL39:
+ 276              	.L17:
+ 277              		.cfi_def_cfa_offset 16
+ 278              		.cfi_offset 3, -16
+ 279              		.cfi_offset 4, -12
+ 280              		.cfi_offset 5, -8
+ 281              		.cfi_offset 14, -4
+  57:..\..\../stringFormater.c **** 
+ 282              		.loc 1 57 0
+ 283 0038 0020     		movs	r0, #0
+ 284              	.LVL40:
+ 285 003a 38BD     		pop	{r3, r4, r5, pc}
+ 286              	.LVL41:
+ 287              	.L18:
+  60:..\..\../stringFormater.c **** 
+ 288              		.loc 1 60 0
+ 289 003c 0020     		movs	r0, #0
+ 290              	.LVL42:
+ 291 003e 38BD     		pop	{r3, r4, r5, pc}
+ 292              	.LVL43:
+ 293              	.L19:
+  64:..\..\../stringFormater.c **** 
+ 294              		.loc 1 64 0
+ 295 0040 0020     		movs	r0, #0
+ 296              	.LVL44:
+ 297              		.loc 1 70 0
+ 298 0042 38BD     		pop	{r3, r4, r5, pc}
+ 299              		.cfi_endproc
+ 300              	.LFE2:
+ 301              		.size	verify_message, .-verify_message
+ 302              		.text
+ 303              	.Letext0:
+ 304              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 305              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 306              		.section	.debug_info,"",%progbits
+ 307              	.Ldebug_info0:
+ 308 0000 52020000 		.4byte	0x252
+ 309 0004 0400     		.2byte	0x4
+ 310 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 311 000a 04       		.byte	0x4
+ 312 000b 01       		.uleb128 0x1
+ 313 000c 78010000 		.4byte	.LASF27
+ 314 0010 0C       		.byte	0xc
+ 315 0011 22000000 		.4byte	.LASF28
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 8
+
+
+ 316 0015 8B000000 		.4byte	.LASF29
+ 317 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 318 001d 00000000 		.4byte	0
+ 319 0021 00000000 		.4byte	.Ldebug_line0
+ 320 0025 02       		.uleb128 0x2
+ 321 0026 01       		.byte	0x1
+ 322 0027 06       		.byte	0x6
+ 323 0028 4B020000 		.4byte	.LASF0
+ 324 002c 03       		.uleb128 0x3
+ 325 002d 00000000 		.4byte	.LASF3
+ 326 0031 02       		.byte	0x2
+ 327 0032 1D       		.byte	0x1d
+ 328 0033 37000000 		.4byte	0x37
+ 329 0037 02       		.uleb128 0x2
+ 330 0038 01       		.byte	0x1
+ 331 0039 08       		.byte	0x8
+ 332 003a 41000000 		.4byte	.LASF1
+ 333 003e 02       		.uleb128 0x2
+ 334 003f 02       		.byte	0x2
+ 335 0040 05       		.byte	0x5
+ 336 0041 65010000 		.4byte	.LASF2
+ 337 0045 03       		.uleb128 0x3
+ 338 0046 F1000000 		.4byte	.LASF4
+ 339 004a 02       		.byte	0x2
+ 340 004b 2B       		.byte	0x2b
+ 341 004c 50000000 		.4byte	0x50
+ 342 0050 02       		.uleb128 0x2
+ 343 0051 02       		.byte	0x2
+ 344 0052 07       		.byte	0x7
+ 345 0053 69000000 		.4byte	.LASF5
+ 346 0057 02       		.uleb128 0x2
+ 347 0058 04       		.byte	0x4
+ 348 0059 05       		.byte	0x5
+ 349 005a 2B020000 		.4byte	.LASF6
+ 350 005e 02       		.uleb128 0x2
+ 351 005f 04       		.byte	0x4
+ 352 0060 07       		.byte	0x7
+ 353 0061 57000000 		.4byte	.LASF7
+ 354 0065 02       		.uleb128 0x2
+ 355 0066 08       		.byte	0x8
+ 356 0067 05       		.byte	0x5
+ 357 0068 3E010000 		.4byte	.LASF8
+ 358 006c 02       		.uleb128 0x2
+ 359 006d 08       		.byte	0x8
+ 360 006e 07       		.byte	0x7
+ 361 006f 09010000 		.4byte	.LASF9
+ 362 0073 04       		.uleb128 0x4
+ 363 0074 04       		.byte	0x4
+ 364 0075 05       		.byte	0x5
+ 365 0076 696E7400 		.ascii	"int\000"
+ 366 007a 02       		.uleb128 0x2
+ 367 007b 04       		.byte	0x4
+ 368 007c 07       		.byte	0x7
+ 369 007d FC000000 		.4byte	.LASF10
+ 370 0081 03       		.uleb128 0x3
+ 371 0082 20010000 		.4byte	.LASF11
+ 372 0086 03       		.byte	0x3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 9
+
+
+ 373 0087 18       		.byte	0x18
+ 374 0088 2C000000 		.4byte	0x2c
+ 375 008c 03       		.uleb128 0x3
+ 376 008d 6F010000 		.4byte	.LASF12
+ 377 0091 03       		.byte	0x3
+ 378 0092 24       		.byte	0x24
+ 379 0093 45000000 		.4byte	0x45
+ 380 0097 02       		.uleb128 0x2
+ 381 0098 08       		.byte	0x8
+ 382 0099 04       		.byte	0x4
+ 383 009a 39020000 		.4byte	.LASF13
+ 384 009e 02       		.uleb128 0x2
+ 385 009f 04       		.byte	0x4
+ 386 00a0 07       		.byte	0x7
+ 387 00a1 35010000 		.4byte	.LASF14
+ 388 00a5 02       		.uleb128 0x2
+ 389 00a6 01       		.byte	0x1
+ 390 00a7 08       		.byte	0x8
+ 391 00a8 34020000 		.4byte	.LASF15
+ 392 00ac 05       		.uleb128 0x5
+ 393 00ad 30010000 		.4byte	.LASF18
+ 394 00b1 01       		.byte	0x1
+ 395 00b2 0F       		.byte	0xf
+ 396 00b3 81000000 		.4byte	0x81
+ 397 00b7 00000000 		.4byte	.LFB0
+ 398 00bb 3E000000 		.4byte	.LFE0-.LFB0
+ 399 00bf 01       		.uleb128 0x1
+ 400 00c0 9C       		.byte	0x9c
+ 401 00c1 34010000 		.4byte	0x134
+ 402 00c5 06       		.uleb128 0x6
+ 403 00c6 3C000000 		.4byte	.LASF16
+ 404 00ca 01       		.byte	0x1
+ 405 00cb 0F       		.byte	0xf
+ 406 00cc 34010000 		.4byte	0x134
+ 407 00d0 00000000 		.4byte	.LLST0
+ 408 00d4 07       		.uleb128 0x7
+ 409 00d5 6C656E00 		.ascii	"len\000"
+ 410 00d9 01       		.byte	0x1
+ 411 00da 0F       		.byte	0xf
+ 412 00db 8C000000 		.4byte	0x8c
+ 413 00df 34000000 		.4byte	.LLST1
+ 414 00e3 08       		.uleb128 0x8
+ 415 00e4 63726300 		.ascii	"crc\000"
+ 416 00e8 01       		.byte	0x1
+ 417 00e9 11       		.byte	0x11
+ 418 00ea 81000000 		.4byte	0x81
+ 419 00ee 73000000 		.4byte	.LLST2
+ 420 00f2 09       		.uleb128 0x9
+ 421 00f3 00000000 		.4byte	.Ldebug_ranges0+0
+ 422 00f7 0A       		.uleb128 0xa
+ 423 00f8 4F000000 		.4byte	.LASF17
+ 424 00fc 01       		.byte	0x1
+ 425 00fd 13       		.byte	0x13
+ 426 00fe 81000000 		.4byte	0x81
+ 427 0102 9D000000 		.4byte	.LLST3
+ 428 0106 0B       		.uleb128 0xb
+ 429 0107 0C000000 		.4byte	.LBB3
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 10
+
+
+ 430 010b 22000000 		.4byte	.LBE3-.LBB3
+ 431 010f 08       		.uleb128 0x8
+ 432 0110 6900     		.ascii	"i\000"
+ 433 0112 01       		.byte	0x1
+ 434 0113 14       		.byte	0x14
+ 435 0114 81000000 		.4byte	0x81
+ 436 0118 B0000000 		.4byte	.LLST4
+ 437 011c 0B       		.uleb128 0xb
+ 438 011d 10000000 		.4byte	.LBB4
+ 439 0121 16000000 		.4byte	.LBE4-.LBB4
+ 440 0125 0C       		.uleb128 0xc
+ 441 0126 73756D00 		.ascii	"sum\000"
+ 442 012a 01       		.byte	0x1
+ 443 012b 15       		.byte	0x15
+ 444 012c 81000000 		.4byte	0x81
+ 445 0130 00       		.byte	0
+ 446 0131 00       		.byte	0
+ 447 0132 00       		.byte	0
+ 448 0133 00       		.byte	0
+ 449 0134 0D       		.uleb128 0xd
+ 450 0135 04       		.byte	0x4
+ 451 0136 3A010000 		.4byte	0x13a
+ 452 013a 0E       		.uleb128 0xe
+ 453 013b 81000000 		.4byte	0x81
+ 454 013f 05       		.uleb128 0x5
+ 455 0140 0A000000 		.4byte	.LASF19
+ 456 0144 01       		.byte	0x1
+ 457 0145 1F       		.byte	0x1f
+ 458 0146 73000000 		.4byte	0x73
+ 459 014a 00000000 		.4byte	.LFB1
+ 460 014e 48000000 		.4byte	.LFE1-.LFB1
+ 461 0152 01       		.uleb128 0x1
+ 462 0153 9C       		.byte	0x9c
+ 463 0154 CB010000 		.4byte	0x1cb
+ 464 0158 06       		.uleb128 0x6
+ 465 0159 28010000 		.4byte	.LASF20
+ 466 015d 01       		.byte	0x1
+ 467 015e 1F       		.byte	0x1f
+ 468 015f 34010000 		.4byte	0x134
+ 469 0163 DA000000 		.4byte	.LLST5
+ 470 0167 06       		.uleb128 0x6
+ 471 0168 57020000 		.4byte	.LASF21
+ 472 016c 01       		.byte	0x1
+ 473 016d 1F       		.byte	0x1f
+ 474 016e 8C000000 		.4byte	0x8c
+ 475 0172 48010000 		.4byte	.LLST6
+ 476 0176 06       		.uleb128 0x6
+ 477 0177 45020000 		.4byte	.LASF22
+ 478 017b 01       		.byte	0x1
+ 479 017c 1F       		.byte	0x1f
+ 480 017d CB010000 		.4byte	0x1cb
+ 481 0181 74010000 		.4byte	.LLST7
+ 482 0185 08       		.uleb128 0x8
+ 483 0186 63726300 		.ascii	"crc\000"
+ 484 018a 01       		.byte	0x1
+ 485 018b 2D       		.byte	0x2d
+ 486 018c 81000000 		.4byte	0x81
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 11
+
+
+ 487 0190 9D010000 		.4byte	.LLST8
+ 488 0194 0F       		.uleb128 0xf
+ 489 0195 26000000 		.4byte	.LVL20
+ 490 0199 4C020000 		.4byte	0x24c
+ 491 019d B4010000 		.4byte	0x1b4
+ 492 01a1 10       		.uleb128 0x10
+ 493 01a2 01       		.uleb128 0x1
+ 494 01a3 50       		.byte	0x50
+ 495 01a4 02       		.uleb128 0x2
+ 496 01a5 75       		.byte	0x75
+ 497 01a6 03       		.sleb128 3
+ 498 01a7 10       		.uleb128 0x10
+ 499 01a8 01       		.uleb128 0x1
+ 500 01a9 51       		.byte	0x51
+ 501 01aa 02       		.uleb128 0x2
+ 502 01ab 76       		.byte	0x76
+ 503 01ac 00       		.sleb128 0
+ 504 01ad 10       		.uleb128 0x10
+ 505 01ae 01       		.uleb128 0x1
+ 506 01af 52       		.byte	0x52
+ 507 01b0 02       		.uleb128 0x2
+ 508 01b1 74       		.byte	0x74
+ 509 01b2 00       		.sleb128 0
+ 510 01b3 00       		.byte	0
+ 511 01b4 11       		.uleb128 0x11
+ 512 01b5 2E000000 		.4byte	.LVL21
+ 513 01b9 AC000000 		.4byte	0xac
+ 514 01bd 10       		.uleb128 0x10
+ 515 01be 01       		.uleb128 0x1
+ 516 01bf 50       		.byte	0x50
+ 517 01c0 02       		.uleb128 0x2
+ 518 01c1 76       		.byte	0x76
+ 519 01c2 00       		.sleb128 0
+ 520 01c3 10       		.uleb128 0x10
+ 521 01c4 01       		.uleb128 0x1
+ 522 01c5 51       		.byte	0x51
+ 523 01c6 02       		.uleb128 0x2
+ 524 01c7 74       		.byte	0x74
+ 525 01c8 00       		.sleb128 0
+ 526 01c9 00       		.byte	0
+ 527 01ca 00       		.byte	0
+ 528 01cb 0D       		.uleb128 0xd
+ 529 01cc 04       		.byte	0x4
+ 530 01cd 81000000 		.4byte	0x81
+ 531 01d1 05       		.uleb128 0x5
+ 532 01d2 7C000000 		.4byte	.LASF23
+ 533 01d6 01       		.byte	0x1
+ 534 01d7 33       		.byte	0x33
+ 535 01d8 73000000 		.4byte	0x73
+ 536 01dc 00000000 		.4byte	.LFB2
+ 537 01e0 44000000 		.4byte	.LFE2-.LFB2
+ 538 01e4 01       		.uleb128 0x1
+ 539 01e5 9C       		.byte	0x9c
+ 540 01e6 4C020000 		.4byte	0x24c
+ 541 01ea 06       		.uleb128 0x6
+ 542 01eb 45020000 		.4byte	.LASF22
+ 543 01ef 01       		.byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 12
+
+
+ 544 01f0 33       		.byte	0x33
+ 545 01f1 34010000 		.4byte	0x134
+ 546 01f5 BF010000 		.4byte	.LLST9
+ 547 01f9 06       		.uleb128 0x6
+ 548 01fa 18000000 		.4byte	.LASF24
+ 549 01fe 01       		.byte	0x1
+ 550 01ff 33       		.byte	0x33
+ 551 0200 8C000000 		.4byte	0x8c
+ 552 0204 41020000 		.4byte	.LLST10
+ 553 0208 0A       		.uleb128 0xa
+ 554 0209 57020000 		.4byte	.LASF21
+ 555 020d 01       		.byte	0x1
+ 556 020e 3E       		.byte	0x3e
+ 557 020f 8C000000 		.4byte	0x8c
+ 558 0213 6D020000 		.4byte	.LLST11
+ 559 0217 0A       		.uleb128 0xa
+ 560 0218 5C010000 		.4byte	.LASF25
+ 561 021c 01       		.byte	0x1
+ 562 021d 42       		.byte	0x42
+ 563 021e 81000000 		.4byte	0x81
+ 564 0222 98020000 		.4byte	.LLST12
+ 565 0226 0A       		.uleb128 0xa
+ 566 0227 53010000 		.4byte	.LASF26
+ 567 022b 01       		.byte	0x1
+ 568 022c 43       		.byte	0x43
+ 569 022d 81000000 		.4byte	0x81
+ 570 0231 AB020000 		.4byte	.LLST13
+ 571 0235 11       		.uleb128 0x11
+ 572 0236 26000000 		.4byte	.LVL33
+ 573 023a AC000000 		.4byte	0xac
+ 574 023e 10       		.uleb128 0x10
+ 575 023f 01       		.uleb128 0x1
+ 576 0240 50       		.byte	0x50
+ 577 0241 02       		.uleb128 0x2
+ 578 0242 74       		.byte	0x74
+ 579 0243 03       		.sleb128 3
+ 580 0244 10       		.uleb128 0x10
+ 581 0245 01       		.uleb128 0x1
+ 582 0246 51       		.byte	0x51
+ 583 0247 02       		.uleb128 0x2
+ 584 0248 75       		.byte	0x75
+ 585 0249 00       		.sleb128 0
+ 586 024a 00       		.byte	0
+ 587 024b 00       		.byte	0
+ 588 024c 12       		.uleb128 0x12
+ 589 024d 4C010000 		.4byte	.LASF30
+ 590 0251 4C010000 		.4byte	.LASF30
+ 591 0255 00       		.byte	0
+ 592              		.section	.debug_abbrev,"",%progbits
+ 593              	.Ldebug_abbrev0:
+ 594 0000 01       		.uleb128 0x1
+ 595 0001 11       		.uleb128 0x11
+ 596 0002 01       		.byte	0x1
+ 597 0003 25       		.uleb128 0x25
+ 598 0004 0E       		.uleb128 0xe
+ 599 0005 13       		.uleb128 0x13
+ 600 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 13
+
+
+ 601 0007 03       		.uleb128 0x3
+ 602 0008 0E       		.uleb128 0xe
+ 603 0009 1B       		.uleb128 0x1b
+ 604 000a 0E       		.uleb128 0xe
+ 605 000b 55       		.uleb128 0x55
+ 606 000c 17       		.uleb128 0x17
+ 607 000d 11       		.uleb128 0x11
+ 608 000e 01       		.uleb128 0x1
+ 609 000f 10       		.uleb128 0x10
+ 610 0010 17       		.uleb128 0x17
+ 611 0011 00       		.byte	0
+ 612 0012 00       		.byte	0
+ 613 0013 02       		.uleb128 0x2
+ 614 0014 24       		.uleb128 0x24
+ 615 0015 00       		.byte	0
+ 616 0016 0B       		.uleb128 0xb
+ 617 0017 0B       		.uleb128 0xb
+ 618 0018 3E       		.uleb128 0x3e
+ 619 0019 0B       		.uleb128 0xb
+ 620 001a 03       		.uleb128 0x3
+ 621 001b 0E       		.uleb128 0xe
+ 622 001c 00       		.byte	0
+ 623 001d 00       		.byte	0
+ 624 001e 03       		.uleb128 0x3
+ 625 001f 16       		.uleb128 0x16
+ 626 0020 00       		.byte	0
+ 627 0021 03       		.uleb128 0x3
+ 628 0022 0E       		.uleb128 0xe
+ 629 0023 3A       		.uleb128 0x3a
+ 630 0024 0B       		.uleb128 0xb
+ 631 0025 3B       		.uleb128 0x3b
+ 632 0026 0B       		.uleb128 0xb
+ 633 0027 49       		.uleb128 0x49
+ 634 0028 13       		.uleb128 0x13
+ 635 0029 00       		.byte	0
+ 636 002a 00       		.byte	0
+ 637 002b 04       		.uleb128 0x4
+ 638 002c 24       		.uleb128 0x24
+ 639 002d 00       		.byte	0
+ 640 002e 0B       		.uleb128 0xb
+ 641 002f 0B       		.uleb128 0xb
+ 642 0030 3E       		.uleb128 0x3e
+ 643 0031 0B       		.uleb128 0xb
+ 644 0032 03       		.uleb128 0x3
+ 645 0033 08       		.uleb128 0x8
+ 646 0034 00       		.byte	0
+ 647 0035 00       		.byte	0
+ 648 0036 05       		.uleb128 0x5
+ 649 0037 2E       		.uleb128 0x2e
+ 650 0038 01       		.byte	0x1
+ 651 0039 3F       		.uleb128 0x3f
+ 652 003a 19       		.uleb128 0x19
+ 653 003b 03       		.uleb128 0x3
+ 654 003c 0E       		.uleb128 0xe
+ 655 003d 3A       		.uleb128 0x3a
+ 656 003e 0B       		.uleb128 0xb
+ 657 003f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 14
+
+
+ 658 0040 0B       		.uleb128 0xb
+ 659 0041 27       		.uleb128 0x27
+ 660 0042 19       		.uleb128 0x19
+ 661 0043 49       		.uleb128 0x49
+ 662 0044 13       		.uleb128 0x13
+ 663 0045 11       		.uleb128 0x11
+ 664 0046 01       		.uleb128 0x1
+ 665 0047 12       		.uleb128 0x12
+ 666 0048 06       		.uleb128 0x6
+ 667 0049 40       		.uleb128 0x40
+ 668 004a 18       		.uleb128 0x18
+ 669 004b 9742     		.uleb128 0x2117
+ 670 004d 19       		.uleb128 0x19
+ 671 004e 01       		.uleb128 0x1
+ 672 004f 13       		.uleb128 0x13
+ 673 0050 00       		.byte	0
+ 674 0051 00       		.byte	0
+ 675 0052 06       		.uleb128 0x6
+ 676 0053 05       		.uleb128 0x5
+ 677 0054 00       		.byte	0
+ 678 0055 03       		.uleb128 0x3
+ 679 0056 0E       		.uleb128 0xe
+ 680 0057 3A       		.uleb128 0x3a
+ 681 0058 0B       		.uleb128 0xb
+ 682 0059 3B       		.uleb128 0x3b
+ 683 005a 0B       		.uleb128 0xb
+ 684 005b 49       		.uleb128 0x49
+ 685 005c 13       		.uleb128 0x13
+ 686 005d 02       		.uleb128 0x2
+ 687 005e 17       		.uleb128 0x17
+ 688 005f 00       		.byte	0
+ 689 0060 00       		.byte	0
+ 690 0061 07       		.uleb128 0x7
+ 691 0062 05       		.uleb128 0x5
+ 692 0063 00       		.byte	0
+ 693 0064 03       		.uleb128 0x3
+ 694 0065 08       		.uleb128 0x8
+ 695 0066 3A       		.uleb128 0x3a
+ 696 0067 0B       		.uleb128 0xb
+ 697 0068 3B       		.uleb128 0x3b
+ 698 0069 0B       		.uleb128 0xb
+ 699 006a 49       		.uleb128 0x49
+ 700 006b 13       		.uleb128 0x13
+ 701 006c 02       		.uleb128 0x2
+ 702 006d 17       		.uleb128 0x17
+ 703 006e 00       		.byte	0
+ 704 006f 00       		.byte	0
+ 705 0070 08       		.uleb128 0x8
+ 706 0071 34       		.uleb128 0x34
+ 707 0072 00       		.byte	0
+ 708 0073 03       		.uleb128 0x3
+ 709 0074 08       		.uleb128 0x8
+ 710 0075 3A       		.uleb128 0x3a
+ 711 0076 0B       		.uleb128 0xb
+ 712 0077 3B       		.uleb128 0x3b
+ 713 0078 0B       		.uleb128 0xb
+ 714 0079 49       		.uleb128 0x49
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 15
+
+
+ 715 007a 13       		.uleb128 0x13
+ 716 007b 02       		.uleb128 0x2
+ 717 007c 17       		.uleb128 0x17
+ 718 007d 00       		.byte	0
+ 719 007e 00       		.byte	0
+ 720 007f 09       		.uleb128 0x9
+ 721 0080 0B       		.uleb128 0xb
+ 722 0081 01       		.byte	0x1
+ 723 0082 55       		.uleb128 0x55
+ 724 0083 17       		.uleb128 0x17
+ 725 0084 00       		.byte	0
+ 726 0085 00       		.byte	0
+ 727 0086 0A       		.uleb128 0xa
+ 728 0087 34       		.uleb128 0x34
+ 729 0088 00       		.byte	0
+ 730 0089 03       		.uleb128 0x3
+ 731 008a 0E       		.uleb128 0xe
+ 732 008b 3A       		.uleb128 0x3a
+ 733 008c 0B       		.uleb128 0xb
+ 734 008d 3B       		.uleb128 0x3b
+ 735 008e 0B       		.uleb128 0xb
+ 736 008f 49       		.uleb128 0x49
+ 737 0090 13       		.uleb128 0x13
+ 738 0091 02       		.uleb128 0x2
+ 739 0092 17       		.uleb128 0x17
+ 740 0093 00       		.byte	0
+ 741 0094 00       		.byte	0
+ 742 0095 0B       		.uleb128 0xb
+ 743 0096 0B       		.uleb128 0xb
+ 744 0097 01       		.byte	0x1
+ 745 0098 11       		.uleb128 0x11
+ 746 0099 01       		.uleb128 0x1
+ 747 009a 12       		.uleb128 0x12
+ 748 009b 06       		.uleb128 0x6
+ 749 009c 00       		.byte	0
+ 750 009d 00       		.byte	0
+ 751 009e 0C       		.uleb128 0xc
+ 752 009f 34       		.uleb128 0x34
+ 753 00a0 00       		.byte	0
+ 754 00a1 03       		.uleb128 0x3
+ 755 00a2 08       		.uleb128 0x8
+ 756 00a3 3A       		.uleb128 0x3a
+ 757 00a4 0B       		.uleb128 0xb
+ 758 00a5 3B       		.uleb128 0x3b
+ 759 00a6 0B       		.uleb128 0xb
+ 760 00a7 49       		.uleb128 0x49
+ 761 00a8 13       		.uleb128 0x13
+ 762 00a9 00       		.byte	0
+ 763 00aa 00       		.byte	0
+ 764 00ab 0D       		.uleb128 0xd
+ 765 00ac 0F       		.uleb128 0xf
+ 766 00ad 00       		.byte	0
+ 767 00ae 0B       		.uleb128 0xb
+ 768 00af 0B       		.uleb128 0xb
+ 769 00b0 49       		.uleb128 0x49
+ 770 00b1 13       		.uleb128 0x13
+ 771 00b2 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 16
+
+
+ 772 00b3 00       		.byte	0
+ 773 00b4 0E       		.uleb128 0xe
+ 774 00b5 26       		.uleb128 0x26
+ 775 00b6 00       		.byte	0
+ 776 00b7 49       		.uleb128 0x49
+ 777 00b8 13       		.uleb128 0x13
+ 778 00b9 00       		.byte	0
+ 779 00ba 00       		.byte	0
+ 780 00bb 0F       		.uleb128 0xf
+ 781 00bc 898201   		.uleb128 0x4109
+ 782 00bf 01       		.byte	0x1
+ 783 00c0 11       		.uleb128 0x11
+ 784 00c1 01       		.uleb128 0x1
+ 785 00c2 31       		.uleb128 0x31
+ 786 00c3 13       		.uleb128 0x13
+ 787 00c4 01       		.uleb128 0x1
+ 788 00c5 13       		.uleb128 0x13
+ 789 00c6 00       		.byte	0
+ 790 00c7 00       		.byte	0
+ 791 00c8 10       		.uleb128 0x10
+ 792 00c9 8A8201   		.uleb128 0x410a
+ 793 00cc 00       		.byte	0
+ 794 00cd 02       		.uleb128 0x2
+ 795 00ce 18       		.uleb128 0x18
+ 796 00cf 9142     		.uleb128 0x2111
+ 797 00d1 18       		.uleb128 0x18
+ 798 00d2 00       		.byte	0
+ 799 00d3 00       		.byte	0
+ 800 00d4 11       		.uleb128 0x11
+ 801 00d5 898201   		.uleb128 0x4109
+ 802 00d8 01       		.byte	0x1
+ 803 00d9 11       		.uleb128 0x11
+ 804 00da 01       		.uleb128 0x1
+ 805 00db 31       		.uleb128 0x31
+ 806 00dc 13       		.uleb128 0x13
+ 807 00dd 00       		.byte	0
+ 808 00de 00       		.byte	0
+ 809 00df 12       		.uleb128 0x12
+ 810 00e0 2E       		.uleb128 0x2e
+ 811 00e1 00       		.byte	0
+ 812 00e2 3F       		.uleb128 0x3f
+ 813 00e3 19       		.uleb128 0x19
+ 814 00e4 3C       		.uleb128 0x3c
+ 815 00e5 19       		.uleb128 0x19
+ 816 00e6 6E       		.uleb128 0x6e
+ 817 00e7 0E       		.uleb128 0xe
+ 818 00e8 03       		.uleb128 0x3
+ 819 00e9 0E       		.uleb128 0xe
+ 820 00ea 00       		.byte	0
+ 821 00eb 00       		.byte	0
+ 822 00ec 00       		.byte	0
+ 823              		.section	.debug_loc,"",%progbits
+ 824              	.Ldebug_loc0:
+ 825              	.LLST0:
+ 826 0000 00000000 		.4byte	.LVL0
+ 827 0004 06000000 		.4byte	.LVL2
+ 828 0008 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 17
+
+
+ 829 000a 50       		.byte	0x50
+ 830 000b 06000000 		.4byte	.LVL2
+ 831 000f 0A000000 		.4byte	.LVL4
+ 832 0013 0100     		.2byte	0x1
+ 833 0015 52       		.byte	0x52
+ 834 0016 0A000000 		.4byte	.LVL4
+ 835 001a 32000000 		.4byte	.LVL13
+ 836 001e 0100     		.2byte	0x1
+ 837 0020 55       		.byte	0x55
+ 838 0021 32000000 		.4byte	.LVL13
+ 839 0025 3E000000 		.4byte	.LFE0
+ 840 0029 0100     		.2byte	0x1
+ 841 002b 52       		.byte	0x52
+ 842 002c 00000000 		.4byte	0
+ 843 0030 00000000 		.4byte	0
+ 844              	.LLST1:
+ 845 0034 00000000 		.4byte	.LVL0
+ 846 0038 08000000 		.4byte	.LVL3
+ 847 003c 0100     		.2byte	0x1
+ 848 003e 51       		.byte	0x51
+ 849 003f 08000000 		.4byte	.LVL3
+ 850 0043 32000000 		.4byte	.LVL13
+ 851 0047 0100     		.2byte	0x1
+ 852 0049 54       		.byte	0x54
+ 853 004a 32000000 		.4byte	.LVL13
+ 854 004e 36000000 		.4byte	.LVL14
+ 855 0052 0100     		.2byte	0x1
+ 856 0054 51       		.byte	0x51
+ 857 0055 36000000 		.4byte	.LVL14
+ 858 0059 3C000000 		.4byte	.LVL15
+ 859 005d 0100     		.2byte	0x1
+ 860 005f 54       		.byte	0x54
+ 861 0060 3C000000 		.4byte	.LVL15
+ 862 0064 3E000000 		.4byte	.LFE0
+ 863 0068 0100     		.2byte	0x1
+ 864 006a 53       		.byte	0x53
+ 865 006b 00000000 		.4byte	0
+ 866 006f 00000000 		.4byte	0
+ 867              	.LLST2:
+ 868 0073 04000000 		.4byte	.LVL1
+ 869 0077 08000000 		.4byte	.LVL3
+ 870 007b 0200     		.2byte	0x2
+ 871 007d 30       		.byte	0x30
+ 872 007e 9F       		.byte	0x9f
+ 873 007f 08000000 		.4byte	.LVL3
+ 874 0083 1C000000 		.4byte	.LVL7
+ 875 0087 0100     		.2byte	0x1
+ 876 0089 50       		.byte	0x50
+ 877 008a 24000000 		.4byte	.LVL8
+ 878 008e 3E000000 		.4byte	.LFE0
+ 879 0092 0100     		.2byte	0x1
+ 880 0094 50       		.byte	0x50
+ 881 0095 00000000 		.4byte	0
+ 882 0099 00000000 		.4byte	0
+ 883              	.LLST3:
+ 884 009d 0C000000 		.4byte	.LVL5
+ 885 00a1 30000000 		.4byte	.LVL12
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 18
+
+
+ 886 00a5 0100     		.2byte	0x1
+ 887 00a7 51       		.byte	0x51
+ 888 00a8 00000000 		.4byte	0
+ 889 00ac 00000000 		.4byte	0
+ 890              	.LLST4:
+ 891 00b0 0C000000 		.4byte	.LVL5
+ 892 00b4 10000000 		.4byte	.LVL6
+ 893 00b8 0200     		.2byte	0x2
+ 894 00ba 38       		.byte	0x38
+ 895 00bb 9F       		.byte	0x9f
+ 896 00bc 10000000 		.4byte	.LVL6
+ 897 00c0 28000000 		.4byte	.LVL10
+ 898 00c4 0100     		.2byte	0x1
+ 899 00c6 53       		.byte	0x53
+ 900 00c7 2A000000 		.4byte	.LVL11
+ 901 00cb 32000000 		.4byte	.LVL13
+ 902 00cf 0100     		.2byte	0x1
+ 903 00d1 53       		.byte	0x53
+ 904 00d2 00000000 		.4byte	0
+ 905 00d6 00000000 		.4byte	0
+ 906              	.LLST5:
+ 907 00da 00000000 		.4byte	.LVL16
+ 908 00de 22000000 		.4byte	.LVL19
+ 909 00e2 0100     		.2byte	0x1
+ 910 00e4 50       		.byte	0x50
+ 911 00e5 22000000 		.4byte	.LVL19
+ 912 00e9 25000000 		.4byte	.LVL20-1
+ 913 00ed 0100     		.2byte	0x1
+ 914 00ef 51       		.byte	0x51
+ 915 00f0 25000000 		.4byte	.LVL20-1
+ 916 00f4 36000000 		.4byte	.LVL23
+ 917 00f8 0100     		.2byte	0x1
+ 918 00fa 56       		.byte	0x56
+ 919 00fb 36000000 		.4byte	.LVL23
+ 920 00ff 3A000000 		.4byte	.LVL24
+ 921 0103 0100     		.2byte	0x1
+ 922 0105 50       		.byte	0x50
+ 923 0106 3A000000 		.4byte	.LVL24
+ 924 010a 3C000000 		.4byte	.LVL25
+ 925 010e 0400     		.2byte	0x4
+ 926 0110 F3       		.byte	0xf3
+ 927 0111 01       		.uleb128 0x1
+ 928 0112 50       		.byte	0x50
+ 929 0113 9F       		.byte	0x9f
+ 930 0114 3C000000 		.4byte	.LVL25
+ 931 0118 40000000 		.4byte	.LVL26
+ 932 011c 0100     		.2byte	0x1
+ 933 011e 50       		.byte	0x50
+ 934 011f 40000000 		.4byte	.LVL26
+ 935 0123 42000000 		.4byte	.LVL27
+ 936 0127 0100     		.2byte	0x1
+ 937 0129 56       		.byte	0x56
+ 938 012a 42000000 		.4byte	.LVL27
+ 939 012e 46000000 		.4byte	.LVL28
+ 940 0132 0100     		.2byte	0x1
+ 941 0134 50       		.byte	0x50
+ 942 0135 46000000 		.4byte	.LVL28
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 19
+
+
+ 943 0139 48000000 		.4byte	.LFE1
+ 944 013d 0100     		.2byte	0x1
+ 945 013f 56       		.byte	0x56
+ 946 0140 00000000 		.4byte	0
+ 947 0144 00000000 		.4byte	0
+ 948              	.LLST6:
+ 949 0148 00000000 		.4byte	.LVL16
+ 950 014c 20000000 		.4byte	.LVL18
+ 951 0150 0100     		.2byte	0x1
+ 952 0152 51       		.byte	0x51
+ 953 0153 20000000 		.4byte	.LVL18
+ 954 0157 36000000 		.4byte	.LVL23
+ 955 015b 0400     		.2byte	0x4
+ 956 015d F3       		.byte	0xf3
+ 957 015e 01       		.uleb128 0x1
+ 958 015f 51       		.byte	0x51
+ 959 0160 9F       		.byte	0x9f
+ 960 0161 36000000 		.4byte	.LVL23
+ 961 0165 48000000 		.4byte	.LFE1
+ 962 0169 0100     		.2byte	0x1
+ 963 016b 51       		.byte	0x51
+ 964 016c 00000000 		.4byte	0
+ 965 0170 00000000 		.4byte	0
+ 966              	.LLST7:
+ 967 0174 00000000 		.4byte	.LVL16
+ 968 0178 1E000000 		.4byte	.LVL17
+ 969 017c 0100     		.2byte	0x1
+ 970 017e 52       		.byte	0x52
+ 971 017f 1E000000 		.4byte	.LVL17
+ 972 0183 36000000 		.4byte	.LVL23
+ 973 0187 0100     		.2byte	0x1
+ 974 0189 55       		.byte	0x55
+ 975 018a 36000000 		.4byte	.LVL23
+ 976 018e 48000000 		.4byte	.LFE1
+ 977 0192 0100     		.2byte	0x1
+ 978 0194 52       		.byte	0x52
+ 979 0195 00000000 		.4byte	0
+ 980 0199 00000000 		.4byte	0
+ 981              	.LLST8:
+ 982 019d 2E000000 		.4byte	.LVL21
+ 983 01a1 34000000 		.4byte	.LVL22
+ 984 01a5 0100     		.2byte	0x1
+ 985 01a7 50       		.byte	0x50
+ 986 01a8 34000000 		.4byte	.LVL22
+ 987 01ac 36000000 		.4byte	.LVL23
+ 988 01b0 0500     		.2byte	0x5
+ 989 01b2 75       		.byte	0x75
+ 990 01b3 00       		.sleb128 0
+ 991 01b4 73       		.byte	0x73
+ 992 01b5 00       		.sleb128 0
+ 993 01b6 22       		.byte	0x22
+ 994 01b7 00000000 		.4byte	0
+ 995 01bb 00000000 		.4byte	0
+ 996              	.LLST9:
+ 997 01bf 00000000 		.4byte	.LVL29
+ 998 01c3 22000000 		.4byte	.LVL32
+ 999 01c7 0100     		.2byte	0x1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 20
+
+
+ 1000 01c9 50       		.byte	0x50
+ 1001 01ca 22000000 		.4byte	.LVL32
+ 1002 01ce 34000000 		.4byte	.LVL37
+ 1003 01d2 0100     		.2byte	0x1
+ 1004 01d4 54       		.byte	0x54
+ 1005 01d5 34000000 		.4byte	.LVL37
+ 1006 01d9 36000000 		.4byte	.LVL38
+ 1007 01dd 0100     		.2byte	0x1
+ 1008 01df 50       		.byte	0x50
+ 1009 01e0 36000000 		.4byte	.LVL38
+ 1010 01e4 38000000 		.4byte	.LVL39
+ 1011 01e8 0400     		.2byte	0x4
+ 1012 01ea F3       		.byte	0xf3
+ 1013 01eb 01       		.uleb128 0x1
+ 1014 01ec 50       		.byte	0x50
+ 1015 01ed 9F       		.byte	0x9f
+ 1016 01ee 38000000 		.4byte	.LVL39
+ 1017 01f2 3A000000 		.4byte	.LVL40
+ 1018 01f6 0100     		.2byte	0x1
+ 1019 01f8 50       		.byte	0x50
+ 1020 01f9 3A000000 		.4byte	.LVL40
+ 1021 01fd 3C000000 		.4byte	.LVL41
+ 1022 0201 0400     		.2byte	0x4
+ 1023 0203 F3       		.byte	0xf3
+ 1024 0204 01       		.uleb128 0x1
+ 1025 0205 50       		.byte	0x50
+ 1026 0206 9F       		.byte	0x9f
+ 1027 0207 3C000000 		.4byte	.LVL41
+ 1028 020b 3E000000 		.4byte	.LVL42
+ 1029 020f 0100     		.2byte	0x1
+ 1030 0211 50       		.byte	0x50
+ 1031 0212 3E000000 		.4byte	.LVL42
+ 1032 0216 40000000 		.4byte	.LVL43
+ 1033 021a 0400     		.2byte	0x4
+ 1034 021c F3       		.byte	0xf3
+ 1035 021d 01       		.uleb128 0x1
+ 1036 021e 50       		.byte	0x50
+ 1037 021f 9F       		.byte	0x9f
+ 1038 0220 40000000 		.4byte	.LVL43
+ 1039 0224 42000000 		.4byte	.LVL44
+ 1040 0228 0100     		.2byte	0x1
+ 1041 022a 50       		.byte	0x50
+ 1042 022b 42000000 		.4byte	.LVL44
+ 1043 022f 44000000 		.4byte	.LFE2
+ 1044 0233 0400     		.2byte	0x4
+ 1045 0235 F3       		.byte	0xf3
+ 1046 0236 01       		.uleb128 0x1
+ 1047 0237 50       		.byte	0x50
+ 1048 0238 9F       		.byte	0x9f
+ 1049 0239 00000000 		.4byte	0
+ 1050 023d 00000000 		.4byte	0
+ 1051              	.LLST10:
+ 1052 0241 00000000 		.4byte	.LVL29
+ 1053 0245 20000000 		.4byte	.LVL31
+ 1054 0249 0100     		.2byte	0x1
+ 1055 024b 51       		.byte	0x51
+ 1056 024c 20000000 		.4byte	.LVL31
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 21
+
+
+ 1057 0250 34000000 		.4byte	.LVL37
+ 1058 0254 0400     		.2byte	0x4
+ 1059 0256 F3       		.byte	0xf3
+ 1060 0257 01       		.uleb128 0x1
+ 1061 0258 51       		.byte	0x51
+ 1062 0259 9F       		.byte	0x9f
+ 1063 025a 34000000 		.4byte	.LVL37
+ 1064 025e 44000000 		.4byte	.LFE2
+ 1065 0262 0100     		.2byte	0x1
+ 1066 0264 51       		.byte	0x51
+ 1067 0265 00000000 		.4byte	0
+ 1068 0269 00000000 		.4byte	0
+ 1069              	.LLST11:
+ 1070 026d 16000000 		.4byte	.LVL30
+ 1071 0271 28000000 		.4byte	.LVL34
+ 1072 0275 0100     		.2byte	0x1
+ 1073 0277 55       		.byte	0x55
+ 1074 0278 28000000 		.4byte	.LVL34
+ 1075 027c 34000000 		.4byte	.LVL37
+ 1076 0280 0300     		.2byte	0x3
+ 1077 0282 75       		.byte	0x75
+ 1078 0283 7D       		.sleb128 -3
+ 1079 0284 9F       		.byte	0x9f
+ 1080 0285 40000000 		.4byte	.LVL43
+ 1081 0289 44000000 		.4byte	.LFE2
+ 1082 028d 0100     		.2byte	0x1
+ 1083 028f 55       		.byte	0x55
+ 1084 0290 00000000 		.4byte	0
+ 1085 0294 00000000 		.4byte	0
+ 1086              	.LLST12:
+ 1087 0298 26000000 		.4byte	.LVL33
+ 1088 029c 30000000 		.4byte	.LVL36
+ 1089 02a0 0100     		.2byte	0x1
+ 1090 02a2 50       		.byte	0x50
+ 1091 02a3 00000000 		.4byte	0
+ 1092 02a7 00000000 		.4byte	0
+ 1093              	.LLST13:
+ 1094 02ab 2A000000 		.4byte	.LVL35
+ 1095 02af 34000000 		.4byte	.LVL37
+ 1096 02b3 0100     		.2byte	0x1
+ 1097 02b5 53       		.byte	0x53
+ 1098 02b6 00000000 		.4byte	0
+ 1099 02ba 00000000 		.4byte	0
+ 1100              		.section	.debug_aranges,"",%progbits
+ 1101 0000 2C000000 		.4byte	0x2c
+ 1102 0004 0200     		.2byte	0x2
+ 1103 0006 00000000 		.4byte	.Ldebug_info0
+ 1104 000a 04       		.byte	0x4
+ 1105 000b 00       		.byte	0
+ 1106 000c 0000     		.2byte	0
+ 1107 000e 0000     		.2byte	0
+ 1108 0010 00000000 		.4byte	.LFB0
+ 1109 0014 3E000000 		.4byte	.LFE0-.LFB0
+ 1110 0018 00000000 		.4byte	.LFB1
+ 1111 001c 48000000 		.4byte	.LFE1-.LFB1
+ 1112 0020 00000000 		.4byte	.LFB2
+ 1113 0024 44000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 22
+
+
+ 1114 0028 00000000 		.4byte	0
+ 1115 002c 00000000 		.4byte	0
+ 1116              		.section	.debug_ranges,"",%progbits
+ 1117              	.Ldebug_ranges0:
+ 1118 0000 08000000 		.4byte	.LBB2
+ 1119 0004 2E000000 		.4byte	.LBE2
+ 1120 0008 30000000 		.4byte	.LBB5
+ 1121 000c 32000000 		.4byte	.LBE5
+ 1122 0010 00000000 		.4byte	0
+ 1123 0014 00000000 		.4byte	0
+ 1124 0018 00000000 		.4byte	.LFB0
+ 1125 001c 3E000000 		.4byte	.LFE0
+ 1126 0020 00000000 		.4byte	.LFB1
+ 1127 0024 48000000 		.4byte	.LFE1
+ 1128 0028 00000000 		.4byte	.LFB2
+ 1129 002c 44000000 		.4byte	.LFE2
+ 1130 0030 00000000 		.4byte	0
+ 1131 0034 00000000 		.4byte	0
+ 1132              		.section	.debug_line,"",%progbits
+ 1133              	.Ldebug_line0:
+ 1134 0000 B3010000 		.section	.debug_str,"MS",%progbits,1
+ 1134      02002D01 
+ 1134      00000201 
+ 1134      FB0E0D00 
+ 1134      01010101 
+ 1135              	.LASF3:
+ 1136 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1136      6E74385F 
+ 1136      7400
+ 1137              	.LASF19:
+ 1138 000a 6275696C 		.ascii	"build_message\000"
+ 1138      645F6D65 
+ 1138      73736167 
+ 1138      6500
+ 1139              	.LASF24:
+ 1140 0018 746F7461 		.ascii	"total_len\000"
+ 1140      6C5F6C65 
+ 1140      6E00
+ 1141              	.LASF28:
+ 1142 0022 2E2E5C2E 		.ascii	"..\\..\\..\\stringFormater.c\000"
+ 1142      2E5C2E2E 
+ 1142      5C737472 
+ 1142      696E6746 
+ 1142      6F726D61 
+ 1143              	.LASF16:
+ 1144 003c 64617461 		.ascii	"data\000"
+ 1144      00
+ 1145              	.LASF1:
+ 1146 0041 756E7369 		.ascii	"unsigned char\000"
+ 1146      676E6564 
+ 1146      20636861 
+ 1146      7200
+ 1147              	.LASF17:
+ 1148 004f 65787472 		.ascii	"extract\000"
+ 1148      61637400 
+ 1149              	.LASF7:
+ 1150 0057 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 23
+
+
+ 1150      20756E73 
+ 1150      69676E65 
+ 1150      6420696E 
+ 1150      7400
+ 1151              	.LASF5:
+ 1152 0069 73686F72 		.ascii	"short unsigned int\000"
+ 1152      7420756E 
+ 1152      7369676E 
+ 1152      65642069 
+ 1152      6E7400
+ 1153              	.LASF23:
+ 1154 007c 76657269 		.ascii	"verify_message\000"
+ 1154      66795F6D 
+ 1154      65737361 
+ 1154      676500
+ 1155              	.LASF29:
+ 1156 008b 433A5C55 		.ascii	"C:\\Users\\bogur\\Documents\\GitHub\\TFG2\\Codigo\\"
+ 1156      73657273 
+ 1156      5C626F67 
+ 1156      75725C44 
+ 1156      6F63756D 
+ 1157 00b7 416C676F 		.ascii	"Algoritmos postcuanticos\\PSOC\\Workspace\\HQC\\HQC"
+ 1157      7269746D 
+ 1157      6F732070 
+ 1157      6F737463 
+ 1157      75616E74 
+ 1158 00e6 5C485143 		.ascii	"\\HQC.cydsn\000"
+ 1158      2E637964 
+ 1158      736E00
+ 1159              	.LASF4:
+ 1160 00f1 5F5F7569 		.ascii	"__uint16_t\000"
+ 1160      6E743136 
+ 1160      5F7400
+ 1161              	.LASF10:
+ 1162 00fc 756E7369 		.ascii	"unsigned int\000"
+ 1162      676E6564 
+ 1162      20696E74 
+ 1162      00
+ 1163              	.LASF9:
+ 1164 0109 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1164      206C6F6E 
+ 1164      6720756E 
+ 1164      7369676E 
+ 1164      65642069 
+ 1165              	.LASF11:
+ 1166 0120 75696E74 		.ascii	"uint8_t\000"
+ 1166      385F7400 
+ 1167              	.LASF20:
+ 1168 0128 7061796C 		.ascii	"payload\000"
+ 1168      6F616400 
+ 1169              	.LASF18:
+ 1170 0130 63726338 		.ascii	"crc8\000"
+ 1170      00
+ 1171              	.LASF14:
+ 1172 0135 73697A65 		.ascii	"sizetype\000"
+ 1172      74797065 
+ 1172      00
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 24
+
+
+ 1173              	.LASF8:
+ 1174 013e 6C6F6E67 		.ascii	"long long int\000"
+ 1174      206C6F6E 
+ 1174      6720696E 
+ 1174      7400
+ 1175              	.LASF30:
+ 1176 014c 6D656D63 		.ascii	"memcpy\000"
+ 1176      707900
+ 1177              	.LASF26:
+ 1178 0153 6372635F 		.ascii	"crc_recv\000"
+ 1178      72656376 
+ 1178      00
+ 1179              	.LASF25:
+ 1180 015c 6372635F 		.ascii	"crc_calc\000"
+ 1180      63616C63 
+ 1180      00
+ 1181              	.LASF2:
+ 1182 0165 73686F72 		.ascii	"short int\000"
+ 1182      7420696E 
+ 1182      7400
+ 1183              	.LASF12:
+ 1184 016f 75696E74 		.ascii	"uint16_t\000"
+ 1184      31365F74 
+ 1184      00
+ 1185              	.LASF27:
+ 1186 0178 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1186      43313120 
+ 1186      352E342E 
+ 1186      31203230 
+ 1186      31363036 
+ 1187 01ab 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1187      20726576 
+ 1187      6973696F 
+ 1187      6E203233 
+ 1187      37373135 
+ 1188 01de 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1188      70202D6D 
+ 1188      6670753D 
+ 1188      66707634 
+ 1188      2D73702D 
+ 1189 0211 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1189      6F6E7320 
+ 1189      2D666661 
+ 1189      742D6C74 
+ 1189      6F2D6F62 
+ 1190              	.LASF6:
+ 1191 022b 6C6F6E67 		.ascii	"long int\000"
+ 1191      20696E74 
+ 1191      00
+ 1192              	.LASF15:
+ 1193 0234 63686172 		.ascii	"char\000"
+ 1193      00
+ 1194              	.LASF13:
+ 1195 0239 6C6F6E67 		.ascii	"long double\000"
+ 1195      20646F75 
+ 1195      626C6500 
+ 1196              	.LASF22:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccMfnM12.s 			page 25
+
+
+ 1197 0245 6672616D 		.ascii	"frame\000"
+ 1197      6500
+ 1198              	.LASF0:
+ 1199 024b 7369676E 		.ascii	"signed char\000"
+ 1199      65642063 
+ 1199      68617200 
+ 1200              	.LASF21:
+ 1201 0257 6C656E67 		.ascii	"length\000"
+ 1201      746800
+ 1202              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

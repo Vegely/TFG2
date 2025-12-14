@@ -39,6 +39,7 @@
           <File BuildType="BUILD" Toolchain="">FreeRTOSConfig.h</File>
           <File BuildType="BUILD" Toolchain="">mainTask.h</File>
           <File BuildType="BUILD" Toolchain="">..\..\..\uartTask.h</File>
+          <File BuildType="BUILD" Toolchain="">cycle_counter.h</File>
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">gcc\startup_psoc6_01_cm4.S</File>
           <File BuildType="BUILD" Toolchain="ARM IAR Generic">iar\startup_psoc6_01_cm4.s</File>
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">mdk\startup_psoc6_01_cm4.s</File>
@@ -46,6 +47,7 @@
           <File BuildType="BUILD" Toolchain="">mainTask.c</File>
           <File BuildType="BUILD" Toolchain="">main_cm4.c</File>
           <File BuildType="BUILD" Toolchain="">..\Serial\uartTask.c</File>
+          <File BuildType="BUILD" Toolchain="">cycle_counter.c</File>
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">cy8c6xx7_cm4_dual.ld</File>
           <File BuildType="BUILD" Toolchain="ARM IAR Generic">cy8c6xx7_cm4_dual.icf</File>
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">cy8c6xx7_cm4_dual.scat</File>
@@ -53,6 +55,8 @@
           <File BuildType="BUILD" Toolchain="">stdio_user.h</File>
           <File BuildType="BUILD" Toolchain="">stdio_user.c</File>
           <File BuildType="BUILD" Toolchain="">system_psoc6.h</File>
+          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.c</File>
+          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn">

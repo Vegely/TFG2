@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 1
 
 
    1              		.syntax unified
@@ -40,27 +40,28 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
    9:main_cm4.c    ****  *
   10:main_cm4.c    ****  * ========================================
   11:main_cm4.c    **** */
-  12:main_cm4.c    **** #include "project.h"
-  13:main_cm4.c    **** #include "FreeRTOS.h"
-  14:main_cm4.c    **** #include "FreeRTOSConfig.h"
-  15:main_cm4.c    **** #include "task.h"
-  16:main_cm4.c    **** #include "timers.h"
-  17:main_cm4.c    **** #include <stdio.h>
-  18:main_cm4.c    **** #include "../Serial/uartTask.h"
-  19:main_cm4.c    **** #include "mainTask.h"
-  20:main_cm4.c    **** 
+  12:main_cm4.c    **** 
+  13:main_cm4.c    **** #include "project.h"
+  14:main_cm4.c    **** #include "FreeRTOS.h"
+  15:main_cm4.c    **** #include "FreeRTOSConfig.h"
+  16:main_cm4.c    **** #include "task.h"
+  17:main_cm4.c    **** #include "timers.h"
+  18:main_cm4.c    **** #include <stdio.h>
+  19:main_cm4.c    **** #include "../Serial/uartTask.h"
+  20:main_cm4.c    **** #include "mainTask.h"
   21:main_cm4.c    **** 
   22:main_cm4.c    **** 
-  23:main_cm4.c    **** volatile uint8_t UART_READY=0;
-  24:main_cm4.c    **** 
+  23:main_cm4.c    **** 
+  24:main_cm4.c    **** volatile uint8_t UART_READY=0;
   25:main_cm4.c    **** 
-  26:main_cm4.c    **** int main(void)
-  27:main_cm4.c    **** {
-  29              		.loc 1 27 0
+  26:main_cm4.c    **** 
+  27:main_cm4.c    **** int main(void)
+  28:main_cm4.c    **** {
+  29              		.loc 1 28 0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 2
+
+
   30              		.cfi_startproc
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 2
-
-
   31              		@ Volatile: function does not return.
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -117,10 +118,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
   43:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __INLINE
   44:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __INLINE                               inline
   45:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 3
+
+
   46:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 3
-
-
   47:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
   49:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
@@ -177,10 +178,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  100:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
  101:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
  102:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 4
+
+
  103:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 4
-
-
  104:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
@@ -218,11 +219,11 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
   48              		.syntax unified
   49              	.LBE5:
   50              	.LBE4:
-  28:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
-  29:main_cm4.c    ****     
-  30:main_cm4.c    ****     /* Create RTOS tasks and start the scheduler */
-  31:main_cm4.c    ****     xTaskCreate(uartTask, "UART Task", 400, 0, 2, 0);
-  51              		.loc 1 31 0
+  29:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
+  30:main_cm4.c    ****     
+  31:main_cm4.c    ****     /* Create RTOS tasks and start the scheduler */
+  32:main_cm4.c    ****     xTaskCreate(uartTask, "UART Task", 400, 0, 2, 0);
+  51              		.loc 1 32 0
   52 0006 0024     		movs	r4, #0
   53 0008 0194     		str	r4, [sp, #4]
   54 000a 0223     		movs	r3, #2
@@ -233,22 +234,22 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
   59 0016 0948     		ldr	r0, .L4+4
   60 0018 FFF7FEFF 		bl	xTaskCreate
   61              	.LVL0:
-  32:main_cm4.c    ****     xTaskCreate(mainTask, "Main Task", 8192, 0, 1, 0);
-  62              		.loc 1 32 0
+  33:main_cm4.c    ****     xTaskCreate(mainTask, "Main Task", 8192, 0, 1, 0);
+  62              		.loc 1 33 0
   63 001c 0194     		str	r4, [sp, #4]
   64 001e 0123     		movs	r3, #1
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 5
+
+
   65 0020 0093     		str	r3, [sp]
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 5
-
-
   66 0022 2346     		mov	r3, r4
   67 0024 4FF40052 		mov	r2, #8192
   68 0028 0549     		ldr	r1, .L4+8
   69 002a 0648     		ldr	r0, .L4+12
   70 002c FFF7FEFF 		bl	xTaskCreate
   71              	.LVL1:
-  33:main_cm4.c    ****     vTaskStartScheduler();
-  72              		.loc 1 33 0
+  34:main_cm4.c    ****     vTaskStartScheduler();
+  72              		.loc 1 34 0
   73 0030 FFF7FEFF 		bl	vTaskStartScheduler
   74              	.LVL2:
   75              	.L2:
@@ -297,10 +298,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  114 000a 04       		.byte	0x4
  115 000b 01       		.uleb128 0x1
  116 000c 75050000 		.4byte	.LASF134
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 6
+
+
  117 0010 0C       		.byte	0xc
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 6
-
-
  118 0011 C2080000 		.4byte	.LASF135
  119 0015 0C040000 		.4byte	.LASF136
  120 0019 00000000 		.4byte	.Ldebug_ranges0+0
@@ -357,10 +358,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  171 0082 37030000 		.4byte	.LASF10
  172 0086 02       		.uleb128 0x2
  173 0087 08       		.byte	0x8
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 7
+
+
  174 0088 05       		.byte	0x5
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 7
-
-
  175 0089 65010000 		.4byte	.LASF11
  176 008d 02       		.uleb128 0x2
  177 008e 08       		.byte	0x8
@@ -417,10 +418,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  228 00f4 34       		.byte	0x34
  229 00f5 02050000 		.4byte	0x502
  230 00f9 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 8
+
+
  231 00fa CA000000 		.4byte	.LASF21
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 8
-
-
  232 00fe 05       		.byte	0x5
  233 00ff 37       		.byte	0x37
  234 0100 CE000000 		.4byte	0xce
@@ -477,10 +478,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  285 0166 50050000 		.4byte	.LASF30
  286 016a 05       		.byte	0x5
  287 016b 40       		.byte	0x40
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 9
+
+
  288 016c CE000000 		.4byte	0xce
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 9
-
-
  289 0170 24       		.byte	0x24
  290 0171 07       		.uleb128 0x7
  291 0172 A5040000 		.4byte	.LASF31
@@ -537,10 +538,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  342 01d8 A2000000 		.4byte	0xa2
  343 01dc 30       		.byte	0x30
  344 01dd 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 10
+
+
  345 01de 75030000 		.4byte	.LASF40
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 10
-
-
  346 01e2 05       		.byte	0x5
  347 01e3 4E       		.byte	0x4e
  348 01e4 A2000000 		.4byte	0xa2
@@ -597,10 +598,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  399 024a D2060000 		.4byte	.LASF49
  400 024e 05       		.byte	0x5
  401 024f 57       		.byte	0x57
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 11
+
+
  402 0250 A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 11
-
-
  403 0254 3E       		.byte	0x3e
  404 0255 07       		.uleb128 0x7
  405 0256 71000000 		.4byte	.LASF50
@@ -657,10 +658,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  456 02bc A2000000 		.4byte	0xa2
  457 02c0 50       		.byte	0x50
  458 02c1 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 12
+
+
  459 02c2 37010000 		.4byte	.LASF59
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 12
-
-
  460 02c6 05       		.byte	0x5
  461 02c7 61       		.byte	0x61
  462 02c8 A2000000 		.4byte	0xa2
@@ -717,10 +718,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  513 032e DC040000 		.4byte	.LASF68
  514 0332 05       		.byte	0x5
  515 0333 6E       		.byte	0x6e
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 13
+
+
  516 0334 B8000000 		.4byte	0xb8
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 13
-
-
  517 0338 5A       		.byte	0x5a
  518 0339 07       		.uleb128 0x7
  519 033a A1070000 		.4byte	.LASF69
@@ -777,10 +778,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  570 03a0 B8000000 		.4byte	0xb8
  571 03a4 6E       		.byte	0x6e
  572 03a5 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 14
+
+
  573 03a6 BE060000 		.4byte	.LASF78
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 14
-
-
  574 03aa 05       		.byte	0x5
  575 03ab 7B       		.byte	0x7b
  576 03ac A2000000 		.4byte	0xa2
@@ -837,10 +838,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  627 0412 C5070000 		.4byte	.LASF87
  628 0416 05       		.byte	0x5
  629 0417 87       		.byte	0x87
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 15
+
+
  630 0418 A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 15
-
-
  631 041c 7D       		.byte	0x7d
  632 041d 07       		.uleb128 0x7
  633 041e 30000000 		.4byte	.LASF88
@@ -897,10 +898,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  684 0484 CE000000 		.4byte	0xce
  685 0488 98       		.byte	0x98
  686 0489 07       		.uleb128 0x7
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 16
+
+
  687 048a 63080000 		.4byte	.LASF97
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 16
-
-
  688 048e 05       		.byte	0x5
  689 048f 93       		.byte	0x93
  690 0490 CE000000 		.4byte	0xce
@@ -957,10 +958,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  741 04f6 4F000000 		.4byte	.LASF106
  742 04fa 05       		.byte	0x5
  743 04fb 9E       		.byte	0x9e
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 17
+
+
  744 04fc CE000000 		.4byte	0xce
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 17
-
-
  745 0500 B4       		.byte	0xb4
  746 0501 00       		.byte	0
  747 0502 03       		.uleb128 0x3
@@ -1017,10 +1018,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  798 0568 7902     		.2byte	0x279
  799 056a E0000000 		.4byte	0xe0
  800 056e 04       		.byte	0x4
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 18
+
+
  801 056f 0E       		.uleb128 0xe
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 18
-
-
  802 0570 0A010000 		.4byte	.LASF115
  803 0574 06       		.byte	0x6
  804 0575 7B02     		.2byte	0x27b
@@ -1077,10 +1078,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  855 05e4 0E       		.uleb128 0xe
  856 05e5 6B060000 		.4byte	.LASF124
  857 05e9 06       		.byte	0x6
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 19
+
+
  858 05ea 8602     		.2byte	0x286
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 19
-
-
  859 05ec E0000000 		.4byte	0xe0
  860 05f0 2C       		.byte	0x2c
  861 05f1 0E       		.uleb128 0xe
@@ -1109,7 +1110,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  884 0620 10       		.uleb128 0x10
  885 0621 39020000 		.4byte	.LASF139
  886 0625 01       		.byte	0x1
- 887 0626 1A       		.byte	0x1a
+ 887 0626 1B       		.byte	0x1b
  888 0627 94000000 		.4byte	0x94
  889 062b 00000000 		.4byte	.LFB485
  890 062f 48000000 		.4byte	.LFE485-.LFB485
@@ -1121,7 +1122,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  896 063e 04000000 		.4byte	.LBB4
  897 0642 02000000 		.4byte	.LBE4-.LBB4
  898 0646 01       		.byte	0x1
- 899 0647 1C       		.byte	0x1c
+ 899 0647 1D       		.byte	0x1d
  900 0648 12       		.uleb128 0x12
  901 0649 1C000000 		.4byte	.LVL0
  902 064d F7060000 		.4byte	0x6f7
@@ -1137,10 +1138,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  912 0660 52       		.byte	0x52
  913 0661 03       		.uleb128 0x3
  914 0662 0A       		.byte	0xa
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 20
+
+
  915 0663 9001     		.2byte	0x190
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 20
-
-
  916 0665 13       		.uleb128 0x13
  917 0666 01       		.uleb128 0x1
  918 0667 53       		.byte	0x53
@@ -1197,10 +1198,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  969 06a7 74       		.byte	0x74
  970 06a8 00       		.sleb128 0
  971 06a9 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 21
+
+
  972 06aa 14       		.uleb128 0x14
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 21
-
-
  973 06ab 34000000 		.4byte	.LVL2
  974 06af 03070000 		.4byte	0x703
  975 06b3 00       		.byte	0
@@ -1229,7 +1230,7 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  998 06e6 18       		.uleb128 0x18
  999 06e7 D0020000 		.4byte	.LASF131
  1000 06eb 01       		.byte	0x1
- 1001 06ec 17       		.byte	0x17
+ 1001 06ec 18       		.byte	0x18
  1002 06ed E5000000 		.4byte	0xe5
  1003 06f1 05       		.uleb128 0x5
  1004 06f2 03       		.byte	0x3
@@ -1257,10 +1258,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1026 0007 03       		.uleb128 0x3
  1027 0008 0E       		.uleb128 0xe
  1028 0009 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 22
+
+
  1029 000a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 22
-
-
  1030 000b 55       		.uleb128 0x55
  1031 000c 17       		.uleb128 0x17
  1032 000d 11       		.uleb128 0x11
@@ -1317,10 +1318,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1083 0040 0B       		.uleb128 0xb
  1084 0041 0B       		.uleb128 0xb
  1085 0042 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 23
+
+
  1086 0043 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 23
-
-
  1087 0044 3B       		.uleb128 0x3b
  1088 0045 0B       		.uleb128 0xb
  1089 0046 01       		.uleb128 0x1
@@ -1377,10 +1378,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1140 0079 0C       		.uleb128 0xc
  1141 007a 16       		.uleb128 0x16
  1142 007b 00       		.byte	0
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 24
+
+
  1143 007c 03       		.uleb128 0x3
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 24
-
-
  1144 007d 0E       		.uleb128 0xe
  1145 007e 3A       		.uleb128 0x3a
  1146 007f 0B       		.uleb128 0xb
@@ -1437,10 +1438,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1197 00b2 00       		.byte	0
  1198 00b3 10       		.uleb128 0x10
  1199 00b4 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 25
+
+
  1200 00b5 01       		.byte	0x1
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 25
-
-
  1201 00b6 3F       		.uleb128 0x3f
  1202 00b7 19       		.uleb128 0x19
  1203 00b8 03       		.uleb128 0x3
@@ -1497,10 +1498,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1254 00ef 8A8201   		.uleb128 0x410a
  1255 00f2 00       		.byte	0
  1256 00f3 02       		.uleb128 0x2
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 26
+
+
  1257 00f4 18       		.uleb128 0x18
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 26
-
-
  1258 00f5 9142     		.uleb128 0x2111
  1259 00f7 18       		.uleb128 0x18
  1260 00f8 00       		.byte	0
@@ -1557,10 +1558,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1311 012d 00       		.byte	0
  1312 012e 18       		.uleb128 0x18
  1313 012f 34       		.uleb128 0x34
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 27
+
+
  1314 0130 00       		.byte	0
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 27
-
-
  1315 0131 03       		.uleb128 0x3
  1316 0132 0E       		.uleb128 0xe
  1317 0133 3A       		.uleb128 0x3a
@@ -1617,10 +1618,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1367      02005502 
  1367      00000201 
  1367      FB0E0D00 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 28
+
+
  1367      01010101 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 28
-
-
  1368              	.LASF56:
  1369 0000 70726F74 		.ascii	"protBusMasterMask\000"
  1369      4275734D 
@@ -1677,10 +1678,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1389      7400
  1390              	.LASF85:
  1391 009e 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 29
+
+
  1391      44697632 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 29
-
-
  1391      345F3543 
  1391      746C4F66 
  1391      66736574 
@@ -1737,10 +1738,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1411      4D61696E 
  1411      57733046 
  1411      72657100 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 30
+
+
  1412              	.LASF15:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 30
-
-
  1413 015d 696E7431 		.ascii	"int16_t\000"
  1413      365F7400 
  1414              	.LASF11:
@@ -1797,10 +1798,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1436              	.LASF55:
  1437 01f6 73797350 		.ascii	"sysPmSimoPresent\000"
  1437      6D53696D 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 31
+
+
  1437      6F507265 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 31
-
-
  1437      73656E74 
  1437      00
  1438              	.LASF45:
@@ -1857,10 +1858,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1460              	.LASF4:
  1461 029e 5F5F696E 		.ascii	"__int16_t\000"
  1461      7431365F 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 32
+
+
  1461      7400
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 32
-
-
  1462              	.LASF121:
  1463 02a8 72784275 		.ascii	"rxBufIdx\000"
  1463      66496478 
@@ -1917,10 +1918,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1483      6420696E 
  1483      7400
  1484              	.LASF112:
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 33
+
+
  1485 0349 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 33
-
-
  1485      625F7363 
  1485      625F7561 
  1485      72745F68 
@@ -1977,10 +1978,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1507      655F7400 
  1508              	.LASF53:
  1509 03f2 65704D6F 		.ascii	"epMonitorNr\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 34
+
+
  1509      6E69746F 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 34
-
-
  1509      724E7200 
  1510              	.LASF117:
  1511 03fe 72785269 		.ascii	"rxRingBufHead\000"
@@ -2037,10 +2038,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1528              	.LASF68:
  1529 04dc 64774368 		.ascii	"dwChOffset\000"
  1529      4F666673 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 35
+
+
  1529      657400
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 35
-
-
  1530              	.LASF43:
  1531 04e7 63707573 		.ascii	"cpussFlashPaSize\000"
  1531      73466C61 
@@ -2097,10 +2098,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1551      352E342E 
  1551      31203230 
  1551      31363036 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 36
+
+
  1552 05a8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 36
-
-
  1552      20726576 
  1552      6973696F 
  1552      6E203233 
@@ -2157,10 +2158,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1574 0692 756E7369 		.ascii	"unsigned char\000"
  1574      676E6564 
  1574      20636861 
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 37
+
+
  1574      7200
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 37
-
-
  1575              	.LASF67:
  1576 06a0 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
  1576      6843746C 
@@ -2217,10 +2218,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1598 0739 5F5F7569 		.ascii	"__uint16_t\000"
  1598      6E743136 
  1598      5F7400
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 38
+
+
  1599              	.LASF83:
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 38
-
-
  1600 0744 70657269 		.ascii	"periDiv16CtlOffset\000"
  1600      44697631 
  1600      3643746C 
@@ -2277,10 +2278,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1620      4B657900 
  1621              	.LASF119:
  1622 07de 72784275 		.ascii	"rxBuf\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 39
+
+
  1622      6600
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 39
-
-
  1623              	.LASF127:
  1624 07e4 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
  1624      74635F73 
@@ -2337,10 +2338,10 @@ ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 1
  1644      61736500 
  1645              	.LASF80:
  1646 0894 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccPuvz1t.s 			page 40
+
+
  1646      44697643 
-ARM GAS  C:\Users\bogur\AppData\Local\Temp\ccKA8fCL.s 			page 40
-
-
  1646      6D645061 
  1646      44697653 
  1646      656C506F 

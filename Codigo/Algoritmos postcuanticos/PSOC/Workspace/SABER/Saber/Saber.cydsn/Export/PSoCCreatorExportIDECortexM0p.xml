@@ -48,6 +48,8 @@
           <File BuildType="BUILD" Toolchain="">stdio_user.h</File>
           <File BuildType="BUILD" Toolchain="">stdio_user.c</File>
           <File BuildType="BUILD" Toolchain="">system_psoc6.h</File>
+          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.c</File>
+          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn">
