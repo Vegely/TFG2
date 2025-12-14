@@ -1,0 +1,5 @@
+    printf("Key Sizes:\r\n");
+    printf("  Public Key Size     : %lu bytes\r\n", (unsigned long)BYTES_PK);
+    printf("  Secret Key Size     : %lu bytes\r\n", (unsigned long)BYTES_SK);
+    printf("  Ciphertext Size     : %lu bytes\r\n", (unsigned long)BYTES_CT);
+    printf("  Shared Secret Size  : %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);

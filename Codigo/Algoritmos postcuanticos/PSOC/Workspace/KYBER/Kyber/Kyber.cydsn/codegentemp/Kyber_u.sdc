@@ -1,3 +1,3 @@
-# Component constraints for C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\TopDesign\TopDesign.cysch
-# Project: C:\Users\bogur\Documents\GitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\Kyber.cyprj
-# Date: Wed, 05 Nov 2025 18:44:51 GMT
+# Component constraints for C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\Kyber.cyprj
+# Date: Sun, 14 Dec 2025 17:02:20 GMT

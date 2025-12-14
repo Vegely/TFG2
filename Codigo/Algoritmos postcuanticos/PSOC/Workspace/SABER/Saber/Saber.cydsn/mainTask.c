@@ -26,6 +26,10 @@ unsigned char *ss = NULL;
 // External semaphore from UART task
 extern SemaphoreHandle_t uartReadySemaphore;
 
+
+
+
+
 void mainTask(void *arg)
 {
     (void)arg;
@@ -59,51 +63,15 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-    if (saber_keypair(pk, sk) != 0) {
-        printf("Keypair generation failed\n");
-    }
-    printf("Keypair generation succesful\n");
-
-    if (saber_encapsulate(ct, ss, pk) != 0) {
-            printf("Encapsulation failed\n");
-    }
-    printf("Correct encapsulation\n");
-    
-    if (saber_decapsulate(ss, ct, sk) != 0) {
-            printf("Encapsulation failed\n");
-    }
-    
-    printf("Correct decapsulation\n");
-    
-    // Your main application loop
-    
-
-    // Get the minimum amount of free stack space that has existed 
-    // since the task started.
-    UBaseType_t uxHighWaterMark;
+    if (saber_keypair(pk, sk) != 0) printf("KeyGen Error\r\n");
+    if (saber_encapsulate(ct, ss, pk) != 0) printf("Encaps Error\r\n");
+    if (saber_decapsulate(ss, ct, sk) != 0) printf("Decaps Error\r\n");
+      
     for(;;)
     {
-        
-        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-         if (saber_keypair(pk, sk) != 0) {
-            printf("Keypair generation failed\n");
-        }
-        printf("Keypair generation succesful\n");
-
-        if (saber_encapsulate(ct, ss, pk) != 0) {
-                printf("Encapsulation failed\n");
-        }
-        printf("Correct encapsulation\n");
-        
-        if (saber_decapsulate(ss, ct, sk) != 0) {
-                printf("Encapsulation failed\n");
-        }
             
-        printf("Correct decapsulation\n");
-        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-        printf("Minimum free stack: %lu words\n", uxHighWaterMark);
     }
-    
+
     // Cleanup (never reached in infinite loop)
     free(sk);
     free(pk);

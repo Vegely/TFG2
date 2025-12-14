@@ -64,7 +64,7 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-     if (hqc_keypair(pk, sk) != 0) {
+    if (hqc_keypair(pk, sk) != 0) {
         printf("Keypair generation failed\n");
     }
     printf("Keypair generation succesful\n");

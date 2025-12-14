@@ -1,0 +1,94 @@
+#define TASK_STACK_SIZE  2*8192
+volatile unsigned int *DWT_CYCCNT = (volatile unsigned int *)0xE0001004;
+volatile unsigned int *DWT_CONTROL = (volatile unsigned int *)0xE0001000;
+volatile unsigned int *SCB_DEMCR = (volatile unsigned int *)0xE000EDFC;
+
+void timer_init(void) {
+    *SCB_DEMCR |= 0x01000000; // Enable DWT access
+    *DWT_CYCCNT = 0;          // Reset cycle counter
+    *DWT_CONTROL |= 1;        // Enable cycle counter
+}
+uint32_t get_time_us(void) {
+    // Get current cycle count
+    uint32_t cycles = DWT->CYCCNT;
+    
+    // Convert cycles to microseconds
+    // SystemCoreClock is automatically defined by PSoC PDL (e.g., 100000000 for 100MHz)
+    return cycles / (SystemCoreClock / 1000000); 
+}
+void print_stack_usage(const char* label) {
+    // 1. Get the minimum amount of free stack space that has existed so far
+    UBaseType_t high_water_mark = uxTaskGetStackHighWaterMark(NULL);
+    
+    // 2. Calculate how much has actually been used
+    uint32_t used_stack = TASK_STACK_SIZE - high_water_mark;
+
+    // 3. Print
+    printf("   [MEM %s] Initial: %d words | Used: %lu words | Free: %lu words\r\n", 
+           label, 
+           TASK_STACK_SIZE, 
+           used_stack, 
+           high_water_mark);
+}
+
+    // Initialize Timer
+    timer_init();
+
+    uint32_t t_start, t_end, t_diff;
+    
+    // Accumulators for Average Calculation
+    uint64_t sum_keygen = 0;
+    uint64_t sum_encaps = 0;
+    uint64_t sum_decaps = 0;
+    
+    int iteration_count = 0;
+    
+    // Loop Counter
+    int iterations = 0;
+    for (int i = 0; i < 100; i++) { // Run 100 times
+        iteration_count++;
+        printf("\r\n=== ITERATION %d ===\r\n", iteration_count);
+
+        // ---------------------------------------------------------
+        // MEASURE 1: Key Generation
+        // ---------------------------------------------------------
+        t_start = get_time_us();
+        if (saber_keypair(pk, sk) != 0) printf("KeyGen Error\r\n");
+        t_end = get_time_us();
+        
+        t_diff = t_end - t_start;
+        sum_keygen += t_diff;
+        
+        printf("[KeyGen] Time: %lu us | Avg: %lu us\r\n", t_diff, (uint32_t)(sum_keygen / iteration_count));
+        print_stack_usage("KeyGen");
+
+        // ---------------------------------------------------------
+        // MEASURE 2: Encapsulation
+        // ---------------------------------------------------------
+        t_start = get_time_us();
+        if (saber_encapsulate(ct, ss, pk) != 0) printf("Encaps Error\r\n");
+        t_end = get_time_us();
+        
+        t_diff = t_end - t_start;
+        sum_encaps += t_diff;
+
+        printf("[Encaps] Time: %lu us | Avg: %lu us\r\n", t_diff, (uint32_t)(sum_encaps / iteration_count));
+        print_stack_usage("Encaps");
+
+        // ---------------------------------------------------------
+        // MEASURE 3: Decapsulation
+        // ---------------------------------------------------------
+        t_start = get_time_us();
+        if (saber_decapsulate(ss, ct, sk) != 0) printf("Decaps Error\r\n");
+        t_end = get_time_us();
+        
+        t_diff = t_end - t_start;
+        sum_decaps += t_diff;
+
+        printf("[Decaps] Time: %lu us | Avg: %lu us\r\n", t_diff, (uint32_t)(sum_decaps / iteration_count));
+        print_stack_usage("Decaps");
+
+        printf("------------------------------------------\r\n");
+    }
+    
+    printf("Done.\r\n");

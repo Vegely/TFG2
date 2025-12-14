@@ -26,6 +26,7 @@ unsigned char *ss = NULL;
 // External semaphore from UART task
 extern SemaphoreHandle_t uartReadySemaphore;
 
+
 void mainTask(void *arg)
 {
     (void)arg;
@@ -45,12 +46,6 @@ void mainTask(void *arg)
     const size_t BYTES_PK = kyber_get_public_key_size();
     const size_t BYTES_CT = kyber_get_ciphertext_size();
     const size_t BYTES_SS = kyber_get_shared_secret_size();
-
-    printf("Kyber Sizes:\r\n");
-    printf("  Public Key Size     : %lu bytes\r\n", (unsigned long)BYTES_PK);
-    printf("  Secret Key Size     : %lu bytes\r\n", (unsigned long)BYTES_SK);
-    printf("  Ciphertext Size     : %lu bytes\r\n", (unsigned long)BYTES_CT);
-    printf("  Shared Secret Size  : %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);
     
     sk = (unsigned char *) calloc(BYTES_SK, sizeof(unsigned char));
     pk = (unsigned char *) calloc(BYTES_PK, sizeof(unsigned char));
@@ -64,22 +59,12 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-     if (kyber_keypair(pk, sk) != 0) {
-        printf("Keypair generation failed\n");
-    }
-    printf("Keypair generation succesful\n");
+    if (kyber_keypair(pk, sk) != 0) printf("Keypair generation failed\n");
+    if (kyber_encapsulate(ct, ss, pk) != 0) printf("Encapsulation failed\n"); 
+    if (kyber_decapsulate(ss, ct, sk) != 0) printf("Encapsulation failed\n");
 
-    if (kyber_encapsulate(ct, ss, pk) != 0) {
-            printf("Encapsulation failed\n");
-    }
-    printf("Correct encapsulation\n");
     
-    if (kyber_decapsulate(ss, ct, sk) != 0) {
-            printf("Encapsulation failed\n");
-    }
-    
-    printf("Correct decapsulation\n");
-    
+
     // Your main application loop
     for(;;)
     {

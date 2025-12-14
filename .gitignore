@@ -1,0 +1,12 @@
+*.o
+*.ctl
+*.pci
+*.cyfit
+*.plc_log
+*.pco
+*.sdc
+*.rt_log
+*.rpt
+*.vh2
+*.v
+*.sdf
