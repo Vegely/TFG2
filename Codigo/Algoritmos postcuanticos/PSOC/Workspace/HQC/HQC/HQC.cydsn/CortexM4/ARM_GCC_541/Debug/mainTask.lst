@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 1
 
 
    1              		.syntax unified
@@ -47,23 +47,22 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
   16:mainTask.c    **** #include "semphr.h"
   17:mainTask.c    **** #include <stdio.h>
   18:mainTask.c    **** #include <stdlib.h>
-  19:mainTask.c    **** #define HQC_SECURITY_256 HQC_SECURITY_256
-  20:mainTask.c    **** #include "../hqc_wrapper.h"
-  21:mainTask.c    **** 
-  22:mainTask.c    **** unsigned char *sk = NULL;
-  23:mainTask.c    **** unsigned char *pk = NULL;
-  24:mainTask.c    **** unsigned char *ct = NULL;
-  25:mainTask.c    **** unsigned char *ss = NULL;
-  26:mainTask.c    **** 
-  27:mainTask.c    **** // External semaphore from UART task
-  28:mainTask.c    **** extern SemaphoreHandle_t uartReadySemaphore;
-  29:mainTask.c    **** 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 2
+  19:mainTask.c    **** #include "../hqc_wrapper.h"
+  20:mainTask.c    **** 
+  21:mainTask.c    **** unsigned char *sk = NULL;
+  22:mainTask.c    **** unsigned char *pk = NULL;
+  23:mainTask.c    **** unsigned char *ct = NULL;
+  24:mainTask.c    **** unsigned char *ss = NULL;
+  25:mainTask.c    **** 
+  26:mainTask.c    **** // External semaphore from UART task
+  27:mainTask.c    **** extern SemaphoreHandle_t uartReadySemaphore;
+  28:mainTask.c    **** 
+  29:mainTask.c    **** void mainTask(void *arg)
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 2
 
 
-  30:mainTask.c    **** void mainTask(void *arg)
-  31:mainTask.c    **** {
-  29              		.loc 1 31 0
+  30:mainTask.c    **** {
+  29              		.loc 1 30 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -76,101 +75,101 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
   39              		.cfi_offset 7, -12
   40              		.cfi_offset 8, -8
   41              		.cfi_offset 14, -4
-  32:mainTask.c    ****     (void)arg;
-  33:mainTask.c    ****     
-  34:mainTask.c    ****     // Wait for UART to be ready (block until semaphore is given)
-  35:mainTask.c    ****     xSemaphoreTake(uartReadySemaphore, portMAX_DELAY);
-  42              		.loc 1 35 0
+  31:mainTask.c    ****     (void)arg;
+  32:mainTask.c    ****     
+  33:mainTask.c    ****     // Wait for UART to be ready (block until semaphore is given)
+  34:mainTask.c    ****     xSemaphoreTake(uartReadySemaphore, portMAX_DELAY);
+  42              		.loc 1 34 0
   43 0004 4FF0FF31 		mov	r1, #-1
   44 0008 3B4B     		ldr	r3, .L11
   45 000a 1868     		ldr	r0, [r3]
   46              	.LVL1:
   47 000c FFF7FEFF 		bl	xQueueSemaphoreTake
   48              	.LVL2:
-  36:mainTask.c    ****     
-  37:mainTask.c    ****     printf("Main task started - UART is ready\r\n");
-  49              		.loc 1 37 0
+  35:mainTask.c    ****     
+  36:mainTask.c    ****     printf("Main task started - UART is ready\r\n");
+  49              		.loc 1 36 0
   50 0010 3A48     		ldr	r0, .L11+4
   51 0012 FFF7FEFF 		bl	puts
   52              	.LVL3:
-  38:mainTask.c    ****     
-  39:mainTask.c    ****     //Initialize SABER
-  40:mainTask.c    ****     if (hqc_init(HQC_SECURITY_256) != 0) {
-  53              		.loc 1 40 0
+  37:mainTask.c    ****     
+  38:mainTask.c    ****     //Initialize SABER
+  39:mainTask.c    ****     if (hqc_init(HQC_SECURITY_256) != 0) {
+  53              		.loc 1 39 0
   54 0016 4FF48070 		mov	r0, #256
   55 001a FFF7FEFF 		bl	hqc_init
   56              	.LVL4:
   57 001e 10B1     		cbz	r0, .L2
-  41:mainTask.c    ****         printf("HQC init failed\n");
-  58              		.loc 1 41 0
+  40:mainTask.c    ****         printf("HQC init failed\n");
+  58              		.loc 1 40 0
   59 0020 3748     		ldr	r0, .L11+8
   60 0022 FFF7FEFF 		bl	puts
   61              	.LVL5:
   62              	.L2:
-  42:mainTask.c    ****     }
-  43:mainTask.c    ****     
-  44:mainTask.c    ****     // Allocate memory
-  45:mainTask.c    ****     const size_t BYTES_SK = hqc_get_secret_key_size();
-  63              		.loc 1 45 0
+  41:mainTask.c    ****     }
+  42:mainTask.c    ****     
+  43:mainTask.c    ****     // Allocate memory
+  44:mainTask.c    ****     const size_t BYTES_SK = hqc_get_secret_key_size();
+  63              		.loc 1 44 0
   64 0026 FFF7FEFF 		bl	hqc_get_secret_key_size
   65              	.LVL6:
   66 002a 0446     		mov	r4, r0
   67              	.LVL7:
-  46:mainTask.c    ****     const size_t BYTES_PK = hqc_get_public_key_size();
-  68              		.loc 1 46 0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 3
-
-
+  45:mainTask.c    ****     const size_t BYTES_PK = hqc_get_public_key_size();
+  68              		.loc 1 45 0
   69 002c FFF7FEFF 		bl	hqc_get_public_key_size
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 3
+
+
   70              	.LVL8:
   71 0030 0646     		mov	r6, r0
   72              	.LVL9:
-  47:mainTask.c    ****     const size_t BYTES_CT = hqc_get_ciphertext_size();
-  73              		.loc 1 47 0
+  46:mainTask.c    ****     const size_t BYTES_CT = hqc_get_ciphertext_size();
+  73              		.loc 1 46 0
   74 0032 FFF7FEFF 		bl	hqc_get_ciphertext_size
   75              	.LVL10:
   76 0036 0546     		mov	r5, r0
   77              	.LVL11:
-  48:mainTask.c    ****     const size_t BYTES_SS = hqc_get_shared_secret_size();
-  78              		.loc 1 48 0
+  47:mainTask.c    ****     const size_t BYTES_SS = hqc_get_shared_secret_size();
+  78              		.loc 1 47 0
   79 0038 FFF7FEFF 		bl	hqc_get_shared_secret_size
   80              	.LVL12:
   81 003c 8046     		mov	r8, r0
   82              	.LVL13:
-  49:mainTask.c    **** 
-  50:mainTask.c    ****     printf("HQC Sizes:\r\n");
-  83              		.loc 1 50 0
+  48:mainTask.c    **** 
+  49:mainTask.c    ****     printf("HQC Sizes:\r\n");
+  83              		.loc 1 49 0
   84 003e 3148     		ldr	r0, .L11+12
   85              	.LVL14:
   86 0040 FFF7FEFF 		bl	puts
   87              	.LVL15:
-  51:mainTask.c    ****     printf("  Public Key Size     : %lu bytes\r\n", (unsigned long)BYTES_PK);
-  88              		.loc 1 51 0
+  50:mainTask.c    ****     printf("  Public Key Size     : %lu bytes\r\n", (unsigned long)BYTES_PK);
+  88              		.loc 1 50 0
   89 0044 3146     		mov	r1, r6
   90 0046 3048     		ldr	r0, .L11+16
   91 0048 FFF7FEFF 		bl	printf
   92              	.LVL16:
-  52:mainTask.c    ****     printf("  Secret Key Size     : %lu bytes\r\n", (unsigned long)BYTES_SK);
-  93              		.loc 1 52 0
+  51:mainTask.c    ****     printf("  Secret Key Size     : %lu bytes\r\n", (unsigned long)BYTES_SK);
+  93              		.loc 1 51 0
   94 004c 2146     		mov	r1, r4
   95 004e 2F48     		ldr	r0, .L11+20
   96 0050 FFF7FEFF 		bl	printf
   97              	.LVL17:
-  53:mainTask.c    ****     printf("  Ciphertext Size     : %lu bytes\r\n", (unsigned long)BYTES_CT);
-  98              		.loc 1 53 0
+  52:mainTask.c    ****     printf("  Ciphertext Size     : %lu bytes\r\n", (unsigned long)BYTES_CT);
+  98              		.loc 1 52 0
   99 0054 2946     		mov	r1, r5
  100 0056 2E48     		ldr	r0, .L11+24
  101 0058 FFF7FEFF 		bl	printf
  102              	.LVL18:
-  54:mainTask.c    ****     printf("  Shared Secret Size  : %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);
- 103              		.loc 1 54 0
+  53:mainTask.c    ****     printf("  Shared Secret Size  : %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);
+ 103              		.loc 1 53 0
  104 005c 4146     		mov	r1, r8
  105 005e 2D48     		ldr	r0, .L11+28
  106 0060 FFF7FEFF 		bl	printf
  107              	.LVL19:
-  55:mainTask.c    ****     
-  56:mainTask.c    ****     sk = (unsigned char *) calloc(BYTES_SK, sizeof(unsigned char));
- 108              		.loc 1 56 0
+  54:mainTask.c    ****     
+  55:mainTask.c    ****     sk = (unsigned char *) calloc(BYTES_SK, sizeof(unsigned char));
+ 108              		.loc 1 55 0
  109 0064 0121     		movs	r1, #1
  110 0066 2046     		mov	r0, r4
  111 0068 FFF7FEFF 		bl	calloc
@@ -178,12 +177,12 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  113 006c 0746     		mov	r7, r0
  114 006e 2A4C     		ldr	r4, .L11+32
  115              	.LVL21:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 4
-
-
  116 0070 2060     		str	r0, [r4]
-  57:mainTask.c    ****     pk = (unsigned char *) calloc(BYTES_PK, sizeof(unsigned char));
- 117              		.loc 1 57 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 4
+
+
+  56:mainTask.c    ****     pk = (unsigned char *) calloc(BYTES_PK, sizeof(unsigned char));
+ 117              		.loc 1 56 0
  118 0072 0121     		movs	r1, #1
  119 0074 3046     		mov	r0, r6
  120 0076 FFF7FEFF 		bl	calloc
@@ -191,8 +190,8 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  122 007a 0646     		mov	r6, r0
  123              	.LVL23:
  124 007c 6060     		str	r0, [r4, #4]
-  58:mainTask.c    ****     ct = (unsigned char *) calloc(BYTES_CT, sizeof(unsigned char));
- 125              		.loc 1 58 0
+  57:mainTask.c    ****     ct = (unsigned char *) calloc(BYTES_CT, sizeof(unsigned char));
+ 125              		.loc 1 57 0
  126 007e 0121     		movs	r1, #1
  127 0080 2846     		mov	r0, r5
  128 0082 FFF7FEFF 		bl	calloc
@@ -200,67 +199,67 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  130 0086 0546     		mov	r5, r0
  131              	.LVL25:
  132 0088 A060     		str	r0, [r4, #8]
-  59:mainTask.c    ****     ss = (unsigned char *) calloc(BYTES_SS, sizeof(unsigned char));
- 133              		.loc 1 59 0
+  58:mainTask.c    ****     ss = (unsigned char *) calloc(BYTES_SS, sizeof(unsigned char));
+ 133              		.loc 1 58 0
  134 008a 0121     		movs	r1, #1
  135 008c 4046     		mov	r0, r8
  136 008e FFF7FEFF 		bl	calloc
  137              	.LVL26:
  138 0092 E060     		str	r0, [r4, #12]
-  60:mainTask.c    **** 
-  61:mainTask.c    ****     if (!sk || !pk || !ct || !ss) {
- 139              		.loc 1 61 0
+  59:mainTask.c    **** 
+  60:mainTask.c    ****     if (!sk || !pk || !ct || !ss) {
+ 139              		.loc 1 60 0
  140 0094 17B1     		cbz	r7, .L3
- 141              		.loc 1 61 0 is_stmt 0 discriminator 1
+ 141              		.loc 1 60 0 is_stmt 0 discriminator 1
  142 0096 0EB1     		cbz	r6, .L3
- 143              		.loc 1 61 0 discriminator 2
+ 143              		.loc 1 60 0 discriminator 2
  144 0098 05B1     		cbz	r5, .L3
- 145              		.loc 1 61 0 discriminator 3
+ 145              		.loc 1 60 0 discriminator 3
  146 009a 18B9     		cbnz	r0, .L4
  147              	.L3:
-  62:mainTask.c    ****         printf("Memory allocation failed\r\n");
- 148              		.loc 1 62 0 is_stmt 1
+  61:mainTask.c    ****         printf("Memory allocation failed\r\n");
+ 148              		.loc 1 61 0 is_stmt 1
  149 009c 1F48     		ldr	r0, .L11+36
  150 009e FFF7FEFF 		bl	puts
  151              	.LVL27:
  152 00a2 02E0     		b	.L5
  153              	.L4:
-  63:mainTask.c    ****     }
-  64:mainTask.c    ****     else{
-  65:mainTask.c    ****         printf("Correct memory allocation\r\n");
- 154              		.loc 1 65 0
+  62:mainTask.c    ****     }
+  63:mainTask.c    ****     else{
+  64:mainTask.c    ****         printf("Correct memory allocation\r\n");
+ 154              		.loc 1 64 0
  155 00a4 1E48     		ldr	r0, .L11+40
  156 00a6 FFF7FEFF 		bl	puts
  157              	.LVL28:
  158              	.L5:
-  66:mainTask.c    ****     }
-  67:mainTask.c    ****     
-  68:mainTask.c    ****     if (hqc_keypair(pk, sk) != 0) {
- 159              		.loc 1 68 0
+  65:mainTask.c    ****     }
+  66:mainTask.c    ****     
+  67:mainTask.c    ****      if (hqc_keypair(pk, sk) != 0) {
+ 159              		.loc 1 67 0
  160 00aa 1B4B     		ldr	r3, .L11+32
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 5
-
-
  161 00ac 1968     		ldr	r1, [r3]
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 5
+
+
  162 00ae 5868     		ldr	r0, [r3, #4]
  163 00b0 FFF7FEFF 		bl	hqc_keypair
  164              	.LVL29:
  165 00b4 10B1     		cbz	r0, .L6
-  69:mainTask.c    ****         printf("Keypair generation failed\n");
- 166              		.loc 1 69 0
+  68:mainTask.c    ****         printf("Keypair generation failed\n");
+ 166              		.loc 1 68 0
  167 00b6 1B48     		ldr	r0, .L11+44
  168 00b8 FFF7FEFF 		bl	puts
  169              	.LVL30:
  170              	.L6:
-  70:mainTask.c    ****     }
-  71:mainTask.c    ****     printf("Keypair generation succesful\n");
- 171              		.loc 1 71 0
+  69:mainTask.c    ****     }
+  70:mainTask.c    ****     printf("Keypair generation succesful\n");
+ 171              		.loc 1 70 0
  172 00bc 1A48     		ldr	r0, .L11+48
  173 00be FFF7FEFF 		bl	puts
  174              	.LVL31:
-  72:mainTask.c    **** 
-  73:mainTask.c    ****     if (hqc_encapsulate(ct, ss, pk) != 0) {
- 175              		.loc 1 73 0
+  71:mainTask.c    **** 
+  72:mainTask.c    ****     if (hqc_encapsulate(ct, ss, pk) != 0) {
+ 175              		.loc 1 72 0
  176 00c2 154B     		ldr	r3, .L11+32
  177 00c4 5A68     		ldr	r2, [r3, #4]
  178 00c6 D968     		ldr	r1, [r3, #12]
@@ -268,21 +267,21 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  180 00ca FFF7FEFF 		bl	hqc_encapsulate
  181              	.LVL32:
  182 00ce 10B1     		cbz	r0, .L7
-  74:mainTask.c    ****             printf("Encapsulation failed\n");
- 183              		.loc 1 74 0
+  73:mainTask.c    ****             printf("Encapsulation failed\n");
+ 183              		.loc 1 73 0
  184 00d0 1648     		ldr	r0, .L11+52
  185 00d2 FFF7FEFF 		bl	puts
  186              	.LVL33:
  187              	.L7:
-  75:mainTask.c    ****     }
-  76:mainTask.c    ****     printf("Correct encapsulation\n");
- 188              		.loc 1 76 0
+  74:mainTask.c    ****     }
+  75:mainTask.c    ****     printf("Correct encapsulation\n");
+ 188              		.loc 1 75 0
  189 00d6 1648     		ldr	r0, .L11+56
  190 00d8 FFF7FEFF 		bl	puts
  191              	.LVL34:
-  77:mainTask.c    ****     
-  78:mainTask.c    ****     if (hqc_decapsulate(ss, ct, sk) != 0) {
- 192              		.loc 1 78 0
+  76:mainTask.c    ****     
+  77:mainTask.c    ****     if (hqc_decapsulate(ss, ct, sk) != 0) {
+ 192              		.loc 1 77 0
  193 00dc 0E4B     		ldr	r3, .L11+32
  194 00de 1A68     		ldr	r2, [r3]
  195 00e0 9968     		ldr	r1, [r3, #8]
@@ -290,19 +289,19 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  197 00e4 FFF7FEFF 		bl	hqc_decapsulate
  198              	.LVL35:
  199 00e8 10B1     		cbz	r0, .L8
-  79:mainTask.c    ****             printf("Encapsulation failed\n");
- 200              		.loc 1 79 0
+  78:mainTask.c    ****             printf("Encapsulation failed\n");
+ 200              		.loc 1 78 0
  201 00ea 1048     		ldr	r0, .L11+52
  202 00ec FFF7FEFF 		bl	puts
  203              	.LVL36:
  204              	.L8:
-  80:mainTask.c    ****     }
-  81:mainTask.c    ****     
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 6
+  79:mainTask.c    ****     }
+  80:mainTask.c    ****     
+  81:mainTask.c    ****     printf("Correct decapsulation\n");
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 6
 
 
-  82:mainTask.c    ****     printf("Correct decapsulation\n");
- 205              		.loc 1 82 0
+ 205              		.loc 1 81 0
  206 00f0 1048     		ldr	r0, .L11+60
  207 00f2 FFF7FEFF 		bl	puts
  208              	.LVL37:
@@ -358,10 +357,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  247      204B6579 
  247      2053697A 
  247      65202020 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 7
-
-
  248              	.LC4:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 7
+
+
  249 0064 20205365 		.ascii	"  Secret Key Size     : %lu bytes\015\012\000"
  249      63726574 
  249      204B6579 
@@ -418,10 +417,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  270              	.LC12:
  271 0160 436F7272 		.ascii	"Correct encapsulation\000"
  271      65637420 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 8
-
-
  271      656E6361 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 8
+
+
  271      7073756C 
  271      6174696F 
  272 0176 0000     		.space	2
@@ -478,10 +477,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  319 0011 06090000 		.4byte	.LASF155
  320 0015 87070000 		.4byte	.LASF156
  321 0019 00000000 		.4byte	.Ldebug_ranges0+0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 9
-
-
  322 001d 00000000 		.4byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 9
+
+
  323 0021 00000000 		.4byte	.Ldebug_line0
  324 0025 02       		.uleb128 0x2
  325 0026 02       		.byte	0x2
@@ -538,10 +537,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  376 0089 91010000 		.4byte	.LASF11
  377 008d 02       		.uleb128 0x2
  378 008e 08       		.byte	0x8
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 10
-
-
  379 008f 07       		.byte	0x7
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 10
+
+
  380 0090 DD000000 		.4byte	.LASF12
  381 0094 04       		.uleb128 0x4
  382 0095 04       		.byte	0x4
@@ -598,10 +597,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  433 00fb 08050000 		.4byte	0x508
  434 00ff 07       		.uleb128 0x7
  435 0100 C4000000 		.4byte	.LASF22
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 11
-
-
  436 0104 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 11
+
+
  437 0105 37       		.byte	0x37
  438 0106 CE000000 		.4byte	0xce
  439 010a 00       		.byte	0
@@ -658,10 +657,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  490 0170 05       		.byte	0x5
  491 0171 40       		.byte	0x40
  492 0172 CE000000 		.4byte	0xce
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 12
-
-
  493 0176 24       		.byte	0x24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 12
+
+
  494 0177 07       		.uleb128 0x7
  495 0178 B5040000 		.4byte	.LASF32
  496 017c 05       		.byte	0x5
@@ -718,10 +717,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  547 01e2 30       		.byte	0x30
  548 01e3 07       		.uleb128 0x7
  549 01e4 DD030000 		.4byte	.LASF41
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 13
-
-
  550 01e8 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 13
+
+
  551 01e9 4E       		.byte	0x4e
  552 01ea A2000000 		.4byte	0xa2
  553 01ee 31       		.byte	0x31
@@ -778,10 +777,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  604 0254 05       		.byte	0x5
  605 0255 57       		.byte	0x57
  606 0256 A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 14
-
-
  607 025a 3E       		.byte	0x3e
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 14
+
+
  608 025b 07       		.uleb128 0x7
  609 025c 70000000 		.4byte	.LASF51
  610 0260 05       		.byte	0x5
@@ -838,10 +837,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  661 02c6 50       		.byte	0x50
  662 02c7 07       		.uleb128 0x7
  663 02c8 63010000 		.4byte	.LASF60
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 15
-
-
  664 02cc 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 15
+
+
  665 02cd 61       		.byte	0x61
  666 02ce A2000000 		.4byte	0xa2
  667 02d2 51       		.byte	0x51
@@ -898,10 +897,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  718 0338 05       		.byte	0x5
  719 0339 6E       		.byte	0x6e
  720 033a B8000000 		.4byte	0xb8
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 16
-
-
  721 033e 5A       		.byte	0x5a
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 16
+
+
  722 033f 07       		.uleb128 0x7
  723 0340 7C080000 		.4byte	.LASF70
  724 0344 05       		.byte	0x5
@@ -958,10 +957,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  775 03aa 6E       		.byte	0x6e
  776 03ab 07       		.uleb128 0x7
  777 03ac E3060000 		.4byte	.LASF79
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 17
-
-
  778 03b0 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 17
+
+
  779 03b1 7B       		.byte	0x7b
  780 03b2 A2000000 		.4byte	0xa2
  781 03b6 70       		.byte	0x70
@@ -1018,10 +1017,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  832 041c 05       		.byte	0x5
  833 041d 87       		.byte	0x87
  834 041e A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 18
-
-
  835 0422 7D       		.byte	0x7d
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 18
+
+
  836 0423 07       		.uleb128 0x7
  837 0424 48000000 		.4byte	.LASF89
  838 0428 05       		.byte	0x5
@@ -1078,10 +1077,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  889 048e 98       		.byte	0x98
  890 048f 07       		.uleb128 0x7
  891 0490 A8090000 		.4byte	.LASF98
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 19
-
-
  892 0494 05       		.byte	0x5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 19
+
+
  893 0495 93       		.byte	0x93
  894 0496 CE000000 		.4byte	0xce
  895 049a 9C       		.byte	0x9c
@@ -1138,10 +1137,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  946 0500 05       		.byte	0x5
  947 0501 9E       		.byte	0x9e
  948 0502 CE000000 		.4byte	0xce
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 20
-
-
  949 0506 B4       		.byte	0xb4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 20
+
+
  950 0507 00       		.byte	0
  951 0508 03       		.uleb128 0x3
  952 0509 5E040000 		.4byte	.LASF108
@@ -1198,10 +1197,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1003 0570 E0000000 		.4byte	0xe0
  1004 0574 04       		.byte	0x4
  1005 0575 0E       		.uleb128 0xe
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 21
-
-
  1006 0576 17010000 		.4byte	.LASF116
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 21
+
+
  1007 057a 06       		.byte	0x6
  1008 057b 7B02     		.2byte	0x27b
  1009 057d 2F050000 		.4byte	0x52f
@@ -1258,10 +1257,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1060 05eb 73060000 		.4byte	.LASF125
  1061 05ef 06       		.byte	0x6
  1062 05f0 8602     		.2byte	0x286
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 22
-
-
  1063 05f2 E0000000 		.4byte	0xe0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 22
+
+
  1064 05f6 2C       		.byte	0x2c
  1065 05f7 0E       		.uleb128 0xe
  1066 05f8 36040000 		.4byte	.LASF126
@@ -1318,10 +1317,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1117 0665 12       		.uleb128 0x12
  1118 0666 7F020000 		.4byte	.LASF158
  1119 066a 01       		.byte	0x1
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 23
+ 1120 066b 1D       		.byte	0x1d
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 23
 
 
- 1120 066b 1E       		.byte	0x1e
  1121 066c 00000000 		.4byte	.LFB485
  1122 0670 38010000 		.4byte	.LFE485-.LFB485
  1123 0674 01       		.uleb128 0x1
@@ -1330,31 +1329,31 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1126 067a 13       		.uleb128 0x13
  1127 067b 61726700 		.ascii	"arg\000"
  1128 067f 01       		.byte	0x1
- 1129 0680 1E       		.byte	0x1e
+ 1129 0680 1D       		.byte	0x1d
  1130 0681 2F050000 		.4byte	0x52f
  1131 0685 00000000 		.4byte	.LLST0
  1132 0689 14       		.uleb128 0x14
  1133 068a B2000000 		.4byte	.LASF135
  1134 068e 01       		.byte	0x1
- 1135 068f 2D       		.byte	0x2d
+ 1135 068f 2C       		.byte	0x2c
  1136 0690 FF080000 		.4byte	0x8ff
  1137 0694 21000000 		.4byte	.LLST1
  1138 0698 14       		.uleb128 0x14
  1139 0699 D0060000 		.4byte	.LASF136
  1140 069d 01       		.byte	0x1
- 1141 069e 2E       		.byte	0x2e
+ 1141 069e 2D       		.byte	0x2d
  1142 069f FF080000 		.4byte	0x8ff
  1143 06a3 3F000000 		.4byte	.LLST2
  1144 06a7 14       		.uleb128 0x14
  1145 06a8 BB000000 		.4byte	.LASF137
  1146 06ac 01       		.byte	0x1
- 1147 06ad 2F       		.byte	0x2f
+ 1147 06ad 2E       		.byte	0x2e
  1148 06ae FF080000 		.4byte	0x8ff
  1149 06b2 5D000000 		.4byte	.LLST3
  1150 06b6 14       		.uleb128 0x14
  1151 06b7 6F020000 		.4byte	.LASF138
  1152 06bb 01       		.byte	0x1
- 1153 06bc 30       		.byte	0x30
+ 1153 06bc 2F       		.byte	0x2f
  1154 06bd FF080000 		.4byte	0x8ff
  1155 06c1 7B000000 		.4byte	.LLST4
  1156 06c5 15       		.uleb128 0x15
@@ -1378,10 +1377,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1174 06e9 05       		.uleb128 0x5
  1175 06ea 03       		.byte	0x3
  1176 06eb 00000000 		.4byte	.LC0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 24
-
-
  1177 06ef 00       		.byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 24
+
+
  1178 06f0 15       		.uleb128 0x15
  1179 06f1 1E000000 		.4byte	.LVL4
  1180 06f5 9C090000 		.4byte	0x99c
@@ -1438,10 +1437,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1231 0768 03       		.byte	0x3
  1232 0769 40000000 		.4byte	.LC3
  1233 076d 16       		.uleb128 0x16
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 25
-
-
  1234 076e 01       		.uleb128 0x1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 25
+
+
  1235 076f 51       		.byte	0x51
  1236 0770 02       		.uleb128 0x2
  1237 0771 76       		.byte	0x76
@@ -1498,10 +1497,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1288 07c8 78       		.byte	0x78
  1289 07c9 00       		.sleb128 0
  1290 07ca 00       		.byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 26
-
-
  1291 07cb 15       		.uleb128 0x15
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 26
+
+
  1292 07cc 6C000000 		.4byte	.LVL20
  1293 07d0 DE090000 		.4byte	0x9de
  1294 07d4 E4070000 		.4byte	0x7e4
@@ -1558,10 +1557,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1345 0825 50       		.byte	0x50
  1346 0826 02       		.uleb128 0x2
  1347 0827 78       		.byte	0x78
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 27
-
-
  1348 0828 00       		.sleb128 0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 27
+
+
  1349 0829 16       		.uleb128 0x16
  1350 082a 01       		.uleb128 0x1
  1351 082b 51       		.byte	0x51
@@ -1618,10 +1617,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1402 0894 17       		.uleb128 0x17
  1403 0895 CE000000 		.4byte	.LVL32
  1404 0899 F4090000 		.4byte	0x9f4
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 28
-
-
  1405 089d 15       		.uleb128 0x15
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 28
+
+
  1406 089e D6000000 		.4byte	.LVL33
  1407 08a2 8D090000 		.4byte	0x98d
  1408 08a6 B4080000 		.4byte	0x8b4
@@ -1678,10 +1677,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1459 0910 05       		.uleb128 0x5
  1460 0911 C3000000 		.4byte	0xc3
  1461 0915 1B       		.uleb128 0x1b
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 29
-
-
  1462 0916 47060000 		.4byte	.LASF140
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 29
+
+
  1463 091a 05       		.byte	0x5
  1464 091b A7       		.byte	0xa7
  1465 091c 20090000 		.4byte	0x920
@@ -1698,7 +1697,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1476 0936 1C       		.uleb128 0x1c
  1477 0937 736B00   		.ascii	"sk\000"
  1478 093a 01       		.byte	0x1
- 1479 093b 16       		.byte	0x16
+ 1479 093b 15       		.byte	0x15
  1480 093c 3F060000 		.4byte	0x63f
  1481 0940 05       		.uleb128 0x5
  1482 0941 03       		.byte	0x3
@@ -1706,7 +1705,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1484 0946 1C       		.uleb128 0x1c
  1485 0947 706B00   		.ascii	"pk\000"
  1486 094a 01       		.byte	0x1
- 1487 094b 17       		.byte	0x17
+ 1487 094b 16       		.byte	0x16
  1488 094c 3F060000 		.4byte	0x63f
  1489 0950 05       		.uleb128 0x5
  1490 0951 03       		.byte	0x3
@@ -1714,7 +1713,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1492 0956 1C       		.uleb128 0x1c
  1493 0957 637400   		.ascii	"ct\000"
  1494 095a 01       		.byte	0x1
- 1495 095b 18       		.byte	0x18
+ 1495 095b 17       		.byte	0x17
  1496 095c 3F060000 		.4byte	0x63f
  1497 0960 05       		.uleb128 0x5
  1498 0961 03       		.byte	0x3
@@ -1722,7 +1721,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1500 0966 1C       		.uleb128 0x1c
  1501 0967 737300   		.ascii	"ss\000"
  1502 096a 01       		.byte	0x1
- 1503 096b 19       		.byte	0x19
+ 1503 096b 18       		.byte	0x18
  1504 096c 3F060000 		.4byte	0x63f
  1505 0970 05       		.uleb128 0x5
  1506 0971 03       		.byte	0x3
@@ -1730,7 +1729,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1508 0976 1B       		.uleb128 0x1b
  1509 0977 F4000000 		.4byte	.LASF142
  1510 097b 01       		.byte	0x1
- 1511 097c 1C       		.byte	0x1c
+ 1511 097c 1B       		.byte	0x1b
  1512 097d 34060000 		.4byte	0x634
  1513 0981 1D       		.uleb128 0x1d
  1514 0982 E8030000 		.4byte	.LASF143
@@ -1738,10 +1737,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1516 098a 08       		.byte	0x8
  1517 098b 8805     		.2byte	0x588
  1518 098d 1E       		.uleb128 0x1e
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 30
-
-
  1519 098e C2040000 		.4byte	.LASF159
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 30
+
+
  1520 0992 30020000 		.4byte	.LASF160
  1521 0996 0F       		.byte	0xf
  1522 0997 00       		.byte	0
@@ -1798,10 +1797,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1573 0a09 1E       		.byte	0x1e
  1574 0a0a 00       		.byte	0
  1575              		.section	.debug_abbrev,"",%progbits
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 31
-
-
  1576              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 31
+
+
  1577 0000 01       		.uleb128 0x1
  1578 0001 11       		.uleb128 0x11
  1579 0002 01       		.byte	0x1
@@ -1858,10 +1857,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1630 0035 00       		.byte	0
  1631 0036 05       		.uleb128 0x5
  1632 0037 35       		.uleb128 0x35
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 32
-
-
  1633 0038 00       		.byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 32
+
+
  1634 0039 49       		.uleb128 0x49
  1635 003a 13       		.uleb128 0x13
  1636 003b 00       		.byte	0
@@ -1918,10 +1917,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1687 006e 01       		.uleb128 0x1
  1688 006f 13       		.uleb128 0x13
  1689 0070 00       		.byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 33
-
-
  1690 0071 00       		.byte	0
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 33
+
+
  1691 0072 0B       		.uleb128 0xb
  1692 0073 05       		.uleb128 0x5
  1693 0074 00       		.byte	0
@@ -1978,10 +1977,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1744 00a7 0B       		.uleb128 0xb
  1745 00a8 0B       		.uleb128 0xb
  1746 00a9 49       		.uleb128 0x49
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 34
-
-
  1747 00aa 13       		.uleb128 0x13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 34
+
+
  1748 00ab 3A       		.uleb128 0x3a
  1749 00ac 0B       		.uleb128 0xb
  1750 00ad 3B       		.uleb128 0x3b
@@ -2038,10 +2037,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1801 00e2 13       		.uleb128 0x13
  1802 00e3 05       		.uleb128 0x5
  1803 00e4 00       		.byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 35
-
-
  1804 00e5 03       		.uleb128 0x3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 35
+
+
  1805 00e6 08       		.uleb128 0x8
  1806 00e7 3A       		.uleb128 0x3a
  1807 00e8 0B       		.uleb128 0xb
@@ -2098,10 +2097,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1858 0122 00       		.byte	0
  1859 0123 00       		.byte	0
  1860 0124 18       		.uleb128 0x18
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 36
-
-
  1861 0125 898201   		.uleb128 0x4109
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 36
+
+
  1862 0128 01       		.byte	0x1
  1863 0129 11       		.uleb128 0x11
  1864 012a 01       		.uleb128 0x1
@@ -2158,10 +2157,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1915 015d 3A       		.uleb128 0x3a
  1916 015e 0B       		.uleb128 0xb
  1917 015f 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 37
-
-
  1918 0160 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 37
+
+
  1919 0161 49       		.uleb128 0x49
  1920 0162 13       		.uleb128 0x13
  1921 0163 3F       		.uleb128 0x3f
@@ -2218,10 +2217,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  1972 0196 03       		.uleb128 0x3
  1973 0197 0E       		.uleb128 0xe
  1974 0198 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 38
-
-
  1975 0199 0B       		.uleb128 0xb
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 38
+
+
  1976 019a 3B       		.uleb128 0x3b
  1977 019b 0B       		.uleb128 0xb
  1978 019c 00       		.byte	0
@@ -2278,10 +2277,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2029 0077 00000000 		.4byte	0
  2030              	.LLST4:
  2031 007b 3E000000 		.4byte	.LVL13
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 39
-
-
  2032 007f 40000000 		.4byte	.LVL14
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 39
+
+
  2033 0083 0100     		.2byte	0x1
  2034 0085 50       		.byte	0x50
  2035 0086 40000000 		.4byte	.LVL14
@@ -2338,10 +2337,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2071 0034 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
  2071      6843746C 
  2071      4D61696E 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 40
-
-
  2071      57733346 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 40
+
+
  2071      72657100 
  2072              	.LASF89:
  2073 0048 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
@@ -2398,10 +2397,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2095      72696F50 
  2095      6F7300
  2096              	.LASF12:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 41
-
-
  2097 00dd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 41
+
+
  2097      206C6F6E 
  2097      6720756E 
  2097      7369676E 
@@ -2458,10 +2457,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2116              	.LASF15:
  2117 0189 696E7431 		.ascii	"int16_t\000"
  2117      365F7400 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 42
-
-
  2118              	.LASF11:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 42
+
+
  2119 0191 6C6F6E67 		.ascii	"long long int\000"
  2119      206C6F6E 
  2119      6720696E 
@@ -2518,10 +2517,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2141 0230 5F5F6275 		.ascii	"__builtin_puts\000"
  2141      696C7469 
  2141      6E5F7075 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 43
-
-
  2141      747300
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 43
+
+
  2142              	.LASF24:
  2143 023f 70657269 		.ascii	"periBase\000"
  2143      42617365 
@@ -2578,10 +2577,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2166              	.LASF9:
  2167 02cd 5F5F7569 		.ascii	"__uint32_t\000"
  2167      6E743332 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 44
-
-
  2167      5F7400
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 44
+
+
  2168              	.LASF53:
  2169 02d8 70617373 		.ascii	"passSarChannels\000"
  2169      53617243 
@@ -2638,10 +2637,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2189      00
  2190              	.LASF76:
  2191 0379 70657269 		.ascii	"periTrCmdGrSelMsk\000"
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 45
-
-
  2191      5472436D 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 45
+
+
  2191      64477253 
  2191      656C4D73 
  2191      6B00
@@ -2698,10 +2697,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2211      7352616D 
  2211      3143746C 
  2211      3000
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 46
-
-
  2212              	.LASF126:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 46
+
+
  2213 0436 63624576 		.ascii	"cbEvents\000"
  2213      656E7473 
  2213      00
@@ -2758,10 +2757,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2236              	.LASF95:
  2237 04d3 63707573 		.ascii	"cpussCm0StatusOffset\000"
  2237      73436D30 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 47
-
-
  2237      53746174 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 47
+
+
  2237      75734F66 
  2237      66736574 
  2238              	.LASF19:
@@ -2818,10 +2817,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2259      63654E72 
  2259      00
  2260              	.LASF154:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 48
-
-
  2261 057d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 48
+
+
  2261      43313120 
  2261      352E342E 
  2261      31203230 
@@ -2878,10 +2877,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2280      6C00
  2281              	.LASF17:
  2282 0692 696E7433 		.ascii	"int32_t\000"
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 49
-
-
  2282      325F7400 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 49
+
+
  2283              	.LASF2:
  2284 069a 756E7369 		.ascii	"unsigned char\000"
  2284      676E6564 
@@ -2938,10 +2937,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2304      746C4F66 
  2304      66736574 
  2305              	.LASF21:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 50
-
-
  2306 073f 6C6F6E67 		.ascii	"long double\000"
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 50
+
+
  2306      20646F75 
  2306      626C6500 
  2307              	.LASF109:
@@ -2998,10 +2997,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2326 0822 5F5F696E 		.ascii	"__int32_t\000"
  2326      7433325F 
  2326      7400
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 51
-
-
  2327              	.LASF37:
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 51
+
+
  2328 082c 6873696F 		.ascii	"hsiomVersion\000"
  2328      6D566572 
  2328      73696F6E 
@@ -3058,10 +3057,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2348 08cd 6770696F 		.ascii	"gpioPrtCfgOffset\000"
  2348      50727443 
  2348      66674F66 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 52
-
-
  2348      66736574 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 52
+
+
  2348      00
  2349              	.LASF127:
  2350 08de 696E6974 		.ascii	"initKey\000"
@@ -3118,10 +3117,10 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 1
  2372      50727449 
  2372      6E747243 
  2372      66674F66 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccjUlG5N.s 			page 53
-
-
  2372      66736574 
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccLgl3zO.s 			page 53
+
+
  2373              	.LASF119:
  2374 099a 72785269 		.ascii	"rxRingBufTail\000"
  2374      6E674275 

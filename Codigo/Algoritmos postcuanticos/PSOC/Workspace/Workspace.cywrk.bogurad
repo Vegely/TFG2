@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace\HQC\CM4 (Core 1)\Source Files\HQC\randombytes.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace\HQC\CM4 (Core 1)\Source Files\mainTask.c">
 <ExpandedNodeIds>
 <v>Workspace</v>
 <v>Workspace\HQC</v>
@@ -273,6 +273,9 @@
 <v>Workspace\SharedLib\src</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\hqc_wrapper.h</v>
+<v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\parameters.h</v>
+<v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\parsing.h</v>
 <v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\randombytes.h</v>
 <v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\reed_muller.h</v>
 <v>Workspace\HQC\CM4 (Core 1)\Header Files\HQC\reed_solomon.h</v>
@@ -315,12 +318,9 @@
 <v>Workspace\HQC\Shared Files\cyapicallbacks.h</v>
 <v>Workspace\HQC\Shared Files\stdio_user.c</v>
 <v>Workspace\HQC\Shared Files\stdio_user.h</v>
-<v>Workspace\HQC\Shared Files\stringFormater.c</v>
-<v>Workspace\HQC\Shared Files\stringFormater.h</v>
 <v>Workspace\HQC\Shared Files\system_psoc6.h</v>
 <v>Workspace\HQC\Generated_Source</v>
 <v>Workspace\HQC\Generated_Source\PSoC6</v>
-<v>Workspace\HQC\Generated_Source\PSoC6\pdl</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -395,7 +395,6 @@
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\retarget.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\stdio_user.lst</v>
-<v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\stringFormater.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.elf</v>
@@ -459,7 +458,6 @@
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm4.lst</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\stdio_user.lst</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\stream_buffer.lst</v>
-<v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\stringFormater.lst</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm4.lst</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\tasks.lst</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\timers.lst</v>
@@ -736,7 +734,6 @@
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\retarget.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\stdio_user.lst</v>
-<v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\stringFormater.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
 <v>Workspace\HQC\CortexM0p\ARM_GCC_541\Debug\HQC.elf</v>
@@ -746,6 +743,7 @@
 <v>Workspace\HQC\CortexM4\ARM_GCC_541</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug</v>
 <v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files</v>
+<v>Workspace\HQC\CortexM4\ARM_GCC_541\Debug\Listing Files\code.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -815,16 +813,7 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\KYBER\Kyber\Kyber.cydsn\system_psoc6_cm4.c" />
-<name v=".\KYBER\Kyber\Serial\uartTask.c" />
-<name v=".\uartTask.h" />
-<name v=".\SABER\Saber\Serial\uartTask.c" />
-<name v=".\SABER\Saber\Saber.cydsn\mainTask.h" />
-<name v=".\SABER\Saber\Saber.cydsn\main_cm4.c" />
-<name v=".\KYBER\Kyber\Kyber.cydsn\main_cm4.c" />
-<name v=".\HQC\HQC\HQC.cydsn\mainTask.h" />
 <name v=".\HQC\HQC\HQC.cydsn\main_cm4.c" />
-<name v=".\HQC\HQC\HQC.cydsn\mainTask.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -832,7 +821,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1108, 703" SelectedTabbedMdiWindow="80eb23cd-5157-428c-be47-62ec34140542"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="9e6ae13d-cfbd-431e-a4ac-c21ecbf0d125" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\system_psoc6_cm4.c" Guid="6eb17d87-6c8f-4b2b-80b6-8bf3a0f3b39e" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Serial\uartTask.c" Guid="398eb61d-8068-49d1-9d39-d1b756e4e25a" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\uartTask.h" Guid="c841a6bf-d2ba-4b17-b537-2a8c1056bf48" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Serial\uartTask.c" Guid="8f652dee-b121-48be-a891-c31c8ec41045" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn\mainTask.h" Guid="e096bd7f-0c64-42c3-8673-c4be9d9702da" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\SABER\Saber\Saber.cydsn\main_cm4.c" Guid="1b640e4b-d86e-4beb-9a39-2449db34cc2c" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\KYBER\Kyber\Kyber.cydsn\main_cm4.c" Guid="433a5ef6-2e0f-4f36-9c0d-409bfb81c1ca" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\mainTask.h" Guid="c23801f1-5c90-4669-bb4e-42355f6851dc" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\main_cm4.c" Guid="286494a9-1d7f-4c49-9b03-7de37f5a900b" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\mainTask.c" Guid="80eb23cd-5157-428c-be47-62ec34140542" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1108, 703" SelectedTabbedMdiWindow="409f25d8-7705-4886-b548-c9e421db0461"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="9e6ae13d-cfbd-431e-a4ac-c21ecbf0d125" /><DocumentWindow Key="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn\main_cm4.c" Guid="409f25d8-7705-4886-b548-c9e421db0461" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

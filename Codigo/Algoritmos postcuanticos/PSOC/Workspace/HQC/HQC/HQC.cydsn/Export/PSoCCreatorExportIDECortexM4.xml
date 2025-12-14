@@ -55,8 +55,6 @@
           <File BuildType="BUILD" Toolchain="">stdio_user.h</File>
           <File BuildType="BUILD" Toolchain="">stdio_user.c</File>
           <File BuildType="BUILD" Toolchain="">system_psoc6.h</File>
-          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.c</File>
-          <File BuildType="BUILD" Toolchain="">..\..\..\stringFormater.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Algoritmos postcuanticos\PSOC\Workspace\HQC\HQC\HQC.cydsn">

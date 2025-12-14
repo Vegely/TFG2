@@ -10,3 +10,16 @@
 *.vh2
 *.v
 *.sdf
+*.log
+*.ctl
+*.cyfit
+*.pci
+*.pco
+*.plc_log
+*.rpt
+*.rt_log
+*.sdc
+*.sdf
+*.v
+*.vh2
+*.lst

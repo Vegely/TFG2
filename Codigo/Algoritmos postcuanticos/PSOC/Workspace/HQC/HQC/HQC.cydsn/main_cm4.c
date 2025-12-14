@@ -29,7 +29,7 @@ int main(void)
     
     /* Create RTOS tasks and start the scheduler */
     xTaskCreate(uartTask, "UART Task", 400, 0, 2, 0);
-    xTaskCreate(mainTask, "Main Task", 2.5*8192, 0, 1, 0);
+    xTaskCreate(mainTask, "Main Task", 2*8192, 0, 1, 0);
     vTaskStartScheduler();
     
         
