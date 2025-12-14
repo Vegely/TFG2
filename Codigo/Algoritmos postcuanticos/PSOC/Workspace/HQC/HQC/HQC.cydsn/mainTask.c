@@ -70,12 +70,12 @@ void mainTask(void *arg)
     printf("Keypair generation succesful\n");
 
     if (hqc_encapsulate(ct, ss, pk) != 0) {
-        printf("Encapsulation failed\n");
+            printf("Encapsulation failed\n");
     }
     printf("Correct encapsulation\n");
     
     if (hqc_decapsulate(ss, ct, sk) != 0) {
-          printf("Encapsulation failed\n");
+            printf("Encapsulation failed\n");
     }
     
     printf("Correct decapsulation\n");

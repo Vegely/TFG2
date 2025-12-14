@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
   28:..\reed_muller.c ****  * 6   ffffffff ffffffff 00000000 00000000
   29:..\reed_muller.c ****  * 7   ffffffff ffffffff ffffffff ffffffff
   30:..\reed_muller.c ****  *
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 2
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 2
 
 
   31:..\reed_muller.c ****  * @param[out] word An RM(1,7) codeword
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
   68 003a 6340     		eors	r3, r3, r4
   69              	.LVL6:
   45:..\reed_muller.c ****     // we can store this in the first quarter
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 3
 
 
   46:..\reed_muller.c ****     cword[0] = first_word;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
   59:..\reed_muller.c ****  * @brief Hadamard transform
   60:..\reed_muller.c ****  *
   61:..\reed_muller.c ****  * Perform hadamard transform of src and store result in dst
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 4
 
 
   62:..\reed_muller.c ****  * src is overwritten
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  148              	.L7:
  149              	.LBE3:
  150 002a 0023     		movs	r3, #0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 5
 
 
  151              	.L6:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
   85:..\reed_muller.c **** 
   86:..\reed_muller.c **** 
   87:..\reed_muller.c **** 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 6
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 6
 
 
   88:..\reed_muller.c **** /**
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  229 0032 0132     		adds	r2, r2, #1
  230              	.LVL25:
  231 0034 00E0     		b	.L12
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 7
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 7
 
 
  232              	.LVL26:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  275              		.loc 1 111 0 discriminator 3
  276 007e 0132     		adds	r2, r2, #1
  277              	.LVL30:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 8
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 8
 
 
  278 0080 00E0     		b	.L15
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  323              	find_peaks:
  324              	.LFB3:
  117:..\reed_muller.c **** 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 9
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 9
 
 
  118:..\reed_muller.c **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  357 0010 3AB2     		sxth	r2, r7
  358 0012 7B42     		negs	r3, r7
  359 0014 5340     		eors	r3, r3, r2
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 10
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 10
 
 
  360 0016 03EAE233 		and	r3, r3, r2, asr #15
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  403              		.loc 1 145 0
  404 004c C0B2     		uxtb	r0, r0
  405              	.LVL52:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 11
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 11
 
 
  406 004e F0BC     		pop	{r4, r5, r6, r7}
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  446              	.L29:
  160:..\reed_muller.c ****         // encode first word
  161:..\reed_muller.c ****         encode(&cdw[2 * i * MULTIPLICITY], msg[i]);
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 12
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 12
 
 
  447              		.loc 1 161 0
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  491 0052 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
  492              		.cfi_endproc
  493              	.LFE4:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 13
 
 
  494              		.size	PQCLEAN_HQC256_CLEAN_reed_muller_encode, .-PQCLEAN_HQC256_CLEAN_reed_muller_encode
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  530 0018 FFF7FEFF 		bl	expand_and_sum
  531              	.LVL64:
  186:..\reed_muller.c ****         // apply hadamard transform
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 14
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 14
 
 
  187:..\reed_muller.c ****         hadamard(expanded, transform);
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  577 0015 33000000 		.4byte	.LASF40
  578 0019 78000000 		.4byte	.Ldebug_ranges0+0x78
  579 001d 00000000 		.4byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 15
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 15
 
 
  580 0021 00000000 		.4byte	.Ldebug_line0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  634 008a 04       		.byte	0x4
  635 008b 05       		.byte	0x5
  636 008c 696E7400 		.ascii	"int\000"
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 16
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 16
 
 
  637 0090 02       		.uleb128 0x2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  691 00ff 24010000 		.4byte	0x124
  692 0103 01       		.uleb128 0x1
  693 0104 50       		.byte	0x50
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 17
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 17
 
 
  694 0105 07       		.uleb128 0x7
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  748 0183 0A010000 		.4byte	.LLST6
  749 0187 0C       		.uleb128 0xc
  750 0188 02000000 		.4byte	.LBB2
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 18
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 18
 
 
  751 018c 3A000000 		.4byte	.LBE2-.LBB2
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  805 0205 0D       		.uleb128 0xd
  806 0206 18000000 		.4byte	.Ldebug_ranges0+0x18
  807 020a 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 19
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 19
 
 
  808 020b 62697400 		.ascii	"bit\000"
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  862 0286 01       		.byte	0x1
  863 0287 81       		.byte	0x81
  864 0288 FC020000 		.4byte	0x2fc
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 20
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 20
 
 
  865 028c DE010000 		.4byte	.LLST13
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  919 030c 01       		.byte	0x1
  920 030d 9E       		.byte	0x9e
  921 030e 00000000 		.4byte	.LFB4
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 21
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 21
 
 
  922 0312 56000000 		.4byte	.LFE4-.LFB4
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  976 038b 11010000 		.4byte	.LASF36
  977 038f 01       		.byte	0x1
  978 0390 B4       		.byte	0xb4
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 22
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 22
 
 
  979 0391 00000000 		.4byte	.LFB5
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1033 0407 51       		.byte	0x51
  1034 0408 0C       		.uleb128 0xc
  1035 0409 74       		.byte	0x74
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 23
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 23
 
 
  1036 040a 00       		.sleb128 0
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1090 0001 11       		.uleb128 0x11
  1091 0002 01       		.byte	0x1
  1092 0003 25       		.uleb128 0x25
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 24
 
 
  1093 0004 0E       		.uleb128 0xe
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1147 003a 0E       		.uleb128 0xe
  1148 003b 3A       		.uleb128 0x3a
  1149 003c 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 25
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 25
 
 
  1150 003d 3B       		.uleb128 0x3b
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1204 0074 0B       		.uleb128 0xb
  1205 0075 49       		.uleb128 0x49
  1206 0076 13       		.uleb128 0x13
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 26
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 26
 
 
  1207 0077 02       		.uleb128 0x2
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1261 00ad 01       		.byte	0x1
  1262 00ae 55       		.uleb128 0x55
  1263 00af 17       		.uleb128 0x17
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 27
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 27
 
 
  1264 00b0 00       		.byte	0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1318 00e6 0E       		.uleb128 0xe
  1319 00e7 3A       		.uleb128 0x3a
  1320 00e8 0B       		.uleb128 0xb
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 28
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 28
 
 
  1321 00e9 3B       		.uleb128 0x3b
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1375 0125 00       		.byte	0
  1376 0126 02       		.uleb128 0x2
  1377 0127 18       		.uleb128 0x18
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 29
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 29
 
 
  1378 0128 9142     		.uleb128 0x2111
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1432 0030 32000000 		.4byte	.LVL5
  1433 0034 0100     		.2byte	0x1
  1434 0036 53       		.byte	0x53
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 30
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 30
 
 
  1435 0037 32000000 		.4byte	.LVL5
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1489 00c2 51       		.byte	0x51
  1490 00c3 38000000 		.4byte	.LVL20
  1491 00c7 40000000 		.4byte	.LFE1
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 31
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 31
 
 
  1492 00cb 0100     		.2byte	0x1
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1546 015c 53       		.byte	0x53
  1547 015d 00000000 		.4byte	0
  1548 0161 00000000 		.4byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 32
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 32
 
 
  1549              	.LLST9:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1603 01f4 01       		.uleb128 0x1
  1604 01f5 50       		.byte	0x50
  1605 01f6 9F       		.byte	0x9f
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 33
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 33
 
 
  1606 01f7 00000000 		.4byte	0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1660 0274 21       		.byte	0x21
  1661 0275 9F       		.byte	0x9f
  1662 0276 00000000 		.4byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 34
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 34
 
 
  1663 027a 00000000 		.4byte	0
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1717 02db 00       		.sleb128 0
  1718 02dc 22       		.byte	0x22
  1719 02dd 94       		.byte	0x94
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 35
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 35
 
 
  1720 02de 02       		.byte	0x2
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1774 031c 7F       		.sleb128 -1
  1775 031d 31       		.byte	0x31
  1776 031e 24       		.byte	0x24
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 36
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 36
 
 
  1777 031f 70       		.byte	0x70
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1831 036d 30       		.byte	0x30
  1832 036e 9F       		.byte	0x9f
  1833 036f 0C000000 		.4byte	.LVL39
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 37
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 37
 
 
  1834 0373 3C000000 		.4byte	.LVL48
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1888 0403 00000000 		.4byte	0
  1889              	.LLST25:
  1890 0407 00000000 		.4byte	.LVL61
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 38
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 38
 
 
  1891 040b 0E000000 		.4byte	.LVL63
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1945              		.section	.debug_ranges,"",%progbits
  1946              	.Ldebug_ranges0:
  1947 0000 06000000 		.4byte	.LBB3
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 39
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 39
 
 
  1948 0004 2A000000 		.4byte	.LBE3
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  1997 0008 5F5F7569 		.ascii	"__uint8_t\000"
  1997      6E74385F 
  1997      7400
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 40
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 40
 
 
  1998              	.LASF17:
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  2021      7200
  2022              	.LASF8:
  2023 00e3 6C6F6E67 		.ascii	"long unsigned int\000"
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 41
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 41
 
 
  2023      20756E73 
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  2045      43313120 
  2045      352E342E 
  2045      31203230 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 42
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 42
 
 
  2045      31363036 
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 1
  2069              	.LASF20:
  2070 02a0 63686172 		.ascii	"char\000"
  2070      00
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccqiJzyu.s 			page 43
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\cc8Kcep9.s 			page 43
 
 
  2071              	.LASF18:
