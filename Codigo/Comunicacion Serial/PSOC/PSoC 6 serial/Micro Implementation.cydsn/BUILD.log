@@ -1,5 +1,0 @@
---------------- Build Started: 03/09/2025 16:28:54 Project: Micro Implementation, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
-cydsfit.exe -.appdatapath "C:\Users\bogurad\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\Users\bogurad\Documents\PSoC Creator\PSoC 6 serial\Micro Implementation.cydsn\Micro Implementation.cyprj" -d CY8C6347BZI-BLD53 -s "C:\Users\bogurad\Documents\PSoC Creator\PSoC 6 serial\Micro Implementation.cydsn\Generated_Source\PSoC6" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
-Error: fit.M0051: The given PDL path '' is invalid. Unable to find required PDSC file.
-Error: fit.M0050: The fitter aborted due to errors, please address all errors and rebuild. (App=cydsfit)
---------------- Build Failed: 03/09/2025 16:28:55 ---------------

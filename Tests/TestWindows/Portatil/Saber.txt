@@ -1,0 +1,25 @@
+Cycles:
+===KEYPAIR===
+Average Cycles: 1242686.50
+===Encapsulation===
+Average Cycles: 478775.58
+===Decapsulation===
+Average Cycles: 246269.50
+
+Benchmarking Keypair... Done.
+-> Total Iterations: 2571
+-> Throughput      : 2570.40 ops/sec
+
+Benchmarking Encapsulation... Done.
+-> Total Iterations: 4022
+-> Throughput      : 4020.94 ops/sec
+
+Benchmarking Decapsulation... Done.
+-> Total Iterations: 7000
+-> Throughput      : 6999.59 ops/sec
+
+=== Corrected Stack Analysis ===
+
+Keypair Depth      : 27952 bytes
+Encapsulation Depth: 23192 bytes
+Decapsulation Depth: 24664 bytes

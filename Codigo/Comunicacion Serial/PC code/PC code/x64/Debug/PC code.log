@@ -1,6 +1,0 @@
-﻿  SerialComunication.cpp
-C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Comunicacion Serial\PC code\PC code\SerialComunication.cpp(141,55): warning C4267: 'argumento': conversión de 'size_t' a 'DWORD'; posible pérdida de datos
-  main.cpp
-  serial_comunication_unit_test.cpp
-  Generando código...
-  PC code.vcxproj -> C:\Users\bogurad\Desktop\Proyectos gitHub\TFG2\Codigo\Comunicacion Serial\PC code\x64\Debug\PC code.exe
