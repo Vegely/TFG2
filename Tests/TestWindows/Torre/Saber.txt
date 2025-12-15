@@ -6,6 +6,7 @@ Average Cycles: 539840.54
 ===Decapsulation===
 Average Cycles: 303053.07
 
+Throughtput 1 second:
 Benchmarking Keypair... Done.
 -> Total Iterations: 4741
 -> Throughput      : 4740.92 ops/sec
