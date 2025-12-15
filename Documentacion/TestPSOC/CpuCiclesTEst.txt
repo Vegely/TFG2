@@ -1,0 +1,19 @@
+Saber:
+KeyGen | Current: 7141470 | Avg: 7141561
+Encaps | Current: 8790991 | Avg: 8790967
+Decaps | Current: 9771096 | Avg: 9771075
+
+Running 1-second stress tests...
+KeyGen : 15 operations in 1 second
+Encaps : 12 operations in 1 second
+Decaps : 11 operations in 1 second
+
+Kyber:
+KeyGen | Current: 3436657 | Avg: 3410769
+Encaps | Current: 4122811 | Avg: 4096689
+Decaps | Current: 4142394 | Avg: 4116277
+
+Running 1-second stress tests...
+KeyGen : 30 operations in 1 second
+Encaps : 25 operations in 1 second
+Decaps : 25 operations in 1 second

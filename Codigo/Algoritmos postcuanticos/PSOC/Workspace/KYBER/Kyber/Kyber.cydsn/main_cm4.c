@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "../Serial/uartTask.h"
 #include "mainTask.h"
-
+#include "cycle_counter.h"
 
 
 volatile uint8_t UART_READY=0;

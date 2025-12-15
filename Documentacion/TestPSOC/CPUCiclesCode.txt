@@ -1,0 +1,49 @@
+      
+    uint32_t start_cycles, end_cycles, current_diff;
+    uint64_t sum_keygen = 0;
+    uint64_t sum_encaps = 0;
+    uint64_t sum_decaps = 0;
+    uint32_t loop_count = 0;
+    CycleCounter_Init();
+    for(;;)
+    {
+       loop_count++; // Increment iteration counter
+
+        /* --- KEYGEN --- */
+        start_cycles = CycleCounter_Get();
+        if (saber_keypair(pk, sk) != 0) printf("KeyGen Error\r\n");
+        end_cycles = CycleCounter_Get();
+        
+        current_diff = end_cycles - start_cycles;
+        sum_keygen += current_diff;
+        
+        printf("KeyGen | Current: %lu | Avg: %lu\r\n", 
+               current_diff, 
+               (uint32_t)(sum_keygen / loop_count));
+
+        /* --- ENCAPSULATION --- */
+        start_cycles = CycleCounter_Get();
+        if (saber_encapsulate(ct, ss, pk) != 0) printf("Encaps Error\r\n");
+        end_cycles = CycleCounter_Get(); 
+        
+        current_diff = end_cycles - start_cycles;
+        sum_encaps += current_diff;
+
+        printf("Encaps | Current: %lu | Avg: %lu\r\n", 
+               current_diff, 
+               (uint32_t)(sum_encaps / loop_count));
+
+        /* --- DECAPSULATION --- */
+        start_cycles = CycleCounter_Get();
+        if (saber_decapsulate(ss, ct, sk) != 0) printf("Decaps Error\r\n");
+        end_cycles = CycleCounter_Get();
+        
+        current_diff = end_cycles - start_cycles;
+        sum_decaps += current_diff;
+
+        printf("Decaps | Current: %lu | Avg: %lu\r\n", 
+               current_diff, 
+               (uint32_t)(sum_decaps / loop_count));
+
+        printf("----------------------------------------\r\n");
+    }

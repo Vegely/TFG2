@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../hqc_wrapper.h"
-
+#include "cycle_counter.h"
 unsigned char *sk = NULL;
 unsigned char *pk = NULL;
 unsigned char *ct = NULL;
@@ -64,7 +64,7 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-     if (hqc_keypair(pk, sk) != 0) {
+    if (hqc_keypair(pk, sk) != 0) {
         printf("Keypair generation failed\n");
     }
     printf("Keypair generation succesful\n");

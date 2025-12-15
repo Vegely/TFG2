@@ -1,116 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "kyber_wrapper.h"
 
-#define TEST_COUNT 10000
-
-void print_hex(const char *label, const unsigned char *data, size_t len) {
-    printf("%s (%zu bytes):\n", label, len);
-    for (size_t i = 0; i < len; ++i) {
+// Helper to print bytes in hex
+void print_hex(const char* label, const unsigned char* data, size_t len) {
+    printf("%-25s: ", label);
+    // Printing first 16 bytes only to avoid console bloat. 
+    // Change limit to 'len' to see the whole key.
+    size_t limit = (len > 16) ? 16 : len;
+    for (size_t i = 0; i < limit; i++) {
         printf("%02X", data[i]);
-        if ((i + 1) % 32 == 0) printf("\n");
     }
-    if (len % 32 != 0) printf("\n");
+    if (len > 16) printf("...");
     printf("\n");
 }
 
 int main(void) {
-    if (kyber_init(KYBER_SECURITY_1024) != 0) {
-        fprintf(stderr, "Kyber init failed\n");
-        return 1;
-    }
+    kyber_init(KYBER_SECURITY_1024);
 
-    size_t pk_size = kyber_get_public_key_size();
-    size_t sk_size = kyber_get_secret_key_size();
-    size_t ct_size = kyber_get_ciphertext_size();
-    size_t ss_size = kyber_get_shared_secret_size();
+    // --- Allocations ---
+    size_t pk_len = kyber_get_public_key_size();
+    size_t sk_len = kyber_get_secret_key_size();
+    size_t ct_len = kyber_get_ciphertext_size();
+    size_t ss_len = kyber_get_shared_secret_size();
 
-    printf("Kyber Sizes:\n");
-    printf("  Public Key Size     : %zu bytes\n", pk_size);
-    printf("  Secret Key Size     : %zu bytes\n", sk_size);
-    printf("  Ciphertext Size     : %zu bytes\n", ct_size);
-    printf("  Shared Secret Size  : %zu bytes\n\n", ss_size);
+    unsigned char* pk = malloc(pk_len);
+    unsigned char* sk = malloc(sk_len);
+    unsigned char* ct = malloc(ct_len);
+    unsigned char* ss_orig = malloc(ss_len);
+    unsigned char* ss_decap = malloc(ss_len);
 
-    unsigned char *pk = malloc(pk_size);
-    unsigned char *sk = malloc(sk_size);
-    unsigned char *ct = malloc(ct_size);
-    unsigned char *ss1 = malloc(ss_size);
-    unsigned char *ss2 = malloc(ss_size);
+    if (!pk || !sk || !ct || !ss_orig || !ss_decap) return 1;
 
-    if (!pk || !sk || !ct || !ss1 || !ss2) {
-        fprintf(stderr, "Memory allocation failed\n");
-        return 1;
-    }
+    printf("Kyber Operations\n\n");
 
-    if (kyber_keypair(pk, sk) != 0) {
-        fprintf(stderr, "Keypair generation failed\n");
-        return 1;
-    }
+    // 1. Keypair Creation
+    kyber_keypair(pk, sk);
+    print_hex("Public Key", pk, pk_len);
+    print_hex("Secret Key", sk, sk_len);
 
-    print_hex("Public Key", pk, pk_size);
-    print_hex("Secret Key", sk, sk_size);
+    // 2. Encapsulation
+    kyber_encapsulate(ct, ss_orig, pk);
+    print_hex("Ciphertext", ct, ct_len);
+    print_hex("Shared Secret (Orig)", ss_orig, ss_len);
 
-    // Allocate memory for storing all shared secrets
-    unsigned char **shared_secrets_sender = malloc(TEST_COUNT * sizeof(unsigned char *));
-    unsigned char **shared_secrets_receiver = malloc(TEST_COUNT * sizeof(unsigned char *));
-    for (int i = 0; i < TEST_COUNT; ++i) {
-        shared_secrets_sender[i] = malloc(ss_size);
-        shared_secrets_receiver[i] = malloc(ss_size);
-    }
+    // 3. Decapsulation
+    kyber_decapsulate(ss_decap, ct, sk);
+    print_hex("Shared Secret (Decap)", ss_decap, ss_len);
 
+    // Cleanup
+    free(pk); free(sk); free(ct); free(ss_orig); free(ss_decap);
 
-
-    int mismatch_found = 0;
-
-    for (int i = 0; i < TEST_COUNT; ++i) {
-        if (kyber_encapsulate(ct, ss1, pk) != 0) {
-            fprintf(stderr, "Encapsulation failed at test %d\n", i);
-            return 1;
-        }
-
-        if (kyber_decapsulate(ss2, ct, sk) != 0) {
-            fprintf(stderr, "Decapsulation failed at test %d\n", i);
-            return 1;
-        }
-
-        memcpy(shared_secrets_sender[i], ss1, ss_size);
-        memcpy(shared_secrets_receiver[i], ss2, ss_size);
-
-        if (memcmp(ss1, ss2, ss_size) != 0) {
-            printf("Mismatch at test %d\n", i);
-            mismatch_found = 1;
-        }
-    }
-
-    printf("\n=== Shared Secrets Comparison ===\n");
-    if (!mismatch_found) {
-        printf("All %d shared secrets matched correctly.\n", TEST_COUNT);
-    }
-
-    // Check if any shared secrets unexpectedly changed (should be unique)
-    for (int i = 0; i < TEST_COUNT; ++i) {
-        for (int j = i + 1; j < TEST_COUNT; ++j) {
-            if (memcmp(shared_secrets_sender[i], shared_secrets_sender[j], ss_size) == 0) {
-                printf("Warning: Duplicate shared secrets found at indices %d and %d\n", i, j);
-            }
-        }
-    }
-
-    free(pk);
-    free(sk);
-    free(ct);
-    free(ss1);
-    free(ss2);
-    for (int i = 0; i < TEST_COUNT; ++i) {
-        free(shared_secrets_sender[i]);
-        free(shared_secrets_receiver[i]);
-    }
-    free(shared_secrets_sender);
-    free(shared_secrets_receiver);
-
-
-    printf("\nPress Enter to exit...");
-    getchar();
     return 0;
 }

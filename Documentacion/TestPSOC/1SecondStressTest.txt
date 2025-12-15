@@ -1,0 +1,68 @@
+/* Variables for the 1-second timer */
+    uint32_t start_time;
+    uint32_t ops_count;
+    uint32_t cycles_per_second;
+
+    /* Initialize Hardware */
+    CycleCounter_Init();
+    
+    /* Get the current CPU frequency (e.g., 100,000,000 for 100MHz) */
+    /* This value represents exactly 1 second in CPU cycles */
+    SystemCoreClockUpdate();
+    cycles_per_second = SystemCoreClock;
+    
+    printf("--- Benchmark Started ---\r\n");
+    printf("CPU Freq: %lu Hz (Cycles per second)\r\n", cycles_per_second);
+
+    for(;;)
+    {
+        printf("\r\nRunning 1-second stress tests...\r\n");
+
+        /* -------------------------------------------------
+           1. KEYPAIR GENERATION (Run for 1 Second)
+           ------------------------------------------------- */
+        ops_count = 0;
+        start_time = CycleCounter_Get();
+        
+        // Keep looping while (CurrentTime - StartTime) < 1 Second
+        while ((CycleCounter_Get() - start_time) < cycles_per_second)
+        {
+            saber_keypair(pk, sk);
+            ops_count++;
+        }
+        printf("KeyGen : %lu operations in 1 second\r\n", ops_count);
+
+
+        /* -------------------------------------------------
+           2. ENCAPSULATION (Run for 1 Second)
+           ------------------------------------------------- */
+        ops_count = 0;
+        start_time = CycleCounter_Get();
+
+        while ((CycleCounter_Get() - start_time) < cycles_per_second)
+        {
+            saber_encapsulate(ct, ss, pk);
+            ops_count++;
+        }
+        printf("Encaps : %lu operations in 1 second\r\n", ops_count);
+
+
+        /* -------------------------------------------------
+           3. DECAPSULATION (Run for 1 Second)
+           ------------------------------------------------- */
+        ops_count = 0;
+        start_time = CycleCounter_Get();
+
+        while ((CycleCounter_Get() - start_time) < cycles_per_second)
+        {
+            saber_decapsulate(ss, ct, sk);
+            ops_count++;
+        }
+        printf("Decaps : %lu operations in 1 second\r\n", ops_count);
+
+        
+        /* Give the CPU a break and let other tasks run 
+           before restarting the benchmark loop.
+        */
+        vTaskDelay(pdMS_TO_TICKS(1000)); 
+    }

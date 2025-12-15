@@ -1,0 +1,63 @@
+﻿BLE MEMORY ANALYSIS REPORT
+Generated: 12/15/2025 02:22:50
+--------------------------------------------------
+TOTAL SUMMARY
+Category;Size(Bytes)
+Code (Flash);164
+Data (RAM);36
+BSS (RAM);50404
+
+--------------------------------------------------
+TOP 50 LARGEST SYMBOLS (Separated by ;)
+--------------------------------------------------
+Size;Type;Name;File
+49632;Code;crypto_hashblocks_sha512;sha512.o
+49152;Zero;ucHeap;heap_1.o
+7198;Code;crypto_hashblocks_sha256;sha256.o
+4440;Code;KeccakF1600_StatePermute;fips202.o
+4096;N;__StackLimit;startup_psoc6_01_cm4.o
+1522;Code;br_aes_ct64_bitslice_Sbox;aes256ctr.o
+1138;Code;aes_ctr4x;aes256ctr.o
+1054;Code;Cy_SCB_I2C_SlaveInterrupt;cy_scb_i2c.o
+1044;Code;Cy_BLE_EcoStart;cy_ble_clk.o
+1024;N;__HeapBase;startup_psoc6_01_cm4.o
+934;Code;br_aes_ct64_ortho;aes256ctr.o
+826;Code;Cy_SCB_EZI2C_Interrupt;cy_scb_ezi2c.o
+820;Code;Cy_SysClk_FllConfigure;cy_sysclk.o
+792;Code;Cy_SCB_I2C_MasterInterrupt;cy_scb_i2c.o
+652;N;__ramVectors;startup_psoc6_01_cm4.o
+652;N;__Vectors;startup_psoc6_01_cm4.o
+642;Code;Cy_SCB_UART_Interrupt;cy_scb_uart.o
+468;Code;EnterDeepSleepRam;cy_syspm.o
+456;Code;Cy_SCB_SPI_Interrupt;cy_scb_spi.o
+452;Code;Cy_SCB_UART_Init;cy_scb_uart.o
+408;Code;prvTimerTask;timers.o
+396;Code;Cy_SysClk_PllConfigure;cy_sysclk.o
+396;Code;xTaskCreate;tasks.o
+388;Code;Cy_SysClk_PeriphGetFrequency;cy_sysclk.o
+384;Code;Cy_SysClk_DeepSleepCallback;cy_sysclk.o
+364;Code;Cy_SCB_SPI_Init;cy_scb_spi.o
+356;Code;xQueueGenericSend;queue.o
+356;Code;Cy_SCB_I2C_SetDataRate;cy_scb_i2c.o
+352;Zero;systemIpcPipeEpArray.10511;system_psoc6_cm4.o
+352;Code;SystemCoreClockUpdate;system_psoc6_cm4.o
+328;Code;br_aes_ct64_interleave_in;aes256ctr.o
+320;Code;Cy_SysClk_StartClkMeasurementCounters;cy_sysclk.o
+320;Code;xQueuePeek;queue.o
+320;Code;xQueueReceive;queue.o
+308;Code;Cy_GPIO_Pin_Init;cy_gpio.o
+304;Code;xQueueSemaphoreTake;queue.o
+292;Code;Cy_Flash_SendCmd;cy_flash.o
+286;Code;keccak_absorb;fips202.o
+284;Code;br_aes_ct64_keysched;aes256ctr.o
+280;Code;pqcrystals_kyber1024_ref_indcpa_enc;indcpa.o
+276;Code;Cy_SCB_I2C_Init;cy_scb_i2c.o
+276;Code;xEventGroupWaitBits;event_groups.o
+264;Code;Cy_SysClk_EcoConfigure;cy_sysclk.o
+256;ReadOnly;pqcrystals_kyber1024_ref_zetas;ntt.o
+256;ReadOnly;pqcrystals_kyber1024_ref_zetas_inv;ntt.o
+252;Code;xTaskGenericNotifyFromISR;tasks.o
+246;Code;xStreamBufferSend;stream_buffer.o
+236;Code;Cy_SCB_UART_Receive;cy_scb_uart.o
+234;Code;br_aes_ct64_skey_expand;aes256ctr.o
+232;Code;Cy_SysPm_CpuEnterDeepSleep;cy_syspm.o

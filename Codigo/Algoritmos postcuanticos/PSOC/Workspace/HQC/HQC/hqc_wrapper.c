@@ -8,19 +8,12 @@ static hqc_security_level_t current_security_level = HQC_SECURITY_256;
 static int is_initialized = 0;
 
 int hqc_init(hqc_security_level_t security_level) {
-    // For now, we only support HQC-256
-    if (security_level != HQC_SECURITY_256) {
-        return -1; // Unsupported security level
+    // Validate security level
+    if (security_level != HQC_SECURITY_128 && 
+        security_level != HQC_SECURITY_192 && 
+        security_level != HQC_SECURITY_256) {
+        return -1;
     }
-    
-    // Check if the compiled version matches HQC-256
-    #ifdef HQC256
-        if (security_level != HQC_SECURITY_256) {
-            return -2; // Compiled for HQC-256 but different level requested
-        }
-    #else
-        return -2; // Not compiled for HQC-256
-    #endif
     
     // Store security level (for runtime checking)
     current_security_level = security_level;

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
   27:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
   28:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
   29:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** /*
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 2
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 2
 
 
   30:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c ****  * The simplest possible implementation of pvPortMalloc().  Note that this
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
   41              	.LVL1:
   72:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** void *pvReturn = NULL;
   73:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** static uint8_t *pucAlignedHeap = NULL;
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 3
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 3
 
 
   74:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
   96:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			( ( xNextFreeByte + xWantedSize ) > xNextFreeByte )	)/* Check for overflow. */
   97:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 		{
   98:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			/* Return the next free byte then increment the index past this
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 4
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 4
 
 
   99:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 			block. */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  106              	.LFE136:
  107              		.size	pvPortMalloc, .-pvPortMalloc
  108              		.section	.text.vPortFree,"ax",%progbits
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 5
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 5
 
 
  109              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
   26:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h ****  */
   27:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
   28:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 6
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 6
 
 
   29:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** #ifndef PORTMACRO_H
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
   83:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 																				\
   84:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	/* Barriers are normally not required but do ensure the code is completely	\
   85:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	within the specified behaviour for the architecture. */						\
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 7
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 7
 
 
   86:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	__asm volatile( "dsb" ::: "memory" );										\
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  140:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 		xReturn = pdFALSE;
  141:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	}
  142:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	else
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 8
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 8
 
 
  143:Generated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h **** 	{
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  137:Generated_Source\PSoC6\pdl\rtos\FreeRTOS\10.0.1\Source\portable\MemMang/heap_1.c **** 	xNextFreeByte = ( size_t ) 0;
  161              		.loc 1 137 0
  162 0000 0022     		movs	r2, #0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 9
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 9
 
 
  163 0002 024B     		ldr	r3, .L14
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  210              	ucHeap:
  211 0004 00000000 		.space	98304
  211      00000000 
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 10
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 10
 
 
  211      00000000 
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  263 0054 00000000 		.4byte	.LASF5
  264 0058 04       		.byte	0x4
  265 0059 1D       		.byte	0x1d
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 11
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 11
 
 
  266 005a 5E000000 		.4byte	0x5e
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  320 00c0 73000000 		.4byte	0x73
  321 00c4 02       		.uleb128 0x2
  322 00c5 EC020000 		.4byte	.LASF18
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 12
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 12
 
 
  323 00c9 05       		.byte	0x5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  377 013e 03       		.byte	0x3
  378 013f 00000000 		.4byte	pucAlignedHeap.11057
  379 0143 0D       		.uleb128 0xd
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 13
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 13
 
 
  380 0144 14000000 		.4byte	.LVL3
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  434 01be AE000000 		.4byte	0xae
  435 01c2 D0010000 		.4byte	0x1d0
  436 01c6 16       		.uleb128 0x16
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 14
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 14
 
 
  437 01c7 9E000000 		.4byte	0x9e
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  491 000f 10       		.uleb128 0x10
  492 0010 17       		.uleb128 0x17
  493 0011 00       		.byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 15
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 15
 
 
  494 0012 00       		.byte	0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  548 0048 01       		.byte	0x1
  549 0049 03       		.uleb128 0x3
  550 004a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 16
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 16
 
 
  551 004b 3A       		.uleb128 0x3a
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  605 0082 00       		.byte	0
  606 0083 03       		.uleb128 0x3
  607 0084 0E       		.uleb128 0xe
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 17
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 17
 
 
  608 0085 3A       		.uleb128 0x3a
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  662 00bd 03       		.uleb128 0x3
  663 00be 0E       		.uleb128 0xe
  664 00bf 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 18
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 18
 
 
  665 00c0 0B       		.uleb128 0xb
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  719 00f7 00       		.byte	0
  720 00f8 00       		.byte	0
  721 00f9 12       		.uleb128 0x12
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 19
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 19
 
 
  722 00fa 34       		.uleb128 0x34
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  776 0132 15       		.uleb128 0x15
  777 0133 01       		.uleb128 0x1
  778 0134 01       		.byte	0x1
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 20
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 20
 
 
  779 0135 49       		.uleb128 0x49
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  833 016b 00       		.byte	0
  834 016c 00       		.byte	0
  835 016d 00       		.byte	0
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 21
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 21
 
 
  836              		.section	.debug_loc,"",%progbits
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  890 0030 00000000 		.4byte	0
  891 0034 00000000 		.4byte	0
  892              		.section	.debug_ranges,"",%progbits
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 22
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 22
 
 
  893              	.Ldebug_ranges0:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  920      2E637964 
  920      736E00
  921              	.LASF16:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 23
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 23
 
 
  922 00b0 75696E74 		.ascii	"uint8_t\000"
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  944              	.LASF24:
  945 0177 75634865 		.ascii	"ucHeap\000"
  945      617000
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 24
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 24
 
 
  946              	.LASF35:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 1
  964      6720696E 
  964      7400
  965              	.LASF23:
-ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccH0xZo3.s 			page 25
+ARM GAS  C:\Users\bogurad\AppData\Local\Temp\ccriEaWE.s 			page 25
 
 
  966 029c 7857616E 		.ascii	"xWantedSize\000"

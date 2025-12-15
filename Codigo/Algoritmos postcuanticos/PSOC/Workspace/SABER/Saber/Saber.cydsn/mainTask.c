@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../saber_wrapper.h"
-
+#include "cycle_counter.h"
 unsigned char *sk = NULL;
 unsigned char *pk = NULL;
 unsigned char *ct = NULL;
@@ -63,13 +63,13 @@ void mainTask(void *arg)
         printf("Correct memory allocation\r\n");
     }
     
-    if (saber_keypair(pk, sk) != 0) printf("KeyGen Error\r\n");
-    if (saber_encapsulate(ct, ss, pk) != 0) printf("Encaps Error\r\n");
-    if (saber_decapsulate(ss, ct, sk) != 0) printf("Decaps Error\r\n");
-      
+    if (saber_keypair(pk, sk) != 0) printf("Keypair generation failed\n");
+    if (saber_encapsulate(ct, ss, pk) != 0) printf("Encapsulation failed\n"); 
+    if (saber_decapsulate(ss, ct, sk) != 0) printf("Encapsulation failed\n");
+    
     for(;;)
     {
-            
+        
     }
 
     // Cleanup (never reached in infinite loop)
