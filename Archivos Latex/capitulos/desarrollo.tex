@@ -70,41 +70,15 @@ Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists j
 \subsection{Compilación en librerías}
 
 \subsection{Diagrama de clases}
-\subsection{Diagrama de uso}
-\subsection{Diagrama funcional}
-\section{Implementación de algoritmos en el microcontrolador}
-\subsection{Diagrama de uso}
-\subsection{Diagrama funcional}
 
-\section{Implementación del intercambio de claves. Creación del secreto compartido}
-Hablar de los modelos de comunicaciones a implementar .... (msg teams)
-\subsection{Modelo 1}
-\subsection{Modelo 2}
-\subsection{Modelo 3}
+\section{Implementación de algoritmos en el microcontrolador}
+
+
 \section{Tests realizados}
-\begin{itemize}
-	\item Rendimiento
-	\begin{itemize}
-		\item Ciclos de CPU (Latency): Es la medida reina en criptografía, más precisa que los milisegundos/segundos porque es independiente de la frecuencia del reloj (si desactivas el Turbo Boost).
-		\item Throughput (Operaciones por segundo): Qué medir: ¿Cuántas encapsulaciones puede hacer tu CPU en 1 segundo a plena carga?. Por qué: Importante para servidores. Un algoritmo puede tener baja latencia (rápido para un usuario) pero bajo throughput (malo para mil usuarios a la vez).
-	\end{itemize}
-	\item Recursos
-	\begin{itemize}
-		\item Uso de Pila (Stack Usage): Crucial para sistemas embebidos.
-		\begin{itemize}
-			\item Qué medir: La cantidad máxima de memoria RAM dinámica (stack) que consume la función.
-			\item Justificación: Si HQC usa 50KB de pila, no cabe en un microcontrolador pequeño, aunque sea rápido.
-		\end{itemize}
-		\item Tamaño del Binario (Code Size / Footprint):
-		\begin{itemize}
-			\item Qué medir: El tamaño de las secciones .text (código compilado) y .data (constantes) tras compilar. Usa el comando size en Linux (size saber_wrapper.o).
-			\item  
-		\end{itemize}
-	\end{itemize}
-	\item  Coste de Comunicación (Overhead): 
-	\begin{itemize}
-		\item Gráfica recomendada: Compara estos tamaños con una clave RSA-4096 o ECC (Curva elíptica) actual. Verás que PQC es mucho más pesado transmitiendo datos. Kyber es equilibrado, pero otros pueden tener claves enormes y cifrados pequeños, o viceversa.
-	\end{itemize}
-	\item  Valgrind / Memory Leaks
-	\item  Suite de aleatoriedad a randombytes
-\end{itemize}
+\subsection{Ciclos de CPU}
+\subsection{Throughput (Operaciones por segundo)}
+\subsection{Uso de Pila (Stack Usage)}
+\subsection{Tamaño del Binario (Code Size / Footprint)}
+\subsection{Coste de Comunicación (Overhead)}
+\subsection{Suite de aleatoriedad a randombytes}
+

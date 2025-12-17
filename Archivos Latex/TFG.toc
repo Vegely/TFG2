@@ -64,16 +64,14 @@
 \contentsline {section}{\numberline {4.4}Implementación algoritmos en el PC}{43}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Compilación en librerías}{43}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Diagrama de clases}{43}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Diagrama de uso}{43}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Diagrama funcional}{43}{subsection.4.4.4}%
 \contentsline {section}{\numberline {4.5}Implementación de algoritmos en el microcontrolador}{43}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Diagrama de uso}{43}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Diagrama funcional}{43}{subsection.4.5.2}%
-\contentsline {section}{\numberline {4.6}Implementación del intercambio de claves. Creación del secreto compartido}{43}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Modelo 1}{43}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Modelo 2}{43}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Modelo 3}{43}{subsection.4.6.3}%
-\contentsline {section}{\numberline {4.7}Tests realizados}{43}{section.4.7}%
+\contentsline {section}{\numberline {4.6}Tests realizados}{43}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Ciclos de CPU}{43}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Throughput (Operaciones por segundo)}{43}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Uso de Pila (Stack Usage)}{43}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}Tamaño del Binario (Code Size / Footprint)}{43}{subsection.4.6.4}%
+\contentsline {subsection}{\numberline {4.6.5}Coste de Comunicación (Overhead)}{43}{subsection.4.6.5}%
+\contentsline {subsection}{\numberline {4.6.6}Suite de aleatoriedad a randombytes}{43}{subsection.4.6.6}%
 \contentsline {chapter}{\numberline {5}Resultados y discusión}{45}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Resultados}{45}{section.5.1}%
 \contentsline {subsection}{\numberline {5.1.1}Test de respuesta conocida}{45}{subsection.5.1.1}%
