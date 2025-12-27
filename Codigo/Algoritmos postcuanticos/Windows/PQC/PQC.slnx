@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="PQC/PQC.vcxproj" Id="8dfa3b0c-4663-4b47-bf75-caf2e18a2824" />
+</Solution>

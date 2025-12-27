@@ -1,13 +1,74 @@
 \chapter{Introducción}
 
 \section{Motivación del proyecto}
-En el ámbito de las comunicaciones industriales, la seguridad en el intercambio de información es un aspecto crítico, especialmente ante el avance de la computación cuántica y su impacto en los algoritmos criptográficos actuales. Este trabajo se enfoca en el análisis, implementación y evaluación de algoritmos de cifrado asimétrico post-cuántico en sistemas embebidos, con el objetivo de garantizar la seguridad de los protocolos de comunicación en un entorno industrial. Se realiza un estudio detallado de los fundamentos matemáticos de los algoritmos asimétricos clásicos y su vulnerabilidad frente al algoritmo de Shor, así como de los nuevos esquemas criptográficos diseñados para resistir ataques cuánticos.
+En el ámbito de las comunicaciones industriales, la seguridad en el intercambio de información es un aspecto crítico, especialmente ante el avance de la computación cuántica y su impacto en los algoritmos criptográficos actuales. Este trabajo se enfoca en el análisis, implementación y evaluación de algoritmos de criptografía poscuántica en sistemas embebidos, con el objetivo de garantizar la seguridad de los protocolos de comunicación en un entorno industrial. Para ello, se realiza un estudio de la problemática de los algoritmos asimétricos clásicos y su vulnerabilidad frente al algoritmo de Shor, así como los fundamentos matemáticos de los nuevos esquemas criptográficos diseñados para resistir ataques cuánticos.
 \newline
 
-El cifrado asimétrico es esencial para establecer claves seguras en protocolos de intercambio de claves, permitiendo así la utilización de cifrado simétrico en las comunicaciones industriales. Esto es particularmente relevante en sistemas de control en línea, donde el cifrado simétrico debe operar dentro del bucle de control en tiempo real, garantizando tanto seguridad como eficiencia.
+El cifrado asimétrico resulta esencial para establecer canales seguros mediante protocolos de intercambio de claves, permitiendo la posterior aplicación de cifrado simétrico. Esto es particularmente relevante en sistemas de control en línea, donde el cifrado simétrico debe operar dentro del bucle de control en tiempo real, garantizando tanto seguridad como eficiencia.
 \newline
 
-Para ello, en este trabajo se comparan diferentes candidatos propuestos en el estándar NIST para evaluar su rendimiento en términos de velocidad, consumo de recursos y nivel de seguridad. 
+Como se ilustra en la Figura \ref{fig:intro}, el modelo propuesto plantea una arquitectura de control centralizado con alta capacidad de cómputo, donde los microprocesadores actúan como interfaces de entrada/salida encargadas de la comunicación con sensores y actuadores. Bajo este esquema, el cifrado se integra directamente en el bucle de control. No obstante, la viabilidad de este proceso depende estrictamente del establecimiento previo de claves seguras, siendo este último el objetivo de estudio en este trabajo.
+\newline
+
+Para ello, se comparan diferentes candidatos propuestos en el estándar NIST para evaluar su rendimiento en términos de velocidad, consumo de recursos y nivel de seguridad. 
+
+\begin{figure}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+		\begin{circuitikz}
+			\tikzstyle{every node}=[font=\normalsize]
+			\draw [ color={rgb,255:red,255; green,255; blue,255},draw opacity = 0 , fill={rgb,255:red,248; green,223; blue,223}] (13.753,14.25) rectangle (21.5,7.75);
+			\draw [ color={rgb,255:red,255; green,255; blue,255},draw opacity = 0 , fill={rgb,255:red,156; green,185; blue,163}] (2.75,14.25) rectangle (13.753,7.75);
+			
+			\draw [->, >=Stealth] (2.75,13) -- (4.75,13);
+			\draw  (5,13) circle (0.25cm);
+			\node [font=\normalsize] at (4.75,13.3) {\textbf{+}};
+			\node [font=\normalsize] at (4.75,12.7) {\textbf{-}};
+			\draw [->, >=Stealth] (5,9) -- (5,12.75);
+			\draw [short] (5,9) -- (9.75,9);
+			\node [font=\normalsize] at (3.25,13.25) {SP};
+			\node [font=\normalsize] at (6,13.25) {Error};
+			\draw [->, >=Stealth] (5.25,13) -- (7.25,13);
+			\draw  (7.25,13.5) rectangle  node {\normalsize Control} (8.75,12.5);
+			\draw [->, >=Stealth] (8.75,13) -- (9.75,13);
+			\draw  (9.75,13.5) rectangle  node {\normalsize Codificador Serv} (13.5,12.5);
+			\draw  (9.75,9.5) rectangle  node {\normalsize Decodificador Serv} (13.5,8.5);
+			\draw  (14.25,9.5) rectangle  node {\normalsize Codificiador Micro} (17.75,8.5);
+			\draw  (14.25,13.5) rectangle  node {\normalsize Decodificador Micro} (17.75,12.5);
+			\draw  (18.25,9.5) rectangle  node {\normalsize Sensor} (20.25,8.5);
+			\draw [->, >=Stealth] (13.5,13) -- (14.25,13);
+			\draw [->, >=Stealth] (14.25,9) -- (13.5,9);
+			\draw [->, >=Stealth] (18.25,9) -- (17.75,9);
+			\draw  (18.25,13.5) rectangle  node {\normalsize Planta} (20.25,12.5);
+			\draw [->, >=Stealth] (17.75,13) -- (18.25,13);
+			\draw [->, >=Stealth] (20.25,13) -- (21.5,13);
+			\draw [->, >=Stealth] (21,9) -- (20.25,9);
+			\draw [short] (21,13) -- (21,9);
+			\draw [color={{rgb,255:red,0; green,30; blue,255}},short] (11.75,11) -- (12.25,11);
+			\draw [color={{rgb,255:red,0; green,30; blue,255}},short] (15.25,11) -- (16,11);
+			\draw [ color={rgb,255:red,0; green,30; blue,255} ] (12.25,11.5) rectangle  node {\normalsize \textbf{Creación claves}} (15.25,10.5);
+			
+			\draw [->, >=Stealth,color={rgb,255:red,0; green,30; blue,255}] (11.75,11) -- (11.75,12.5);
+			\draw [->, >=Stealth,color={rgb,255:red,0; green,30; blue,255}] (11.75,11) -- (11.75,9.5);
+			\draw [->, >=Stealth,color={rgb,255:red,0; green,30; blue,255}] (16,11) -- (16,12.5);
+			\draw [->, >=Stealth,color={rgb,255:red,0; green,30; blue,255}] (16,11) -- (16,9.5);
+
+			\draw [ color={rgb,255:red,0; green,77; blue,19}, dashed] (2.75,14.25) -- (13.75,14.25);
+			\draw [ color={rgb,255:red,0; green,77; blue,19}, dashed] (13.75,14.25) -- (13.75,11.5);
+			\draw [ color={rgb,255:red,0; green,77; blue,19}, dashed] (13.75,10.75) -- (13.75,7.75);
+			\draw [ color={rgb,255:red,0; green,77; blue,19}, dashed] (13.75,7.75) -- (2.75,7.75);
+			\draw [ color={rgb,255:red,255; green,255; blue,255}, dashed] (13.75,14.25) -- (19,14.25);
+			\draw [ color={rgb,255:red,204; green,0; blue,0}, dashed] (13.75,14.25) -- (21.5,14.25);
+			\draw [ color={rgb,255:red,204; green,0; blue,0}, dashed] (13.75,7.75) -- (21.5,7.75);
+			\node [font=\normalsize, color={rgb,255:red,0; green,77; blue,19}] at (3.75,11) {\textbf{Servidor}};
+			\node [font=\normalsize, color={rgb,255:red,204; green,0; blue,0}] at (19.25,11) {\textbf{Micro}};
+		\end{circuitikz}
+	\end{adjustbox}
+	\caption{Representación del esquema de control en línea entre un micro y un servidor.}
+	\label{fig:intro}
+	
+\end{figure}
+\newpage
 \section{Objetivos}
 Para realizar el proyecto, se proponen los siguientes objetivos:
 \begin{itemize}
@@ -21,7 +82,6 @@ Para realizar el proyecto, se proponen los siguientes objetivos:
 	\item HQC
 \end{itemize}
 \item Comparar el rendimiento de los algoritmos de cifrado postcuántico evaluando velocidad, consumo de recursos y seguridad.
-\item Estudiar la necesidad de implementar estos algoritmos en FPGAs en caso de que en el microcontrolador el rendimiento no fuera aceptable.
 \item Implementar y diseñar un sistema de intercambio de claves que permita la escalabilidad de la solución.
 \end{itemize}
 
@@ -29,13 +89,12 @@ Para realizar el proyecto, se proponen los siguientes objetivos:
 \section{Herramientas utilizadas}
 \subsection{LaTex} 
 Se ha preferido el uso de \LaTeX\ debido a la facilidad que ofrece para el maquetado de textos, superando a otras herramientas de elaboración de documentos. Además, \LaTeX\ permite crear figuras vectorizadas, representar correctamente ecuaciones y ubicar adecuadamente figuras, tablas y bibliografía.
-\subsection{TikzMaker} 
-Esta herramienta \cite{tikzmaker} permite crear figuras vectorizadas de \LaTeX\ mediante el paquete de circuitikz. Su principal ventaja radica en la interfaz gráfica que proporciona y en la facilidad para elaborar figuras.
 
 \subsection{C y C++}
-
+Se ha optado por el lenguaje de programación C debido a su predominio en el desarrollo para microcontroladores. Además, este lenguaje garantiza la compatibilidad directa con los algoritmos de cifrado postcuántico, cuyas implementaciones de referencia se encuentran desarrolladas en C.
 \subsection{Microprocesador CY8CPROTO-063-BLE }
-se usa el \cite{CY8CPROTO063BLE}
+Para las pruebas experimentales referidas al entorno embebido, se ha seleccionado el kit de desarrollo \cite{CY8CPROTO063BLE}. Se ha preferido este hardware frente a las plataformas Arduino por sus superiores prestaciones, y frente a la familia STM32 debido a que la configuración y programación de esta última resulta significativamente más compleja.
+
 \section{Estructura del documento}
 A continuación y para facilitar la lectura del documento, se detalla el contenido de cada capítulo:
 
@@ -43,7 +102,7 @@ A continuación y para facilitar la lectura del documento, se detalla el conteni
 	\item En el capítulo 1 se realiza una introducción.
 	\item En el capítulo 2 se estudia trabajos realizados con relación al tema.
 	\item En el capítulo 3 se desarrollan los fundamentos matemáticos del proyecto.
-	\item En el capítulo 4 se describe la implementación de los algoritmos.
+	\item En el capítulo 4 se describe la implementación de los algoritmos y las pruebas a realizar.
 	\item En el capítulo 5 se presentan y analizan los resultados obtenidos en el capítulo anterior como consecuencia de ejecutar el software realizado. 
 	\item En el capítulo 6  se realiza una conclusión.
 \end{itemize}

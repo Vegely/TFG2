@@ -6,7 +6,7 @@
 \newpage
 
 \section{Interfaz para los algoritmos de cifrado asimétrico} 
-Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algoritmo. De esta manera, las implementaciones de referencia obtenidas del NIST \cite{nistPQCround3, nistPQCround4} quedan encapsuladas bajo una interfaz común. La estructura general de todos los ficheros \texttt{AlgorythWrapper.h} es la del listing \ref{lst:wrapper_core}.
+Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algoritmo. De esta manera, las implementaciones de referencia obtenidas del NIST \cite{nistPQCround3} \cite{nistPQCround4} quedan encapsuladas bajo una interfaz común. La estructura general de todos los ficheros \texttt{AlgorythWrapper.h} es la del listing \ref{lst:wrapper_core}.
 
 \begin{lstlisting}[language=C, caption={Estructura genérica del wrapper para los algoritmos PQC}, label={lst:wrapper_core}]
 	// Estructura comun para Kyber, HQC y Saber
