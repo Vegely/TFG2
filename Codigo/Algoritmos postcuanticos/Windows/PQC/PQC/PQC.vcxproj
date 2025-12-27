@@ -19,20 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CircularBuffer.cpp" />
     <ClCompile Include="src\hqc.cpp" />
     <ClCompile Include="src\KEMProtocol.cpp" />
     <ClCompile Include="src\keyexhange.cpp" />
     <ClCompile Include="src\kyber.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\saber.cpp" />
+    <ClCompile Include="src\SerialComunication.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\CircularBuffer.h" />
     <ClInclude Include="inc\hqc.h" />
     <ClInclude Include="inc\KEMProtocol.h" />
     <ClInclude Include="inc\keyexhange.h" />
     <ClInclude Include="inc\kyber.h" />
     <ClInclude Include="inc\saber.h" />
     <ClInclude Include="inc\secureVector.h" />
+    <ClInclude Include="inc\SerialComunication.h" />
     <ClInclude Include="lib\hqc_wrapper.h" />
     <ClInclude Include="lib\kyber_wrapper.h" />
     <ClInclude Include="lib\saber_wrapper.h" />
