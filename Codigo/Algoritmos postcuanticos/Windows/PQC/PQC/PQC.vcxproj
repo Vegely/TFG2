@@ -27,6 +27,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\saber.cpp" />
     <ClCompile Include="src\SerialComunication.cpp" />
+    <ClCompile Include="src\SerialPacketTransport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\CircularBuffer.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="inc\saber.h" />
     <ClInclude Include="inc\secureVector.h" />
     <ClInclude Include="inc\SerialComunication.h" />
+    <ClInclude Include="inc\SerialPacketTransport.h" />
     <ClInclude Include="lib\hqc_wrapper.h" />
     <ClInclude Include="lib\kyber_wrapper.h" />
     <ClInclude Include="lib\saber_wrapper.h" />
@@ -138,7 +140,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>saber.lib;kyber.lib;hqc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>saber.lib;kyber.lib;hqc.lib;Setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;</AdditionalLibraryDirectories>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -157,7 +159,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>saber.lib;kyber.lib;hqc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>saber.lib;kyber.lib;hqc.lib;Setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;</AdditionalLibraryDirectories>
       <AdditionalOptions>/FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>

@@ -54,15 +54,16 @@
 \contentsline {subsection}{\numberline {3.6.2}Seguridad esperada en Saber}{38}{subsection.3.6.2}%
 \contentsline {subsection}{\numberline {3.6.3}Seguridad esperada en \acrshort {hqc}}{39}{subsection.3.6.3}%
 \contentsline {chapter}{\numberline {4}Desarrollo}{41}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Implementación comunicación serie}{41}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Parámetros generales y formato mensajes}{41}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementación en el ordenador}{41}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementación en el microprocesador}{41}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Interfaz para los algoritmos de cifrado asimétrico}{42}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Modificación de los algoritmos descargados del \acrshort {nist}}{43}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Implementación algoritmos en el PC}{43}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Compilación en librerías}{43}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Diagrama de clases}{43}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.1}Adaptación de Primitivas Criptográficas}{41}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Kyber y Saber: Implementaciones de Referencia}{41}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}Estructura del código en Kyber}{41}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}Estructura del código en Saber}{41}{subsubsection.4.1.1.2}%
+\contentsline {subsection}{\numberline {4.1.2}HQC: Selección de PQClean}{41}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}Estructura del código en HQC}{41}{subsubsection.4.1.2.1}%
+\contentsline {section}{\numberline {4.2}Unificación de Interfaces (Capa Wrapper)}{41}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Infraestructura de Compilación y Aleatoriedad}{43}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Arquitectura del Agente Criptográfico (C++)}{43}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Diagrama de Clases y Diseño del Agente}{43}{subsection.4.4.1}%
 \contentsline {section}{\numberline {4.5}Implementación de algoritmos en el microcontrolador}{43}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Tests realizados}{43}{section.4.6}%
 \contentsline {subsection}{\numberline {4.6.1}Ciclos de CPU}{43}{subsection.4.6.1}%

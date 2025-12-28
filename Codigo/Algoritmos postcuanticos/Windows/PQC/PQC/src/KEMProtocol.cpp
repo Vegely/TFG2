@@ -65,7 +65,7 @@ std::vector<unsigned char> KEMProtocol::process_message(const std::vector<unsign
         case ProtocolState::ESTABLISHED:
             break;
 
-        case ProtocolState::ERROR:
+        case ProtocolState::FAILURE:
         default:
             break;
         }
@@ -119,7 +119,7 @@ void KEMProtocol::handle_decapsulation(const std::vector<unsigned char>& ct) {
 }
 
 void KEMProtocol::transition_to_error(const char* msg) {
-    state_ = ProtocolState::ERROR;
+    state_ = ProtocolState::FAILURE;
     secret_key_.clear();
     shared_secret_.clear();
     std::cerr << "[KEM-Proto Error] " << msg << std::endl;

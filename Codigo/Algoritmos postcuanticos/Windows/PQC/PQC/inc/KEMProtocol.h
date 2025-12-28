@@ -17,7 +17,7 @@ enum class ProtocolState {
     WAITING_FOR_CT, // Initiator generated PK, waiting for response
     WAITING_FOR_PK, // Responder waiting for start message
     ESTABLISHED,    // Key exchange complete, Shared Secret is valid
-    ERROR           
+    FAILURE
 };
 
 class KEMProtocol {

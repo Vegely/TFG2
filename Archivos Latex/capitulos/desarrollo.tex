@@ -1,12 +1,31 @@
 \chapter{Desarrollo}
-\section{Implementación comunicación serie}
-\subsection{Parámetros generales y formato mensajes}
-\subsection{Implementación en el ordenador}
-\subsection{Implementación en el microprocesador}
-\newpage
+En este capítulo se describe el código y la implementación propia realizada en base a los algoritmos proporcionados por el \acrshort{nist}.
+\section{Adaptación de Primitivas Criptográficas}
+El primer nivel de desarrollo se centra en la obtención y depuración de los núcleos algorítmicos en lenguaje C.
 
-\section{Interfaz para los algoritmos de cifrado asimétrico} 
-Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algoritmo. De esta manera, las implementaciones de referencia obtenidas del NIST \cite{nistPQCround3} \cite{nistPQCround4} quedan encapsuladas bajo una interfaz común. La estructura general de todos los ficheros \texttt{AlgorythWrapper.h} es la del listing \ref{lst:wrapper_core}.
+\subsection{Kyber y Saber: Implementaciones de Referencia}
+Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github} \cite{SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
+\newline
+
+
+Para los algoritmos Kyber y Saber se han integrado las implementaciones presentadas en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Se han realizado modificaciones menores para asegurar la compatibilidad con el compilador MSVC de Windows, eliminando dependencias de cabeceras exclusivas de Unix.
+
+\subsubsection{Estructura del código en Kyber}
+\subsubsection{Estructura del código en Saber}
+\subsection{HQC: Selección de PQClean}
+Para \acrshort{hqc}, se descartó la implementación de la ronda 4 del NIST en favor de la versión mantenida por el proyecto \textbf{PQClean} \cite{pqclean_github, SSR:KSSW22}. 
+\textbf{Justificación:} La versión original presenta un acoplamiento fuerte con un generador pseudoaleatorio determinista (DRBG) diseñado para pruebas KAT. La arquitectura de PQClean permite inyectar entropía real del sistema operativo de forma modular, requisito indispensable para la seguridad en el entorno de producción final.
+
+
+\subsubsection{Estructura del código en HQC}
+\section{Unificación de Interfaces (Capa Wrapper)}
+Se ha desarrollado un módulo envoltorio (\textit{wrapper}) para cada algoritmo con el objetivo de encapsular las implementaciones de referencia del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4} bajo una interfaz común. La estructura general de los ficheros de cabecera, denominados \texttt{AlgorithmWrapper.h}, se detalla en el Listing \ref{lst:wrapper_core}.
+\newline
+
+El propósito principal de esta capa de abstracción es homogeneizar las distintas implementaciones provistas por el \acrshort{nist}. Esto permite instanciar los algoritmos mediante un inicializador común ajustado al nivel de seguridad deseado (dependiente de la compilación de la librería con los parámetros correspondientes). Asimismo, este diseño resuelve los conflictos de enlazado (\textit{linking}) derivados del uso de símbolos idénticos en las APIs originales, facilitando así la intercambiabilidad dinámica entre los distintos algoritmos criptográficos.
+\newline
+
+Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosofía donde la responsabilidad recae íntegramente en el usuario, quien debe encargarse de la asignación y liberación de los \textit{buffers}.
 
 \begin{lstlisting}[language=C, caption={Estructura genérica del wrapper para los algoritmos PQC}, label={lst:wrapper_core}]
 	// Estructura comun para Kyber, HQC y Saber
@@ -57,19 +76,33 @@ Se ha desarrollado un módulo intermediario (\textit{wrapper}) para cada algorit
 		return crypto_kem_dec(ss, ct, sk);
 	}
 \end{lstlisting}
-\newpage
 
-\section{Modificación de los algoritmos descargados del \acrshort{nist}}
-Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github} \cite{SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
-\section{Implementación algoritmos en el PC}
+\section{Infraestructura de Compilación y Aleatoriedad}
 Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
 \begin{itemize}
 	\item Versión con \texttt{rng.h}: genera los secretos compartidas a partir de una semilla y sirve para generar los \acrshort{kat} para generar un archivo \texttt{.rsp} a partir de un archivo \texttt{.req}.
 	\item Versión con \texttt{randombytes.h}: usando la librería del siguiente repositorio \cite{sprenkels_randombytes_2017} utilizada en el proyecto PQClean  \cite{SSR:KSSW22} para generar números aleatorios a partir de la entropía del sistema operativo.
 \end{itemize}
-\subsection{Compilación en librerías}
 
-\subsection{Diagrama de clases}
+\section{Arquitectura del Agente Criptográfico y de las comunicaciones (C++)}
+Sobre la base de las librerías en C descritas anteriormente, se ha construido una capa de aplicación en C++ que integra las capacidades criptográficas con un módulo de comunicaciones serie.
+
+\subsection{Diagrama de Clases y Diseño del Agente}
+La integración se ha modelado siguiendo un patrón de diseño orientado a objetos, donde cada algoritmo es encapsulado en una clase que hereda de una interfaz común \texttt{ICryptoProvider}. Esto permite al Agente cambiar de algoritmo dinámicamente según la configuración recibida por el puerto serie.
+
+La Figura \ref{fig:class_diagram} ilustra la arquitectura del sistema, destacando la relación entre el gestor de comunicaciones (\texttt{SerialManager}) y el núcleo criptográfico.
+
+% Aquí pones tu figura del diagrama de clases
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{class_diagram.png}
+%    \caption{Diagrama de clases del Agente Criptográfico con soporte para comunicación serie.}
+%    \label{fig:class_diagram}
+%\end{figure}
+
+
+
+
 
 \section{Implementación de algoritmos en el microcontrolador}
 

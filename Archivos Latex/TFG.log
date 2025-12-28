@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  27 DEC 2025 04:36
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  28 DEC 2025 05:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1269,63 +1269,84 @@ Package: supertabular 2020/02/02 v4.1g the supertabular environment
 Package: glossary-tree 2023/09/29 v4.53 (NLCT)
 \glstreeindent=\skip86
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 54.
-\c@theorem=\count409
+(c:/texlive/2023/texmf-dist/tex/generic/dirtree/dirtree.sty
+Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
+
+(c:/texlive/2023/texmf-dist/tex/generic/dirtree/dirtree.tex
+`dirtree' v0.32, 2012/12/11 (jcc)
+\DT@offset=\dimen369
+\DT@width=\dimen370
+\DT@sep=\dimen371
+\DT@all=\dimen372
+\DT@rulewidth=\dimen373
+\DT@dotwidth=\dimen374
+\DTbaselineskip=\dimen375
+\DT@counti=\count409
+\DT@countii=\count410
+\DT@countiii=\count411
+\DT@countiv=\count412
+\DT@indent=\dimen376
+\DT@parskip=\dimen377
+\DT@baselineskip=\dimen378
+)
+File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 55.
+\c@theorem=\count413
 \glswrite=\write4
 \glo@main@file=\write5
 \openout5 = `TFG.glo'.
 
-Package glossaries Info: Writing glossary file TFG.glo on input line 101.
+Package glossaries Info: Writing glossary file TFG.glo on input line 102.
 \glo@acronym@file=\write6
 \openout6 = `TFG.acn'.
 
-Package glossaries Info: Writing glossary file TFG.acn on input line 101.
+Package glossaries Info: Writing glossary file TFG.acn on input line 102.
 \glo@symbols@file=\write7
 \openout7 = `TFG.sbl'.
 
-Package glossaries Info: Writing glossary file TFG.sbl on input line 101.
-
-(./TFG.aux (./capitulos/portada.aux)
+Package glossaries Info: Writing glossary file TFG.sbl on input line 102.
+ (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
- (./capitulos/firmas.aux)
-(./capitulos/licencia.aux) (./capitulos/evaluacion.aux)
-(./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
+
+(./capitulos/firmas.aux) (./capitulos/licencia.aux) (./capitulos/evaluacion.aux
+) (./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
 (./capitulos/glosario.aux) (./capitulos/introduccion.aux)
 (./capitulos/estadoarte.aux) (./capitulos/fundamentosgenerales.aux)
 (./capitulos/desarrollo.aux) (./capitulos/resultados.aux)
 (./capitulos/conclusion.aux) (./capitulos/apendice.aux))
 \openout1 = `TFG.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-03.
+04.
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Info: Redefining \. on input line 103.
-LaTeX Info: Redefining \% on input line 103.
-\c@lstlisting=\count410
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Info: Redefining \. on input line 104.
+LaTeX Info: Redefining \% on input line 104.
+\c@lstlisting=\count414
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1364,7 +1385,7 @@ LaTeX Info: Redefining \% on input line 103.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-Package hyperref Info: Link coloring ON on input line 103.
+Package hyperref Info: Link coloring ON on input line 104.
 (./TFG.out) (./TFG.out)
 \@outlinefile=\write8
 \openout8 = `TFG.out'.
@@ -1376,7 +1397,7 @@ File: translations-basic-dictionary-spanish.trsl (spanish translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `spanish'. on input line 103.
+or `spanish'. on input line 104.
  (./TFG.glsdefs)
 \openout2 = `capitulos/portada.aux'.
 
@@ -1443,7 +1464,7 @@ LaTeX Font Info:    Trying to load font information for U+esint on input line 3
 (c:/texlive/2023/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 ))
-Overfull \hbox (17.608pt too wide) in paragraph at lines 27--116
+Overfull \hbox (17.608pt too wide) in paragraph at lines 27--117
 []$[]$ $[]$ 
  []
 
@@ -1473,8 +1494,8 @@ LaTeX Info: Redefining \% on input line 8.
  [12
 
 ]) [13]
-LaTeX Info: Redefining \. on input line 121.
-LaTeX Info: Redefining \% on input line 121.
+LaTeX Info: Redefining \. on input line 122.
+LaTeX Info: Redefining \% on input line 122.
  [14
 
 
@@ -1518,17 +1539,17 @@ Overfull \hbox (2.36871pt too wide) in paragraph at lines 50--50
 table []IND- 
  []
 
-LaTeX Info: Redefining \. on input line 74.
-LaTeX Info: Redefining \% on input line 74.
+LaTeX Info: Redefining \. on input line 75.
+LaTeX Info: Redefining \% on input line 75.
 [16])
 \tf@toc=\write9
 \openout9 = `TFG.toc'.
 
-LaTeX Info: Redefining \. on input line 125.
-LaTeX Info: Redefining \% on input line 125.
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
  [17]
-LaTeX Info: Redefining \. on input line 125.
-LaTeX Info: Redefining \% on input line 125.
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
  [18
 
 ] (./TFG.lof
@@ -1539,8 +1560,8 @@ LaTeX Info: Redefining \% on input line 1.
 \openout10 = `TFG.lof'.
 
  [19]
-LaTeX Info: Redefining \. on input line 128.
-LaTeX Info: Redefining \% on input line 128.
+LaTeX Info: Redefining \. on input line 129.
+LaTeX Info: Redefining \% on input line 129.
  [20
 
 ] (./TFG.lot
@@ -1553,8 +1574,8 @@ Underfull \vbox (badness 7326) has occurred while \output is active []
 \tf@lot=\write11
 \openout11 = `TFG.lot'.
 
-LaTeX Info: Redefining \. on input line 130.
-LaTeX Info: Redefining \% on input line 130.
+LaTeX Info: Redefining \. on input line 131.
+LaTeX Info: Redefining \% on input line 131.
 
 [22]
 \openout2 = `capitulos/glosario.aux'.
@@ -1567,8 +1588,8 @@ LaTeX Info: Redefining \% on input line 130.
 
 
 ]
-LaTeX Info: Redefining \. on input line 132.
-LaTeX Info: Redefining \% on input line 132.
+LaTeX Info: Redefining \. on input line 133.
+LaTeX Info: Redefining \% on input line 133.
  [24
 
 
@@ -1598,8 +1619,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--12
 
 
 ])
-LaTeX Info: Redefining \. on input line 134.
-LaTeX Info: Redefining \% on input line 134.
+LaTeX Info: Redefining \. on input line 135.
+LaTeX Info: Redefining \% on input line 135.
  [2]
 \openout2 = `capitulos/estadoarte.aux'.
 
@@ -1611,8 +1632,8 @@ Capítulo 2.
 
 
 ]
-LaTeX Info: Redefining \. on input line 138.
-LaTeX Info: Redefining \% on input line 138.
+LaTeX Info: Redefining \. on input line 139.
+LaTeX Info: Redefining \% on input line 139.
  [4]
 \openout2 = `capitulos/fundamentosgenerales.aux'.
 
@@ -2257,51 +2278,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 1879--1881
 LaTeX Info: Redefining \. on input line 1881.
 LaTeX Info: Redefining \% on input line 1881.
 [39])
-LaTeX Info: Redefining \. on input line 140.
-LaTeX Info: Redefining \% on input line 140.
+LaTeX Info: Redefining \. on input line 141.
+LaTeX Info: Redefining \% on input line 141.
  [40]
 \openout2 = `capitulos/desarrollo.aux'.
 
  (./capitulos/desarrollo.tex
 Capítulo 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--24
+
+ []
+
 [41
 
 
 
 
-] (c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+]
+Underfull \hbox (badness 10000) in paragraph at lines 25--27
+
+ []
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 11.
+nput line 30.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 15.
-LaTeX Info: Redefining \. on input line 60.
-LaTeX Info: Redefining \% on input line 60.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 34.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 83.
+LaTeX Info: Redefining \% on input line 83.
  [42]
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\acrshort' on input line 62.
+LaTeX Warning: Reference `fig:class_diagram' on page 43 undefined on input line
+ 93.
 
 )
-LaTeX Info: Redefining \. on input line 142.
-LaTeX Info: Redefining \% on input line 142.
-
-
-! Package glossaries Error: Glossary entry `NIST' has not been defined.
-
-See the glossaries package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.142 ^^I\include{capitulos/desarrollo}
-                                       
-You need to define a glossary entry before you can use it.
-
-[43]
+LaTeX Info: Redefining \. on input line 143.
+LaTeX Info: Redefining \% on input line 143.
+ [43]
 \openout2 = `capitulos/resultados.aux'.
 
  (./capitulos/resultados.tex
@@ -2561,8 +2588,8 @@ Overfull \hbox (115.2199pt too wide) has occurred while \output is active
  []
 
 [68] [69])
-LaTeX Info: Redefining \. on input line 153.
-LaTeX Info: Redefining \% on input line 153.
+LaTeX Info: Redefining \. on input line 154.
+LaTeX Info: Redefining \% on input line 154.
 
 Overfull \hbox (115.2199pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 70 \TU/lmr/m/sl/10 APÉNDICE D.  EJEMPLO DE CODIFICACIÓN MEDIANTE
@@ -2599,8 +2626,8 @@ LaTeX Info: Redefining \% on input line 183.
 LaTeX Info: Redefining \. on input line 278.
 LaTeX Info: Redefining \% on input line 278.
  [73])
-LaTeX Info: Redefining \. on input line 170.
-LaTeX Info: Redefining \% on input line 170.
+LaTeX Info: Redefining \. on input line 171.
+LaTeX Info: Redefining \% on input line 171.
  [74] (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
@@ -2619,16 +2646,19 @@ L3 programming layer <2024-01-22>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: F081592D2E8816D262ECB5EA0D5EEB90;19565.
+(rerunfilecheck)             Checksum: 1D2D65072BB1F3566B212A423883D6E2;19936.
  ) 
 Here is how much of TeX's memory you used:
- 64252 strings out of 474879
- 1590179 string characters out of 5763781
- 2761713 words of memory out of 5000000
- 85340 multiletter control sequences out of 15000+600000
+ 64309 strings out of 474879
+ 1591248 string characters out of 5763781
+ 2763753 words of memory out of 5000000
+ 85391 multiletter control sequences out of 15000+600000
  569511 words of font info for 122 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,16n,101p,2354b,1242s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,16n,101p,2354b,1240s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on TFG.pdf (98 pages).

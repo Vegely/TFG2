@@ -1,5 +1,6 @@
 #ifndef _SERIAL_COMUNICATION__HPP_
 #define _SERIAL_COMUNICATION__HPP_
+#define NOMINMAX
 #ifdef _WIN32
 #include <Windows.h>
 #endif // _WIN32
