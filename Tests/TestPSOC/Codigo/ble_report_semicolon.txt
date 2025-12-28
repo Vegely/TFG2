@@ -1,0 +1,64 @@
+﻿MEMORY ANALYSIS REPORT
+Generated: 12/28/2025 08:47:07
+Target: C:\Users\bogurad\Desktop\ProyectosgitHub\TFG2\Codigo\Algoritmospostcuanticos\Psoc_modus\HQC\build\Release\local\src
+--------------------------------------------------
+TOTAL SUMMARY
+Category;Size(Bytes)
+Code (Flash);0
+Data (RAM);0
+BSS (RAM);0
+
+--------------------------------------------------
+TOP 50 LARGEST SYMBOLS (Separated by ;)
+--------------------------------------------------
+Size;Type;Name;File
+10324;ReadOnly;alpha_ij_pow;reed_solomon.o
+3508;Code;KeccakF1600_StatePermute;fips202.o
+1008;Code;karatsuba;gf2x.o
+1004;Code;PQCLEAN_HQC256_CLEAN_reed_solomon_decode;reed_solomon.o
+596;ReadOnly;m_val;vector.o
+534;Code;fft_rec;fft.o
+516;ReadOnly;gf_exp;reed_solomon.o
+512;ReadOnly;gf_log;fft.o
+444;Code;PQCLEAN_HQC256_CLEAN_vect_set_random_fixed_weight;vector.o
+422;Code;PQCLEAN_HQC256_CLEAN_reed_muller_decode;reed_muller.o
+418;Code;PQCLEAN_HQC256_CLEAN_crypto_kem_dec;kem.o
+354;Code;PQCLEAN_HQC256_CLEAN_hqc_pke_encrypt;hqc.o
+288;Code;PQCLEAN_HQC256_CLEAN_crypto_kem_enc;kem.o
+278;Code;PQCLEAN_HQC256_CLEAN_fft;fft.o
+276;Code;radix;fft.o
+276;Code;PQCLEAN_HQC256_CLEAN_hqc_pke_keygen;hqc.o
+274;Code;keccak_absorb;fips202.o
+254;Code;keccak_inc_absorb;fips202.o
+246;Code;radix_big;fft.o
+206;Code;keccak_inc_squeeze;fips202.o
+196;Code;PQCLEAN_HQC256_CLEAN_hqc_pke_decrypt;hqc.o
+192;ReadOnly;KeccakF_RoundConstants;fips202.o
+182;Code;PQCLEAN_HQC256_CLEAN_gf_mul;gf.o
+162;Code;gf_reduce.constprop.0;gf.o
+160;Code;PQCLEAN_HQC256_CLEAN_fft_retrieve_error_poly;fft.o
+144;Code;PQCLEAN_HQC256_CLEAN_load8_arr;parsing.o
+144;Code;PQCLEAN_HQC256_CLEAN_reed_solomon_encode;reed_solomon.o
+136;Code;PQCLEAN_HQC256_CLEAN_vect_mul;gf2x.o
+136;Code;PQCLEAN_HQC256_CLEAN_reed_muller_encode;reed_muller.o
+110;Code;PQCLEAN_HQC256_CLEAN_vect_resize;vector.o
+96;Code;keccak_squeezeblocks;fips202.o
+84;Code;randombytes;randombytes.o
+84;Code;keccak_inc_finalize;fips202.o
+80;Code;PQCLEAN_HQC256_CLEAN_hqc_secret_key_from_string;parsing.o
+76;Code;PQCLEAN_HQC256_CLEAN_store8_arr;parsing.o
+74;Code;PQCLEAN_HQC256_CLEAN_gf_inverse;gf.o
+72;Code;shake128;fips202.o
+72;Code;shake256;fips202.o
+72;Code;PQCLEAN_HQC256_CLEAN_vect_set_random;vector.o
+66;Code;PQCLEAN_HQC256_CLEAN_hqc_ciphertext_from_string;parsing.o
+66;Code;PQCLEAN_HQC256_CLEAN_hqc_ciphertext_to_string;parsing.o
+64;Code;sha3_256_inc_finalize;fips202.o
+64;Code;sha3_512_inc_finalize;fips202.o
+64;Code;sha3_384_inc_finalize;fips202.o
+62;Code;sha3_256;fips202.o
+62;Code;sha3_512;fips202.o
+62;Code;sha3_384;fips202.o
+58;Code;PQCLEAN_HQC256_CLEAN_shake256_512_ds;shake_ds.o
+58;Code;compute_subset_sums;fft.o
+56;Code;PQCLEAN_HQC256_CLEAN_hqc_secret_key_to_string;parsing.o

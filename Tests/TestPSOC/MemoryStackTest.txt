@@ -35,4 +35,7 @@ Kyber:
 ------------------------------------------
 
 HQC:
-Not working
+--- Iteration 1 ---
+[KeyGen] 5718970 us | Stack Peak: 103596 bytes
+[Encaps] 11482686 us | Stack Peak: 161364 bytes
+[Decaps] 17434819 us | Stack Peak: 175820 bytes

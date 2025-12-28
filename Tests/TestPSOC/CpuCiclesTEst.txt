@@ -17,3 +17,15 @@ Running 1-second stress tests...
 KeyGen : 30 operations in 1 second
 Encaps : 25 operations in 1 second
 Decaps : 25 operations in 1 second
+
+HQC:
+KeyGen | Cyc: 571896356 | Avg: 571896356
+Encaps | Cyc: 1148267355 | Avg: 1148267355
+Decaps | Cyc: 1743477982 | Avg: 1743477982
+
+=== TEST 3: HQC 1-Second Stress Test ===
+Starting Stress Test (1 second per Algo)...
+
+Running KeyGen for 1 second... DONE. Count: 1 ops/sec
+Running Encaps for 1 second... DONE. Count: 1 ops/sec
+Running Decaps for 1 second... DONE. Count: 1 ops/sec

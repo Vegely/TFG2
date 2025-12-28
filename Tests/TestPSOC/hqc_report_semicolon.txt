@@ -1,0 +1,13 @@
+﻿BLE MEMORY ANALYSIS REPORT
+Generated: 12/28/2025 08:45:04
+--------------------------------------------------
+TOTAL SUMMARY
+Category;Size(Bytes)
+Code (Flash);0
+Data (RAM);0
+BSS (RAM);0
+
+--------------------------------------------------
+TOP 50 LARGEST SYMBOLS (Separated by ;)
+--------------------------------------------------
+Size;Type;Name;File

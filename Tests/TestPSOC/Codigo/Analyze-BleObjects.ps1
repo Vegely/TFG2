@@ -6,11 +6,17 @@
 # ==============================================================================
 # 1. CONFIGURATION
 # ==============================================================================
-# Your PSoC / ARM Tool Path
+
+# --- TARGET DIRECTORY (Updated) ---
+# We explicitly set the path you requested here:
+$TargetDirectory = "C:\Users\bogurad\Desktop\ProyectosgitHub\TFG2\Codigo\Algoritmospostcuanticos\Psoc_modus\HQC\build\Release\local\src"
+
+# --- TOOL PATHS ---
+# CHECK THIS: If you use ModusToolbox, this path might be different (e.g., C:\ModusToolbox\tools_3.1\gcc\bin)
 $ToolPath = "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\import\gnu\arm\5.4.1\bin\"
 $Prefix   = "arm-none-eabi-"
 
-# Output filenames
+# Output filenames (These will be created where you save this script)
 $ReportFile = "ble_report_semicolon.txt"
 $CsvFile    = "ble_data_semicolon.csv"
 
@@ -20,8 +26,16 @@ $CsvFile    = "ble_data_semicolon.csv"
 $nm   = "${ToolPath}${Prefix}nm.exe"
 $size = "${ToolPath}${Prefix}size.exe"
 
+# Check if tools exist
 if (-not (Test-Path $nm)) {
     Write-Host "ERROR: Tool not found at $nm" -ForegroundColor Red
+    Write-Host "Please check the `$ToolPath variable in the script." -ForegroundColor Yellow
+    exit
+}
+
+# Check if target directory exists
+if (-not (Test-Path $TargetDirectory)) {
+    Write-Host "ERROR: Target directory not found: $TargetDirectory" -ForegroundColor Red
     exit
 }
 
@@ -30,8 +44,9 @@ $TotalCode = 0
 $TotalData = 0
 $TotalBSS  = 0
 
-$objectFiles = Get-ChildItem -Path . -Filter *.o -Recurse
-Write-Host "Analyzing $($objectFiles.Count) files..." -ForegroundColor Cyan
+# Updated to look in $TargetDirectory instead of "."
+$objectFiles = Get-ChildItem -Path $TargetDirectory -Filter *.o -Recurse
+Write-Host "Analyzing $($objectFiles.Count) files in target directory..." -ForegroundColor Cyan
 
 foreach ($file in $objectFiles) {
     # 1. Get Section Sizes
@@ -57,7 +72,7 @@ foreach ($file in $objectFiles) {
                     "R" { $TypeName = "ReadOnly" }
                     Default { $TypeName = $TypeChar }
                 }
-                
+                 
                 $AllSymbols += [PSCustomObject]@{
                     Size    = [int]$Matches[2]
                     Type    = $TypeName
@@ -77,8 +92,9 @@ Write-Host "Generating reports..." -ForegroundColor Yellow
 
 # --- Report Content ---
 $ReportContent = @()
-$ReportContent += "BLE MEMORY ANALYSIS REPORT"
+$ReportContent += "MEMORY ANALYSIS REPORT"
 $ReportContent += "Generated: $(Get-Date)"
+$ReportContent += "Target: $TargetDirectory"
 $ReportContent += "--------------------------------------------------"
 $ReportContent += "TOTAL SUMMARY"
 $ReportContent += "Category;Size(Bytes)"
@@ -99,7 +115,6 @@ $AllSymbols | Sort-Object Size -Descending | Select-Object -First 50 | ForEach-O
 $ReportContent | Out-File -FilePath $ReportFile -Encoding UTF8
 
 # --- Generate Full CSV (Semicolon Delimited) ---
-# This file contains EVERYTHING, not just the top 50
 $AllSymbols | Sort-Object Size -Descending | Export-Csv -Path $CsvFile -Delimiter ";" -NoTypeInformation
 
 Write-Host "Done!" -ForegroundColor Green
