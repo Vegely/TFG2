@@ -726,3 +726,59 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{rng}%
+{%
+name={\acronymfont {\glsentryshort {rng}}},%
+sort={RNG},%
+type={acronym},%
+first={RNG},%
+firstplural={RNGs},%
+text={RNG},%
+plural={RNGs},%
+description={Random Number Generator o Generador de Números Aleatorios},%
+descriptionplural={Random Number Generator o Generador de Números Aleatorios},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Random Number Generator o Generador de Números Aleatorios},%
+longplural={Random Number Generator o Generador de Números Aleatorioss},%
+short={RNG},%
+shortplural={RNGs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{trng}%
+{%
+name={\acronymfont {\glsentryshort {trng}}},%
+sort={TRNG},%
+type={acronym},%
+first={TRNG},%
+firstplural={TRNGs},%
+text={TRNG},%
+plural={TRNGs},%
+description={True Random Number Generator o Generador de Números Aleatorios Verdadero},%
+descriptionplural={True Random Number Generator o Generador de Números Aleatorios Verdadero},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={True Random Number Generator o Generador de Números Aleatorios Verdadero},%
+longplural={True Random Number Generator o Generador de Números Aleatorios Verdaderos},%
+short={TRNG},%
+shortplural={TRNGs},%
+counter={page},%
+parent={},%
+%
+}%
+

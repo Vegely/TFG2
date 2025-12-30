@@ -7,6 +7,7 @@
 #include <thread>
 #include <mutex>
 
+
 bool SerialComunication::setAvailablePorts() {
     std::vector<std::pair<int, std::wstring>> portList;
     HDEVINFO hDevInfo = SetupDiGetClassDevs(&GUID_DEVCLASS_PORTS, 0, 0, DIGCF_PRESENT);
@@ -79,6 +80,10 @@ bool SerialComunication::openPort(int port) {
     if (hSerial == INVALID_HANDLE_VALUE) {
         std::cerr << "Error: Unable to open COM port " << port << ". Error code: " << GetLastError() << std::endl;
         return false;
+    }
+
+    if (!SetupComm(hSerial, 8192, 8192)) {
+        std::cerr << "Warning: Failed to set serial buffer size. Error: " << GetLastError() << std::endl;
     }
 
     // Configure serial port settings
@@ -178,10 +183,8 @@ void SerialComunication::receiveLoop() {
         // Attempt to read from the serial port
         if (ReadFile(hSerial, buffer, bufferSize - 1, &bytesRead, NULL)) {
             if (bytesRead > 0) {
-
                 std::lock_guard<std::mutex> lock(receiveMutex);
-                std::string safeData(buffer, bytesRead);
-                receiveBuffer.push(safeData);
+                receiveBuffer.push(std::string(buffer, bytesRead));
             }
         }
         else {

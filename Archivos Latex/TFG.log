@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  28 DEC 2025 05:53
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.1.31)  29 DEC 2025 11:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1269,27 +1269,25 @@ Package: supertabular 2020/02/02 v4.1g the supertabular environment
 Package: glossary-tree 2023/09/29 v4.53 (NLCT)
 \glstreeindent=\skip86
 ))
-(c:/texlive/2023/texmf-dist/tex/generic/dirtree/dirtree.sty
-Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
-
-(c:/texlive/2023/texmf-dist/tex/generic/dirtree/dirtree.tex
-`dirtree' v0.32, 2012/12/11 (jcc)
-\DT@offset=\dimen369
-\DT@width=\dimen370
-\DT@sep=\dimen371
-\DT@all=\dimen372
-\DT@rulewidth=\dimen373
-\DT@dotwidth=\dimen374
-\DTbaselineskip=\dimen375
-\DT@counti=\count409
-\DT@countii=\count410
-\DT@countiii=\count411
-\DT@countiv=\count412
-\DT@indent=\dimen376
-\DT@parskip=\dimen377
-\DT@baselineskip=\dimen378
-)
-File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
+(c:/texlive/2023/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen369
+\lightrulewidth=\dimen370
+\cmidrulewidth=\dimen371
+\belowrulesep=\dimen372
+\belowbottomsep=\dimen373
+\aboverulesep=\dimen374
+\abovetopsep=\dimen375
+\cmidrulesep=\dimen376
+\cmidrulekern=\dimen377
+\defaultaddspace=\dimen378
+\@cmidla=\count409
+\@cmidlb=\count410
+\@aboverulesep=\dimen379
+\@belowrulesep=\dimen380
+\@thisruleclass=\count411
+\@lastruleclass=\count412
+\@thisrulewidth=\dimen381
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 55.
 \c@theorem=\count413
@@ -1306,16 +1304,17 @@ Package glossaries Info: Writing glossary file TFG.acn on input line 102.
 \openout7 = `TFG.sbl'.
 
 Package glossaries Info: Writing glossary file TFG.sbl on input line 102.
- (./TFG.aux (./capitulos/portada.aux)
+ (./TFG.aux
+(./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
-
-(./capitulos/firmas.aux) (./capitulos/licencia.aux) (./capitulos/evaluacion.aux
-) (./capitulos/agradecimientos.aux) (./capitulos/resumen.aux)
-(./capitulos/glosario.aux) (./capitulos/introduccion.aux)
-(./capitulos/estadoarte.aux) (./capitulos/fundamentosgenerales.aux)
-(./capitulos/desarrollo.aux) (./capitulos/resultados.aux)
-(./capitulos/conclusion.aux) (./capitulos/apendice.aux))
+ (./capitulos/firmas.aux) (./capitulos/licencia.aux)
+(./capitulos/evaluacion.aux) (./capitulos/agradecimientos.aux)
+(./capitulos/resumen.aux) (./capitulos/glosario.aux)
+(./capitulos/introduccion.aux) (./capitulos/estadoarte.aux)
+(./capitulos/fundamentosgenerales.aux) (./capitulos/desarrollo.aux)
+(./capitulos/resultados.aux) (./capitulos/conclusion.aux)
+(./capitulos/apendice.aux))
 \openout1 = `TFG.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
@@ -1568,7 +1567,7 @@ LaTeX Info: Redefining \% on input line 129.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 
-Underfull \vbox (badness 7326) has occurred while \output is active []
+Underfull \vbox (badness 1205) has occurred while \output is active []
 
  [21])
 \tf@lot=\write11
@@ -2286,12 +2285,12 @@ LaTeX Info: Redefining \% on input line 141.
  (./capitulos/desarrollo.tex
 Capítulo 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--9
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--24
+Underfull \hbox (badness 10000) in paragraph at lines 9--11
 
  []
 
@@ -2301,66 +2300,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--24
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 25--27
+LaTeX Info: Redefining \. on input line 49.
+LaTeX Info: Redefining \% on input line 49.
+ [42]
+Underfull \hbox (badness 10000) in paragraph at lines 80--82
 
  []
 
-(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+LaTeX Info: Redefining \. on input line 85.
+LaTeX Info: Redefining \% on input line 85.
+[43]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\acrshort' on input line 87.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--119
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
+
+ []
+
+LaTeX Info: Redefining \. on input line 124.
+LaTeX Info: Redefining \% on input line 124.
+[44] (c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 30.
+nput line 126.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 34.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 130.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1173) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 83.
-LaTeX Info: Redefining \% on input line 83.
- [42]
+LaTeX Info: Redefining \. on input line 186.
+LaTeX Info: Redefining \% on input line 186.
+ [45]
 
-LaTeX Warning: Reference `fig:class_diagram' on page 43 undefined on input line
- 93.
+LaTeX Warning: Reference `fig:class_diagram' on page 46 undefined on input line
+ 190.
 
 )
 LaTeX Info: Redefining \. on input line 143.
 LaTeX Info: Redefining \% on input line 143.
- [43]
+ [46]
 \openout2 = `capitulos/resultados.aux'.
 
  (./capitulos/resultados.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [44
+Capítulo 5.
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47
 
 
 
 
 ]
-Capítulo 5.
-) [45]
+LaTeX Info: Redefining \. on input line 145.
+LaTeX Info: Redefining \% on input line 145.
+
+[48]
 \openout2 = `capitulos/conclusion.aux'.
 
  (./capitulos/conclusion.tex
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [46
+Capítulo 6.
+) [49
 
 
 
 
 ]
-Capítulo 6.
-) [47]
 \openout2 = `capitulos/apendice.aux'.
 
  (./capitulos/apendice.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
- [48
+ [50
 
 
 
@@ -2372,7 +2394,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 9--15
 []$[]$ 
  []
 
-[49]
+[51]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 57--63
 []$[]$ 
  []
@@ -2384,7 +2406,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 105--111
 
 LaTeX Info: Redefining \. on input line 119.
 LaTeX Info: Redefining \% on input line 119.
-[50]
+[52]
 File: figuras/PartsState1.png Graphic file (type bmp)
 <figuras/PartsState1.png>
 
@@ -2399,7 +2421,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 151--157
 
 LaTeX Info: Redefining \. on input line 177.
 LaTeX Info: Redefining \% on input line 177.
-[51]
+[53]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 182--188
 []$[]$ 
  []
@@ -2410,14 +2432,14 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 LaTeX Info: Redefining \. on input line 213.
 LaTeX Info: Redefining \% on input line 213.
-[52]
+[54]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 217--221
 []$[]$ 
  []
 
 LaTeX Info: Redefining \. on input line 271.
 LaTeX Info: Redefining \% on input line 271.
-[53]
+[55]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 274--280
 []$[]$ 
  []
@@ -2429,7 +2451,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 311--317
 
 LaTeX Info: Redefining \. on input line 347.
 LaTeX Info: Redefining \% on input line 347.
-[54]
+[56]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 351--357
 []$[]$ 
  []
@@ -2440,14 +2462,14 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 LaTeX Info: Redefining \. on input line 401.
 LaTeX Info: Redefining \% on input line 401.
-[55]
+[57]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 405--409
 []$[]$ 
  []
 
 LaTeX Info: Redefining \. on input line 457.
 LaTeX Info: Redefining \% on input line 457.
-[56]
+[58]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 467--473
 []$[]$ 
  []
@@ -2459,7 +2481,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 501--507
 
 LaTeX Info: Redefining \. on input line 532.
 LaTeX Info: Redefining \% on input line 532.
-[57]
+[59]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 537--543
 []$[]$ 
  []
@@ -2474,7 +2496,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 LaTeX Info: Redefining \. on input line 596.
 LaTeX Info: Redefining \% on input line 596.
-[58]
+[60]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 600--604
 []$[]$ 
  []
@@ -2492,7 +2514,7 @@ l.657 \newpage
               
 You need to define a glossary entry before you can use it.
 
-[59]
+[61]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 662--668
 []$[]$ 
  []
@@ -2504,7 +2526,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 703--709
 
 LaTeX Info: Redefining \. on input line 722.
 LaTeX Info: Redefining \% on input line 722.
-[60]
+[62]
 Overfull \hbox (10.0pt too wide) in paragraph at lines 730--736
 []$[]$ 
  []
@@ -2522,10 +2544,10 @@ l.774 \chapter
               {Ejemplo \gls{rlwe}}
 You need to define a glossary entry before you can use it.
 
-[61]
+[63]
 LaTeX Info: Redefining \. on input line 774.
 LaTeX Info: Redefining \% on input line 774.
- [62
+ [64
 
 ]
 Apéndice B.
@@ -2538,10 +2560,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 776--778
 
  []
 
-[63]
+[65]
 LaTeX Info: Redefining \. on input line 838.
 LaTeX Info: Redefining \% on input line 838.
- [64
+ [66
 
 ]
 Apéndice C.
@@ -2549,7 +2571,7 @@ Apéndice C.
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\acrshort' on input line 838.
 
-[65]
+[67]
 LaTeX Info: Redefining \. on input line 870.
 LaTeX Info: Redefining \% on input line 870.
 
@@ -2565,7 +2587,7 @@ l.870 \chapter
 
 You need to define a glossary entry before you can use it.
 
-[66
+[68
 
 ]
 Apéndice D.
@@ -2574,7 +2596,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 872--874
 
  []
 
-[67]
+[69]
 Overfull \hbox (52.62724pt too wide) detected at line 944
 [][][][]
  []
@@ -2583,52 +2605,60 @@ LaTeX Info: Redefining \. on input line 997.
 LaTeX Info: Redefining \% on input line 997.
 
 Overfull \hbox (115.2199pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 68 \TU/lmr/m/sl/10 APÉNDICE D.  EJEMPLO DE CODIFICACIÓN MEDIANTE
- POLINOMIOS DE REED-SOLOMON Y REED-MULLER
- []
-
-[68] [69])
-LaTeX Info: Redefining \. on input line 154.
-LaTeX Info: Redefining \% on input line 154.
-
-Overfull \hbox (115.2199pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 70 \TU/lmr/m/sl/10 APÉNDICE D.  EJEMPLO DE CODIFICACIÓN MEDIANTE
  POLINOMIOS DE REED-SOLOMON Y REED-MULLER
  []
 
-[70] (./TFG.bbl
-Underfull \hbox (badness 2426) in paragraph at lines 33--37
+[70] [71])
+LaTeX Info: Redefining \. on input line 154.
+LaTeX Info: Redefining \% on input line 154.
+
+Overfull \hbox (115.2199pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 72 \TU/lmr/m/sl/10 APÉNDICE D.  EJEMPLO DE CODIFICACIÓN MEDIANTE
+ POLINOMIOS DE REED-SOLOMON Y REED-MULLER
+ []
+
+[72] (./TFG.bbl
+Underfull \hbox (badness 2426) in paragraph at lines 30--34
 []\TU/lmr/m/n/10 Infineon Technologies AG, “CY8CPROTO-063-BLE PSoC 6 BLE Protot
 yping Kit.”
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--37
+Underfull \hbox (badness 10000) in paragraph at lines 30--34
 [][]$[][][][][] [] [] [] [][][] [] [][][][][][][][] [] [][][] [] [][][] [] [][]
  [] [][][][][][][] [] [][][][][][][][][][][][][][][][][][] [] [][][][][][][][][
 ][][][][][][][][][][][]$[][]\TU/lmr/m/n/10 ,
  []
 
-[71
+[73
 
 
 
 
 
 ]
-Invalid UTF-8 byte or sequence at line 148 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 145 replaced by U+FFFD.
 
 Missing character: There is no � (U+FFFD) in font [lmroman10-regular]:mapping=t
 ex-text;!
-LaTeX Info: Redefining \. on input line 183.
-LaTeX Info: Redefining \% on input line 183.
-[72]
-LaTeX Info: Redefining \. on input line 278.
-LaTeX Info: Redefining \% on input line 278.
- [73])
+LaTeX Info: Redefining \. on input line 180.
+LaTeX Info: Redefining \% on input line 180.
+[74]
+LaTeX Info: Redefining \. on input line 275.
+LaTeX Info: Redefining \% on input line 275.
+ [75]
+Invalid UTF-8 byte or sequence at line 298 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 298 replaced by U+FFFD.
+
+Missing character: There is no � (U+FFFD) in font [lmroman10-regular]:mapping=t
+ex-text;!
+Missing character: There is no � (U+FFFD) in font [lmroman10-regular]:mapping=t
+ex-text;!
+)
 LaTeX Info: Redefining \. on input line 171.
 LaTeX Info: Redefining \% on input line 171.
- [74] (./TFG.aux (./capitulos/portada.aux)
+ [76] (./TFG.aux (./capitulos/portada.aux)
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
  (./capitulos/firmas.aux)
@@ -2650,15 +2680,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `TFG.out' has not changed.
-(rerunfilecheck)             Checksum: 1D2D65072BB1F3566B212A423883D6E2;19936.
+(rerunfilecheck)             Checksum: A80A0B47DDC75A9B54BE5CB27580F125;22345.
  ) 
 Here is how much of TeX's memory you used:
- 64309 strings out of 474879
- 1591248 string characters out of 5763781
- 2763753 words of memory out of 5000000
- 85391 multiletter control sequences out of 15000+600000
+ 64395 strings out of 474879
+ 1592394 string characters out of 5763781
+ 2764445 words of memory out of 5000000
+ 85479 multiletter control sequences out of 15000+600000
  569511 words of font info for 122 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,16n,101p,2354b,1240s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on TFG.pdf (98 pages).
+Output written on TFG.pdf (100 pages).

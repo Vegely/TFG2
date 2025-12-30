@@ -1,54 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\",
+  "WorkspaceRootPath": "C:\\Users\\bogurad\\Desktop\\ProyectosgitHub\\TFG2\\Codigo\\Algoritmospostcuanticos\\Windows\\PQC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialComunication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\src\\SerialComunication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\KEMProtocol.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\src\\KEMProtocol.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\KEMProtocol.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\KEMProtocol.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialPacketTransport.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\SerialPacketTransport.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialComunication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\SerialComunication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialPacketTransport.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\src\\SerialPacketTransport.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\CircularBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\src\\CircularBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\kyber.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\kyber.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\saber.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\saber.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\ProyectosgitHub\\TFG2\\Codigo\\Algoritmospostcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\hqc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\secureVector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{8DFA3B0C-4663-4B47-BF75-CAF2E18A2824}|PQC\\PQC.vcxproj|solutionrelative:PQC\\inc\\secureVector.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,151 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 267,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SerialComunication.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialComunication.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\SerialComunication.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialComunication.h",
-              "RelativeToolTip": "PQC\\inc\\SerialComunication.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T05:20:00.027Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SerialPacketTransport.cpp",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialPacketTransport.cpp",
-              "RelativeDocumentMoniker": "PQC\\src\\SerialPacketTransport.cpp",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialPacketTransport.cpp",
-              "RelativeToolTip": "PQC\\src\\SerialPacketTransport.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-27T05:12:09.338Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SerialPacketTransport.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialPacketTransport.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\SerialPacketTransport.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\SerialPacketTransport.h",
-              "RelativeToolTip": "PQC\\inc\\SerialPacketTransport.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T05:11:50.081Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SerialComunication.cpp",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialComunication.cpp",
-              "RelativeDocumentMoniker": "PQC\\src\\SerialComunication.cpp",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\SerialComunication.cpp",
-              "RelativeToolTip": "PQC\\src\\SerialComunication.cpp",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAFUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-27T04:47:53.952Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CircularBuffer.cpp",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\CircularBuffer.cpp",
-              "RelativeDocumentMoniker": "PQC\\src\\CircularBuffer.cpp",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\CircularBuffer.cpp",
-              "RelativeToolTip": "PQC\\src\\CircularBuffer.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-27T04:47:47.247Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "saber.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\saber.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\saber.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\saber.h",
-              "RelativeToolTip": "PQC\\inc\\saber.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T04:26:08.129Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "kyber.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\kyber.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\kyber.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\kyber.h",
-              "RelativeToolTip": "PQC\\inc\\kyber.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T04:25:45.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "KEMProtocol.cpp",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\KEMProtocol.cpp",
-              "RelativeDocumentMoniker": "PQC\\src\\KEMProtocol.cpp",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\KEMProtocol.cpp",
-              "RelativeToolTip": "PQC\\src\\KEMProtocol.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAkwBIAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-27T03:59:23.819Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "KEMProtocol.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\KEMProtocol.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\KEMProtocol.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\KEMProtocol.h",
-              "RelativeToolTip": "PQC\\inc\\KEMProtocol.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAD4vxUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T03:59:07.84Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "secureVector.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\secureVector.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\secureVector.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\secureVector.h",
-              "RelativeToolTip": "PQC\\inc\\secureVector.h",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T03:57:48.106Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "hqc.h",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h",
-              "RelativeDocumentMoniker": "PQC\\inc\\hqc.h",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h",
-              "RelativeToolTip": "PQC\\inc\\hqc.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-27T03:36:56.213Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\main.cpp",
-              "RelativeDocumentMoniker": "PQC\\src\\main.cpp",
-              "ToolTip": "C:\\Users\\bogurad\\Desktop\\Proyectos gitHub\\TFG2\\Codigo\\Algoritmos postcuanticos\\Windows\\PQC\\PQC\\src\\main.cpp",
-              "RelativeToolTip": "PQC\\src\\main.cpp",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwFcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-12-27T02:02:36.337Z",
+              "Title": "hqc.h",
+              "DocumentMoniker": "C:\\Users\\bogurad\\Desktop\\ProyectosgitHub\\TFG2\\Codigo\\Algoritmospostcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h",
+              "RelativeDocumentMoniker": "PQC\\inc\\hqc.h",
+              "ToolTip": "C:\\Users\\bogurad\\Desktop\\ProyectosgitHub\\TFG2\\Codigo\\Algoritmospostcuanticos\\Windows\\PQC\\PQC\\inc\\hqc.h",
+              "RelativeToolTip": "PQC\\inc\\hqc.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-27T03:36:56.213Z",
               "EditorCaption": ""
             }
           ]

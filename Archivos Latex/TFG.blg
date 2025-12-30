@@ -18,10 +18,10 @@ A level-1 auxiliary file: capitulos/apendice.aux
 The style file: ieeetr.bst
 Database file #1: bibliografia/bibliografia.bib
 Warning--entry type for "pqclean_github" isn't style-file defined
---line 19 of file bibliografia/bibliografia.bib
+--line 125 of file bibliografia/bibliografia.bib
 Warning--entry type for "sprenkels_randombytes_2017" isn't style-file defined
---line 35 of file bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 49 of file bibliografia/bibliografia.bib
+--line 141 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 155 of file bibliografia/bibliografia.bib
  :  commit       = {a612509} 
  :                           % Opcional: el hash del commit si quieres ser muy preciso
 I'm skipping whatever remains of this entry
@@ -39,45 +39,45 @@ Warning--empty journal in modlwr
 Warning--empty journal in Karatsuba
 Warning--can't use both volume and number fields in 24hqc
 Warning--empty publisher in QROM
-You've used 61 entries,
+You've used 64 entries,
             1876 wiz_defined-function locations,
-            851 strings with 16259 characters,
-and the built_in function-call counts, 14483 in all, are:
-= -- 1296
-> -- 753
+            875 strings with 17215 characters,
+and the built_in function-call counts, 15278 in all, are:
+= -- 1365
+> -- 813
 < -- 1
-+ -- 276
-- -- 215
-* -- 1058
-:= -- 2157
-add.period$ -- 72
-call.type$ -- 61
-change.case$ -- 61
++ -- 297
+- -- 233
+* -- 1127
+:= -- 2290
+add.period$ -- 77
+call.type$ -- 64
+change.case$ -- 63
 chr.to.int$ -- 0
-cite$ -- 75
-duplicate$ -- 716
-empty$ -- 1401
-format.name$ -- 215
-if$ -- 3434
+cite$ -- 78
+duplicate$ -- 747
+empty$ -- 1459
+format.name$ -- 233
+if$ -- 3610
 int.to.chr$ -- 0
-int.to.str$ -- 61
-missing$ -- 54
-newline$ -- 197
-num.names$ -- 57
-pop$ -- 265
+int.to.str$ -- 64
+missing$ -- 56
+newline$ -- 208
+num.names$ -- 61
+pop$ -- 270
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 397
+skip$ -- 416
 stack$ -- 0
-substring$ -- 686
-swap$ -- 214
+substring$ -- 718
+swap$ -- 226
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 14
-while$ -- 129
-width$ -- 63
-write$ -- 553
+while$ -- 136
+width$ -- 66
+write$ -- 584
 (There was 1 error message)

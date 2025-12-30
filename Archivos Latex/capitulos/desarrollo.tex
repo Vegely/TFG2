@@ -1,23 +1,118 @@
 \chapter{Desarrollo}
 En este capítulo se describe el código y la implementación propia realizada en base a los algoritmos proporcionados por el \acrshort{nist}.
-\section{Adaptación de Primitivas Criptográficas}
-El primer nivel de desarrollo se centra en la obtención y depuración de los núcleos algorítmicos en lenguaje C.
-
-\subsection{Kyber y Saber: Implementaciones de Referencia}
-Para los algoritmos Kyber y Saber se han utilizado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Sin embargo, para \acrshort{hqc} se ha optado por la versión del proyecto PQClean \cite{pqclean_github} \cite{SSR:KSSW22}. Esta decisión se debe a que la implementación original de la ronda 4 \cite{nistPQCround4} presenta dificultades técnicas al intentar sustituir el generador pseudoaleatorio determinista diseñado para los \acrlong{kat}(\acrshort{kat}) por una fuente de aleatoriedad real.
+\section{Adaptación de Primitivas Criptográficas} La primera fase del desarrollo se centró en la extracción y depuración de los núcleos algorítmicos en lenguaje C, con el objetivo de garantizar su portabilidad independientemente de la plataforma escogida.
 \newline
 
+Las implementaciones de referencia presentan dependencias de compilación ligadas a entornos UNIX, presencia de trazas de depuración (\textit{debug prints}) dispersas en múltiples ficheros y cierto acoplamiento entre la lógica criptográfica y los vectores de prueba.  Por ello, en esta sección se detallan las refactorizaciones realizadas y se describe la estructura final de los ficheros fuente para cada algoritmo.
 
-Para los algoritmos Kyber y Saber se han integrado las implementaciones presentadas en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. Se han realizado modificaciones menores para asegurar la compatibilidad con el compilador MSVC de Windows, eliminando dependencias de cabeceras exclusivas de Unix.
+\subsection{Kyber y Saber: Implementaciones de Referencia}
+Para los algoritmos Kyber y Saber se han integrado las implementaciones de referencia presentadas por los autores en las rondas 3 y 4 del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4}. 
+\newline
 
+Se han aplicado modificaciones estructurales menores, siendo la más relevante el desacoplamiento del módulo de generación de aleatoriedad. En la versión original, el código dependía de \texttt{rng.h} para generar secuencias deterministas a partir de una semilla fija. Esta dependencia se ha sustituido por la interfaz genérica \texttt{randombytes.h}, la cual permite inyectar una fuente de entropía real del sistema. Para más detalles sobre esta gestión de aleatoriedad, consultar la sección \ref{rng:win}.
+
+\newpage
 \subsubsection{Estructura del código en Kyber}
+En la tabla \ref{tab:kyber_files} se describe brevemente la estructura lógica del código de Kyber tras la limpieza del código \cite{kyber-spec-2021}.
+
+
+
+\begin{table}[H]
+	\centering
+	
+	\resizebox{\textwidth}{!}{% Ajusta la tabla al ancho de página
+		\begin{tabular}{@{}llp{7.5cm}@{}}
+			\toprule
+			\textbf{Categoría} & \textbf{Ficheros (.c/.h)} & \textbf{Descripción Funcional} \\ \midrule
+			
+			\textbf{Núcleo del esquema} & \texttt{kem, indcpa} & Implementan el protocolo de intercambio de claves. En \texttt{indcpa} se encuentran los esquemas básicos de la \acrshort{mlwe} para obtener seguridad \acrshort{cpa} mientras que en el fichero \texttt{kem} mediante la \acrshort{tfo} se implementa la seguridad \acrshort{cca22}. \\
+			
+			& \texttt{api}& Archivo de api original del \acrshort{nist}. Tiene la problemática de ser poco flexible y dar problemas de enlazado si se usan varios cifrados distintos.\\
+			& \texttt{kyber\_wrapper} & Envoltorio desarrollado para abstraer las funcionalidades de Kyber.  \\ 
+			& \texttt{verify} & Función para comparar dos vectores en tiempo constante. \\ \addlinespace
+			\textbf{Matemáticas} & \texttt{poly, polyvec} & Definen las estructuras de datos para operaciones algebraicas sobre el anillo $R_q$. \\
+			& \texttt{ntt, reduce} & Implementan la multiplicación rápida de polinomios mediante la \acrshort{ntt} y la reducción modular eficiente (se usa un módulo no potencia de 2 \(q=3329\)). \\
+			& \texttt{cbd} & Generación de ruido determinista necesario para la seguridad LWE mediante la distribución binomial. \\ \addlinespace
+			
+			\textbf{Hashing}     & \texttt{fips202, sha, symetric} & Implementación del estándar SHA-3 (Keccak) junto a las interfaces necesarias para kyber. \\
+			 \addlinespace
+			
+			\textbf{Sistema}     
+			& \texttt{randombytes} &Función para generar la aleatoriedad en el esquema.\\
+			&\texttt{params}&Tabla de parametros del esquema de seguridad a utilizar.\\
+			\bottomrule
+		\end{tabular}%
+	}
+	\caption{Desglose funcional de los ficheros fuente de Kyber.}
+	\label{tab:kyber_files}
+\end{table}
+\newpage
 \subsubsection{Estructura del código en Saber}
+En la tabla \ref{tab:saber_files} se describe brevemente la estructura lógica del código de Saber tras la limpieza del código \cite{saber-spec-2020}.
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{% Ajusta la tabla al ancho de página
+		\begin{tabular}{@{}llp{7.5cm}@{}}
+			\toprule
+			\textbf{Categoría} & \textbf{Ficheros (.c/.h)} & \textbf{Descripción Funcional} \\ \midrule
+			
+			\textbf{Núcleo del esquema} & \texttt{kem, SABER\_indcpa} & Implementan el mecanismo de encapsulamiento. En \texttt{SABER\_indcpa} se define la lógica base del problema \acrshort{mlwr}  para seguridad \acrshort{cpa}, mientras que \texttt{kem} aplica la \acrshort{tfo} para alcanzar seguridad \acrshort{cca22}. \\
+			& \texttt{api} &  Archivo de api original del \acrshort{nist}. Tiene la problemática de ser poco flexible y dar problemas de enlazado si se usan varios cifrados distintos.\\
+			& \texttt{saber\_wrapper} & Envoltorio desarrollado para abstraer las funcionalidades de Saber.  \\ 
+			& \texttt{verify} & Función auxiliar para comparación de vectores en tiempo constante. \\ \addlinespace
+			
+			\textbf{Matemáticas} & \texttt{poly, pack\_unpack} & Estructuras de datos para el anillo $R_q$ y rutinas de optimización del ancho de banda. \\
+			& \texttt{poly\_mul} & Implementa la multiplicación polinomial mediante Toom-Cook y Karatsuba. \\
+			& \texttt{cbd} & Generación de ruido determinista mediante la Distribución Binomial Centrada. \\ \addlinespace
+			
+			\textbf{Hashing} & \texttt{fips202} & Implementación del estándar SHA-3 (Keccak). \\ \addlinespace
+			
+			\textbf{Sistema} 
+			& \texttt{randombytes} &Función para generar la aleatoriedad en el esquema.\\
+			& \texttt{SABER\_params} & Tabla de parametros del esquema de seguridad a utilizar.\\
+			\bottomrule
+		\end{tabular}%
+	}
+	\caption{Desglose funcional de los ficheros fuente de Saber.}
+	\label{tab:saber_files}
+\end{table}
 \subsection{HQC: Selección de PQClean}
-Para \acrshort{hqc}, se descartó la implementación de la ronda 4 del NIST en favor de la versión mantenida por el proyecto \textbf{PQClean} \cite{pqclean_github, SSR:KSSW22}. 
-\textbf{Justificación:} La versión original presenta un acoplamiento fuerte con un generador pseudoaleatorio determinista (DRBG) diseñado para pruebas KAT. La arquitectura de PQClean permite inyectar entropía real del sistema operativo de forma modular, requisito indispensable para la seguridad en el entorno de producción final.
+Para \acrshort{hqc}, se descartó la implementación de la ronda 4 del NIST en favor de la versión mantenida por el proyecto PQClean \cite{pqclean_github} \cite{SSR:KSSW22}. Esta decisión se fundamenta en la arquitectura de la versión original, la cual presenta un fuerte acoplamiento con el generador pseudoaleatorio determinista diseñado para pruebas  \acrlong{kat}(\acrshort{kat}). La versión de PQClean ofrece una interfaz para modificar la fuente de aleatoriedad de manera sencilla. Esto facilita el uso de una semilla fija para validación o una fuente de aleatoriedad real (\acrshort{trng}).
+\newline
 
+Es importante señalar que la implementación actual no garantiza seguridad \acrshort{cca2}. Esto se debe a que, durante la fase de desencapsulado, el mecanismo de verificación carece de rechazo implícito. Si el texto cifrado recalculado no coincide con el recibido, la función retorna un fallo explícito en lugar de generar un valor pseudoaleatorio indistinguible para un atacante. Esta limitación ha sido asumida dentro del alcance del proyecto priorizando la claridad conceptual, ya que, aunque su inclusión afectaría marginalmente a las métricas de rendimiento, no compromete la validación funcional de los algoritmos. Si se quisiera implementar la solución para un entorno de producción sería necesario utilizar la \acrshort{tfo}.
 
-\subsubsection{Estructura del código en HQC}
+\newpage
+
+\subsubsection{Estructura del código en \acrshort{hqc}}
+En la tabla \ref{tab:hqc_files} se describe brevemente la estructura lógica del código de \acrshort{hqc} tras la limpieza del código \cite{pqclean_github}.
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{% Ajusta la tabla al ancho de página
+		\begin{tabular}{@{}llp{7.5cm}@{}}
+			\toprule
+			\textbf{Categoría} & \textbf{Ficheros (.c/.h)} & \textbf{Descripción Funcional} \\ \midrule
+			
+			\textbf{Núcleo del esquema} & \texttt{code, hqc} & En \texttt{code} se define una interfaz a los mecanismos de corrección de errores, mientras que \texttt{hqc} implementa todo el mecanismo de intercambio de claves. \\
+			& \texttt{api} & Archivo de api original del \acrshort{nist}. Tiene la problemática de ser poco flexible y dar problemas de enlazado si se usan varios cifrados distintos.\\
+			& \texttt{hqc\_wrapper} & Envoltorio desarrollado para abstraer las funcionalidades de HQC.  \\ 
+			& \texttt{parsing} & Funciones auxiliares para dar formato a las claves y los textos cifrados. \\ \addlinespace
+			
+			\textbf{Matemáticas} & \texttt{reed\_solomon, reed\_muller} & Implementan la codificación y decodificación de códigos correctores de errores. \\
+			& \texttt{gf, gf2x, fft} & Implementa la aritmética en cuerpos de Galois y multiplicación de polinomios eficiente mediante la Transformada Rápida de Fourier. \\
+			& \texttt{vector} & Implementa la aritmética entre vectores de bits. \\ \addlinespace
+			
+			\textbf{Hashing} & \texttt{fips202, shake\_ds, shake\_prng} & Implementación del estándar SHA-3 (Keccak) junto a las interfaces necesarias para \acrshort{hqc}. \\  \addlinespace
+			
+			\textbf{Sistema} 
+			& \texttt{randombytes} &Función para generar la aleatoriedad en el esquema.\\
+			& \texttt{parameters, domains} & Tabla de parametros del esquema de seguridad a utilizar.\\
+			\bottomrule
+		\end{tabular}%
+	}
+	\caption{Desglose funcional de los ficheros fuente de \acrshort{hqc}.}
+	\label{tab:hqc_files}
+\end{table}
 \section{Unificación de Interfaces (Capa Wrapper)}
 Se ha desarrollado un módulo envoltorio (\textit{wrapper}) para cada algoritmo con el objetivo de encapsular las implementaciones de referencia del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4} bajo una interfaz común. La estructura general de los ficheros de cabecera, denominados \texttt{AlgorithmWrapper.h}, se detalla en el Listing \ref{lst:wrapper_core}.
 \newline
@@ -26,6 +121,7 @@ El propósito principal de esta capa de abstracción es homogeneizar las distint
 \newline
 
 Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosofía donde la responsabilidad recae íntegramente en el usuario, quien debe encargarse de la asignación y liberación de los \textit{buffers}.
+\newpage
 
 \begin{lstlisting}[language=C, caption={Estructura genérica del wrapper para los algoritmos PQC}, label={lst:wrapper_core}]
 	// Estructura comun para Kyber, HQC y Saber
@@ -78,6 +174,7 @@ Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosof�
 \end{lstlisting}
 
 \section{Infraestructura de Compilación y Aleatoriedad}
+\label{rng:win}
 Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
 \begin{itemize}
 	\item Versión con \texttt{rng.h}: genera los secretos compartidas a partir de una semilla y sirve para generar los \acrshort{kat} para generar un archivo \texttt{.rsp} a partir de un archivo \texttt{.req}.
@@ -114,4 +211,4 @@ La Figura \ref{fig:class_diagram} ilustra la arquitectura del sistema, destacand
 \subsection{Tamaño del Binario (Code Size / Footprint)}
 \subsection{Coste de Comunicación (Overhead)}
 \subsection{Suite de aleatoriedad a randombytes}
-
+limitaciones ent y funcionamiento \cite{ENTLimita} , dieharder \cite{brown2006dieharder}, Do1 \cite{U01test} y nist \cite{rngNistPaper}

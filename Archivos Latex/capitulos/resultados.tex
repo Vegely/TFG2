@@ -3,10 +3,10 @@
 En este capítulo se muestran los resultados obtenidos de aplicar las rutinas desarrolladas con anterioridad.
 
 
-\section{Resultados}
-\subsection{Test de respuesta conocida}
+
+\section{Test de respuesta conocida}
 Este test se realiza para comprobar que la compilación e integración de los algoritmos funciona matemáticamente igual que las implementaciones de referencia presentadas al \acrshort{nist}. Para ello, el procedimiento estándar en un \textit{Known Answer Tests} consiste en generar un fichero de respuesta (\texttt{.rsp}) a partir de una semilla inicial fija con la cual mediante el generador \texttt{rng.h} pseudoaleatorio se derivan todas las claves y textos cifrados. Si la implementación es correcta el fichero ha de ser igual al proporcionado por los autores.
-\subsubsection{Kyber}
+\subsection{Kyber}
 La ejecución de los tests para Kyber se completó sin incidencias. Se procesaron los 100 vectores de prueba definidos por el NIST. Al utilizar la misma semilla de entrada, la implementación generó claves y criptogramas idénticos a la referencia.
 
 
@@ -21,8 +21,23 @@ La ejecución de los tests para Kyber se completó sin incidencias. Se procesaro
 %	ct = 7219927A685D26C3...[truncado]...E5D79E182D2D70
 %	ss = A3D3F1E38367A58E29E250A84D5852267667C08CC3B44B36398F81716A8C576D
 %\end{lstlisting}
-\subsubsection{Saber}
-\subsubsection{HQC}
+\subsection{Saber}
+\subsection{HQC}
+\section{CPU cicles}
+\subsection{Comparacion por plataforma}
+\subsection{Comparacion por dispositivo}
 
-
-\section{Discusión}
+\section{Throughput}
+\subsection{Comparacion por plataforma}
+\subsection{Comparacion por dispositivo}
+\section{Uso de pila}
+\subsection{Comparacion por plataforma}
+\subsection{Comparacion por dispositivo}
+\section{Tamaño de binarios}
+\subsection{Kyber}
+\subsection{Saber}
+\subsection{HQC}
+\section{Tiempos de comunicación}
+\section{Test de aleatoriedad}
+\subsection{Plataforma Windows}
+\subsection{PSOC}

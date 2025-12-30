@@ -26,9 +26,6 @@ M.~Bellare, A.~Desai, D.~Pointcheval, and P.~Rogaway, ``Relations among notions
   of security for public-key encryption schemes,'' in {\em Annual International
   Cryptology Conference}, pp.~26--45, Springer, 1998.
 
-\bibitem{tikzmaker}
-``Tikzmaker.'' \url{https://tikzmaker.com/editor}, 2024.
-
 \bibitem{CY8CPROTO063BLE}
 {Infineon Technologies AG}, ``{CY8CPROTO-063-BLE PSoC 6 BLE Prototyping Kit}.''
   \url{https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/},
@@ -296,5 +293,27 @@ M.~J. Kannwischer, P.~Schwabe, D.~Stebila, and T.~Wiggers, ``Improving software
 D.~Sprenkels, ``{randombytes}: A portable c library for generating
   crypto-secure random bytes.''
   \url{https://github.com/dsprenkels/randombytes}, 2017.
+
+\bibitem{ENTLimita}
+E.~Almaraz~Luengo, B.~Alaña~Olivares, L.~J. García~Villalba,
+  J.~Hernandez-Castro, and D.~Hurley-Smith, ``{StringENT} test suite: {ENT}
+  battery revisited for efficient {P} value computation,'' {\em Journal of
+  Cryptographic Engineering}, vol.~13, pp.~235--249, jun 2023.
+
+\bibitem{brown2006dieharder}
+R.~G. Brown, {\em DieHarder: A Gnu Public License Random Number Tester}.
+\newblock Duke University Physics Department, Durham, NC, 2006.
+\newblock Version 3.31.2beta.
+
+\bibitem{U01test}
+P.~L'Ecuyer and R.~Simard, ``Testu01: A c library for empirical testing of
+  random number generators,'' {\em ACM Trans. Math. Softw.}, vol.~33, Aug.
+  2007.
+
+\bibitem{rngNistPaper}
+L.~Bassham, A.~Rukhin, J.~Soto, J.~Nechvatal, M.~Smid, S.~Leigh, M.~Levenson,
+  M.~Vangel, N.~Heckert, and D.~Banks, ``A statistical test suite for random
+  and pseudorandom number generators for cryptographic applications,''
+  2010-09-16 2010.
 
 \end{thebibliography}

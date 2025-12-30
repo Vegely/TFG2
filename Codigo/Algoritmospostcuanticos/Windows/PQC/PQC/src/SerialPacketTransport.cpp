@@ -1,72 +1,76 @@
 #include "SerialPacketTransport.h"
-#include <cstring>
-#include <chrono>
 #include <thread>
-#include <iostream>
+#include <chrono>
+#include <algorithm> // for std::min
 
-SerialPacketTransport::SerialPacketTransport(SerialComunication& s) : serial(s) {}
-
-uint32_t SerialPacketTransport::readHeader(const std::string& data) {
-    if (data.size() < 4) return 0;
-
-
-    uint32_t len =
-        (static_cast<unsigned char>(data[0])) |
-        (static_cast<unsigned char>(data[1]) << 8) |
-        (static_cast<unsigned char>(data[2]) << 16) |
-        (static_cast<unsigned char>(data[3]) << 24);
-
-    return len;
+SerialPacketTransport::SerialPacketTransport(SerialComunication& serialObj)
+    : serial(serialObj)
+{
 }
 
 bool SerialPacketTransport::sendPacket(const std::vector<unsigned char>& data) {
-    uint32_t len = static_cast<uint32_t>(data.size());
+    if (data.size() > 65535) return false;
+
+    uint16_t len = (uint16_t)data.size();
+
+    // 1. Build the full raw frame: [LenLow] [LenHigh] [Data...]
+    std::string frame;
+    frame.reserve(2 + len);
+    frame.push_back((char)(len & 0xFF));
+    frame.push_back((char)((len >> 8) & 0xFF));
+    frame.append((char*)data.data(), data.size());
+
+    // 2. SEND IN CHUNKS (Flow Control)
+    // The PSoC 6 UART FIFO is small. We must pause slightly between chunks.
+    const size_t CHUNK_SIZE = 64;
+
+    for (size_t i = 0; i < frame.size(); i += CHUNK_SIZE) {
+        size_t currentSize = std::min(CHUNK_SIZE, frame.size() - i);
+        std::string chunk = frame.substr(i, currentSize);
+
+        if (!serial.send(chunk)) return false;
 
 
-    std::string packet;
-    packet.reserve(4 + len);
+    }
 
-
-    packet.push_back(static_cast<char>(len & 0xFF));
-    packet.push_back(static_cast<char>((len >> 8) & 0xFF));
-    packet.push_back(static_cast<char>((len >> 16) & 0xFF));
-    packet.push_back(static_cast<char>((len >> 24) & 0xFF));
-
-
-    packet.append(reinterpret_cast<const char*>(data.data()), len);
-
-    return serial.send(packet);
+    return true;
 }
 
-bool SerialPacketTransport::receivePacket(std::vector<unsigned char>& outData, int timeoutMs) {
+bool SerialPacketTransport::receivePacket(std::vector<unsigned char>& buffer, int timeoutMs) {
+    // Reuse the implementation I gave you previously (Read 2 bytes, then Read payload)
+    // ... (See previous answer for receivePacket logic if needed, or use your working one)
+    // IMPORTANT: Make sure receivePacket does NOT call sleep inside its tight loop if using non-blocking reads.
+
+    buffer.clear();
     auto start = std::chrono::steady_clock::now();
 
-    while (true) {
-        std::string fragment;
-        while (serial.getReceivedMessage(fragment)) {
-            internalBuffer += fragment;
-        }
+    // 1. Wait for Header (2 bytes)
+    std::string header;
+    while (header.size() < 2) {
+        std::string chunk;
+        if (serial.getReceivedMessage(chunk)) header += chunk;
 
-        if (internalBuffer.size() >= 4) {
-            uint32_t msgLen = readHeader(internalBuffer);
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start).count() > timeoutMs) return false;
 
-            if (msgLen > 100000) {
-                internalBuffer.clear();
-            }
-            else if (internalBuffer.size() >= 4 + msgLen) {
-                std::string payload = internalBuffer.substr(4, msgLen);
-                outData.assign(payload.begin(), payload.end());
-                internalBuffer.erase(0, 4 + msgLen);
-
-                return true;
-            }
-        }
-
-        auto now = std::chrono::steady_clock::now();
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(now - start).count() > timeoutMs) {
-            return false; 
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        if (header.size() < 2) std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
+
+    uint16_t packetLen = (uint8_t)header[0] | ((uint8_t)header[1] << 8);
+    std::string data = header.substr(2); // Keep leftovers
+
+    // 2. Wait for Data
+    while (data.size() < packetLen) {
+        std::string chunk;
+        if (serial.getReceivedMessage(chunk)) data += chunk;
+
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start).count() > timeoutMs) return false;
+
+        if (data.size() < packetLen) std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    // 3. Output
+    for (size_t i = 0; i < packetLen; i++) buffer.push_back((unsigned char)data[i]);
+    return true;
 }

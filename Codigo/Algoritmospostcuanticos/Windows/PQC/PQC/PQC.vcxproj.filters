@@ -16,49 +16,40 @@
     <Filter Include="Archivos de encabezado\Externals">
       <UniqueIdentifier>{8a565db8-e05c-43ea-ab5e-fa67d7c3cb6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Kem">
+      <UniqueIdentifier>{c2c7fb53-81c9-4b7a-8ccb-ea211e5d0432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\comunications">
+      <UniqueIdentifier>{d877926f-3941-4825-b632-c3e1c8387a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\kem">
+      <UniqueIdentifier>{cef1ab24-1b90-49f1-bd1c-a6c8288e2e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\comunications">
+      <UniqueIdentifier>{49698f80-ed74-4110-94a4-96844664ffe6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\hqc.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="src\keyexhange.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="src\kyber.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="src\saber.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
-    <ClCompile Include="src\KEMProtocol.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="src\keyexhange.cpp">
+      <Filter>Archivos de origen\kem</Filter>
     </ClCompile>
     <ClCompile Include="src\CircularBuffer.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\comunications</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KEMProtocol.cpp">
+      <Filter>Archivos de origen\comunications</Filter>
     </ClCompile>
     <ClCompile Include="src\SerialComunication.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\comunications</Filter>
     </ClCompile>
     <ClCompile Include="src\SerialPacketTransport.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\comunications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\hqc.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\keyexhange.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\kyber.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\saber.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="lib\hqc_wrapper.h">
       <Filter>Archivos de encabezado\Externals</Filter>
     </ClInclude>
@@ -68,20 +59,32 @@
     <ClInclude Include="lib\saber_wrapper.h">
       <Filter>Archivos de encabezado\Externals</Filter>
     </ClInclude>
-    <ClInclude Include="inc\secureVector.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="inc\kyber.h">
+      <Filter>Archivos de encabezado\Kem</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\saber.h">
+      <Filter>Archivos de encabezado\Kem</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\keyexhange.h">
+      <Filter>Archivos de encabezado\Kem</Filter>
     </ClInclude>
     <ClInclude Include="inc\KEMProtocol.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Kem</Filter>
     </ClInclude>
-    <ClInclude Include="inc\CircularBuffer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\SerialComunication.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="inc\hqc.h">
+      <Filter>Archivos de encabezado\Kem</Filter>
     </ClInclude>
     <ClInclude Include="inc\SerialPacketTransport.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\comunications</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\SerialComunication.h">
+      <Filter>Archivos de encabezado\comunications</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\secureVector.h">
+      <Filter>Archivos de encabezado\comunications</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\CircularBuffer.h">
+      <Filter>Archivos de encabezado\comunications</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 \glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvi}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
 \glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xvii}}
@@ -19,6 +20,7 @@
 \glossaryentry{M-LWE?\glossentry{mlwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
 \glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
 \glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{\es@scroman  {xxi}}
 \glossaryentry{KEM?\glossentry{kem}|setentrycounter[]{page}"\glsnumberformat}{5}
 \glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{5}
@@ -210,33 +212,50 @@
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{40}
 \glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{41}
 \glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{KAT?\glossentry{kat}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{KAT?\glossentry{kat}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{41}
-\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{41}
+\glossaryentry{M-LWE?\glossentry{mlwe}|setentrycounter[]{page}"\glsnumberformat}{42}
+\glossaryentry{CPA?\glossentry{cpa}|setentrycounter[]{page}"\glsnumberformat}{42}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{42}
+\glossaryentry{CCA2?\glossentry{cca22}|setentrycounter[]{page}"\glsnumberformat}{42}
 \glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{42}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{42}
+\glossaryentry{Mod-LWR?\glossentry{mlwr}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{CPA?\glossentry{cpa}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{CCA2?\glossentry{cca22}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{43}
 \glossaryentry{KAT?\glossentry{kat}|setentrycounter[]{page}"\glsnumberformat}{43}
-\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{45}
-\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{52}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{53}
-\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{58}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{58}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{58}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{59}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{59}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{59}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{60}
+\glossaryentry{KAT?\glossentry{kat}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{TRNG?\glossentry{trng}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{43}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{44}
+\glossaryentry{KAT?\glossentry{kat}|setentrycounter[]{page}"\glsnumberformat}{45}
+\glossaryentry{NIST?\glossentry{nist}|setentrycounter[]{page}"\glsnumberformat}{47}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{54}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{NTT?\glossentry{ntt}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{55}
+\glossaryentry{TFO?\glossentry{tfo}|setentrycounter[]{page}"\glsnumberformat}{60}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{60}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{60}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{61}
 \glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{61}
-\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{61}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{63}
-\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{64}
-\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{65}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{61}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{62}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{62}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{62}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{63}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{63}
+\glossaryentry{IND-CCA2?\glossentry{cca2}|setentrycounter[]{page}"\glsnumberformat}{63}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{65}
+\glossaryentry{R-LWE?\glossentry{rlwe}|setentrycounter[]{page}"\glsnumberformat}{66}
+\glossaryentry{HQC?\glossentry{hqc}|setentrycounter[]{page}"\glsnumberformat}{67}

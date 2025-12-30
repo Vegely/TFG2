@@ -20,12 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CircularBuffer.cpp" />
-    <ClCompile Include="src\hqc.cpp" />
     <ClCompile Include="src\KEMProtocol.cpp" />
     <ClCompile Include="src\keyexhange.cpp" />
-    <ClCompile Include="src\kyber.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\saber.cpp" />
     <ClCompile Include="src\SerialComunication.cpp" />
     <ClCompile Include="src\SerialPacketTransport.cpp" />
   </ItemGroup>
