@@ -173,37 +173,297 @@ Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosof�
 	}
 \end{lstlisting}
 
-\section{Infraestructura de Compilación y Aleatoriedad}
+
+\section{Precompilados y gestión de la aleatoriedad.}
 \label{rng:win}
+Para facilitar el desarrollo y el uso de los algoritmos de cifrado en un entorno de sistemas de proposito general, se ha optado por encapsular la lógica en bibliotecas estáticas (.lib). Así, el acceso a las llamadas a nivel de usuario se reduce a interactuar con un wrapper similar al del listing \ref{lst:wrapper_core}. 
+
 Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
 \begin{itemize}
 	\item Versión con \texttt{rng.h}: genera los secretos compartidas a partir de una semilla y sirve para generar los \acrshort{kat} para generar un archivo \texttt{.rsp} a partir de un archivo \texttt{.req}.
 	\item Versión con \texttt{randombytes.h}: usando la librería del siguiente repositorio \cite{sprenkels_randombytes_2017} utilizada en el proyecto PQClean  \cite{SSR:KSSW22} para generar números aleatorios a partir de la entropía del sistema operativo.
 \end{itemize}
 
+
+
+
 \section{Arquitectura del Agente Criptográfico y de las comunicaciones (C++)}
 Sobre la base de las librerías en C descritas anteriormente, se ha construido una capa de aplicación en C++ que integra las capacidades criptográficas con un módulo de comunicaciones serie.
 
+\begin{landscape}
+\begin{figure}[h]
+	\centering
+	% This resizes the diagram to fit perfectly on the page width
+	\resizebox{0.95\paperwidth}{!}{%
+		\begin{tikzpicture}
+			
+			% ---------------------------------------------------------
+			% 1. DEFINE CLASSES
+			% ---------------------------------------------------------
+			
+			% --- Interface: KeyExchange (CENTER) ---
+			\begin{interface}[text width=9cm]{keyexchange}{0,0}
+				\operation{+get\_public\_key\_size()}
+				\operation{+get\_secret\_key\_size()}
+				\operation{+get\_ciphertext\_size()}
+				\operation{+get\_shared\_secret\_size()}
+				\operation{+get\_algorithm\_name()}
+				\operation{+keypair(inout pk: char, inout sk: char)}
+				\operation{+encapsulate(inout ct: char,inout ss:char, inout pk:char)}
+				\operation{+decapsulate(inout ss: char,inout ct:char, inout sk:char)}
+			\end{interface}
+			
+			% --- Class: AlgorithmTester (LEFT) ---
+			% Positioned to the left of the interface
+			\begin{class}[text width=8.0cm]{AlgorithmTester}{-11, 1.2}
+				\attribute{-frequency\_: long}
+				\attribute{-stack\_trap: uint8\_t}
+				\attribute{-STACK\_SIZE: const int}
+				\attribute{-CANARY: const int}
+				\attribute{-pk\_buf: vector$<$char$>$}
+				\attribute{-sk\_buf: vector$<$char$>$}
+				\attribute{-ct\_buf: vector$<$char$>$}
+				\attribute{-ss\_buf: vector$<$char$>$}
+				
+				\operation{+AlgorithmTester(inout alg: KeyExchange)}
+				\operation{+runStackAnalysis()}
+				\operation{+runCycleAnalysis()}
+				\operation{+runThroughputAnalysis()}
+				\operation{+paintStack()}
+				\operation{+checkStackDepth()}
+				\operation{+resizeBuffers()}
+			\end{class}
+			
+			% --- Class: KEMProtocol (RIGHT) ---
+			% Positioned to the right of the interface
+			\begin{class}[text width=10cm]{KEMProtocol}{13, 0.1}
+				\attribute{-secret\_key\_: SecureVector}
+				\attribute{-shared\_secret\_: SecureVector}
+				
+				\operation{+KEMProtocol(inout kem: KeyExchange, in role: ProtocolRole)}
+				\operation{+getState()}
+				\operation{+start\_negotiation()}
+				\operation{+process\_message(in input\_msg: char)}
+				\operation{+get\_shared\_secret()}
+				\operation{+handle\_encapsulation(in pk: vector)}
+				\operation{+handle\_decapsulation(in ct: vector)}
+				\operation{+transition\_to\_error(out msg: char)}
+			\end{class}
+			
+			% --- Datatype: SecureVector (ABOVE KEMProtocol) ---
+			\begin{class}[text width=6.5cm]{SecureVector}{13, 4}
+				\stereotype{datatype}
+				\operation{+allocate(in n: size\_t)}
+				\operation{+deallocate(inout p: classT, in n: size\_t)}
+			\end{class}
+			
+			% --- Implementations (BOTTOM CENTER) ---
+			% Fully restored methods for all three classes
+			
+			\begin{class}[text width=4.2cm]{Saber}{0, -9}
+				\inherit{keyexchange}
+				\operation{+get\_public\_key\_size()}
+				\operation{+get\_secret\_key\_size()}
+				\operation{+get\_ciphertext\_size()}
+				\operation{+get\_shared\_secret\_size()}
+				\operation{+get\_algorithm\_name()}
+				\operation{+keypair(...)}
+				\operation{+encapsulate(...)}
+				\operation{+decapsulate(...)}
+			\end{class}
+			
+			\begin{class}[text width=4.2cm]{Kyber}{-5, -9}
+				\inherit{keyexchange}
+				\operation{+get\_public\_key\_size()}
+				\operation{+get\_secret\_key\_size()}
+				\operation{+get\_ciphertext\_size()}
+				\operation{+get\_shared\_secret\_size()}
+				\operation{+get\_algorithm\_name()}
+				\operation{+keypair(...)}
+				\operation{+encapsulate(...)}
+				\operation{+decapsulate(...)}
+			\end{class}
+			
+			\begin{class}[text width=4.2cm]{HQC}{5, -9}
+				\inherit{keyexchange}
+				\operation{+get\_public\_key\_size()}
+				\operation{+get\_secret\_key\_size()}
+				\operation{+get\_ciphertext\_size()}
+				\operation{+get\_shared\_secret\_size()}
+				\operation{+get\_algorithm\_name()}
+				\operation{+keypair(...)}
+				\operation{+encapsulate(...)}
+				\operation{+decapsulate(...)}
+			\end{class}
+			
+			% --- Enums (BOTTOM RIGHT) ---
+			% Moved down to Y=-11 to avoid overlap
+			\begin{class}[text width=3cm]{ProtocolRole}{11, -11}
+				\stereotype{enumeration}
+				\attribute{+INITIATOR}
+				\attribute{+RESPONDER}
+			\end{class}
+			
+			\begin{class}[text width=4cm]{ProtocolState}{15, -11}
+				\stereotype{enumeration}
+				\attribute{+INIT}
+				\attribute{+WAITING\_FOR\_CT}
+				\attribute{+WAITING\_FOR\_PK}
+				\attribute{+ESTABLISHED}
+				\attribute{+FAILURE}
+			\end{class}
+			
+			% ---------------------------------------------------------
+			% 2. DRAW RELATIONS
+			% ---------------------------------------------------------
+			
+			% Style for the Composition Diamond (filled black diamond)
+			% "start" means the diamond is at the beginning of the line
+			\tikzset{diamond_start/.style={{Diamond[fill=black, width=3mm, length=5mm]}-}}
+			
+			% A. AlgorithmTester <>-> KeyExchange
+			% Diamond is attached to AlgorithmTester
+			\draw[diamond_start] (AlgorithmTester.east) -- (keyexchange.west) 
+			node[midway, above, yshift=0.5mm] {algo\_};
+			
+			% B. KEMProtocol <>-> KeyExchange
+			% Diamond is attached to KEMProtocol
+			\draw[diamond_start] (KEMProtocol.west) -- (keyexchange.east) 
+			node[midway, above] {kem\_: unique\_ptr};
+			
+			% C. KEMProtocol <>-> ProtocolRole
+			% Vertical line down, then horizontal. Diamond at KEMProtocol.
+			% pos=0.1 places the text near the top (near the diamond)
+			% anchor=east forces the text to sit to the LEFT of the line
+			\draw[diamond_start] (KEMProtocol.south) -- ++(0,-1.5) -| (ProtocolRole.north) 
+			node[pos=0.1, anchor=east, yshift=2mm] {role\_}; 
+			
+			% D. KEMProtocol <>-> ProtocolState
+			% Vertical line down, then horizontal. Diamond at KEMProtocol.
+			% pos=0.1 places the text near the top (near the diamond)
+			% anchor=west forces the text to sit to the RIGHT of the line
+			\draw[diamond_start] (KEMProtocol.south) -- ++(0,-1.5) -| (ProtocolState.north) 
+			node[pos=0.1, anchor=west, yshift=2mm] {state\_};
+			
+			% E. SecureVector Association
+			% Simple line, matching the diagram's placement
+
+			
+		\end{tikzpicture}%
+	}
+	\caption{miau}
+	\label{fig:logicUML}
+	
+\end{figure}
+\end{landscape}
+
+\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tikzpicture}
+			
+			% ---------------------------------------------------------
+			% 1. LEFT COLUMN: The "Big" Class
+			% ---------------------------------------------------------
+			\begin{class}[text width=9cm]{SerialComunication}{0, 0}
+				\attribute{-availablePorts: vector$<$pair$<$int,wstring$>$$>$}
+				\attribute{-hSerial: HANDLE}
+				\attribute{-running: atomic$<$bool$>$}
+				\attribute{-receiveThread: tread}
+				\attribute{-receiveMutex: mutex}
+				
+				\operation{-setAvailablePorts()}
+				\operation{-receiveLoop()}
+				\operation{+SerialComunication(in bufferSize: int)}
+				\operation{+updateAvailablePorts()}
+				\operation{+openPort(in port:int)}
+				\operation{+closePort()}
+				\operation{+send(in message: str)}
+				\operation{+isBufferEmpty()}
+				\operation{+getReceivedMessage()}
+				\operation{+startReceiving()}
+				\operation{+stopReceiving()}
+				\operation{+displayAvaileblePorts()}
+				\operation{+getAvailablePorts()}
+			\end{class}
+			
+			% ---------------------------------------------------------
+			% 2. RIGHT COLUMN: The Stacked Classes
+			% ---------------------------------------------------------
+			
+			% --- TOP RIGHT: SerialPacketTransport ---
+			% CHANGED Y=0 to Y=5 so it sits ABOVE the center line
+			\begin{class}[text width=8cm]{SerialPacketTransport}{11, 0}
+				\attribute{-internalBuffer: str}
+				\operation{+SerialPacketTransport(inout s: SerialComunication)}
+				\operation{+sendPacket(in data: vector$<$char$>$)}
+				\operation{+receivePacket(out data: vector$<$char$>$, in ms: int)}
+			\end{class}
+			
+			% --- BOTTOM RIGHT: CircularBuffer ---
+			% Y=-5 is perfect for the bottom one
+			\begin{class}[text width=8cm]{CircularBuffer}{11, -4}
+				\attribute{-size: int}
+				\attribute{-head: int}
+				\attribute{-tail: int}
+				\attribute{-count: int}
+				\attribute{-buffer: str}
+				
+				\operation{+CircularBuffer(in size: int)}
+				\operation{+push(in value: str)}
+				\operation{+pop(out value: str)}
+				\operation{+isempty()}
+				\operation{+isfull()}
+				\operation{+getCount()}
+				\operation{+getSize()}
+			\end{class}
+			
+			% ---------------------------------------------------------
+			% 3. CONNECTIONS
+			% ---------------------------------------------------------
+			
+			% DEFINE THE ARROW STYLE
+			% {Diamond...}-  means "Put a diamond at the START, nothing at the END"
+			% ARROW STYLE: Diamond at the START of the line
+			\tikzset{comp/.style={{Diamond[fill=black, width=3mm, length=5mm]}-}}
+			
+			% RELATION 1: Transport (Right) -> Communication (Left)
+			% Diamond on Transport.
+			% Draw from Transport.west -> Horizontal intersection with Communication.east
+			\draw[comp] (SerialPacketTransport.west) -- (SerialPacketTransport.west -| SerialComunication.east)
+			node[midway, above] {serial};
+			
+			% RELATION 2: Communication (Left) -> Buffer (Right)
+			% Diamond on Communication.
+			% Draw from Horizontal intersection on Communication.east -> Buffer.west
+			\draw[comp] (CircularBuffer.west -| SerialComunication.east) -- (CircularBuffer.west)
+			node[midway, above, yshift=2mm] {receiveBuffer};
+			
+		\end{tikzpicture}%
+	}
+	\caption{miau}
+	\label{fig:comunicationsUML}
+	
+\end{figure}
+
+\begin{figure}[H]
+	% This box tells LaTeX: "Pretend this content fits in \linewidth and center it [c]"
+	\makebox[\linewidth][c]{%
+		\includegraphics[width=1.2\linewidth]{figuras/umlTiempo}%
+	}
+	\caption{miau}
+	\label{fig:umltiempo}
+\end{figure}
 \subsection{Diagrama de Clases y Diseño del Agente}
 La integración se ha modelado siguiendo un patrón de diseño orientado a objetos, donde cada algoritmo es encapsulado en una clase que hereda de una interfaz común \texttt{ICryptoProvider}. Esto permite al Agente cambiar de algoritmo dinámicamente según la configuración recibida por el puerto serie.
 
 La Figura \ref{fig:class_diagram} ilustra la arquitectura del sistema, destacando la relación entre el gestor de comunicaciones (\texttt{SerialManager}) y el núcleo criptográfico.
 
-% Aquí pones tu figura del diagrama de clases
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.8\textwidth]{class_diagram.png}
-%    \caption{Diagrama de clases del Agente Criptográfico con soporte para comunicación serie.}
-%    \label{fig:class_diagram}
-%\end{figure}
-
-
-
 
 
 \section{Implementación de algoritmos en el microcontrolador}
 
-
+\section{Filosofia de comunicacion}
 \section{Tests realizados}
 \subsection{Ciclos de CPU}
 \subsection{Throughput (Operaciones por segundo)}

@@ -304,7 +304,7 @@ Para la correcta definición de la \acrshort{ntt}, es requisito indispensable qu
 
 Por tanto, el polinomio \(X^{256} + 1\) se puede factorizar sobre el cuerpo \(\mathbb{Z}_q\). En la implementación concreta del esquema Kyber, este polinomio se descompone en 128 factores cuadráticos en lugar de los 256 factores lineales.
 \newline
-\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (\acrshort{ntt})}
+\subsubsection{Transformada Teórica de Números o Number Theoretic Transform (NTT)}
 A este polinomio se le aplica la transformada \acrshort{ntt} a sus coeficientes, la cual no es más que una variación de la \acrshort{dft} aplicada a cuerpos finitos \(\mathbb{Z}_q\) y aplicada a polinomios de grado \(n\). Para ello, se definen dos operaciones fundamentales:
 \begin{enumerate}
 	\item La transformada directa:
@@ -322,34 +322,46 @@ Donde $\phi$ es un valor tal que $\phi^2=\omega$, con $\omega$ una raíz enésim
 
 A continuación, se presenta un ejemplo extraído de \cite{cryptoeprint:2024/585} para ilustrar su funcionamiento. Sea el polinomio \(G(x)=5+6x+7x^2+8x^3\), cuyo vector de coeficientes es \(g=[5,6,7,8]\). Trabajando en el anillo \(\mathbb{Z}_{7681}\), y tomando $\phi=1925$, se puede calcular la transformada \acrshort{ntt} \(\hat{g}\). Aplicando luego la transformada inversa, es posible recuperar el vector original \(g\).
 \begin{equation}
-	\hat{g}=\begin{bmatrix}
+	\hat{g} = 
+	\begin{bmatrix}
 		\phi^0 & \phi^1 & \phi^2 & \phi^3\\
 		\phi^0 & \phi^3 & \phi^6 & \phi^1\\
 		\phi^0 & \phi^5 & \phi^2 & \phi^7\\
-		\phi^0 & \phi^7 & \phi^6 & \phi^5\\
-	\end{bmatrix} \cdot \begin{bmatrix}
-	5\\
-	6\\
-	7\\
-	8
-	\end{bmatrix}=\begin{bmatrix}
-	1 & 1925 & 3383 & 6468\\
-	1 & 6468 & 4298 & 1925\\
-	1 & 5756 & 3383 & 1213\\
-	1 & 1213 & 4298 & 5756\\
-	\end{bmatrix} \cdot \begin{bmatrix}
-	5\\
-	6\\
-	7\\
-	8 \end{bmatrix}= \begin{bmatrix}
-	2489\\
-	7489\\
-	6478\\
-	6607 \end{bmatrix}
+		\phi^0 & \phi^7 & \phi^6 & \phi^5
+	\end{bmatrix} 
+	\cdot 
+	\begin{bmatrix}
+		5\\
+		6\\
+		7\\
+		8
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & 1925 & 3383 & 6468\\
+		1 & 6468 & 4298 & 1925\\
+		1 & 5756 & 3383 & 1213\\
+		1 & 1213 & 4298 & 5756
+	\end{bmatrix} 
+	\cdot 
+	\begin{bmatrix}
+		5\\
+		6\\
+		7\\
+		8 
+	\end{bmatrix}
+	= 
+	\begin{bmatrix}
+		2489\\
+		7489\\
+		6478\\
+		6607 
+	\end{bmatrix}
 \end{equation}
 \newpage 
 
 Aplicando la transformada inversa, donde la inversa de $\phi=1925$ en \(\mathbb{Z}_{7681}\) es $\phi^{-1}=1213$ y el inverso del orden del polinomio \(n=4\) es \(n^{-1}=5761\):
+
 \begin{equation}
 	g=n^{-1}\begin{bmatrix}
 		\phi^0 & \phi^0 & \phi^0 & \phi^0\\
@@ -357,15 +369,15 @@ Aplicando la transformada inversa, donde la inversa de $\phi=1925$ en \(\mathbb{
 		\phi^{-2} & \phi^{-6} & \phi^{-2} & \phi^{-6}\\
 		\phi^{-3} & \phi^{-1} & \phi^{-7} & \phi^{-5}\\
 	\end{bmatrix} \cdot \hat{g}=5761\begin{bmatrix}
-	1 & 1 & 1 & 1\\
-	1213& 5756& 6468& 1925\\
-	4298& 3383& 4298& 3383\\
-	5756& 1213& 1925& 6468\\
+		1 & 1 & 1 & 1\\
+		1213& 5756& 6468& 1925\\
+		4298& 3383& 4298& 3383\\
+		5756& 1213& 1925& 6468\\
 	\end{bmatrix} \cdot \begin{bmatrix}
-	2489\\
-	7489\\
-	6478\\
-	6607 \end{bmatrix}
+		2489\\
+		7489\\
+		6478\\
+		6607 \end{bmatrix}
 \end{equation}
 
 Con estas transformadas definidas se define el producto o convolución negativa en el anillo \(	R_q \coloneqq \dfrac{\mathbb{Z}_q[X]}{X^n + 1}\) entre dos polinomios \(g\) y \(h\) como:

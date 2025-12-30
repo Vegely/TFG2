@@ -22,7 +22,7 @@
 \usepackage{multicol}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
-\usepackage{float} 
+\usepackage{float}
 \usepackage{circuitikz}
 \usepackage{tikz}
 \usetikzlibrary{babel}
@@ -37,16 +37,21 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{amsthm}
-\usetikzlibrary{tikzmark,calc}
+\usetikzlibrary{tikzmark,calc,arrows.meta, positioning}
 \usepackage[acronym, nonumberlist]{glossaries}
 \floatname{algorithm}{Algoritmo}
 \usepackage{booktabs}
+\usepackage{pgf-umlcd}
+\usepackage{pdflscape}
+
+\renewcommand{\umlfillcolor}{purple!20}
+\renewcommand{\umldrawcolor}{black}
 %parametros del documento (sus propiedades)
 \hypersetup{
     pdftitle={Bogurad Barañski Barañska - TFG - 2025},
     pdfsubject={TFG - año},
     pdfauthor={Bogurad Barañski Barañska},
-    pdfkeywords={encriptación} {comunicaciones} {lazo de control},
+    pdfkeywords={encriptación, comunicaciones, lazo de control},
     colorlinks,
     citecolor=black,
     filecolor=black,

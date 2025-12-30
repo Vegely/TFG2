@@ -17,10 +17,13 @@
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado.}}{31}{figure.3.8}%
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite {CCA2} que demuestran estas relaciones.}}{31}{figure.3.9}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces miau}}{47}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces miau}}{48}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces miau}}{49}{figure.4.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Representación de la transformada $\chi $ realizada en cada fila \cite {FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}}{53}{figure.Alph1.1}%
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Representación de la transformada $\chi $ realizada en cada fila \cite {FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}}{57}{figure.Alph1.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -17,10 +17,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Offsets de la transformada $\rho $.}}{51}{table.Alph1.1}%
-\contentsline {table}{\numberline {A.2}{\ignorespaces Tabla de transformación $\pi $. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}}{52}{table.Alph1.2}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Offsets de la transformada $\rho $.}}{55}{table.Alph1.1}%
+\contentsline {table}{\numberline {A.2}{\ignorespaces Tabla de transformación $\pi $. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}}{56}{table.Alph1.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Potencias de $\alpha $ en $\text {GF}(2^3)$ con representación en forma de potencia, binaria y decimal.}}{69}{table.Alph4.1}%
-\contentsline {table}{\numberline {D.2}{\ignorespaces Ejemplo de aplicación de \(F\) sobre el $\text {Bloque}_0$.}}{71}{table.Alph4.2}%
+\contentsline {table}{\numberline {D.1}{\ignorespaces Potencias de $\alpha $ en $\text {GF}(2^3)$ con representación en forma de potencia, binaria y decimal.}}{73}{table.Alph4.1}%
+\contentsline {table}{\numberline {D.2}{\ignorespaces Ejemplo de aplicación de \(F\) sobre el $\text {Bloque}_0$.}}{75}{table.Alph4.2}%
