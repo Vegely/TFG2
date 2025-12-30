@@ -14,7 +14,6 @@
 
 #define MAX_BUF_SIZE 4096
 
-// --- Helper: Receive Packet ---
 bool UART_ReceivePacket(unsigned char* buf, uint32_t* outLen) {
     int low = getchar();
     int high = getchar();
@@ -32,7 +31,7 @@ bool UART_ReceivePacket(unsigned char* buf, uint32_t* outLen) {
     return true;
 }
 
-// --- Helper: Send Packet ---
+
 void UART_SendPacket(const unsigned char* data, uint32_t len) {
     putchar(len & 0xFF);
     putchar((len >> 8) & 0xFF);

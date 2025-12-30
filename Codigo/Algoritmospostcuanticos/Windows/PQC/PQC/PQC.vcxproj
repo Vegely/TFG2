@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AlgorithmTester.cpp" />
     <ClCompile Include="src\CircularBuffer.cpp" />
     <ClCompile Include="src\KEMProtocol.cpp" />
     <ClCompile Include="src\keyexhange.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="src\SerialPacketTransport.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\AlgorithmTester.h" />
     <ClInclude Include="inc\CircularBuffer.h" />
     <ClInclude Include="inc\hqc.h" />
     <ClInclude Include="inc\KEMProtocol.h" />

@@ -28,6 +28,12 @@
     <Filter Include="Archivos de origen\comunications">
       <UniqueIdentifier>{49698f80-ed74-4110-94a4-96844664ffe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Test">
+      <UniqueIdentifier>{d2e9ad68-79cc-49b2-9913-30a3b040b72b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Test">
+      <UniqueIdentifier>{45ad087f-29cf-4e6d-9b1b-360e947f5b43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="src\SerialPacketTransport.cpp">
       <Filter>Archivos de origen\comunications</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AlgorithmTester.cpp">
+      <Filter>Archivos de origen\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,11 +89,14 @@
     <ClInclude Include="inc\SerialComunication.h">
       <Filter>Archivos de encabezado\comunications</Filter>
     </ClInclude>
-    <ClInclude Include="inc\secureVector.h">
-      <Filter>Archivos de encabezado\comunications</Filter>
-    </ClInclude>
     <ClInclude Include="inc\CircularBuffer.h">
       <Filter>Archivos de encabezado\comunications</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\secureVector.h">
+      <Filter>Archivos de encabezado\Kem</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\AlgorithmTester.h">
+      <Filter>Archivos de encabezado\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

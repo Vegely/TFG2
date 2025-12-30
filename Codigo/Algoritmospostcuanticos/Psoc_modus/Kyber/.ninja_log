@@ -1277,3 +1277,5 @@
 8260	8584	7887761114810278	C:/Users/bogurad/Desktop/ProyectosgitHub/TFG2/Codigo/Algoritmospostcuanticos/Psoc_modus/Kyber/build/Debug/libraries_shared/mtb-pdl-cat1/utils/TOOLCHAIN_GCC_ARM/mtb_stdlib_stubs.o	54fe48d5cacb933f
 8283	8845	7887761115037095	C:/Users/bogurad/Desktop/ProyectosgitHub/TFG2/Codigo/Algoritmospostcuanticos/Psoc_modus/Kyber/build/Debug/libraries_shared/retarget-io/source/cy_retarget_io.o	dbc6cbd1818cb12f
 8845	9295	7887761120658423	build/APP_CY8CPROTO-063-BLE/Debug/mtb-example-hal-hello-world.elf	be2e10eddbb4e698
+41	342	7887804530688565	C:/Users/bogurad/Desktop/ProyectosgitHub/TFG2/Codigo/Algoritmospostcuanticos/Psoc_modus/Kyber/build/Debug/local/main.o	87bdf5359e9685bb
+342	583	7887804533700971	build/APP_CY8CPROTO-063-BLE/Debug/mtb-example-hal-hello-world.elf	be2e10eddbb4e698

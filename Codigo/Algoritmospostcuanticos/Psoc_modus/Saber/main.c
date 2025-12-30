@@ -6,114 +6,128 @@
 #include "cyhal.h"
 #include "cybsp.h"
 #include "cy_retarget_io.h"
-#include "cy_crypto_core.h" /* REQUIRED for Hardware Random Number Generator */
-
+#include "cy_crypto_core.h" 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-/* * NOTE: Ensure you added "INCLUDES+= ./inc" to your Makefile so this works.
- * If not, use: #include "../inc/saber_wrapper.h"
- */
 #include "saber_wrapper.h"
 
-/*******************************************************************************
-* Function Name: main
-********************************************************************************/
+#define MAX_BUF_SIZE 4096
+
+bool UART_ReceivePacket(unsigned char* buf, uint32_t* outLen) {
+    int low = getchar();
+    int high = getchar();
+    if(low == EOF || high == EOF) return false;
+
+    uint16_t len = (uint16_t)(low | (high << 8));
+    if (len > MAX_BUF_SIZE) return false;
+
+    for (uint16_t i = 0; i < len; i++) {
+        int c = getchar();
+        if (c == EOF) return false;
+        buf[i] = (unsigned char)c;
+    }
+    *outLen = len;
+    return true;
+}
+
+
+void UART_SendPacket(const unsigned char* data, uint32_t len) {
+    putchar(len & 0xFF);
+    putchar((len >> 8) & 0xFF);
+    for (uint32_t i = 0; i < len; i++) {
+        putchar(data[i]);
+    }
+}
+
 int main(void)
 {
-    cy_rslt_t result;
-
-    /* 1. Initialize the device and board peripherals */
-    result = cybsp_init();
-    if (result != CY_RSLT_SUCCESS)
-    {
-        CY_ASSERT(0);
-    }
-
-    /* 2. Enable global interrupts */
+    /* 1. Init Hardware */
+    if (cybsp_init() != CY_RSLT_SUCCESS) CY_ASSERT(0);
     __enable_irq();
+    if (cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX, 115200) != CY_RSLT_SUCCESS) CY_ASSERT(0);
 
-    /* 3. Initialize UART (Retarget I/O) for printf functionality 
-     * This handles buffering automatically (replacing your old UART_Isr)
-     */
-    result = cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX, 115200);
-    if (result != CY_RSLT_SUCCESS)
-    {
-        CY_ASSERT(0);
-    }
-
-    /* 4. IMPORTANT: Enable the PSoC 6 Crypto Hardware 
-     * If you skip this, the TRNG will fail and the chip will crash.
-     */
+    /* 2. Init Crypto */
     Cy_Crypto_Core_Enable(CRYPTO);
-
-    /* Turn off stdout buffering so prints appear immediately */
     setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stdin, NULL, _IONBF, 0);
 
-    /* Print Banner */
-    printf("\x1b[2J\x1b[;H"); // Clear Screen
-    printf("================================\r\n");
-    printf(" System Start (ModusToolbox - Saber)\r\n");
-    printf("================================\r\n");
+    
+    if (saber_init(SABER_SECURITY_FIRE) != 0) { /* Error */ }
 
-    /* 5. Initialize Saber Logic */
-    /* Note: Ensure SABER_SECURITY_FIRE is defined in your header */
-    if (saber_init(SABER_SECURITY_FIRE) != 0) {
-        printf("Saber init failed\r\n");
-    }
+    // Allocate Memory
+    size_t sz_pk = saber_get_public_key_size();
+    size_t sz_sk = saber_get_secret_key_size();
+    size_t sz_ct = saber_get_ciphertext_size();
+    size_t sz_ss = saber_get_shared_secret_size();
 
-    // Get Sizes
-    const size_t BYTES_SK = saber_get_secret_key_size();
-    const size_t BYTES_PK = saber_get_public_key_size();
-    const size_t BYTES_CT = saber_get_ciphertext_size();
-    const size_t BYTES_SS = saber_get_shared_secret_size();
+    unsigned char *pk = calloc(sz_pk, 1);
+    unsigned char *sk = calloc(sz_sk, 1);
+    unsigned char *ct = calloc(sz_ct, 1);
+    unsigned char *ss = calloc(sz_ss, 1);
+    unsigned char *rx_buf = calloc(MAX_BUF_SIZE, 1);
 
-    printf("Saber Sizes:\r\n");
-    printf("  Public Key Size   : %lu bytes\r\n", (unsigned long)BYTES_PK);
-    printf("  Secret Key Size   : %lu bytes\r\n", (unsigned long)BYTES_SK);
-    printf("  Ciphertext Size   : %lu bytes\r\n", (unsigned long)BYTES_CT);
-    printf("  Shared Secret Size: %lu bytes\r\n\r\n", (unsigned long)BYTES_SS);
+    if (!pk || !sk || !rx_buf) while(1); 
 
-    /* 6. Allocate Memory */
-    /* Check Makefile HEAP_SIZE if this fails (0x8000 is recommended) */
-    unsigned char *sk = (unsigned char *) calloc(BYTES_SK, sizeof(unsigned char));
-    unsigned char *pk = (unsigned char *) calloc(BYTES_PK, sizeof(unsigned char));
-    unsigned char *ct = (unsigned char *) calloc(BYTES_CT, sizeof(unsigned char));
-    unsigned char *ss = (unsigned char *) calloc(BYTES_SS, sizeof(unsigned char));
-
-    if (!sk || !pk || !ct || !ss) {
-        printf("CRITICAL: Memory allocation failed.\r\n");
-        printf("SOLUTION: Increase HEAP_SIZE in your Makefile.\r\n");
-    } else {
-        printf("Memory allocated successfully.\r\n");
-
-        /* Key Generation */
-        printf("Generating Keys... ");
-        if (saber_keypair(pk, sk) != 0) printf("FAILED\r\n");
-        else printf("SUCCESS\r\n");
-
-        /* Encapsulation */
-        printf("Encapsulating... ");
-        if (saber_encapsulate(ct, ss, pk) != 0) printf("FAILED\r\n");
-        else printf("SUCCESS\r\n");
-
-        /* Decapsulation */
-        printf("Decapsulating... ");
-        if (saber_decapsulate(ss, ct, sk) != 0) printf("FAILED\r\n");
-        else printf("SUCCESS\r\n");
-        
-        printf("\r\n--- Saber Crypto Test Complete ---\r\n");
-    }
-
-    /* Cleanup */
-    free(sk); free(pk); free(ct); free(ss);
-
-    printf("Entering Command Loop.\r\n");
+    printf("READY"); 
 
     for(;;)
     {
-        /* ModusToolbox handles UART receiving in the background. */
-        cyhal_system_delay_ms(100); 
+        int cmd = getchar(); 
+
+        // ECHO MODE
+        if (cmd == 'E') {
+            uint32_t len = 0;
+            if (UART_ReceivePacket(rx_buf, &len)) {
+                UART_SendPacket(rx_buf, len);
+            }
+        }
+
+        // ALICE MODE
+        else if (cmd == 'A') 
+        {
+            saber_keypair(pk, sk);
+            UART_SendPacket(pk, (uint32_t)sz_pk);
+
+            uint32_t len = 0;
+            if (UART_ReceivePacket(rx_buf, &len)) {
+                if (len == sz_ct) {
+                    memcpy(ct, rx_buf, sz_ct);
+                    saber_decapsulate(ss, ct, sk);
+                    
+
+                    // Wait 500ms to let Windows switch to "Receive Mode"
+                    cyhal_system_delay_ms(500); 
+                    
+                    // Send Secret for Verification
+                    UART_SendPacket(ss, (uint32_t)sz_ss);
+                }
+            }
+        }
+
+        // BOB MODE
+        else if (cmd == 'B') 
+        {
+            uint32_t len = 0;
+            if (UART_ReceivePacket(rx_buf, &len)) {
+                if (len == sz_pk) {
+                    memcpy(pk, rx_buf, sz_pk);
+                    saber_encapsulate(ct, ss, pk);
+                    UART_SendPacket(ct, (uint32_t)sz_ct);
+                    
+
+                    // Wait 500ms to let Windows switch to "Receive Mode"
+                    cyhal_system_delay_ms(500);
+
+                    // Send Secret for Verification
+                    UART_SendPacket(ss, (uint32_t)sz_ss);
+                }
+            }
+        }
     }
 }
-/* [] END OF FILE */
+
+
+
+   
