@@ -294,6 +294,16 @@ D.~Sprenkels, ``{randombytes}: A portable c library for generating
   crypto-secure random bytes.''
   \url{https://github.com/dsprenkels/randombytes}, 2017.
 
+\bibitem{infineon_psoc6_arch_trm}
+{Infineon Technologies}, {\em {PSoC? 6 MCU: CY8C62x6, CY8C62x7 Architecture
+  Technical Reference Manual}}.
+\newblock Infineon Technologies AG.
+
+\bibitem{teste4}
+M.~J. Kannwischer, J.~Rijneveld, P.~Schwabe, and K.~Stoffelen, ``pqm4: Testing
+  and benchmarking {NIST} {PQC} on {ARM} cortex-m4.'' Cryptology {ePrint}
+  Archive, Paper 2019/844, 2019.
+
 \bibitem{ENTLimita}
 E.~Almaraz~Luengo, B.~Alaña~Olivares, L.~J. García~Villalba,
   J.~Hernandez-Castro, and D.~Hurley-Smith, ``{StringENT} test suite: {ENT}

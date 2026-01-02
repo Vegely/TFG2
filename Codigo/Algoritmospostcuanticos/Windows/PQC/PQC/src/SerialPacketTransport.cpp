@@ -13,15 +13,12 @@ bool SerialPacketTransport::sendPacket(const std::vector<unsigned char>& data) {
 
     uint16_t len = (uint16_t)data.size();
 
-    // 1. Build the full raw frame: [LenLow] [LenHigh] [Data...]
     std::string frame;
     frame.reserve(2 + len);
     frame.push_back((char)(len & 0xFF));
     frame.push_back((char)((len >> 8) & 0xFF));
     frame.append((char*)data.data(), data.size());
 
-    // 2. SEND IN CHUNKS (Flow Control)
-    // The PSoC 6 UART FIFO is small. We must pause slightly between chunks.
     const size_t CHUNK_SIZE = 64;
 
     for (size_t i = 0; i < frame.size(); i += CHUNK_SIZE) {
@@ -37,14 +34,9 @@ bool SerialPacketTransport::sendPacket(const std::vector<unsigned char>& data) {
 }
 
 bool SerialPacketTransport::receivePacket(std::vector<unsigned char>& buffer, int timeoutMs) {
-    // Reuse the implementation I gave you previously (Read 2 bytes, then Read payload)
-    // ... (See previous answer for receivePacket logic if needed, or use your working one)
-    // IMPORTANT: Make sure receivePacket does NOT call sleep inside its tight loop if using non-blocking reads.
-
     buffer.clear();
     auto start = std::chrono::steady_clock::now();
 
-    // 1. Wait for Header (2 bytes)
     std::string header;
     while (header.size() < 2) {
         std::string chunk;
@@ -57,9 +49,8 @@ bool SerialPacketTransport::receivePacket(std::vector<unsigned char>& buffer, in
     }
 
     uint16_t packetLen = (uint8_t)header[0] | ((uint8_t)header[1] << 8);
-    std::string data = header.substr(2); // Keep leftovers
+    std::string data = header.substr(2);
 
-    // 2. Wait for Data
     while (data.size() < packetLen) {
         std::string chunk;
         if (serial.getReceivedMessage(chunk)) data += chunk;
@@ -70,7 +61,6 @@ bool SerialPacketTransport::receivePacket(std::vector<unsigned char>& buffer, in
         if (data.size() < packetLen) std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    // 3. Output
     for (size_t i = 0; i < packetLen; i++) buffer.push_back((unsigned char)data[i]);
     return true;
 }

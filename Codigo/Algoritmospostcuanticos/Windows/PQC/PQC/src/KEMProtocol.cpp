@@ -20,60 +20,53 @@ std::vector<unsigned char> KEMProtocol::start_negotiation() {
         return {};
     }
 
-    try {
-        std::vector<unsigned char> public_key(kem_->get_public_key_size());
-        secret_key_.resize(kem_->get_secret_key_size());
+    
+    std::vector<unsigned char> public_key(kem_->get_public_key_size());
+    secret_key_.resize(kem_->get_secret_key_size());
 
-        if (kem_->keypair(public_key.data(), secret_key_.data()) != 0) {
-            transition_to_error("Keypair generation failed.");
-            return {};
-        }
-
-        state_ = ProtocolState::WAITING_FOR_CT;
-        return public_key;
-    }
-    catch (const std::exception& e) {
-        transition_to_error(e.what());
+    if (kem_->keypair(public_key.data(), secret_key_.data()) != 0) {
+        transition_to_error("Keypair generation failed.");
         return {};
     }
+
+    state_ = ProtocolState::WAITING_FOR_CT;
+    return public_key;
+    
 }
 
 std::vector<unsigned char> KEMProtocol::process_message(const std::vector<unsigned char>& input_msg) {
     std::vector<unsigned char> response_data;
 
-    try {
-        switch (state_) {
-        case ProtocolState::INIT:
-            if (role_ == ProtocolRole::RESPONDER) {
-                response_data = handle_encapsulation(input_msg);
-            }
-            else {
-                transition_to_error("Initiator received data in INIT state (expected to start).");
-            }
-            break;
-
-        case ProtocolState::WAITING_FOR_CT:
-            // Initiator receives Ciphertext from Responder
-            if (role_ == ProtocolRole::INITIATOR) {
-                handle_decapsulation(input_msg);
-            }
-            else {
-                transition_to_error("Responder logic error: reached WAITING_FOR_CT.");
-            }
-            break;
-
-        case ProtocolState::ESTABLISHED:
-            break;
-
-        case ProtocolState::FAILURE:
-        default:
-            break;
+     
+    switch (state_) {
+    case ProtocolState::INIT:
+        if (role_ == ProtocolRole::RESPONDER) {
+            response_data = handle_encapsulation(input_msg);
         }
-    }
-    catch (const std::exception& e) {
-        transition_to_error(e.what());
-    }
+        else {
+            transition_to_error("Initiator received data in INIT state (expected to start).");
+        }
+        break;
 
+    case ProtocolState::WAITING_FOR_CT:
+        // Initiator receives Ciphertext from Responder
+        if (role_ == ProtocolRole::INITIATOR) {
+            handle_decapsulation(input_msg);
+        }
+        else {
+            transition_to_error("Responder logic error: reached WAITING_FOR_CT.");
+        }
+        break;
+
+    case ProtocolState::ESTABLISHED:
+        break;
+
+    case ProtocolState::FAILURE:
+    default:
+        break;
+    }
+    
+    
     return response_data;
 }
 

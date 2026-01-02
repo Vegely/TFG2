@@ -1,9 +1,8 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{Agradecimientos}{\es@scroman {ix}}{chapter*.1}%
-\contentsline {chapter}{Resumen}{\es@scroman {xi}}{chapter*.2}%
-\contentsline {chapter}{Abstract}{\es@scroman {xiii}}{chapter*.4}%
-\contentsline {chapter}{Índice}{\es@scroman {xvii}}{chapter*.6}%
-\contentsline {chapter}{Abreviaturas y siglas}{\es@scroman {xxiii}}{chapter*.9}%
+\contentsline {chapter}{Resumen}{\es@scroman {ix}}{chapter*.1}%
+\contentsline {chapter}{Abstract}{\es@scroman {xi}}{chapter*.3}%
+\contentsline {chapter}{Índice}{\es@scroman {xv}}{chapter*.5}%
+\contentsline {chapter}{Abreviaturas y siglas}{\es@scroman {xxi}}{chapter*.8}%
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivación del proyecto}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}%
@@ -35,8 +34,8 @@
 \contentsline {subsubsection}{\numberline {3.4.1.1}Transformada Teórica de Números o Number Theoretic Transform (NTT)}{11}{subsubsection.3.4.1.1}%
 \contentsline {subsubsection}{\numberline {3.4.1.2}Aprendizaje Con Errores o Learning With Errors (\acrshort {lwe})}{13}{subsubsection.3.4.1.2}%
 \contentsline {subsubsection}{\numberline {3.4.1.3}\acrshort {lwe} en anillos}{14}{subsubsection.3.4.1.3}%
-\contentsline {paragraph}{Aplicación del \acrshort {rlwe} para el intercambio de claves públicas}{15}{section*.10}%
-\contentsline {paragraph}{Uso de \acrshort {mlwe} en Kyber}{16}{section*.11}%
+\contentsline {paragraph}{Aplicación del \acrshort {rlwe} para el intercambio de claves públicas}{15}{section*.9}%
+\contentsline {paragraph}{Uso de \acrshort {mlwe} en Kyber}{16}{section*.10}%
 \contentsline {subsubsection}{\numberline {3.4.1.4}Parámetros empleados en Kyber}{17}{subsubsection.3.4.1.4}%
 \contentsline {subsection}{\numberline {3.4.2}Fundamentos matemáticos de Saber}{17}{subsection.3.4.2}%
 \contentsline {subsubsection}{\numberline {3.4.2.1}Algoritmos de Toom-Cook y Karatsuba}{17}{subsubsection.3.4.2.1}%
@@ -63,47 +62,50 @@
 \contentsline {section}{\numberline {4.2}Unificación de Interfaces (Capa Wrapper)}{44}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Precompilados y gestión de la aleatoriedad.}{45}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Arquitectura del Agente Criptográfico y de las comunicaciones (C++)}{46}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Diagrama de Clases y Diseño del Agente}{49}{subsection.4.4.1}%
-\contentsline {section}{\numberline {4.5}Implementación de algoritmos en el microcontrolador}{50}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Filosofia de comunicacion}{50}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Tests realizados}{50}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Ciclos de CPU}{50}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Throughput (Operaciones por segundo)}{50}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Uso de Pila (Stack Usage)}{50}{subsection.4.7.3}%
-\contentsline {subsection}{\numberline {4.7.4}Tamaño del Binario (Code Size / Footprint)}{50}{subsection.4.7.4}%
-\contentsline {subsection}{\numberline {4.7.5}Coste de Comunicación (Overhead)}{50}{subsection.4.7.5}%
-\contentsline {subsection}{\numberline {4.7.6}Suite de aleatoriedad a randombytes}{50}{subsection.4.7.6}%
-\contentsline {chapter}{\numberline {5}Resultados y discusión}{51}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Test de respuesta conocida}{51}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Kyber}{51}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Saber}{52}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}HQC}{52}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}CPU cicles}{52}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Comparacion por plataforma}{52}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Comparacion por dispositivo}{52}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Throughput}{52}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Comparacion por plataforma}{52}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Comparacion por dispositivo}{52}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Uso de pila}{52}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Comparacion por plataforma}{52}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Comparacion por dispositivo}{52}{subsection.5.4.2}%
-\contentsline {section}{\numberline {5.5}Tamaño de binarios}{52}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Kyber}{52}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Saber}{52}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}HQC}{52}{subsection.5.5.3}%
-\contentsline {section}{\numberline {5.6}Tiempos de comunicación}{52}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Test de aleatoriedad}{52}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Plataforma Windows}{52}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}PSOC}{52}{subsection.5.7.2}%
-\contentsline {chapter}{\numberline {6}Conclusiones}{53}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusión}{53}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Desarrollos futuros}{53}{section.6.2}%
-\contentsline {chapter}{\numberline {A}Pseudocódigo de los algoritmos postcuánticos}{55}{appendix.Alph1}%
-\contentsline {section}{\numberline {A.1}Transformadas Keccak-p}{55}{section.Alph1.1}%
-\contentsline {section}{\numberline {A.2}Algoritmos principales de Kyber \cite {kyber-spec-2021}}{58}{section.Alph1.2}%
-\contentsline {section}{\numberline {A.3}Algoritmos principales de Saber \cite {saber-spec-2020} }{61}{section.Alph1.3}%
-\contentsline {section}{\numberline {A.4}Algoritmos principales de \acrshort {hqc} \cite {hqc2025}}{64}{section.Alph1.4}%
-\contentsline {chapter}{\numberline {B}Ejemplo \gls {rlwe}}{69}{appendix.Alph2}%
-\contentsline {chapter}{\numberline {C}Polinomios generadores acortados de Reed-Solomon en \acrshort {hqc}}{71}{appendix.Alph3}%
-\contentsline {chapter}{\numberline {D}Ejemplo de codificación mediante polinomios de Reed-Solomon y Reed-Muller}{73}{appendix.Alph4}%
-\contentsline {chapter}{Bibliografia}{77}{equation.Alph4.0.24}%
+\contentsline {subsection}{\numberline {4.4.1}Modelo de comunicaciones}{46}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}Clase \texttt {SerialComunication}}{46}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2}Clase \texttt {CircularBuffer}}{47}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.4.1.3}Clase \texttt {SerialPacketTransport}}{47}{subsubsection.4.4.1.3}%
+\contentsline {subsection}{\numberline {4.4.2}Modelo criptográfico}{48}{subsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.1}Plantilla \texttt {SecureVector}}{48}{subsubsection.4.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.4.2.2}Clase \texttt {keyexchange}}{48}{subsubsection.4.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.3}Clase \texttt {KEMProtocol}}{49}{subsubsection.4.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.4.2.4}Clase \texttt {AlgorithmTester}}{49}{subsubsection.4.4.2.4}%
+\contentsline {section}{\numberline {4.5}Implementación de algoritmos en el microcontrolador}{51}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Diagrama de secuencia}{51}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Tests de rendimiento realizados}{53}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Ciclos de CPU}{53}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Operaciones por segundo}{53}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Uso de Pila}{53}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Coste de Comunicación}{53}{subsection.4.7.4}%
+\contentsline {subsection}{\numberline {4.7.5}Suite de aleatoriedad a randombytes}{53}{subsection.4.7.5}%
+\contentsline {chapter}{\numberline {5}Resultados y discusión}{55}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Test de respuesta conocida}{55}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Kyber}{55}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Saber}{56}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}HQC}{56}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}CPU cicles}{56}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Comparacion por plataforma}{56}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Comparacion por algoritmo}{56}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Throughput}{57}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Comparacion por plataforma}{57}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Comparacion por algoritmo}{57}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Uso de pila}{58}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Comparacion por plataforma}{58}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Comparacion por algoritmo}{58}{subsection.5.4.2}%
+\contentsline {section}{\numberline {5.5}Coste de comunicación y tiempo teórico de ejecución de los protocolos}{59}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Test de aleatoriedad}{59}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Plataforma Windows}{59}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}PSOC}{60}{subsection.5.6.2}%
+\contentsline {chapter}{\numberline {6}Conclusiones}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusión}{63}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Desarrollos futuros}{63}{section.6.2}%
+\contentsline {chapter}{\numberline {A}Pseudocódigo de los algoritmos postcuánticos}{65}{appendix.Alph1}%
+\contentsline {section}{\numberline {A.1}Transformadas Keccak-p}{65}{section.Alph1.1}%
+\contentsline {section}{\numberline {A.2}Algoritmos principales de Kyber \cite {kyber-spec-2021}}{68}{section.Alph1.2}%
+\contentsline {section}{\numberline {A.3}Algoritmos principales de Saber \cite {saber-spec-2020} }{71}{section.Alph1.3}%
+\contentsline {section}{\numberline {A.4}Algoritmos principales de \acrshort {hqc} \cite {hqc2025}}{74}{section.Alph1.4}%
+\contentsline {chapter}{\numberline {B}Ejemplo \gls {rlwe}}{79}{appendix.Alph2}%
+\contentsline {chapter}{\numberline {C}Polinomios generadores acortados de Reed-Solomon en \acrshort {hqc}}{81}{appendix.Alph3}%
+\contentsline {chapter}{\numberline {D}Ejemplo de codificación mediante polinomios de Reed-Solomon y Reed-Muller}{83}{appendix.Alph4}%
+\contentsline {chapter}{Bibliografia}{87}{equation.Alph4.0.24}%

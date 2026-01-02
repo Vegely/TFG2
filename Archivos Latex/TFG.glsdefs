@@ -782,3 +782,59 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{fifo}%
+{%
+name={\acronymfont {\glsentryshort {fifo}}},%
+sort={FIFO},%
+type={acronym},%
+first={FIFO},%
+firstplural={FIFOs},%
+text={FIFO},%
+plural={FIFOs},%
+description={First In First Out},%
+descriptionplural={First In First Out},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={First In First Out},%
+longplural={First In First Outs},%
+short={FIFO},%
+shortplural={FIFOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{hmac}%
+{%
+name={\acronymfont {\glsentryshort {hmac}}},%
+sort={HMAC},%
+type={acronym},%
+first={HMAC},%
+firstplural={HMACs},%
+text={HMAC},%
+plural={HMACs},%
+description={Código de Autenticación de Mensaje Basado en Hash},%
+descriptionplural={Código de Autenticación de Mensaje Basado en Hash},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Código de Autenticación de Mensaje Basado en Hash},%
+longplural={Código de Autenticación de Mensaje Basado en Hashs},%
+short={HMAC},%
+shortplural={HMACs},%
+counter={page},%
+parent={},%
+%
+}%
+

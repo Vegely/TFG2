@@ -10,7 +10,7 @@ Este test se realiza para comprobar que la compilación e integración de los al
 La ejecución de los tests para Kyber se completó sin incidencias. Se procesaron los 100 vectores de prueba definidos por el NIST. Al utilizar la misma semilla de entrada, la implementación generó claves y criptogramas idénticos a la referencia.
 
 
-\newpage
+
 %En el Listing \ref{lst:kyber_kat} se muestra el primer vector de prueba generado por nuestra implementación, donde se verificó la coincidencia exacta de la clave pública (\texttt{pk}), la clave secreta (\texttt{sk}) y el secreto compartido (\texttt{ss}) con los valores esperados.
 %\begin{lstlisting}[caption={Extracto del fichero .rsp generado para Kyber (Vector 0)}, label={lst:kyber_kat}, basicstyle=\ttfamily\scriptsize]
 %	# kyber512
@@ -25,19 +25,92 @@ La ejecución de los tests para Kyber se completó sin incidencias. Se procesaro
 \subsection{HQC}
 \section{CPU cicles}
 \subsection{Comparacion por plataforma}
-\subsection{Comparacion por dispositivo}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/cycles_platform}
+	\caption{}
+	\label{fig:cyclesplatform}
+\end{figure}
+
+\subsection{Comparacion por algoritmo}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/cycles_device}
+	\caption{}
+	\label{fig:cyclesdevice}
+\end{figure}
 
 \section{Throughput}
 \subsection{Comparacion por plataforma}
-\subsection{Comparacion por dispositivo}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/throughput_platform}
+	\caption{}
+	\label{fig:throughputplatform}
+\end{figure}
+
+\subsection{Comparacion por algoritmo}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/throughput_device}
+	\caption{}
+	\label{fig:throughputdevice}
+\end{figure}
+
 \section{Uso de pila}
 \subsection{Comparacion por plataforma}
-\subsection{Comparacion por dispositivo}
-\section{Tamaño de binarios}
-\subsection{Kyber}
-\subsection{Saber}
-\subsection{HQC}
-\section{Tiempos de comunicación}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/stack_platform}
+	\caption{}
+	\label{fig:stackplatform}
+\end{figure}
+
+\subsection{Comparacion por algoritmo}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{figuras/stack_device}
+	\caption{}
+	\label{fig:stackdevice}
+\end{figure}
+\section{Coste de comunicación y tiempo teórico de ejecución de los protocolos}
 \section{Test de aleatoriedad}
 \subsection{Plataforma Windows}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/1_histogramWIN}
+	\caption{}
+	\label{fig:1histogramwin}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/2_bitmapWIN}
+	\caption{}
+	\label{fig:2bitmapwin}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/3_lagplotWIN}
+	\caption{}
+	\label{fig:3lagplotwin}
+\end{figure}
+
 \subsection{PSOC}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/1_histogramPSOC}
+	\caption{}
+	\label{fig:1histogrampsoc}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/2_bitmapPSOC}
+	\caption{}
+	\label{fig:2bitmappsoc}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figuras/3_lagplotPSOC}
+	\caption{}
+	\label{fig:3lagplotpsoc}
+\end{figure}

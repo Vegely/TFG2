@@ -1,0 +1,52 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+
+% --- DEFINITIONS ---
+\definecolor{myBlue}{RGB}{0, 114, 178}
+\definecolor{myOrange}{RGB}{213, 94, 0}
+\definecolor{myGreen}{RGB}{0, 158, 115}
+
+% --- STYLE DEFINITION (Fixes 'bar width' error) ---
+\pgfplotsset{
+    tfg_bar_style/.style={
+        ybar,
+        bar width=9pt,             % Defined safely here
+        width=6cm, height=6.5cm,
+        ymode=log, log origin=infty,
+        grid=major, grid style={dashed, gray!30},
+        symbolic x coords={KeyGen,Encaps,Decaps},
+        xtick=data,
+        enlarge x limits=0.25,
+        ylabel style={font=\footnotesize\bfseries, align=center},
+        tick label style={font=\footnotesize},
+        title style={font=\bfseries},
+        legend style={at={(0.5,-0.30)}, anchor=north, legend columns=-1, draw=none, font=\footnotesize},
+        % Fix for black lines:
+        every axis plot/.append style={draw=none, fill} 
+    }
+}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{groupplot}[
+        group style={group size=3 by 1, horizontal sep=1.8cm},
+        tfg_bar_style,            % Apply the robust style
+        ylabel={Bytes}
+    ]
+        \nextgroupplot[title={HQC}, legend style={draw=none, fill=none, text opacity=0}]
+        \addplot[fill=myBlue] coordinates { (KeyGen,103596.00) (Encaps,161364.00) (Decaps,175820.00) };
+        \addplot[fill=myOrange] coordinates { (KeyGen,102688.00) (Encaps,160560.00) (Decaps,175072.00) };
+        \addplot[fill=myGreen] coordinates { (KeyGen,102688.00) (Encaps,160560.00) (Decaps,175072.00) };
+        \nextgroupplot[title={Kyber}]
+        \addplot[fill=myBlue] coordinates { (KeyGen,16080.00) (Encaps,19760.00) (Decaps,21336.00) }; \addlegendentry{Cortex-M4}
+        \addplot[fill=myOrange] coordinates { (KeyGen,30032.00) (Encaps,19544.00) (Decaps,21112.00) }; \addlegendentry{Intel i7}
+        \addplot[fill=myGreen] coordinates { (KeyGen,30032.00) (Encaps,19544.00) (Decaps,21112.00) }; \addlegendentry{AMD Ryzen}
+        \nextgroupplot[title={Saber}, legend style={draw=none, fill=none, text opacity=0}]
+        \addplot[fill=myBlue] coordinates { (KeyGen,20384.00) (Encaps,23512.00) (Decaps,24992.00) };
+        \addplot[fill=myOrange] coordinates { (KeyGen,27952.00) (Encaps,23192.00) (Decaps,24664.00) };
+        \addplot[fill=myGreen] coordinates { (KeyGen,27952.00) (Encaps,23192.00) (Decaps,24664.00) };
+    \end{groupplot}
+\end{tikzpicture}
+\end{document}

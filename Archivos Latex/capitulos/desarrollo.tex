@@ -117,7 +117,7 @@ En la tabla \ref{tab:hqc_files} se describe brevemente la estructura lógica del
 Se ha desarrollado un módulo envoltorio (\textit{wrapper}) para cada algoritmo con el objetivo de encapsular las implementaciones de referencia del \acrshort{nist} \cite{nistPQCround3} \cite{nistPQCround4} bajo una interfaz común. La estructura general de los ficheros de cabecera, denominados \texttt{AlgorithmWrapper.h}, se detalla en el Listing \ref{lst:wrapper_core}.
 \newline
 
-El propósito principal de esta capa de abstracción es homogeneizar las distintas implementaciones provistas por el \acrshort{nist}. Esto permite instanciar los algoritmos mediante un inicializador común ajustado al nivel de seguridad deseado (dependiente de la compilación de la librería con los parámetros correspondientes). Asimismo, este diseño resuelve los conflictos de enlazado (\textit{linking}) derivados del uso de símbolos idénticos en las APIs originales, facilitando así la intercambiabilidad dinámica entre los distintos algoritmos criptográficos.
+El propósito principal de esta capa de abstracción es homogeneizar las distintas implementaciones provistas por el \acrshort{nist}. Esto permite instanciar los algoritmos mediante un inicializador común, configurado según el nivel de seguridad definido durante la compilación de la librería. Asimismo, este diseño resuelve los conflictos de enlazado (\textit{linking}) derivados del uso de símbolos idénticos en las APIs originales, facilitando así la intercambiabilidad dinámica entre los distintos algoritmos criptográficos.
 \newline
 
 Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosofía donde la responsabilidad recae íntegramente en el usuario, quien debe encargarse de la asignación y liberación de los \textit{buffers}.
@@ -176,22 +176,214 @@ Finalmente, en lo relativo a la gestión de memoria, se ha adoptado una filosof�
 
 \section{Precompilados y gestión de la aleatoriedad.}
 \label{rng:win}
-Para facilitar el desarrollo y el uso de los algoritmos de cifrado en un entorno de sistemas de proposito general, se ha optado por encapsular la lógica en bibliotecas estáticas (.lib). Así, el acceso a las llamadas a nivel de usuario se reduce a interactuar con un wrapper similar al del listing \ref{lst:wrapper_core}. 
+Para agilizar la integración de los algoritmos de cifrado en sistemas de propósito general, se ha optado por encapsular la lógica en bibliotecas estáticas (.lib). Gracias a esto, la interacción a nivel de usuario se reduce al uso de una interfaz simplificada, similar a la mostrada en el Listing \ref{lst:wrapper_core}, facilitando su incorporación en proyectos externos.
+\newline
 
-Para facilitar el uso de los algoritmos y su compilación se usa un CMakeLists junto a un script de Windows. Para los tres algoritmos a estudiar se crean dos versiones:
+Es importante señalar que, debido a la arquitectura actual, la selección del nivel de seguridad es estática. Para alternar dinámicamente entre distintos niveles, sería necesario refactorizar el código para desacoplarlo de los archivos de parámetros dependientes de la compilación al incluirlos en el init de los algoritmos. Sin embargo, dado que el alcance de este trabajo se centra en el análisis de algoritmos con un nivel de seguridad equivalente a 256 bits, no se ha considerado prioritaria dicha flexibilidad en esta etapa.
+\newline
+
+
+En cuanto a la gestión de aleatoriedad, como se mencionó anteriormente, existen dos implementaciones en función de la función que se desea que cumpla el algoritmo:
 \begin{itemize}
-	\item Versión con \texttt{rng.h}: genera los secretos compartidas a partir de una semilla y sirve para generar los \acrshort{kat} para generar un archivo \texttt{.rsp} a partir de un archivo \texttt{.req}.
-	\item Versión con \texttt{randombytes.h}: usando la librería del siguiente repositorio \cite{sprenkels_randombytes_2017} utilizada en el proyecto PQClean  \cite{SSR:KSSW22} para generar números aleatorios a partir de la entropía del sistema operativo.
+	\item \textbf{Versión determinista (\texttt{rng.h}):} Utilizada para generar vectores de prueba conocidos (\acrshort{kat}). Genera los secretos compartidos a partir de una semilla inicial fija. Esta implementación inicializa la entropía con un valor conocido y utiliza \texttt{AES256} para derivar una secuencia de números pseudoaleatorios, permitiendo así la verificación mediante archivos \texttt{.req} y \texttt{.rsp}.
+	
+	\item \textbf{Versión de producción (\texttt{randombytes.h}):} Implementa un generador de números aleatorios criptográficamente seguro. En sistemas de propósito general, se obtiene la entropía directamente del sistema operativo, mientras que en la plataforma PSOC utiliza el generador de hardware (\acrshort{trng}) nativo de la placa.
+
+	\newline
+	Para la implementación en sistemas de propósito general se ha integrado la librería disponible en \cite{sprenkels_randombytes_2017}, utilizada también en el proyecto PQClean \cite{SSR:KSSW22}. De este modo, se garantiza el uso de un generador criptográficamente seguro, cumpliendo con los requisitos de seguridad que serán validados posteriormente mediante baterías de tests estadísticos.
+	
 \end{itemize}
-
-
 
 
 \section{Arquitectura del Agente Criptográfico y de las comunicaciones (C++)}
 Sobre la base de las librerías en C descritas anteriormente, se ha construido una capa de aplicación en C++ que integra las capacidades criptográficas con un módulo de comunicaciones serie.
 
+\subsection{Modelo de comunicaciones}
+Para implementar las comunicaciones, por su sencillez se ha optado por la comunicación mediante UART conectando directamente la placa del PSOC al ordenador por USB. Los parámetros generales de las comunicaciones utilizados son:
+\begin{itemize}
+	\item \textbf{BaudRate:} 115200 baudios.
+	\item \textbf{Data Bits:} 8 bits.
+	\item \textbf{Paridad:} Ninguna (\textit{No Parity}).
+	\item \textbf{Bits de parada:} 1 bit.
+	\item \textbf{Control de flujo:} Ninguno. La gestión de la integridad se delega a los buffers de software, aunque se mantiene activa la señal DTR\footnote{La señal DTR (\textit{Data Terminal Ready}) indica al dispositivo que el PC está listo para establecer la comunicación. Esta señal se fuerza a estar activa para habilitar el canal de datos y/o prevenir que la placa de desarrollo no se reinicie.} para garantizar la estabilidad del enlace.
+
+	\item \textbf{Buffers (I/O):} 8192 bytes para reducir la latencia en transferencias grandes.
+	\item \textbf{Timeouts:} Configuración no bloqueante con un tiempo de espera máximo de 50 ms por lectura.
+\end{itemize}
+
+
+ Tal como se puede ver en la figura \ref{fig:comunicationsUML} las comunicaciones se implementan mediante tres clases: 
+ 
+\subsubsection{Clase \texttt{SerialComunication}}
+ 
+ Esta es la clase fundamental dentro del modelo de comunicaciones pues se encarga de abstraer la API de Windows (\texttt{Win32 API}) para manejar de manera sencilla los datos enviados por el canal serie. Para ello, a continuación se describen brevemente los elementos de esta clase:
+ \begin{itemize}
+ 	\item \textbf{Inicialización y selección del puerto}: para iniciar la comunicación es necesario identificar primero el puerto asignado al dispositivo PSOC. Para ello, se utiliza el método \texttt{AvailablePorts}, que escanea el registro del sistema para listar los puertos COM activos. Una vez seleccionado el puerto objetivo, las funciones \texttt{openPort} y \texttt{closePort} gestionan la apertura del descriptor de archivo y la liberación de recursos, respectivamente.
+ 	
+ 	\item \textbf{Envío de mensajes}: para enviar mensajes el mecanismo es sencillo pues basta con usar la función \texttt{send} con el mensaje deseado y se enviará por el canal serie automáticamente.
+ 	\item \textbf{Recepción de mensajes}: para recibir mensajes y no tener que bloquear el flujo principal del programa, se ha implementado un patrón Productor-Consumidor mediante multihilo:
+ 	\begin{itemize}
+ 		\item \textbf{Hilo de Captura}: mediante la función \texttt{startReceiving}, se despliega un hilo secundario que ejecuta un bucle de lectura. Este hilo monitoriza constantemente el puerto serie y, al detectar bytes entrantes, los transfiere inmediatamente a un buffer intermedio (\texttt{receiveBuffer}) y así liberar espacio del buffer del puerto serie. Para evitar el consumo excesivo de CPU durante la espera, se incluye un breve retardo (\textit{sleep}) de 10 ms entre ciclos de lectura.
+ 		\item \textbf{Sincronización y acceso}: dado que el buffer de recepción es un recurso compartido, todas las operaciones de escritura (desde el hilo) y lectura (desde la aplicación) están protegidas por un \texttt{std::mutex} para evitar condiciones de carrera.
+ 		\item \textbf{Interfaz de Consumo}: para recuperar los datos enviados se utiliza el método
+ 		 \texttt{ getRece}\-\ \texttt{ivedMessage}, el cual extrae de forma segura los mensajes almacenados en el buffer circular, garantizando la integridad de los datos en un entorno concurrente.
+ 	\end{itemize}
+ 	
+ \end{itemize}
+
+\subsubsection{Clase \texttt{CircularBuffer}}
+Esta clase implementa una estructura de datos de tipo \acrshort{fifo} sobre un espacio de memoria preasignado. Su función crítica es actuar como almacenamiento intermedio o buffer entre el hilo de recepción de la UART y la lógica de aplicación. Al utilizar un puntero de lectura y uno de escritura que rotan sobre el array, se consigue una inserción y extracción de datos eficiente sin la sobrecarga computacional que implicaría el redimensionamiento dinámico de vectores.
+
+\subsubsection{Clase \texttt{SerialPacketTransport}}
+Esta clase es esencial para el modelo criptográfico mediante agentes descrito en la figura \ref{fig:mainprotocol} y para garantizar que no se sature el microcontrolador pues los tamaños de claves pueden ser muy elevados entre 1312 y 14421 bytes como se describió en las tablas \ref{tab:KyberParams}, \ref{tab:SaberParams} y \ref{tab:HQCParams}. Para ello, se estructura la comunicación mediante un protocolo de enpaquetado ligero como una capa superior a la clase \texttt{SerialComunication}, permitiendo el envío de bloques de datos discretos. Esta clase tiene las siguientes características:
+
+
+\begin{itemize}
+	\item \textbf{Protocolo de encabezado}: para distinguir el inicio y fin de cada mensaje en el flujo continuo del puerto serie, la clase antepone a cada paquete una cabecera de 16 bits (2 bytes) en formato Little Endian. Esta cabecera indica la longitud exacta de la carga útil, permitiendo gestionar paquetes de hasta 65.535 bytes (64 KB).
+	
+	\item \textbf{Empaquetación en el envío}: el método \texttt{sendPacket} no envía el mensaje completo de golpe, si no que realiza una fragmentación en bloques de 64 bytes. Esta estrategia se utiliza para evitar saturar los buffers internos del PSOC y mejorar la estabilidad de la transmisión.
+	
+	\item \textbf{Recepción con reensamblado y Timeout}: el método \texttt{receivePacket} implementa una lógica de lectura en dos fases: primero espera la recepción de los 2 bytes de cabecera para conocer el tamaño esperado y, posteriormente, acumula los fragmentos recibidos hasta completar el paquete. Para evitar bloquear el programa permanentemente se introduce un tiempo de espera o timeout, que aborta la operación si el paquete no se completa dentro del tiempo estipulado.
+	\newline
+	
+	Cabe justificar que, si bien la capa inferior utiliza un modelo multihilo para la captura de datos, esta clase expone una interfaz bloqueante. Esta decisión se alinea con la naturaleza secuencial del protocolo de intercambio de claves, donde cada paso criptográfico depende estrictamente de la finalización del paso anterior y la recepción completa de la respuesta del otro agente, haciendo innecesaria una gestión asíncrona a nivel de aplicación.
+\end{itemize}
+\newline
+\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tikzpicture}
+			
+			% ---------------------------------------------------------
+			% 1. LEFT COLUMN: The "Big" Class
+			% ---------------------------------------------------------
+			\begin{class}[text width=9cm]{SerialComunication}{0, 0}
+				\attribute{-availablePorts: vector$<$pair$<$int,wstring$>$$>$}
+				\attribute{-hSerial: HANDLE}
+				\attribute{-running: atomic$<$bool$>$}
+				\attribute{-receiveThread: thread}
+				\attribute{-receiveMutex: mutex}
+				
+				\operation{-setAvailablePorts()}
+				\operation{-receiveLoop()}
+				\operation{+SerialComunication(in bufferSize: int)}
+				\operation{+updateAvailablePorts()}
+				\operation{+openPort(in port:int)}
+				\operation{+closePort()}
+				\operation{+send(in message: str)}
+				\operation{+isBufferEmpty()}
+				\operation{+getReceivedMessage()}
+				\operation{+startReceiving()}
+				\operation{+stopReceiving()}
+				\operation{+displayAvailablePorts()}
+				\operation{+getAvailablePorts()}
+			\end{class}
+			
+			% ---------------------------------------------------------
+			% 2. RIGHT COLUMN: The Stacked Classes
+			% ---------------------------------------------------------
+			
+			% --- TOP RIGHT: SerialPacketTransport ---
+			% CHANGED Y=0 to Y=5 so it sits ABOVE the center line
+			\begin{class}[text width=9cm]{SerialPacketTransport}{11, 0}
+				\attribute{-internalBuffer: str}
+				\operation{+SerialPacketTransport(inout s: SerialComunication)}
+				\operation{+sendPacket(in data: vector$<$char$>$)}
+				\operation{+receivePacket(out data: vector$<$char$>$, in ms: int)}
+			\end{class}
+			
+			% --- BOTTOM RIGHT: CircularBuffer ---
+			% Y=-5 is perfect for the bottom one
+			\begin{class}[text width=5cm]{CircularBuffer}{11, -2.7}
+				\attribute{-size: int}
+				\attribute{-head: int}
+				\attribute{-tail: int}
+				\attribute{-count: int}
+				\attribute{-buffer: str}
+				
+				\operation{+CircularBuffer(in size: int)}
+				\operation{+push(in value: str)}
+				\operation{+pop(out value: str)}
+				\operation{+isempty()}
+				\operation{+isfull()}
+				\operation{+getCount()}
+				\operation{+getSize()}
+			\end{class}
+			
+			% ---------------------------------------------------------
+			% 3. CONNECTIONS
+			% ---------------------------------------------------------
+			
+			% DEFINE THE ARROW STYLE
+			% {Diamond...}-  means "Put a diamond at the START, nothing at the END"
+			% ARROW STYLE: Diamond at the START of the line
+			\tikzset{comp/.style={{Diamond[fill=black, width=3mm, length=5mm]}-}}
+			
+			% RELATION 1: Transport (Right) -> Communication (Left)
+			% Diamond on Transport.
+			% Draw from Transport.west -> Horizontal intersection with Communication.east
+			\draw[comp] (SerialPacketTransport.west) -- (SerialPacketTransport.west -| SerialComunication.east)
+			node[midway, above] {serial};
+			
+			% RELATION 2: Communication (Left) -> Buffer (Right)
+			% Diamond on Communication.
+			% Draw from Horizontal intersection on Communication.east -> Buffer.west
+			\draw[comp] (CircularBuffer.west -| SerialComunication.east) -- (CircularBuffer.west)
+			node[midway, above, yshift=2mm] {receiveBuffer};
+			
+		\end{tikzpicture}%
+	}
+	\caption{Diagrama de clases en UML para implementar las comunicaciones por serial.}
+	\label{fig:comunicationsUML}
+	
+\end{figure}
+
+\subsection{Modelo criptográfico}
+Para implementar el modelo de agentes de la figura \ref{fig:mainprotocol} se utiliza una interfaz común \texttt{keyexchange} para acceder a los distintos algoritmos de cifrado postcuántico y mediante la clase \texttt{KEMProtocol} se implementa el protocolo. Además, para ejecutar los tests de rendimiento o benchmarks para cada algoritmo se utiliza la clase auxiliar \texttt{AlgorithmTester}.
+
+
+
+\subsubsection{Plantilla \texttt{SecureVector}}
+En el desarrollo de software criptográfico robusto, normalmente se recomienda el uso de memoria estática (\texttt{stack}) para el almacenamiento de material sensible, como las claves privadas. Esto se debe a que la gestión de memoria dinámica (\texttt{heap}) introduce una superficie de ataque que puede ser explotada para extraer información residual o fragmentada.
+\newline
+
+No obstante, dada la naturaleza modular de este banco de pruebas y la necesidad de instanciar dinámicamente algoritmos con requisitos de memoria heterogéneos, el uso del \texttt{heap} resulta inevitable. Para mitigar los riesgos de seguridad asociados, se ha implementado la plantilla \texttt{SecureVector}.
+\newline
+
+La plantilla \texttt{SecureVector} actúa como un contenedor seguro basado en \texttt{std::vector}. La principal modificación reside en la sobrecarga de la rutina de desasignación: antes de liberar el bloque de memoria y devolverlo al sistema operativo, la clase sobrescribe explícitamente el contenido con ceros. Esta medida preventiva garantiza que no permanezcan trazas de información confidencial en la memoria no asignada.
+
+\subsubsection{Clase \texttt{keyexchange}}
+Dado que los métodos de los algoritmos de cifrado postcuántico son comunes, se ha creado una interfaz unificada que resuelve su instanciación mediante polimorfismo. De esta forma, las clases derivadas representan los algoritmos específicos, añadiendo una capa de abstracción sobre los envoltorios en C descritos en el listing \ref{lst:wrapper_core}.
+\newpage
+
+\subsubsection{Clase \texttt{KEMProtocol}}
+
+Esta clase implementa el protocolo criptográfico descrito en la figura \ref{fig:mainprotocol} mediante una máquina de estados finitos. Dado que el flujo de ejecución es secuencial y dependiente del extremo de la comunicación, el constructor recibe dos parámetros fundamentales: el rol a desempeñar (Alice como \texttt{INITIATOR} o Bob como \texttt{RESPONDER}) y una referencia al algoritmo criptográfico deseado (Saber, Kyber o \acrshort{hqc}).
+\newline
+
+Para gestionar la variabilidad de algoritmos se aplica el patrón de diseño Estrategia. Esto permite abstraer las operaciones primitivas (generación de claves, encapsulado y decapsulado) tras una interfaz común, desacoplando la lógica de control de estado de la implementación matemática específica de cada algoritmo.
+\newline
+
+
+El comportamiento de la máquina de estados varía según el rol asignado: 
+\begin{itemize} 
+	\item \textbf{Rol INITIATOR (Alice)}: Comienza en el estado \texttt{INIT}. Al invocar el método \texttt{start} \texttt{\_negotiation}, la clase genera el par de claves, transiciona al estado \texttt{WAITING\_FOR\_CT} y devuelve la clave pública. Esta clave queda disponible y debe ser transmitida por el canal de comunicación (en este proyecto, enviada vía serie al PSoC). 
+	\item \textbf{Rol RESPONDER (Bob)}: Inicia en el estado \texttt{INIT} y permanece a la espera. Su transición ocurre únicamente cuando se solicita procesar un mensaje externo mediante el método \texttt{process\_message}. 
+\end{itemize}
+
+Cuando la clase recibe un mensaje mediante el método \texttt{process\_message} y se encuentra en un estado válido de espera (es decir, en \texttt{INIT} si es Bob o en \texttt{WAITING\_FOR\_CT} si es Alice), ejecuta la lógica criptográfica correspondiente: encapsulación para el responder o decapsulación para el initiator. Tras finalizar la operación con éxito, la máquina transiciona al estado final \texttt{ESTABLISHED}, completando el intercambio.
+\newline
+
+Para proteger la información crítica, el secreto compartido y la clave privada se gestionan mediante la plantilla \texttt{SecureVector} mencionada anteriormente. De esta manera el sistema contempla un estado de \texttt{FAILURE} al que se transiciona si se solicita una operación inválida para el rol actual, etapa actual o si falla alguna operación del intercambio de claves.
+\newline
+
+Cabe destacar que para cumplir seguridad \acrshort{cca2} las funciones del intercambio de claves no pueden fallar debido a que ello implicaría que el atacante puede obtener información del oráculo. Si bien en algunas implementaciones se contempla la posibilidad de fallo si la función \texttt{randombytes} se queda sin entropía al consultar el \acrshort{trng}, en el alcance de este trabajo no se contempla dicha posibilidad, asumiendo disponibilidad de entropía infinita. 
+\subsubsection{Clase \texttt{AlgorithmTester}}
+Esta clase actúa como un entorno de ejecución controlado para realizar benchmarks de los algoritmos de cifrado. Aprovechando el patrón Estrategia, la clase \texttt{AlgorithmTester} interactúa con los algoritmos a través de su interfaz común, lo que permite someter a cualquiera de los esquemas implementados (Kyber, Saber, \acrshort{hqc}) a las mismas baterías de pruebas bajo condiciones idénticas. La descripción detallada de la metodología de pruebas y sus resultados se encuentra en la sección \ref{sec:testes}.
+
+
 \begin{landscape}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	% This resizes the diagram to fit perfectly on the page width
 	\resizebox{0.95\paperwidth}{!}{%
@@ -245,9 +437,9 @@ Sobre la base de las librerías en C descritas anteriormente, se ha construido u
 				\operation{+start\_negotiation()}
 				\operation{+process\_message(in input\_msg: char)}
 				\operation{+get\_shared\_secret()}
-				\operation{+handle\_encapsulation(in pk: vector)}
-				\operation{+handle\_decapsulation(in ct: vector)}
-				\operation{+transition\_to\_error(out msg: char)}
+				\operation{-handle\_encapsulation(in pk: vector)}
+				\operation{-handle\_decapsulation(in ct: vector)}
+				\operation{-transition\_to\_error(out msg: char)}
 			\end{class}
 			
 			% --- Datatype: SecureVector (ABOVE KEMProtocol) ---
@@ -308,7 +500,6 @@ Sobre la base de las librerías en C descritas anteriormente, se ha construido u
 				\stereotype{enumeration}
 				\attribute{+INIT}
 				\attribute{+WAITING\_FOR\_CT}
-				\attribute{+WAITING\_FOR\_PK}
 				\attribute{+ESTABLISHED}
 				\attribute{+FAILURE}
 			\end{class}
@@ -351,124 +542,72 @@ Sobre la base de las librerías en C descritas anteriormente, se ha construido u
 			
 		\end{tikzpicture}%
 	}
-	\caption{miau}
+	\caption{Diagrama de clases en UML para implementar la lógica criptográfica.}
 	\label{fig:logicUML}
 	
 \end{figure}
 \end{landscape}
+\section{Implementación de algoritmos en el microcontrolador}
+La integración de algoritmos postcuánticos en sistemas embebidos presenta desafíos significativos debido a la limitación de recursos. No obstante, la migración del código fuente resulta directa gracias a las implementaciones portables. La única adaptación necesaria a nivel de plataforma es la implementación de la función \texttt{randombytes}, para la generación de los \acrshort{trng} mediante el hardware. 
+\newline
 
-\begin{figure}[H]
-	\centering
-	\resizebox{\textwidth}{!}{%
-		\begin{tikzpicture}
-			
-			% ---------------------------------------------------------
-			% 1. LEFT COLUMN: The "Big" Class
-			% ---------------------------------------------------------
-			\begin{class}[text width=9cm]{SerialComunication}{0, 0}
-				\attribute{-availablePorts: vector$<$pair$<$int,wstring$>$$>$}
-				\attribute{-hSerial: HANDLE}
-				\attribute{-running: atomic$<$bool$>$}
-				\attribute{-receiveThread: tread}
-				\attribute{-receiveMutex: mutex}
-				
-				\operation{-setAvailablePorts()}
-				\operation{-receiveLoop()}
-				\operation{+SerialComunication(in bufferSize: int)}
-				\operation{+updateAvailablePorts()}
-				\operation{+openPort(in port:int)}
-				\operation{+closePort()}
-				\operation{+send(in message: str)}
-				\operation{+isBufferEmpty()}
-				\operation{+getReceivedMessage()}
-				\operation{+startReceiving()}
-				\operation{+stopReceiving()}
-				\operation{+displayAvaileblePorts()}
-				\operation{+getAvailablePorts()}
-			\end{class}
-			
-			% ---------------------------------------------------------
-			% 2. RIGHT COLUMN: The Stacked Classes
-			% ---------------------------------------------------------
-			
-			% --- TOP RIGHT: SerialPacketTransport ---
-			% CHANGED Y=0 to Y=5 so it sits ABOVE the center line
-			\begin{class}[text width=8cm]{SerialPacketTransport}{11, 0}
-				\attribute{-internalBuffer: str}
-				\operation{+SerialPacketTransport(inout s: SerialComunication)}
-				\operation{+sendPacket(in data: vector$<$char$>$)}
-				\operation{+receivePacket(out data: vector$<$char$>$, in ms: int)}
-			\end{class}
-			
-			% --- BOTTOM RIGHT: CircularBuffer ---
-			% Y=-5 is perfect for the bottom one
-			\begin{class}[text width=8cm]{CircularBuffer}{11, -4}
-				\attribute{-size: int}
-				\attribute{-head: int}
-				\attribute{-tail: int}
-				\attribute{-count: int}
-				\attribute{-buffer: str}
-				
-				\operation{+CircularBuffer(in size: int)}
-				\operation{+push(in value: str)}
-				\operation{+pop(out value: str)}
-				\operation{+isempty()}
-				\operation{+isfull()}
-				\operation{+getCount()}
-				\operation{+getSize()}
-			\end{class}
-			
-			% ---------------------------------------------------------
-			% 3. CONNECTIONS
-			% ---------------------------------------------------------
-			
-			% DEFINE THE ARROW STYLE
-			% {Diamond...}-  means "Put a diamond at the START, nothing at the END"
-			% ARROW STYLE: Diamond at the START of the line
-			\tikzset{comp/.style={{Diamond[fill=black, width=3mm, length=5mm]}-}}
-			
-			% RELATION 1: Transport (Right) -> Communication (Left)
-			% Diamond on Transport.
-			% Draw from Transport.west -> Horizontal intersection with Communication.east
-			\draw[comp] (SerialPacketTransport.west) -- (SerialPacketTransport.west -| SerialComunication.east)
-			node[midway, above] {serial};
-			
-			% RELATION 2: Communication (Left) -> Buffer (Right)
-			% Diamond on Communication.
-			% Draw from Horizontal intersection on Communication.east -> Buffer.west
-			\draw[comp] (CircularBuffer.west -| SerialComunication.east) -- (CircularBuffer.west)
-			node[midway, above, yshift=2mm] {receiveBuffer};
-			
-		\end{tikzpicture}%
-	}
-	\caption{miau}
-	\label{fig:comunicationsUML}
+
+Sin embargo, el desafío principal residió en la selección y configuración del entorno de desarrollo (IDE). Inicialmente se evaluó el uso de \textit{PSoC Creator}, la herramienta tradicional para esta familia de microcontroladores. Durante las pruebas con el algoritmo \acrshort{hqc}, que demanda una cantidad elevada de memoria (aprox. 170 KB), la ejecución fallaba sistemáticamente derivando en excepciones de hardware.
+\newline
+
+
+El análisis en tiempo de depuración reveló un comportamiento anómalo en la gestión de memoria: el puntero de pila (Stack Pointer) o los accesos a memoria apuntaban a direcciones en el rango \texttt{0x78...}, una región inválida situada aproximadamente a 1.8 GB de distancia del espacio direccionable real de la SRAM, cuya base se encuentra en \texttt{0x08...} según el manual de arquitectura \cite{infineon_psoc6_arch_trm}. Adicionalmente, PSoC Creator impone restricciones en la arquitectura de seguridad, limitando el acceso directo a los registros del \acrshort{trng} desde el núcleo principal (Cortex-M4), forzando una arquitectura maestro-esclavo con el núcleo Cortex-M0+ que añade complejidad innecesaria para este proyecto.
+\newline
+
+Debido a estas limitaciones críticas, se optó por migrar el desarrollo al entorno \textit{ModusToolbox}. Esta plataforma moderna permite el uso directo de la \textit{Peripheral Driver Library} (PDL) para controlar el \acrshort{trng} desde el núcleo M4 y gestiona el mapa de memoria de forma más eficiente, permitiendo la correcta ejecución de \acrshort{hqc}. Aunque no se ha aislado la causa raíz del fallo en el entorno anterior, el éxito en ModusToolbox se atribuye a una combinación de factores en la gestión del \textit{Linker Script}:
+\begin{itemize} 
+	\item \textbf{Gestión dinámica de memoria (Heap vs Stack):} Para soportar tamaños de clave variables, las claves y textos cifrados se reservan dinámicamente en el heap. Se hipotetiza que el script de enlazado de PSoC Creator define regiones rígidas o contiguas que provocan una colisión temprana entre el stack (creciendo hacia abajo) y el heap (creciendo hacia arriba) cuando se demandan grandes bloques contiguos para \acrshort{hqc}. 
+	\item \textbf{Optimizaciones del Compilador GCC:} ModusToolbox integra versiones más recientes del toolchain GCC ARM. Es probable que las diferencias en las optimizaciones de gestión de pila y la definición de las secciones de memoria en el script de arranque eviten el desbordamiento o la corrupción de punteros que se observaba anteriormente. 
+\end{itemize}
+
+
+\section{Diagrama de secuencia}
+En la figura \ref{fig:umltiempo} se detalla el diagrama de secuencia diseñado para validar el funcionamiento del protocolo de establecimiento de claves. La interacción sigue una arquitectura estricta de Maestro-Esclavo, donde el servidor (ordenador de propósito general) orquesta la comunicación y el PSOC actúa como periférico. Esta decisión de diseño permite desacoplar la lógica de control del dispositivo embebido, centralizando la gestión de estados y el acceso al canal serie en el servidor, lo cual facilita la escalabilidad en un hipotético entorno industrial con múltiples nodos.
+\newline
+
+El flujo de ejecución consta de tres fases diferenciadas:
+
+\begin{enumerate}
+	\item  \textbf{Inicialización y Verificación (Echo Test)}: tras la apertura del puerto COM y una espera inicial de 2 segundos para garantizar el arranque del PSOC, se ejecuta una prueba de eco (Echo Test). Esta fase es crítica para validar la integridad física del canal y la sincronización de la configuración UART. Si esta validación falla o no se recibe respuesta en la ventana de tiempo estipulada, el servidor aborta la operación inmediatamente cerrando el puerto.
 	
-\end{figure}
+	\item  \textbf{Negociación de Roles}: superado el test inicial, el servidor determina arbitrariamente qué rol desempeñará (Alice o Bob) y comunica al PSOC el rol complementario. Como se observa en la figura, esto bifurca la ejecución en dos escenarios simétricos. Es relevante notar la diferencia en la gestión del tiempo:
+	\begin{itemize}
+		\item \textbf{En el PSOC:} se utilizan esperas bloqueantes para la recepción de datos, aprovechando que el dispositivo dedica sus recursos exclusivamente a esta tarea.
+		\item \textbf{En el Servidor:} se implementan timeouts conservadores (20s y 25s) para la recepción de la clave pública y el texto cifrado respectivamente. Estos márgenes amplios son necesarios no solo para cubrir el tiempo de cómputo criptográfico del microcontrolador, si no también para compensar la latencia introducida por el buffer del puerto serie y la planificación de procesos del sistema operativo del PC.
+	\end{itemize}
+	
+	\item  \textbf{Verificación del Secreto y Limitaciones}: finalmente, para confirmar el éxito del protocolo, ambos extremos intercambian el secreto compartido obtenido. Cabe destacar dos consideraciones técnicas sobre esta etapa:
+	
+	\begin{enumerate}
+		\item \textbf{Gestión del Buffer:} se identificó un cuello de botella en la transmisión Servidor $\rightarrow$ PSoC. Para evitar el desbordamiento del buffer de recepción del microcontrolador y la consecuente pérdida de datos, se fragmenta el envío en paquetes pequeños, lo que justifica parte de la latencia observada.
+		\item \textbf{Seguridad de la Validación:} el envío del secreto compartido en texto claro por el canal serie se realiza estrictamente con fines de depuración y validación académica. Tal como se discutió en la introducción (ver sección \ref{sec:intro}), en un entorno de producción esto constituiría una vulnerabilidad crítica. La verificación de integridad debería realizarse mediante un \acrfull{hmac}, sin revelar jamás el secreto original.
+	\end{enumerate}
+\end{enumerate}
+
 
 \begin{figure}[H]
 	% This box tells LaTeX: "Pretend this content fits in \linewidth and center it [c]"
-	\makebox[\linewidth][c]{%
-		\includegraphics[width=1.2\linewidth]{figuras/umlTiempo}%
-	}
-	\caption{miau}
+
+	\includegraphics[width=0.9\linewidth]{figuras/umlTiempo}%
+	
+	\caption{Diagrama de secuencia en UML que representa un ejemplo de intercambio de claves entre un Servidor y un PSOC.}
 	\label{fig:umltiempo}
 \end{figure}
-\subsection{Diagrama de Clases y Diseño del Agente}
-La integración se ha modelado siguiendo un patrón de diseño orientado a objetos, donde cada algoritmo es encapsulado en una clase que hereda de una interfaz común \texttt{ICryptoProvider}. Esto permite al Agente cambiar de algoritmo dinámicamente según la configuración recibida por el puerto serie.
-
-La Figura \ref{fig:class_diagram} ilustra la arquitectura del sistema, destacando la relación entre el gestor de comunicaciones (\texttt{SerialManager}) y el núcleo criptográfico.
+\newpage
 
 
+\section{Tests de rendimiento realizados}
+\label{sec:testes}
 
-\section{Implementación de algoritmos en el microcontrolador}
-
-\section{Filosofia de comunicacion}
-\section{Tests realizados}
+basado en la metodología en \cite{teste4}  
 \subsection{Ciclos de CPU}
-\subsection{Throughput (Operaciones por segundo)}
-\subsection{Uso de Pila (Stack Usage)}
-\subsection{Tamaño del Binario (Code Size / Footprint)}
-\subsection{Coste de Comunicación (Overhead)}
+\subsection{Operaciones por segundo}
+\subsection{Uso de Pila}
+\subsection{Coste de Comunicación}
 \subsection{Suite de aleatoriedad a randombytes}
-limitaciones ent y funcionamiento \cite{ENTLimita} , dieharder \cite{brown2006dieharder}, Do1 \cite{U01test} y nist \cite{rngNistPaper}
+limitaciones ent  y funcionamiento \cite{ENTLimita} , dieharder \cite{brown2006dieharder}, Do1 \cite{U01test} y nist \cite{rngNistPaper}

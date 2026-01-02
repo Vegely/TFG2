@@ -1,0 +1,39 @@
+dieharder: 
+sudo apt-get install dieharder
+dieharder -a -g 201 -f clean_test.bin
+
+ent: 
+sudo apt-get install ent
+ent clean_test.bin
+
+NIST:  
+git clone https://github.com/terrillmoore/NIST-Statistical-Test-Suite.git
+cd NIST-Statistical-Test-Suite/
+./setup.sh
+
+ 	1) cd /NIST-Statistical-Test-Suite/sts 
+	2)  ./assess 1000000
+	3) 0
+	4) /home/bogurad/TestDieharder/clean_test.bin
+/home/bogurad/TestPSoc/psoc_trng_1gb.bin
+
+	5) 1
+	6) 10
+	7) 1
+
+U01: 
+sudo apt-get install libtestu01-0-dev testu01-bin
+rm run_test.c
+nano run_test.c
+#include <stdio.h>
+#include <TestU01.h>
+
+int main() {
+    char *filename = "/home/bogurad/TestDieharder/clean_test.bin";
+    unif01_Gen *gen = ufile_CreateReadBin(filename, 65536);
+    bbattery_SmallCrush(gen);
+    ufile_DeleteReadBin(gen);
+    return 0;
+}
+gcc run_test.c -o run_test -ltestu01 -lm
+./run_test
