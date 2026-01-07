@@ -1,12 +1,26 @@
 %chapter introduce un nuevo capítulo
 \chapter{Resumen}
 
-Este proyecto se resume en.................
+Este proyecto aborda el desafío crítico que supone la llegada de la computación cuántica para la seguridad de las comunicaciones industriales actuales. Ante la vulnerabilidad de los estándares de cifrado asimétrico tradicionales, se presenta un estudio comparativo y la implementación práctica de tres algoritmos de criptografía postcuántica (PQC) seleccionados en el proceso de estandarización del NIST: CRYSTALS-Kyber, Saber y HQC.
+\newline
 
-\section*{Palabras clave:} palabraclave1, palabraclave2, palabraclave3.
+El desarrollo se ha realizado sobre un sistema embebido de recursos limitados, utilizando un microcontrolador PSOC 6 BLE (ARM Cortex-M4), para evaluar la viabilidad de estos algoritmos en entornos de operación real. Se ha diseñado una arquitectura Cliente-Servidor con comunicación vía puerto serie para realizar pruebas de intercambio de claves (KEM).
+\newline
+
+Los resultados experimentales analizan métricas clave como el tiempo de cómputo, el consumo de memoria y la entropía de los generadores de números aleatorios. El análisis concluye que, mientras algoritmos como Kyber y Saber ofrecen un rendimiento muy eficiente y apto para la industria, alternativas como HQC, aunque seguras, presentan mayores exigencias de memoria que pueden limitar su uso en dispositivos de gama baja.
+
+\section*{Palabras clave:} Criptografía Postcuántica, Ciberseguridad Industrial, Sistemas Embebidos, PSOC 6, NIST, Kyber, Saber, HQC.
+
+
 
 \chapter{Abstract}
 
-In this project...
+This project addresses the critical challenge posed by the advent of quantum computing to the security of current industrial communications. In light of the vulnerability of traditional asymmetric encryption standards, this work presents a comparative study and practical implementation of three Post-Quantum Cryptography (PQC) algorithms selected in the NIST standardization process: CRYSTALS-Kyber, Saber, and HQC.
+\newline
 
-\section*{Keywords:} keyword1, keyword2, keyword3.
+The development was carried out on a resource-constrained embedded system, utilizing a PSOC 6 BLE microcontroller (ARM Cortex-M4), to evaluate the viability of these algorithms in real-world operating environments. A Client-Server architecture with serial port communication was designed to conduct Key Encapsulation Mechanism (KEM) tests.
+\newline
+
+Experimental results analyze key metrics such as computation time, memory consumption, and the entropy of random number generators. The analysis concludes that, while algorithms such as Kyber and Saber offer highly efficient performance suitable for industrial applications, alternatives like HQC, although secure, present higher memory requirements that may limit their use in low-end devices.
+
+\section*{Keywords:} Post-Quantum Cryptography, Industrial Cybersecurity, Embedded Systems, PSOC 6, NIST, Kyber, Saber, HQC.

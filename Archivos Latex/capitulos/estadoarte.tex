@@ -1,23 +1,126 @@
 \chapter{Estado del arte}
-Los artículos que de momento tengo que son relevantes mencionar, lo haré después de los fundamentos:
-\cite{NIST_IR_8413_2022} \cite{NIST_IR_8545_2025} \cite{011318_1_5.0179566} \cite{s11042-024-20535-x} \cite{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE} \cite{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption} \cite{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications} \cite{First-Order-Masked-Kyber-on-ARM-Cortex-M4} \cite{2022-414} \cite{An_overview_of_Quantum_Cryptography_and} \cite{2502.12252v1} \cite{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT} \cite{NISTFIPS203}
+En este capítulo se discute la literatura general existente respecto a sistemas de cifrado. Los detalles de literatura más relevantes respecto a los algoritmos concretos utilizados en este trabajo fin de grado se encuentran en el capítulo de fundamentos.
 \section{Introducción}
-a
-\subsection{Tipos de cifrado}
-a
-\subsection{Necesidad del cifrado asimétrico}
-a
-\section{Sistemas de intercambio de claves}
-a
-\section{Cambio en el paradigma de cifrado asimétrico. Algoritmo de Shore}
-a
-\subsection{Algoritmo de Shore}
-Generico: \cite{9508027v2} ECC: \cite{0301141v2} RSA: \cite{RESERCHFINAL}
-\section{Evolución de los algoritmos postcuánticos}
-a fundamentos y distintas alternativas a codebased \cite{SurveyCOdeBAsed}
-\section{Cifrado asimétrico postcuántico en sistemas embebidos}
-a
-\section{ALgoritmos postcuanticos}
+Una vez establecida la motivación del proyecto y la necesidad crítica de asegurar los sistemas de control industrial frente a futuras amenazas, es imprescindible contextualizar el estado actual de la tecnología criptográfica. Este capítulo ofrece una visión integral sobre la evolución de los estándares de seguridad, analizando el paradigma de la criptografía de clave pública actual y el punto de inflexión que supone la aparición de la computación cuántica.
+\newline
 
-Kyber has a very efficient key-generation procedure (see also Section 2) and is therefore particularly well
-suited for applications that use frequent key generations to achieve forward secrecy. \cite{kyber-spec-2021}
+En el panorama actual, la protección de datos se rige por marcos regulatorios y técnicos complementarios. Mientras que en Estados Unidos el Instituto Nacional de Estándares y Tecnología (\acrshort{nist}) define especificaciones técnicas concretas, en Europa el Reglamento General de Protección de Datos (GDPR) establece la obligatoriedad legal de garantizar la seguridad de la información. Ambos enfoques convergen en la recomendación de estándares robustos \cite{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}, consolidando el uso de algoritmos simétricos como \acrfull{aes} para el cifrado de datos.
+\newline
+
+No obstante, a diferencia de la estabilidad del cifrado simétrico, los mecanismos de establecimiento de claves atraviesan una transformación profunda. Este proceso de estandarización, motivado por la amenaza cuántica, ha sido un esfuerzo global liderado por el \acrshort{nist}, iniciándose formalmente con las rondas de selección en 2017-2019 y culminando sus primeras fases de estandarización recientemente entre 2024 y 2025 \cite{NIST_IR_8240_2019}\cite{NIST_IR_8309_2020}\cite{NIST_IR_8413_2022}\cite{NIST_IR_8545_2025}.
+\newline
+
+En este capítulo, en primer lugar, se revisan brevemente los criptosistemas clásicos que han dominado la seguridad informática en las últimas décadas, identificando las limitaciones que presentan ante el nuevo escenario tecnológico, específicamente debido a la vulnerabilidad frente al algoritmo de Shor y el incremento en la capacidad de cómputo cuántico.
+\newline
+
+Finalmente, se detalla el mencionado proceso de estandarización de criptografía postcuántica. Se examinan los candidatos finalistas y alternativos, cuyo estudio comparativo fundamenta la selección de los algoritmos que serán descritos matemáticamente en el capítulo de Fundamentos Generales y posteriormente implementados en la arquitectura propuesta.
+\newpage
+
+\section{Tipos de cifrado}
+Como se introdujo en la Sección \ref{sec:moti}, la criptografía moderna se divide en dos paradigmas fundamentales: simétrica y asimétrica.
+\newline
+
+La criptografía simétrica se basa en el principio de secreto compartido, donde se utiliza una única clave tanto para el proceso de cifrado como para el descifrado. Matemáticamente, el emisor transforma el texto plano utilizando la clave y el receptor realiza el proceso inverso transformando el texto cifrado en texto plano. Sin embargo, este modelo presenta un desafío inherente conocido como el problema de distribución de claves. Donde para que el sistema sea seguro, ambas partes deben haber acordado la clave previamente a través de un canal seguro. En un entorno de red abierto, transmitir esta clave sin protección comprometería toda la comunicación.
+\newline
+
+Para mitigar esta vulnerabilidad surge la criptografía asimétrica (o de clave pública). Este enfoque soluciona el problema del intercambio de secretos mediante el uso de un par de claves matemáticamente vinculadas: una clave pública para cifrar, que puede ser distribuida abiertamente, y una clave privada para descifrar, que permanece bajo custodia exclusiva del receptor.
+\newline
+
+Ante esta disyuntiva, resulta pertinente cuestionar la vigencia del cifrado simétrico si la criptografía asimétrica ya resuelve la problemática distribución de claves. La justificación fundamental reside en la eficiencia computacional. Mientras que los criptosistemas asimétricos dependen de operaciones matemáticas intensivas que introducen un elevado sobrecoste, los algoritmos simétricos están diseñados estructuralmente para el procesamiento de datos a alta velocidad. La evidencia empírica y los benchmarks de la industria confirman esta disparidad: el cifrado simétrico es entre \textbf{100 y 4.000} veces más rápido que su contraparte asimétrica, una diferencia de magnitud que varía según el algoritmo específico y el volumen de datos a procesar \cite{CryptoPP_Benchmarks} \cite{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}.
+\newline
+
+Por consiguiente, la arquitectura estándar actual es híbrida: se utiliza criptografía asimétrica exclusivamente para establecer la clave, y criptografía simétrica para el cifrado masivo de los datos \cite{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption}\cite{2022-414}. 
+
+\section{Algoritmos de cifrado clásicos. Algoritmo de Shor}
+En el ámbito del intercambio de claves clásico se han utilizado predominantemente dos algoritmos: \acrfull{rsa} y \acrfull{ecc}. Sin embargo, ambos se han demostrado vulnerables ante la computación cuántica como consecuencia del algoritmo de Shor. Pese a ello, continúan utilizándose en numerosas aplicaciones actuales, aunque la literatura reciente advierte sobre la necesidad de su obsolescencia \cite{ugwuishiwu2020overview}. El riesgo subyacente radica en que un atacante podría almacenar los mensajes cifrados hoy para descifrarlos en el futuro. Por tanto, la confidencialidad de la información crítica a largo plazo queda comprometida si depende exclusivamente de estas claves.
+\newline
+
+El algoritmo de Shor \cite{9508027v2} es un algoritmo eficiente para la factorización en números primos que utiliza las propiedades de la mecánica cuántica, específicamente el paralelismo cuántico y la interferencia, para resolver problemas intratables para la computación clásica en tiempo polinomial. Mientras que los mejores algoritmos clásicos para factorización y logaritmo discreto requieren tiempos superpolinomiales o exponenciales, el algoritmo de Shor ofrece una complejidad de $O(n^3)$. Su núcleo se basa en la Transformada Cuántica de Fourier (\acrshort{qft}), la cual permite encontrar el periodo de una función oscilatoria de manera exponencialmente más rápida que cualquier método conocido basado en física clásica.
+\newline
+
+\acrshort{rsa} es un algoritmo que fundamenta su seguridad en la dificultad computacional de factorizar grandes números enteros compuestos, típicamente el producto $N$ de dos números primos grandes $p$ y $q$. En el artículo \cite{RESERCHFINAL} y en estudios complementarios sobre la eficiencia de estos ataques \cite{bhatia2020efficient}, se demuestra que falla ante ataques cuánticos porque el algoritmo de Shor reduce el problema de la factorización a un problema de búsqueda de periodos. Utilizando la superposición cuántica, el algoritmo evalúa la función modular $f(x) = a^x \pmod N$ para múltiples valores simultáneamente y, mediante la \acrshort{qft}, extrae el periodo $r$ de dicha función. Una vez obtenido $r$, es computacionalmente sencillo para un ordenador clásico calcular los factores primos $p$ y $q$ mediante el máximo común divisor de $(a^{r/2} \pm 1, N)$, rompiendo así la clave privada.
+\newline
+
+\acrshort{ecc} es un algoritmo que basa su seguridad en la dificultad del Problema del Logaritmo Discreto en Curvas Elípticas sobre cuerpos finitos, permitiendo el uso de claves mucho más cortas que \acrshort{rsa} para un nivel de seguridad equivalente. Sin embargo, en el artículo \cite{0301141v2} se demuestra que falla ante ataques cuánticos porque una variante del algoritmo de Shor puede resolver el problema del logaritmo discreto en el grupo de puntos de la curva elíptica de manera eficiente. Es crucial destacar que \acrshort{ecc} resulta ser comparativamente más vulnerable a la computación cuántica que \acrshort{rsa} por bit de seguridad. Se estima que una clave de \acrshort{ecc} de 160 bits podría romperse utilizando aproximadamente 1000 qubits, mientras que factorizar un módulo \acrshort{rsa} de 1024 bits (que ofrece una seguridad clásica similar) requeriría alrededor de 2000 qubits. Esto implica que los ordenadores cuánticos más pequeños podrán comprometer sistemas \acrshort{ecc} antes de tener la capacidad de romper sistemas \acrshort{rsa} equivalentes.
+\newline
+
+Además, hoy en día se están haciendo rápidos avances, como se ve en las hojas de ruta hacia la computación cuántica tolerante a fallos propuesta por Microsoft Quantum \cite{microsoft2025roadmap}. Estos avances apuntan hacia la construcción de dispositivos con miles de qubits lógicos capaces de ejecutar algoritmos complejos como el de Shor, acelerando la llegada del momento en que la criptografía clásica quede obsoleta.
+
+
+\section{Evolución de los algoritmos postcuánticos. Rondas de selección del NIST}
+Ante la amenaza inminente que supone la computación cuántica para los estándares criptográficos actuales, el \acrshort{nist} inició en 2016 un proceso público de estandarización con el objetivo de seleccionar y evaluar algoritmos resistentes a ataques cuánticos. Este proceso no se planteó como una competición cerrada, sino como un esfuerzo colaborativo para identificar esquemas seguros, eficientes y flexibles para cifrado de clave pública, establecimiento de claves (\acrshort{kem}) y firma digital.
+\newline
+
+El proceso comenzó formalmente con la convocatoria de propuestas en diciembre de 2016. En la primera ronda, que se extendió hasta 2019, se recibieron un total de 82 propuestas, de las cuales 69 cumplieron los criterios mínimos de aceptación y requerimientos de presentación. Esta fase inicial se caracterizó por una gran diversidad de enfoques matemáticos, incluyendo retículas, códigos correctores de errores, isogenias y sistemas multivariables \cite{NIST_IR_8240_2019}.
+\newline
+
+Tras un periodo de análisis de seguridad y rendimiento, el \acrshort{nist} seleccionó 26 algoritmos para avanzar a la segunda ronda (2019-2020). Durante esta etapa, la comunidad criptográfica intensificó el criptoanálisis, descartando aquellos candidatos que presentaban vulnerabilidades o un rendimiento deficiente en comparación con sus competidores. De los candidatos supervivientes, se observó un predominio de las soluciones basadas en retículas estructuradas debido a su equilibrio entre tamaño de clave y velocidad de cómputo \cite{NIST_IR_8309_2020}.
+\newline
+
+La tercera ronda (2020-2022) marcó un hito decisivo en el proceso. El \acrshort{nist} identificó siete finalistas y ocho candidatos alternativos. En julio de 2022, se anunciaron los primeros algoritmos ganadores para ser estandarizados. Para el establecimiento de claves (\acrshort{kem}), se seleccionó el algoritmo CRYSTALS-Kyber, destacando por su eficiencia \cite{NIST_IR_8413_2022}.
+\newline
+
+Sin embargo, buscando la diversificación de fundamentos matemáticos para no depender exclusivamente de la seguridad de las retículas, el proceso continuó hacia una cuarta ronda (2022-2025). Esta fase se centró en evaluar \acrshort{kem}s alternativos basados en códigos y otras primitivas. Los candidatos evaluados incluyeron BIKE, Classic McEliece, \acrshort{hqc} y SIKE. Durante este periodo, se demostró la importancia de la diversificación cuando el candidato SIKE (basado en isogenias) fue roto criptográficamente. Finalmente, en marzo de 2025, el \acrshort{nist} anunció la selección de \acrshort{hqc} (basado en códigos) para su estandarización, complementando así a los estándares basados en retículas \cite{NIST_IR_8545_2025}.
+\newline
+
+Como resultado de este exhaustivo proceso de casi una década, en agosto de 2024 se publicó oficialmente el estándar FIPS 203, que especifica el Mecanismo de Encapsulamiento de Claves Basado en Retículas de Módulos (ML-KEM), derivado directamente de CRYSTALS-Kyber \cite{NISTFIPS203}.
+
+
+
+\section{Distribución Cuántica de Claves}
+En contraposición a la metodología del \acrshort{nist}, que se centra en la estandarización de algoritmos de Criptografía postcuántica basados en la complejidad computacional, la Distribución Cuántica de Claves (\acrshort{qkd}) propone un paradigma de seguridad basado en leyes físicas. Este paradigma se sustenta en el hecho de que el enfoque computacional del \acrshort{nist} presenta riesgos ante avances que demuestren la vulnerabilidad de estos algoritmos, tal como ya ocurrió en rondas anteriores con candidatos como SIKE, los cuales fueron rotos mediante nuevos ataques criptoanalíticos ejecutados en hardware clásico \cite{RubioGarcia:2023dgz}. 
+\newline
+
+Frente a este escenario de incertidumbre algorítmica, \acrshort{qkd} emerge como una alternativa que ofrece Seguridad Teórica de la Información, independiente de la capacidad computacional del adversario \cite{RubioGarcia:2023dgz}. No obstante, a pesar de sus garantías teóricas, su aplicación práctica en un entorno industrial se ve obstaculizada por barreras de implementación críticas. Una de las restricciones más severas es la exigencia de colocalización física, la cual dicta que la entidad de aplicación y el nodo \acrshort{qkd} deben estar directamente conectados para evitar la exposición de claves en enlaces clásicos, lo que obliga a utilizar hardware dedicado que resulta prohibitivo para la escalabilidad en redes industriales dispersas \cite{RubioGarcia:2023dgz} \cite{s11042-024-20535-x}. 
+\newline 
+
+A esta complejidad de infraestructura, que demanda canales ópticos duales y hardware específico, se suma un impacto negativo considerable en el rendimiento de la red. La evidencia experimental indica que la integración de \acrshort{qkd} en protocolos estándar introduce una sobrecarga de comunicación cercana al 117\%, derivada principalmente de la alta latencia en las interfaces de recuperación de claves, lo cual es incompatible con los estrictos requisitos de tiempo real necesarios para el control de procesos críticos \cite{RubioGarcia:2023dgz}. Asimismo, la gestión de recursos criptográficos presenta vulnerabilidades operativas significativas frente a ataques de agotamiento de claves. Dado que la tasa de generación de claves es un recurso finito que decae con la distancia, un atacante podría saturar el sistema mediante solicitudes masivas, obligando a implementar mecanismos de autenticación previa que dificultan aún más la integración fluida de esta tecnología en las redes actuales \cite{RubioGarcia:2023dgz} \cite{s11042-024-20535-x}.
+
+
+
+\section{Implementación en microcontroladores Cortex-M4}
+Finalmente, se revisan los resultados reportados en la literatura para implementaciones en dispositivos embebidos, con el objetivo de establecer un marco comparativo para las métricas obtenidas en el presente trabajo. La existencia de estos estudios previos valida, a su vez, la viabilidad técnica de desplegar algoritmos de criptografía postcuántica en plataformas de recursos restringidos.
+\newline
+
+Es relevante destacar que este análisis comparativo se centra específicamente en Kyber, Saber y \acrshort{hqc}. La elección de los dos primeros permite contrastar el estándar definitivo Kyber con su competidor más directo durante el proceso de selección Saber, ambos con arquitecturas de retículas muy similares. La decisión \acrshort{nist} se inclinó hacia Kyber principalmente por la mayor madurez teórica del problema \acrshort{lwe} frente al \acrshort{lwr} de Saber, y no por diferencias críticas de rendimiento. 
+\newline
+
+Por su parte, la inclusión de \acrshort{hqc} en este trabajo es fundamental para aportar diversidad criptográfica. Al ser el algoritmo basado en códigos seleccionado para la estandarización, representa la alternativa de seguridad más robusta en caso de que se descubran vulnerabilidades sistémicas en los modelos basados en retículas."
+
+
+\subsection{Plataforma de Evaluación Común: El framework pqm4}
+Para el análisis en dispositivos de recursos restringidos, se toma como referencia principal el proyecto \textbf{pqm4} \cite{pqm4_2019}, una plataforma de evaluación estandarizada que analiza el rendimiento de los algoritmos de la tercera ronda del \acrshort{nist}. Las pruebas de este framework se realizan sobre una placa STM32F4 Discovery, basada en un procesador ARM Cortex-M4 con 192 KB de RAM. La principal ventaja de utilizar esta fuente es la homogeneidad del entorno de pruebas: garantiza el uso de las mismas implementaciones para las primitivas comunes y el mismo generador de números aleatorios, asegurando así una comparación justa entre los distintos candidatos.
+\newline
+
+No obstante, es importante señalar que el banco de pruebas oficial de \textbf{pqm4} no incluye el algoritmo \acrshort{hqc}. Esto se debe a que sus requerimientos de memoria excedían la capacidad disponible (192 KB) de la placa STM32F4, haciendo inviable su implementación directa en dicho entorno. Por consiguiente, para incorporar \acrshort{hqc} a este análisis comparativo, se han extraído los métricas del estudio realizado en \cite{HQC_Optimized_2025}, donde se validó el algoritmo utilizando una placa de desarrollo NUCLEO-L4R5ZI, la cual dispone de una memoria superior de 640 KB de RAM, suficiente para albergar las claves y textos cifrados basados en códigos.
+\newline
+
+En la Tabla \ref{tab:algoritmos} se presentan los resultados provenientes de ambas fuentes para el nivel de seguridad de 256 bits que es el que se utiliza en este trabajo:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{llccc}
+		\toprule
+		\textbf{Algoritmo} & \textbf{Operación} & \textbf{Ciclos} & \textbf{Pila} (Bytes) & \textbf{Fuente} \\
+		\midrule
+		\multirow{3}{*}{Kyber-1024} 
+		& KeyGen & 1,891,737 & 15,224 & \multirow{3}{*}{\cite{pqm4_2019}} \\
+		& Encaps & 2,254,703 & 18,928 & \\
+		& Decaps & 2,407,858 & 20,496 & \\
+		\midrule
+		\multirow{3}{*}{FireSaber} 
+		& KeyGen & 3,815,672 & 20,144 & \multirow{3}{*}{\cite{pqm4_2019}} \\
+		& Encaps & 4,745,405 & 23,008 & \\
+		& Decaps & 5,402,295 & 24,592 & \\
+		\midrule
+		\multirow{3}{*}{HQC-256} 
+		& KeyGen & 296,502,394 & 117,300 & \multirow{3}{*}{\cite{HQC_Optimized_2025}} \\
+		& Encaps & 594,750,705 & 196,800 & \\
+		& Decaps & 894,101,373 & 175,100 & \\
+		\bottomrule
+	\end{tabular}%
+	\caption{Comparativa de rendimiento en un Cortex-M4 de Kyber-1024, FireSaber y HQC-256.}
+	\label{tab:algoritmos}
+\end{table}
+
+Finalmente, es relevante destacar que los datos obtenidos provienen únicamente de las implementaciones de referencia y no de las versiones optimizadas para Cortex-M4. La razón de esta elección reside en que en este Trabajo de Fin de Grado se han utilizado las implementaciones limpias para garantizar su funcionamiento en cualquier dispositivo, evitando así la necesidad de adaptar el código ensamblador específico al microprocesador PSOC utilizado.

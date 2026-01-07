@@ -6,35 +6,33 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Representación del esquema de control en línea entre un micro y un servidor.}}{1}{figure.1.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}}{6}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \small Dibujo de un vector de estado \cite {FIPS202}.}}{8}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces \small Elementos de un vector de estado \cite {FIPS202}.}}{8}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Representación visual del funcionamiento del algoritmo \texttt {sponge} \cite {FIPS202}.}}{9}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \acrshort {ntt} en comparación con los algoritmos clásicos.}}{13}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{18}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Representación del funcionamiento mediante códigos concatenados en \acrshort {hqc}.}}{26}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado.}}{31}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite {CCA2} que demuestran estas relaciones.}}{31}{figure.3.9}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Representación del protocolo empleado en los algoritmos asimétricos para establecer una clave común o secreto compartido.}}{10}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \small Dibujo de un vector de estado \cite {FIPS202}.}}{12}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \small Elementos de un vector de estado \cite {FIPS202}.}}{12}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Representación visual del funcionamiento del algoritmo \texttt {sponge} \cite {FIPS202}.}}{13}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Representación del cálculo de un producto de polinomios mediante \acrshort {ntt} en comparación con los algoritmos clásicos.}}{17}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Representación del cálculo de un producto de polinomios en Saber. Inicialmente, para polinomios de grado 255, se aplica el algoritmo Toom-Cook-4 que reduce los productos a polinomios de grado 63, ya que ofrece el mejor rendimiento asintótico. Sin embargo, conforme disminuye el tamaño de los polinomios, este rendimiento asintótico se vuelve menos eficiente, por lo que se utiliza el algoritmo de Karatsuba para reducir a polinomios de grado 15, y finalmente se realiza el producto mediante multiplicación tradicional de polinomios.}}{22}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Representación del funcionamiento mediante códigos concatenados en \acrshort {hqc}.}}{30}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Representación de las fases posibles de ataque mediante los oráculos de cifrado y descifrado.}}{35}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Representación de las equivalencias de seguridad entre los distintos esquemas de seguridad posible. Si existe una flecha entre dos esquemas \(A\) y \(B\) implica que si se da \(A\) entonces \(B\) también se cumple. Los números denotan los teoremas del artículo \cite {CCA2} que demuestran estas relaciones.}}{35}{figure.3.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de clases en UML para implementar las comunicaciones por serial.}}{48}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de clases en UML para implementar la lógica criptográfica.}}{50}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de secuencia en UML que representa un ejemplo de intercambio de claves entre un Servidor y un PSOC.}}{52}{figure.4.3}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de clases en UML para implementar las comunicaciones por serial.}}{52}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de clases en UML para implementar la lógica criptográfica.}}{54}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de secuencia en UML que representa un ejemplo de intercambio de claves entre un Servidor y un PSOC.}}{56}{figure.4.3}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces }}{56}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces }}{56}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces }}{57}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces }}{57}{figure.5.4}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces }}{58}{figure.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces }}{58}{figure.5.6}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces }}{59}{figure.5.7}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces }}{59}{figure.5.8}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces }}{60}{figure.5.9}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces }}{60}{figure.5.10}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces }}{61}{figure.5.11}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces }}{62}{figure.5.12}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Evaluación comparativa del coste computacional (ciclos de reloj) de los esquemas HQC, Kyber y Saber, segregado por arquitectura de hardware.}}{63}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Impacto de la plataforma de ejecución en el número de ciclos de CPU requeridos por cada algoritmo postcuántico individual.}}{63}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Evaluación comparativa del caudal de procesamiento (operaciones por segundo) de los esquemas HQC, Kyber y Saber, segregado por plataforma de hardware.}}{64}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Impacto de la arquitectura de hardware en el rendimiento computacional (operaciones por segundo) para cada algoritmo postcuántico individual.}}{65}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Evaluación comparativa del consumo de pila (stack usage) de los esquemas \acrshort {hqc}, Kyber y Saber, segregado por plataforma de hardware.}}{65}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Impacto de la arquitectura de hardware en los requerimientos de memoria de pila para cada algoritmo postcuántico individual.}}{66}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Comparativa de tiempos de ejecución de los distintos protocolos de comunicación.}}{68}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Comparativa de tiempos de ejecución de los distintos protocolos de comunicación excluyendo \acrshort {hqc}.}}{68}{figure.5.8}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Análisis cualitativo de la aleatoriedad del generador \texttt {randombytes} en la plataforma Windows. Se representa de izquierda a derecha: un histograma para ver si los bytes se distribuyen uniformemente en el intervalo 0-255, un mapa de bits para ver si existen patrones visuales en los números aleatorios y un gráfico de retardo para ver posible autocorrelación.}}{69}{figure.5.9}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Análisis cualitativo de la aleatoriedad del generador \texttt {randombytes} en el PSOC. Se representa de izquierda a derecha: un histograma para ver si los bytes se distribuyen uniformemente en el intervalo 0-255, un mapa de bits para ver si existen patrones visuales en los números aleatorios y un gráfico de retardo para ver posible autocorrelación.}}{69}{figure.5.10}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Representación de la transformada $\chi $ realizada en cada fila \cite {FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}}{67}{figure.Alph1.1}%
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Representación de la transformada $\chi $ realizada en cada fila \cite {FIPS202}. Arriba la matriz \(A(x,y,z)\) y abajo la matriz \(A'(x,y,z)\).}}{81}{figure.Alph1.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

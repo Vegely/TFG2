@@ -32,6 +32,27 @@ M.~Bellare, A.~Desai, D.~Pointcheval, and P.~Rogaway, ``Relations among notions
   2020.
 \newblock Consultado: 2025-05-05.
 
+\bibitem{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}
+A.~Atadoga, O.~A. Farayola, B.~S. Ayinla, O.~O. Amoo, T.~O. Abrahams, and
+  F.~Osasona, ``A comparative review of data encryption methods in the usa and
+  europe,'' {\em Computer Science \& IT Research Journal}, vol.~5, no.~2,
+  pp.~447--460, 2024.
+
+\bibitem{NIST_IR_8240_2019}
+G.~Alagic, J.~Alperin-Sheriff, D.~Apon, D.~Cooper, Q.~Dang, C.~Miller,
+  D.~Moody, R.~Peralta, R.~Perlner, A.~Robinson, D.~Smith-Tone, and Y.-K. Liu,
+  ``Status report on the first round of the nist post-quantum cryptography
+  standardization process,'' Tech. Rep. NIST IR 8240, US Department of
+  Commerce, National Institute of Standards and Technology, January 2019.
+
+\bibitem{NIST_IR_8309_2020}
+G.~Alagic, J.~Alperin-Sheriff, D.~Apon, D.~Cooper, Q.~Dang, J.~Kelsey, Y.-K.
+  Liu, C.~Miller, D.~Moody, R.~Peralta, R.~Perlner, A.~Robinson, and
+  D.~Smith-Tone, ``Status report on the second round of the nist post-quantum
+  cryptography standardization process,'' Tech. Rep. NIST IR 8309, US
+  Department of Commerce, National Institute of Standards and Technology, July
+  2020.
+
 \bibitem{NIST_IR_8413_2022}
 G.~Alagic, G.~Alagic, D.~Apon, D.~Cooper, Q.~Dang, T.~Dang, J.~Kelsey,
   J.~Lichtinger, Y.-K. Liu, C.~Miller, {\em et~al.}, ``Status report on the
@@ -44,20 +65,16 @@ G.~Alagic, G.~Alagic, D.~Apon, D.~Cooper, Q.~Dang, T.~Dang, J.~Kelsey,
   third round of the nist post-quantum cryptography standardization process,''
   tech. rep., 2022.
 
-\bibitem{011318_1_5.0179566}
-Y.~Zhang, Y.~Bian, Z.~Li, S.~Yu, and H.~Guo, ``Continuous-variable quantum key
-  distribution system: Past, present, and future,'' {\em Applied Physics
-  Reviews}, vol.~11, no.~1, 2024.
+\bibitem{CryptoPP_Benchmarks}
+{Crypto++ Project} and W.~Dai, ``{Crypto++ 5.6.0 Benchmarks: Speed Comparison
+  of Popular Crypto Algorithms}.''
+  \url{https://www.cryptopp.com/benchmarks.html}, 2009.
+\newblock Accedido: 2025-01-06.
 
-\bibitem{s11042-024-20535-x}
-M.~Kumar and B.~Mondal, ``A brief review on quantum key distribution
-  protocols,'' {\em Multimedia Tools and Applications}, pp.~1--40, 2025.
-
-\bibitem{A_COMPARATIVE_REVIEW_OF_DATA_ENCRYPTION_METHODS_IN_THE_USA_AND_EUROPE}
-A.~Atadoga, O.~A. Farayola, B.~S. Ayinla, O.~O. Amoo, T.~O. Abrahams, and
-  F.~Osasona, ``A comparative review of data encryption methods in the usa and
-  europe,'' {\em Computer Science \& IT Research Journal}, vol.~5, no.~2,
-  pp.~447--460, 2024.
+\bibitem{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}
+B.~Halak, Y.~Yilmaz, and D.~Shiu, ``Comparative analysis of energy costs of
+  asymmetric vs symmetric encryption-based security applications,'' {\em Ieee
+  Access}, vol.~10, pp.~76707--76719, 2022.
 
 \bibitem{An_Overview_and_Analysis_of_Hybrid_Encryption_The_Combination_of_Symmetric_Encryption_and_Asymmetric_Encryption}
 Q.~Zhang, ``An overview and analysis of hybrid encryption: the combination of
@@ -65,56 +82,63 @@ Q.~Zhang, ``An overview and analysis of hybrid encryption: the combination of
   international conference on computing and data science (CDS)}, pp.~616--622,
   IEEE, 2021.
 
-\bibitem{Comparative_Analysis_of_Energy_Costs_of_Asymmetric_vs_Symmetric_Encryption-Based_Security_Applications}
-B.~Halak, Y.~Yilmaz, and D.~Shiu, ``Comparative analysis of energy costs of
-  asymmetric vs symmetric encryption-based security applications,'' {\em Ieee
-  Access}, vol.~10, pp.~76707--76719, 2022.
-
-\bibitem{First-Order-Masked-Kyber-on-ARM-Cortex-M4}
-D.~Heinz, M.~J. Kannwischer, G.~Land, T.~P{\"o}ppelmann, P.~Schwabe, and
-  A.~Sprenkels, ``First-order masked kyber on arm cortex-m4,'' {\em Cryptology
-  ePrint Archive}, 2022.
-
 \bibitem{2022-414}
 M.~Anastasova, P.~Kampanakis, and J.~Massimo, ``Pq-hpke: post-quantum hybrid
   public key encryption,'' {\em Cryptology ePrint Archive}, 2022.
 
-\bibitem{An_overview_of_Quantum_Cryptography_and}
+\bibitem{ugwuishiwu2020overview}
 C.~Ugwuishiwu, U.~Orji, C.~Ugwu, and C.~Asogwa, ``An overview of quantum
-  cryptography and shor?s algorithm,'' {\em Int. J. Adv. Trends Comput. Sci.
-  Eng}, vol.~9, no.~5, 2020.
-
-\bibitem{2502.12252v1}
-D.~Aasen, M.~Aghaee, Z.~Alam, M.~Andrzejczuk, A.~Antipov, M.~Astafev,
-  L.~Avilovas, A.~Barzegar, B.~Bauer, J.~Becker, {\em et~al.}, ``Roadmap to
-  fault tolerant quantum computation using topological qubit arrays,'' 2025.
-
-\bibitem{Quantum_Resistance_Saber-Based_Group_Key_Exchange_Protocol_for_IoT}
-F.~Samiullah, M.-L. Gan, S.~Akleylek, and Y.~Aun, ``Quantum resistance
-  saber-based group key exchange protocol for iots,'' {\em IEEE Open Journal of
-  the Communications Society}, 2024.
-
-\bibitem{NISTFIPS203}
-``{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard},''
-  Federal Information Processing Standards Publication FIPS 203, National
-  Institute of Standards and Technology, Gaithersburg, MD, USA, Aug. 2024.
+  cryptography and shor's algorithm,'' {\em International Journal of Advanced
+  Trends in Computer Science and Engineering}, vol.~9, no.~5, 2020.
 
 \bibitem{9508027v2}
 P.~W. Shor, ``Polynomial-time algorithms for prime factorization and discrete
   logarithms on a quantum computer,'' {\em SIAM review}, vol.~41, no.~2,
   pp.~303--332, 1999.
 
-\bibitem{0301141v2}
-J.~Proos and C.~Zalka, ``Shor's discrete logarithm quantum algorithm for
-  elliptic curves,'' {\em arXiv preprint quant-ph/0301141}, 2003.
-
 \bibitem{RESERCHFINAL}
 S.~Singh and E.~Sakk, ``Implementation and analysis of shor?s algorithm to
   break rsa cryptosystem security,'' 2024.
 
-\bibitem{SurveyCOdeBAsed}
-V.~Weger, N.~Gassner, and J.~Rosenthal, ``A survey on code-based
-  cryptography,'' {\em arXiv preprint arXiv:2201.07119}, 2022.
+\bibitem{bhatia2020efficient}
+V.~Bhatia and K.~Ramkumar, ``An efficient quantum computing technique for
+  cracking rsa using shor's algorithm,'' in {\em 2020 IEEE 5th International
+  Conference on Computing Communication and Automation (ICCCA)}, pp.~89--94,
+  IEEE, 2020.
+
+\bibitem{0301141v2}
+J.~Proos and C.~Zalka, ``Shor's discrete logarithm quantum algorithm for
+  elliptic curves,'' {\em arXiv preprint quant-ph/0301141}, 2003.
+
+\bibitem{microsoft2025roadmap}
+{Microsoft Quantum}, ``Roadmap to fault tolerant quantum computation using
+  topological qubit arrays,'' {\em arXiv preprint arXiv:2502.12252}, 2025.
+
+\bibitem{NISTFIPS203}
+``{FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard},''
+  Federal Information Processing Standards Publication FIPS 203, National
+  Institute of Standards and Technology, Gaithersburg, MD, USA, Aug. 2024.
+
+\bibitem{RubioGarcia:2023dgz}
+C.~Rubio~Garc{\'\i}a, S.~Rommel, S.~Takarabt, J.~J. Vegas~Olmos, S.~Guilley,
+  P.~Nguyen, and I.~Tafur~Monroy, ``{Quantum-resistant Transport Layer
+  Security},'' {\em Computer Communications}, vol.~213, pp.~345--358, 2024.
+
+\bibitem{s11042-024-20535-x}
+M.~Kumar and B.~Mondal, ``A brief review on quantum key distribution
+  protocols,'' {\em Multimedia Tools and Applications}, pp.~1--40, 2025.
+
+\bibitem{pqm4_2019}
+M.~J. Kannwischer, J.~Rijneveld, P.~Schwabe, and K.~Stoffelen, ``pqm4: Testing
+  and benchmarking nist pqc on arm cortex-m4.'' Paper presented at the Second
+  PQC Standardization Conference (Santa Barbara, CA) and GitHub repository,
+  2019.
+\newblock \url{https://github.com/mupq/pqm4}.
+
+\bibitem{HQC_Optimized_2025}
+D.~Kim, J.~Choi, S.~Yoon, and S.~C. Seo, ``Optimized implementation of hqc on
+  cortex-m4,'' {\em ICT Express}, vol.~11, pp.~939--944, 2025.
+\newblock ISSN 2405-9595.
 
 \bibitem{NIST_SP_800_227_ipd_2025}
 G.~Alagic, E.~Barker, L.~Chen, D.~Moody, A.~Robinson, H.~Silberg, and
@@ -202,6 +226,10 @@ C.~A. Melchor, N.~Aragon, S.~Bettaieb, L.~Bidoux, O.~Blazy, J.-C. Deneuville,
   Quasi-Cyclic (Fourth Round Submission)},'' {\em NIST PQC Round 4 submission},
   October 2022.
 
+\bibitem{SurveyCOdeBAsed}
+V.~Weger, N.~Gassner, and J.~Rosenthal, ``A survey on code-based
+  cryptography,'' {\em arXiv preprint arXiv:2201.07119}, 2022.
+
 \bibitem{Gaborit2005ShorterKF}
 P.~Gaborit, ``Shorter keys for code based cryptography,'' in {\em Proceedings
   of the 2005 International Workshop on Coding and Cryptography (WCC 2005)},
@@ -279,7 +307,7 @@ G.~Goy, M.~Spyropoulos, N.~Aragon, P.~Gaborit, R.~Pacalet, F.~Perion,
   2025.
 
 \bibitem{pqclean_github}
-M.~J. Kannwischer, P.~Schwabe, D.~Stebila, and T.~Wiggers, ``{PQClean}: Clean,
+M.~J. Kannwischer, P.~Schwabe, D.~Stebila, and T.~Wiggers, ``Pqclean: Clean,
   portable, tested implementations of post-quantum cryptography,'' 2025.
 
 \bibitem{SSR:KSSW22}
@@ -325,5 +353,27 @@ L.~Bassham, A.~Rukhin, J.~Soto, J.~Nechvatal, M.~Smid, S.~Leigh, M.~Levenson,
   M.~Vangel, N.~Heckert, and D.~Banks, ``A statistical test suite for random
   and pseudorandom number generators for cryptographic applications,''
   2010-09-16 2010.
+
+\bibitem{Saber_ARM_2018}
+A.~Karmakar, J.~M.~B. Mera, S.~S. Roy, and I.~Verbauwhede, ``Saber on arm:
+  Cca-secure module lattice-based key encapsulation on arm,'' {\em IACR
+  Transactions on Cryptographic Hardware and Embedded Systems (TCHES)},
+  vol.~2018, no.~3, pp.~243--266, 2018.
+
+\bibitem{Faster_Kyber_2022}
+A.~Abdulrahman, V.~Hwang, M.~J. Kannwischer, and A.~Sprenkels, ``Faster kyber
+  and dilithium on the cortex-m4,'' in {\em Progress in Cryptology --
+  AFRICACRYPT 2022}, vol.~13394 of {\em Lecture Notes in Computer Science},
+  pp.~85--111, Springer, 2022.
+
+\bibitem{pablos2023secure}
+J.~I.~E. Pablos and M.~I.~G. Vasco, ``Secure post-quantum group key exchange:
+  Implementing a solution based on kyber,'' {\em IET Communications}, vol.~17,
+  no.~6, pp.~758--773, 2023.
+
+\bibitem{samiullah2025quantum}
+F.~Samiullah, M.-L. Gan, S.~Akleylek, and Y.~Aun, ``Quantum resistance
+  saber-based group key exchange protocol for iot,'' {\em IEEE Open Journal of
+  the Communications Society}, vol.~6, pp.~378--397, 2025.
 
 \end{thebibliography}

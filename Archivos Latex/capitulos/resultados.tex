@@ -5,112 +5,337 @@ En este capítulo se muestran los resultados obtenidos de aplicar las rutinas de
 
 
 \section{Test de respuesta conocida}
-Este test se realiza para comprobar que la compilación e integración de los algoritmos funciona matemáticamente igual que las implementaciones de referencia presentadas al \acrshort{nist}. Para ello, el procedimiento estándar en un \textit{Known Answer Tests} consiste en generar un fichero de respuesta (\texttt{.rsp}) a partir de una semilla inicial fija con la cual mediante el generador \texttt{rng.h} pseudoaleatorio se derivan todas las claves y textos cifrados. Si la implementación es correcta el fichero ha de ser igual al proporcionado por los autores.
-\subsection{Kyber}
-La ejecución de los tests para Kyber se completó sin incidencias. Se procesaron los 100 vectores de prueba definidos por el NIST. Al utilizar la misma semilla de entrada, la implementación generó claves y criptogramas idénticos a la referencia.
+Este test se realiza para comprobar que la compilación e integración de los algoritmos funciona matemáticamente igual que las implementaciones de referencia presentadas al \acrshort{nist}. Para ello, el procedimiento estándar en un Known Answer Tests consiste en generar un fichero de respuesta (\texttt{.rsp}) a partir de una semilla inicial fija con la cual mediante el generador \texttt{rng.h} pseudoaleatorio se derivan todas las claves y textos cifrados. Si la implementación es correcta el fichero ha de ser igual al proporcionado por los autores.
+\subsection{Kyber y Saber}
+La ejecución de los tests se completó sin incidencias. Se procesaron los 100 vectores de prueba definidos por el NIST. Al utilizar la misma semilla de entrada, la implementación generó claves y criptogramas idénticos a la referencia.
+\newline
 
-
-
-%En el Listing \ref{lst:kyber_kat} se muestra el primer vector de prueba generado por nuestra implementación, donde se verificó la coincidencia exacta de la clave pública (\texttt{pk}), la clave secreta (\texttt{sk}) y el secreto compartido (\texttt{ss}) con los valores esperados.
-%\begin{lstlisting}[caption={Extracto del fichero .rsp generado para Kyber (Vector 0)}, label={lst:kyber_kat}, basicstyle=\ttfamily\scriptsize]
-%	# kyber512
-%	count = 0
-%	seed = 632616E53E5C162547070F037A3C4D2644D25C6552272846174A698762514332
-%	pk = 753F88E022567D07...[truncado]...A3273187FDD077
-%	sk = 826F8082692F0197...[truncado]...A3273187FDD077
-%	ct = 7219927A685D26C3...[truncado]...E5D79E182D2D70
-%	ss = A3D3F1E38367A58E29E250A84D5852267667C08CC3B44B36398F81716A8C576D
-%\end{lstlisting}
-\subsection{Saber}
+En los Listings \ref{lst:kyber_kat} y \ref{lst:saber_kat} se muestra el primer vector de prueba generado donde se verifica la coincidencia exacta de la clave pública (\texttt{pk}), la clave secreta (\texttt{sk}) y el secreto compartido (\texttt{ss}) con los valores esperados.
+\begin{lstlisting}[caption={Extracto del fichero .rsp generado para Kyber.}, label={lst:kyber_kat}, basicstyle=\ttfamily\scriptsize]
+	# kyber
+	count = 0
+	seed = 061550234D158C5E...[65  bytes]...8541DBD2E1FFA1
+	pk = D22302CBD3399FAC...[3137  bytes]...A3166529B53922
+	sk = 07638FB69868F3D3...[1537  bytes]...FA9E8B872BFB8F
+	ct = A6AF29D5F5B80BD1...[1537  bytes]...858DDC4F32C013         
+	ss = B10F7394926AD3B49C5D62D5AEB531D5757538BCC0DA9E550D438F1B61BD7419
+\end{lstlisting}
+\begin{lstlisting}[caption={Extracto del fichero .rsp generado para Saber.}, label={lst:saber_kat}, basicstyle=\ttfamily\scriptsize]
+	# Saber
+	count = 0
+	seed = 061550234D158C5E...[65  bytes]...8541DBD2E1FFA1
+	pk = 7AEF892E4EE8DA1B...[1281  bytes]...70D33A813889C3
+	sk = 004000F8FFFF2F00...[3009  bytes]...09FE76F6997615
+	ct = AD37F00BCD85C038...[1441  bytes]...7274AEE4ED0C62
+	ss = B478BDF6D51F9F578E7D5134EEFD4F58D76618424E775CA4184635F925C185AD
+\end{lstlisting}
+\newpage
 \subsection{HQC}
-\section{CPU cicles}
-\subsection{Comparacion por plataforma}
+Tal y como se ha discutido previamente, la implementación de \acrshort{hqc} seleccionada para este trabajo difiere de la referencia oficial presentada en la cuarta ronda del \acrshort{nist} \cite{hqc-spec-2022}. Se ha optado por integrar la versión mantenida por el proyecto PQClean \cite{pqclean_github}, debido a su arquitectura modular que desacopla la generación de números aleatorios de la construcción de las claves.
+\newline
+
+Esta diferencia implica que los vectores de prueba (\acrshort{kat}) generados no coinciden con los publicados en la especificación oficial, dado que la secuencia determinista de aleatoriedad se aplica de forma distinta en ambas implementaciones. Aún así, aunque esto impida una verificación directa contra los valores de referencia, se ha priorizado la portabilidad y la viabilidad de la integración en el PSOC.
+\newline
+
+A pesar de la discrepancia en los valores binarios exactos, se ha verificado que las estructuras de datos y los tamaños de las claves generadas son consistentes con el estándar, validando así la corrección funcional del algoritmo adaptado. En el Listing \ref{lst:saber_hqc} se presenta el primer vector de prueba obtenido con la implementación actual.
+
+
+\begin{lstlisting}[caption={Extracto del fichero .rsp generado para HQC.}, label={lst:saber_hqc}, basicstyle=\ttfamily\scriptsize]
+	# HQC
+	count = 0
+	seed = 061550234D158C5E...[65  bytes]...8541DBD2E1FFA1
+	pk = 57CCC2E0F69353AE...[7208  bytes]...D348901605131F
+	sk = 7C9935A0B07694AA...[7302  bytes]...D348901605131F
+	ct = A6FA45DD30A85E24...[14390 bytes]...2D16BB2309286F
+	ss = E9D909D12948A8F5...[97    bytes]...8B75CECE84D408
+\end{lstlisting}
+
+\section{Ciclos de CPU}
+En este apartado se analiza el coste de ejecución de los algoritmos evaluados en términos de ciclos de CPU.
+\subsection{Comparación por plataforma}
+En la Figura \ref{fig:cyclesplatform} se evidencia que \acrshort{hqc} es el algoritmo con mayor coste computacional, situándose varios órdenes de magnitud por encima de las alternativas basadas en retículas (Saber y Kyber). Analizando el desempeño por plataforma, en el sistema embebido Kyber se posiciona como la opción más eficiente, superando al resto en todas las fases del proceso criptográfico. Por el contrario, en la arquitectura x86, Saber muestra una ligera ventaja en las operaciones de encapsulado y decapsulado, aunque este margen de mejora es significativamente menor que la superioridad que demuestra Kyber en el entorno PSOC.
+\newpage
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/cycles_platform}
-	\caption{}
+	\caption{Evaluación comparativa del coste computacional (ciclos de reloj) de los esquemas HQC, Kyber y Saber, segregado por arquitectura de hardware.}
 	\label{fig:cyclesplatform}
 \end{figure}
 
-\subsection{Comparacion por algoritmo}
+\subsection{Comparación por algoritmo}
+En la Figura \ref{fig:cyclesdevice} se evidencia la brecha de rendimiento entre la arquitectura Cortex-M4 y los procesadores de escritorio x86. El sistema embebido demanda un número de ciclos significativamente mayor para ejecutar las mismas primitivas, una diferencia que se atribuye a la carencia de extensiones vectoriales (como AVX) y de optimizaciones específicas de hardware presentes en los procesadores de PC.
+\newline
+
+Esta limitación sitúa al Cortex-M4 un orden de magnitud por encima en coste computacional para la mayoría de algoritmos, con la notable excepción de Kyber, donde ambas arquitecturas muestran un comportamiento más parejo. Finalmente, en la comparativa de escritorio, cabe destacar que el Intel Core i7 presenta una ligera ventaja en eficiencia de ciclos frente al AMD Ryzen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/cycles_device}
-	\caption{}
+	\caption{Impacto de la plataforma de ejecución en el número de ciclos de CPU requeridos por cada algoritmo postcuántico individual.}
 	\label{fig:cyclesdevice}
 \end{figure}
+\newpage
 
-\section{Throughput}
-\subsection{Comparacion por plataforma}
+\section{Caudal de Procesamiento}
+En este apartado se analiza la capacidad de procesamiento de los algoritmos evaluados. Las figuras siguientes comparan el desempeño de cada candidato en términos de caudal de procesamiento, desglosando el análisis para las operaciones de generación de claves, encapsulado y decapsulado.
+\subsection{Comparación por plataforma}
+En la figura \ref{fig:throughputplatform} se observa una gráfica dual a la de la figura \ref{fig:cyclesplatform}, es decir, los algoritmos más ligeros en ciclos ofrecen mayor caudal de procesamiento. La única excepción reseñable se encuentra en la plataforma Intel Core i7, donde se produce una ligera inversión de la tendencia entre Kyber y Saber. Mientras que en ciclos Saber parecía levemente más eficiente, en pruebas de estrés continuo Kyber alcanza un caudal de operaciones por segundo marginalmente superior. 
+\newline
+
+Asimismo, cabe destacar una limitación metodológica en la medición de \acrshort{hqc}. Debido a su elevada carga computacional, el algoritmo no logra finalizar una sola operación primitiva antes de que expire el temporizador de un segundo. Por tanto, los datos reflejados para este algoritmo no representan un flujo continuo, sino la imposibilidad de ejecutar al menos una operación completa en la unidad de tiempo.
+ 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/throughput_platform}
-	\caption{}
+	\caption{Evaluación comparativa del caudal de procesamiento (operaciones por segundo) de los esquemas HQC, Kyber y Saber, segregado por plataforma de hardware.}
 	\label{fig:throughputplatform}
 \end{figure}
 
-\subsection{Comparacion por algoritmo}
+\subsection{Comparación por algoritmo}
+En la Figura \ref{fig:throughputdevice} se acentúa la brecha de rendimiento entre el sistema embebido y los equipos de sobremesa. No obstante, esta limitación no compromete la viabilidad del diseño, dado que el PSOC actúa como nodo esclavo en la arquitectura de comunicaciones y únicamente requiere completar una operación criptográfica por cada sesión establecida. 
+\newline
+
+Por otro lado, la comparativa entre plataformas de escritorio revela un matiz importante: aunque el procesador Intel demuestra una mayor eficiencia arquitectónica (menor consumo de ciclos por operación), su rendimiento final en tiempo real se ve lastrado por una frecuencia de reloj y una velocidad de memoria RAM inferiores a las del sistema AMD, que logra un mayor caudal de procesamiento bruto.
+\newpage
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/throughput_device}
-	\caption{}
+	\caption{Impacto de la arquitectura de hardware en el rendimiento computacional (operaciones por segundo) para cada algoritmo postcuántico individual.}
 	\label{fig:throughputdevice}
 \end{figure}
 
+
 \section{Uso de pila}
-\subsection{Comparacion por plataforma}
+Esta sección recoge los resultados de las pruebas de consumo de memoria. Se representan los valores máximos de pila utilizados por cada algoritmo, obtenidos mediante la técnica de Stack Painting descrita en la metodología, permitiendo identificar los requisitos mínimos de RAM para cada candidato.
+\subsection{Comparación por plataforma}
+En la figura \ref{fig:stackplatform} se observa que \acrshort{hqc} es el algoritmo más exigente en términos de memoria, situándose casi un orden de magnitud por encima del resto. El consumo máximo registrado llega a los 175 kB, una cifra considerable si se compara con el límite físico de 288 kB del PSOC (un 60\%). Además, se aprecia que Kyber requiere menos espacio de pila que Saber.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/stack_platform}
-	\caption{}
+	\caption{Evaluación comparativa del consumo de pila (stack usage) de los esquemas \acrshort{hqc}, Kyber y Saber, segregado por plataforma de hardware.}
 	\label{fig:stackplatform}
 \end{figure}
+\newpage
+\subsection{Comparación por algoritmo}
+En la Figura \ref{fig:stackdevice} se observa una clara dependencia del consumo de pila respecto a la plataforma de ejecución. Los dos procesadores evaluados bajo Windows muestran un uso de memoria idéntico, un comportamiento esperable dado que comparten arquitectura (x86) y cadena de compilación. Por su parte, el sistema PSOC presenta una demanda de memoria ligeramente superior, aunque el incremento no es muy significativo.
+\newline
 
-\subsection{Comparacion por algoritmo}
+Desde el punto de vista algorítmico, se identifica un patrón distintivo en la distribución de la carga: 
+\begin{itemize} 
+	\item En los esquemas basados en retículas (Kyber y Saber), el pico de consumo se produce durante la Generación de Claves, debido a la manipulación de grandes matrices de polinomios para crear la estructura pública. 
+	\item En contraste, para \acrshort{hqc}, la operación crítica es el Decapsulado. Esto es coherente con la teoría, ya que esta fase implica ejecutar los complejos algoritmos de decodificación de Reed-Solomon y Reed-Muller.
+\end{itemize}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{figuras/stack_device}
-	\caption{}
+	\caption{Impacto de la arquitectura de hardware en los requerimientos de memoria de pila para cada algoritmo postcuántico individual.}
 	\label{fig:stackdevice}
 \end{figure}
-\section{Coste de comunicación y tiempo teórico de ejecución de los protocolos}
-\section{Test de aleatoriedad}
-\subsection{Plataforma Windows}
+
+
+\section{Coste de comunicación}
+En esta sección se analizan los tiempos de ejecución integrando el coste de las comunicaciones. Los resultados preliminares del \texttt{EchoTest} (Tabla \ref{tab:resumen_unificado}) revelan una asimetría notable en el rendimiento del canal.
+\newline
+
+Se observa experimentalmente que la velocidad de transferencia desde el ordenador hacia el PSOC es aproximadamente 10 veces menor que en el sentido inverso. Esto evidencia un cuello de botella en la gestión del envío de datos por parte del PC. Si bien corregir esta limitación sería necesario para un despliegue industrial, no impide la validación funcional de los algoritmos. Dado que el objetivo principal de este trabajo es la evaluación criptográfica y no la optimización de drivers de comunicaciones, se asume esta restricción como parte de las condiciones del entorno de pruebas actual.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrrr}
+		\toprule
+		\textbf{Dirección} & \textbf{Tiempo Medio} & \textbf{Desviación Típica} & \textbf{Rendimiento} & \textbf{Velocidad} & \textbf{Tasa Transm.} \\
+		& \textit{(4KB)} & \textit{(4KB)} & \textit{(kB/s)} & \textit{(Bytes/ms)} & \textit{(ms/Byte)} \\
+		\midrule
+		PC $\rightarrow$ PSOC & 5320.26 ms &  3.86 ms & 0.77 & 0.77 & 1.30 \\
+		PSOC $\rightarrow$ PC & 466.17 ms & 13.56 ms & 8.79 & 8.79 & 0.11 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Resumen de tiempos de comunicación por el canal serie.}
+	\label{tab:resumen_unificado}
+\end{table}
+
+La Tabla \ref{tab:comparacion_rendimiento} presenta los tiempos de cómputo obtenidos en una medición puntual. Si bien esta metodología no recoge la varianza estadística entre ejecuciones, los órdenes de magnitud observados son suficientes para extraer conclusiones sobre la viabilidad operativa.
+\newline
+
+Desde el punto de vista de la disponibilidad del sistema, los resultados indican que Kyber y Saber permiten un restablecimiento de sesión en un rango de 200-800 ms. Este tiempo de respuesta resulta aceptable para la mayoría de escenarios industriales, permitiendo una rápida recuperación tras un reinicio o una renegociación de claves programada. Mientras que por el contrario, \acrshort{hqc} presenta tiempos de inicialización de entre 11 y 19 segundos. Esta latencia resulta prohibitiva para operaciones críticas o de tiempo real, donde un tiempo de indisponibilidad tan prolongado durante un reinicio en caliente podría comprometer la seguridad o la estabilidad del proceso.
+\newline
+
+Finalmente, es crítico señalar que estos valores representan únicamente el límite inferior (tiempo de CPU). En un despliegue real, a estas cifras se debe sumar la latencia de transmisión del canal (analizada en la sección anterior), lo que dilataría aún más el tiempo total de recuperación de servicio.
+\begin{table}[H]
+	\centering
+	
+	\begin{tabular}{llrr}
+		\toprule
+		\textbf{Algoritmo} & \textbf{Operación} & \textbf{Tiempo ARM} & \textbf{Tiempo PSOC} \\
+		& & \textit{(ms)} & \textit{(ms)} \\
+		\midrule
+		\multirow{3}{*}{\textbf{HQC}} 
+		& Gen. Claves & 9.1  & 5587   \\
+		& Encap & 17.0  & 11177   \\
+		& Decap & 22.7  &13763   \\
+		\midrule
+		\multirow{3}{*}{\textbf{Kyber}} 
+		& Gen. Claves & 1.9  & 100   \\
+		& Encap & 1.8  & 150   \\
+		& Decap & 0.1  & 464   \\
+		\midrule
+		\multirow{3}{*}{\textbf{Saber}} 
+		& Gen. Claves & 2.0  & 113   \\
+		& Encap & 1.5  & 194   \\
+		& Decap & 0.1  & 725  \\
+		\bottomrule
+	\end{tabular}
+	\caption{Tiempos de cálculo en función del dispositivo utilizado.}
+	\label{tab:comparacion_rendimiento}
+\end{table}
+
+
+Finalmente, las Figuras \ref{fig:timinganalisis} y \ref{fig:timinganalisis2} ilustran el tiempo total de ejecución de los protocolos, representando la latencia extremo a extremo del sistema. Cabe señalar que la Figura \ref{fig:timinganalisis2} ofrece una vista detallada de los datos presentados en la primera gráfica, excluyendo los valores de \acrshort{hqc} para visualizar correctamente las diferencias de escala entre los algoritmos más rápidos. En ambas figuras, la notación 1 identifica el escenario donde el PC actúa como Iniciador (Generador de Claves), mientras que el 2 denota el caso inverso, con el PSOC iniciando el protocolo.
+\newline
+
+Del análisis de estos tiempos se desprende que el cuello de botella principal del sistema reside en la transmisión de datos a través del enlace descendente (PC $\rightarrow$ PSOC). En los esquemas basados en retículas, Kyber y Saber, el tiempo dedicado al cómputo criptográfico resulta prácticamente despreciable, quedando eclipsado por la latencia de transferencia introducida por el driver del sistema operativo. Sin embargo, \acrshort{hqc} constituye una excepción notable a esta tendencia, exhibiendo tiempos de cómputo masivos. Este comportamiento se justifica por su fundamento algorítmico: al basarse en códigos correctores y carecer de la estructura algebraica de anillo de polinomios presente en los esquemas de retículas, no puede beneficiarse de optimizaciones aritméticas agresivas como la \acrshort{ntt}, lo que penaliza severamente su rendimiento temporal.
+\newline
+
+Considerando estos factores y asumiendo un escenario ideal con tiempos de transmisión simétricos, Kyber se consolida como el algoritmo más eficiente globalmente al ofrecer el mejor equilibrio entre carga computacional y tamaño de claves. Por último, es relevante discutir la estrategia de transmisión de material criptográfico. Aunque ciertos estándares permiten la expansión de semillas (enviar solo una semilla pequeña y regenerar la matriz en el destino para ahorrar ancho de banda), en este trabajo se ha optado por transmitir la clave pública completa. Esta decisión se fundamenta en la necesidad de mantener la estricta fidelidad con la implementación de referencia del \acrshort{nist} para garantizar la interoperabilidad y la corrección funcional. No obstante, en un despliegue de producción real, la implementación de la expansión de semillas constituiría una optimización obligatoria para reducir la latencia de red.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/1_histogramWIN}
-	\caption{}
-	\label{fig:1histogramwin}
+	\includegraphics[width=0.7\linewidth]{figuras/timingAnalisis}
+	\caption{Comparativa de tiempos de ejecución de los distintos protocolos de comunicación.}
+	\label{fig:timinganalisis}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/2_bitmapWIN}
-	\caption{}
-	\label{fig:2bitmapwin}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/3_lagplotWIN}
-	\caption{}
-	\label{fig:3lagplotwin}
+	\includegraphics[width=0.7\linewidth]{figuras/timingAnalisis2}
+	\caption{Comparativa de tiempos de ejecución de los distintos protocolos de comunicación excluyendo \acrshort{hqc}.}
+	\label{fig:timinganalisis2}
 \end{figure}
 
-\subsection{PSOC}
+\newpage
+\section{Evaluación de la Aleatoriedad}
+
+En esta sección se presentan los resultados de la caracterización estocástica de la función \texttt{randombytes}, comparando su comportamiento en las dos plataformas evaluadas: el entorno de escritorio (Windows) y el sistema embebido (PSOC). La validación se ha dividido en dos fases: un análisis cualitativo preliminar y una batería exhaustiva de pruebas estadísticas.
+
+\subsection{Análisis Cualitativo Visual}
+En una primera aproximación, se ha verificado la distribución espacial y la ausencia de patrones visuales en los datos generados. Tal como ilustran las Figuras \ref{fig:analisiscombinadowin} (Windows) y \ref{fig:analisiscombinadopsoc} (PSOC), ambas plataformas muestran resultados consistentes con una distribución uniforme ideal: \begin{itemize} 
+	\item \textbf{Histogramas}: los bytes se reparten equitativamente en el rango [0-255]. 
+	\item \textbf{Mapas de Bits}: no se aprecian patrones geométricos, líneas o agrupamientos anómalos. 
+	\item \textbf{Gráficos de Retardo}: la nube de puntos dispersa confirma la ausencia de autocorrelación lineal evidente entre muestras consecutivas.
+\end{itemize}
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/1_histogramPSOC}
-	\caption{}
-	\label{fig:1histogrampsoc}
+	\includegraphics[width=1\linewidth]{figuras/analisis_combinadoWIN}
+	\caption{Análisis cualitativo de la aleatoriedad del generador \texttt{randombytes} en la plataforma Windows. Se representa de izquierda a derecha: un histograma para ver si los bytes se distribuyen uniformemente en el intervalo 0-255, un mapa de bits para ver si existen patrones visuales en los números aleatorios y un gráfico de retardo para ver posible autocorrelación.}
+	\label{fig:analisiscombinadowin}
 \end{figure}
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/2_bitmapPSOC}
-	\caption{}
-	\label{fig:2bitmappsoc}
+	\includegraphics[width=1\linewidth]{figuras/analisis_combinadopsoc}
+	\caption{Análisis cualitativo de la aleatoriedad del generador \texttt{randombytes} en el PSOC. Se representa de izquierda a derecha: un histograma para ver si los bytes se distribuyen uniformemente en el intervalo 0-255, un mapa de bits para ver si existen patrones visuales en los números aleatorios y un gráfico de retardo para ver posible autocorrelación.}
+	\label{fig:analisiscombinadopsoc}
 \end{figure}
-\begin{figure}[H]
+\newpage
+
+\subsection{Validación Estadística (Baterías de Test)}
+
+\subsubsection{Resultados en Windows}
+
+El generador en entorno Windows superó satisfactoriamente las baterías ENT y NIST. Sin embargo, se detectaron anomalías específicas en pruebas avanzadas:
+
+\begin{itemize} 
+	\item TestU01 (Hamming Weights): esta prueba mide el número de bits en bloques consecutivos que se distribuyen con menos varianza de lo que se espera de un proceso puramente aleatorio. Se obtuvo un p-valor sospechosamente alto.
+	
+	\item Dieharder (Bitstream Test): esta prueba analiza la frecuencia de palabras de 20 bits superpuestas que debe distribuirse como una normal con media 141909 y varianza 409. Se obtuvo un p-valor sospechosamente alto.
+\end{itemize}
+
+Ambos fallos apuntan al fenómeno de \esquote{super-uniformidad}. Esto no implica una falta de aleatoriedad de por si, sino que es un artefacto común en los generadores criptográficamente seguros de los sistemas operativos modernos, los cuales aplican técnicas de blanqueo agresivas que fuerzan a los datos a parecer \esquote{más perfectos} estadísticamente de lo que se esperaría en un proceso estocástico natural.
+
+
+\subsubsection{Resultados en PSOC}
+
+En el sistema embebido, el generador superó las pruebas ENT, NIST y TestU01 sin incidencias. No obstante, la batería Dieharder reveló vulnerabilidades sutiles:
+\begin{itemize} 
+	\item Fallo en Marsaglia Tsang GCD: se obtuvieron p-valores consistentemente bajos en la prueba del Máximo Común Divisor. Esto indica un sesgo sistemático en la relación entre enteros consecutivos. Para mitigar este hallazgo en un entorno de producción, sería necesario aplicar una etapa de postprocesado (como un hash criptográfico sobre la salida) para romper estas relaciones aritméticas. 
+	\item Sospecha en STS Runs: se registró un p-valor demasiado alto  en la prueba de rachas de bits idénticos. Sin embargo, dado que este comportamiento solo se manifestó en una única muestra (la número 14) del conjunto total, se clasifica como un falso positivo estadístico o una anomalía puntual, a diferencia de la superuniformidad observada en Windows. 
+\end{itemize}
+
+
+\section{Discusión de los resultados}
+En esta sección se discuten los resultados, considerando el estado del arte y las
+metodologías alternativas que podrían haberse aplicado, así como las razones que
+justificaron las decisiones tomadas en este trabajo.
+
+\subsection{Elección de los algoritmos Kyber, Saber y HQC}
+Tal y como se detalló en el estado del arte, el proceso de selección del \acrshort{nist} comenzó con un total de 69 propuestas válidas. Tras las sucesivas fases eliminatorias, la tercera ronda culminó con la estandarización de Kyber frente a otros finalistas como NTRU, McEliece y Saber. La deliberación final se centró especialmente en la comparativa entre estos dos últimos, decantándose por Kyber debido a que, según la literatura \cite{nistPQCround3}, existen mayores garantías de seguridad sobre el problema \acrshort{lwe} que sobre \acrshort{lwr}, además de presentar una eficiencia ligeramente superior en sus implementaciones estándar.
+\newline
+
+Sin embargo, el estudio de Saber mantiene una gran relevancia en el contexto de este trabajo. Aunque Kyber es más rápido en condiciones ideales, su rendimiento sufre una degradación severa (llegando a ser hasta cinco veces más lento)\cite{kyber-spec-2021} al implementar protecciones contra ataques de canal lateral. Esto se debe a la dificultad intrínseca de enmascarar la \acrshort{ntt} y las operaciones de reducción modular. Por el contrario, Saber utiliza aritmética modular en potencias de dos, lo que facilita su protección frente a ataques de trazas sin penalizar significativamente el rendimiento \ref{eq:saberSEc}, a pesar de emplear algoritmos como Toom-Cook y Karatsuba . Por tanto, analizar Saber resulta fundamental en entornos embebidos industriales donde el acceso físico al dispositivo es un riesgo real. Si bien la implementación experimental de dichas contramedidas excede el alcance de este proyecto por su elevada complejidad técnica, esta justificación teórica valida su inclusión en el estudio.
+\newline
+
+Por último, la inclusión de \acrshort{hqc} responde a la necesidad de evaluar una alternativa basada en códigos, seleccionada por el \acrshort{nist} como respaldo ante una posible vulneración de las retículas. Si bien existen implementaciones en el estado del arte sobre diversas plataformas embebidas, el interés de este trabajo radica en verificar su comportamiento en un entorno con restricciones de hardware particularmente severas (como la mitad de memoria RAM respecto a otras plataformas de referencia \cite{HQC_Optimized_2025}). De este modo, el estudio busca demostrar empíricamente la viabilidad de integrar esta alternativa robusta en microcontroladores industriales donde la memoria es un recurso crítico, garantizando una opción de seguridad ante futuros cambios de paradigma.
+
+
+
+\subsection{Implementaciones utilizadas}
+Respecto al software empleado, en este trabajo se ha optado por las denominadas implementaciones limpias. Estas versiones eliminan las dependencias específicas de la plataforma de compilación, permitiendo su intercambio entre dispositivos con un único ajuste: la modificación de la fuente de entropía en el archivo \texttt{randombytes}. De hecho, para las plataformas de escritorio (Windows y Unix), esta portabilidad es nativa, dado que la implementación de referencia de \texttt{randombytes} incorpora mecanismos de detección automática del sistema operativo. Esta característica ha sido fundamental para estandarizar las pruebas y garantizar una comparativa homogénea entre el entorno embebido y el de sobremesa.
+\newline
+
+No obstante, es importante destacar la existencia de implementaciones altamente optimizadas para microcontroladores STM32 \cite{Saber_ARM_2018}\cite{Faster_Kyber_2022}\cite{HQC_Optimized_2025}, las cuales emplean código ensamblador para acelerar las operaciones criptográficas críticas y reducir el uso de la memoria de pila. Sin embargo, se decidió prescindir de ellas en este estudio debido a la complejidad de su portabilidad. Aunque tanto la placa utilizada (PSOC) como las STM32 comparten un núcleo Cortex-M4, estas optimizaciones suelen depender de periféricos específicos o configuraciones del entorno de desarrollo original, haciendo que su adaptación no sea trivial.
+\newline
+
+En cualquier caso, dado que los resultados obtenidos con las implementaciones de referencia ya demuestran la viabilidad técnica de la propuesta, la aplicación de estas optimizaciones específicas constituiría una fase posterior de refinamiento, innecesaria para superar este primer umbral de validación funcional.
+
+\subsection{Comparación de resultados}
+En la implementación práctica se corroboran las previsiones teóricas: Kyber presenta una ligera ventaja de eficiencia frente a Saber, situándose ambos, al menos, un orden de magnitud por encima de \acrshort{hqc} tanto en velocidad de cómputo como en consumo de memoria de pila.
+\newline
+
+Sin embargo, al contrastar los resultados experimentales (Tabla \ref{tab:mis_resultados}) con los del estado del arte (Tabla \ref{tab:algoritmos}), se observa que los tamaños de pila obtenidos en este trabajo son ligeramente superiores, salvo en el caso de \acrshort{hqc}. Asimismo, existe una discrepancia sistemática en el conteo de ciclos de CPU, siendo los valores obtenidos aquí aproximadamente el doble ($\approx \times 2$) que los reportados en la literatura. Esta diferencia se atribuye a la configuración de la frecuencia de reloj. Mientras que en estudios previos se tiende a reducir la velocidad a 24 MHz para sincronizar la CPU con la velocidad de acceso de la memoria Flash (eliminando tiempos muertos), en este Trabajo de Fin de Grado se ha operado a la frecuencia nominal de 100 MHz. Esta mayor velocidad obliga al procesador a introducir ciclos de espera mientras la memoria Flash recupera los datos, lo que infla el conteo total de ciclos sin que ello implique necesariamente un peor rendimiento en tiempo real.
+\newline
+
+Desde un punto de vista funcional, dado que el establecimiento de claves es una operación de inicialización única (ejecutada solo al encender o reiniciar el dispositivo), el rendimiento de cómputo obtenido es plenamente aceptable. En este sentido, tiempos de arranque totales inferiores a 0,5 segundos resultan viables en la mayoría de entornos industriales electromecánicos cuyas dinámicas no requieren respuestas inmediatas en la fase de inicialización, especialmente si se mitigan las latencias de comunicación observadas previamente, que constituyen el principal cuello de botella actual. La única excepción es \acrshort{hqc}, donde la carga computacional y de transmisión es excesiva, siendo imprescindible buscar una implementación más optimizada para garantizar su viabilidad práctica.
+
+\begin{table}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figuras/3_lagplotPSOC}
-	\caption{}
-	\label{fig:3lagplotpsoc}
-\end{figure}
+	
+	
+	\begin{tabular}{llcc}
+		\toprule
+		\textbf{Algoritmo} & \textbf{Operación} & \textbf{Ciclos} & \textbf{Pila} (Bytes)  \\
+		\midrule
+		\multirow{3}{*}{Kyber} 
+		& KeyGen & 3,410,769 & 16,080  \\
+		& Encaps & 4,096,689 & 19,760  \\
+		& Decaps & 4,116,277 & 21,336  \\
+		\midrule
+		\multirow{3}{*}{Saber} 
+		& KeyGen & 7,141,561 & 20,384  \\
+		& Encaps & 8,790,967 & 23,512  \\
+		& Decaps & 9,771,075 & 24,992  \\
+		\midrule
+		\multirow{3}{*}{HQC} 
+		& KeyGen & 571,896,356 & 103,596  \\
+		& Encaps & 1,148,267,355 & 161,364  \\
+		& Decaps & 1,743,477,982 & 175,820 \\
+		\bottomrule
+	\end{tabular}%
+	\caption{Rendimiento experimental obtenido en la plataforma PSOC para los algoritmos Kyber, Saber y HQC.}
+	\label{tab:mis_resultados}
+\end{table}
+
+\subsection{Análisis del cuello de botella en comunicaciones}
+Como se evidencia en la Tabla \ref{tab:resumen_unificado} y en las Figuras \ref{fig:timinganalisis} y \ref{fig:timinganalisis2}, el principal cuello de botella del sistema reside en la transmisión de datos desde el PC hacia el PSOC. Este fenómeno se atribuye a la gestión de recursos del sistema operativo Windows, el cual introduce una sobrecarga significativa en las operaciones de entrada/salida a través del puerto serie virtual. Al no tratarse de un sistema de tiempo real, la pila de controladores USB y el planificador de procesos de Windows priorizan el throughput sobre la latencia, agrupando transmisiones y añadiendo retardos no deterministas que penalizan el envío de pequeñas ráfagas de datos.
+\newline
+
+Una estrategia potencial para mitigar este problema sería la migración del software de control a un entorno basado en UNIX, cuya arquitectura de gestión de entrada/salida y acceso a dispositivos suele ofrecer menores latencias y un control más granular sobre los buffers de transmisión. Sin embargo, la aplicación actual ha sido desarrollada utilizando librerías y llamadas al sistema nativas de Windows para la gestión del puerto serie. La refactorización necesaria para adaptar esta capa de comunicaciones a un entorno UNIX implica una carga de desarrollo que, por su extensión y complejidad técnica, excede el alcance y los objetivos centrados en la criptografía de este TFG. Asimismo, se descartó el uso de máquinas virtuales, pues intentar caracterizar tiempos de respuesta de hardware físico desde una capa de emulación software carece de rigor técnico y validez experimental
+\newline
+
+Por último, es importante destacar que el tamaño de paquete seleccionado (4096 bytes) representa un compromiso óptimo de diseño. Aumentar este tamaño (por ejemplo, a 8192 bytes) provoca la saturación de los buffers internos del PSOC, observándose pérdidas de paquetes a partir de los 7000 bytes en pruebas preliminares. Por el contrario, disminuir excesivamente la carga útil (p.ej. a 64 bytes) reduce drásticamente la eficiencia del canal, duplicando la latencia total debido al incremento proporcional en el número de cabeceras y operaciones de gestión de interrupciones necesarias para procesar la misma cantidad de información.
+\newpage
+
+\subsection{Evaluación de la seguridad y la aleatoriedad}
+Por último, es fundamental destacar la validación del generador de números aleatorios, un componente crítico para la seguridad del intercambio de claves según las especificaciones técnicas de los algoritmos. Los resultados obtenidos confirman que, en términos generales, la fuente de entropía empleada es válida para las aplicaciones criptográficas de este trabajo.
+\newline
+
+Sin embargo, en el caso específico del PSOC, se detectó un fallo en la prueba Marsaglia Tsang GCD, lo que evidencia la existencia de correlaciones aritméticas sutiles entre números consecutivos generados por el hardware. Para mitigar este sesgo, es necesario aplicar una etapa de postprocesamiento. Dado que algoritmos como Kyber, Saber y \acrshort{hqc} integran internamente funciones de hash, estas actúan implícitamente como mecanismos de blanqueo o extracción de aleatoriedad. Gracias a las propiedades de difusión y efecto avalancha de estas funciones, cualquier patrón lineal en la fuente de entropía original es destruido, garantizando que la secuencia de salida final posea una distribución estadística uniforme e indistinguible del ruido aleatorio, subsanando así las deficiencias del generador físico.
+

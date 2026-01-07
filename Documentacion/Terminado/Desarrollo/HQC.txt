@@ -1,0 +1,3 @@
+https://github.com/PQClean/PQClean?tab=readme-ov-file
+
+https://github.com/dsprenkels/randombytes?tab=readme-ov-file

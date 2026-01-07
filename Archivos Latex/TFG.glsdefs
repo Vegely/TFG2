@@ -838,3 +838,115 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{aes}%
+{%
+name={\acronymfont {\glsentryshort {aes}}},%
+sort={AES},%
+type={acronym},%
+first={AES},%
+firstplural={AESs},%
+text={AES},%
+plural={AESs},%
+description={Advanced Encription Standart},%
+descriptionplural={Advanced Encription Standart},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Advanced Encription Standart},%
+longplural={Advanced Encription Standarts},%
+short={AES},%
+shortplural={AESs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{qkd}%
+{%
+name={\acronymfont {\glsentryshort {qkd}}},%
+sort={QKD},%
+type={acronym},%
+first={QKD},%
+firstplural={QKDs},%
+text={QKD},%
+plural={QKDs},%
+description={Distribución Cuántica de Claves},%
+descriptionplural={Distribución Cuántica de Claves},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Distribución Cuántica de Claves},%
+longplural={Distribución Cuántica de Clavess},%
+short={QKD},%
+shortplural={QKDs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{qft}%
+{%
+name={\acronymfont {\glsentryshort {qft}}},%
+sort={QFT},%
+type={acronym},%
+first={QFT},%
+firstplural={QFTs},%
+text={QFT},%
+plural={QFTs},%
+description={Transformada Cuántica de Fourier},%
+descriptionplural={Transformada Cuántica de Fourier},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Transformada Cuántica de Fourier},%
+longplural={Transformada Cuántica de Fouriers},%
+short={QFT},%
+shortplural={QFTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{gake}%
+{%
+name={\acronymfont {\glsentryshort {gake}}},%
+sort={GAKE},%
+type={acronym},%
+first={GAKE},%
+firstplural={GAKEs},%
+text={GAKE},%
+plural={GAKEs},%
+description={Group Authenticated Key Exchange},%
+descriptionplural={Group Authenticated Key Exchange},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Group Authenticated Key Exchange},%
+longplural={Group Authenticated Key Exchanges},%
+short={GAKE},%
+shortplural={GAKEs},%
+counter={page},%
+parent={},%
+%
+}%
+

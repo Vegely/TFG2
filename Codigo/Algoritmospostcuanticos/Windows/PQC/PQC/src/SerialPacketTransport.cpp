@@ -19,7 +19,7 @@ bool SerialPacketTransport::sendPacket(const std::vector<unsigned char>& data) {
     frame.push_back((char)((len >> 8) & 0xFF));
     frame.append((char*)data.data(), data.size());
 
-    const size_t CHUNK_SIZE = 64;
+    const size_t CHUNK_SIZE = 4096;
 
     for (size_t i = 0; i < frame.size(); i += CHUNK_SIZE) {
         size_t currentSize = std::min(CHUNK_SIZE, frame.size() - i);

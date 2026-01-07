@@ -1,0 +1,5 @@
+On the powershell:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
+
+Dependencies:
+CMake 4.0.3

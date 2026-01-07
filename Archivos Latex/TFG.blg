@@ -17,18 +17,18 @@ A level-1 auxiliary file: capitulos/apendice.aux
 The style file: ieeetr.bst
 Database file #1: bibliografia/bibliografia.bib
 Warning--entry type for "pqclean_github" isn't style-file defined
---line 155 of file bibliografia/bibliografia.bib
+--line 293 of file bibliografia/bibliografia.bib
 Warning--entry type for "sprenkels_randombytes_2017" isn't style-file defined
---line 171 of file bibliografia/bibliografia.bib
-I was expecting a `,' or a `}'---line 185 of file bibliografia/bibliografia.bib
+--line 309 of file bibliografia/bibliografia.bib
+I was expecting a `,' or a `}'---line 323 of file bibliografia/bibliografia.bib
  :  commit       = {a612509} 
  :                           % Opcional: el hash del commit si quieres ser muy preciso
 I'm skipping whatever remains of this entry
 Warning--empty journal in FIPS202
 Warning--empty institution in NIST_IR_8413_2022
 Warning--empty institution in NIST_IR_8545_2025
-Warning--empty author in NISTFIPS203
 Warning--empty journal in RESERCHFINAL
+Warning--empty author in NISTFIPS203
 Warning--empty author in nistPQCround3
 Warning--empty journal in nistPQCround3
 Warning--empty author in nistPQCround4
@@ -38,45 +38,45 @@ Warning--empty journal in modlwr
 Warning--empty journal in Karatsuba
 Warning--can't use both volume and number fields in 24hqc
 Warning--empty publisher in QROM
-You've used 66 entries,
+You've used 74 entries,
             1876 wiz_defined-function locations,
-            882 strings with 17518 characters,
-and the built_in function-call counts, 15569 in all, are:
-= -- 1390
-> -- 831
-< -- 1
-+ -- 304
-- -- 238
-* -- 1142
-:= -- 2335
-add.period$ -- 80
-call.type$ -- 66
-change.case$ -- 64
+            934 strings with 19361 characters,
+and the built_in function-call counts, 18234 in all, are:
+= -- 1664
+> -- 945
+< -- 3
++ -- 345
+- -- 271
+* -- 1345
+:= -- 2706
+add.period$ -- 91
+call.type$ -- 74
+change.case$ -- 72
 chr.to.int$ -- 0
-cite$ -- 80
-duplicate$ -- 758
-empty$ -- 1492
-format.name$ -- 238
-if$ -- 3680
+cite$ -- 88
+duplicate$ -- 881
+empty$ -- 1720
+format.name$ -- 271
+if$ -- 4322
 int.to.chr$ -- 0
-int.to.str$ -- 66
-missing$ -- 56
-newline$ -- 215
-num.names$ -- 63
-pop$ -- 281
+int.to.str$ -- 74
+missing$ -- 61
+newline$ -- 242
+num.names$ -- 71
+pop$ -- 302
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 421
+skip$ -- 520
 stack$ -- 0
-substring$ -- 718
-swap$ -- 228
-text.length$ -- 1
+substring$ -- 929
+swap$ -- 288
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 14
-while$ -- 138
-width$ -- 68
-write$ -- 600
+while$ -- 167
+width$ -- 76
+write$ -- 688
 (There was 1 error message)

@@ -241,7 +241,7 @@ Esta clase es esencial para el modelo criptográfico mediante agentes descrito e
 \begin{itemize}
 	\item \textbf{Protocolo de encabezado}: para distinguir el inicio y fin de cada mensaje en el flujo continuo del puerto serie, la clase antepone a cada paquete una cabecera de 16 bits (2 bytes) en formato Little Endian. Esta cabecera indica la longitud exacta de la carga útil, permitiendo gestionar paquetes de hasta 65.535 bytes (64 KB).
 	
-	\item \textbf{Empaquetación en el envío}: el método \texttt{sendPacket} no envía el mensaje completo de golpe, si no que realiza una fragmentación en bloques de 64 bytes. Esta estrategia se utiliza para evitar saturar los buffers internos del PSOC y mejorar la estabilidad de la transmisión.
+	\item \textbf{Empaquetación en el envío}: el método \texttt{sendPacket} no envía el mensaje completo de golpe, si no que realiza una fragmentación en bloques de 4096 bytes. Esta estrategia se utiliza para evitar saturar los buffers internos del PSOC y mejorar la estabilidad de la transmisión.
 	
 	\item \textbf{Recepción con reensamblado y Timeout}: el método \texttt{receivePacket} implementa una lógica de lectura en dos fases: primero espera la recepción de los 2 bytes de cabecera para conocer el tamaño esperado y, posteriormente, acumula los fragmentos recibidos hasta completar el paquete. Para evitar bloquear el programa permanentemente se introduce un tiempo de espera o timeout, que aborta la operación si el paquete no se completa dentro del tiempo estipulado.
 	\newline
@@ -603,11 +603,182 @@ El flujo de ejecución consta de tres fases diferenciadas:
 
 \section{Tests de rendimiento realizados}
 \label{sec:testes}
+La validación experimental se basa en la metodología propuesta en \cite{teste4}, priorizando el análisis de ciclos de CPU para aislar la eficiencia algorítmica de la velocidad de reloj del hardware. No obstante, para caracterizar el comportamiento del sistema en un entorno de producción, se complementa esta métrica teórica con medidas de rendimiento práctico (throughput), es decir, número de ejecuciones por segundo, y un análisis exhaustivo del consumo de memoria de la pila (stack), factor limitante principal en sistemas embebidos.
+\newline
 
-basado en la metodología en \cite{teste4}  
+Adicionalmente, el estudio evalúa la sobrecarga introducida por la transmisión de datos (coste de comunicación) y valida la robustez criptográfica del sistema mediante el análisis estadístico de los generadores de números aleatorios, asegurando así la integridad de las claves generadas.
+
+\subsection{Dispositivos ensayados}
+En este trabajo se ha ensayado la placa de desarrollo PSOC cyproto-063-ble y dos ordenadores con las características de la  tabla \ref{tab:specs}:
+
+\begin{table}[H]
+	\centering
+	\resizebox{\textwidth}{!}{% Ajusta la tabla al ancho si es necesario
+		\begin{tabular}{@{}l l l l @{}}
+			\toprule
+			\textbf{Sistema} & \textbf{Procesador} & \textbf{Frecuencia} & \textbf{Memoria RAM} \\ \midrule
+			\textbf{Portátil} & Intel Core i7-8750H & 2.20 GHz (Base) & 16 GB \\
+			& (6 Núcleos / 12 Hilos) & 4.10 GHz (Máx.) & (2667 MHz) \\ \midrule
+			\textbf{Torre} & AMD Ryzen 7 5800X & 3.80 GHz (Base) & 32 GB \\
+			& (8 Núcleos / 16 Hilos) & 4.70 GHz (Máx.) & (3600 MHz) \\ \midrule
+			\textbf{PSOC 6 BLE} & CY8C6347BZI-BLD53 & 100 MHz (Configurada) & 288 KB \\
+			(CY8CPROTO-063) & (Dual Core M4/M0+) & 150 MHz (Máx. Capaz) & (SRAM) \\ \midrule
+		\end{tabular}
+	}
+	\caption{Comparativa de especificaciones de los sistemas evaluados}
+	\label{tab:specs}
+\end{table}
+
 \subsection{Ciclos de CPU}
-\subsection{Operaciones por segundo}
+Para evaluar el coste computacional de las primitivas criptográficas (generación de claves, encapsulado y desencapsulado) cada test se ejecuta en múltiples iteraciones. El objetivo es mitigar el ruido introducido por interrupciones del sistema, cambios de contexto o procesos en segundo plano, permitiendo así obtener una media aritmética estable y descartar valores atípicos.
+\newline
+
+Para ello, en función del sistema se usa una estrategia distinta:
+\begin{itemize}
+	\item \textbf{Entorno Windows (Arquitectura x86\_64):} 
+	Se utilizan las instrucciones intrínsecas proporcionadas por el compilador MSVC. Específicamente, se emplea \texttt{\_\_rdtsc} (Read Time-Stamp Counter), que lee el contador de ciclos de reloj del procesador, junto con \texttt{\_mm\_lfence} (Load Fence). 
+	\newline
+	
+	La instrucción \texttt{\_mm\_lfence} es crítica en procesadores modernos con ejecución fuera de orden, ya que actúa como una barrera de serialización. Esto garantiza que todas las instrucciones previas a la medición hayan terminado y que ninguna instrucción posterior comience antes de leer el contador, asegurando que la medición capture estrictamente el código objetivo.
+	\newline
+	
+	Para ver el funcionamiento del código ver el Listing \ref{lst:WIN}.
+
+	\begin{lstlisting}[language=C, caption={Instrumentación para medición de ciclos en Windows (x86\_64)}, label={lst:WIN}]
+		unsigned long long start, end;
+		
+		// Serializacion previa para evitar ejecucion especulativa
+		_mm_lfence();
+		start = __rdtsc(); // Lectura del contador inicial
+		_mm_lfence();
+		
+		funcion_criptografica(); // Codigo bajo prueba
+		
+		_mm_lfence();
+		end = __rdtsc();   // Lectura del contador final
+		_mm_lfence();
+		
+		// El resultado (end - start) son los ciclos consumidos
+	\end{lstlisting}
+	
+	\item \textbf{Entorno Embebido (PSoC 6 - ARM Cortex-M4):} 
+	En la arquitectura ARM, se accede directamente a la unidad de depuración DWT (Data Watchpoint and Trace). A diferencia de los contadores estándar (como SysTick), el registro \texttt{DWT->CYCCNT} ofrece una resolución de un ciclo de reloj y es accesible con baja latencia.
+	\newline
+	
+	Para su uso, es necesario habilitar previamente el bloque de trazas a través del registro \texttt{DEMCR} y reiniciar el contador, tal como se detalla en el Listing \ref{lst:initCicles}.
+	
+	\begin{lstlisting}[language=C, caption={Configuración y lectura del contador DWT en ARM Cortex-M para medición de número de ciclos.}, label={lst:initCicles}]
+		// Inicializacion del contador de ciclos (DWT)
+		void CycleCounter_Init(void)
+		{
+			// 1. Habilitar bloques de traza y depuracion (TRCENA)
+			CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+			
+			// 2. Resetear el contador a 0
+			DWT->CYCCNT = 0;
+			
+			// 3. Habilitar el conteo de ciclos (CYCCNTENA)
+			DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+		}
+		
+		// Lectura en linea
+		// Nota: DWT->CYCCNT es un registro de 32 bits.
+		// Se debe tener en cuenta el desbordamiento en operaciones muy largas.
+		
+		CycleCounter_Init();
+		uint32_t start_cycles = DWT->CYCCNT;
+		
+		funcion_criptografica();
+		
+		uint32_t end_cycles = DWT->CYCCNT;
+		uint32_t total_ciclos = end_cycles - start_cycles;
+	\end{lstlisting}
+\end{itemize}
+
+
+\subsection{Caudal de Procesamiento}
+Esta prueba constituye una métrica de caudal (throughput) complementaria al conteo de ciclos. La metodología consiste en ejecutar la primitiva criptográfica dentro de un bucle continuo, contabilizando el número de iteraciones completas realizadas hasta que el tiempo transcurrido supera el umbral de un segundo. Es importante destacar que el bucle siempre espera a que finalice la operación en curso antes de detenerse.
+\newline
+
+Aunque esta métrica está directamente correlacionada con la prueba anterior (a menos ciclos, más operaciones por segundo), se incluye para ofrecer una visión tangible del tiempo real de ejecución, facilitando la estimación de la carga de trabajo efectiva que puede soportar el dispositivo.
+\newpage
+
 \subsection{Uso de Pila}
-\subsection{Coste de Comunicación}
-\subsection{Suite de aleatoriedad a randombytes}
-limitaciones ent  y funcionamiento \cite{ENTLimita} , dieharder \cite{brown2006dieharder}, Do1 \cite{U01test} y nist \cite{rngNistPaper}
+La medición del uso máximo de pila es crítica en sistemas embebidos para evitar desbordamientos que deriven en excepciones de hardware. Para cuantificar este consumo, se emplea la técnica conocida como Stack Painting.
+\newline
+
+El procedimiento consiste en llenar una región reservada de la memoria de pila (en este caso, un array de 256 kB) con un patrón de bytes conocido y poco probable, denominado \esquote{canario} (se utiliza el valor \texttt{0xAA}). Posteriormente, se ejecuta la función criptográfica objetivo. Dado que las operaciones de la función sobrescribirán la pila con sus propias variables locales y direcciones de retorno, el patrón original quedaría alterado. Por tanto, una vez finalizada la ejecución, se recorre la memoria reservada para identificar la \esquote{marca de agua} más profunda, es decir, la dirección de memoria más lejana donde el patrón ha sido modificado. La diferencia entre el inicio del buffer y esta marca determina el consumo máximo de pila en bytes (ver Listado \ref{lst:stacksz}).
+\newline
+
+Si durante las pruebas el consumo excediera el tamaño del buffer reservado, se produciría un fallo de sistema. No obstante, durante la evaluación de las primitivas criptográficas seleccionadas, el tamaño de 256 kB resultó suficiente para contener la ejecución de todos los algoritmos sin incidencias.
+
+
+\begin{lstlisting}[language=C, caption={Implementación de la técnica de Stack Painting}, label={lst:stacksz}]
+	// Constantes utilizadas en el proyecto
+	static const int STACK_SIZE = 256 * 1024;
+	static const int CANARY = 0xAA;
+	
+	// Inicializa la pila con el patrón conocido (Canario)
+	void paintStack() {
+		volatile uint8_t buffer[STACK_SIZE];
+		stack_trap_ = &buffer[0];
+		for (int i = 0; i < STACK_SIZE; i++) {
+			buffer[i] = CANARY;
+		}
+	}
+	
+	// Verifica la profundidad de escritura tras la ejecución
+	size_t AlgorithmTester::checkStackDepth() {
+		size_t depth = 0;
+		for (int i = 0; i < STACK_SIZE; i++) {
+			if (stack_trap_[i] != CANARY) {
+				depth = STACK_SIZE - i;
+				break;
+			}
+		}
+		return depth;
+	}	
+	
+	// Ejemplo de ejecución de un test
+	paintStack();
+	funcion_criptografica();
+	size_t depth = checkStackDepth();
+\end{lstlisting}
+
+\subsection{Evaluación de tiempos}
+Como última etapa de validación, se evalúa el coste temporal de los protocolos criptográficos. Dado que las mediciones se realizan desde el servidor (PC con procesador AMD), el tiempo total observado incluye inevitablemente la latencia introducida por el canal de comunicaciones serie.
+\newline
+
+Para aislar el tiempo efectivo de cómputo del microcontrolador (tiempo de procesamiento) respecto al tiempo de transferencia, se emplea una metodología diferencial basada en dos mediciones:
+\begin{enumerate} 
+	\item \textbf{Caracterización del Canal}: se utiliza la operación de \texttt{EchoTest} (descrita en la figura \ref{fig:umltiempo}) para medir el tiempo de ida y vuelta de los datos sin carga de procesamiento criptográfico. Esto permite establecer una línea base de la velocidad del enlace y calcular métricas como la latencia media por Byte y la velocidad de transferencia efectiva. 
+	\item \textbf{Estimación del Cómputo}: al medir el tiempo total de ejecución de los algoritmos, se resta el tiempo de comunicación estimado previamente. De esta forma, se obtiene un valor fiable del tiempo que el PSOC dedica exclusivamente a la ejecución del algoritmo.
+\end{enumerate}
+
+
+
+\subsection{Evaluación de la Fuente de Aleatoriedad (randombytes)}
+Con el objetivo de verificar la idoneidad criptográfica de los generadores de números aleatorios implementados tanto en el PSOC como en el entorno Windows, se ha diseñado un protocolo de validación híbrido que combina el análisis cualitativo (ensayos visuales) con el análisis cuantitativo riguroso (baterías de tests estadísticos).
+\newline
+
+Para la ejecución de las pruebas, se generaron ficheros de datos de gran tamaño mediante llamadas iterativas a \texttt{randombytes}. Se optó por un volumen de 100 MB para los análisis visuales y se amplió la muestra a 1 GB para los ensayos cuantitativos.
+
+\subsubsection{Ensayos Visuales}
+Estas pruebas permiten una detección rápida de fallos estructurales graves de manera visual. Se han empleado tres técnicas de representación:
+\begin{itemize}
+	\item \textbf{Histograma de Frecuencias:} Permite verificar la bondad de ajuste de los datos a una distribución uniforme ideal. Se espera observar una distribución plana donde todos los valores del byte ($0-255$) aparezcan con la misma frecuencia.
+	\item \textbf{Bitmap (Mapa de Bits):} Consiste en visualizar los bits generados como píxeles de una imagen en escala de grises. Una fuente de alta entropía debe producir una imagen de ruido blanco sin patrones geométricos, líneas o estructuras repetitivas visibles.
+	\item \textbf{Lag Plot (Gráfico de Retardo):} Diagrama de dispersión que representa la relación entre un dato $x_i$ y su consecutivo $x_{i+1}$. Esta técnica es eficaz para revelar correlaciones seriales o dependencias a corto plazo entre los bytes generados.
+\end{itemize}
+
+\subsubsection{Baterías de Tests Estadísticos}
+Para una validación profunda, se somete la secuencia a las suites estándar de la industria y la literatura académica. Las herramientas seleccionadas se describen a continuación:
+
+\begin{itemize}
+	\item \textbf{ENT \cite{ENTLimita}}: batería básica y extremadamente rápida que evalúa propiedades fundamentales de la secuencia, como la entropía, la media aritmética y la correlación serie. Su principal utilidad radica en un primer análisis preliminar, aunque presenta limitaciones conocidas, como la falta de cálculo de p-valores rigurosos para la mayoría de sus pruebas.
+	
+	\item \textbf{Dieharder \cite{brown2006dieharder}}: suite de código abierto que extiende y mejora la clásica batería \esquote{Diehard} A diferencia de su predecesora, permite parametrizar los tests y aplica pruebas de Kolmogorov-Smirnov a la distribución de múltiples p-valores obtenidos, aumentando la capacidad de discernir los resultados. Integra diferentes pruebas, incluyendo versiones de los tests del \acrshort{nist} y de Knuth, posicionándose como una herramienta versátil para pruebas de números aleatorios.
+	\item \textbf{TestU01 \cite{U01test}}: biblioteca exhaustiva implementada en C que ofrece una vasta colección de utilidades para pruebas empíricas de generadores de números aleatorios uniformes. Es ampliamente reconocida por sus baterías predefinidas de intensidad creciente las cuales someten a los generadores a pruebas de estrés muy rigurosas, capaces de detectar defectos sutiles que otras suites pasan por alto.
+	\item \textbf{NIST SP 800-22 \cite{rngNistPaper}}: paquete estadístico diseñado específicamente por el \acrshort{nist} para evaluar generadores de números aleatorios en aplicaciones criptográficas. Consta de 15 pruebas estadísticas que analizan propiedades críticas como la frecuencia, la complejidad lineal, las excursiones aleatorias y la entropía aproximada.
+\end{itemize}
+

@@ -102,7 +102,6 @@ int main(void)
                     // Send Secret for Verification
                     UART_SendPacket(ss, (uint32_t)sz_ss);
 					
-					RunSecureSession(ss);
                 }
             }
         }
@@ -124,7 +123,6 @@ int main(void)
                     // Send Secret for Verification
                     UART_SendPacket(ss, (uint32_t)sz_ss);
 
-					RunSecureSession(ss);
                 }
             }
         }

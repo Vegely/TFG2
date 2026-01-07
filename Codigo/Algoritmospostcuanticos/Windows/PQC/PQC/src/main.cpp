@@ -51,33 +51,64 @@ void flush_serial_buffer(SerialComunication& serial) {
     if (!garbage.empty()) std::cout << "[DEBUG] Flushed startup noise." << std::endl;
 }
 
-
 bool test_echo_connection(SerialComunication& serial, SerialPacketTransport& transport) {
+    // ---------------- CONFIGURATION ----------------
+    const size_t PAYLOAD_SIZE = 4096; // 4KB Payload
+    const int TIMEOUT_MS = 20000;     // Increased timeout to 20s based on your 16s result
+    // -----------------------------------------------
+
     std::cout << "--------------------------------------" << std::endl;
-    std::cout << "[TEST] Starting Echo Check..." << std::endl;
+    std::cout << "[TEST] Starting Echo Check (Performance Mode)..." << std::endl;
 
     // Send 'E' to switch PSoC to Echo Mode
     serial.send("E");
-    std::this_thread::sleep_for(std::chrono::milliseconds(200)); // Safety delay
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
-    // Create a test message
-    std::string testMsg = "Hello PSoC!";
-    std::vector<unsigned char> txData(testMsg.begin(), testMsg.end());
+    // Create a large test message
+    std::vector<unsigned char> txData(PAYLOAD_SIZE);
+    for (size_t i = 0; i < PAYLOAD_SIZE; i++) {
+        txData[i] = (unsigned char)(i % 256);
+    }
 
-    std::cout << "[PC] Sending: \"" << testMsg << "\"" << std::endl;
+    std::cout << "[PC] Sending " << PAYLOAD_SIZE << " bytes..." << std::endl;
+
+    // --- START TOTAL TIMER ---
+    auto t_start = std::chrono::high_resolution_clock::now();
+
+    // --- SENDING PHASE ---
     if (!transport.sendPacket(txData)) {
         std::cerr << "[FAIL] Failed to send echo packet." << std::endl;
         return false;
     }
+    auto t_tx_done = std::chrono::high_resolution_clock::now(); // Capture time immediately after send
 
-    // Wait for reply
+    // --- RECEIVING PHASE ---
     std::vector<unsigned char> rxData;
-    if (transport.receivePacket(rxData, 2000)) {
-        std::string reply(rxData.begin(), rxData.end());
-        std::cout << "[PSoC] Reply:   \"" << reply << "\"" << std::endl;
+    if (transport.receivePacket(rxData, TIMEOUT_MS)) {
+        auto t_rx_done = std::chrono::high_resolution_clock::now(); // Capture time immediately after receive
+
+        std::cout << "[PSoC] Reply received (" << rxData.size() << " bytes)." << std::endl;
 
         if (rxData == txData) {
             std::cout << "[PASS] Echo Verification Successful." << std::endl;
+
+            // --- CALCULATE SPLIT TIMINGS (in milliseconds) ---
+            double tx_time_ms = std::chrono::duration<double, std::milli>(t_tx_done - t_start).count();
+            double rx_time_ms = std::chrono::duration<double, std::milli>(t_rx_done - t_tx_done).count();
+            double total_rtt_ms = tx_time_ms + rx_time_ms;
+
+            // --- CALCULATE STATS ---
+            size_t total_bytes = txData.size() + rxData.size();
+            double time_per_byte_us = (total_rtt_ms * 1000.0) / total_bytes;
+            double throughput_kbs = (total_bytes / 1024.0) / (total_rtt_ms / 1000.0);
+
+            // --- OUTPUT ---
+            std::cout << std::fixed << std::setprecision(2);
+            std::cout << "       Tx Time (PC -> PSoC): " << tx_time_ms << " ms" << std::endl;
+            std::cout << "       Rx Time (PSoC -> PC): " << rx_time_ms << " ms (includes PSoC processing)" << std::endl;
+            std::cout << "       Total RTT:            " << total_rtt_ms << " ms" << std::endl;
+            std::cout << "       Throughput:           " << throughput_kbs << " KB/s" << std::endl;
+            std::cout << "       Overhead:             " << std::setprecision(3) << time_per_byte_us << " us/byte" << std::endl;
             std::cout << "--------------------------------------\n" << std::endl;
             return true;
         }
@@ -86,11 +117,50 @@ bool test_echo_connection(SerialComunication& serial, SerialPacketTransport& tra
         }
     }
     else {
-        std::cerr << "[FAIL] Timeout. PSoC did not reply." << std::endl;
+        std::cerr << "[FAIL] Timeout. PSoC did not reply within " << TIMEOUT_MS << "ms." << std::endl;
     }
     std::cout << "--------------------------------------\n" << std::endl;
     return false;
 }
+//bool test_echo_connection(SerialComunication& serial, SerialPacketTransport& transport) {
+//    std::cout << "--------------------------------------" << std::endl;
+//    std::cout << "[TEST] Starting Echo Check..." << std::endl;
+//
+//    // Send 'E' to switch PSoC to Echo Mode
+//    serial.send("E");
+//    std::this_thread::sleep_for(std::chrono::milliseconds(200)); // Safety delay
+//
+//    // Create a test message
+//    std::string testMsg = "Hello PSoC!";
+//    std::vector<unsigned char> txData(testMsg.begin(), testMsg.end());
+//
+//    std::cout << "[PC] Sending: \"" << testMsg << "\"" << std::endl;
+//    if (!transport.sendPacket(txData)) {
+//        std::cerr << "[FAIL] Failed to send echo packet." << std::endl;
+//        return false;
+//    }
+//
+//    // Wait for reply
+//    std::vector<unsigned char> rxData;
+//    if (transport.receivePacket(rxData, 2000)) {
+//        std::string reply(rxData.begin(), rxData.end());
+//        std::cout << "[PSoC] Reply:   \"" << reply << "\"" << std::endl;
+//
+//        if (rxData == txData) {
+//            std::cout << "[PASS] Echo Verification Successful." << std::endl;
+//            std::cout << "--------------------------------------\n" << std::endl;
+//            return true;
+//        }
+//        else {
+//            std::cerr << "[FAIL] Data mismatch!" << std::endl;
+//        }
+//    }
+//    else {
+//        std::cerr << "[FAIL] Timeout. PSoC did not reply." << std::endl;
+//    }
+//    std::cout << "--------------------------------------\n" << std::endl;
+//    return false;
+//}
 
 
 void run_serial_session(int comPort, ProtocolRole role, std::unique_ptr<KeyExchange> kem_impl) {

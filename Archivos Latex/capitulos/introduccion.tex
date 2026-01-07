@@ -1,6 +1,7 @@
 \chapter{Introducción}
 
 \section{Motivación del proyecto}
+\label{sec:moti}
 En el ámbito de las comunicaciones industriales, la seguridad en el intercambio de información es un aspecto crítico, especialmente ante el avance de la computación cuántica y su impacto en los algoritmos criptográficos actuales. Este trabajo se enfoca en el análisis, implementación y evaluación de algoritmos de criptografía poscuántica en sistemas embebidos, con el objetivo de garantizar la seguridad de los protocolos de comunicación en un entorno industrial. Para ello, se realiza un estudio de la problemática de los algoritmos asimétricos clásicos y su vulnerabilidad frente al algoritmo de Shor, así como los fundamentos matemáticos de los nuevos esquemas criptográficos diseñados para resistir ataques cuánticos.
 \newline
 
@@ -93,7 +94,8 @@ Se ha preferido el uso de \LaTeX\ debido a la facilidad que ofrece para el maque
 \subsection{C y C++}
 Se ha optado por el lenguaje de programación C debido a su predominio en el desarrollo para microcontroladores. Además, este lenguaje garantiza la compatibilidad directa con los algoritmos de cifrado postcuántico, cuyas implementaciones de referencia se encuentran desarrolladas en C.
 \subsection{Microprocesador CY8CPROTO-063-BLE }
-Para las pruebas experimentales referidas al entorno embebido, se ha seleccionado el kit de desarrollo \cite{CY8CPROTO063BLE}. Se ha preferido este hardware frente a las plataformas Arduino por sus superiores prestaciones, y frente a la familia STM32 debido a que la configuración y programación de esta última resulta significativamente más compleja.
+Para la validación experimental se ha seleccionado el kit de desarrollo PSoC 6 BLE \cite{CY8CPROTO063BLE}. La elección de este dispositivo frente a otras alternativas (como Arduino o STM32) se fundamenta crucialmente, en la disponibilidad de un Generador de Números Aleatorios Verdaderos (\acrshort{trng}) por hardware, componente esencial para una implementación criptográfica segura.
+
 
 \section{Estructura del documento}
 A continuación y para facilitar la lectura del documento, se detalla el contenido de cada capítulo:

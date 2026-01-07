@@ -4,22 +4,27 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de rendimiento en un Cortex-M4 de Kyber-1024, FireSaber y HQC-256.}}{7}{table.2.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Tabla con un ejemplo numérico del calculo del valor \(b\) necesario para el problema \acrshort {lwe} como en \acrshort {rlwe} para ver como efectivamente en la clave pública \((a,b)\) el tamaño es menor. En este ejemplo se trabaja en \(\mathbb {Z}_{17}\) y \(X^2 + 1\). En \acrshort {mlwe} las claves son de tamaño similar que en \acrshort {rlwe} pues la matriz \(A\) se puede reconstruir a través de una semilla y la matriz \(b\) solo ve reescalada en función de la seguridad empleada.}}{14}{table.3.1}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Tabla con los parámetros utilizados por Kyber1024. El valor de \(n=256\) se elige para permitir una escalabilidad sencilla y permitir distintos niveles de seguridad sin perder capacidad de tener un nivel de ruido aceptable. El valor de \(k=4\) fija el tamaño de la retícula e implica una seguridad de 256 bits. El valor de \(q=3329\) es un primo que satisface \(n|(q-1)\) para permitir la \acrshort {ntt}, los primos anterior y siguiente que también satisfacen esta propiedad conllevan probabilidades de fallo demasiado altas. Los valores $\eta _1$ y $\eta _2$ definen el ruido y junto a \(d_u\) y \(d_v\) se usan para equilibrar la seguridad y la tasa de fallos $\delta $. El valor \((32)\) en la llave pública es el tamaño de la semilla necesaria para reconstruirla.}}{17}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(\mu \) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}}{23}{table.3.3}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Tabla con los parámetros utilizados por \acrshort {hqc}-5. Mediante \(n_1\) se denota la longitud del código de Reed-Solomon, mediante \(n_2\) se denota la longitud del código Reed-Muller y \(n\) es el menor número primitivo que sea mayor que \(n_1\cdot n_2\). El párametro \(k\) es la dimensión de los códigos. Mediante $\omega $, $\omega _r$, y $\omega _e$ se denotan los pesos de hamming de los vectores de la llave privada, de la aleatoriedad \(r1,r2\) y del error respectivamente. $\delta $ denota la probabilidad de fallo para obtener el mismo secreto compartido.}}{29}{table.3.4}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Tabla con un ejemplo numérico del calculo del valor \(b\) necesario para el problema \acrshort {lwe} como en \acrshort {rlwe} para ver como efectivamente en la clave pública \((a,b)\) el tamaño es menor. En este ejemplo se trabaja en \(\mathbb {Z}_{17}\) y \(X^2 + 1\). En \acrshort {mlwe} las claves son de tamaño similar que en \acrshort {rlwe} pues la matriz \(A\) se puede reconstruir a través de una semilla y la matriz \(b\) solo ve reescalada en función de la seguridad empleada.}}{18}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Tabla con los parámetros utilizados por Kyber1024. El valor de \(n=256\) se elige para permitir una escalabilidad sencilla y permitir distintos niveles de seguridad sin perder capacidad de tener un nivel de ruido aceptable. El valor de \(k=4\) fija el tamaño de la retícula e implica una seguridad de 256 bits. El valor de \(q=3329\) es un primo que satisface \(n|(q-1)\) para permitir la \acrshort {ntt}, los primos anterior y siguiente que también satisfacen esta propiedad conllevan probabilidades de fallo demasiado altas. Los valores $\eta _1$ y $\eta _2$ definen el ruido y junto a \(d_u\) y \(d_v\) se usan para equilibrar la seguridad y la tasa de fallos $\delta $. El valor \((32)\) en la llave pública es el tamaño de la semilla necesaria para reconstruirla.}}{21}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Tabla con los parámetros utilizados por FireSaber. Se elige el valor \(n=256\) para permitir la escalabilidad de Saber mediante el parámetro \(l=4\), que marca el tamaño de las matrices sobre las que se trabaja \(R_q^{k\times k}\). Los parámetros \(q\), \(p\) y \(t\) tienen esos valores para que la probabilidad de fallo \(\delta \) sea baja. El valor \(\mu \) representa el tamaño de la binomial a partir de la cual se muestrea la llave secreta \(sk\).}}{27}{table.3.3}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Tabla con los parámetros utilizados por \acrshort {hqc}-5. Mediante \(n_1\) se denota la longitud del código de Reed-Solomon, mediante \(n_2\) se denota la longitud del código Reed-Muller y \(n\) es el menor número primitivo que sea mayor que \(n_1\cdot n_2\). El párametro \(k\) es la dimensión de los códigos. Mediante $\omega $, $\omega _r$, y $\omega _e$ se denotan los pesos de hamming de los vectores de la llave privada, de la aleatoriedad \(r1,r2\) y del error respectivamente. $\delta $ denota la probabilidad de fallo para obtener el mismo secreto compartido.}}{33}{table.3.4}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Desglose funcional de los ficheros fuente de Kyber.}}{42}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Desglose funcional de los ficheros fuente de Saber.}}{43}{table.4.2}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Desglose funcional de los ficheros fuente de \acrshort {hqc}.}}{44}{table.4.3}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Desglose funcional de los ficheros fuente de Kyber.}}{46}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Desglose funcional de los ficheros fuente de Saber.}}{47}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Desglose funcional de los ficheros fuente de \acrshort {hqc}.}}{48}{table.4.3}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Comparativa de especificaciones de los sistemas evaluados}}{57}{table.4.4}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Resumen de tiempos de comunicación por el canal serie.}}{67}{table.5.1}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Tiempos de cálculo en función del dispositivo utilizado.}}{67}{table.5.2}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Rendimiento experimental obtenido en la plataforma PSOC para los algoritmos Kyber, Saber y HQC.}}{72}{table.5.3}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Offsets de la transformada $\rho $.}}{79}{table.Alph1.1}%
+\contentsline {table}{\numberline {A.2}{\ignorespaces Tabla de transformación $\pi $. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}}{80}{table.Alph1.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Offsets de la transformada $\rho $.}}{65}{table.Alph1.1}%
-\contentsline {table}{\numberline {A.2}{\ignorespaces Tabla de transformación $\pi $. Para obtener el valor de $A'(x,y)$, se debe leer el valor de la posición $(x',y')$ indicada en la celda correspondiente de la matriz original $A$.}}{66}{table.Alph1.2}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Potencias de $\alpha $ en $\text {GF}(2^3)$ con representación en forma de potencia, binaria y decimal.}}{83}{table.Alph4.1}%
-\contentsline {table}{\numberline {D.2}{\ignorespaces Ejemplo de aplicación de \(F\) sobre el $\text {Bloque}_0$.}}{85}{table.Alph4.2}%
+\contentsline {table}{\numberline {D.1}{\ignorespaces Potencias de $\alpha $ en $\text {GF}(2^3)$ con representación en forma de potencia, binaria y decimal.}}{97}{table.Alph4.1}%
+\contentsline {table}{\numberline {D.2}{\ignorespaces Ejemplo de aplicación de \(F\) sobre el $\text {Bloque}_0$.}}{99}{table.Alph4.2}%

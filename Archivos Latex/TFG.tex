@@ -25,6 +25,7 @@
 \usepackage{float}
 \usepackage{circuitikz}
 \usepackage{tikz}
+\usepackage{multirow}
 \usetikzlibrary{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -65,7 +66,10 @@
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \definecolor{codeblue}{rgb}{0.0, 0.2, 0.6}
-
+\definecolor{colorCalcPC}{HTML}{4A90E2}   % Blue
+\definecolor{colorSendPC}{HTML}{F5A623}   % Orange
+\definecolor{colorCalcPSoC}{HTML}{7ED321} % Green
+\definecolor{colorSendPSoC}{HTML}{D0021B} % Red
 
 \lstdefinestyle{mystyle}{
 	backgroundcolor=\color{backcolour},   
@@ -132,6 +136,9 @@
 	
 	%Índice de tablas.
 	\listoftables
+	
+	% 3. Generate List of Listings
+	\lstlistoflistings
 	
 	\include{capitulos/glosario}
 	%Empieza la parte descriptiva del trabajo

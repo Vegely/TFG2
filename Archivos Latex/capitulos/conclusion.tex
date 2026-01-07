@@ -3,9 +3,51 @@
 Se presentan a continuación las conclusiones del proyecto y desarrollos futuros para mejorar la implementación.
 
 \section{Conclusión}
+Tras la finalización del proyecto y la revisión de los objetivos planteados al inicio de este Trabajo de Fin de Grado, se puede concluir que estos han sido alcanzados satisfactoriamente. A continuación, se detallan los principales logros y conclusiones extraídas:
+\newline
 
-Una vez finalizado el proyecto...
+En primer lugar, se ha contextualizado la problemática de la criptografía clásica ante el avance de la computación cuántica, destacando la eficiencia del algoritmo de Shor para vulnerar los estándares actuales. Este análisis ha justificado la necesidad imperiosa de transicionar hacia algoritmos postcuánticos para garantizar la confidencialidad de la información a largo plazo.
+\newline
+
+Respecto a la fundamentación teórica, se han analizado en profundidad las bases matemáticas de las primitivas elegidas: los esquemas basados en retículas (Kyber y Saber) y los basados en códigos (\acrshort{hqc}). Además del desarrollo teórico y la inclusión de pseudocódigos (Anexo \ref{sub:kybAlg}), se han realizado aportaciones propias, como la demostración de la convergencia de claves en Saber y la elaboración de ejemplos numéricos (Anexos \ref{chap:ej:rlwe} y \ref{chap:ReedSM}) que ilustran el funcionamiento interno de los algoritmos.
+\newline
+
+En cuanto a la implementación práctica, se ha logrado desplegar con éxito un sistema de comunicaciones cifradas entre un PC y un microcontrolador PSOC. Si bien la arquitectura es funcional, el análisis de tiempos evidenció que la latencia introducida por el sistema operativo de escritorio representa un cuello de botella significativo, identificando la necesidad de optimizar la pila de comunicaciones para su despliegue en entornos de producción industrial.
+\newline
+
+La integración de los algoritmos Kyber, Saber y \acrshort{hqc} en ambas plataformas se completó exitosamente. Para ello, se desacoplaron las implementaciones de referencia de las dependencias específicas de UNIX, logrando un código portable cuya única adaptación requerida es la interfaz con la fuente de entropía (\texttt{randombytes}). Cabe destacar el desafío técnico que supuso \acrshort{hqc} en el entorno embebido, su integración fue posible gracias a la migración a un entorno de desarrollo optimizado, lo que permitió gestionar eficazmente los estrictos requisitos de pila del algoritmo.
+\newline
+
+El objetivo de comparar el rendimiento y la seguridad se ha cumplido de manera exhaustiva. En el ámbito del rendimiento, se ha ejecutado una batería completa de pruebas prácticas sobre el hardware real, lo que ha permitido cuantificar métricas críticas y contrastarlas con las previsiones teóricas presentadas en el estado del arte.
+\newline
+
+Por su parte, el análisis de seguridad ha revelado diferencias fundamentales entre las familias criptográficas. En el plano teórico, mientras Kyber y Saber cuentan con demostraciones robustas en el modelo \acrshort{qrom}, \acrshort{hqc} carece actualmente de dicha validación formal. A esta limitación se suma una vulnerabilidad severa detectada durante la exploración de la implementación de referencia de \acrshort{hqc}: el software no aplica correctamente el mecanismo de rechazo implícito, devolviendo un código de error explícito ante fallos de decapsulado. Esta conducta incumple los requisitos de seguridad \acrshort{cca2}, exponiendo un oráculo de validación que podría ser explotado en ataques adaptativos.
+\newline
+
+Finalmente, aunque se ha validado una arquitectura maestro-esclavo en topología punto a punto (un cliente, un servidor), el sistema sienta las bases para futuras ampliaciones. La escalabilidad hacia protocolos de red más complejos y topologías distribuidas se propone como una línea de trabajo futuro.
+
 
 \section{Desarrollos futuros}
+A la luz de los objetivos alcanzados y las limitaciones identificadas durante el desarrollo de este trabajo, se proponen las siguientes líneas de investigación y mejora para dar continuidad al proyecto:
 
-Un posible desarrollo...
+\begin{itemize}
+	\item \textbf{Optimización del entorno de comunicaciones}: tal y como se discutió en el análisis de resultados, la gestión del puerto serie en Windows introduce una latencia que limita el despliegue en producción. Se propone migrar el banco de pruebas y el software de control a un sistema operativo basado en UNIX, donde el manejo nativo de los dispositivos serie permitiría reducir drásticamente los tiempos de transmisión y aprovechar el rendimiento real de los algoritmos.
+	
+	\item \textbf{Escalabilidad y robustez del protocolo de red}: la implementación actual se limita a una topología básica de un único cliente y servidor. Para elevar esta solución a un entorno de aplicación real, sería necesario evolucionar hacia arquitecturas que soporten múltiples esclavos, ya sea mediante la multiplexación temporal del canal serie o mediante sistemas multihilo capaces de gestionar varios canales de manera concurrente. Incluso, se podría plantear trascender el modelo maestro-esclavo para implementar protocolos de intercambio de claves en grupo (\acrshort{gake}), cuya viabilidad teórica en retículas ya existe en la literatura \cite{pablos2023secure}\cite{samiullah2025quantum}.
+	\newline
+	
+	Adicionalmente, un aspecto vital no abordado en este estudio preliminar es la incorporación de mecanismos de verificación explícita dentro del protocolo. Esto implica dos fases críticas: primero, asegurar que solo los dispositivos registrados puedan iniciar la negociación mediante mecanismos de autenticación, y segundo, implementar una etapa de confirmación de claves. Esta última consiste en validar matemáticamente que ambas partes han derivado la misma clave final tras el encapsulado/decapsulado, lo cual se realizaría enviando un \acrshort{hmac} del secreto compartido para verificar su integridad antes de comenzar el cifrado de datos.
+	
+	\item \textbf{Análisis de resistencia a ataques físicos}: la evaluación de seguridad frente a ataques de canal lateral (consumo de potencia y radiación electromagnética) resulta crítica para sistemas embebidos. Dado que la ejecución de estas pruebas y el diseño de implementaciones enmascaradas requieren una complejidad experimental que excede el alcance de este trabajo, se propone como una línea de investigación independiente para validar la robustez física del criptosistema.
+	
+	\item \textbf{Refinamiento de las implementaciones}: se plantean tres optimizaciones concretas para mejorar la eficiencia y seguridad del código en el microcontrolador:
+	\begin{itemize}
+		\item \textbf{Expansión de semilla}: se propone modificar el protocolo para transmitir únicamente la semilla de la clave pública en lugar de la matriz completa. Esto reduciría el ancho de banda requerido, aunque sería necesario evaluar el impacto computacional de regenerar la matriz en el sistema embebido.
+		\newpage
+		\item \textbf{Corrección del mecanismo de decapsulado en HQC}: implementar correctamente el rechazo implícito mediante la \acrshort{tfo} para que, ante un fallo de decodificación, el sistema devuelva una clave pseudoaleatoria en lugar de un error explícito, garantizando así la seguridad \acrshort{cca2}.
+		\item \textbf{Optimización en ensamblador}: sustituir las funciones críticas en C por rutinas en ensamblador específicas para el set de instrucciones del Cortex-M4. Si bien esto requiere un conocimiento profundo de la arquitectura hardware, permitiría reducir significativamente los ciclos de CPU.
+	\end{itemize}
+	
+	\item \textbf{Formalización de la seguridad de HQC}: como se expuso en los fundamentos, \acrshort{hqc} carece actualmente de una demostración formal de seguridad en el modelo \acrshort{qrom}, asumiéndose su robustez por la inexistencia de ataques eficientes conocidos. El seguimiento de los avances en la literatura científica para cerrar esta brecha teórica constituye una necesidad para validar su uso a largo plazo frente a las retículas.
+\end{itemize}
+
