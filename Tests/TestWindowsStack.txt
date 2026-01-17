@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include "hqc_wrapper.h"
+
+#define STACK_SIZE (256 * 1024) 
+#define CANARY 0xAA
+
+// Global pointer to track where our "trap" memory is
+volatile uint8_t* g_stack_trap = NULL;
+
+// 1. THE PAINTER
+// This function claims stack space, fills it, and returns.
+// By returning, it marks the memory as "free" but leaves the 0xAA bytes there.
+void paint_stack(void) {
+    volatile uint8_t buffer[STACK_SIZE];
+
+    // Save the address so we can check it later
+    // (Technically unsafe in normal code, but perfect for this specific hack)
+    g_stack_trap = &buffer[0];
+
+    for (int i = 0; i < STACK_SIZE; i++) {
+        buffer[i] = CANARY;
+    }
+    // Returns, releasing 'buffer' for the next function to reuse
+}
+
+// 2. THE CHECKER
+// Looks at the memory previously occupied by paint_stack
+size_t check_stack_depth(void) {
+    size_t depth = 0;
+    for (int i = 0; i < STACK_SIZE; i++) {
+        // We look for the first byte that ISN'T 0xAA
+        // Since stack grows down, the "deepest" usage is at the lowest index
+        if (g_stack_trap[i] != CANARY) {
+            // Found a modified byte!
+            // Calculate how deep the stack went (from the top of buffer down)
+            depth = STACK_SIZE - i;
+            break;
+        }
+    }
+    return depth;
+}
+
+int main(void) {
+    // Buffers for crypto data
+    unsigned char* pk = malloc(hqc_get_public_key_size());
+    unsigned char* sk = malloc(hqc_get_secret_key_size());
+    unsigned char* ct = malloc(hqc_get_ciphertext_size());
+    unsigned char* ss = malloc(hqc_get_shared_secret_size());
+
+    hqc_init(HQC_SECURITY_256);
+
+    printf("=== Corrected Stack Analysis ===\n\n");
+
+    // TEST 1: KEYPAIR
+    paint_stack();           // 1. Fill memory with 0xAA
+    hqc_keypair(pk, sk);     // 2. Run function (overwrites 0xAA)
+    size_t d = check_stack_depth(); // 3. Measure
+    printf("Keypair Depth      : %zu bytes\n", d);
+
+    // TEST 2: ENCAPSULATION
+    paint_stack();           // Reset memory
+    hqc_encapsulate(ct, ss, pk);
+    d = check_stack_depth();
+    printf("Encapsulation Depth: %zu bytes\n", d);
+
+    // TEST 3: DECAPSULATION
+    paint_stack();           // Reset memory
+    hqc_decapsulate(ss, ct, sk);
+    d = check_stack_depth();
+    printf("Decapsulation Depth: %zu bytes\n", d);
+
+    getchar();
+    return 0;
+}

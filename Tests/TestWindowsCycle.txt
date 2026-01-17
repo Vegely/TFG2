@@ -1,0 +1,147 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "hqc_wrapper.h"
+
+#define ITERATIONS 100
+
+
+int main(void) {
+    if (hqc_init(HQC_SECURITY_256) != 0) {
+        fprintf(stderr, "HQC init failed\n");
+        return 1;
+    }
+
+    size_t pk_size = hqc_get_public_key_size();
+    size_t sk_size = hqc_get_secret_key_size();
+    size_t ct_size = hqc_get_ciphertext_size();
+    size_t ss_size = hqc_get_shared_secret_size();
+
+    printf("HQC Sizes:\n");
+    printf("  Public Key Size     : %zu bytes\n", pk_size);
+    printf("  Secret Key Size     : %zu bytes\n", sk_size);
+    printf("  Ciphertext Size     : %zu bytes\n", ct_size);
+    printf("  Shared Secret Size  : %zu bytes\n\n", ss_size);
+
+    unsigned char *pk = malloc(pk_size);
+    unsigned char *sk = malloc(sk_size);
+    unsigned char *ct = malloc(ct_size);
+    unsigned char *ss = malloc(ss_size);
+
+
+    if (!pk || !sk || !ct || !ss) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    unsigned long long start_cycles, end_cycles, cycle_count;
+    unsigned long long total_cycles = 0;
+    printf("Measuring function performance over %d iterations...\n\n", ITERATIONS);
+    printf("===KEYPAIR===...\n\n");
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        
+        // A. Capture Start Cycles
+        // We use a "Fence" (optional but recommended) to prevent the CPU 
+        // from re-ordering instructions for optimization.
+        _mm_lfence(); 
+        start_cycles = __rdtsc();
+        _mm_lfence();
+
+        // B. Run the function
+        if (hqc_keypair(pk, sk) != 0) fprintf(stderr, "Keypair generation failed\n");
+
+        // C. Capture End Cycles
+        _mm_lfence();
+        end_cycles = __rdtsc();
+        _mm_lfence();
+
+        // D. Calculate difference
+        cycle_count = end_cycles - start_cycles;
+        total_cycles += cycle_count;
+
+        printf("Run %d: %llu cycles\n", i + 1, cycle_count);
+    }
+
+    // E. Calculate Average
+    double average = (double)total_cycles / ITERATIONS;
+    
+    printf("\n----------------------------\n");
+    printf("Total Cycles: %llu\n", total_cycles);
+    printf("Average Cycles: %.2f\n", average);
+    printf("===Encapsulation===...\n\n");
+    total_cycles = 0;
+    for (int i = 0; i < ITERATIONS; i++) {
+        
+        // A. Capture Start Cycles
+        // We use a "Fence" (optional but recommended) to prevent the CPU 
+        // from re-ordering instructions for optimization.
+        _mm_lfence(); 
+        start_cycles = __rdtsc();
+        _mm_lfence();
+
+        // B. Run the function
+        if (hqc_encapsulate(ct, ss, pk) != 0) fprintf(stderr, "Encapsulation failed\n");
+
+        // C. Capture End Cycles
+        _mm_lfence();
+        end_cycles = __rdtsc();
+        _mm_lfence();
+
+        // D. Calculate difference
+        cycle_count = end_cycles - start_cycles;
+        total_cycles += cycle_count;
+
+        printf("Run %d: %llu cycles\n", i + 1, cycle_count);
+    }
+    // E. Calculate Average
+    average = (double)total_cycles / ITERATIONS;
+
+    printf("\n----------------------------\n");
+    printf("Total Cycles: %llu\n", total_cycles);
+    printf("Average Cycles: %.2f\n", average);
+    printf("===Encapsulation===...\n\n");
+
+    printf("===Decapsulation===...\n\n");
+    total_cycles = 0;
+    for (int i = 0; i < ITERATIONS; i++) {
+        
+        // A. Capture Start Cycles
+        // We use a "Fence" (optional but recommended) to prevent the CPU 
+        // from re-ordering instructions for optimization.
+        _mm_lfence(); 
+        start_cycles = __rdtsc();
+        _mm_lfence();
+
+        // B. Run the function
+        if (hqc_decapsulate(ss, ct, sk)!= 0)  fprintf(stderr, "Decapsulation failed\n");
+
+        // C. Capture End Cycles
+        _mm_lfence();
+        end_cycles = __rdtsc();
+        _mm_lfence();
+
+        // D. Calculate difference
+        cycle_count = end_cycles - start_cycles;
+        total_cycles += cycle_count;
+
+        printf("Run %d: %llu cycles\n", i + 1, cycle_count);
+    }  
+    // E. Calculate Average
+    average = (double)total_cycles / ITERATIONS;
+
+    printf("\n----------------------------\n");
+    printf("Total Cycles: %llu\n", total_cycles);
+    printf("Average Cycles: %.2f\n", average);
+    printf("===Encapsulation===...\n\n");
+    free(pk);
+    free(sk);
+    free(ct);
+    free(ss);
+
+    
+
+    printf("\nPress Enter to exit...");
+    getchar();
+    return 0;
+}
